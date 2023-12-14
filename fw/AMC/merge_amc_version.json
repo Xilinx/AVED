@@ -1,0 +1,22 @@
+{
+    "BUILD_BRANCH": "",
+    "VERSION_HASH": "f58a3505c860add4b5a28c305202bb5cb48acc6e",
+    "VERSION_HASH_DATE": "20231130",
+    "AMC_VERSION_RELEASE": "1.8.0",
+    "AMC_VERSION_MAJOR": 1,
+    "AMC_VERSION_MINOR": 8,
+    "AMC_VERSION_PATCH": 0,
+    "AMC_DEV_COMMITS": 0,
+    "AMC_DEV_STATUS": 0,
+    "gcq_version": {
+        "BUILD_BRANCH": "",
+        "VERSION_HASH": "939f2a66dff2ff14785a49587d040fb83289e5eb",
+        "VERSION_HASH_DATE": "",
+        "GCQ_DRIVER_VERSION_RELEASE": "1.0.0-24-g939f2a6",
+        "GCQ_DRIVER_VERSION_MAJOR": 1,
+        "GCQ_DRIVER_VERSION_MINOR": 0,
+        "GCQ_DRIVER_VERSION_PATCH": 0,
+        "GCQ_DRIVER_DEV_COMMITS": 24,
+        "GCQ_DRIVER_DEV_STATUS": 0
+    }
+}

@@ -1,0 +1,392 @@
+{
+  "build_info": {
+    "xbtest": {
+      "version": {
+        "major": 7,
+        "minor": 0
+      },
+      "build": 4004544,
+      "date": "Sun Sep 24 09:59:08 MDT 2023",
+      "internal_release": false
+    },
+    "board": {
+      "name": "NOT DEFINED",
+      "interface_uuid": "NOT DEFINED"
+    },
+    "tool": {
+      "version": 2023.1,
+      "version_long": "Vivado v2023.1 (64-bit). SW Build 3865809 on Sun May  7 15:04:56 MDT 2023. IP Build 3864474 on Sun May  7 20:36:21 MDT 2023. Tool Version Limit: 2023.05. Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.. SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023. "
+    }
+  },
+  "definition": {
+    "clocks": {
+      "0": 400,
+      "1": 600
+    },
+    "memory": {
+      "0": {
+        "name": "HBM",
+        "target": "board",
+        "type": "multi_channel",
+        "axi_data_size": 256,
+        "num_axi_thread": 4,
+        "num_axi_outstanding": 32
+      }
+    },
+    "compute_units": {
+      "0": {
+        "name": "krnl_powertest_slr0",
+        "SLR": 0,
+        "mode": 0,
+        "num_connections": 1,
+        "connectivity": {
+          "0": "BRAM[0]"
+        },
+        "cu_type_configuration": {
+          "SLR": 0,
+          "throttle_mode": "INTERNAL_MACRO",
+          "use_aie": 0
+        }
+      },
+      "1": {
+        "name": "krnl_powertest_slr1",
+        "SLR": 1,
+        "mode": 0,
+        "num_connections": 0,
+        "connectivity": {
+        },
+        "cu_type_configuration": {
+          "SLR": 1,
+          "throttle_mode": "EXTERNAL_MACRO",
+          "use_aie": 0
+        }
+      },
+      "2": {
+        "name": "krnl_powertest_slr2",
+        "SLR": 2,
+        "mode": 0,
+        "num_connections": 0,
+        "connectivity": {
+        },
+        "cu_type_configuration": {
+          "SLR": 2,
+          "throttle_mode": "EXTERNAL_MACRO",
+          "use_aie": 0
+        }
+      },
+      "3": {
+        "name": "krnl_memtest_hbm_64_00",
+        "SLR": 2,
+        "mode": 1,
+        "num_connections": 65,
+        "connectivity": {
+          "0": "BRAM[2]",
+          "1": "HBM[0]",
+          "2": "HBM[0]",
+          "3": "HBM[1]",
+          "4": "HBM[1]",
+          "5": "HBM[2]",
+          "6": "HBM[2]",
+          "7": "HBM[3]",
+          "8": "HBM[3]",
+          "9": "HBM[4]",
+          "10": "HBM[4]",
+          "11": "HBM[5]",
+          "12": "HBM[5]",
+          "13": "HBM[6]",
+          "14": "HBM[6]",
+          "15": "HBM[7]",
+          "16": "HBM[7]",
+          "17": "HBM[8]",
+          "18": "HBM[8]",
+          "19": "HBM[9]",
+          "20": "HBM[9]",
+          "21": "HBM[10]",
+          "22": "HBM[10]",
+          "23": "HBM[11]",
+          "24": "HBM[11]",
+          "25": "HBM[12]",
+          "26": "HBM[12]",
+          "27": "HBM[13]",
+          "28": "HBM[13]",
+          "29": "HBM[14]",
+          "30": "HBM[14]",
+          "31": "HBM[15]",
+          "32": "HBM[15]",
+          "33": "HBM[16]",
+          "34": "HBM[16]",
+          "35": "HBM[17]",
+          "36": "HBM[17]",
+          "37": "HBM[18]",
+          "38": "HBM[18]",
+          "39": "HBM[19]",
+          "40": "HBM[19]",
+          "41": "HBM[20]",
+          "42": "HBM[20]",
+          "43": "HBM[21]",
+          "44": "HBM[21]",
+          "45": "HBM[22]",
+          "46": "HBM[22]",
+          "47": "HBM[23]",
+          "48": "HBM[23]",
+          "49": "HBM[24]",
+          "50": "HBM[24]",
+          "51": "HBM[25]",
+          "52": "HBM[25]",
+          "53": "HBM[26]",
+          "54": "HBM[26]",
+          "55": "HBM[27]",
+          "56": "HBM[27]",
+          "57": "HBM[28]",
+          "58": "HBM[28]",
+          "59": "HBM[29]",
+          "60": "HBM[29]",
+          "61": "HBM[30]",
+          "62": "HBM[30]",
+          "63": "HBM[31]",
+          "64": "HBM[31]"
+        },
+        "cu_type_configuration": {
+          "memory_type": "HBM"
+        }
+      },
+      "4": {
+        "name": "krnl_verify",
+        "SLR": 0,
+        "mode": 5,
+        "num_connections": 1,
+        "connectivity": {
+          "0": "BRAM[0]"
+        },
+        "cu_type_configuration": {
+          "dna_read": false
+        }
+      }
+    }
+  },
+  "pre_canned": {
+    "verify": {
+      "comment": [
+        "This is an example of test JSON file",
+        "You can use this example as template for your own tests",
+        "Please refer to the User Guide for how to define or add/remove testcases",
+        "Comments can be added or removed anywhere in test JSON file"
+      ]
+    },
+    "power": {
+      "comment": [
+        "This is an example of test JSON file",
+        "You can use this example as template for your own tests",
+        "Please refer to the User Guide for how to define or add/remove testcases",
+        "Comments can be added or removed anywhere in test JSON file"
+      ],
+      "testcases": {
+        "power": {
+          "global_config": {
+            "test_sequence": [
+              {
+                "duration": 100,
+                "toggle_rate": 5
+              },
+              {
+                "duration": 100,
+                "toggle_rate": 10
+              },
+              {
+                "duration": 100,
+                "toggle_rate": 15
+              },
+              {
+                "duration": 100,
+                "toggle_rate": 20
+              }
+            ]
+          }
+        }
+      }
+    },
+    "memory": {
+      "comment": [
+        "This is an example of test JSON file",
+        "You can use this example as template for your own tests",
+        "Please refer to the User Guide for how to define or add/remove testcases",
+        "Comments can be added or removed anywhere in test JSON file"
+      ],
+      "testcases": {
+        "memory": {
+          "HBM": {
+            "global_config": {
+              "test_sequence": [
+                {
+                  "duration": 20,
+                  "mode": "alternate_wr_rd"
+                },
+                {
+                  "duration": 20,
+                  "mode": "only_wr"
+                },
+                {
+                  "duration": 20,
+                  "mode": "only_rd"
+                },
+                {
+                  "duration": 20,
+                  "mode": "simultaneous_wr_rd"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "mmio": {
+      "comment": [
+        "This is an example of test JSON file",
+        "You can use this example as template for your own tests",
+        "Please refer to the User Guide for how to define or add/remove testcases",
+        "Comments can be added or removed anywhere in test JSON file"
+      ],
+      "testcases": {
+        "mmio": {
+          "global_config": {
+            "test_sequence": [
+              {
+                "duration": 10
+              }
+            ]
+          }
+        }
+      }
+    },
+    "stress": {
+      "comment": [
+        "This is an example of test JSON file",
+        "You can use this example as template for your own tests",
+        "Please refer to the User Guide for how to define or add/remove testcases",
+        "Comments can be added or removed anywhere in test JSON file"
+      ],
+      "testcases": {
+        "power": {
+          "comment": "Update toggle rate according to your test environment",
+          "global_config": {
+            "test_sequence": [
+              {
+                "duration": 300,
+                "toggle_rate": 10
+              }
+            ]
+          }
+        },
+        "memory": {
+          "HBM": {
+            "global_config": {
+              "test_sequence": [
+                {
+                  "duration": 300,
+                  "mode": "alternate_wr_rd"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "xbtest_pfm_def": {
+    "comment": [
+      "xbtest platform definition JSON file for: NOT DEFINED",
+      "This is a generated template file",
+      "Please refer to the checklist for how to update/define its content"
+    ],
+    "device": {
+      "runtime": {
+        "download_time": 1
+      },
+      "memory": {
+        "0": {
+          "name": "HBM",
+          "cu_rate": {
+            "only_wr": {
+              "write": {
+                "nominal": 100
+              }
+            },
+            "only_rd": {
+              "read": {
+                "nominal": 100
+              }
+            },
+            "simul_wr_rd": {
+              "write": {
+                "nominal": 100
+              },
+              "read": {
+                "nominal": 100
+              }
+            }
+          },
+          "cu_outstanding": {
+            "only_wr": {
+              "write": {
+                "nominal": 0
+              }
+            },
+            "only_rd": {
+              "read": {
+                "nominal": 0
+              }
+            },
+            "simul_wr_rd": {
+              "write": {
+                "nominal": 0
+              },
+              "read": {
+                "nominal": 0
+              }
+            }
+          },
+          "cu_bw": {
+            "only_wr": {
+              "write": {
+                "average": 2
+              }
+            },
+            "only_rd": {
+              "read": {
+                "average": 2
+              }
+            },
+            "simul_wr_rd": {
+              "write": {
+                "average": 2
+              },
+              "read": {
+                "average": 2
+              }
+            }
+          },
+          "cu_latency": {
+            "only_wr": {
+              "write": {
+                "average": 2
+              }
+            },
+            "only_rd": {
+              "read": {
+                "average": 2
+              }
+            },
+            "simul_wr_rd": {
+              "write": {
+                "average": 2
+              },
+              "read": {
+                "average": 2
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

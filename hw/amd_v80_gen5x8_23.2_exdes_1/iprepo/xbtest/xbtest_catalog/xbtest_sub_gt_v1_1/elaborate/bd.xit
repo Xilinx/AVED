@@ -1,0 +1,164 @@
+# Copyright (C) 2022 Xilinx, Inc.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+proc update_bd {} {
+
+    set xbtest_subsystem      [::ipxit::current_inst]
+    set c_board               [get_property CONFIG.C_BOARD  $xbtest_subsystem]
+    set GT_TYPE               [get_property CONFIG.GT_TYPE  $xbtest_subsystem]
+
+    #set GT_TYPE "GTYP"
+
+    set vlnv_gt_quad_base                   "xilinx.com:ip:gt_quad_base"
+    set vlnv_gt_bridge_ip                   "xilinx.com:ip:gt_bridge_ip"
+    set vlnv_gt_refclk_buf                  "xilinx.com:ip:util_ds_buf"
+    set vlnv_gt_clk_buf                     "xilinx.com:ip:bufg_gt"
+    set vlnv_xlconcat                       "xilinx.com:ip:xlconcat"
+    set vlnv_util_reduced_logic             "xilinx.com:ip:util_reduced_logic"
+
+    create_bd_cell -type ip -vlnv $vlnv_gt_bridge_ip gt_bridge_ip_0
+
+    if {$GT_TYPE == "GTM"} {
+        # GTM: versal HBM 2023.1 (xcvh1782-lsva4737-2MP-e-L)
+        # Versasl ACAPs Transceiver Bridge IP
+        #   Pass Through Mode
+        #   AXI Lite
+        #   Preset: "GTM: (PAM4) Ethernet 56G"
+        #   Transceiver Configs:
+        #       Line rate: let to default 56.42
+        #       Requested Reference Clock: 322.26562518361095 MHz
+        #       user data width: 128
+        set_property -dict [list \
+            CONFIG.BYPASS_MODE {true} \
+            CONFIG.GT_TYPE {GTM} \
+            CONFIG.IP_LR0_SETTINGS {PRESET GTM-PAM4_Ethernet_56G RX_PAM_SEL PAM4 TX_PAM_SEL PAM4 TX_HD_EN 0 RX_HD_EN 0 RX_GRAY_BYP false TX_GRAY_BYP false RX_GRAY_LITTLEENDIAN false TX_GRAY_LITTLEENDIAN false RX_PRECODE_BYP true TX_PRECODE_BYP true RX_PRECODE_LITTLEENDIAN false TX_PRECODE_LITTLEENDIAN false INTERNAL_PRESET PAM4_Ethernet_56G GT_TYPE GTM GT_DIRECTION DUPLEX TX_LINE_RATE 56.42 TX_PLL_TYPE LCPLL TX_REFCLK_FREQUENCY 322.26562518361095 TX_ACTUAL_REFCLK_FREQUENCY 322.265625479192 TX_FRACN_ENABLED true TX_FRACN_OVRD false TX_FRACN_NUMERATOR 0 TX_REFCLK_SOURCE R0 TX_DATA_ENCODING RAW TX_USER_DATA_WIDTH 128 TX_INT_DATA_WIDTH 128 TX_BUFFER_MODE 1 TX_BUFFER_BYPASS_MODE Fast_Sync TX_PIPM_ENABLE false TX_OUTCLK_SOURCE TXPROGDIVCLK TXPROGDIV_FREQ_ENABLE true TXPROGDIV_FREQ_SOURCE LCPLL TXPROGDIV_FREQ_VAL 440.781 TX_DIFF_SWING_EMPH_MODE CUSTOM TX_64B66B_SCRAMBLER false TX_64B66B_ENCODER false TX_64B66B_CRC false TX_RATE_GROUP A RX_LINE_RATE 56.42 RX_PLL_TYPE LCPLL RX_REFCLK_FREQUENCY 322.26562518361095 RX_ACTUAL_REFCLK_FREQUENCY 322.265625479192 RX_FRACN_ENABLED true RX_FRACN_OVRD false RX_FRACN_NUMERATOR 0 RX_REFCLK_SOURCE R0 RX_DATA_DECODING RAW RX_USER_DATA_WIDTH 128 RX_INT_DATA_WIDTH 128 RX_BUFFER_MODE 1 RX_OUTCLK_SOURCE RXPROGDIVCLK RXPROGDIV_FREQ_ENABLE true RXPROGDIV_FREQ_SOURCE LCPLL RXPROGDIV_FREQ_VAL 440.781 RXRECCLK_FREQ_ENABLE false RXRECCLK_FREQ_VAL 0 INS_LOSS_NYQ 20 RX_EQ_MODE AUTO RX_COUPLING AC RX_TERMINATION VCOM_VREF RX_RATE_GROUP A RX_TERMINATION_PROG_VALUE 800 RX_PPM_OFFSET 200 RX_64B66B_DESCRAMBLER false RX_64B66B_DECODER false RX_64B66B_CRC false OOB_ENABLE false RX_COMMA_ALIGN_WORD 1 RX_COMMA_SHOW_REALIGN_ENABLE true PCIE_ENABLE false TX_LANE_DESKEW_HDMI_ENABLE false RX_COMMA_P_ENABLE false RX_COMMA_M_ENABLE false RX_COMMA_DOUBLE_ENABLE false RX_COMMA_P_VAL 0101111100 RX_COMMA_M_VAL 1010000011 RX_COMMA_MASK 0000000000 RX_SLIDE_MODE OFF RX_SSC_PPM 0 RX_CB_NUM_SEQ 0 RX_CB_LEN_SEQ 1 RX_CB_MAX_SKEW 1 RX_CB_MAX_LEVEL 1 RX_CB_MASK_0_0 false RX_CB_VAL_0_0 00000000 RX_CB_K_0_0 false RX_CB_DISP_0_0 false RX_CB_MASK_0_1 false RX_CB_VAL_0_1 00000000 RX_CB_K_0_1 false RX_CB_DISP_0_1 false RX_CB_MASK_0_2 false RX_CB_VAL_0_2 00000000 RX_CB_K_0_2 false RX_CB_DISP_0_2 false RX_CB_MASK_0_3 false RX_CB_VAL_0_3 00000000 RX_CB_K_0_3 false RX_CB_DISP_0_3 false RX_CB_MASK_1_0 false RX_CB_VAL_1_0 00000000 RX_CB_K_1_0 false RX_CB_DISP_1_0 false RX_CB_MASK_1_1 false RX_CB_VAL_1_1 00000000 RX_CB_K_1_1 false RX_CB_DISP_1_1 false RX_CB_MASK_1_2 false RX_CB_VAL_1_2 00000000 RX_CB_K_1_2 false RX_CB_DISP_1_2 false RX_CB_MASK_1_3 false RX_CB_VAL_1_3 00000000 RX_CB_K_1_3 false RX_CB_DISP_1_3 false RX_CC_NUM_SEQ 0 RX_CC_LEN_SEQ 1 RX_CC_PERIODICITY 5000 RX_CC_KEEP_IDLE DISABLE RX_CC_PRECEDENCE ENABLE RX_CC_REPEAT_WAIT 0 RX_CC_VAL 00000000000000000000000000000000000000000000000000000000000000000000000000000000 RX_CC_MASK_0_0 false RX_CC_VAL_0_0 00000000 RX_CC_K_0_0 false RX_CC_DISP_0_0 false RX_CC_MASK_0_1 false RX_CC_VAL_0_1 00000000 RX_CC_K_0_1 false RX_CC_DISP_0_1 false RX_CC_MASK_0_2 false RX_CC_VAL_0_2 00000000 RX_CC_K_0_2 false RX_CC_DISP_0_2 false RX_CC_MASK_0_3 false RX_CC_VAL_0_3 00000000 RX_CC_K_0_3 false RX_CC_DISP_0_3 false RX_CC_MASK_1_0 false RX_CC_VAL_1_0 00000000 RX_CC_K_1_0 false RX_CC_DISP_1_0 false RX_CC_MASK_1_1 false RX_CC_VAL_1_1 00000000 RX_CC_K_1_1 false RX_CC_DISP_1_1 false RX_CC_MASK_1_2 false RX_CC_VAL_1_2 00000000 RX_CC_K_1_2 false RX_CC_DISP_1_2 false RX_CC_MASK_1_3 false RX_CC_VAL_1_3 00000000 RX_CC_K_1_3 false RX_CC_DISP_1_3 false PCIE_USERCLK2_FREQ 250 PCIE_USERCLK_FREQ 250 RX_JTOL_FC 10 RX_JTOL_LF_SLOPE -20 RX_BUFFER_BYPASS_MODE Fast_Sync RX_BUFFER_BYPASS_MODE_LANE MULTI RX_BUFFER_RESET_ON_CB_CHANGE ENABLE RX_BUFFER_RESET_ON_COMMAALIGN DISABLE RX_BUFFER_RESET_ON_RATE_CHANGE ENABLE TX_BUFFER_RESET_ON_RATE_CHANGE ENABLE RESET_SEQUENCE_INTERVAL 0 RX_COMMA_PRESET NONE RX_COMMA_VALID_ONLY 0 } \
+            CONFIG.IP_PRESET {GTM-PAM4_Ethernet_56G} \
+            CONFIG.REG_CONF_INTF {AXI_LITE} \
+        ] [get_bd_cells gt_bridge_ip_0]
+
+    } elseif {$GT_TYPE == "GTYP"} {
+
+        # GTYP: versal HBM 2023.1 (xcvh1782-lsva4737-2MP-e-L)
+        # Versasl ACAPs Transceiver Bridge IP
+        #   Pass Through Mode
+        #   AXI Lite
+        #   Preset: "GTYP: Aurora 64B/66B"
+        #   Transceiver Configs:
+        #       Line rate: 32.0 Gb/s
+        #       requested Reference Clock: 100 MHz
+        #       Encoding: "64B66B ASYNC"
+        set_property -dict [list \
+            CONFIG.BYPASS_MODE {true} \
+            CONFIG.IP_LR0_SETTINGS {PRESET GTYP-Aurora_64B66B RX_PAM_SEL NRZ TX_PAM_SEL NRZ TX_HD_EN 0 RX_HD_EN 0 RX_GRAY_BYP true TX_GRAY_BYP true RX_GRAY_LITTLEENDIAN true TX_GRAY_LITTLEENDIAN true RX_PRECODE_BYP true TX_PRECODE_BYP true RX_PRECODE_LITTLEENDIAN false TX_PRECODE_LITTLEENDIAN false INTERNAL_PRESET Aurora_64B66B GT_TYPE GTYP GT_DIRECTION DUPLEX TX_LINE_RATE 32.0 TX_PLL_TYPE LCPLL TX_REFCLK_FREQUENCY 100 TX_ACTUAL_REFCLK_FREQUENCY 100.000000000000 TX_FRACN_ENABLED false TX_FRACN_OVRD false TX_FRACN_NUMERATOR 0 TX_REFCLK_SOURCE R0 TX_DATA_ENCODING 64B66B_ASYNC TX_USER_DATA_WIDTH 64 TX_INT_DATA_WIDTH 64 TX_BUFFER_MODE 1 TX_BUFFER_BYPASS_MODE Fast_Sync TX_PIPM_ENABLE false TX_OUTCLK_SOURCE TXPROGDIVCLK TXPROGDIV_FREQ_ENABLE true TXPROGDIV_FREQ_SOURCE LCPLL TXPROGDIV_FREQ_VAL 484.848 TX_DIFF_SWING_EMPH_MODE CUSTOM TX_64B66B_SCRAMBLER false TX_64B66B_ENCODER false TX_64B66B_CRC false TX_RATE_GROUP A RX_LINE_RATE 32.0 RX_PLL_TYPE LCPLL RX_REFCLK_FREQUENCY 100 RX_ACTUAL_REFCLK_FREQUENCY 100.000000000000 RX_FRACN_ENABLED false RX_FRACN_OVRD false RX_FRACN_NUMERATOR 0 RX_REFCLK_SOURCE R0 RX_DATA_DECODING 64B66B_ASYNC RX_USER_DATA_WIDTH 64 RX_INT_DATA_WIDTH 64 RX_BUFFER_MODE 1 RX_OUTCLK_SOURCE RXPROGDIVCLK RXPROGDIV_FREQ_ENABLE true RXPROGDIV_FREQ_SOURCE LCPLL RXPROGDIV_FREQ_VAL 484.848 RXRECCLK_FREQ_ENABLE true RXRECCLK_FREQ_VAL 484.848 INS_LOSS_NYQ 20 RX_EQ_MODE AUTO RX_COUPLING AC RX_TERMINATION PROGRAMMABLE RX_RATE_GROUP A RX_TERMINATION_PROG_VALUE 800 RX_PPM_OFFSET 0 RX_64B66B_DESCRAMBLER false RX_64B66B_DECODER false RX_64B66B_CRC false OOB_ENABLE false RX_COMMA_ALIGN_WORD 1 RX_COMMA_SHOW_REALIGN_ENABLE true PCIE_ENABLE false TX_LANE_DESKEW_HDMI_ENABLE false RX_COMMA_P_ENABLE false RX_COMMA_M_ENABLE false RX_COMMA_DOUBLE_ENABLE false RX_COMMA_P_VAL 0101111100 RX_COMMA_M_VAL 1010000011 RX_COMMA_MASK 0000000000 RX_SLIDE_MODE OFF RX_SSC_PPM 0 RX_CB_NUM_SEQ 0 RX_CB_LEN_SEQ 1 RX_CB_MAX_SKEW 1 RX_CB_MAX_LEVEL 1 RX_CB_MASK_0_0 false RX_CB_VAL_0_0 00000000 RX_CB_K_0_0 false RX_CB_DISP_0_0 false RX_CB_MASK_0_1 false RX_CB_VAL_0_1 00000000 RX_CB_K_0_1 false RX_CB_DISP_0_1 false RX_CB_MASK_0_2 false RX_CB_VAL_0_2 00000000 RX_CB_K_0_2 false RX_CB_DISP_0_2 false RX_CB_MASK_0_3 false RX_CB_VAL_0_3 00000000 RX_CB_K_0_3 false RX_CB_DISP_0_3 false RX_CB_MASK_1_0 false RX_CB_VAL_1_0 00000000 RX_CB_K_1_0 false RX_CB_DISP_1_0 false RX_CB_MASK_1_1 false RX_CB_VAL_1_1 00000000 RX_CB_K_1_1 false RX_CB_DISP_1_1 false RX_CB_MASK_1_2 false RX_CB_VAL_1_2 00000000 RX_CB_K_1_2 false RX_CB_DISP_1_2 false RX_CB_MASK_1_3 false RX_CB_VAL_1_3 00000000 RX_CB_K_1_3 false RX_CB_DISP_1_3 false RX_CC_NUM_SEQ 0 RX_CC_LEN_SEQ 1 RX_CC_PERIODICITY 5000 RX_CC_KEEP_IDLE DISABLE RX_CC_PRECEDENCE ENABLE RX_CC_REPEAT_WAIT 0 RX_CC_VAL 00000000000000000000000000000000000000000000000000000000000000000000000000000000 RX_CC_MASK_0_0 false RX_CC_VAL_0_0 00000000 RX_CC_K_0_0 false RX_CC_DISP_0_0 false RX_CC_MASK_0_1 false RX_CC_VAL_0_1 00000000 RX_CC_K_0_1 false RX_CC_DISP_0_1 false RX_CC_MASK_0_2 false RX_CC_VAL_0_2 00000000 RX_CC_K_0_2 false RX_CC_DISP_0_2 false RX_CC_MASK_0_3 false RX_CC_VAL_0_3 00000000 RX_CC_K_0_3 false RX_CC_DISP_0_3 false RX_CC_MASK_1_0 false RX_CC_VAL_1_0 00000000 RX_CC_K_1_0 false RX_CC_DISP_1_0 false RX_CC_MASK_1_1 false RX_CC_VAL_1_1 00000000 RX_CC_K_1_1 false RX_CC_DISP_1_1 false RX_CC_MASK_1_2 false RX_CC_VAL_1_2 00000000 RX_CC_K_1_2 false RX_CC_DISP_1_2 false RX_CC_MASK_1_3 false RX_CC_VAL_1_3 00000000 RX_CC_K_1_3 false RX_CC_DISP_1_3 false PCIE_USERCLK2_FREQ 250 PCIE_USERCLK_FREQ 250 RX_JTOL_FC 10 RX_JTOL_LF_SLOPE -20 RX_BUFFER_BYPASS_MODE Fast_Sync RX_BUFFER_BYPASS_MODE_LANE MULTI RX_BUFFER_RESET_ON_CB_CHANGE ENABLE RX_BUFFER_RESET_ON_COMMAALIGN DISABLE RX_BUFFER_RESET_ON_RATE_CHANGE ENABLE TX_BUFFER_RESET_ON_RATE_CHANGE ENABLE RESET_SEQUENCE_INTERVAL 0 RX_COMMA_PRESET NONE RX_COMMA_VALID_ONLY 0 } \
+            CONFIG.IP_PRESET {GTYP-Aurora_64B66B} \
+            CONFIG.REG_CONF_INTF {AXI_LITE} \
+        ] [get_bd_cells gt_bridge_ip_0]
+
+    } else {
+        # GTY: originally tested with 2020.1:  "gt_quad_base:1.1" "gt_bridge_ip:1.1"
+        set_property -dict [list CONFIG.BYPASS_MODE {true} CONFIG.IP_PRESET {GTY-Ethernet_25G} CONFIG.IP_LR0_SETTINGS {PRESET GTY-Ethernet_25G RX_PAM_SEL NRZ TX_PAM_SEL NRZ TX_HD_EN 0 RX_HD_EN 0 RX_GRAY_BYP true TX_GRAY_BYP true RX_GRAY_LITTLEENDIAN true TX_GRAY_LITTLEENDIAN true RX_PRECODE_BYP true TX_PRECODE_BYP true RX_PRECODE_LITTLEENDIAN false TX_PRECODE_LITTLEENDIAN false INTERNAL_PRESET Ethernet_25G TX_LINE_RATE 25.78125 TX_PLL_TYPE LCPLL TX_REFCLK_FREQUENCY 161.1328125 TX_ACTUAL_REFCLK_FREQUENCY 161.132812500000 TX_FRACN_ENABLED false TX_FRACN_OVRD false TX_FRACN_NUMERATOR 0 TX_REFCLK_SOURCE R0 TX_DATA_ENCODING 64B66B_ASYNC TX_USER_DATA_WIDTH 64 TX_INT_DATA_WIDTH 64 TX_BUFFER_MODE 1 TX_BUFFER_BYPASS_MODE Fast_Sync TX_PIPM_ENABLE false TX_OUTCLK_SOURCE TXPROGDIVCLK TXPROGDIV_FREQ_ENABLE true TXPROGDIV_FREQ_SOURCE LCPLL TXPROGDIV_FREQ_VAL 390.625 TX_DIFF_SWING_EMPH_MODE CUSTOM TX_64B66B_SCRAMBLER false TX_64B66B_ENCODER false TX_64B66B_CRC false TX_RATE_GROUP A RX_LINE_RATE 25.78125 RX_PLL_TYPE LCPLL RX_REFCLK_FREQUENCY 161.1328125 RX_ACTUAL_REFCLK_FREQUENCY 161.132812500000 RX_FRACN_ENABLED false RX_FRACN_OVRD false RX_FRACN_NUMERATOR 0 RX_REFCLK_SOURCE R0 RX_DATA_DECODING 64B66B_ASYNC RX_USER_DATA_WIDTH 64 RX_INT_DATA_WIDTH 64 RX_BUFFER_MODE 1 RX_OUTCLK_SOURCE RXPROGDIVCLK RXPROGDIV_FREQ_ENABLE true RXPROGDIV_FREQ_SOURCE LCPLL RXPROGDIV_FREQ_VAL 390.625 RXRECCLK_FREQ_ENABLE true RXRECCLK_FREQ_VAL 781.250 INS_LOSS_NYQ 20 RX_EQ_MODE AUTO RX_COUPLING AC RX_TERMINATION PROGRAMMABLE RX_RATE_GROUP A RX_TERMINATION_PROG_VALUE 800 RX_PPM_OFFSET 0 RX_64B66B_DESCRAMBLER false RX_64B66B_DECODER false RX_64B66B_CRC false OOB_ENABLE false RX_COMMA_ALIGN_WORD 1 RX_COMMA_SHOW_REALIGN_ENABLE true PCIE_ENABLE false TX_LANE_DESKEW_HDMI_ENABLE false RX_COMMA_P_ENABLE false RX_COMMA_M_ENABLE false RX_COMMA_DOUBLE_ENABLE false RX_COMMA_P_VAL 0101111100 RX_COMMA_M_VAL 1010000011 RX_COMMA_MASK 0000000000 RX_SLIDE_MODE OFF RX_SSC_PPM 0 RX_CB_NUM_SEQ 0 RX_CB_LEN_SEQ 1 RX_CB_MAX_SKEW 1 RX_CB_MAX_LEVEL 1 RX_CB_MASK 00000000 RX_CB_VAL 00000000000000000000000000000000000000000000000000000000000000000000000000000000 RX_CB_K 00000000 RX_CB_DISP 00000000 RX_CB_MASK_0_0 false RX_CB_VAL_0_0 00000000 RX_CB_K_0_0 false RX_CB_DISP_0_0 false RX_CB_MASK_0_1 false RX_CB_VAL_0_1 00000000 RX_CB_K_0_1 false RX_CB_DISP_0_1 false RX_CB_MASK_0_2 false RX_CB_VAL_0_2 00000000 RX_CB_K_0_2 false RX_CB_DISP_0_2 false RX_CB_MASK_0_3 false RX_CB_VAL_0_3 00000000 RX_CB_K_0_3 false RX_CB_DISP_0_3 false RX_CB_MASK_1_0 false RX_CB_VAL_1_0 00000000 RX_CB_K_1_0 false RX_CB_DISP_1_0 false RX_CB_MASK_1_1 false RX_CB_VAL_1_1 00000000 RX_CB_K_1_1 false RX_CB_DISP_1_1 false RX_CB_MASK_1_2 false RX_CB_VAL_1_2 00000000 RX_CB_K_1_2 false RX_CB_DISP_1_2 false RX_CB_MASK_1_3 false RX_CB_VAL_1_3 00000000 RX_CB_K_1_3 false RX_CB_DISP_1_3 false RX_CC_NUM_SEQ 0 RX_CC_LEN_SEQ 1 RX_CC_PERIODICITY 5000 RX_CC_KEEP_IDLE DISABLE RX_CC_PRECEDENCE ENABLE RX_CC_REPEAT_WAIT 0 RX_CC_MASK 00000000 RX_CC_VAL 00000000000000000000000000000000000000000000000000000000000000000000000000000000 RX_CC_K 00000000 RX_CC_DISP 00000000 RX_CC_MASK_0_0 false RX_CC_VAL_0_0 00000000 RX_CC_K_0_0 false RX_CC_DISP_0_0 false RX_CC_MASK_0_1 false RX_CC_VAL_0_1 00000000 RX_CC_K_0_1 false RX_CC_DISP_0_1 false RX_CC_MASK_0_2 false RX_CC_VAL_0_2 00000000 RX_CC_K_0_2 false RX_CC_DISP_0_2 false RX_CC_MASK_0_3 false RX_CC_VAL_0_3 00000000 RX_CC_K_0_3 false RX_CC_DISP_0_3 false RX_CC_MASK_1_0 false RX_CC_VAL_1_0 00000000 RX_CC_K_1_0 false RX_CC_DISP_1_0 false RX_CC_MASK_1_1 false RX_CC_VAL_1_1 00000000 RX_CC_K_1_1 false RX_CC_DISP_1_1 false RX_CC_MASK_1_2 false RX_CC_VAL_1_2 00000000 RX_CC_K_1_2 false RX_CC_DISP_1_2 false RX_CC_MASK_1_3 false RX_CC_VAL_1_3 00000000 RX_CC_K_1_3 false RX_CC_DISP_1_3 false PCIE_USERCLK2_FREQ 250 PCIE_USERCLK_FREQ 250 RX_JTOL_FC 10 RX_JTOL_LF_SLOPE -20 RX_BUFFER_BYPASS_MODE Fast_Sync RX_BUFFER_BYPASS_MODE_LANE MULTI RX_BUFFER_RESET_ON_CB_CHANGE ENABLE RX_BUFFER_RESET_ON_COMMAALIGN DISABLE RX_BUFFER_RESET_ON_RATE_CHANGE ENABLE TX_BUFFER_RESET_ON_RATE_CHANGE ENABLE RESET_SEQUENCE_INTERVAL 0 RX_
+COMMA_PRESET NONE RX_COMMA_VALID_ONLY 0 GT_DIRECTION DUPLEX GT_TYPE GTY}] [get_bd_cells gt_bridge_ip_0]
+        # aurora @ 25.78125 Gb/s with Ref Clk = 161.1328125 MHz
+        # set_property -dict [list CONFIG.BYPASS_MODE {true}  CONFIG.IP_PRESET {GTY-Aurora_64B66B} CONFIG.IP_LR0_SETTINGS {PRESET GTY-Aurora_64B66B RX_PAM_SEL NRZ TX_PAM_SEL NRZ TX_HD_EN 0 RX_HD_EN 0 RX_GRAY_BYP true TX_GRAY_BYP true RX_GRAY_LITTLEENDIAN true TX_GRAY_LITTLEENDIAN true RX_PRECODE_BYP true TX_PRECODE_BYP true RX_PRECODE_LITTLEENDIAN false TX_PRECODE_LITTLEENDIAN false INTERNAL_PRESET Aurora_64B66B GT_TYPE GTY GT_DIRECTION DUPLEX TX_LINE_RATE 25.78125 TX_PLL_TYPE LCPLL TX_REFCLK_FREQUENCY 161.1328125 TX_ACTUAL_REFCLK_FREQUENCY 161.132812500000 TX_FRACN_ENABLED false TX_FRACN_OVRD false TX_FRACN_NUMERATOR 0 TX_REFCLK_SOURCE R0 TX_DATA_ENCODING 64B66B_SYNC TX_USER_DATA_WIDTH 64 TX_INT_DATA_WIDTH 64 TX_BUFFER_MODE 1 TX_BUFFER_BYPASS_MODE Fast_Sync TX_PIPM_ENABLE false TX_OUTCLK_SOURCE TXOUTCLKPMA TXPROGDIV_FREQ_ENABLE false TXPROGDIV_FREQ_SOURCE LCPLL TXPROGDIV_FREQ_VAL 402.832031 TX_DIFF_SWING_EMPH_MODE CUSTOM TX_64B66B_SCRAMBLER false TX_64B66B_ENCODER false TX_64B66B_CRC false TX_RATE_GROUP A RX_LINE_RATE 25.78125 RX_PLL_TYPE LCPLL RX_REFCLK_FREQUENCY 161.1328125 RX_ACTUAL_REFCLK_FREQUENCY 161.132812500000 RX_FRACN_ENABLED false RX_FRACN_OVRD false RX_FRACN_NUMERATOR 0 RX_REFCLK_SOURCE R0 RX_DATA_DECODING 64B66B_SYNC RX_USER_DATA_WIDTH 64 RX_INT_DATA_WIDTH 64 RX_BUFFER_MODE 1 RX_OUTCLK_SOURCE RXOUTCLKPMA RXPROGDIV_FREQ_ENABLE false RXPROGDIV_FREQ_SOURCE LCPLL RXPROGDIV_FREQ_VAL 402.832031 RXRECCLK_FREQ_ENABLE false RXRECCLK_FREQ_VAL 0 INS_LOSS_NYQ 20 RX_EQ_MODE AUTO RX_COUPLING AC RX_TERMINATION PROGRAMMABLE RX_RATE_GROUP A RX_TERMINATION_PROG_VALUE 800 RX_PPM_OFFSET 0 RX_64B66B_DESCRAMBLER false RX_64B66B_DECODER false RX_64B66B_CRC false OOB_ENABLE false RX_COMMA_ALIGN_WORD 1 RX_COMMA_SHOW_REALIGN_ENABLE true PCIE_ENABLE false TX_LANE_DESKEW_HDMI_ENABLE false RX_COMMA_P_ENABLE false RX_COMMA_M_ENABLE false RX_COMMA_DOUBLE_ENABLE false RX_COMMA_P_VAL 0101111100 RX_COMMA_M_VAL 1010000011 RX_COMMA_MASK 0000000000 RX_SLIDE_MODE OFF RX_SSC_PPM 0 RX_CB_NUM_SEQ 0 RX_CB_LEN_SEQ 1 RX_CB_MAX_SKEW 1 RX_CB_MAX_LEVEL 1 RX_CB_MASK_0_0 false RX_CB_VAL_0_0 00000000 RX_CB_K_0_0 false RX_CB_DISP_0_0 false RX_CB_MASK_0_1 false RX_CB_VAL_0_1 00000000 RX_CB_K_0_1 false RX_CB_DISP_0_1 false RX_CB_MASK_0_2 false RX_CB_VAL_0_2 00000000 RX_CB_K_0_2 false RX_CB_DISP_0_2 false RX_CB_MASK_0_3 false RX_CB_VAL_0_3 00000000 RX_CB_K_0_3 false RX_CB_DISP_0_3 false RX_CB_MASK_1_0 false RX_CB_VAL_1_0 00000000 RX_CB_K_1_0 false RX_CB_DISP_1_0 false RX_CB_MASK_1_1 false RX_CB_VAL_1_1 00000000 RX_CB_K_1_1 false RX_CB_DISP_1_1 false RX_CB_MASK_1_2 false RX_CB_VAL_1_2 00000000 RX_CB_K_1_2 false RX_CB_DISP_1_2 false RX_CB_MASK_1_3 false RX_CB_VAL_1_3 00000000 RX_CB_K_1_3 false RX_CB_DISP_1_3 false RX_CC_NUM_SEQ 0 RX_CC_LEN_SEQ 1 RX_CC_PERIODICITY 5000 RX_CC_KEEP_IDLE DISABLE RX_CC_PRECEDENCE ENABLE RX_CC_REPEAT_WAIT 0 RX_CC_VAL 00000000000000000000000000000000000000000000000000000000000000000000000000000000 RX_CC_MASK_0_0 false RX_CC_VAL_0_0 00000000 RX_CC_K_0_0 false RX_CC_DISP_0_0 false RX_CC_MASK_0_1 false RX_CC_VAL_0_1 00000000 RX_CC_K_0_1 false RX_CC_DISP_0_1 false RX_CC_MASK_0_2 false RX_CC_VAL_0_2 00000000 RX_CC_K_0_2 false RX_CC_DISP_0_2 false RX_CC_MASK_0_3 false RX_CC_VAL_0_3 00000000 RX_CC_K_0_3 false RX_CC_DISP_0_3 false RX_CC_MASK_1_0 false RX_CC_VAL_1_0 00000000 RX_CC_K_1_0 false RX_CC_DISP_1_0 false RX_CC_MASK_1_1 false RX_CC_VAL_1_1 00000000 RX_CC_K_1_1 false RX_CC_DISP_1_1 false RX_CC_MASK_1_2 false RX_CC_VAL_1_2 00000000 RX_CC_K_1_2 false RX_CC_DISP_1_2 false RX_CC_MASK_1_3 false RX_CC_VAL_1_3 00000000 RX_CC_K_1_3 false RX_CC_DISP_1_3 false PCIE_USERCLK2_FREQ 250 PCIE_USERCLK_FREQ 250 RX_JTOL_FC 10 RX_JTOL_LF_SLOPE -20 RX_BUFFER_BYPASS_MODE Fast_Sync RX_BUFFER_BYPASS_MODE_LANE MULTI RX_BUFFER_RESET_ON_CB_CHANGE ENABLE RX_BUFFER_RESET_ON_COMMAALIGN DISABLE RX_BUFFER_RESET_ON_RATE_CHANGE ENABLE TX_BUFFER_RESET_ON_RATE_CHANGE ENABLE RESET_SEQUENCE_INTERVAL 0 RX_COMMA_PRESET NONE RX_COMMA_VALID_ONLY 0 } ] [get_bd_cells gt_bridge_ip_0]
+    }
+
+    apply_bd_automation -rule xilinx.com:bd_rule:gt_ips -config { DataPath_Interface_Connection {Auto} Lane0_selection {NULL} Lane10_selection {NULL} Lane11_selection {NULL} Lane12_selection {NULL} Lane13_selection {NULL} Lane14_selection {NULL} Lane15_selection {NULL} Lane16_selection {NULL} Lane17_selection {NULL} Lane18_selection {NULL} Lane19_selection {NULL} Lane1_selection {NULL} Lane2_selection {NULL} Lane3_selection {NULL} Lane4_selection {NULL} Lane5_selection {NULL} Lane6_selection {NULL} Lane7_selection {NULL} Lane8_selection {NULL} Lane9_selection {NULL} Quad0_selection {NULL} Quad10_selection {NULL} Quad11_selection {NULL} Quad12_selection {NULL} Quad13_selection {NULL} Quad14_selection {NULL} Quad15_selection {NULL} Quad16_selection {NULL} Quad17_selection {NULL} Quad18_selection {NULL} Quad19_selection {NULL} Quad1_selection {NULL} Quad2_selection {NULL} Quad3_selection {NULL} Quad4_selection {NULL} Quad5_selection {NULL} Quad6_selection {NULL} Quad7_selection {NULL} Quad8_selection {NULL} Quad9_selection {NULL}}  [get_bd_cells gt_bridge_ip_0]
+
+    #set_property -dict [list CONFIG.APB3_CLK_FREQUENCY.VALUE_SRC USER] [get_bd_cells gt_quad_base]
+    #set_property -dict [list CONFIG.APB3_CLK_FREQUENCY {150}] [get_bd_cells gt_quad_base]
+
+    connect_bd_net [get_bd_ports gt_powergood] [get_bd_pins gt_quad_base/gtpowergood]
+
+    for {set i 0} {$i < 4} {incr i} {
+
+        connect_bd_net [get_bd_ports lane_loopback_${i}]            [get_bd_pins gt_quad_base/ch${i}_loopback]
+        connect_bd_net [get_bd_ports lane_rxlpmen_${i}]             [get_bd_pins gt_bridge_ip_0/ch${i}_rxlpmen_ext]
+        connect_bd_net [get_bd_ports lane_rxpolarity_${i}]          [get_bd_pins gt_bridge_ip_0/ch${i}_rxpolarity_ext]
+        connect_bd_net [get_bd_ports lane_txpolarity_${i}]          [get_bd_pins gt_bridge_ip_0/ch${i}_txpolarity_ext]
+        connect_bd_net [get_bd_ports lane_txpostcursor_${i}]        [get_bd_pins gt_bridge_ip_0/ch${i}_txpostcursor_ext]
+        connect_bd_net [get_bd_ports lane_txprecursor_${i}]         [get_bd_pins gt_bridge_ip_0/ch${i}_txprecursor_ext]
+        connect_bd_net [get_bd_ports lane_txdiffctrl_${i}]          [get_bd_pins gt_bridge_ip_0/ch${i}_txdiffctrl_ext]
+        connect_bd_net [get_bd_ports lane_txmaincursor_${i}]        [get_bd_pins gt_bridge_ip_0/ch${i}_txmaincursor_ext]
+
+        if {$GT_TYPE == "GTM"} {
+            connect_bd_net [get_bd_ports lane_txprecursor_${i}]         [get_bd_pins gt_bridge_ip_0/ch${i}_txprecursor2_ext]
+            connect_bd_net [get_bd_ports lane_txprecursor_${i}]         [get_bd_pins gt_bridge_ip_0/ch${i}_txprecursor3_ext]
+        }
+
+        if {$GT_TYPE == "GTYP"} {
+            connect_bd_net [get_bd_pins gt_bridge_ip_0/pcie_rstb] [get_bd_pins gt_quad_base/ch${i}_pcierstb]
+            connect_bd_net [get_bd_pins gt_bridge_ip_0/gt_ilo_reset] [get_bd_pins gt_quad_base/ch${i}_iloreset]
+        }
+
+    }
+
+    if {$GT_TYPE == "GTYP"} {
+        connect_bd_net  [get_bd_pins gt_bridge_ip_0/gt_pll_reset] [get_bd_pins gt_quad_base/hsclk0_lcpllreset] [get_bd_pins gt_quad_base/hsclk0_rpllreset] \
+                                                                  [get_bd_pins gt_quad_base/hsclk1_lcpllreset] [get_bd_pins gt_quad_base/hsclk1_rpllreset]
+
+        create_bd_cell -type ip -vlnv xilinx.com:ip:util_reduced_logic:2.0 util_reduced_logic_ip0_lcpll
+        create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_0_lcpll
+
+        set_property CONFIG.C_SIZE {2} [get_bd_cells util_reduced_logic_ip0_lcpll]
+        connect_bd_net [get_bd_pins gt_quad_base/hsclk0_lcplllock] [get_bd_pins xlconcat_0_lcpll/In0]
+        connect_bd_net [get_bd_pins gt_quad_base/hsclk1_lcplllock] [get_bd_pins xlconcat_0_lcpll/In1]
+        connect_bd_net [get_bd_pins xlconcat_0_lcpll/dout] [get_bd_pins util_reduced_logic_ip0_lcpll/Op1]
+        connect_bd_net [get_bd_pins util_reduced_logic_ip0_lcpll/Res] [get_bd_pins gt_bridge_ip_0/gt_lcpll_lock]
+
+        create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_ilo
+        set_property CONFIG.NUM_PORTS {4} [get_bd_cells xlconcat_ilo]
+        create_bd_cell -type ip -vlnv xilinx.com:ip:util_reduced_logic:2.0 util_reduced_logic_0_ilo
+        set_property CONFIG.C_SIZE {4} [get_bd_cells util_reduced_logic_0_ilo]
+        connect_bd_net [get_bd_pins gt_quad_base/ch0_iloresetdone] [get_bd_pins xlconcat_ilo/In0]
+        connect_bd_net [get_bd_pins gt_quad_base/ch1_iloresetdone] [get_bd_pins xlconcat_ilo/In1]
+        connect_bd_net [get_bd_pins gt_quad_base/ch2_iloresetdone] [get_bd_pins xlconcat_ilo/In2]
+        connect_bd_net [get_bd_pins gt_quad_base/ch3_iloresetdone] [get_bd_pins xlconcat_ilo/In3]
+        connect_bd_net [get_bd_pins xlconcat_ilo/dout] [get_bd_pins util_reduced_logic_0_ilo/Op1]
+        connect_bd_net [get_bd_pins util_reduced_logic_0_ilo/Res] [get_bd_pins gt_bridge_ip_0/ilo_resetdone]
+
+        create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_phy
+        set_property CONFIG.NUM_PORTS {4} [get_bd_cells xlconcat_phy]
+        connect_bd_net [get_bd_pins gt_quad_base/ch0_phystatus] [get_bd_pins xlconcat_phy/In0]
+        connect_bd_net [get_bd_pins gt_quad_base/ch1_phystatus] [get_bd_pins xlconcat_phy/In1]
+        connect_bd_net [get_bd_pins gt_quad_base/ch2_phystatus] [get_bd_pins xlconcat_phy/In2]
+        connect_bd_net [get_bd_pins gt_quad_base/ch3_phystatus] [get_bd_pins xlconcat_phy/In3]
+        connect_bd_net [get_bd_pins xlconcat_phy/dout] [get_bd_pins gt_bridge_ip_0/ch_phystatus_in]
+    }
+
+    # from pg331:
+    # 1. gt_lcpll_lock, gt_rpll_lock, ch_phystatus_in, and ilo_resetdone inputs are don't care and can be ignored.
+    # 2. gt_ilo_reset, gt_pll_reset, rpll_lock_out, lcpll_lock_out, pcie_rstb, and reset_mask output values are not used and can be ignored.
+    # Recommend use hsclk0_lcplllock, hsclk1_lcplllock, hsclk0_rplllock, and hsclk1_rplllock signals from respective gt_quad_base IP for monitoring purpose.
+    connect_bd_net [get_bd_ports hsclk0_lcplllock_0]  [get_bd_pins gt_quad_base/hsclk0_lcplllock]
+    connect_bd_net [get_bd_ports hsclk1_lcplllock_0]  [get_bd_pins gt_quad_base/hsclk1_lcplllock]
+
+    connect_bd_net [get_bd_ports hsclk0_rplllock_0]  [get_bd_pins gt_quad_base/hsclk0_rplllock]
+    connect_bd_net [get_bd_ports hsclk1_rplllock_0]  [get_bd_pins gt_quad_base/hsclk1_rplllock]
+
+    delete_bd_objs [get_bd_ports rpll_lock_gt_bridge_ip_0] [get_bd_ports lcpll_lock_gt_bridge_ip_0]
+
+    # disconnect GT_REFCLK0 input of the quad and route gt_refclk_out/in instead of
+    if {$GT_TYPE == "GTM"} {
+        delete_bd_objs [get_bd_nets util_ds_buf_IBUFDS_GTME5_O]
+        connect_bd_net [get_bd_ports gt_refclk_out] [get_bd_pins util_ds_buf/IBUFDS_GTME5_O]
+        connect_bd_net [get_bd_ports gt_refclk_in] [get_bd_pins gt_quad_base/GT_REFCLK0]
+
+    } elseif {$GT_TYPE == "GTYP"} {
+        delete_bd_objs [get_bd_nets util_ds_buf_IBUF_OUT]
+        connect_bd_net [get_bd_ports gt_refclk_out] [get_bd_pins util_ds_buf/IBUF_OUT]
+        connect_bd_net [get_bd_ports gt_refclk_in] [get_bd_pins gt_quad_base/GT_REFCLK0]
+    }
+
+}
+
+update_bd

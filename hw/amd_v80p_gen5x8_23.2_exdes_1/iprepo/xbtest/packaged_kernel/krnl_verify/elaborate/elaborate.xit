@@ -1,0 +1,379 @@
+# Copyright (C) 2022 Xilinx, Inc.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+namespace eval elaborate_xbtest {
+
+    ::ipxit::source_ipfile example/common.tcl
+    ::ipxit::source_ipfile tcl/messages.tcl
+    set kernel_inst     [::ipxit::current_inst]
+    set Component_Name  [get_property CONFIG.Component_Name $kernel_inst]
+    set MESSAGES_DICT   [get_property CONFIG.MESSAGES_DICT  $kernel_inst]
+    set config [dict create MESSAGES_DICT $MESSAGES_DICT]
+
+    set Cur_Proj_ARCHITECTURE   [string tolower [xit::get_project_property ARCHITECTURE ]]
+    set Cur_Proj_FAMILY         [string tolower [xit::get_project_property FAMILY       ]]
+    set Cur_Proj_SPEEDGRADE     [string tolower [xit::get_project_property SPEEDGRADE   ]]
+    set Cur_Proj_PART           [string tolower [xit::get_project_property PART         ]]
+    set Cur_Proj_BOARD          [string tolower [xit::get_project_property BOARD        ]]
+    set Cur_Proj_DEVICE         [string tolower [xit::get_project_property DEVICE       ]]
+    set Cur_Proj_PACKAGE        [string tolower [xit::get_project_property PACKAGE      ]]
+
+    if {([regexp -- {krnl_gtf_} $Component_Name] == 1)} {
+
+        log_message $config {ELABORATE_XBTEST-1} [list $Component_Name]; # Start
+
+        # create_ip -name gtfwizard -vendor xilinx.com -library ip -version 1.0 -module_name gtf_wiz_10_raw
+        # set_property CONFIG.preset {GTF-10G-RAW} [get_ips gtf_wiz_10_raw]
+        # set_property CONFIG.RX_OUTCLK_SOURCE {RXOUTCLKPMA} [get_ips gtf_wiz_10_raw]
+        # set_property CONFIG.FREERUN_FREQUENCY {150} [get_ips gtf_wiz_10_raw]
+        # set_property CONFIG.INTERNAL_TOTAL_NUM_CHANNELS {4} [get_ips gtf_wiz_10_raw]
+
+        set sub_core_gtf_vlnv xilinx.com:ip:gtfwizard:1.0
+        set sub_core_gtf_name gtf_wiz_10_raw
+
+        set sub_core_gtf [create_sub_core $sub_core_gtf_vlnv $sub_core_gtf_name]
+
+        set sub_core_gtf_params [ list \
+            CONFIG.preset                           {GTF-10G-RAW} \
+            CONFIG.RX_OUTCLK_SOURCE                 {RXOUTCLKPMA} \
+            CONFIG.FREERUN_FREQUENCY                {150} \
+            CONFIG.INTERNAL_TOTAL_NUM_CHANNELS      {4} \
+        ]
+
+        set_property -dict $sub_core_gtf_params $sub_core_gtf
+
+        # Report sub-core properties
+        log_message $config {ELABORATE_XBTEST-5} [list $sub_core_gtf_name $sub_core_gtf_vlnv $Component_Name $sub_core_gtf_params];
+
+        set_property -dict $sub_core_gtf_params $sub_core_gtf
+        log_message $config {ELABORATE_XBTEST-4} [list $sub_core_gtf_name $sub_core_gtf_vlnv $Component_Name]; # End sub-core
+
+        log_message $config {ELABORATE_XBTEST-7} [list $Component_Name]; # End
+
+    } elseif {([regexp -- {krnl_gtm_} $Component_Name] == 1)} {
+
+        log_message $config {ELABORATE_XBTEST-1} [list $Component_Name]; # Start
+
+        set sub_core_gt_vlnv xilinx.com:ip:xbtest_sub_gt:1.1
+        set sub_core_gt_name gtm_xbtest_sub_gt_0
+
+        set sub_core_gt [create_sub_core $sub_core_gt_vlnv $sub_core_gt_name]
+
+        set sub_core_gt_params [ list CONFIG.GT_TYPE "GTM"]
+
+        set_property -dict $sub_core_gt_params $sub_core_gt
+
+        log_message $config {ELABORATE_XBTEST-7} [list $Component_Name]; # End
+
+    } elseif {([regexp -- {krnl_gtyp_} $Component_Name] == 1)} {
+
+        log_message $config {ELABORATE_XBTEST-1} [list $Component_Name]; # Start
+
+        set sub_core_gt_vlnv xilinx.com:ip:xbtest_sub_gt:1.1
+        set sub_core_gt_name gtyp_xbtest_sub_gt_0
+
+        set sub_core_gt [create_sub_core $sub_core_gt_vlnv $sub_core_gt_name]
+
+        set sub_core_gt_params [ list CONFIG.GT_TYPE "GTYP"]
+
+        set_property -dict $sub_core_gt_params $sub_core_gt
+
+        log_message $config {ELABORATE_XBTEST-7} [list $Component_Name]; # End
+
+    } elseif { ([regexp -- {krnl_gt_} $Component_Name] == 1)|| [regexp -- {krnl_gty_} $Component_Name] == 1 } {
+        log_message $config {ELABORATE_XBTEST-1} [list $Component_Name]; # Start
+
+        set C_KRNL_MODE [get_property CONFIG.C_KRNL_MODE    $kernel_inst]
+        set C_GT_INDEX  [get_property CONFIG.C_GT_INDEX     $kernel_inst]
+        set C_GT_TYPE   [get_property CONFIG.GT_TYPE        $kernel_inst]
+
+        log_message $config {ELABORATE_XBTEST-2} [list C_KRNL_MODE $Component_Name $C_KRNL_MODE]; # Report parameter
+        log_message $config {ELABORATE_XBTEST-2} [list C_GT_INDEX  $Component_Name $C_GT_INDEX];  # Report parameter
+
+        if {($C_KRNL_MODE == 3) || ($C_KRNL_MODE == 6)} {
+
+            # from GROUP_SELECT (e.g. QUAD_X1Y10) generate wiz config
+            #    CONFIG.CHANNEL_ENABLE {X1Y43 X1Y42 X1Y41 X1Y40} CONFIG.TX_MASTER_CHANNEL {X1Y40} CONFIG.RX_MASTER_CHANNEL {X1Y40}
+            set GT_GROUP_SELECT [get_property CONFIG.GT_${C_GT_INDEX}_GROUP_SELECT $kernel_inst]
+            log_message $config {ELABORATE_XBTEST-2} [list GT_${C_GT_INDEX}_GROUP_SELECT $Component_Name $GT_GROUP_SELECT];  # Report parameter
+
+            if {$C_KRNL_MODE == 6} {
+                set GT_IP_SEL       [get_property CONFIG.GT_IP_SEL  $kernel_inst]
+                log_message $config {ELABORATE_XBTEST-2} [list GT_IP_SEL $Component_Name $GT_IP_SEL];  # Report parameter
+            } else {
+                set GT_IP_SEL "gt_wiz"
+            }
+
+            if {$GT_IP_SEL == {xbtest_sub_gt}} {
+
+                set sub_core_gt_vlnv xilinx.com:ip:xbtest_sub_gt:1.1
+                set sub_core_gt_name gty_xbtest_sub_gt_0
+
+                set sub_core_gt [create_sub_core $sub_core_gt_vlnv $sub_core_gt_name]
+
+                set sub_core_gt_params [ list CONFIG.GT_GROUP_SELECT $GT_GROUP_SELECT]
+                lappend sub_core_mac_params CONFIG.GT_TYPE "GTY"
+
+                set_property -dict $sub_core_gt_params $sub_core_gt
+
+#                # ILA gt_prbs_25_core_sub_gt
+#                create_ip -name axis_ila -vendor xilinx.com -library ip -version 1.1 -module_name axis_ila_gt_reset
+#                set_property -dict [list CONFIG.C_NUM_OF_PROBES {8} CONFIG.Component_Name {axis_ila_gt_reset} CONFIG.C_EN_STRG_QUAL {1} CONFIG.C_INPUT_PIPE_STAGES {2} CONFIG.C_PROBE7_MU_CNT {2} CONFIG.C_PROBE6_MU_CNT {2} CONFIG.C_PROBE5_MU_CNT {2} CONFIG.C_PROBE4_MU_CNT {2} CONFIG.C_PROBE3_MU_CNT {2} CONFIG.C_PROBE2_MU_CNT {2} CONFIG.C_PROBE1_MU_CNT {2} CONFIG.C_PROBE0_MU_CNT {2} CONFIG.ALL_PROBE_SAME_MU_CNT {2}] [get_ips axis_ila_gt_reset]
+
+#                set sub_core_ila_vlnv xilinx.com:ip:axis_ila:1.1
+#                set sub_core_ila_name axis_ila_gt_reset
+#                set sub_core_ila [create_sub_core $sub_core_ila_vlnv $sub_core_ila_name]
+#                set sub_core_ila_params [ list CONFIG.C_NUM_OF_PROBES {8} CONFIG.Component_Name {axis_ila_gt_reset} CONFIG.C_EN_STRG_QUAL {1} CONFIG.C_INPUT_PIPE_STAGES {2} CONFIG.C_PROBE7_MU_CNT {2} CONFIG.C_PROBE6_MU_CNT {2} CONFIG.C_PROBE5_MU_CNT {2} CONFIG.C_PROBE4_MU_CNT {2} CONFIG.C_PROBE3_MU_CNT {2} CONFIG.C_PROBE2_MU_CNT {2} CONFIG.C_PROBE1_MU_CNT {2} CONFIG.C_PROBE0_MU_CNT {2} CONFIG.ALL_PROBE_SAME_MU_CNT {2} ]
+#                set_property -dict $sub_core_ila_params $sub_core_ila
+
+
+                #create_ip -name axis_ila -vendor xilinx.com -library ip -version 1.1 -module_name axis_ila_gt_rxdata
+                #set_property -dict [list CONFIG.C_BRAM_CNT {4} CONFIG.C_PROBE3_WIDTH {6} CONFIG.C_PROBE2_WIDTH {2} CONFIG.C_PROBE1_WIDTH {128} CONFIG.C_PROBE0_WIDTH {2} CONFIG.C_NUM_OF_PROBES {6} CONFIG.Component_Name {axis_ila_gt_rxdata} CONFIG.C_EN_STRG_QUAL {1} CONFIG.C_INPUT_PIPE_STAGES {2} CONFIG.C_PROBE5_MU_CNT {2} CONFIG.C_PROBE4_MU_CNT {2} CONFIG.C_PROBE3_MU_CNT {2} CONFIG.C_PROBE2_MU_CNT {2} CONFIG.C_PROBE1_MU_CNT {2} CONFIG.C_PROBE0_MU_CNT {2} CONFIG.ALL_PROBE_SAME_MU_CNT {2}] [get_ips axis_ila_gt_rxdata]
+
+                #set sub_core_ila_vlnv xilinx.com:ip:axis_ila:1.1
+                #set sub_core_ila_name axis_ila_gt_rxdata
+                #set sub_core_ila [create_sub_core $sub_core_ila_vlnv $sub_core_ila_name]
+                #set sub_core_ila_params [ list CONFIG.C_BRAM_CNT {4.5} CONFIG.C_PROBE3_WIDTH {6} CONFIG.C_PROBE2_WIDTH {2} CONFIG.C_PROBE1_WIDTH {134} CONFIG.C_PROBE0_WIDTH {2} CONFIG.C_NUM_OF_PROBES {6} CONFIG.C_EN_STRG_QUAL {1} CONFIG.C_INPUT_PIPE_STAGES {2} CONFIG.C_PROBE5_MU_CNT {2} CONFIG.C_PROBE4_MU_CNT {2} CONFIG.C_PROBE3_MU_CNT {2} CONFIG.C_PROBE2_MU_CNT {2} CONFIG.C_PROBE1_MU_CNT {2} CONFIG.C_PROBE0_MU_CNT {2} CONFIG.ALL_PROBE_SAME_MU_CNT {2} ]
+                #set_property -dict $sub_core_ila_params $sub_core_ila
+
+            } elseif {$GT_IP_SEL == {gtf_wiz}} {
+
+                # NO IP required as gtfwizard only create 1 lane design
+
+                #create_ip -name gtfwizard -vendor xilinx.com -library ip -version 1.0 -module_name gtf_wiz_25_raw
+                #set_property -dict [list CONFIG.preset {GTF-25G-RAW}] [get_ips gtf_wiz_25_raw]
+                #set_property -dict [list CONFIG.Component_Name {gtf_wiz_25_raw}] [get_ips gtf_wiz_25_raw]
+
+                # set sub_core_gtf_wiz_vlnv xilinx.com:ip:gtfwizard
+                # set sub_core_gtf_wiz_name gtf_wiz_25_raw
+                # set sub_core_gtf_wiz [create_sub_core $sub_core_gtf_wiz_vlnv $sub_core_gtf_wiz_name]
+                # set sub_core_gtf_wiz_params [ list CONFIG.preset {GTF-25G-RAW} ]
+                # set_property -dict $sub_core_gtf_wiz_params $sub_core_gtf_wiz
+
+            } else {
+
+                ###########################
+                # create GT wizard component
+                ###########################
+                # u250 example:
+                #   create_ip -name gtwizard_ultrascale -vendor xilinx.com -library ip -version 1.7 -module_name gt_wiz_25
+                #   set_property -dict [list CONFIG.preset {GTY-10GBASE-KR}] [get_ips gt_wiz_25]
+                #   set_property -dict [list CONFIG.CHANNEL_ENABLE {X1Y43 X1Y42 X1Y41 X1Y40} CONFIG.TX_MASTER_CHANNEL {X1Y40} CONFIG.RX_MASTER_CHANNEL {X1Y40} CONFIG.INS_LOSS_NYQ {20} CONFIG.TX_LINE_RATE {25.78125} CONFIG.TX_REFCLK_FREQUENCY {161.1328125} CONFIG.TX_USER_DATA_WIDTH {64} CONFIG.TX_INT_DATA_WIDTH {64} CONFIG.RX_LINE_RATE {25.78125} CONFIG.RX_REFCLK_FREQUENCY {161.1328125} CONFIG.RX_USER_DATA_WIDTH {64} CONFIG.RX_INT_DATA_WIDTH {64} CONFIG.RX_JTOL_FC {10} CONFIG.RX_CB_MAX_LEVEL {2} CONFIG.ENABLE_OPTIONAL_PORTS {loopback_in rxcdrhold_in rxlpmen_in txdiffctrl_in txpolarity_in txpostcursor_in txprecursor_in} CONFIG.TXPROGDIV_FREQ_VAL {390.625} CONFIG.LOCATE_IN_SYSTEM_IBERT_CORE {NONE} CONFIG.FREERUN_FREQUENCY {150} CONFIG.Component_Name {gt_wiz_25}] [get_ips gt_wiz_25]
+
+                #   set_property -dict [list CONFIG.CHANNEL_ENABLE {X0Y3 X0Y2 X0Y1 X0Y0} CONFIG.INS_LOSS_NYQ {20} CONFIG.TX_LINE_RATE {25.78125} CONFIG.TX_REFCLK_FREQUENCY {161.1328125} CONFIG.TX_USER_DATA_WIDTH {64} CONFIG.TX_INT_DATA_WIDTH {64} CONFIG.RX_LINE_RATE {25.78125} CONFIG.RX_REFCLK_FREQUENCY {161.1328125} CONFIG.RX_USER_DATA_WIDTH {64} CONFIG.RX_INT_DATA_WIDTH {64} CONFIG.RX_JTOL_FC {10} CONFIG.RX_CB_MAX_LEVEL {2} CONFIG.ENABLE_OPTIONAL_PORTS {loopback_in rxcdrhold_in rxlpmen_in txdiffctrl_in txpolarity_in txpostcursor_in txprecursor_in} CONFIG.RX_REFCLK_SOURCE {} CONFIG.TXPROGDIV_FREQ_VAL {390.625} CONFIG.FREERUN_FREQUENCY {150}] [get_ips gt_wiz_25]
+
+                #set sub_core_gt_wiz_vlnv "xilinx.com:ip:gtwizard_ultrascale:1.7"
+                set ip_min_version 1.7
+                set ip_max_version 2.0
+                # get all gtwizard_ultrascale version
+                set ip_ipdef_list [get_ipdefs -filter {NAME=~*gtwizard_ultrascale*}]
+
+                set ip_ipdef_sorted_list [lsort $ip_ipdef_list]
+
+                # get the first element of the list if multiple IP are present. Normally only 1 minor version is present per major
+                set ip_ipdef [lindex $ip_ipdef_sorted_list 0]
+
+                set ip_VERSION [get_property VERSION   $ip_ipdef]
+
+                if { [expr { $ip_VERSION >= $ip_min_version}] && [expr { $ip_VERSION < $ip_max_version}] } {
+                    log_message $config {ELABORATE_XBTEST-8} [list $Component_Name gtwizard_ultrascale $ip_VERSION]
+                } else {
+                    log_message $config {ELABORATE_XBTEST-9} [list $Component_Name $ip_ipdef $ip_min_version $ip_max_version ]
+                }
+                set sub_core_gt_wiz_vlnv $ip_ipdef
+
+                set sub_core_gt_wiz_name gt_wiz_25
+
+                log_message $config {ELABORATE_XBTEST-3} [list $sub_core_gt_wiz_name $sub_core_gt_wiz_vlnv $Component_Name]; # Start sub-core
+
+                # Common sub-core configuration
+                set sub_core_gt_wiz_params [list \
+                    CONFIG.preset                       {GTY-10GBASE-KR} \
+                    CONFIG.TX_REFCLK_FREQUENCY          {161.1328125} \
+                    CONFIG.RX_REFCLK_FREQUENCY          {161.1328125} \
+                    CONFIG.RX_CB_MAX_LEVEL              {2} \
+                    CONFIG.ENABLE_OPTIONAL_PORTS        {loopback_in rxcdrhold_in rxlpmen_in txdiffctrl_in txpolarity_in txpostcursor_in txprecursor_in} \
+                    CONFIG.INS_LOSS_NYQ                 {20} \
+                    CONFIG.TX_LINE_RATE                 {25.78125} \
+                    CONFIG.TX_USER_DATA_WIDTH           {64} \
+                    CONFIG.TX_INT_DATA_WIDTH            {64} \
+                    CONFIG.RX_LINE_RATE                 {25.78125} \
+                    CONFIG.RX_USER_DATA_WIDTH           {64} \
+                    CONFIG.RX_INT_DATA_WIDTH            {64} \
+                    CONFIG.RX_JTOL_FC                   {10} \
+                    CONFIG.TXPROGDIV_FREQ_VAL           {390.625} \
+                    CONFIG.LOCATE_IN_SYSTEM_IBERT_CORE  {NONE} \
+                    CONFIG.FREERUN_FREQUENCY            {150} \
+                ]
+                #    CONFIG.LOCATE_TX_USER_CLOCKING      {CORE} \
+                #    CONFIG.LOCATE_RX_USER_CLOCKING      {CORE} \
+                # CONFIG.ENABLE_OPTIONAL_PORTS        {loopback_in rxcdrhold_in rxlpmen_in txdiffctrl_in txmaincursor_in txpolarity_in txpostcursor_in txprecursor_in} \
+
+                ## split QUAD _ XxxYyy
+                set loc_xy [lindex [split $GT_GROUP_SELECT {"_"}] 1]; # result loc_xy = XxxYyy
+                set loc_x  [lindex [split $loc_xy     {"Y"}] 0]; # result loc_x = Xxx
+                scan [lindex [split $loc_xy {"Y"}] 1] %d quad_y
+                scan [lindex [split $loc_x  {"X"}] 1] %d quad_x
+                set channel_y0 [expr ($quad_y*4 + 0)]
+                set channel_y1 [expr ($quad_y*4 + 1)]
+                set channel_y2 [expr ($quad_y*4 + 2)]
+                set channel_y3 [expr ($quad_y*4 + 3)]
+
+                set GT_LPBK_CFG "CONFIG.CHANNEL_ENABLE \{X${quad_x}Y${channel_y3} X${quad_x}Y${channel_y2} X${quad_x}Y${channel_y1} X${quad_x}Y${channel_y0}\} CONFIG.TX_MASTER_CHANNEL \{X${quad_x}Y${channel_y0}\} CONFIG.RX_MASTER_CHANNEL \{X${quad_x}Y${channel_y0}\}"
+
+                set sub_core_gt_wiz_params [concat $GT_LPBK_CFG $sub_core_gt_wiz_params ]
+
+                set sub_core_gt_wiz [create_sub_core $sub_core_gt_wiz_vlnv $sub_core_gt_wiz_name]; # create GT component
+
+                # Report sub-core properties
+                log_message $config {ELABORATE_XBTEST-5} [list $sub_core_gt_wiz_name $sub_core_gt_wiz_vlnv $Component_Name $sub_core_gt_wiz_params];
+
+                set_property -dict $sub_core_gt_wiz_params $sub_core_gt_wiz
+                log_message $config {ELABORATE_XBTEST-4} [list $sub_core_gt_wiz_name $sub_core_gt_wiz_vlnv $Component_Name]; # End sub-core
+            }
+
+        } elseif {$C_KRNL_MODE == 4} {
+
+            set GT_TYPE         [get_property CONFIG.GT_TYPE                        $kernel_inst]
+            set GT_MAC_IP_SEL   [get_property CONFIG.GT_MAC_IP_SEL                  $kernel_inst]
+            set GT_GROUP_SELECT [get_property CONFIG.GT_${C_GT_INDEX}_GROUP_SELECT  $kernel_inst]
+            set ENABLE_RSFEC    [get_property CONFIG.ENABLE_RSFEC                   $kernel_inst]
+
+            log_message $config {ELABORATE_XBTEST-2} [list GT_TYPE                          $Component_Name $GT_TYPE];  # Report parameter
+            log_message $config {ELABORATE_XBTEST-2} [list GT_MAC_IP_SEL                    $Component_Name $GT_MAC_IP_SEL];  # Report parameter
+            log_message $config {ELABORATE_XBTEST-2} [list GT_${C_GT_INDEX}_GROUP_SELECT    $Component_Name $GT_GROUP_SELECT];  # Report parameter
+            log_message $config {ELABORATE_XBTEST-2} [list ENABLE_RSFEC                     $Component_Name $ENABLE_RSFEC];  # Report parameter
+
+            if {$GT_MAC_IP_SEL == {xbtest_sub_xxv_gt}} {
+
+                set sub_core_mac_vlnv xilinx.com:ip:xbtest_sub_xxv_gt:1.0
+                set sub_core_mac_name xbtest_sub_xxv_gt_0
+
+                set sub_core_mac [create_sub_core $sub_core_mac_vlnv $sub_core_mac_name]
+
+                if {$ENABLE_RSFEC} {
+                    set sub_core_mac_params [ list CONFIG.ENABLE_RSFEC    {1}]
+                } else {
+                    set sub_core_mac_params [ list CONFIG.ENABLE_RSFEC    {0}]
+                }
+
+                # Compute unit specific configuration
+                lappend sub_core_mac_params CONFIG.GT_GROUP_SELECT $GT_GROUP_SELECT
+
+                set_property -dict $sub_core_mac_params $sub_core_mac
+
+#                # ILA for gt_mac/gt_traffic_cnt.vhd
+#                set sub_core_ila_vlnv xilinx.com:ip:axis_ila:1.1
+#                set sub_core_ila_name axis_ila_0
+#                set sub_core_ila [create_sub_core $sub_core_ila_vlnv $sub_core_ila_name]
+#                set sub_core_ila_params [ list CONFIG.C_BRAM_CNT {6} CONFIG.C_PROBE11_WIDTH {48} CONFIG.C_PROBE10_WIDTH {48} CONFIG.C_PROBE9_WIDTH {48} CONFIG.C_PROBE1_WIDTH {64} CONFIG.C_NUM_OF_PROBES {12} CONFIG.Component_Name {axis_ila} CONFIG.C_EN_STRG_QUAL {1} CONFIG.C_INPUT_PIPE_STAGES {2} CONFIG.C_PROBE11_MU_CNT {2} CONFIG.C_PROBE10_MU_CNT {2} CONFIG.C_PROBE9_MU_CNT {2} CONFIG.C_PROBE8_MU_CNT {2} CONFIG.C_PROBE7_MU_CNT {2} CONFIG.C_PROBE6_MU_CNT {2} CONFIG.C_PROBE5_MU_CNT {2} CONFIG.C_PROBE4_MU_CNT {2} CONFIG.C_PROBE3_MU_CNT {2} CONFIG.C_PROBE2_MU_CNT {2} CONFIG.C_PROBE1_MU_CNT {2} CONFIG.C_PROBE0_MU_CNT {2} CONFIG.ALL_PROBE_SAME_MU_CNT {2} ]
+
+#                set_property -dict $sub_core_ila_params $sub_core_ila
+
+            } elseif {$GT_MAC_IP_SEL == {xxv}} {
+
+                ###########################
+                # create XXV Ethernet component
+                ###########################
+                # use version from 3.2 (vivado 2020.1) to 4.0 (vivado 2021.1)
+                set xxv_min_version 3.2
+                set xxv_max_version 4.2
+                # get all XXV_ethernet version
+                set xxv_ethernet_ipdef_list [get_ipdefs -filter {NAME=~*xxv_ethernet*}]
+
+                set xxv_ethernet_ipdef_sorted_list [lsort $xxv_ethernet_ipdef_list]
+
+                # get the first element (older version) of the list if multiple IP are present. Normally only 1 minor version is present per major
+                set xxv_ethernet_ipdef [lindex $xxv_ethernet_ipdef_sorted_list 0]
+
+                set xxv_ethernet_VERSION    [get_property VERSION   $xxv_ethernet_ipdef]
+
+                if { [expr { $xxv_ethernet_VERSION >= $xxv_min_version}] && [expr { $xxv_ethernet_VERSION < $xxv_max_version}] } {
+                    log_message $config {ELABORATE_XBTEST-8} [list $Component_Name xxv_ethernet $xxv_ethernet_VERSION]
+                } else {
+                    log_message $config {ELABORATE_XBTEST-9} [list $Component_Name $xxv_ethernet_ipdef $xxv_min_version $xxv_max_version ]
+                }
+                set sub_core_mac_vlnv $xxv_ethernet_ipdef
+
+                if {$GT_TYPE == {GTY}} {
+
+                    set sub_core_mac_name mac_core
+                    log_message $config {ELABORATE_XBTEST-3} [list $sub_core_mac_name $sub_core_mac_vlnv $Component_Name]; # Start sub-core
+
+                    # Common sub-core configuration: 10-25 GbE
+                    set sub_core_mac_params [ list \
+                        CONFIG.NUM_OF_CORES                 {4} \
+                        CONFIG.RUNTIME_SWITCH               {1} \
+                        CONFIG.INCLUDE_FEC_LOGIC            {1} \
+                        CONFIG.ADD_GT_CNTRL_STS_PORTS       {1} \
+                        CONFIG.INCLUDE_SHARED_LOGIC         {1} \
+                        CONFIG.INCLUDE_AXI4_INTERFACE       {1} \
+                        CONFIG.GT_DRP_CLK                   {75.00} \
+                        CONFIG.INCLUDE_STATISTICS_COUNTERS  {1} \
+                    ]
+
+#                    # 10 gbe only
+#                    set sub_core_mac_params [ list \
+#                        CONFIG.LINE_RATE                    {10} \
+#                        CONFIG.NUM_OF_CORES                 {4} \
+#                        CONFIG.INCLUDE_FEC_LOGIC            {1} \
+#                        CONFIG.INCLUDE_AXI4_INTERFACE       {1} \
+#                        CONFIG.INCLUDE_STATISTICS_COUNTERS  {1} \
+#                        CONFIG.GT_REF_CLK_FREQ              {161.1328125} \
+#                        CONFIG.INCLUDE_SHARED_LOGIC         {1} \
+#                        CONFIG.ADD_GT_CNTRL_STS_PORTS       {1} \
+#                    ]
+#
+#                    # 25 gbe only
+#                    set sub_core_mac_params [ list \
+#                        CONFIG.NUM_OF_CORES {4} \
+#                        CONFIG.INCLUDE_FEC_LOGIC {1} \
+#                        CONFIG.INCLUDE_AXI4_INTERFACE {1} \
+#                        CONFIG.INCLUDE_STATISTICS_COUNTERS {1} \
+#                        CONFIG.GT_DRP_CLK {75.00} \
+#                        CONFIG.ADD_GT_CNTRL_STS_PORTS {1}]
+
+
+                    # Compute unit specific configuration
+                    set GT_GROUP_SELECT [get_property CONFIG.GT_${C_GT_INDEX}_GROUP_SELECT $kernel_inst]
+                    log_message $config {ELABORATE_XBTEST-2} [list GT_${C_GT_INDEX}_GROUP_SELECT $Component_Name $GT_GROUP_SELECT];  # Report parameter
+
+                    if {$GT_GROUP_SELECT == ""} {
+                        log_message $config {ELABORATE_XBTEST-6} [list $sub_core_mac_name $sub_core_mac_vlnv $Component_Name GT_${C_GT_INDEX}_GROUP_SELECT]; # ERROR missing sub-core property
+                    }
+
+                    lappend sub_core_mac_params \
+                        CONFIG.GT_GROUP_SELECT $GT_GROUP_SELECT
+
+                    if {$ENABLE_RSFEC} {
+                        lappend sub_core_mac_params \
+                            CONFIG.INCLUDE_RSFEC_LOGIC {1}
+                    }
+
+                    set sub_core_mac [create_sub_core $sub_core_mac_vlnv $sub_core_mac_name]
+
+                    log_message $config {ELABORATE_XBTEST-5} [list $sub_core_mac_name $sub_core_mac_vlnv $Component_Name $sub_core_mac_params]; # Report sub-core properties
+                    set_property -dict $sub_core_mac_params $sub_core_mac
+
+                    log_message $config {ELABORATE_XBTEST-4} [list $sub_core_mac_name $sub_core_mac_vlnv $Component_Name]; # End sub-core
+
+                } else {
+                    log_message $config {ELABORATE_XBTEST-6} [list $sub_core_mac_name $sub_core_mac_vlnv $Component_Name "GT_${C_GT_INDEX}_GT_TYPE"]; # ERROR missing sub-core property
+                }
+            }
+
+        }
+
+        log_message $config {ELABORATE_XBTEST-7} [list $Component_Name]; # End
+    }
+}

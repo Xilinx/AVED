@@ -1,0 +1,42 @@
+{
+  "comment": [
+    "This is an example of test JSON file",
+    "You can use this example as template for your own tests",
+    "Please refer to the User Guide for how to define or add/remove testcases",
+    "Comments can be added or removed anywhere in test JSON file"
+  ],
+  "testcases": {
+    "gtyp_prbs": {
+      "default": {
+        "global_config": {
+          "test_sequence": [
+            {
+              "duration": 1,
+              "mode": "conf_gt"
+            },
+            {
+              "duration": 1,
+              "mode": "tx_rx_rst"
+            },
+            {
+              "duration": 1,
+              "mode": "rx_datapath_rst"
+            },
+            {
+              "duration": 1,
+              "mode": "clear_status"
+            },
+            {
+              "duration": 60,
+              "mode": "run"
+            },
+            {
+              "duration": 1,
+              "mode": "check_status"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

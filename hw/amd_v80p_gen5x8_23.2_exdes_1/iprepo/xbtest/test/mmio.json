@@ -1,0 +1,19 @@
+{
+  "comment": [
+    "This is an example of test JSON file",
+    "You can use this example as template for your own tests",
+    "Please refer to the User Guide for how to define or add/remove testcases",
+    "Comments can be added or removed anywhere in test JSON file"
+  ],
+  "testcases": {
+    "mmio": {
+      "global_config": {
+        "test_sequence": [
+          {
+            "duration": 10
+          }
+        ]
+      }
+    }
+  }
+}

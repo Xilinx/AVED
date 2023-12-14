@@ -1,0 +1,45 @@
+# Object files
+*.o
+*.a
+*.swp
+*.swo
+*.elf
+
+
+#includes specifics for perforce + any other non public
+output/
+
+# VS Code settings
+.vscode/
+
+# Build output (cmake, binary files, etc...)
+#build/
+
+#Deploy folder - pending discussion
+#deploy/
+
+#__pycache__folder in scripts
+__pycache__/
+
+#Ignore deb/rpm packages
+*.deb
+*.rpm
+*.zip
+
+# Vitis Build files
+.Xil
+
+# Test sources
+CMocka/
+componentTest/
+**/AMC/src/test/
+**/AMI/test/
+
+# Generated BSP
+amc_bsp/
+.metadata/
+.analytics
+IDE.log
+
+# Others
+.nfs*

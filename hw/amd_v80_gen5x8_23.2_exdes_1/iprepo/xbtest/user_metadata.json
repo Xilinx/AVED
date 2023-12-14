@@ -1,0 +1,1024 @@
+{
+  "build_info": {
+    "xbtest": {
+      "version": {
+        "major": 7,
+        "minor": 0
+      },
+      "build": 4004544,
+      "date": "Fri Sep 22 10:16:28 MDT 2023",
+      "internal_release": false
+    },
+    "board": {
+      "name": "NOT DEFINED",
+      "interface_uuid": "NOT DEFINED"
+    },
+    "tool": {
+      "version": 2023.1,
+      "version_long": "Vivado v2023.1 (64-bit). SW Build 3865809 on Sun May  7 15:04:56 MDT 2023. IP Build 3864474 on Sun May  7 20:36:21 MDT 2023. Tool Version Limit: 2023.05. Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.. SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023. "
+    }
+  },
+  "definition": {
+    "clocks": {
+      "0": 400,
+      "1": 600
+    },
+    "memory": {
+      "0": {
+        "name": "DDR",
+        "target": "board",
+        "type": "multi_channel",
+        "axi_data_size": 512,
+        "num_axi_thread": 4,
+        "num_axi_outstanding": 32
+      },
+      "1": {
+        "name": "HBM",
+        "target": "board",
+        "type": "multi_channel",
+        "axi_data_size": 256,
+        "num_axi_thread": 4,
+        "num_axi_outstanding": 32
+      }
+    },
+    "gt": {
+      "0": {
+        "gt_index": 0,
+        "gt_type": "GTM",
+        "gtm_prbs_ip_sel": "xbtest_sub_gt",
+        "gt_group_select": "QUAD_GTM_X1Y8",
+        "gt_refclk_sel": "0",
+        "gt_serial_port": "qsfp0_4x",
+        "gt_diff_clocks": "qsfp0_322mhz"
+      },
+      "1": {
+        "gt_index": 1,
+        "gt_type": "GTM",
+        "gtm_prbs_ip_sel": "xbtest_sub_gt",
+        "gt_group_select": "QUAD_GTM_X1Y7",
+        "gt_refclk_sel": "0",
+        "gt_serial_port": "qsfp1_4x",
+        "gt_diff_clocks": "qsfp0_322mhz"
+      },
+      "2": {
+        "gt_index": 2,
+        "gt_type": "GTM",
+        "gtm_prbs_ip_sel": "xbtest_sub_gt",
+        "gt_group_select": "QUAD_GTM_X0Y9",
+        "gt_refclk_sel": "2",
+        "gt_serial_port": "qsfp2_4x",
+        "gt_diff_clocks": "qsfp2_322mhz"
+      },
+      "3": {
+        "gt_index": 3,
+        "gt_type": "GTM",
+        "gtm_prbs_ip_sel": "xbtest_sub_gt",
+        "gt_group_select": "QUAD_GTM_X0Y10",
+        "gt_refclk_sel": "2",
+        "gt_serial_port": "qsfp3_4x",
+        "gt_diff_clocks": "qsfp2_322mhz"
+      },
+      "4": {
+        "gt_index": 4,
+        "gt_type": "GTYP",
+        "gtyp_prbs_ip_sel": "xbtest_sub_gt",
+        "gt_group_select": "QUAD_X1Y0",
+        "gt_refclk_sel": "4",
+        "gt_serial_port": "mcio0_4x",
+        "gt_diff_clocks": "mcio0_100mhz"
+      },
+      "5": {
+        "gt_index": 5,
+        "gt_type": "GTYP",
+        "gtyp_prbs_ip_sel": "xbtest_sub_gt",
+        "gt_group_select": "QUAD_X1Y7",
+        "gt_refclk_sel": "5",
+        "gt_serial_port": "mcio1_a_4x",
+        "gt_diff_clocks": "mcio1_100mhz"
+      },
+      "6": {
+        "gt_index": 6,
+        "gt_type": "GTYP",
+        "gtyp_prbs_ip_sel": "xbtest_sub_gt",
+        "gt_group_select": "QUAD_X1Y8",
+        "gt_refclk_sel": "5",
+        "gt_serial_port": "mcio1_b_4x",
+        "gt_diff_clocks": "mcio1_100mhz"
+      },
+      "7": {
+        "gt_index": 7,
+        "gt_type": "GTYP",
+        "gtyp_prbs_ip_sel": "xbtest_sub_gt",
+        "gt_group_select": "QUAD_X1Y12",
+        "gt_refclk_sel": "7",
+        "gt_serial_port": "mcio2_4x",
+        "gt_diff_clocks": "mcio2_100mhz"
+      }
+    },
+    "compute_units": {
+      "0": {
+        "name": "krnl_gtyp_prbs_test_01_00",
+        "SLR": 0,
+        "mode": 9,
+        "num_connections": 1,
+        "connectivity": {
+          "0": "BRAM[0]"
+        },
+        "cu_type_configuration": {
+          "gt_index": {
+            "0": false,
+            "1": false,
+            "2": false,
+            "3": false,
+            "4": true,
+            "5": false,
+            "6": false,
+            "7": false,
+            "8": false,
+            "9": false,
+            "10": false,
+            "11": false,
+            "12": false,
+            "13": false,
+            "14": false,
+            "15": false,
+            "16": false,
+            "17": false,
+            "18": false,
+            "19": false,
+            "20": false,
+            "21": false,
+            "22": false,
+            "23": false,
+            "24": false,
+            "25": false,
+            "26": false,
+            "27": false,
+            "28": false,
+            "29": false,
+            "30": false,
+            "31": false
+          }
+        }
+      },
+      "1": {
+        "name": "krnl_gtyp_prbs_test_03_02",
+        "SLR": 2,
+        "mode": 9,
+        "num_connections": 1,
+        "connectivity": {
+          "0": "BRAM[2]"
+        },
+        "cu_type_configuration": {
+          "gt_index": {
+            "0": false,
+            "1": false,
+            "2": false,
+            "3": false,
+            "4": false,
+            "5": true,
+            "6": true,
+            "7": true,
+            "8": false,
+            "9": false,
+            "10": false,
+            "11": false,
+            "12": false,
+            "13": false,
+            "14": false,
+            "15": false,
+            "16": false,
+            "17": false,
+            "18": false,
+            "19": false,
+            "20": false,
+            "21": false,
+            "22": false,
+            "23": false,
+            "24": false,
+            "25": false,
+            "26": false,
+            "27": false,
+            "28": false,
+            "29": false,
+            "30": false,
+            "31": false
+          }
+        }
+      },
+      "2": {
+        "name": "krnl_gtm_prbs_test_04_01",
+        "SLR": 1,
+        "mode": 8,
+        "num_connections": 1,
+        "connectivity": {
+          "0": "BRAM[1]"
+        },
+        "cu_type_configuration": {
+          "gt_index": {
+            "0": true,
+            "1": true,
+            "2": true,
+            "3": true,
+            "4": false,
+            "5": false,
+            "6": false,
+            "7": false,
+            "8": false,
+            "9": false,
+            "10": false,
+            "11": false,
+            "12": false,
+            "13": false,
+            "14": false,
+            "15": false,
+            "16": false,
+            "17": false,
+            "18": false,
+            "19": false,
+            "20": false,
+            "21": false,
+            "22": false,
+            "23": false,
+            "24": false,
+            "25": false,
+            "26": false,
+            "27": false,
+            "28": false,
+            "29": false,
+            "30": false,
+            "31": false
+          }
+        }
+      },
+      "3": {
+        "name": "krnl_powertest_slr0",
+        "SLR": 0,
+        "mode": 0,
+        "num_connections": 1,
+        "connectivity": {
+          "0": "BRAM[0]"
+        },
+        "cu_type_configuration": {
+          "SLR": 0,
+          "throttle_mode": "INTERNAL_MACRO",
+          "use_aie": 0
+        }
+      },
+      "4": {
+        "name": "krnl_powertest_slr1",
+        "SLR": 1,
+        "mode": 0,
+        "num_connections": 0,
+        "connectivity": {
+        },
+        "cu_type_configuration": {
+          "SLR": 1,
+          "throttle_mode": "EXTERNAL_MACRO",
+          "use_aie": 0
+        }
+      },
+      "5": {
+        "name": "krnl_powertest_slr2",
+        "SLR": 2,
+        "mode": 0,
+        "num_connections": 0,
+        "connectivity": {
+        },
+        "cu_type_configuration": {
+          "SLR": 2,
+          "throttle_mode": "EXTERNAL_MACRO",
+          "use_aie": 0
+        }
+      },
+      "6": {
+        "name": "krnl_memtest_ddr_02_00",
+        "SLR": 0,
+        "mode": 1,
+        "num_connections": 3,
+        "connectivity": {
+          "0": "BRAM[0]",
+          "1": "DDR",
+          "2": "DDR"
+        },
+        "cu_type_configuration": {
+          "memory_type": "DDR"
+        }
+      },
+      "7": {
+        "name": "krnl_memtest_hbm_64_00",
+        "SLR": 2,
+        "mode": 1,
+        "num_connections": 65,
+        "connectivity": {
+          "0": "BRAM[2]",
+          "1": "HBM[0]",
+          "2": "HBM[0]",
+          "3": "HBM[1]",
+          "4": "HBM[1]",
+          "5": "HBM[2]",
+          "6": "HBM[2]",
+          "7": "HBM[3]",
+          "8": "HBM[3]",
+          "9": "HBM[4]",
+          "10": "HBM[4]",
+          "11": "HBM[5]",
+          "12": "HBM[5]",
+          "13": "HBM[6]",
+          "14": "HBM[6]",
+          "15": "HBM[7]",
+          "16": "HBM[7]",
+          "17": "HBM[8]",
+          "18": "HBM[8]",
+          "19": "HBM[9]",
+          "20": "HBM[9]",
+          "21": "HBM[10]",
+          "22": "HBM[10]",
+          "23": "HBM[11]",
+          "24": "HBM[11]",
+          "25": "HBM[12]",
+          "26": "HBM[12]",
+          "27": "HBM[13]",
+          "28": "HBM[13]",
+          "29": "HBM[14]",
+          "30": "HBM[14]",
+          "31": "HBM[15]",
+          "32": "HBM[15]",
+          "33": "HBM[16]",
+          "34": "HBM[16]",
+          "35": "HBM[17]",
+          "36": "HBM[17]",
+          "37": "HBM[18]",
+          "38": "HBM[18]",
+          "39": "HBM[19]",
+          "40": "HBM[19]",
+          "41": "HBM[20]",
+          "42": "HBM[20]",
+          "43": "HBM[21]",
+          "44": "HBM[21]",
+          "45": "HBM[22]",
+          "46": "HBM[22]",
+          "47": "HBM[23]",
+          "48": "HBM[23]",
+          "49": "HBM[24]",
+          "50": "HBM[24]",
+          "51": "HBM[25]",
+          "52": "HBM[25]",
+          "53": "HBM[26]",
+          "54": "HBM[26]",
+          "55": "HBM[27]",
+          "56": "HBM[27]",
+          "57": "HBM[28]",
+          "58": "HBM[28]",
+          "59": "HBM[29]",
+          "60": "HBM[29]",
+          "61": "HBM[30]",
+          "62": "HBM[30]",
+          "63": "HBM[31]",
+          "64": "HBM[31]"
+        },
+        "cu_type_configuration": {
+          "memory_type": "HBM"
+        }
+      },
+      "8": {
+        "name": "krnl_verify",
+        "SLR": 0,
+        "mode": 5,
+        "num_connections": 1,
+        "connectivity": {
+          "0": "BRAM[0]"
+        },
+        "cu_type_configuration": {
+          "dna_read": false
+        }
+      }
+    }
+  },
+  "pre_canned": {
+    "verify": {
+      "comment": [
+        "This is an example of test JSON file",
+        "You can use this example as template for your own tests",
+        "Please refer to the User Guide for how to define or add/remove testcases",
+        "Comments can be added or removed anywhere in test JSON file"
+      ]
+    },
+    "power": {
+      "comment": [
+        "This is an example of test JSON file",
+        "You can use this example as template for your own tests",
+        "Please refer to the User Guide for how to define or add/remove testcases",
+        "Comments can be added or removed anywhere in test JSON file"
+      ],
+      "testcases": {
+        "power": {
+          "global_config": {
+            "test_sequence": [
+              {
+                "duration": 100,
+                "toggle_rate": 5
+              },
+              {
+                "duration": 100,
+                "toggle_rate": 10
+              },
+              {
+                "duration": 100,
+                "toggle_rate": 15
+              },
+              {
+                "duration": 100,
+                "toggle_rate": 20
+              }
+            ]
+          }
+        }
+      }
+    },
+    "memory": {
+      "comment": [
+        "This is an example of test JSON file",
+        "You can use this example as template for your own tests",
+        "Please refer to the User Guide for how to define or add/remove testcases",
+        "Comments can be added or removed anywhere in test JSON file"
+      ],
+      "testcases": {
+        "memory": {
+          "DDR": {
+            "global_config": {
+              "test_sequence": [
+                {
+                  "duration": 20,
+                  "mode": "alternate_wr_rd"
+                },
+                {
+                  "duration": 20,
+                  "mode": "only_wr"
+                },
+                {
+                  "duration": 20,
+                  "mode": "only_rd"
+                },
+                {
+                  "duration": 20,
+                  "mode": "simultaneous_wr_rd"
+                }
+              ]
+            }
+          },
+          "HBM": {
+            "global_config": {
+              "test_sequence": [
+                {
+                  "duration": 20,
+                  "mode": "alternate_wr_rd"
+                },
+                {
+                  "duration": 20,
+                  "mode": "only_wr"
+                },
+                {
+                  "duration": 20,
+                  "mode": "only_rd"
+                },
+                {
+                  "duration": 20,
+                  "mode": "simultaneous_wr_rd"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "mmio": {
+      "comment": [
+        "This is an example of test JSON file",
+        "You can use this example as template for your own tests",
+        "Please refer to the User Guide for how to define or add/remove testcases",
+        "Comments can be added or removed anywhere in test JSON file"
+      ],
+      "testcases": {
+        "mmio": {
+          "global_config": {
+            "test_sequence": [
+              {
+                "duration": 10
+              }
+            ]
+          }
+        }
+      }
+    },
+    "gtm_prbs": {
+      "comment": [
+        "This is an example of test JSON file",
+        "You can use this example as template for your own tests",
+        "Please refer to the User Guide for how to define or add/remove testcases",
+        "Comments can be added or removed anywhere in test JSON file"
+      ],
+      "testcases": {
+        "gtm_prbs": {
+          "default": {
+            "global_config": {
+              "test_sequence": [
+                {
+                  "duration": 1,
+                  "mode": "conf_gt"
+                },
+                {
+                  "duration": 1,
+                  "mode": "tx_rx_rst"
+                },
+                {
+                  "duration": 1,
+                  "mode": "rx_datapath_rst"
+                },
+                {
+                  "duration": 1,
+                  "mode": "clear_status"
+                },
+                {
+                  "duration": 60,
+                  "mode": "run"
+                },
+                {
+                  "duration": 1,
+                  "mode": "check_status"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "gtyp_prbs": {
+      "comment": [
+        "This is an example of test JSON file",
+        "You can use this example as template for your own tests",
+        "Please refer to the User Guide for how to define or add/remove testcases",
+        "Comments can be added or removed anywhere in test JSON file"
+      ],
+      "testcases": {
+        "gtyp_prbs": {
+          "default": {
+            "global_config": {
+              "test_sequence": [
+                {
+                  "duration": 1,
+                  "mode": "conf_gt"
+                },
+                {
+                  "duration": 1,
+                  "mode": "tx_rx_rst"
+                },
+                {
+                  "duration": 1,
+                  "mode": "rx_datapath_rst"
+                },
+                {
+                  "duration": 1,
+                  "mode": "clear_status"
+                },
+                {
+                  "duration": 60,
+                  "mode": "run"
+                },
+                {
+                  "duration": 1,
+                  "mode": "check_status"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "stress": {
+      "comment": [
+        "This is an example of test JSON file",
+        "You can use this example as template for your own tests",
+        "Please refer to the User Guide for how to define or add/remove testcases",
+        "Comments can be added or removed anywhere in test JSON file"
+      ],
+      "testcases": {
+        "power": {
+          "comment": "Update toggle rate according to your test environment",
+          "global_config": {
+            "test_sequence": [
+              {
+                "duration": 300,
+                "toggle_rate": 10
+              }
+            ]
+          }
+        },
+        "memory": {
+          "DDR": {
+            "global_config": {
+              "test_sequence": [
+                {
+                  "duration": 300,
+                  "mode": "alternate_wr_rd"
+                }
+              ]
+            }
+          },
+          "HBM": {
+            "global_config": {
+              "test_sequence": [
+                {
+                  "duration": 300,
+                  "mode": "alternate_wr_rd"
+                }
+              ]
+            }
+          }
+        },
+        "gtm_prbs": {
+          "comment": [
+            "Make sure power duration is bigger than the total duration gt tests",
+            "reset gt only after power toggle rate is stable"
+          ],
+          "default": {
+            "global_config": {
+              "test_sequence": [
+                {
+                  "duration": 1,
+                  "mode": "conf_gt"
+                },
+                {
+                  "duration": 1,
+                  "mode": "tx_rx_rst"
+                },
+                {
+                  "duration": 1,
+                  "mode": "rx_datapath_rst"
+                },
+                {
+                  "duration": 1,
+                  "mode": "clear_status"
+                },
+                {
+                  "duration": 250,
+                  "mode": "run"
+                },
+                {
+                  "duration": 1,
+                  "mode": "check_status"
+                }
+              ]
+            }
+          }
+        },
+        "gtyp_prbs": {
+          "comment": [
+            "Make sure power duration is bigger than the total duration gt tests",
+            "reset gt only after power toggle rate is stable"
+          ],
+          "default": {
+            "global_config": {
+              "test_sequence": [
+                {
+                  "duration": 1,
+                  "mode": "conf_gt"
+                },
+                {
+                  "duration": 1,
+                  "mode": "tx_rx_rst"
+                },
+                {
+                  "duration": 1,
+                  "mode": "rx_datapath_rst"
+                },
+                {
+                  "duration": 1,
+                  "mode": "clear_status"
+                },
+                {
+                  "duration": 250,
+                  "mode": "run"
+                },
+                {
+                  "duration": 1,
+                  "mode": "check_status"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "xbtest_pfm_def": {
+    "comment": [
+      "xbtest platform definition JSON file for: NOT DEFINED",
+      "This is a generated template file",
+      "Please refer to the checklist for how to update/define its content"
+    ],
+    "device": {
+      "runtime": {
+        "download_time": 1
+      },
+      "gt": {
+        "0": {
+          "transceiver_settings": {
+            "module": {
+              "tx_differential_swing_control": 0,
+              "tx_pre_emphasis": 0,
+              "tx_post_emphasis": 0,
+              "rx_equaliser": "DFE"
+            },
+            "cable": {
+              "tx_differential_swing_control": 0,
+              "tx_pre_emphasis": 0,
+              "tx_post_emphasis": 0,
+              "rx_equaliser": "DFE"
+            }
+          }
+        },
+        "1": {
+          "transceiver_settings": {
+            "module": {
+              "tx_differential_swing_control": 0,
+              "tx_pre_emphasis": 0,
+              "tx_post_emphasis": 0,
+              "rx_equaliser": "DFE"
+            },
+            "cable": {
+              "tx_differential_swing_control": 0,
+              "tx_pre_emphasis": 0,
+              "tx_post_emphasis": 0,
+              "rx_equaliser": "DFE"
+            }
+          }
+        },
+        "2": {
+          "transceiver_settings": {
+            "module": {
+              "tx_differential_swing_control": 0,
+              "tx_pre_emphasis": 0,
+              "tx_post_emphasis": 0,
+              "rx_equaliser": "DFE"
+            },
+            "cable": {
+              "tx_differential_swing_control": 0,
+              "tx_pre_emphasis": 0,
+              "tx_post_emphasis": 0,
+              "rx_equaliser": "DFE"
+            }
+          }
+        },
+        "3": {
+          "transceiver_settings": {
+            "module": {
+              "tx_differential_swing_control": 0,
+              "tx_pre_emphasis": 0,
+              "tx_post_emphasis": 0,
+              "rx_equaliser": "DFE"
+            },
+            "cable": {
+              "tx_differential_swing_control": 0,
+              "tx_pre_emphasis": 0,
+              "tx_post_emphasis": 0,
+              "rx_equaliser": "DFE"
+            }
+          }
+        },
+        "4": {
+          "transceiver_settings": {
+            "module": {
+              "tx_differential_swing_control": 0,
+              "tx_pre_emphasis": 0,
+              "tx_post_emphasis": 0,
+              "rx_equaliser": "DFE"
+            },
+            "cable": {
+              "tx_differential_swing_control": 0,
+              "tx_pre_emphasis": 0,
+              "tx_post_emphasis": 0,
+              "rx_equaliser": "DFE"
+            }
+          }
+        },
+        "5": {
+          "transceiver_settings": {
+            "module": {
+              "tx_differential_swing_control": 0,
+              "tx_pre_emphasis": 0,
+              "tx_post_emphasis": 0,
+              "rx_equaliser": "DFE"
+            },
+            "cable": {
+              "tx_differential_swing_control": 0,
+              "tx_pre_emphasis": 0,
+              "tx_post_emphasis": 0,
+              "rx_equaliser": "DFE"
+            }
+          }
+        },
+        "6": {
+          "transceiver_settings": {
+            "module": {
+              "tx_differential_swing_control": 0,
+              "tx_pre_emphasis": 0,
+              "tx_post_emphasis": 0,
+              "rx_equaliser": "DFE"
+            },
+            "cable": {
+              "tx_differential_swing_control": 0,
+              "tx_pre_emphasis": 0,
+              "tx_post_emphasis": 0,
+              "rx_equaliser": "DFE"
+            }
+          }
+        },
+        "7": {
+          "transceiver_settings": {
+            "module": {
+              "tx_differential_swing_control": 0,
+              "tx_pre_emphasis": 0,
+              "tx_post_emphasis": 0,
+              "rx_equaliser": "DFE"
+            },
+            "cable": {
+              "tx_differential_swing_control": 0,
+              "tx_pre_emphasis": 0,
+              "tx_post_emphasis": 0,
+              "rx_equaliser": "DFE"
+            }
+          }
+        }
+      },
+      "memory": {
+        "0": {
+          "name": "DDR",
+          "cu_rate": {
+            "only_wr": {
+              "write": {
+                "nominal": 100
+              }
+            },
+            "only_rd": {
+              "read": {
+                "nominal": 100
+              }
+            },
+            "simul_wr_rd": {
+              "write": {
+                "nominal": 100
+              },
+              "read": {
+                "nominal": 100
+              }
+            }
+          },
+          "cu_outstanding": {
+            "only_wr": {
+              "write": {
+                "nominal": 0
+              }
+            },
+            "only_rd": {
+              "read": {
+                "nominal": 0
+              }
+            },
+            "simul_wr_rd": {
+              "write": {
+                "nominal": 0
+              },
+              "read": {
+                "nominal": 0
+              }
+            }
+          },
+          "cu_bw": {
+            "only_wr": {
+              "write": {
+                "average": 2
+              }
+            },
+            "only_rd": {
+              "read": {
+                "average": 2
+              }
+            },
+            "simul_wr_rd": {
+              "write": {
+                "average": 2
+              },
+              "read": {
+                "average": 2
+              }
+            }
+          },
+          "cu_latency": {
+            "only_wr": {
+              "write": {
+                "average": 2
+              }
+            },
+            "only_rd": {
+              "read": {
+                "average": 2
+              }
+            },
+            "simul_wr_rd": {
+              "write": {
+                "average": 2
+              },
+              "read": {
+                "average": 2
+              }
+            }
+          }
+        },
+        "1": {
+          "name": "HBM",
+          "cu_rate": {
+            "only_wr": {
+              "write": {
+                "nominal": 100
+              }
+            },
+            "only_rd": {
+              "read": {
+                "nominal": 100
+              }
+            },
+            "simul_wr_rd": {
+              "write": {
+                "nominal": 100
+              },
+              "read": {
+                "nominal": 100
+              }
+            }
+          },
+          "cu_outstanding": {
+            "only_wr": {
+              "write": {
+                "nominal": 0
+              }
+            },
+            "only_rd": {
+              "read": {
+                "nominal": 0
+              }
+            },
+            "simul_wr_rd": {
+              "write": {
+                "nominal": 0
+              },
+              "read": {
+                "nominal": 0
+              }
+            }
+          },
+          "cu_bw": {
+            "only_wr": {
+              "write": {
+                "average": 2
+              }
+            },
+            "only_rd": {
+              "read": {
+                "average": 2
+              }
+            },
+            "simul_wr_rd": {
+              "write": {
+                "average": 2
+              },
+              "read": {
+                "average": 2
+              }
+            }
+          },
+          "cu_latency": {
+            "only_wr": {
+              "write": {
+                "average": 2
+              }
+            },
+            "only_rd": {
+              "read": {
+                "average": 2
+              }
+            },
+            "simul_wr_rd": {
+              "write": {
+                "average": 2
+              },
+              "read": {
+                "average": 2
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

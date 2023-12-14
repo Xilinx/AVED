@@ -1,0 +1,391 @@
+<: setFileUsedIn { synthesis implementation } :>
+<: ;#Component and file information :>
+<: set Component_Name [getComponentNameString] :>
+<: if {[regexp -- "krnl_" $Component_Name]} { :>
+<: setOutputDirectory "./" :>
+<: setFileName $Component_Name :>
+<: setFileExtension ".xdc" :>
+<: setFileProcessingOrder late :>
+<!: example/common.tcl :>
+<!: tcl/messages.tcl :>
+<: set MESSAGES_DICT   [get_parameter_property "MESSAGES_DICT"] :>
+<: set messages_config [dict create MESSAGES_DICT $MESSAGES_DICT] :>
+<!: tcl/power/gen_power_floorplan.tcl :>
+<: set c_stop_post_opt  [get_parameter_property "C_STOP_POST_OPT"]:>
+<: set c_krnl_mode      [get_parameter_property "C_KRNL_MODE"]:>
+<: set c_clock0_freq    [get_parameter_property "C_CLOCK0_FREQ"]:>
+<: set c_clock1_freq    [get_parameter_property "C_CLOCK1_FREQ"]:>
+<: set FAMILY           [get_property PROJECT_PARAM.FAMILY] :>
+
+# Copyright (C) 2022 Xilinx, Inc.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+set ap_clock [get_clocks -of_objects [get_ports ap_clk]]
+<: set ap_clk_period_ns [format "%.2f" [expr 1000.0/double($c_clock0_freq)]] :>
+
+    # ap_clk and ap_clk_cont are seen as synchronous by vivado and it's the expected behaviour (both coming from the same MMCM output port)
+    #    BUT sometime to time vivado can't balance the skew of the 2 clk_buf
+    #    use XPM to go around timing issue, but as clocks are seen as in sync, vivado ignores the false path of the input stage of the xpm_cdc
+    #    manually re-instate the false paths
+set_false_path -quiet -to [get_pins -hierarchical -filter {NAME =~ *u_timer/timer_1_sec.timer_1_sec_cdc.xpm_cdc_toggle_1_sec/syncstages_ff_reg[0]/D}]; # ap_clk_cont to ap_clk
+set_false_path -quiet -to [get_pins -hierarchical -filter {NAME =~ *u_timer/timer_user.timer_user_cdc.xpm_cdc_timer_end/syncstages_ff_reg[0]/D}];      # ap_clk_cont to ap_clk
+
+<: if {$c_krnl_mode == 0} { :>
+<:  set c_throttle_mode [get_parameter_property "C_THROTTLE_MODE"]:>
+<:  if {$c_throttle_mode == 1} { :>
+        set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets -of [get_pins {*inst_krnl_core/inst_powertest_top/pwr_ctrl.clk_throttle/CB.i_BUFG/I}]]
+        set_property CLOCK_LOW_FANOUT TRUE [get_nets -of [get_pins {*inst_krnl_core/inst_powertest_top/pwr_ctrl.clk_throttle/CB.i_BUFG/O}]]
+<:  } :>
+<:  if {$c_throttle_mode == 0} { :>
+        set_false_path -from [get_pins {*inst_krnl_core/inst_powertest_top/pwr_ctrl.clk_throttle/Gate_Fast_d1_reg/C}]
+<:  } :>
+<:  if {$c_throttle_mode <= 1} { :>
+        set_false_path -from [get_pins {*inst_krnl_core/inst_powertest_top/cu_cfg.ctrl_enable_reg_reg/C}]
+        set_false_path -from [get_pins {*inst_krnl_core/inst_powertest_top/cu_cfg.ctrl_enable_dsp_reg/C}]
+        set_false_path -from [get_pins {*inst_krnl_core/inst_powertest_top/cu_cfg.ctrl_enable_bram_reg/C}]
+        set_false_path -from [get_pins {*inst_krnl_core/inst_powertest_top/cu_cfg.ctrl_enable_uram_reg/C}]
+<:  } :>
+
+<:  if {!$c_stop_post_opt} { :>
+<:     log_message $messages_config "GEN_POWER_FLOORPLAN-20" [list "XDC constraints"] :>
+<:     set c_krnl_slr           [get_parameter_property "C_KRNL_SLR"]           :>
+<:     set C_DYNAMIC_GEOMETRY   [get_parameter_property "C_DYNAMIC_GEOMETRY"]   :>
+<:     set C_INVALID            [get_parameter_property "C_INVALID"]            :>
+<:     set C_UTILIZATION        [get_parameter_property "C_UTILIZATION"]        :>
+<:     set const_out [ gen_power_floorplan [list $c_krnl_slr] ]  :>
+<:     set COL_CONSTRAINTS_LIST   [lindex $const_out 2]  :>
+<:     set SLICE_CONSTRAINTS_LIST [lindex $const_out 3]  :>
+<:     foreach {site_type COL_CONSTRAINTS_LIST_TYPE} $COL_CONSTRAINTS_LIST { :>
+<:          foreach {idx_slr constraints} $COL_CONSTRAINTS_LIST_TYPE { :>
+<:              foreach line $constraints { :>
+<=: $line :>
+<:                  } :>
+<:              } :>
+<:          } :>
+<:     foreach {site_type SLICE_CONSTRAINTS_LIST_TYPE} $SLICE_CONSTRAINTS_LIST { :>
+<:         foreach {idx_slr constraints} $SLICE_CONSTRAINTS_LIST_TYPE { :>
+<:             foreach line $constraints { :>
+<=: $line :>
+<:                  } :>
+<:              } :>
+<:          } :>
+<:      } :>
+<: } :>
+
+<: if {$c_krnl_mode == 1} { :>
+
+    # axi pointer signals all of them except the PLRAM one
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_control_s_axi/axi*_ptr0_reg*/C}]
+
+    # control signals
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_reg_array/ctrl_wr_start_addr_lsb_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_reg_array/ctrl_wr_start_addr_msb_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_reg_array/ctrl_rd_start_addr_lsb_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_reg_array/ctrl_rd_start_addr_msb_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_reg_array/ctrl_wr_burst_size_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_reg_array/ctrl_rd_burst_size_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_reg_array/ctrl_wr_num_xfer_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_reg_array/ctrl_rd_num_xfer_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_reg_array/ctrl_wr_burst_req_rate_en_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_reg_array/ctrl_wr_burst_req_rate_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_reg_array/ctrl_rd_burst_req_rate_en_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_reg_array/ctrl_rd_burst_req_rate_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_reg_array/ctrl_wr_outstanding_en_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_reg_array/ctrl_wr_outstanding_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_reg_array/ctrl_rd_outstanding_en_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_reg_array/ctrl_rd_outstanding_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_reg_array/ctrl_axi_id_en_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_reg_array/ctrl_user_pattern_a_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_reg_array/ctrl_user_pattern_b_reg*/C}]
+
+    # status signals
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_burst_latency_rd/u_stat_pipe/stat_inst_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_burst_latency_rd/u_stat_pipe/stat_total_reg*/C}]
+    set_false_path -quiet -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_burst_latency_rd/u_stat_pipe/stat_min_reg*/C}]
+    set_false_path -quiet -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_burst_latency_rd/u_stat_pipe/stat_max_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_burst_latency_wr/u_stat_pipe/stat_inst_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_burst_latency_wr/u_stat_pipe/stat_total_reg*/C}]
+    set_false_path -quiet -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_burst_latency_wr/u_stat_pipe/stat_min_reg*/C}]
+    set_false_path -quiet -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_memtest_wrapper_0/*/u_burst_latency_wr/u_stat_pipe/stat_max_reg*/C}]
+
+<: } :>
+
+
+<: if {$c_krnl_mode == 3} { :>
+    set_property CLOCK_LOW_FANOUT TRUE [get_nets -of [get_pins {*inst_krnl_core/u_gt_lpbk_25_top/gt_lpbk_25_core/*Rx_BUFG_i/O}]]
+    set_property CLOCK_LOW_FANOUT TRUE [get_nets -of [get_pins {*inst_krnl_core/u_gt_lpbk_25_top/gt_lpbk_25_core/Tx_BUFG_i/O}]]
+<: } :>
+
+<: if {$c_krnl_mode == 6} { :>
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_gt_prbs_25_top/gtf_wiz.u_gt_prbs_core/u_gtf_quad/CH[*].u_channel_top/u_reset_inst/gttxreset_out_reg/C}]
+
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_gt_prbs_25_top/u_reg_array/gt_loopback_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_gt_prbs_25_top/u_reg_array/gt_rxlpmen_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_gt_prbs_25_top/u_reg_array/gt_txpolarity_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_gt_prbs_25_top/u_reg_array/gt_txpostcursor_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_gt_prbs_25_top/u_reg_array/gt_txprecursor_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_gt_prbs_25_top/u_reg_array/gt_txdiffctrl_reg*/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/u_gt_prbs_25_top/u_reg_array/gt_txmaincursor_reg*/C}]
+
+    create_clock -period 6.206 [get_ports {*QSFP_CK_P}]
+
+    <:  set c_gt_ip_sel [get_parameter_property "C_GT_IP_SEL"]:>
+    <:  set c_gt_num_lane [get_parameter_property "C_GT_NUM_LANE"]:>
+
+    <: if {$c_gt_ip_sel == 0} { :>
+        # GTY wizard
+        set_property CLOCK_LOW_FANOUT TRUE [get_nets -of [get_pins {*inst_krnl_core/u_gt_prbs_25_top/gt_wiz.u_gt_prbs_25_core/*Rx_BUFG_i/O}]]
+        set_property CLOCK_LOW_FANOUT TRUE [get_nets -of [get_pins {*inst_krnl_core/u_gt_prbs_25_top/gt_wiz.u_gt_prbs_25_core/Tx_BUFG_i/O}]]
+        # create_clock -period 6.206 [get_pins {*inst_krnl_core/u_gt_prbs_25_top/gt_wiz.u_gt_prbs_25_core/GTC/I}]
+    <: } :>
+
+    <: if {$c_gt_ip_sel == 1} { :>
+        # versal subsystem GT
+        set_property CLOCK_LOW_FANOUT TRUE [get_nets -of [get_pins {*inst_krnl_core/u_gt_prbs_25_top/sub_gt.u_gt_prbs_25_core/gt_1bridge_4lanes_inst/gt_1bridge_4lanes_i/inst/bufg_gt*/inst/bufg_gt_usrclk_inst/O}]]
+        #create_clock -period 6.206 [get_pins {*inst_krnl_core/u_gt_prbs_25_top/sub_gt.u_gt_prbs_25_core/gt_1bridge_4lanes_inst/gt_1bridge_4lanes_i/inst/util_ds_buf/U0/USE_IBUFDS_GTE5.GEN_IBUFDS_GTE5[0].IBUFDS_GTE5_I/I}]
+    <: } :>
+
+    <: if {$c_gt_ip_sel == 2} { :>
+
+        <: if {$c_gt_num_lane == 1} { :>
+
+            # single lane design
+            set_property CLOCK_LOW_FANOUT TRUE [get_nets -of [get_pins {*inst_krnl_core/u_gt_prbs_25_top/gtf_wiz.u_gt_prbs_core/single_lane.u_gtf_raw_single_lane/u_gtf_wiz_ip_top/inst/u_rxusrclk_inst/O}]]
+            set_property CLOCK_LOW_FANOUT TRUE [get_nets -of [get_pins {*inst_krnl_core/u_gt_prbs_25_top/gtf_wiz.u_gt_prbs_core/single_lane.u_gtf_raw_single_lane/u_gtf_wiz_ip_top/inst/u_txusrclk_inst/O}]]
+
+        <: } else { :>
+
+            # GTF quad
+            set_property CLOCK_LOW_FANOUT TRUE [get_nets -of [get_pins {*inst_krnl_core/u_gt_prbs_25_top/gtf_wiz.u_gt_prbs_core/u_gtf_quad/CH[*].u_channel_top/u_txusrclk_inst/O}]]
+            set_property CLOCK_LOW_FANOUT TRUE [get_nets -of [get_pins {*inst_krnl_core/u_gt_prbs_25_top/gtf_wiz.u_gt_prbs_core/u_gtf_quad/CH[*].u_channel_top/u_rxusrclk_inst/O}]]
+
+        <: } :>
+
+    <: } :>
+
+<: } :>
+
+<: if {$c_krnl_mode == 7} { :>
+
+    <: for {set ii 0} {$ii < 32} {incr ii} { :>
+
+        <: set c_quad_en_name  C_QUAD_EN_[format "%02d" $ii] :>
+        <: set c_quad_en       [get_parameter_property $c_quad_en_name] :>
+
+        <: if {$c_quad_en == 1} { :>
+
+            <: set qsfp_ck_p_name "*QSFP_CK_P_[format "%02d" $ii]" :>
+            create_clock -period 6.206 [get_ports <=: $qsfp_ck_p_name :>]
+
+        <: } :>
+
+    <: } :>
+
+    <:  set c_gt_num_lane [get_parameter_property "C_GT_NUM_LANE"]:>
+
+    set_property CLOCK_LOW_FANOUT TRUE [get_nets -of [get_pins {*inst_krnl_core/u_multi_gt_prbs_wrapper/top_*.gtf.u_prbs_top/u_prbs_core/u_gtf_quad/gen_blk_multi_ch[*].u_gtf_wiz_ip_top/inst/u_txusrclk_inst/O}]]
+    set_property CLOCK_LOW_FANOUT TRUE [get_nets -of [get_pins {*inst_krnl_core/u_multi_gt_prbs_wrapper/top_*.gtf.u_prbs_top/u_prbs_core/u_gtf_quad/gen_blk_multi_ch[*].u_gtf_wiz_ip_top/inst/u_rxusrclk_inst/O}]]
+
+    set_false_path -to [get_pins {*inst_krnl_core/u_multi_gt_prbs_wrapper/top_*.gtf.u_prbs_top/u_prbs_core/u_gtf_quad/gen_blk_multi_ch[*].u_gtf_wiz_ip_top/inst/gtf_channel_inst/gtf_channel_inst/TXPHDLYPD}]
+    set_false_path -to [get_pins {*inst_krnl_core/u_multi_gt_prbs_wrapper/top_*.gtf.u_prbs_top/u_prbs_core/u_gtf_quad/gen_blk_multi_ch[*].u_gtf_wiz_ip_top/inst/gtf_channel_inst/gtf_channel_inst/TXDIFFCTRL}]
+    set_false_path -to [get_pins {*inst_krnl_core/u_multi_gt_prbs_wrapper/top_*.gtf.u_prbs_top/u_prbs_core/u_gtf_quad/gen_blk_multi_ch[*].u_gtf_wiz_ip_top/inst/gtf_channel_inst/gtf_channel_inst/TXPRECURSOR}]
+    set_false_path -to [get_pins {*inst_krnl_core/u_multi_gt_prbs_wrapper/top_*.gtf.u_prbs_top/u_prbs_core/u_gtf_quad/gen_blk_multi_ch[*].u_gtf_wiz_ip_top/inst/gtf_channel_inst/gtf_channel_inst/TXPOSTCURSOR}]
+    set_false_path -to [get_pins {*inst_krnl_core/u_multi_gt_prbs_wrapper/top_*.gtf.u_prbs_top/u_prbs_core/u_gtf_quad/gen_blk_multi_ch[*].u_gtf_wiz_ip_top/inst/gtf_channel_inst/gtf_channel_inst/TXMAINCURSOR}]
+    set_false_path -to [get_pins {*inst_krnl_core/u_multi_gt_prbs_wrapper/top_*.gtf.u_prbs_top/u_prbs_core/u_gtf_quad/gen_blk_multi_ch[*].u_gtf_wiz_ip_top/inst/gtf_channel_inst/gtf_channel_inst/RXLPMEN}]
+    set_false_path -to [get_pins {*inst_krnl_core/u_multi_gt_prbs_wrapper/top_*.gtf.u_prbs_top/u_prbs_core/u_gtf_quad/gen_blk_multi_ch[*].u_gtf_wiz_ip_top/inst/gtf_channel_inst/gtf_channel_inst/LOOPBACK}]
+    set_false_path -to [get_pins {*inst_krnl_core/u_multi_gt_prbs_wrapper/top_*.gtf.u_prbs_top/u_prbs_core/u_gtf_quad/gen_blk_multi_ch[*].u_gtf_wiz_ip_top/inst/gtf_channel_inst/gtf_channel_inst/DRPRST}]
+
+<: } :>
+
+<: if {$c_krnl_mode == 8} { :>
+
+    <: for {set ii 0} {$ii < 32} {incr ii} { :>
+
+        <: set c_quad_en_name  C_QUAD_EN_[format "%02d" $ii] :>
+        <: set c_quad_en       [get_parameter_property $c_quad_en_name] :>
+
+        <: if {$c_quad_en == 1} { :>
+
+            <: set qsfp_ck_p_name "*QSFP_CK_P_[format "%02d" $ii]" :>
+            create_clock -period 3.103 [get_ports <=: $qsfp_ck_p_name :>]
+
+        <: } :>
+
+    <: } :>
+
+    set_property CLOCK_LOW_FANOUT TRUE [get_nets -of [get_pins {*inst_krnl_core/u_multi_gt_prbs_wrapper/top_*.gtm.u_prbs_top/u_prbs_core/u_gtm_quad/gtm_xbtest_sub_gt_0_i/inst/bufg_gt/inst/bufg_gt_usrclk_inst/O}]]
+    set_property CLOCK_LOW_FANOUT TRUE [get_nets -of [get_pins {*inst_krnl_core/u_multi_gt_prbs_wrapper/top_*.gtm.u_prbs_top/u_prbs_core/u_gtm_quad/gtm_xbtest_sub_gt_0_i/inst/bufg_gt_1/inst/bufg_gt_usrclk_inst/O}]]
+
+
+<: } :>
+
+<: if {$c_krnl_mode == 9} { :>
+
+    <: for {set ii 0} {$ii < 32} {incr ii} { :>
+
+        <: set c_quad_en_name  C_QUAD_EN_[format "%02d" $ii] :>
+        <: set c_quad_en       [get_parameter_property $c_quad_en_name] :>
+
+        <: if {$c_quad_en == 1} { :>
+
+            <: set qsfp_ck_p_name "*QSFP_CK_P_[format "%02d" $ii]" :>
+            create_clock -period 10.0 [get_ports <=: $qsfp_ck_p_name :>]
+
+        <: } :>
+
+    <: } :>
+
+    set_property CLOCK_LOW_FANOUT TRUE [get_nets -of [get_pins {*inst_krnl_core/u_multi_gt_prbs_wrapper/top_*.gtyp.u_prbs_top/u_prbs_core/u_gtyp_quad/gtyp_xbtest_sub_gt_0_i/inst/bufg_gt/inst/bufg_gt_usrclk_inst/O}]]
+    set_property CLOCK_LOW_FANOUT TRUE [get_nets -of [get_pins {*inst_krnl_core/u_multi_gt_prbs_wrapper/top_*.gtyp.u_prbs_top/u_prbs_core/u_gtyp_quad/gtyp_xbtest_sub_gt_0_i/inst/bufg_gt_1/inst/bufg_gt_usrclk_inst/O}]]
+
+<: } :>
+
+<: if {$c_krnl_mode == 4} { :>
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst/inst_krnl_core/inst_gt_test_top/lane[*].tr_dbg/mode_switch_reg/C}]
+
+    # AXI4-lite interface runs at a quarter of ap_clk
+    set drp_clk [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */inst_gt_test_top/DRP_CK/O}]]
+    <: set drp_clk_period_ns [format "%.2f" [expr ($ap_clk_period_ns)*4.0]] :>
+
+    # the LUT RAM is read in ap_clk clock domain and written in Tx gt clock domain, but not simultaneously
+    # suppress timing arch between write clock and read FF
+    set_false_path -from [get_clocks -of_objects [get_pins -filter {REF_PIN_NAME=~C} -of [get_cells *inst_krnl_core/inst_gt_test_top/lane[0].rx_tc/Cnt_RAM_In_reg[0]]]] -to [get_pins -filter {REF_PIN_NAME=~D} -of [get_cells *inst_krnl_core/inst_gt_test_top/lane[0].rx_tc/RAM_Out_reg[*]]]
+    set_false_path -from [get_clocks -of_objects [get_pins -filter {REF_PIN_NAME=~C} -of [get_cells *inst_krnl_core/inst_gt_test_top/lane[1].rx_tc/Cnt_RAM_In_reg[0]]]] -to [get_pins -filter {REF_PIN_NAME=~D} -of [get_cells *inst_krnl_core/inst_gt_test_top/lane[1].rx_tc/RAM_Out_reg[*]]]
+    set_false_path -from [get_clocks -of_objects [get_pins -filter {REF_PIN_NAME=~C} -of [get_cells *inst_krnl_core/inst_gt_test_top/lane[2].rx_tc/Cnt_RAM_In_reg[0]]]] -to [get_pins -filter {REF_PIN_NAME=~D} -of [get_cells *inst_krnl_core/inst_gt_test_top/lane[2].rx_tc/RAM_Out_reg[*]]]
+    set_false_path -from [get_clocks -of_objects [get_pins -filter {REF_PIN_NAME=~C} -of [get_cells *inst_krnl_core/inst_gt_test_top/lane[3].rx_tc/Cnt_RAM_In_reg[0]]]] -to [get_pins -filter {REF_PIN_NAME=~D} -of [get_cells *inst_krnl_core/inst_gt_test_top/lane[3].rx_tc/RAM_Out_reg[*]]]
+
+    # false path for reset
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/inst_gt_test_top/mc/MAC_RX_reset_int_reg/C}]
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/inst_gt_test_top/mc/MAC_TX_reset_int_reg/C}]
+
+<:  if {$FAMILY == "versal" } { :>
+
+#         set gt_rx_clocks [get_clocks -of [get_pins -of [get_cells -of [get_pins -of [get_nets -segments -of [get_pins -hierarchical -filter {NAME =~ */mac_versal_core/*/quad_inst/CH*_RXOUTCLK}]] -filter {REF_PIN_NAME =~ "I"}]] -filter { REF_PIN_NAME =~ "O"}]]
+#         set gt_tx_clocks [get_clocks -of [get_pins -of [get_cells -of [get_pins -of [get_nets -segments -of [get_pins -hierarchical -filter {NAME =~ */mac_versal_core/*/quad_inst/CH*_TXOUTCLK}]] -filter {REF_PIN_NAME =~ "I"}]] -filter { REF_PIN_NAME =~ "O"}]]
+#
+#         if {$drp_clk == $gt_rx_clocks } {
+#             puts "Incorrect clocks reported for CH*_RXOUTCLK = ${gt_rx_clocks}"
+#         } else {
+#             set_max_delay -datapath_only -verbose -from $ap_clock -to $gt_rx_clocks <=: $ap_clk_period_ns :>
+#             set_max_delay -datapath_only -verbose -from $gt_rx_clocks -to $ap_clock 2.56
+#
+#             # DRP clock
+#             set_max_delay -datapath_only -verbose -from $drp_clk -to $gt_rx_clocks <=: $drp_clk_period_ns :>
+#             set_max_delay -datapath_only -verbose -from $gt_rx_clocks -to $drp_clk 2.56
+#         }
+#
+#         if {$drp_clk == $gt_tx_clocks } {
+#             puts "Incorrect clocks reported for CH*_TXOUTCLK = ${gt_tx_clocks}"
+#         } else {
+#             set_max_delay -datapath_only -verbose -from $ap_clock -to $gt_tx_clocks <=: $ap_clk_period_ns :>
+#             set_max_delay -datapath_only -verbose -from $gt_tx_clocks -to $ap_clock 2.56
+#
+#             # DRP clock
+#             set_max_delay -datapath_only -verbose -from $drp_clk -to $gt_tx_clocks <=: $drp_clk_period_ns :>
+#             set_max_delay -datapath_only -verbose -from $gt_tx_clocks -to $drp_clk 2.56
+#         }
+#
+#         if {$gt_rx_clocks == $gt_tx_clocks } {
+#             puts "Identical clocks reported for CH*_RXOUTCLK & CH*_TXOUTCLK = ${gt_rx_clocks}"
+#         } else {
+#             set_max_delay -datapath_only -verbose -from $gt_rx_clocks -to $gt_tx_clocks 2.56
+#         }
+
+        set_max_delay -datapath_only -verbose -from $ap_clock -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */mac_versal_core/*/quad_inst/CH*_RXOUTCLK}]] <=: $ap_clk_period_ns :>
+        set_max_delay -datapath_only -verbose -from $ap_clock -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */mac_versal_core/*/quad_inst/CH*_TXOUTCLK}]] <=: $ap_clk_period_ns :>
+
+        set_max_delay -datapath_only -verbose -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */mac_versal_core/*/quad_inst/CH*_RXOUTCLK}]] -to $ap_clock 2.56
+        set_max_delay -datapath_only -verbose -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */mac_versal_core/*/quad_inst/CH*_TXOUTCLK}]] -to $ap_clock 2.56
+
+        set_max_delay -datapath_only -verbose -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */mac_versal_core/*/quad_inst/CH*_RXOUTCLK}]] -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */mac_versal_core/*/quad_inst/CH*_TXOUTCLK}]] 2.56
+
+        # DRP clock
+        set_max_delay -datapath_only -verbose -from $drp_clk -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */mac_versal_core/*/quad_inst/CH*_RXOUTCLK}]] <=: $drp_clk_period_ns :>
+        set_max_delay -datapath_only -verbose -from $drp_clk -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */mac_versal_core/*/quad_inst/CH*_TXOUTCLK}]] <=: $drp_clk_period_ns :>
+
+        set_max_delay -datapath_only -verbose -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */mac_versal_core/*/quad_inst/CH*_RXOUTCLK}]] -to $drp_clk 2.56
+        set_max_delay -datapath_only -verbose -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */mac_versal_core/*/quad_inst/CH*_TXOUTCLK}]] -to $drp_clk 2.56
+
+<:  } else { :>
+        set_max_delay  -datapath_only -from $ap_clock -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~   */i_mac_core_gt/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/RXOUTCLK}]] <=: $ap_clk_period_ns :>
+        set_max_delay  -datapath_only -from $ap_clock -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_1/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/RXOUTCLK}]] <=: $ap_clk_period_ns :>
+        set_max_delay  -datapath_only -from $ap_clock -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_2/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/RXOUTCLK}]] <=: $ap_clk_period_ns :>
+        set_max_delay  -datapath_only -from $ap_clock -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_3/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/RXOUTCLK}]] <=: $ap_clk_period_ns :>
+
+        set_max_delay  -datapath_only -from $ap_clock -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~   */i_mac_core_gt/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/TXOUTCLK}]] <=: $ap_clk_period_ns :>
+        set_max_delay  -datapath_only -from $ap_clock -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_1/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/TXOUTCLK}]] <=: $ap_clk_period_ns :>
+        set_max_delay  -datapath_only -from $ap_clock -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_2/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/TXOUTCLK}]] <=: $ap_clk_period_ns :>
+        set_max_delay  -datapath_only -from $ap_clock -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_3/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/TXOUTCLK}]] <=: $ap_clk_period_ns :>
+
+        set_max_delay  -datapath_only -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/RXOUTCLK}]]   -to $ap_clock 2.56
+        set_max_delay  -datapath_only -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_1/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/RXOUTCLK}]] -to $ap_clock 2.56
+        set_max_delay  -datapath_only -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_2/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/RXOUTCLK}]] -to $ap_clock 2.56
+        set_max_delay  -datapath_only -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_3/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/RXOUTCLK}]] -to $ap_clock 2.56
+
+        set_max_delay  -datapath_only -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/TXOUTCLK}]]   -to $ap_clock 2.56
+        set_max_delay  -datapath_only -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_1/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/TXOUTCLK}]] -to $ap_clock 2.56
+        set_max_delay  -datapath_only -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_2/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/TXOUTCLK}]] -to $ap_clock 2.56
+        set_max_delay  -datapath_only -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_3/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/TXOUTCLK}]] -to $ap_clock 2.56
+
+        set_max_delay  -datapath_only -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/RXOUTCLK}]]   -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/TXOUTCLK}]] 2.56
+        set_max_delay  -datapath_only -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_1/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/RXOUTCLK}]] -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_1/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/TXOUTCLK}]] 2.56
+        set_max_delay  -datapath_only -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_2/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/RXOUTCLK}]] -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_2/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/TXOUTCLK}]] 2.56
+        set_max_delay  -datapath_only -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_3/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/RXOUTCLK}]] -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_3/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/TXOUTCLK}]] 2.56
+
+        # DRP clock
+        set_max_delay  -datapath_only -from $drp_clk -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~   */i_mac_core_gt/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/RXOUTCLK}]] <=: $drp_clk_period_ns :>
+        set_max_delay  -datapath_only -from $drp_clk -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_1/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/RXOUTCLK}]] <=: $drp_clk_period_ns :>
+        set_max_delay  -datapath_only -from $drp_clk -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_2/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/RXOUTCLK}]] <=: $drp_clk_period_ns :>
+        set_max_delay  -datapath_only -from $drp_clk -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_3/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/RXOUTCLK}]] <=: $drp_clk_period_ns :>
+
+        set_max_delay  -datapath_only -from $drp_clk -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~   */i_mac_core_gt/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/TXOUTCLK}]] <=: $drp_clk_period_ns :>
+        set_max_delay  -datapath_only -from $drp_clk -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_1/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/TXOUTCLK}]] <=: $drp_clk_period_ns :>
+        set_max_delay  -datapath_only -from $drp_clk -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_2/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/TXOUTCLK}]] <=: $drp_clk_period_ns :>
+        set_max_delay  -datapath_only -from $drp_clk -to [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_3/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/TXOUTCLK}]] <=: $drp_clk_period_ns :>
+
+        set_max_delay  -datapath_only -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/RXOUTCLK}]]   -to $drp_clk 2.56
+        set_max_delay  -datapath_only -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_1/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/RXOUTCLK}]] -to $drp_clk 2.56
+        set_max_delay  -datapath_only -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_2/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/RXOUTCLK}]] -to $drp_clk 2.56
+        set_max_delay  -datapath_only -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_3/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/RXOUTCLK}]] -to $drp_clk 2.56
+
+        set_max_delay  -datapath_only -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/TXOUTCLK}]]   -to $drp_clk 2.56
+        set_max_delay  -datapath_only -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_1/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/TXOUTCLK}]] -to $drp_clk 2.56
+        set_max_delay  -datapath_only -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_2/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/TXOUTCLK}]] -to $drp_clk 2.56
+        set_max_delay  -datapath_only -from [get_clocks -of_objects [get_pins -hierarchical -filter {NAME =~ */i_mac_core_gt_3/*/gtye4_channel_gen.gen_gtye4_channel_inst[0]*/TXOUTCLK}]] -to $drp_clk 2.56
+<:  } :>
+<: } :>
+
+<: if {$c_krnl_mode == 5} { :>
+
+    # ap_clk and ap_clk_cont are seen as synchronous by vivado and it's the expected behaviour (both coming from the same MMCM output port)
+    #    BUT sometime to time vivado can't balance the skew of the 2 clk_buf
+    #    use XPM to go around timing issue, but as clocks are seen as in sync, vivado ignores the false path of the input stage of the xpm_cdc
+    #    manually re-instate the false paths
+    set_false_path -to [get_pins -hierarchical -filter {NAME =~ */u_common_ctrl_status/ap_clk_throt_detect.u_clk_throttle_detect/u_cdc_counter/CDC_data/syncstages_ff_reg[0][*]/D}];  # ap_clk      to ap_clk_cont
+    set_false_path -to [get_pins -hierarchical -filter {NAME =~ */u_common_ctrl_status/ap_clk_throt_detect.u_clk_throttle_detect/u_cdc_counter/CDC_ctrl/syncstages_ff_reg[0]/D}];     # ap_clk      to ap_clk_cont
+    set_false_path -to [get_pins -hierarchical -filter {NAME =~ */u_common_ctrl_status/ap_clk_throt_detect.u_clk_throttle_detect/u_cdc_req_tog/syncstages_ff_reg[0]/D}];              # ap_clk_cont to ap_clk
+    set_false_path -to [get_pins -hierarchical -filter {NAME =~ */u_common_ctrl_status/ap_clk_throt_detect.u_clk_throttle_detect/u_cdc_enable_cont/syncstages_ff_reg[0]/D}];          # ap_clk      to ap_clk
+    set_false_path -to [get_pins -hierarchical -filter {NAME =~ */u_common_ctrl_status/ap_clk_throt_detect.u_clk_throttle_detect/u_cdc_ack/syncstages_ff_reg[0]/D}];                  # ap_clk      to ap_clk_cont
+    set_false_path -to [get_pins -hierarchical -filter {NAME =~ */u_common_ctrl_status/ap_clk_throt_detect.u_clk_throttle_detect/u_cdc_alarm/syncstages_ff_reg[0]/D}];                # ap_clk_cont to ap_clk
+    set_false_path -to [get_pins -hierarchical -filter {NAME =~ */u_common_ctrl_status/ap_clk_throt_detect.u_cdc_detection_avail/syncstages_ff_reg[0]/D}];                            # ap_clk_cont to ap_clk
+    set_false_path -to [get_pins -hierarchical -filter {NAME =~ */u_common_ctrl_status/ap_clk_2_throt_detect.u_clk_throttle_detect/u_cdc_counter/CDC_data/syncstages_ff_reg[0][*]/D}];  # ap_clk_2      to ap_clk_2_cont
+    set_false_path -to [get_pins -hierarchical -filter {NAME =~ */u_common_ctrl_status/ap_clk_2_throt_detect.u_clk_throttle_detect/u_cdc_counter/CDC_ctrl/syncstages_ff_reg[0]/D}];     # ap_clk_2      to ap_clk_2_cont
+    set_false_path -to [get_pins -hierarchical -filter {NAME =~ */u_common_ctrl_status/ap_clk_2_throt_detect.u_clk_throttle_detect/u_cdc_req_tog/syncstages_ff_reg[0]/D}];              # ap_clk_2_cont to ap_clk_2
+    set_false_path -to [get_pins -hierarchical -filter {NAME =~ */u_common_ctrl_status/ap_clk_2_throt_detect.u_clk_throttle_detect/u_cdc_enable_cont/syncstages_ff_reg[0]/D}];          # ap_clk_2      to ap_clk_2
+    set_false_path -to [get_pins -hierarchical -filter {NAME =~ */u_common_ctrl_status/ap_clk_2_throt_detect.u_clk_throttle_detect/u_cdc_ack/syncstages_ff_reg[0]/D}];                  # ap_clk_2      to ap_clk_2_cont
+    set_false_path -to [get_pins -hierarchical -filter {NAME =~ */u_common_ctrl_status/ap_clk_2_throt_detect.u_clk_throttle_detect/u_cdc_alarm/syncstages_ff_reg[0]/D}];                # ap_clk_2_cont to ap_clk_2
+
+    set_false_path -from [get_pins -hierarchical -filter {NAME =~ *inst_krnl_core/inst_verify_top/u_reg_array/u_common_ctrl_status/watchdog_alarm_latch_reg/C}]
+<: } :>
+
+<: } :>
