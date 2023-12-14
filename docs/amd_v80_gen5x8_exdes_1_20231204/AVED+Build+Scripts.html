@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script charset="UTF-8" data-document-language="true" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script class="optanon-category-C0002" type="text/plain">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+<title>AVED Build Scripts — AVED  documentation</title>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="_static/xbtest.css" rel="stylesheet" type="text/css"/>
+<link href="_static/_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="https://docs.xilinx.com/favicon.ico" rel="shortcut icon"/>
+<!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/js/theme.js"></script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="Source%2BConfiguration%2BControl.html" rel="next" title="Source Configuration Control"/>
+<link href="xbtest/user-guide/source/docs/card-definition/card-definition.html" rel="prev" title="Card definition"/>
+<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager -->
+<noscript><iframe class="optanon-category-C0002" height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager -->
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="index.html"> AVED
+            <img alt="Logo" class="logo" src="_static/xilinx-header-logo.svg"/>
+</a>
+<div role="search">
+<form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" type="text"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+</div>
+</div><div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BUser%2BApplication.html">AVED - User Application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">AVED Build Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#command-line-options">Command Line Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#conf-json">Conf JSON</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#conf-xbtest-json">conf_xbtest.json</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conf-xbtest-stress-json">conf_xbtest_stress.json</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conf-user-json">conf_user.json</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#example-build-command">Example Build Command</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#build-steps">Build Steps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hw">hw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fw">fw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pdi">pdi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#deploy-optional">deploy (optional)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#restarting-a-build-from-a-previously-run-step">Restarting a build from a previously run step</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80/V80P</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BHierarchy%2BOverview.html">AVED V80/V80P - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BCIPS%2BConfiguration.html">AVED V80/V80P - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BMemory%2BResources.html">AVED V80/V80P - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BMemory%2BMap.html">AVED V80/V80P - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BNoC%2BConfiguration.html">AVED V80/V80P - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BBase%2BLogic.html">AVED V80/V80P - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BClock%2BReset%2BModule.html">AVED V80/V80P - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BSource%2BFile%2BOverview.html">AVED V80/V80P - Source File Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BXBTEST%2BDesign.html">AVED V80/V80P - XBTEST Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BClock%2BControl%2B%28ACC%29%2BProxy%2BDriver.html">AVED Clock Control (ACC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI &amp; xbtest)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest%2Bbuild.html">xbtest build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift"><nav aria-label="Mobile navigation menu" class="wy-nav-top" style="background: black">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="index.html">AVED</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="Page navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a class="icon icon-home" href="index.html"></a> »</li>
+<li>AVED Build Scripts</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<section id="aved-build-scripts">
+<h1>AVED Build Scripts<a class="headerlink" href="#aved-build-scripts" title="Permalink to this headline">¶</a></h1>
+<p>The AVED Git repository contains a python build script which can be used to build any of the AVED example designs. <code class="docutils literal notranslate"><span class="pre">gen_design.py</span></code> is the main build script, which calls other build scripts for each step of the build. These additional build scripts
+are located within the scripts directory as shown in the following figure.</p>
+<p><a class="confluence-embedded-image reference internal" href="_images/1174022829.png"><img alt="image1" class="confluence-embedded-image" src="_images/1174022829.png" style="width: 500px;"/></a></p>
+<p><a class="confluence-embedded-image reference internal" href="_images/1174022831.png"><img alt="image2" class="confluence-embedded-image" src="_images/1174022831.png" style="width: 370px;"/></a></p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<section id="command-line-options">
+<span id="avedbuildscripts-commandlineoptions"></span><h2>Command Line Options<a class="headerlink" href="#command-line-options" title="Permalink to this headline">¶</a></h2>
+<p>The following table defines available command line options:</p>
+<table class="relative-table wrapped confluenceTable" style="width: 1573.0px;"><colgroup><col style="width: 249.0px;"/><col style="width: 486.0px;"/><col style="width: 837.0px;"/></colgroup><thead><tr><th class="confluenceTh" style="text-align: left;"><p>Option</p></th><th class="confluenceTh" style="text-align: left;"><p>Description</p></th><th class="confluenceTh" style="text-align: left;"><p>Default</p></th></tr></thead><tbody><tr><td class="confluenceTd" style="text-align: left;"><code>--help       </code></td><td class="confluenceTd" style="text-align: left;">Display help message.</td><td class="confluenceTd" style="text-align: left;"><br/></td></tr><tr><td class="confluenceTd" style="text-align: left;"><code><span class="inline-comment-marker" data-ref="4100d51b-622e-4a94-a85d-5cea099448f7">--conf_json</span></code></td><td class="confluenceTd" style="text-align: left;">Path to the configuration JSON file. This is a mandatory command line argument.</td><td class="confluenceTd" style="text-align: left;"><br/></td></tr><tr><td class="confluenceTd" style="text-align: left;"><code>--use_lsf    </code></td><td class="confluenceTd" style="text-align: left;"><p>Run on LSF to build HW design.</p></td><td class="confluenceTd" style="text-align: left;"><br/></td></tr><tr><td class="confluenceTd" style="text-align: left;"><code>--lsf_cmd &lt;cmd&gt;   </code></td><td class="confluenceTd" style="text-align: left;">Override LSF command.</td><td class="confluenceTd" style="text-align: left;"><p><code>bsub -I -R "select[type=X86_64 &amp;&amp; (osdistro=rhel || osdistro=centos) &amp;&amp; (osver == ws7 || osver == cent7)] rusage[mem=256000]" -N -q long -W 48:00</code></p>This default is an example LSF command. Users should use the --lsf_cmd to define the LSF command which is appropriate for their LSF environment.</td></tr><tr><td class="confluenceTd" style="text-align: left;"><code>--output_dir &lt;output_dir&gt;</code></td><td class="confluenceTd" style="text-align: left;">Path to the output directory.</td><td class="confluenceTd" style="text-align: left;"><code> ./output/&lt;aved design name&gt;/&lt;date&gt;_&lt;time&gt;</code></td></tr><tr><td class="confluenceTd" style="text-align: left;"><code>--from_step &lt;step name&gt;</code></td><td class="confluenceTd" style="text-align: left;"><p>Restart previous<span> </span><code>&lt;output_dir&gt;</code><span> </span>build from given step.</p><ul><li>Supported steps are:  hw, fw, pdi and deploy.</li></ul></td><td class="confluenceTd" style="text-align: left;"><br/></td></tr><tr><td class="confluenceTd" style="text-align: left;"><code>--single-step &lt;step name&gt;</code></td><td class="confluenceTd" style="text-align: left;"><p>Rerun previous &lt;output_dir&gt; build executing only given step. </p><ul><li>Supported steps are: hw, fw, pdi and deploy.</li></ul></td><td class="confluenceTd" style="text-align: left;"><br/></td></tr><tr><td class="confluenceTd" style="text-align: left;"><code>--verbose    </code></td><td class="confluenceTd" style="text-align: left;">Turn on verbosity.</td><td class="confluenceTd" style="text-align: left;"><br/></td></tr><tr><td class="confluenceTd" style="text-align: left;"><code>--force      </code></td><td class="confluenceTd" style="text-align: left;">Override output directory if already existing.</td><td class="confluenceTd" style="text-align: left;"><br/></td></tr><tr><td class="confluenceTd" style="text-align: left;"><code>--version    </code></td><td class="confluenceTd" style="text-align: left;">Display version.</td><td class="confluenceTd"><br/></td></tr><tr><td class="confluenceTd" style="text-align: left;"><code>--deploy</code></td><td class="confluenceTd" style="text-align: left;"><p>Include the optional deploy step.</p><p>With this option set, after the other build steps have completed, a deployment archive will be generated.</p><p>See <a class="reference external" href="AVED+Deployment+Archive.html">AVED Deployment Archive</a> for more details on the deployment archive. </p></td><td class="confluenceTd"><br/></td></tr></tbody></table>
+</section>
+<section id="configuration">
+<span id="avedbuildscripts-configuration"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>The main design configuration file is specified with a JSON file. The JSON file is consumed by the build scripts and used to generate and customize the design. The configuration file simplifies the need to modify multiple files/scripts to change
+basic characteristics of the design.</p>
+<section id="conf-json">
+<span id="avedbuildscripts-confjson"></span><h3>Conf JSON<a class="headerlink" href="#conf-json" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">--conf_json</span></code> option is used to select which configuration JSON is used in the build. For this reason, the script requires that a Config JSON be provided.</p>
+<p>The Config JSON files for AVED example designs can be found in the hw/&lt;VBNV&gt;/ directory.</p>
+<p><a class="confluence-embedded-image reference internal" href="_images/1174022863.png"><img alt="image3" class="confluence-embedded-image" src="_images/1174022863.png" style="width: 500px;"/></a></p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Three example JSON files are provided for each design in the AVED repository’s hw folder. The figure above shows 3 different JSONs to enable 3 different variants of the amd_v80_gen5x8_23.2_exdes_1 AVED design to be built.</p>
+<section id="conf-xbtest-json">
+<span id="avedbuildscripts-conf-xbtest-json"></span><h4>conf_xbtest.json<a class="headerlink" href="#conf-xbtest-json" title="Permalink to this headline">¶</a></h4>
+<p>The conf_xbtest.json configuration file will build an AVED design, which contains the standard xbtest IP. More details on the xbtest IP can be found in the <a class="reference external" href="AVED+Deployment.html">AVED Deployment</a> section.</p>
+<p>This is the recommended JSON file to use for a developer who would like to experiment with building the AVED design.</p>
+</section>
+<section id="conf-xbtest-stress-json">
+<span id="avedbuildscripts-conf-xbtest-stress-json"></span><h4>conf_xbtest_stress.json<a class="headerlink" href="#conf-xbtest-stress-json" title="Permalink to this headline">¶</a></h4>
+<p>The conf_xbtest_stress.json configuration file will build an AVED design, which contains the standard xbtest IP along with the additional power xbtest IP. This is the prebuilt design which is provided in the released AVED deployment archive.</p>
+<p>Developers can build this design as well, but it should be noted that the xbtest power IP consumes a lot more logic than the standard xbtest IP. Therefore, build times will be greatly increased in comparison.</p>
+</section>
+<section id="conf-user-json">
+<span id="avedbuildscripts-conf-user-json"></span><h4>conf_user.json<a class="headerlink" href="#conf-user-json" title="Permalink to this headline">¶</a></h4>
+<p>The conf_user.json configuration file creates an AVED example design without any xbtest IP. The intention of this JSON is to provide the user with a starting point to enable the developer to integrate their own IP into the AVED design structure.</p>
+<p>See <a class="reference external" href="AVED+-+User+Application.html">AVED - User Application</a> for more details on how developers can do this. Details on the required contents of the conf json files are also detailed in this section with guidance on how they should be modified to
+suit the user’s application.</p>
+</section>
+</section>
+<section id="example-build-command">
+<span id="avedbuildscripts-examplebuildcommand"></span><h3>Example Build Command<a class="headerlink" href="#example-build-command" title="Permalink to this headline">¶</a></h3>
+<p>The following command demonstrates how to run a V80 xbtest build.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./gen_design.py --conf_json hw/amd_v80_gen5x8_23.2_exdes_1/conf_xbtest.json
+</pre></div>
+</div>
+</section>
+</section>
+<section id="build-steps">
+<span id="avedbuildscripts-buildsteps"></span><h2>Build Steps<a class="headerlink" href="#build-steps" title="Permalink to this headline">¶</a></h2>
+<p>The build script divides the build flow into a number of separate steps.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><img alt="image4" class="confluence-embedded-image" src="_images/1148356721.png"/></p>
+<section id="setup">
+<span id="avedbuildscripts-setup"></span><h3>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
+<p>The setup step creates an output directory where the build takes place. The created build directory contains the VBNV of the design and a Time stamp in the hierarchal name.</p>
+<p>The sources and scripts from the top level GIT directory are copied into this bkp_design directory so that the exact sources that were used are captured in the build directory. This gives traceability to the sources in a particular build and enables
+the user to easily resurrect a build and restart it from a specific step.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><img alt="image5" class="confluence-embedded-image" src="_images/1142532885.png"/></p>
+</section>
+<section id="hw">
+<span id="avedbuildscripts-hw"></span><h3>hw<a class="headerlink" href="#hw" title="Permalink to this headline">¶</a></h3>
+<p>With a copy of all the build sources now in the build directory, the next step in the flow is the hardware build.</p>
+<p>A hw directory is created in the TIMESTAMP build directory. This is where the AMD Vivado™ project is generated in the prj sub directory.</p>
+<p><img alt="image6" class="confluence-embedded-image" src="_images/1142533205.png"/></p>
+<p>This Vivado project is used to generate the BD design, run Synthesis &amp; Implementation, and create the initial PDI.</p>
+<p>The xpr file for this project is located here <strong>hw/prj/prj.xpr</strong></p>
+<p>The write_hw_platform command is run on the implemented design to create an XSA (named <strong>static.xsa</strong>), which is used as a HW handoff file to the AMC build in the fw build step.</p>
+<p>Further, if xbtest IP is part of the design, an xbtest_metadata.json file is also created. This captures design information on the xbtest IP (such as endpoint addresses) which will later be consumed by the xbtest SW when it runs on the Host.</p>
+<p>This allows the xbtest SW to be coded in a data-driven manner and provides an example of how this could be achieved for other host applications, if desired.</p>
+</section>
+<section id="fw">
+<span id="avedbuildscripts-fw"></span><h3>fw<a class="headerlink" href="#fw" title="Permalink to this headline">¶</a></h3>
+<p>The fw step builds the AMC firmware and generates a FPT binary. Like the hw step, a fw directory is created to contain the outputs of the fw build step.</p>
+<p><img alt="image7" class="confluence-embedded-image" src="_images/1142536342.png"/></p>
+<p>The AMC build is run in the AMC source code directory (i.e., <strong>bkp_design/fw/AMC</strong>) using the AMC’s own build script <strong>(bkp_design/fw/AMC/scripts/build.sh).</strong></p>
+<p>The AMC’s build.sh can take a number of different build options (which are detailed in the AMC’s <a class="reference external" href="Profiles+and+CMake+build+process.html">Profiles and CMake build process</a> page), but the the AVED build flow executes it with these specific options.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Command ./scripts/build.sh</span>
+<span class="c1">#   -os freertos10_xilinx</span>
+<span class="c1">#   -profile &lt;board profile e.g. v80&gt;</span>
+<span class="c1">#   -xsa &lt;absolute_path_to_xsa&gt;</span>
+</pre></div>
+</div>
+<p>where the <strong>os</strong> is always freertos10_xilinx, the <strong>profile</strong> is the AMD Alveo™ card name (determined from the conf.json) and the <strong>xsa</strong> is the static.xsa generated in the hw step.</p>
+<p>The resultant ELF file from the AMC build is then stored in the fw directory (<strong>fw/amc.elf</strong>).</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Another important concept of the AVED design is the FPT (see <a class="reference external" href="AVED+-+Device+Programming.html">AVED - Device Programming</a>) as this defines how the flash memory is organized.</p>
+<p>The contents of the FPT are defined in a JSON file in the AMC source code directory <strong>bkp_design/fw/AMC/scripts/fpt.json</strong>, and another script (also in AMC source code directory - <strong>bkp_design/fw/AMC/scripts/gen_fpt.py)</strong> is used to convert the JSON
+contents into a binary file.</p>
+<p>The execution of the gen_fpt.py takes place during the fw step, and the resultant binary file is also stored in the fw directory (<strong>fw/fpt.bin</strong>).</p>
+</section>
+<section id="pdi">
+<span id="avedbuildscripts-pdi"></span><h3>pdi<a class="headerlink" href="#pdi" title="Permalink to this headline">¶</a></h3>
+<p>The pdi step is responsible for combining outputs from previous steps in order to create 2 different PDI files. Like the previous steps, a new pdi directory is generated to contain the generated PDIs.</p>
+<p><img alt="image8" class="confluence-embedded-image" src="_images/1142536346.png"/></p>
+<p>The 2 generated PDIs are known as the Design PDI and the FPT_Setup PDI.</p>
+<p>First, the Design PDI is created when bootgen is called to combine the PDI generated in the hw step with the AMC ELF which was generated in the fw step. This PDI contains the complete AVED design and is intended to be written to a flash partition
+over PCIe using AMI.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><img alt="image9" class="confluence-embedded-image" src="_images/1148356973.png"/></p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>The FPT setup PDI is intended to be written to flash over JTAG using HW Manager. This PDI sets up the flash so that it can be used by AMC/AMI.</p>
+<p>This basically means that it contains the FPT at the beginning of the memory, which AMI/AMC can then process to determine where in flash it can write different Design PDIs.</p>
+<p>The FPT setup PDI is generated using the <strong>bkp_design/hw/fpt/scripts/fpt_pdi_gen.py</strong> script. This script takes the previously generated Design PDI and appends the FPT Binary to the start of the file. Padding is added between the FPT and the design
+PDI to ensure that the design PDI is aligned to a 32KB boundary (this is a requirement of the PMC boot search).</p>
+<p>Effectively, the FPT Setup PDI configures the flash to contain the FPT along with Design PDI in the 1st PDI Partition.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Writing FPT setup PDI to flash is only required if the FPT has been modified. Otherwise, if the FPT in flash is still valid, then the Design PDI can be written to one of the PDI partitions over PCIe using AMI.</p>
+</section>
+<section id="deploy-optional">
+<span id="avedbuildscripts-deploy-optional"></span><h3>deploy (optional)<a class="headerlink" href="#deploy-optional" title="Permalink to this headline">¶</a></h3>
+<p>The deploy step is an optional step whose outputs get stored in a newly created deploy directory.</p>
+<p><img alt="image10" class="confluence-embedded-image" src="_images/1142536348.png"/></p>
+<p>This step gathers the outputs from all the other build steps and pulls them together into an AVED deployment archive format (see <a class="reference external" href="AVED+Deployment+Archive.html">AVED Deployment Archive</a> for details).</p>
+<p>This is an optional step and is provided to enable the user to create a ZIP like the one which is part of the AVED release if they wish to do so.</p>
+<p>This step is only run when the <code class="docutils literal notranslate"><span class="pre">--deploy</span></code> command line option is used.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./gen_design.py --conf_json hw/amd_v80_gen5x8_23.2_exdes_1/conf_xbtest.json --deploy
+</pre></div>
+</div>
+</section>
+</section>
+<section id="restarting-a-build-from-a-previously-run-step">
+<span id="avedbuildscripts-restartingabuildfromapreviouslyrunstep"></span><h2>Restarting a build from a previously run step<a class="headerlink" href="#restarting-a-build-from-a-previously-run-step" title="Permalink to this headline">¶</a></h2>
+<p>The AVED build scripts allow the user to rerun certain steps on a previously run build.</p>
+<p>There are 2 options</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--single-step</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--from_step</span></code></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">--single-step</span></code> only runs one specified step, whereas <code class="docutils literal notranslate"><span class="pre">--from_step</span></code> reruns a specified step as well as any other steps which follow that step.</p>
+<p>When using either of these options, the user must also provide the path of the previously run build using the <code class="docutils literal notranslate"><span class="pre">--output_dir</span></code> option.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--from_step</span></code> is particularly useful when making changes to the AMC FW. If the AMC sources are modified in the <strong>bkp_design/fw/AMC</strong> directory of a previous build, the build script can be instructed to start at the fw step, in which case the
+lengthy hw build doesn’t get repeated.</p>
+<p>An example command of how to run the build script in this scenario is shown below. In this example, the previously run build is in the <strong>output/amd_v80_gen5x8_23.2_exdes_1/2023-10-12_12-30-31</strong> directory, and the AMC source code was modified in the
+<strong>output/amd_v80_gen5x8_23.2_exdes_1/2023-10-12_12-30-31/bkp_design/fw/AMC/src</strong> directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./gen_design.py --conf_json hw/amd_v80_gen5x8_23.2_exdes_1/conf_xbtest.json --from_step fw --output_dir output/amd_v80_gen5x8_23.2_exdes_1/2023-10-12_12-30-31
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>As the <code class="docutils literal notranslate"><span class="pre">--from_step</span> <span class="pre">fw</span></code> option is used, only the fw &amp; pdi steps will be rerun, and only the fw and pdi output directories will be overwritten.</p>
+<p><a class="confluence-embedded-image reference internal" href="_images/1148357073.png"><img alt="image11" class="confluence-embedded-image" src="_images/1148357073.png" style="height: 159px;"/></a></p>
+<p>Page Revision: v. 28</p>
+</section>
+</section>
+</div>
+</div>
+<footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+<a accesskey="p" class="btn btn-neutral float-left" href="xbtest/user-guide/source/docs/card-definition/card-definition.html" rel="prev" title="Card definition"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+<a accesskey="n" class="btn btn-neutral float-right" href="Source%2BConfiguration%2BControl.html" rel="next" title="Source Configuration Control">Next <span aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<p>© Copyright 2023, Advanced Micro Devices Inc.</p>
+</div>
+<div class="aem-Grid aem-Grid--16">
+<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+<div class="container-fluid sub-footer">
+<div class="row">
+<div class="col-xs-24">
+<p><a href="https://www.amd.com/en/corporate/copyright" target="_blank">Terms and Conditions</a> | <a href="https://www.amd.com/en/corporate/privacy" target="_blank">Privacy</a> | <a href="https://www.amd.com/en/corporate/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.amd.com/en/corporate/trademarks" target="_blank">Trademarks</a> | <a href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf" target="_blank">Statement on Forced Labor</a> | <a href="https://www.amd.com/en/corporate/competition" target="_blank">Fair and Open Competition</a> | <a href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf" target="_blank">UK Tax Strategy</a> | <a href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA" target="_blank">Inclusive Terminology</a> | <a class="ot-sdk-show-settings" href="#cookiessettings">Cookies Settings</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+</div>
+</div>
+</section>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+</body>
+</html>

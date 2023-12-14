@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script charset="UTF-8" data-document-language="true" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script class="optanon-category-C0002" type="text/plain">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+<title>AVED - User Application — AVED  documentation</title>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="_static/xbtest.css" rel="stylesheet" type="text/css"/>
+<link href="_static/_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="https://docs.xilinx.com/favicon.ico" rel="shortcut icon"/>
+<!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/js/theme.js"></script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="AVED%2BDeployment%2BArchive.html" rel="next" title="AVED Deployment Archive"/>
+<link href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html" rel="prev" title="AVED - Host to Card Communication"/>
+<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager -->
+<noscript><iframe class="optanon-category-C0002" height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager -->
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="index.html"> AVED
+            <img alt="Logo" class="logo" src="_static/xilinx-header-logo.svg"/>
+</a>
+<div role="search">
+<form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" type="text"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+</div>
+</div><div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">AVED - User Application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#xbtest-validation-example">xbtest validation example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-file-format">Configuration file format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-file-example">Configuration file example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-board-name-version">Vendor Board Name Version</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#customizing-the-design-for-a-new-application">Customizing the design for a new application</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80/V80P</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BHierarchy%2BOverview.html">AVED V80/V80P - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BCIPS%2BConfiguration.html">AVED V80/V80P - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BMemory%2BResources.html">AVED V80/V80P - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BMemory%2BMap.html">AVED V80/V80P - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BNoC%2BConfiguration.html">AVED V80/V80P - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BBase%2BLogic.html">AVED V80/V80P - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BClock%2BReset%2BModule.html">AVED V80/V80P - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BSource%2BFile%2BOverview.html">AVED V80/V80P - Source File Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BXBTEST%2BDesign.html">AVED V80/V80P - XBTEST Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BClock%2BControl%2B%28ACC%29%2BProxy%2BDriver.html">AVED Clock Control (ACC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI &amp; xbtest)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest%2Bbuild.html">xbtest build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift"><nav aria-label="Mobile navigation menu" class="wy-nav-top" style="background: black">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="index.html">AVED</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="Page navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a class="icon icon-home" href="index.html"></a> »</li>
+<li>AVED - User Application</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<section id="aved-user-application">
+<h1>AVED - User Application<a class="headerlink" href="#aved-user-application" title="Permalink to this headline">¶</a></h1>
+<section id="overview">
+<span id="aveduserapplication-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The AMD Alveo Vivado™ example design lays the groundwork for building a custom solution. The example is delivered as source code to be easily updated and modified. It demonstrates the following features:</p>
+<ul class="simple">
+<li><p>Pinouts targeting the Alveo V80 card.</p></li>
+<li><p>CPM/PCIe instantiation and connections for host communications.</p></li>
+<li><p>Programmable logic block diagram to support AMC firmware and AMI host driver.</p></li>
+<li><p>Internal HBM, external DDR4 memory controller configurations and instantiations.</p></li>
+<li><p>xbtest application example demonstrating I/O interface connection, traffic, and power.</p></li>
+</ul>
+</section>
+<section id="xbtest-validation-example">
+<span id="aveduserapplication-xbtestvalidationexample"></span><h2>xbtest validation example<a class="headerlink" href="#xbtest-validation-example" title="Permalink to this headline">¶</a></h2>
+<p>The xbtest design instantiates the necessary blocks to provide PCIe® based host communication using the AMC firmware with the AMI drivers. The xbtest application validates functionality and connectivity to much of the optional external I/Os in the
+design. Additionally, a software application is provided to interact with the xbtest hardware.</p>
+</section>
+<section id="configuration">
+<span id="aveduserapplication-configuration"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>The main design configuration file is specified with a JSON file. The JSON file is read by the Vivado TCL and python scripts to generate and customize the design. The configuration file simplifies the need to modify multiple files/scripts to change
+basic characteristics of the design.</p>
+<section id="configuration-file-format">
+<span id="aveduserapplication-configurationfileformat"></span><h3>Configuration file format<a class="headerlink" href="#configuration-file-format" title="Permalink to this headline">¶</a></h3>
+<p>The format of the JSON file is shown in the table below.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/bbdefb6a589a451975dca638fe7ccbe289b63cba.png"><img alt="image1" class="drawio-diagram-image" src="_images/bbdefb6a589a451975dca638fe7ccbe289b63cba.png" style="width: 1101px;"/></a></p>
+</section>
+<section id="configuration-file-example">
+<span id="aveduserapplication-configurationfileexample"></span><h3>Configuration file example<a class="headerlink" href="#configuration-file-example" title="Permalink to this headline">¶</a></h3>
+<p>The following is an example of the configuration file to instantiate the xbtest application example. The pcie_bars section is only used for xbtest and can be omitted for a custom application if it is not needed.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">{</span>
+    <span class="s2">"vendor"</span>: <span class="o">{</span>
+        <span class="s2">"name"</span>  : <span class="s2">"amd"</span>,
+        <span class="s2">"full"</span>  : <span class="s2">"Amd, Inc"</span>,
+        <span class="s2">"email"</span> : <span class="s2">"support@amd.com"</span>
+    <span class="o">}</span>,
+    <span class="s2">"board"</span>: <span class="o">{</span>
+        <span class="s2">"name"</span>        : <span class="s2">"v80"</span>,
+        <span class="s2">"device_part"</span> : <span class="s2">"xcv80-lsva4737-2MHP-e-S"</span>
+    <span class="o">}</span>,
+    <span class="s2">"design"</span>: <span class="o">{</span>
+        <span class="s2">"name"</span>        : <span class="s2">"gen5x8_23.2_exdes"</span>,
+        <span class="s2">"version"</span>     : <span class="s2">"1"</span>,
+        <span class="s2">"application"</span> : <span class="s2">"xbtest"</span>,
+        <span class="s2">"pcie_bars"</span>   : <span class="o">{</span>
+            <span class="s2">"mgmt"</span> : <span class="o">{</span>
+                <span class="s2">"physical_function"</span> : <span class="s2">"0"</span>,
+                <span class="s2">"bar"</span>               : <span class="s2">"0"</span>,
+                <span class="s2">"offset"</span>            : <span class="s2">"0x0000020100000000"</span>,
+                <span class="s2">"range"</span>             : <span class="s2">"0x0000000010000000"</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="vendor-board-name-version">
+<span id="aveduserapplication-vendorboardnameversion"></span><h3>Vendor Board Name Version<a class="headerlink" href="#vendor-board-name-version" title="Permalink to this headline">¶</a></h3>
+<p>The vendor board name version (VBNV) identifier is derived from the configuration file and is used throughout the designs to generate the output products. It is composed of the fields in the configuration file with the following format:
+<code class="docutils literal notranslate"><span class="pre">&lt;vendor.name&gt;_&lt;board.name&gt;_&lt;design.name&gt;_&lt;board.version&gt;</span></code>. The VNBV is used to find source files and to generate the output file paths. To change the name of the design, update the appropriate fields in the configuration json file. The VBNV of
+this example is amd_v80_gen5x8_23.2_exdes_1. If the VBNV is changed, a new ./hw/&lt;new VBNV&gt; sources directory is required to match the new VBNV. The default output directory defaults to ./output/&lt;VBNV&gt;/&lt;timestamp&gt;/ .</p>
+</section>
+</section>
+<section id="customizing-the-design-for-a-new-application">
+<span id="aveduserapplication-customizingthedesignforanewapplication"></span><h2>Customizing the design for a new application<a class="headerlink" href="#customizing-the-design-for-a-new-application" title="Permalink to this headline">¶</a></h2>
+<p>The following steps provide the instructions to modify the xbtest example design to create a custom user design. This example workflow will use the design without any existing hardware application as a starting point.</p>
+<ol class="arabic">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">./hw/amd_v80_gen5x8_23.2_exdes_1/conf_user.json</span></code> configuration is used as the starting point. This configuration has the application set to “user” which will instruct the tcl scripts to only instantiate the base design. It is recommended to
+copy the file to a new file if customizations are required. Keep in mind any fields that adjust the <em>VBNV</em> will cause the source and output directories to change.</p></li>
+<li><p>Add any custom/new IPs to the <code class="docutils literal notranslate"><span class="pre">./hw/&lt;VBNV&gt;/iprepo</span></code> directory to have them automatically added to the IP Catalog during design creation.</p></li>
+<li><p>(Optional) Modify the existing XDCs in <code class="docutils literal notranslate"><span class="pre">./hw/&lt;VBNV&gt;/constraints</span></code> if necessary and remove pinouts of I/O that will not be used. This is not strictly necessary, but will reduce the amount of CRITICAL WARNINGs and WARNINGs in the design. If
+additional constraint files are added, then modify <code class="docutils literal notranslate"><span class="pre">./hw/&lt;VBNV&gt;/build_hw.tcl</span></code> to add them to the design automatically.</p>
+<p>XDC files that specify constraints that depend on existing clocks should have <code class="docutils literal notranslate"><span class="pre">processing_order</span></code> set to <code class="docutils literal notranslate"><span class="pre">LATE</span></code> so that they are applied after the clocks are created.</p>
+</li>
+<li><p>Run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./gen_design.py --gui --conf ./hw/amd_v80_gen5x8_23.2_exdes_1/conf_user.json
+</pre></div>
+</div>
+<p>to launch Vivado into GUI mode with just the base design. The script instantiates the AVED design base logic and then hands off control for interactive modifications. The design is ready to be modified. Make necessary changes to the block design
+as needed and ensure the design can validate cleanly.</p>
+</li>
+<li><div class="line-block">
+<div class="line">When the design is ready to be implemented, execute the tcl proc <code class="docutils literal notranslate"><span class="pre">do_aved_build</span></code> in the Vivado TCL console. This will complete the rest of the build steps including synthesis and implementation. It will also automatically issue a
+<code class="docutils literal notranslate"><span class="pre">write_bd_tcl</span></code> command to create a tcl script of the final bd design here: <code class="docutils literal notranslate"><span class="pre">&lt;output_directory&gt;/bd_gen/create_bd_design_final.tcl</span></code> . This file can be copied over the &lt;sources&gt;/bd/create_bd_design.tcl file to automatically include the updates
+for future <code class="docutils literal notranslate"><span class="pre">./gen_design.py</span></code> invocations.</div>
+<div class="line">To save the bd file manually, the recommended command is:</div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>write_bd_tcl -force -no_ip_version -hier_blks <span class="o">[</span>get_bd_cells /<span class="o">]</span> &lt;file.tcl&gt;
+</pre></div>
+</div>
+</li>
+<li><p>Once the device image has been successfully generated, the script will report it is done. Close Vivado to allow the python script to continue with the rest of the build flow.</p></li>
+<li><p>When the <code class="docutils literal notranslate"><span class="pre">gen_design.py</span></code> script completes successfully, the final PDI will be generated in the output directory: <code class="docutils literal notranslate"><span class="pre">./output/&lt;VBNV&gt;/&lt;timestamp&gt;/pdi/fpt_setup_amd_v80_gen5x8_23.2_exdes_1.pdi</span></code> . The final pdi is generated and is ready to be tested
+on hardware.</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Page Revision: v. 23</p>
+</section>
+</section>
+</div>
+</div>
+<footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+<a accesskey="p" class="btn btn-neutral float-left" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html" rel="prev" title="AVED - Host to Card Communication"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+<a accesskey="n" class="btn btn-neutral float-right" href="AVED%2BDeployment%2BArchive.html" rel="next" title="AVED Deployment Archive">Next <span aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<p>© Copyright 2023, Advanced Micro Devices Inc.</p>
+</div>
+<div class="aem-Grid aem-Grid--16">
+<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+<div class="container-fluid sub-footer">
+<div class="row">
+<div class="col-xs-24">
+<p><a href="https://www.amd.com/en/corporate/copyright" target="_blank">Terms and Conditions</a> | <a href="https://www.amd.com/en/corporate/privacy" target="_blank">Privacy</a> | <a href="https://www.amd.com/en/corporate/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.amd.com/en/corporate/trademarks" target="_blank">Trademarks</a> | <a href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf" target="_blank">Statement on Forced Labor</a> | <a href="https://www.amd.com/en/corporate/competition" target="_blank">Fair and Open Competition</a> | <a href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf" target="_blank">UK Tax Strategy</a> | <a href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA" target="_blank">Inclusive Terminology</a> | <a class="ot-sdk-show-settings" href="#cookiessettings">Cookies Settings</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+</div>
+</div>
+</section>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+</body>
+</html>

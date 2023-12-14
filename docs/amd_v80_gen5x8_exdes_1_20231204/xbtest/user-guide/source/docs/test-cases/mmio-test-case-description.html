@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+  <title>MMIO test case description &mdash; AVED  documentation</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/xbtest.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/_static/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="https://docs.xilinx.com/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="DMA test case description" href="dma-test-case-description.html" />
+    <link rel="prev" title="Verify test case description" href="verify-test-case-description.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
+<!-- End Google Tag Manager --> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+            <a href="../../../../../index.html" class="icon icon-home"> AVED
+            <img src="../../../../../_static/xilinx-header-logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2B-%2BUser%2BApplication.html">AVED - User Application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Xbtest Userguide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pre-canned-tests.html">Pre-canned tests</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../test-cases.html">Test cases</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="test-cases-overview.html">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="verify-test-case-description.html">Verify</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">MMIO</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#test-parameters">Test parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#main-test-steps">Main test steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mmio-test-json-members">MMIO test JSON members</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#definition">Definition</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#basic-examples">Basic examples</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#test-sequence"><code class="docutils literal notranslate"><span class="pre">test_sequence</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#check-bw"><code class="docutils literal notranslate"><span class="pre">check_bw</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#stop-on-error"><code class="docutils literal notranslate"><span class="pre">stop_on_error</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#hi-thresh-wr-hi-thresh-rd"><code class="docutils literal notranslate"><span class="pre">hi_thresh_wr</span></code>, <code class="docutils literal notranslate"><span class="pre">hi_thresh_rd</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#lo-thresh-wr-lo-thresh-rd"><code class="docutils literal notranslate"><span class="pre">lo_thresh_wr</span></code>, <code class="docutils literal notranslate"><span class="pre">lo_thresh_rd</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#total-size"><code class="docutils literal notranslate"><span class="pre">total_size</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#output-files">Output files</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#mmio-detail-csv-output-file"><code class="docutils literal notranslate"><span class="pre">mmio_detail.csv</span></code> output file</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#mmio-result-csv-output-file"><code class="docutils literal notranslate"><span class="pre">mmio_result.csv</span></code> output file</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dma-test-case-description.html">DMA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memory-test-case-description.html">Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="power-test-case-description.html">Power</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gt-test-case-description.html">GT</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tasks.html">Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../card-definition.html">Card definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#alveo-data-center-accelerator-card-compatibility">Alveo data center accelerator card compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#what-s-new">What’s new</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80/V80P</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%26V80P%2B-%2BHierarchy%2BOverview.html">AVED V80/V80P - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%26V80P%2B-%2BCIPS%2BConfiguration.html">AVED V80/V80P - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%26V80P%2B-%2BMemory%2BResources.html">AVED V80/V80P - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%26V80P%2B-%2BMemory%2BMap.html">AVED V80/V80P - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%26V80P%2B-%2BNoC%2BConfiguration.html">AVED V80/V80P - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%26V80P%2B-%2BBase%2BLogic.html">AVED V80/V80P - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%26V80P%2B-%2BClock%2BReset%2BModule.html">AVED V80/V80P - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%26V80P%2B-%2BSource%2BFile%2BOverview.html">AVED V80/V80P - Source File Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%26V80P%2B-%2BXBTEST%2BDesign.html">AVED V80/V80P - XBTEST Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BClock%2BControl%2B%28ACC%29%2BProxy%2BDriver.html">AVED Clock Control (ACC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI &amp; xbtest)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../xbtest%2Bbuild.html">xbtest build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: black" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">AVED</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Xbtest Userguide</a> &raquo;</li>
+          <li><a href="../../test-cases.html">Test cases</a> &raquo;</li>
+      <li>MMIO test case description</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mmio-test-case-description">
+<span id="id2"></span><h1>MMIO test case description<a class="headerlink" href="#mmio-test-case-description" title="Permalink to this headline">¶</a></h1>
+<p>The goal of this test case is to check communication and available bandwidth between host PCIe BARs available on the <a class="reference external" href="https://www.xilinx.com/products/boards-and-kits/alveo.html">Alveo™</a> card through the PCIe.
+Data integrity and write/read bandwidths are measured.</p>
+<p>The <a class="reference internal" href="#mmio-test-case-description"><span class="std std-ref">MMIO</span></a> test case consists of writing and reading back data to and from the BAR range under test over and over during a certain period.
+A write-read-check cycle is never interrupted, meaning that:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Data is always fully sent and read back to and from the PCIe BAR and checked for data integrity.</p></li>
+<li><p>If required, a test <a class="reference internal" href="#mmio-parameter-test-sequence-duration"><span class="std std-ref">duration</span></a> can be extended to perform all write-read-check cycle operations.</p></li>
+</ul>
+</div></blockquote>
+<p>The data sent and read back to and from the PCIe BAR is:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Generated via an 8-bit counter that is randomly initialized at the beginning of each write-read-check cycle.</p></li>
+<li><p>Split into buffers which are transferred to or from the Alveo card.</p></li>
+</ul>
+</div></blockquote>
+<p>The test JSON parameter <a class="reference internal" href="#mmio-parameter-total-size"><span class="std std-ref">total_size</span></a> can be used to override the quantity of data (in Bytes) sent and read back to and from the PCIe BAR available on the card.
+When not specified, <a class="reference internal" href="#mmio-parameter-total-size"><span class="std std-ref">total_size</span></a> defaults to the size of xbtest configuration and status memory (the one in SLR0 for multi-SLR devices).</p>
+<p>The write/read bandwidths are computed after all write/read data transfers in each write-read-check cycle and the values are averaged over the test <a class="reference internal" href="#mmio-parameter-test-sequence-duration"><span class="std std-ref">duration</span></a>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>By default, the average read and write bandwidths are not checked against any pass/fail criteria, but this can be overruled by setting <a class="reference internal" href="#mmio-parameter-check-bw"><span class="std std-ref">check_bw</span></a>.</p>
+</div>
+<section id="test-parameters">
+<h2>Test parameters<a class="headerlink" href="#test-parameters" title="Permalink to this headline">¶</a></h2>
+<p>The mandatory test configuration parameters are listed below.
+For more information, see <a class="reference internal" href="#mmio-test-json-members"><span class="std std-ref">MMIO test JSON members</span></a>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="#mmio-parameter-test-sequence-duration"><span class="std std-ref">duration</span></a>: The duration of the test (in seconds).</p></li>
+</ul>
+</div></blockquote>
+<p>The following optional parameter may also be specified:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="#mmio-parameter-test-sequence-bar"><span class="std std-ref">bar</span></a>: PCIe BAR index.</p></li>
+<li><p><a class="reference internal" href="#mmio-parameter-test-sequence-offset"><span class="std std-ref">offset</span></a>: Start address offset in PCIe BAR of register to access.</p></li>
+<li><p><a class="reference internal" href="#mmio-parameter-test-sequence-buffer-size"><span class="std std-ref">buffer_size</span></a>: Write/read buffer size.</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The different <a class="reference external" href="https://www.xilinx.com/products/boards-and-kits/alveo.html">Alveo™</a> cards have different PCIe BAR layout, and each PCIe BAR registers are assigned for different functionalities of the card.
+Overwriting <a class="reference internal" href="#mmio-parameter-test-sequence-buffer-size"><span class="std std-ref">buffer_size</span></a>, <a class="reference internal" href="#mmio-parameter-test-sequence-buffer-size"><span class="std std-ref">buffer_size</span></a> and <a class="reference internal" href="#mmio-parameter-test-sequence-buffer-size"><span class="std std-ref">buffer_size</span></a> may cause unexpected consequences.</p>
+</div>
+</section>
+<section id="main-test-steps">
+<h2>Main test steps<a class="headerlink" href="#main-test-steps" title="Permalink to this headline">¶</a></h2>
+<p>For each test configuration, the following steps are repeated:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Allocate <code class="docutils literal notranslate"><span class="pre">N</span></code> host buffers aligned with memory page size.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The number of buffers <code class="docutils literal notranslate"><span class="pre">N</span></code> equals <a class="reference internal" href="#mmio-parameter-total-size"><span class="std std-ref">total_size</span></a> divided by <a class="reference internal" href="#mmio-parameter-test-sequence-buffer-size"><span class="std std-ref">buffer_size</span></a>.</p></li>
+<li><p>The memory page size is detected automatically and displayed at the beginning of the <a class="reference internal" href="#mmio-test-case-description"><span class="std std-ref">MMIO</span></a> test case in <code class="docutils literal notranslate"><span class="pre">xbtest.log</span></code> file.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Allocate and initialize the reference buffer used to check data integrity.</p></li>
+<li><p>Write-read-check cycles are repeated for the <a class="reference internal" href="#mmio-parameter-test-sequence-duration"><span class="std std-ref">duration</span></a> of the test.
+One cycle consists of the following steps:</p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li><p>Set host buffers with reference data (8-bit counter).</p></li>
+<li><p>Write host buffers to the card PCIe BAR, measure bandwidth.</p></li>
+<li><p>Reset host buffers to 0.</p></li>
+<li><p>Read from the card PCIe BAR, measure bandwidth.</p></li>
+<li><p>Check that the host buffers contain the same data as the reference buffers (data integrity).
+Host buffers are set with reference data if data integrity fails.</p></li>
+</ol>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These steps constitute a write-read-check cycle which is always entirely executed. If <a class="reference internal" href="#mmio-parameter-stop-on-error"><span class="std std-ref">stop_on_error</span></a> is set, the <a class="reference internal" href="#mmio-test-case-description"><span class="std std-ref">MMIO</span></a> test case aborts in case of write/read transfer or data integrity error.</p>
+</div>
+</li>
+<li><p>Compute write and read minimum, maximum, and average bandwidths.</p></li>
+<li><p>If enabled, compare the average read and write bandwidths against their thresholds.</p></li>
+<li><p>Release all host buffers.</p></li>
+</ol>
+</div></blockquote>
+</section>
+<section id="mmio-test-json-members">
+<span id="id3"></span><h2>MMIO test JSON members<a class="headerlink" href="#mmio-test-json-members" title="Permalink to this headline">¶</a></h2>
+<section id="definition">
+<h3>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">¶</a></h3>
+<p>The following table shows all members available for this test case.
+More details are provided for each member in the subsequent sections.</p>
+<table class="docutils align-default" id="id4">
+<caption><span class="caption-text">MMIO test case members</span><a class="headerlink" href="#id4" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 15%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Member</p></th>
+<th class="head"><p>Mandatory / Optional</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#mmio-parameter-test-sequence"><span class="std std-ref">test_sequence</span></a></p></td>
+<td><p>Mandatory</p></td>
+<td><p>Describes the sequence of tests to perform.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mmio-parameter-check-bw"><span class="std std-ref">check_bw</span></a></p></td>
+<td><p>Optional</p></td>
+<td><p>Enable bandwidth checking. Disabled by default.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mmio-parameter-stop-on-error"><span class="std std-ref">stop_on_error</span></a></p></td>
+<td><p>Optional</p></td>
+<td><p>Enable stop test case on error. Disabled by default.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mmio-parameter-hi-thresh-wr"><span class="std std-ref">hi_thresh_wr</span></a></p>
+<p><a class="reference internal" href="#mmio-parameter-hi-thresh-rd"><span class="std std-ref">hi_thresh_rd</span></a></p>
+</td>
+<td><p>Optional</p></td>
+<td><p>Overwrite high threshold of the write/read bandwidth (kB/s).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mmio-parameter-lo-thresh-wr"><span class="std std-ref">lo_thresh_wr</span></a></p>
+<p><a class="reference internal" href="#mmio-parameter-lo-thresh-rd"><span class="std std-ref">lo_thresh_rd</span></a></p>
+</td>
+<td><p>Optional</p></td>
+<td><p>Overwrite low threshold of the write/read bandwidth (kB/s).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mmio-parameter-total-size"><span class="std std-ref">total_size</span></a></p></td>
+<td><p>Optional</p></td>
+<td><p>Total amount of data (Bytes) per bandwidth measurement.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="basic-examples">
+<h3>Basic examples<a class="headerlink" href="#basic-examples" title="Permalink to this headline">¶</a></h3>
+<p>The following is a basic example of a <a class="reference internal" href="#mmio-test-case-description"><span class="std std-ref">MMIO</span></a> test case targeting default PCIe BAR range.
+By default, the entire xbtest configuration and status memory (the one in SLR0 for multi-SLR devices) is targeted.</p>
+<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;mmio&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;global_config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;test_sequence&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Following is an example of <a class="reference internal" href="#mmio-test-case-description"><span class="std std-ref">MMIO</span></a> test case where some test JSON members are overwritten: PCIe BAR registers are selected and comparison of the average read and write bandwidths against thresholds is enabled.</p>
+<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;mmio&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;global_config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;stop_on_error&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;check_bw&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;hi_thresh_wr&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">13000</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;hi_thresh_rd&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">13000</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;lo_thresh_wr&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9000</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;lo_thresh_rd&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9000</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;test_sequence&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;offset&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">67108864</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;offset&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">83886080</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;buffer_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4096</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By default, bandwidths are not checked, so <a class="reference internal" href="#mmio-parameter-check-bw"><span class="std std-ref">check_bw</span></a> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+</div>
+</section>
+<section id="test-sequence">
+<span id="mmio-parameter-test-sequence"></span><h3><code class="docutils literal notranslate"><span class="pre">test_sequence</span></code><a class="headerlink" href="#test-sequence" title="Permalink to this headline">¶</a></h3>
+<p>Mandatory. Describes the sequence of tests to perform.
+Tests are performed serially, and a failure in one test does not stop the sequence (the next test will be launched).
+There is no limitation to the length of the test sequence.</p>
+<p>This field contains a list of tests, each test being defined by an object of key–value parameters pairs: <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">{},</span> <span class="pre">{},</span> <span class="pre">{}</span> <span class="pre">]</span></code>.</p>
+<p>The following table defines the parameters supported in the MMIO test sequence:</p>
+<span id="mmio-parameter-test-sequence-offset"></span><span id="mmio-parameter-test-sequence-buffer-size"></span><span id="mmio-parameter-test-sequence-bar"></span><span id="mmio-parameter-test-sequence-duration"></span><table class="docutils align-default" id="id5">
+<caption><span class="caption-text">MMIO test sequence parameters</span><a class="headerlink" href="#id5" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 10%" />
+<col style="width: 82%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Member</p></th>
+<th class="head"><p>Mandatory / Optional</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">duration</span></code></p></td>
+<td><p>Mandatory</p></td>
+<td><p>The duration of the test in seconds; Range [1, 2<sup>32</sup>-1].</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bar</span></code></p></td>
+<td><p>Optional</p></td>
+<td><p>PCIe BAR index. Possible value depend on the <a class="reference internal" href="../card-definition/card-definition.html#ug-card-definition"><span class="std std-ref">Card definition</span></a>.
+Default: specified in the <a class="reference internal" href="../card-definition/card-definition.html#ug-card-definition"><span class="std std-ref">Card definition</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">buffer_size</span></code></p></td>
+<td><p>Optional</p></td>
+<td><p>Write/read buffer size in Bytes. Range [4, <code class="docutils literal notranslate"><span class="pre">max_buffer_size</span></code>] where <code class="docutils literal notranslate"><span class="pre">max_buffer_size</span></code> equals the PCIe BAR size.
+Default: specified in the <a class="reference internal" href="../card-definition/card-definition.html#ug-card-definition"><span class="std std-ref">Card definition</span></a>.</p>
+<p>The number of buffers used in the test equals <a class="reference internal" href="#mmio-parameter-total-size"><span class="std std-ref">total_size</span></a> divided by <a class="reference internal" href="#mmio-parameter-test-sequence-buffer-size"><span class="std std-ref">buffer_size</span></a>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">offset</span></code></p></td>
+<td><p>Optional</p></td>
+<td><p>Start address offset in PCIe BAR. Range [0, <code class="docutils literal notranslate"><span class="pre">max_offset</span></code>] where <code class="docutils literal notranslate"><span class="pre">max_offset</span></code> equals the <code class="docutils literal notranslate"><span class="pre">max_total_size</span></code> minus <a class="reference internal" href="#mmio-parameter-test-sequence-buffer-size"><span class="std std-ref">buffer_size</span></a> and <cite>max_total_size`</cite> is the PCIe BAR size.
+Default: specified in the <a class="reference internal" href="../card-definition/card-definition.html#ug-card-definition"><span class="std std-ref">Card definition</span></a>.</p></td>
+</tr>
+</tbody>
+</table>
+<p>For example:</p>
+<blockquote>
+<div><ul>
+<li><p><strong>Single test</strong>:</p>
+<blockquote>
+<div><ul>
+<li><div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;test_sequence&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+</li>
+<li><div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;test_sequence&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;offset&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">67108864</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+</li>
+<li><div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;test_sequence&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;offset&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">83886080</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;buffer_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4096</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Multiple tests</strong>:</p>
+<blockquote>
+<div><ul>
+<li><div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;test_sequence&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;offset&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50331648</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;offset&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">67108864</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;offset&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">83886080</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</section>
+<section id="check-bw">
+<span id="mmio-parameter-check-bw"></span><h3><code class="docutils literal notranslate"><span class="pre">check_bw</span></code><a class="headerlink" href="#check-bw" title="Permalink to this headline">¶</a></h3>
+<p>Optional;
+Type           : boolean;
+Possible values: <code class="docutils literal notranslate"><span class="pre">false</span></code> or <code class="docutils literal notranslate"><span class="pre">true</span></code>;
+Default        : <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<p>By setting this member to <code class="docutils literal notranslate"><span class="pre">true</span></code>, average bandwidth measurements will be compared against defined thresholds.
+When set to <code class="docutils literal notranslate"><span class="pre">false</span></code>, no average bandwidth measurement will be checked.</p>
+<p>Default bandwidth limits are defined in <a class="reference internal" href="../card-definition/card-definition.html#ug-card-definition"><span class="std std-ref">Card definition</span></a> and are displayed at the beginning of the tests.</p>
+<p>The bandwidth limits can be overwritten using the following parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="#mmio-parameter-hi-thresh-wr-rd"><span class="std std-ref">hi_thresh_wr, hi_thresh_rd</span></a>.</p></li>
+<li><p><a class="reference internal" href="#mmio-parameter-lo-thresh-wr-rd"><span class="std std-ref">lo_thresh_wr, lo_thresh_rd</span></a>.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="stop-on-error">
+<span id="mmio-parameter-stop-on-error"></span><h3><code class="docutils literal notranslate"><span class="pre">stop_on_error</span></code><a class="headerlink" href="#stop-on-error" title="Permalink to this headline">¶</a></h3>
+<p>Optional;
+Type           : boolean;
+Possible values: <code class="docutils literal notranslate"><span class="pre">false</span></code> or <code class="docutils literal notranslate"><span class="pre">true</span></code>;
+Default        : <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<p>By default, the write-read-check cycles are always executed during the entire test <a class="reference internal" href="#mmio-parameter-test-sequence-duration"><span class="std std-ref">duration</span></a> even if errors occurred during a cycle.
+By setting this member to <code class="docutils literal notranslate"><span class="pre">true</span></code>, the <a class="reference internal" href="#mmio-test-case-description"><span class="std std-ref">MMIO</span></a> test case will stop in case of write / read transfer or data integrity error.</p>
+</section>
+<section id="hi-thresh-wr-hi-thresh-rd">
+<span id="mmio-parameter-hi-thresh-rd"></span><span id="mmio-parameter-hi-thresh-wr"></span><span id="mmio-parameter-hi-thresh-wr-rd"></span><h3><code class="docutils literal notranslate"><span class="pre">hi_thresh_wr</span></code>, <code class="docutils literal notranslate"><span class="pre">hi_thresh_rd</span></code><a class="headerlink" href="#hi-thresh-wr-hi-thresh-rd" title="Permalink to this headline">¶</a></h3>
+<p>Optional;
+Type           : integer;
+Possible values: from 1 to 2<sup>32</sup>-1;
+Default        : specified in the <a class="reference internal" href="../card-definition/card-definition.html#ug-card-definition"><span class="std std-ref">Card definition</span></a>.</p>
+<p>Overwrite high threshold of the write/read bandwidth (kB/s) specified in the <a class="reference internal" href="../card-definition/card-definition.html#ug-card-definition"><span class="std std-ref">Card definition</span></a>.
+After all bandwidth measurements made during the test <a class="reference internal" href="#mmio-parameter-test-sequence-duration"><span class="std std-ref">duration</span></a> are complete, if the measured bandwidth is greater than this threshold, the test fails.</p>
+</section>
+<section id="lo-thresh-wr-lo-thresh-rd">
+<span id="mmio-parameter-lo-thresh-rd"></span><span id="mmio-parameter-lo-thresh-wr"></span><span id="mmio-parameter-lo-thresh-wr-rd"></span><h3><code class="docutils literal notranslate"><span class="pre">lo_thresh_wr</span></code>, <code class="docutils literal notranslate"><span class="pre">lo_thresh_rd</span></code><a class="headerlink" href="#lo-thresh-wr-lo-thresh-rd" title="Permalink to this headline">¶</a></h3>
+<p>Optional;
+Type   : integer;
+Range  : [1, 2<sup>32</sup>-1];
+Default: specified in the <a class="reference internal" href="../card-definition/card-definition.html#ug-card-definition"><span class="std std-ref">Card definition</span></a>.</p>
+<p>Overwrite low threshold of the write/read bandwidth (kB/s) specified in the <a class="reference internal" href="../card-definition/card-definition.html#ug-card-definition"><span class="std std-ref">Card definition</span></a>.
+After all bandwidth measurements made during the test <a class="reference internal" href="#mmio-parameter-test-sequence-duration"><span class="std std-ref">duration</span></a> are complete, if the measured bandwidth is lower than this threshold, the test fails.
+Low threshold must be lower than high threshold.</p>
+</section>
+<section id="total-size">
+<span id="mmio-parameter-total-size"></span><h3><code class="docutils literal notranslate"><span class="pre">total_size</span></code><a class="headerlink" href="#total-size" title="Permalink to this headline">¶</a></h3>
+<p>Optional;
+Type           : integer;
+Possible values: from minimum buffer size to size of selected PCIe BAR;
+Range          : [4, <code class="docutils literal notranslate"><span class="pre">PCIe</span> <span class="pre">BAR</span> <span class="pre">size</span></code>];
+Default        : specified in the <a class="reference internal" href="../card-definition/card-definition.html#ug-card-definition"><span class="std std-ref">Card definition</span></a>.</p>
+<p>Override the total amount of data (in Bytes) per transfer cycle.
+Default value defined in <a class="reference internal" href="../card-definition/card-definition.html#ug-card-definition"><span class="std std-ref">Card definition</span></a> and is displayed at the beginning of the tests.
+This must be a multiple of the <a class="reference internal" href="#mmio-parameter-test-sequence-buffer-size"><span class="std std-ref">buffer_size</span></a> parameter for all tests in the <a class="reference internal" href="#mmio-parameter-test-sequence"><span class="std std-ref">test_sequence</span></a>.</p>
+</section>
+</section>
+<section id="output-files">
+<h2>Output files<a class="headerlink" href="#output-files" title="Permalink to this headline">¶</a></h2>
+<p>All MMIO measurements are stored in output CSV files which are generated in xbtest logging directory.
+The values are stored in CSV type format with one column for each information type.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If the command line option <a class="reference internal" href="../usage/command-line-options.html#cmdoption-L"><code class="xref std std-option docutils literal notranslate"><span class="pre">-L</span></code></a> is used while calling the <a class="reference internal" href="../introduction/overview.html#application-software"><span class="std std-ref">xbtest application software (xbtSW)</span></a>, no output file is generated.</p>
+</div>
+<p>In the <a class="reference internal" href="#mmio-test-case-description"><span class="std std-ref">MMIO</span></a> test case, two different CSV files are used to store all test results.
+They are named with the following convention:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mmio_detail.csv</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mmio_result.csv</span></code></p></li>
+</ul>
+</div></blockquote>
+<section id="mmio-detail-csv-output-file">
+<h3><code class="docutils literal notranslate"><span class="pre">mmio_detail.csv</span></code> output file<a class="headerlink" href="#mmio-detail-csv-output-file" title="Permalink to this headline">¶</a></h3>
+<p>This file contains all intermediate bandwidth measurements.
+There is one line of result for every write-read-check cycle of each test of the <a class="reference internal" href="#mmio-parameter-test-sequence"><span class="std std-ref">test_sequence</span></a> containing following results.</p>
+<blockquote>
+<div><ul>
+<li><p><strong>Test</strong>: Index of current test within the <a class="reference internal" href="#mmio-parameter-test-sequence"><span class="std std-ref">test_sequence</span></a>. Index of first test is 1.</p></li>
+<li><p><strong>bar</strong>: Tested PCIe BAR index.</p></li>
+<li><p><strong>offset</strong>: Start address offset in BAR of tested PCIe BAR range.</p></li>
+<li><p><strong>buffer size (Bytes)</strong>: Size of buffers transferred during the test.</p></li>
+<li><p><strong>Cycle ID</strong>: Index of the write-read-check cycle: the number of cycles depends on test <a class="reference internal" href="#mmio-parameter-test-sequence-duration"><span class="std std-ref">duration</span></a> and quantity of data transferred.</p></li>
+<li><p><strong>Data integrity</strong>: Data integrity result for the current write-read-check cycle.</p></li>
+<li><p><strong>write results</strong>: This group contains the following columns:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>live write BW (kBps)</strong>: MMIO write BW measurements for the current write-read-check cycle.</p></li>
+<li><p><strong>minimum write BW (kBps)</strong>: Minimum of MMIO write BW measurements.</p></li>
+<li><p><strong>average write BW (kBps)</strong>: Average of MMIO write BW measurements.</p></li>
+<li><p><strong>maximum write BW (kBps)</strong>: Maximum of MMIO write BW measurements.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>read results</strong>: This group contains the following columns:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>live read BW (kBps)</strong>: MMIO read BW measurements for the current write-read-check cycle.</p></li>
+<li><p><strong>minimum read BW (kBps)</strong>: Minimum of MMIO read BW measurements.</p></li>
+<li><p><strong>average read BW (kBps)</strong>: Average of MMIO read BW measurements.</p></li>
+<li><p><strong>maximum read BW (kBps)</strong>: Maximum of MMIO read BW measurements.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</section>
+<section id="mmio-result-csv-output-file">
+<h3><code class="docutils literal notranslate"><span class="pre">mmio_result.csv</span></code> output file<a class="headerlink" href="#mmio-result-csv-output-file" title="Permalink to this headline">¶</a></h3>
+<p>For each test of the <a class="reference internal" href="#mmio-parameter-test-sequence"><span class="std std-ref">test_sequence</span></a>, a new row containing the test configuration and results computed is present in this file:</p>
+<blockquote>
+<div><ul>
+<li><p><strong>Test</strong>: Index of current test within the <a class="reference internal" href="#mmio-parameter-test-sequence"><span class="std std-ref">test_sequence</span></a>. Index of first test is 1.</p></li>
+<li><p><strong>duration (s)</strong>: Test duration.</p></li>
+<li><p><strong>configuration</strong>: This group contains the following columns:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>bar</strong>: Tested PCIe BAR index.</p></li>
+<li><p><strong>offset</strong>: Start address offset in BAR of tested PCIe BAR range.</p></li>
+<li><p><strong>buffer size (Bytes)</strong>: Size of buffers transferred during the test.</p></li>
+<li><p><strong>number of buffers</strong>: Quantity of buffers transferred in each write-read-check cycle.</p></li>
+<li><p><strong>total size (Bytes)</strong>: Total quantity of data transferred in each write-read-check cycle.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Number of cycles</strong>: Total number of write-read-check cycles performed: the number of cycles depends on test <a class="reference internal" href="#mmio-parameter-test-sequence-duration"><span class="std std-ref">duration</span></a> and quantity of data transferred.</p></li>
+<li><p><strong>Data integrity</strong>: Data integrity result.</p></li>
+<li><p><strong>write results</strong>: This group contains the following columns:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>minimum write BW (kBps)</strong>: Minimum of MMIO write BW measurements.</p></li>
+<li><p><strong>average write BW (kBps)</strong>: Average of MMIO write BW measurements.</p></li>
+<li><p><strong>maximum write BW (kBps)</strong>: Maximum of MMIO write BW measurements.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>read results</strong>: This group contains the following columns:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>minimum read BW (kBps)</strong>: Minimum of MMIO read BW measurements.</p></li>
+<li><p><strong>average read BW (kBps)</strong>: Average of MMIO read BW measurements.</p></li>
+<li><p><strong>maximum read BW (kBps)</strong>: Maximum of MMIO read BW measurements.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+				  
+				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="verify-test-case-description.html" class="btn btn-neutral float-left" title="Verify test case description" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dma-test-case-description.html" class="btn btn-neutral float-right" title="DMA test case description" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Advanced Micro Devices Inc.</p>
+  </div>
+
+
+
+										<div class="aem-Grid aem-Grid--16">
+											<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+												<div class="container-fluid sub-footer">
+
+													                    <div class="row">
+                        <div class="col-xs-24">
+                          <p><a target="_blank" href="https://www.amd.com/en/corporate/copyright">Terms and Conditions</a> | <a target="_blank" href="https://www.amd.com/en/corporate/privacy">Privacy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/cookies">Cookie Policy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/trademarks">Trademarks</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf">Statement on Forced Labor</a> | <a target="_blank" href="https://www.amd.com/en/corporate/competition">Fair and Open Competition</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf">UK Tax Strategy</a> | <a target="_blank" href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA">Inclusive Terminology</a> | <a href="#cookiessettings" class="ot-sdk-show-settings">Cookies Settings</a></p>
+                        </div>
+                    </div>
+												</div>
+											</div>
+										</div>
+										
+</br>
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

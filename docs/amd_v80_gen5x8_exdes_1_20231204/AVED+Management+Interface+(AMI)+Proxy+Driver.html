@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script charset="UTF-8" data-document-language="true" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script class="optanon-category-C0002" type="text/plain">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+<title>AVED Management Interface (AMI) Proxy Driver — AVED  documentation</title>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="_static/xbtest.css" rel="stylesheet" type="text/css"/>
+<link href="_static/_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="https://docs.xilinx.com/favicon.ico" rel="shortcut icon"/>
+<!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/js/theme.js"></script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html" rel="next" title="AVED Programming Control (APC) Proxy Driver"/>
+<link href="AVED%2BInBand%2BTelemetry%2BApplication.html" rel="prev" title="AVED InBand Telemetry Application"/>
+<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager -->
+<noscript><iframe class="optanon-category-C0002" height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager -->
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="index.html"> AVED
+            <img alt="Logo" class="logo" src="_static/xilinx-header-logo.svg"/>
+</a>
+<div role="search">
+<form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" type="text"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+</div>
+</div><div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BUser%2BApplication.html">AVED - User Application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80/V80P</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BHierarchy%2BOverview.html">AVED V80/V80P - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BCIPS%2BConfiguration.html">AVED V80/V80P - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BMemory%2BResources.html">AVED V80/V80P - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BMemory%2BMap.html">AVED V80/V80P - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BNoC%2BConfiguration.html">AVED V80/V80P - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BBase%2BLogic.html">AVED V80/V80P - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BClock%2BReset%2BModule.html">AVED V80/V80P - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BSource%2BFile%2BOverview.html">AVED V80/V80P - Source File Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BXBTEST%2BDesign.html">AVED V80/V80P - XBTEST Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BClock%2BControl%2B%28ACC%29%2BProxy%2BDriver.html">AVED Clock Control (ACC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">AVED Management Interface (AMI) Proxy Driver</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#proxy-driver-external-apis">Proxy Driver External APIs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#initialize-the-ami-proxy-driver">Initialize the AMI proxy driver.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bind-callbacks">Bind Callbacks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pdi-download-response">PDI Download Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pdi-copy-response">PDI Copy Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sensor-complete-response">Sensor Complete Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#avedmanagementinterface-ami-proxydriver-identityresponse">Identity Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#boot-select-response">Boot Select Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#eeprom-read-write-response">EEPROM read/write Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-read-write-response">Module read/write Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pdi-download-request">PDI Download Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pdi-copy-request">PDI Copy Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sensor-request">Sensor Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#boot-select-request">Boot Select Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#eeprom-read-write-request">Eeprom Read Write Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-read-write-request">Module Read Write Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#print-statistics">Print Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clear-statistics">Clear Statistics</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sequence-diagrams">Sequence Diagrams</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ami-proxy-initialization">AMI Proxy Initialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ami-proxy-task">AMI Proxy Task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ami-handling-requests">AMI Handling Requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ami-handling-responses">AMI Handling Responses</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#initialize-driver">Initialize Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#register-for-callback">Register For Callback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generating-responses">Generating Responses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#handling-requests">Handling Requests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI &amp; xbtest)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest%2Bbuild.html">xbtest build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift"><nav aria-label="Mobile navigation menu" class="wy-nav-top" style="background: black">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="index.html">AVED</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="Page navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a class="icon icon-home" href="index.html"></a> »</li>
+<li>AVED Management Interface (AMI) Proxy Driver</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<section id="aved-management-interface-ami-proxy-driver">
+<h1>AVED Management Interface (AMI) Proxy Driver<a class="headerlink" href="#aved-management-interface-ami-proxy-driver" title="Permalink to this headline">¶</a></h1>
+<section id="overview">
+<span id="avedmanagementinterface-ami-proxydriver-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The AMI proxy driver binds in the FAL provided in the initialization and uses this to read requests and write responses back to handle communication to/from the host.</p>
+<p>Internally it creates a number of resources, including a mutex for protection, a mailbox to handle asynchronous responses and a task to handle the interaction with the FAL.</p>
+<p>The task spawned will:</p>
+<ul class="simple">
+<li><p>Read requests from the FAL store data associated with the host request internally (using an unique id) and generate event via the AEL to anyone registered for the callback.</p></li>
+<li><p>Service the internal mailbox and handle writing data back to the FAL for the host responses.</p></li>
+</ul>
+<p>The API consists of a number of functions to get the AMI request data, these will be called when the application receives the relevant event via the AEL, once the relevant action has been performed the matching response function can be invoked with
+the same unique id received in the request. The response API’s will then post an internal message with the data required for the host responses to onto the mailbox and then thread will service this mailbox and form up the response back to the host.</p>
+<p>The API also provides a few debug function to handle display and clear of the stat/error counters.</p>
+</section>
+<section id="proxy-driver-external-apis">
+<span id="avedmanagementinterface-ami-proxydriver-proxydriverexternalapis"></span><h2>Proxy Driver External APIs<a class="headerlink" href="#proxy-driver-external-apis" title="Permalink to this headline">¶</a></h2>
+<section id="initialize-the-ami-proxy-driver">
+<span id="avedmanagementinterface-ami-proxydriver-initializetheamiproxydriver"></span><h3>Initialize the AMI proxy driver.<a class="headerlink" href="#initialize-the-ami-proxy-driver" title="Permalink to this headline">¶</a></h3>
+<p>This will open the FAL using the handle provided in the API (pxFwIf) &amp; make use of the OSAL layer to create a mutex, a mailbox and a task.</p>
+<p><strong>iAMI_Initialise</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/*
+ * @brief   Main initialisation point <span class="k">for</span> the AMI Proxy Driver
+ *
+ * @param   ucProxyId   Unique ID <span class="k">for</span> this Proxy driver
+ * @param   pxFwIf      Handle to the Firmware Interface to use
+ * @param   ulFwIfPort  Port to use on the Firmware Interface
+ * @param   ulTaskPrio  Priority of the Proxy driver task <span class="o">(</span><span class="k">if</span> RR disabled<span class="o">)</span>
+ * @param   ulTaskStack Stack size of the Proxy driver task
+ *
+ * @return  OK          Proxy driver initialised correctly
+ *          ERROR       Proxy driver not initialised, or was already initialised
+ *
+ * @notes   Proxy drivers can have <span class="m">0</span> or more firmware interfaces
+ */
+int iAMI_Initialise<span class="o">(</span> uint8_t ucProxyId,
+                     FW_IF_CFG *pxFwIf,
+                     uint32_t ulFwIfPort,
+                     uint32_t ulTaskPrio,
+                     uint32_t ulTaskStack <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="bind-callbacks">
+<span id="avedmanagementinterface-ami-proxydriver-bindcallbacks"></span><h3>Bind Callbacks<a class="headerlink" href="#bind-callbacks" title="Permalink to this headline">¶</a></h3>
+<p>This API can be used to bind into a callback to be notified of events generated by the AMI proxy using the EVL library. The current supported events are:</p>
+<ul class="simple">
+<li><p><strong>AMI_PROXY_DRIVER_E_PDI_DOWNLOAD_STAMI</strong></p></li>
+<li><p><strong>AMI_PROXY_DRIVER_E_SENSOR_READ</strong></p></li>
+<li><p><strong>AMI_PROXY_DRIVER_E_GET_IDENTITY</strong></p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><strong>iAMI_BindCallback</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/*
+ * @brief   Bind into this proxy driver
+ *
+ * @param   pxCallback  Callback to <span class="nb">bind</span> into the proxy driver
+ *
+ * @return  OK          Callback successfully bound
+ *          ERROR       Callback not bound
+ */
+int iAMI_BindCallback<span class="o">(</span> AEL_CALLBACK *pxCallback <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="pdi-download-response">
+<span id="avedmanagementinterface-ami-proxydriver-pdidownloadresponse"></span><h3>PDI Download Response<a class="headerlink" href="#pdi-download-response" title="Permalink to this headline">¶</a></h3>
+<p>This will post a message onto the mailbox to be handled within the the internal task to send a response back over the FAL that the PDI download request has completed successfully/failed.</p>
+<p><strong>iAMI_SetPdiDownloadCompleteResponse</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/* Set Functions **************************************************************/
+
+/*
+ * @brief   Set the response after the PDI download has completed
+ *
+ * @param   pxSignal    Current event occurance <span class="o">(</span>used <span class="k">for</span> tracking<span class="o">)</span>
+ * @param   xResult     The result of the pdi download request
+ *
+ * @return  OK          Data passed to proxy driver successfully
+ *          ERROR       Data not passed successfully
+ */
+int iAMI_SetPdiDownloadCompleteResponse<span class="o">(</span> AEL_SIGNAL *pxSignal, AMI_PROXY_RESULT xResult <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="pdi-copy-response">
+<span id="avedmanagementinterface-ami-proxydriver-pdicopyresponse"></span><h3>PDI Copy Response<a class="headerlink" href="#pdi-copy-response" title="Permalink to this headline">¶</a></h3>
+<p>This will post a message onto the mailbox to be handled within the the internal task to send a response back over the FAL that the PDI copy request has completed successfully/failed.</p>
+<p><strong>iAMI_SetPdiCopyCompleteResponse</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Set the response after the PDI copy has completed
+ *
+ * @param   pxSignal    Current event occurance <span class="o">(</span>used <span class="k">for</span> tracking<span class="o">)</span>
+ * @param   xResult     The result of the pdi copy request
+ *
+ * @return  OK          Data passed to proxy driver successfully
+ *          ERROR       Data not passed successfully
+ */
+int iAMI_SetPdiCopyCompleteResponse<span class="o">(</span> EVL_SIGNAL *pxSignal, AMI_PROXY_RESULT xResult <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="sensor-complete-response">
+<span id="avedmanagementinterface-ami-proxydriver-sensorcompleteresponse"></span><h3>Sensor Complete Response<a class="headerlink" href="#sensor-complete-response" title="Permalink to this headline">¶</a></h3>
+<p>This will post a message onto the mailbox to be handled within the the internal task to send a response back over the FAL that the sensor read request has completed successfully/failed.</p>
+<p><strong>iAMI_SetSensorCompleteResponse</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/*
+ * @brief   Set the response after the sensor request has completed
+ *
+ * @param   pxSignal    Current event occurance <span class="o">(</span>used <span class="k">for</span> tracking<span class="o">)</span>
+ * @param   xResult     The result of the sensor request
+ *
+ * @return  OK          Data passed to proxy driver successfully
+ *          ERROR       Data not passed successfully
+ */
+int iAMI_SetSensorCompleteResponse<span class="o">(</span> AEL_SIGNAL *pxSignal, AMI_PROXY_RESULT xResult <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterface-ami-proxydriver-identityresponse">
+<span id="identity-response"></span><h3>Identity Response<a class="headerlink" href="#avedmanagementinterface-ami-proxydriver-identityresponse" title="Permalink to this headline">¶</a></h3>
+<p>This will post a message onto the mailbox to be handled within the the internal task to send a response back over the FAL that the identity read request has completed successfully/failed.</p>
+<p><strong>iAMI_SetIdentityResponse</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/*
+ * @brief   Set the identity response
+ *
+ * @param   pxSignal                Current event occurance <span class="o">(</span>used <span class="k">for</span> tracking<span class="o">)</span>
+ * @param   xResult                 The result of the identity request
+ * @param   pxIdentityResponse      The structure containing the major/minor version
+ *
+ * @return  OK                      Data passed to proxy driver successfully
+ *          ERROR                   Data not passed successfully
+ */
+int iAMI_SetIdentityResponse<span class="o">(</span> AEL_SIGNAL *pxSignal, AMI_PROXY_RESULT xResult, AMI_PROXY_IDENTITY_ *pxIdentity <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="boot-select-response">
+<span id="avedmanagementinterface-ami-proxydriver-bootselectresponse"></span><h3>Boot Select Response<a class="headerlink" href="#boot-select-response" title="Permalink to this headline">¶</a></h3>
+<p>This will post a message onto the mailbox to be handled within the the internal task to send a back over the FAL that the boot select request has completed successfully/failed.</p>
+<p><strong>iAMI_SetBootSelectCompleteResponse</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Set the response after the Boot <span class="k">select</span> has completed
+ *
+ * @param   pxSignal    Current event occurance <span class="o">(</span>used <span class="k">for</span> tracking<span class="o">)</span>
+ * @param   xResult     The result of the boot <span class="k">select</span> request
+ *
+ * @return  OK          Data passed to proxy driver successfully
+ *          ERROR       Data not passed successfully
+ */
+int iAMI_SetBootSelectCompleteResponse<span class="o">(</span> EVL_SIGNAL *pxSignal, AMI_PROXY_RESULT xResult <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="eeprom-read-write-response">
+<span id="avedmanagementinterface-ami-proxydriver-eepromread-writeresponse"></span><h3>EEPROM read/write Response<a class="headerlink" href="#eeprom-read-write-response" title="Permalink to this headline">¶</a></h3>
+<p>This will post a message onto the mailbox to be handled within the the internal task to send a back over the FAL that the EEPROM read/write request has completed successfully/failed.</p>
+<p><strong>iAMI_SetEepromReadWriteCompleteResponse</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Set the response after the EEPROM read/write has completed
+ *
+ * @param   pxSignal    Current event occurance <span class="o">(</span>used <span class="k">for</span> tracking<span class="o">)</span>
+ * @param   xResult     The result of the boot <span class="k">select</span> request
+ *
+ * @return  OK          Data passed to proxy driver successfully
+ *          ERROR       Data not passed successfully
+ */
+int iAMI_SetEepromReadWriteCompleteResponse<span class="o">(</span> EVL_SIGNAL *pxSignal, AMI_PROXY_RESULT xResult <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="module-read-write-response">
+<span id="avedmanagementinterface-ami-proxydriver-moduleread-writeresponse"></span><h3>Module read/write Response<a class="headerlink" href="#module-read-write-response" title="Permalink to this headline">¶</a></h3>
+<p>This will post a message onto the mailbox to be handled within the the internal task to send a back over the FAL that the Module read/write request has completed successfully/failed.</p>
+<p><strong>iAMI_SetModuleReadWriteCompleteResponse</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief Set the response after the module read/write has completed
+ *
+ * @param pxSignal Current event occurance <span class="o">(</span>used <span class="k">for</span> tracking<span class="o">)</span>
+ * @param xResult The result of the module rd/wr request
+ *
+ * @return OK Data passed to proxy driver successfully
+ * ERROR Data not passed successfully
+ */
+int iAMI_SetModuleReadWriteCompleteResponse<span class="o">(</span> EVL_SIGNAL *pxSignal, AMI_PROXY_RESULT xResult <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+<section id="pdi-download-request">
+<span id="avedmanagementinterface-ami-proxydriver-pdidownloadrequest"></span><h3>PDI Download Request<a class="headerlink" href="#pdi-download-request" title="Permalink to this headline">¶</a></h3>
+<p>This API will be used by the application to obtain the data associated with the PDI download request, which is stored internally within the proxy before the event is raised.</p>
+<p><strong>iAMI_GetPdiDownloadRequest</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/*
+ * @brief   Get the PDI download request
+ *
+ * @param   pxSignal                Current event occurrence <span class="o">(</span>used <span class="k">for</span> tracking<span class="o">)</span>
+ * @param   pxDownloadRequest       Pointer to download pdi structure
+ *
+ * @return  OK                      Data retrieved from proxy driver successfully
+ *          ERROR                   Data not retrieved successfully
+ *
+ */
+int iAMI_GetPdiDownloadRequest<span class="o">(</span> AEL_SIGNAL *pxSignal, AMI_PROXY_PDI_DOWNLOAD_REQUEST *pxDownloadRequest <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="pdi-copy-request">
+<span id="avedmanagementinterface-ami-proxydriver-pdicopyrequest"></span><h3>PDI Copy Request<a class="headerlink" href="#pdi-copy-request" title="Permalink to this headline">¶</a></h3>
+<p>This API will be used by the application to obtain the data associated with the PDI copy request, which is stored internally within the proxy before the event is raised.</p>
+<p><strong>iAMI_GetPdiCopyRequest</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Get the PDI copy request
+ *
+ * @param   pxSignal                Current event occurrence <span class="o">(</span>used <span class="k">for</span> tracking<span class="o">)</span>
+ * @param   pxCopyRequest           Pointer to copy pdi structure
+ *
+ * @return  OK                      Data retrieved from proxy driver successfully
+ *          ERROR                   Data not retrieved successfully
+ */
+int iAMI_GetPdiCopyRequest<span class="o">(</span> EVL_SIGNAL *pxSignal,
+                            AMI_PROXY_PDI_COPY_REQUEST *pxCopyRequest <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="sensor-request">
+<span id="avedmanagementinterface-ami-proxydriver-sensorrequest"></span><h3>Sensor Request<a class="headerlink" href="#sensor-request" title="Permalink to this headline">¶</a></h3>
+<p>This API will be used by the application to obtain the data associated with the Get Sensor request, which is stored internally within the proxy before the event is raised.</p>
+<p><strong>iAMI_GetSensorRequest</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/*
+ * @brief   Get the Sensor request
+ *
+ * @param   pxSignal                Current event occurrence <span class="o">(</span>used <span class="k">for</span> tracking<span class="o">)</span>
+ * @param   pxSensorRequest         Pointer sensor request structure
+ *
+ * @return  OK                      Data retrieved from proxy driver successfully
+ *          ERROR                   Data not retrieved successfully
+ *
+ */
+int iAMI_GetSensorRequest<span class="o">(</span> AEL_SIGNAL *pxSignal, AMI_PROXY_SENSOR_REQUEST *pxSensorRequest <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="boot-select-request">
+<span id="avedmanagementinterface-ami-proxydriver-bootselectrequest"></span><h3>Boot Select Request<a class="headerlink" href="#boot-select-request" title="Permalink to this headline">¶</a></h3>
+<p>This API will be used by the application to obtain the data associated with the boot selection request, which is stored internally within the proxy before the event is raised.</p>
+<p><strong>iAMI_GetBootSelectRequest</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Get the Boot Select request
+ *
+ * @param   pxSignal                Current event occurance <span class="o">(</span>used <span class="k">for</span> tracking<span class="o">)</span>
+ * @param   pxBootSelectRequest     Pointer boot <span class="k">select</span> request structure
+ *
+ * @return  OK                      Data retrieved from proxy driver successfully
+ *          ERROR                   Data not retrieved successfully
+ *
+ */
+int iAMI_GetBootSelectRequest<span class="o">(</span> EVL_SIGNAL *pxSignal, AMI_PROXY_BOOT_SELECT_REQUEST *pxBootSelectRequest <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="eeprom-read-write-request">
+<span id="avedmanagementinterface-ami-proxydriver-eepromreadwriterequest"></span><h3>Eeprom Read Write Request<a class="headerlink" href="#eeprom-read-write-request" title="Permalink to this headline">¶</a></h3>
+<p>This API will be used by the application to obtain the data associated with the EEPROM read write request, which is stored internally within the proxy before the event is raised.</p>
+<p><strong>iAMI_GetEepromReadWriteRequest</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Get the eeprom <span class="nb">read</span> write request
+ *
+ * @param   pxSignal                    Current event occurance <span class="o">(</span>used <span class="k">for</span> tracking<span class="o">)</span>
+ * @param   pxEepromReadWriteRequest    Pointer sensor request structure
+ *
+ * @return  OK                          Data retrieved from proxy driver successfully
+ *          ERROR                       Data not retrieved successfully
+ *
+ */
+int iAMI_GetEepromReadWriteRequest<span class="o">(</span> EVL_SIGNAL *pxSignal,
+                                    AMI_PROXY_EEPROM_RW_REQUEST *pxEepromReadWriteRequest <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="module-read-write-request">
+<span id="avedmanagementinterface-ami-proxydriver-modulereadwriterequest"></span><h3>Module Read Write Request<a class="headerlink" href="#module-read-write-request" title="Permalink to this headline">¶</a></h3>
+<p>This API will be used by the application to obtain the data associated with the Module read write request, which is stored internally within the proxy before the event is raised.</p>
+<p><strong>iAMI_GetModuleReadWriteRequest</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief Get the module <span class="nb">read</span> write request
+ *
+ * @param pxSignal Current event occurance <span class="o">(</span>used <span class="k">for</span> tracking<span class="o">)</span>
+ * @param pxModuleReadWriteRequest Pointer sensor request structure
+ *
+ * @return OK Data retrieved from proxy driver successfully
+ * ERROR Data not retrieved successfully
+ *
+ */
+int iAMI_GetModuleReadWriteRequest<span class="o">(</span> EVL_SIGNAL *pxSignal, AMI_PROXY_MODULE_RW_REQUEST *pxModuleReadWriteRequest <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+<section id="print-statistics">
+<span id="avedmanagementinterface-ami-proxydriver-printstatistics"></span><h3>Print Statistics<a class="headerlink" href="#print-statistics" title="Permalink to this headline">¶</a></h3>
+<p>Debug function used to display the statistic counters and errors.</p>
+<p><strong>iAMI_PrintStatistics</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/*
+ * @brief   Print all the stats gathered by the application
+ *
+ * @return  OK          Stats retrieved from proxy driver successfully
+ *          ERROR       Stats not retrieved successfully
+ *
+ * @notes   None
+ */
+int iAMI_PrintStatistics<span class="o">(</span> void <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<p><img alt="image1" class="confluence-embedded-image" src="_images/1160207703.png"/></p>
+</section>
+<section id="clear-statistics">
+<span id="avedmanagementinterface-ami-proxydriver-clearstatistics"></span><h3>Clear Statistics<a class="headerlink" href="#clear-statistics" title="Permalink to this headline">¶</a></h3>
+<p>Debug function used to clear the all statistics counters back to zero.</p>
+<p><strong>iAMI_ClearStatistics</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/*
+ * @brief   Clear all the stats <span class="k">in</span> the application
+ *
+ * @return  OK          Stats cleared successfully
+ *          ERROR       Stats not cleared successfully
+ *
+ * @notes   None
+ */
+int iAMI_ClearStatistics<span class="o">(</span> void <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</section>
+<section id="sequence-diagrams">
+<span id="avedmanagementinterface-ami-proxydriver-sequencediagrams"></span><h2>Sequence Diagrams<a class="headerlink" href="#sequence-diagrams" title="Permalink to this headline">¶</a></h2>
+<section id="ami-proxy-initialization">
+<span id="avedmanagementinterface-ami-proxydriver-amiproxyinitialization"></span><h3>AMI Proxy Initialization<a class="headerlink" href="#ami-proxy-initialization" title="Permalink to this headline">¶</a></h3>
+<p>The initialization function (iAMI_Initialise) is called from the main task when all the other proxies are being initialized.</p>
+<p>It obtains a handle to the FAL and creates the resources needed by the driver including spawning the AMI proxy task.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/35861a02c40d038655dc884afb726a57e2fdc17c.png"><img alt="image2" class="drawio-diagram-image" src="_images/35861a02c40d038655dc884afb726a57e2fdc17c.png" style="width: 711px;"/></a></p>
+</section>
+<section id="ami-proxy-task">
+<span id="avedmanagementinterface-ami-proxydriver-amiproxytask"></span><h3>AMI Proxy Task<a class="headerlink" href="#ami-proxy-task" title="Permalink to this headline">¶</a></h3>
+<p>The task within the AMI proxy has two different responsibilities:</p>
+<ul class="simple">
+<li><p>To check for requests incoming via the FAL.</p></li>
+<li><p>To service the internal mailbox and form up responses to go back out to the FAL.</p></li>
+</ul>
+<p><a class="drawio-diagram-image reference internal" href="_images/56fab7689e19eec90197d7af312a4a37464ef16b.png"><img alt="image3" class="drawio-diagram-image" src="_images/56fab7689e19eec90197d7af312a4a37464ef16b.png" style="width: 731px;"/></a></p>
+</section>
+<section id="ami-handling-requests">
+<span id="avedmanagementinterface-ami-proxydriver-amihandlingrequests"></span><h3>AMI Handling Requests<a class="headerlink" href="#ami-handling-requests" title="Permalink to this headline">¶</a></h3>
+<p>The request API’s allows an application to get a copy of the internal proxy request data received via the FAL.</p>
+<ul class="simple">
+<li><p>iAMI_GetPdiDownloadRequest( )</p></li>
+<li><p>iAMI_GetSensorRequest( )</p></li>
+</ul>
+<p>The requests data is stored within the AMI proxy when the event is generated and the callback has been invoked to notify any registered users.</p>
+<p>When the request from the application is made a protected copy of the data is made and returned that will allow the user to perform the relevant action.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/754c2915fab58943c7d6068112fe90a3aa6760bc.png"><img alt="image4" class="drawio-diagram-image" src="_images/754c2915fab58943c7d6068112fe90a3aa6760bc.png" style="width: 596px;"/></a></p>
+</section>
+<section id="ami-handling-responses">
+<span id="avedmanagementinterface-ami-proxydriver-amihandlingresponses"></span><h3>AMI Handling Responses<a class="headerlink" href="#ami-handling-responses" title="Permalink to this headline">¶</a></h3>
+<p>The response API’s are used by the application to respond back to the request with data/result code once the relevant action has been performed.</p>
+<ul class="simple">
+<li><p>iAMI_SetPdiDownloadCompleteResponse( )</p></li>
+<li><p>iAMI_SetSensorCompleteResponse( )</p></li>
+<li><p>iAMI_SetIdentityResponse( )</p></li>
+</ul>
+<p>Within each response a mailbox message is formed with the unique instance id, the type, and the result and posted to be handled by the internal task.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/edb213b65e3b3792e4834f9be27bedb4723703a1.png"><img alt="image5" class="drawio-diagram-image" src="_images/edb213b65e3b3792e4834f9be27bedb4723703a1.png" style="width: 596px;"/></a></p>
+</section>
+</section>
+<section id="examples">
+<span id="avedmanagementinterface-ami-proxydriver-examples"></span><h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<section id="initialize-driver">
+<span id="avedmanagementinterface-ami-proxydriver-initializedriver"></span><h3>Initialize Driver<a class="headerlink" href="#initialize-driver" title="Permalink to this headline">¶</a></h3>
+<p>The initialize function needs a unique id for the proxy, a handle to a FW_IF (already created and initialized), and a task priority/size passed in.</p>
+<p><strong>iAMI_Initialise Example</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#define AMC_EVENT_UNIQUE_ID_AMI ( 1 )   /* each proxy needs an unique id */</span>
+<span class="c1">#define AMC_TASK_PRIO_DEFAULT   ( 5 )</span>
+<span class="c1">#define AMC_TASK_DEFAULT_STACK  ( 0x1024 )</span>
+
+/* NOTE: The handle to the FW_IF needs to have been initialised and created before being passed <span class="k">in</span> */
+<span class="k">if</span><span class="o">(</span> <span class="nv">OK</span> <span class="o">==</span> iAMI_Initialise<span class="o">(</span> AMC_EVENT_UNIQUE_ID_AMI, <span class="p">&amp;</span>myIf, <span class="m">0</span>, AMC_TASK_PRIO_DEFAULT, AMC_TASK_DEFAULT_STACK <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    printf<span class="o">(</span> <span class="s2">"AMI Proxy Driver initialised\r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    printf<span class="o">(</span> <span class="s2">"Error initialising AMI Proxy Driver\r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="register-for-callback">
+<span id="avedmanagementinterface-ami-proxydriver-registerforcallback"></span><h3>Register For Callback<a class="headerlink" href="#register-for-callback" title="Permalink to this headline">¶</a></h3>
+<p>Define a function based on the function pointer prototype and bind in using the API.</p>
+<p><strong>iAMI_BindCallback Example</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/* Define a callback to handle the events */
+int iAmiCallback<span class="o">(</span> AEL_SIGNAL *pxSignal <span class="o">)</span>
+<span class="o">{</span>
+    int <span class="nv">iStatus</span> <span class="o">=</span> ERROR<span class="p">;</span>
+
+    <span class="k">if</span><span class="o">(</span> <span class="o">(</span> NULL !<span class="o">=</span> pxSignal <span class="o">)</span>
+    <span class="o">{</span>
+        printf<span class="o">(</span> <span class="s2">"AMI Proxy Driver (0x%02X), Instance %d\r\n"</span>, pxSignal-&gt;ucModule, pxSignal-&gt;ucInstance <span class="o">)</span><span class="p">;</span>
+
+        switch<span class="o">(</span> pxSignal-&gt;ucEventType <span class="o">)</span>
+        <span class="o">{</span>
+        <span class="k">case</span> AMI_PROXY_DRIVER_E_SENSOR_READ:
+        <span class="k">case</span> AMI_PROXY_DRIVER_E_PDI_DOWNLOAD_STAMI:
+        <span class="k">case</span> AMI_PROXY_DRIVER_E_GET_IDENTITY:
+            /* TODO: handle the events */
+            <span class="nv">iStatus</span> <span class="o">=</span> OK<span class="p">;</span>
+            break<span class="p">;</span>
+
+        default:
+            break<span class="p">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> iStatus<span class="p">;</span>
+<span class="o">}</span>
+
+/* Bind into the callback during the application initialisation */
+int iApplication_Initialise<span class="o">(</span> void <span class="o">)</span>
+<span class="o">{</span>
+    int <span class="nv">iStatus</span> <span class="o">=</span> ERROR<span class="p">;</span>
+
+    /* The rest of init depending on application before or after the callback binding */
+
+    <span class="nv">iStatus</span> <span class="o">=</span> iAMI_BindCallback<span class="o">(</span> <span class="p">&amp;</span>iAmiCallback <span class="o">)</span><span class="p">;</span>
+    <span class="k">if</span><span class="o">(</span> <span class="nv">OK</span> <span class="o">==</span> iStatus <span class="o">)</span>
+    <span class="o">{</span>
+        printf<span class="o">(</span> <span class="s2">"AMI Proxy Driver bound\r\n"</span> <span class="o">)</span><span class="p">;</span>
+    <span class="o">}</span>
+    <span class="k">else</span>
+    <span class="o">{</span>
+        printf<span class="o">(</span> <span class="s2">"Error binding to AMI Proxy Driver\r\n"</span> <span class="o">)</span><span class="p">;</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> iStatus<span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="generating-responses">
+<span id="avedmanagementinterface-ami-proxydriver-generatingresponses"></span><h3>Generating Responses<a class="headerlink" href="#generating-responses" title="Permalink to this headline">¶</a></h3>
+<p>Example of calling the response (<strong>iAMI_SetSensorCompleteResponse</strong>) from within the callback to send the result back towards the host.</p>
+<p><strong>iAMI_SetSensorCompleteResponse Example</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/* Define a callback to handle the events */
+int iAmiCallback<span class="o">(</span> AEL_SIGNAL *pxSignal <span class="o">)</span>
+<span class="o">{</span>
+    int <span class="nv">iStatus</span> <span class="o">=</span> ERROR<span class="p">;</span>
+    <span class="k">if</span><span class="o">(</span> <span class="o">(</span> NULL !<span class="o">=</span> pxSignal <span class="o">)</span>
+    <span class="o">{</span>   AMI_PROXY_RESULT <span class="nv">xResult</span> <span class="o">=</span> AMI_PROXY_RESULT_INVALID_ARG<span class="p">;</span>
+        printf<span class="o">(</span> <span class="s2">"AMI Proxy Driver (0x%02X), Instance %d\r\n"</span>, pxSignal-&gt;ucModule, pxSignal-&gt;ucInstance <span class="o">)</span><span class="p">;</span>
+
+        switch<span class="o">(</span> pxSignal-&gt;ucEventType <span class="o">)</span>
+        <span class="o">{</span>
+        <span class="k">case</span> AMI_PROXY_DRIVER_E_SENSOR_READ:
+            /* TODO: collect the sensor data */
+
+            /* TODO: Set the result code based on the collection */
+
+            /* Send the response back using same pxSignal structure passed into callback <span class="p">&amp;</span> the result */
+            <span class="nv">iStatus</span> <span class="o">=</span> iAMI_SetSensorCompleteResponse<span class="o">(</span> pxSignal, xResult <span class="o">)</span><span class="p">;</span>
+            break<span class="p">;</span>
+
+        <span class="k">case</span> AMI_PROXY_DRIVER_E_PDI_DOWNLOAD_STAMI:
+        <span class="k">case</span> AMI_PROXY_DRIVER_E_GET_IDENTITY:
+            /* TODO: handle the other events */
+            break<span class="p">;</span>
+
+        default:
+            break<span class="p">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> iStatus<span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="handling-requests">
+<span id="avedmanagementinterface-ami-proxydriver-handlingrequests"></span><h3>Handling Requests<a class="headerlink" href="#handling-requests" title="Permalink to this headline">¶</a></h3>
+<p>Example of requesting the data associated with an event (<strong>iAMI_GetSensorRequest</strong>) from within the callback and to send the result back towards the host.</p>
+<p><strong>iAMI_GetSensorRequest Example</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/* Define a callback to handle the events */
+int iAmiCallback<span class="o">(</span> AEL_SIGNAL *pxSignal <span class="o">)</span>
+<span class="o">{</span>
+    int <span class="nv">iStatus</span> <span class="o">=</span> ERROR<span class="p">;</span>
+    <span class="k">if</span><span class="o">(</span> <span class="o">(</span> NULL !<span class="o">=</span> pxSignal <span class="o">)</span>
+    <span class="o">{</span>   AMI_PROXY_RESULT <span class="nv">xResult</span> <span class="o">=</span> AMI_PROXY_RESULT_INVALID_ARG<span class="p">;</span>
+        printf<span class="o">(</span> <span class="s2">"AMI Proxy Driver (0x%02X), Instance %d\r\n"</span>, pxSignal-&gt;ucModule, pxSignal-&gt;ucInstance <span class="o">)</span><span class="p">;</span>
+
+        switch<span class="o">(</span> pxSignal-&gt;ucEventType <span class="o">)</span>
+        <span class="o">{</span>
+        <span class="k">case</span> AMI_PROXY_DRIVER_E_SENSOR_READ:
+            <span class="nv">iStatus</span> <span class="o">=</span> iAMI_GetSensorRequest<span class="o">(</span> pxSignal, <span class="p">&amp;</span>xSensorRequest <span class="o">)</span><span class="p">;</span>
+
+            <span class="k">if</span><span class="o">(</span> <span class="nv">OK</span> <span class="o">==</span> iStatus <span class="o">)</span>
+            <span class="o">{</span>
+                /* TODO: use data from xSensorRequest to collect the correct sensor data */
+
+                /* Set the result code based on the collection */
+                <span class="nv">xResult</span> <span class="o">=</span> AMI_PROXY_RESULT_SUCCESS<span class="p">;</span>
+
+                /* Send the response back using same pxSignal structure passed into callback <span class="p">&amp;</span> the result*/
+                <span class="nv">iStatus</span> <span class="o">=</span> iAMI_SetSensorCompleteResponse<span class="o">(</span> pxSignal, xResult <span class="o">)</span><span class="p">;</span>
+            <span class="o">}</span>
+            break<span class="p">;</span>
+
+        <span class="k">case</span> AMI_PROXY_DRIVER_E_PDI_DOWNLOAD_STAMI:
+        <span class="k">case</span> AMI_PROXY_DRIVER_E_GET_IDENTITY:
+            /* TODO: handle the other events */
+            break<span class="p">;</span>
+
+        default:
+            break<span class="p">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> iStatus<span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Page Revision: v. 49</p>
+</section>
+</section>
+</section>
+</div>
+</div>
+<footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+<a accesskey="p" class="btn btn-neutral float-left" href="AVED%2BInBand%2BTelemetry%2BApplication.html" rel="prev" title="AVED InBand Telemetry Application"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+<a accesskey="n" class="btn btn-neutral float-right" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html" rel="next" title="AVED Programming Control (APC) Proxy Driver">Next <span aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<p>© Copyright 2023, Advanced Micro Devices Inc.</p>
+</div>
+<div class="aem-Grid aem-Grid--16">
+<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+<div class="container-fluid sub-footer">
+<div class="row">
+<div class="col-xs-24">
+<p><a href="https://www.amd.com/en/corporate/copyright" target="_blank">Terms and Conditions</a> | <a href="https://www.amd.com/en/corporate/privacy" target="_blank">Privacy</a> | <a href="https://www.amd.com/en/corporate/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.amd.com/en/corporate/trademarks" target="_blank">Trademarks</a> | <a href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf" target="_blank">Statement on Forced Labor</a> | <a href="https://www.amd.com/en/corporate/competition" target="_blank">Fair and Open Competition</a> | <a href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf" target="_blank">UK Tax Strategy</a> | <a href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA" target="_blank">Inclusive Terminology</a> | <a class="ot-sdk-show-settings" href="#cookiessettings">Cookies Settings</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+</div>
+</div>
+</section>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+</body>
+</html>

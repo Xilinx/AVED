@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script charset="UTF-8" data-document-language="true" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script class="optanon-category-C0002" type="text/plain">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+<title>AVED Management Interface userguide (ami_tool) — AVED  documentation</title>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="_static/xbtest.css" rel="stylesheet" type="text/css"/>
+<link href="_static/_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="https://docs.xilinx.com/favicon.ico" rel="shortcut icon"/>
+<!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/js/theme.js"></script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="xbtest/user-guide/source/index.html" rel="next" title="Xbtest Userguide"/>
+<link href="AVED%2BJTAG%2BBoot%2BRecovery.html" rel="prev" title="AVED JTAG Boot Recovery"/>
+<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager -->
+<noscript><iframe class="optanon-category-C0002" height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager -->
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="index.html"> AVED
+            <img alt="Logo" class="logo" src="_static/xilinx-header-logo.svg"/>
+</a>
+<div role="search">
+<form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" type="text"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+</div>
+</div><div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BUser%2BApplication.html">AVED - User Application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">AVED Management Interface userguide (ami_tool)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage-options">Usage - Options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#help">help</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-output">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-notes-1">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#version">version</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-description-1">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-1">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-notes-2">Notes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#usage-commands">Usage - Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-overview2">overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-description-2">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-2">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-notes-3">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pcieinfo">pcieinfo</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-description-3">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-3">Example output</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#reload">reload</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-description-4">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-4">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-notes-4">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#sensors">sensors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-description-5">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-5">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-notes-5">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cfgmem-info">cfgmem_info</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-description-6">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-6">Example output</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cfgmem-program">cfgmem_program</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-description-7">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-7">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-notes-6">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cfgmem-fpt">cfgmem_fpt</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-description-8">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-8">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-notes-7">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cfgmem-copy">cfgmem_copy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-description-9">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-9">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-notes-8">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bar-wr">bar_wr</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-description-10">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-10">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-notes-9">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bar-rd">bar_rd</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-description-11">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-11">Example output</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#device-boot">device_boot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-description-12">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-12">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-notes-10">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mfg-info">mfg_info</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-description-13">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-13">Example output</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#eeprom-rd">eeprom_rd</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-description-14">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-14">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-notes-11">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#eeprom-wr">eeprom_wr</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-description-15">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-15">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-notes-12">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-byte-rd">module_byte_rd</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-description-16">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-16">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-notes-13">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-byte-wr">module_byte_wr</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-description-17">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-17">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avedmanagementinterfaceuserguide-ami-tool-notes-14">Notes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80/V80P</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BHierarchy%2BOverview.html">AVED V80/V80P - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BCIPS%2BConfiguration.html">AVED V80/V80P - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BMemory%2BResources.html">AVED V80/V80P - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BMemory%2BMap.html">AVED V80/V80P - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BNoC%2BConfiguration.html">AVED V80/V80P - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BBase%2BLogic.html">AVED V80/V80P - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BClock%2BReset%2BModule.html">AVED V80/V80P - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BSource%2BFile%2BOverview.html">AVED V80/V80P - Source File Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BXBTEST%2BDesign.html">AVED V80/V80P - XBTEST Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BClock%2BControl%2B%28ACC%29%2BProxy%2BDriver.html">AVED Clock Control (ACC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI &amp; xbtest)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest%2Bbuild.html">xbtest build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift"><nav aria-label="Mobile navigation menu" class="wy-nav-top" style="background: black">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="index.html">AVED</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="Page navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a class="icon icon-home" href="index.html"></a> »</li>
+<li>AVED Management Interface userguide (ami_tool)</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<section id="aved-management-interface-userguide-ami-tool">
+<h1>AVED Management Interface userguide (ami_tool)<a class="headerlink" href="#aved-management-interface-userguide-ami-tool" title="Permalink to this headline">¶</a></h1>
+<section id="overview">
+<span id="avedmanagementinterfaceuserguide-ami-tool-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The AVED Management Interface (AMI) provides an interface to an AVED device and control of the AVED management controller (AMC) firmware deployed on it.</p>
+<p>AMI is provided as 3 parts - the kernel driver (as a <strong>.ko</strong> file), the API, and a command line tool - <strong>ami_tool</strong>.</p>
+<p>The <strong>ami_tool</strong> application provides a command line interface (CLI) to the user.</p>
+<hr class="docutils"/>
+</section>
+<section id="dependencies">
+<span id="avedmanagementinterfaceuserguide-ami-tool-dependencies"></span><h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p>Supported OSs</p>
+<ul class="simple">
+<li><p>Ubuntu 22.04</p></li>
+<li><p>Redhat 8.3</p></li>
+</ul>
+<p>Tested on the following Kernel versions:</p>
+<ul class="simple">
+<li><p>4.18.0</p></li>
+<li><p>5.4.0</p></li>
+<li><p>5.15.0</p></li>
+</ul>
+<p>Ubuntu 22.04</p>
+<ul class="simple">
+<li><p>libc6</p></li>
+<li><p>gcc</p></li>
+<li><p>make</p></li>
+<li><p>dkms</p></li>
+<li><p>grep</p></li>
+<li><p>gawk</p></li>
+<li><p>linux-header</p></li>
+</ul>
+<p>Redhat 8.3</p>
+<ul class="simple">
+<li><p>glibc</p></li>
+<li><p>gcc</p></li>
+<li><p>make</p></li>
+<li><p>dkms</p></li>
+<li><p>grep</p></li>
+<li><p>gawk</p></li>
+<li><p>kernel-devel</p></li>
+<li><p>kernel-header</p></li>
+</ul>
+<hr class="docutils"/>
+</section>
+<section id="notes">
+<span id="avedmanagementinterfaceuserguide-ami-tool-notes"></span><h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Ensure that the AMI API and AMI Driver versions are the same. Behaviour is undefined when the versions do not match. See <a class="reference external" href="#avedmanagementinterfaceuserguide-ami-tool-overview2">overview</a> for more information.</p></li>
+</ol>
+</section>
+<section id="usage-options">
+<span id="avedmanagementinterfaceuserguide-ami-tool-usage-options"></span><h2>Usage - Options<a class="headerlink" href="#usage-options" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="#avedmanagementinterfaceuserguide-ami-tool-help">help</a></p></li>
+<li><p><a class="reference external" href="#avedmanagementinterfaceuserguide-ami-tool-version">version</a></p></li>
+</ul>
+<hr class="docutils"/>
+<section id="help">
+<span id="avedmanagementinterfaceuserguide-ami-tool-help"></span><h3>help<a class="headerlink" href="#help" title="Permalink to this headline">¶</a></h3>
+<section id="description">
+<span id="avedmanagementinterfaceuserguide-ami-tool-description"></span><h4>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h4>
+<p>Displays the available ami_tool commands.</p>
+<p>When used after a command (e.g. <strong>ami_tool sensors –help</strong>), it displays the available options and expected usage of that specific command.</p>
+</section>
+<section id="example-output">
+<span id="avedmanagementinterfaceuserguide-ami-tool-exampleoutput"></span><h4>Example output<a class="headerlink" href="#example-output" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~$ ami_tool --help
+ami_tool - <span class="nb">command</span> line tool <span class="k">for</span> the AMI driver API
+
+Usage:
+    ami_tool <span class="o">{</span>command<span class="o">}</span> <span class="o">[</span>arguments<span class="o">]</span>
+    ami_tool <span class="o">{</span>command<span class="o">}</span> -h <span class="p">|</span> --help
+    ami_tool -h <span class="p">|</span> --help
+    ami_tool --version
+
+Options:
+    -h --help          Show this screen
+    --version          Show version
+
+Commands:
+    sensors            Show sensor information
+    cfgmem_program     Program a device
+    cfgmem_fpt         Program a device and update the FPT
+    cfgmem_copy        Copy one partition to another
+    cfgmem_info        Show partition information
+    device_boot        Set boot partition
+    mfg_info           View manufacturing information
+    bar_wr             Write to PCI BAR memory
+    bar_rd             Read from PCI BAR memory
+    overview           Show basic AMI/device information
+    pcieinfo           View PCI-related information
+    reload             Reload a device/devices
+    eeprom_rd          Read data from the device EEPROM
+    eeprom_wr          Write data to the device EEPROM
+    module_byte_rd     Read data from a QSFP module
+    module_byte_wr     Write data to a QSFP module
+~$
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-notes-1">
+<span id="id1"></span><h4>Notes<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-notes-1" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>For commands which accept a -d (device) option, all parts of the string are optional except the device bus number. The following are all valid inputs and refer to the same device:</p>
+<ul>
+<li><p>0000:21:00.0</p></li>
+<li><p>0000:21</p></li>
+<li><p>21:00.0</p></li>
+<li><p>21:00</p></li>
+<li><p>21</p></li>
+</ul>
+</li>
+</ul>
+<hr class="docutils"/>
+</section>
+</section>
+<section id="version">
+<span id="avedmanagementinterfaceuserguide-ami-tool-version"></span><h3>version<a class="headerlink" href="#version" title="Permalink to this headline">¶</a></h3>
+<section id="avedmanagementinterfaceuserguide-ami-tool-description-1">
+<span id="id2"></span><h4>Description<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-description-1" title="Permalink to this headline">¶</a></h4>
+<p>Displays the version information of the currently installed AMI API and AMI Driver.</p>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-exampleoutput-1">
+<span id="id3"></span><h4>Example output<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-1" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~$ ami_tool --version
+API Version     <span class="p">|</span>  <span class="m">1</span>.5.0  <span class="o">(</span><span class="m">0</span><span class="o">)</span>
+API Branch      <span class="p">|</span>  develop
+API Hash        <span class="p">|</span>  a49637b85c602e7991a1ab030e2989c09296e6e3
+API Hash Date   <span class="p">|</span>  Mon Oct <span class="m">16</span> <span class="m">09</span>:31:01 <span class="m">2023</span> +0100
+Driver Version  <span class="p">|</span>  <span class="m">1</span>.5.0  <span class="o">(</span><span class="m">0</span><span class="o">)</span>
+~$
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-notes-2">
+<span id="id4"></span><h4>Notes<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-notes-2" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>If the API Version and Driver Version do not match, behavior is undefined and may result in unexpected results.</p></li>
+</ul>
+<hr class="docutils"/>
+</section>
+</section>
+</section>
+<section id="usage-commands">
+<span id="avedmanagementinterfaceuserguide-ami-tool-usage-commands"></span><h2>Usage - Commands<a class="headerlink" href="#usage-commands" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="#avedmanagementinterfaceuserguide-ami-tool-overview2">overview</a></p></li>
+<li><p><a class="reference external" href="#avedmanagementinterfaceuserguide-ami-tool-pcieinfo">pcieinfo</a></p></li>
+<li><p><a class="reference external" href="#avedmanagementinterfaceuserguide-ami-tool-reload">reload</a></p></li>
+<li><p><a class="reference external" href="#avedmanagementinterfaceuserguide-ami-tool-sensors">sensors</a></p></li>
+<li><p><a class="reference external" href="#avedmanagementinterfaceuserguide-ami-tool-cfgmem-info">cfgmem_info</a></p></li>
+<li><p><a class="reference external" href="#avedmanagementinterfaceuserguide-ami-tool-cfgmem-program">cfgmem_program</a></p></li>
+<li><p><a class="reference external" href="#avedmanagementinterfaceuserguide-ami-tool-cfgmem-fpt">cfgmem_fpt</a></p></li>
+<li><p><a class="reference external" href="#avedmanagementinterfaceuserguide-ami-tool-cfgmem-copy">cfgmem_copy</a></p></li>
+<li><p><a class="reference external" href="#avedmanagementinterfaceuserguide-ami-tool-bar-wr">bar_wr</a></p></li>
+<li><p><a class="reference external" href="#avedmanagementinterfaceuserguide-ami-tool-bar-rd">bar_rd</a></p></li>
+<li><p><a class="reference external" href="#avedmanagementinterfaceuserguide-ami-tool-device-boot">device_boot</a></p></li>
+<li><p><a class="reference external" href="#avedmanagementinterfaceuserguide-ami-tool-mfg-info">mfg_info</a></p></li>
+<li><p><a class="reference external" href="#avedmanagementinterfaceuserguide-ami-tool-eeprom-rd">eeprom_rd</a></p></li>
+<li><p><a class="reference external" href="#avedmanagementinterfaceuserguide-ami-tool-eeprom-wr">eeprom_wr</a></p></li>
+<li><p><a class="reference external" href="#avedmanagementinterfaceuserguide-ami-tool-module-byte-rd">module_byte_rd</a></p></li>
+<li><p><a class="reference external" href="#avedmanagementinterfaceuserguide-ami-tool-module-byte-wr">module_byte_wr</a></p></li>
+</ul>
+<hr class="docutils"/>
+<section id="avedmanagementinterfaceuserguide-ami-tool-overview2">
+<span id="id5"></span><h3>overview<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-overview2" title="Permalink to this headline">¶</a></h3>
+<section id="avedmanagementinterfaceuserguide-ami-tool-description-2">
+<span id="id6"></span><h4>Description<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-description-2" title="Permalink to this headline">¶</a></h4>
+<p>Displays an overview of the current AMI and associated devices setup. This includes the same version information as is shown in the <strong>ami_tool –version</strong> command.</p>
+<p>Each detected and supported card will be displayed below.</p>
+<p>This output can be logged to a file using the <strong>-o</strong> option, and the logged format specified by the <strong>-f</strong> option.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% ami_tool overview --help
+overview - show basic AMI/device information
+
+Usage:
+        ami_tool overview <span class="o">[</span>options...<span class="o">]</span>
+
+Options:
+        -h --help            Show this screen
+        -f &lt;table<span class="p">|</span>json&gt;      Set the output format
+        -o &lt;file&gt;            Specify output file
+        -v                   Print verbose information
+~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-exampleoutput-2">
+<span id="id7"></span><h4>Example output<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-2" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~$ ami_tool overview
+
+AMI
+-------------------------------------------------------------
+Version          <span class="p">|</span> <span class="m">1</span>.5.0  <span class="o">(</span><span class="m">0</span><span class="o">)</span>
+Branch           <span class="p">|</span> develop
+Hash             <span class="p">|</span> a49637b85c602e7991a1ab030e2989c09296e6e3
+Hash Date        <span class="p">|</span> Mon Oct <span class="m">16</span> <span class="m">09</span>:31:01 <span class="m">2023</span> +0100
+Driver Version   <span class="p">|</span> <span class="m">1</span>.5.0  <span class="o">(</span><span class="m">0</span><span class="o">)</span>
+
+
+BDF       <span class="p">|</span> Device          <span class="p">|</span> UUID                               <span class="p">|</span> AMC          <span class="p">|</span> State
+-------------------------------------------------------------------------------------
+<span class="m">21</span>:00.0   <span class="p">|</span> ALVEO V80 ES3   <span class="p">|</span> c9804e2a89e92ebb510102b39142e89b   <span class="p">|</span> <span class="m">1</span>.5.0  <span class="o">(</span><span class="m">0</span><span class="o">)</span>   <span class="p">|</span> READY
+~$
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-notes-3">
+<span id="id8"></span><h4>Notes<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-notes-3" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>The version value is the version of the AMI command line tool (and associated API) installed.</p></li>
+<li><p>The driver version value is the version of the AMI Driver (ami.ko) installed.</p>
+<ul>
+<li><p><strong>In cases where either the AMI tool/API or driver has been replaced with a different version, and the “Version” and “Driver Version” values do not match, behaviour is undefined.</strong></p></li>
+</ul>
+</li>
+<li><p>A row is appended to the table for each supported card discovered:</p>
+<ul>
+<li><p>BDF - the ID to use when selecting this device for subsequent commands.</p></li>
+<li><p>Device - the type of device detected (e.g. V80, etc.).</p></li>
+<li><p>UUID - the ID of the hardware build loaded on the card.</p></li>
+<li><p>AMC - the version of AMC running on the card (if applicable).</p></li>
+<li><p>State - the state of the AMC running on the card (if applicable).</p></li>
+</ul>
+</li>
+<li><p>When using the verbose options, the following additional fields are appended:</p>
+<ul>
+<li><p>HWMON - the ID of the hwmon directory entry for this device</p></li>
+<li><p>CDEV - the number of the corresponding /dev/ami character device</p></li>
+</ul>
+</li>
+</ul>
+<hr class="docutils"/>
+</section>
+</section>
+<section id="pcieinfo">
+<span id="avedmanagementinterfaceuserguide-ami-tool-pcieinfo"></span><h3>pcieinfo<a class="headerlink" href="#pcieinfo" title="Permalink to this headline">¶</a></h3>
+<section id="avedmanagementinterfaceuserguide-ami-tool-description-3">
+<span id="id9"></span><h4>Description<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-description-3" title="Permalink to this headline">¶</a></h4>
+<p>Displays the PCI information.</p>
+<p>This output can be logged to a file using the <strong>-o</strong> option, and the logged format specified by the <strong>-f</strong> option.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% ami_tool pcieinfo --help
+pcieinfo - view PCI-related information
+
+Usage:
+        ami_tool pcieinfo -d &lt;bdf&gt; <span class="o">[</span>options...<span class="o">]</span>
+
+Options:
+        -h --help             Show this screen
+        -d &lt;b&gt;:<span class="o">[</span>d<span class="o">]</span>.<span class="o">[</span>f<span class="o">]</span>        Specify the device BDF
+        -f &lt;table<span class="p">|</span>json&gt;       Set the output format
+        -o &lt;file&gt;             Specify output file
+~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-exampleoutput-3">
+<span id="id10"></span><h4>Example output<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-3" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~$ ami_tool pcieinfo -d <span class="m">21</span>:00.0
+
+PCIe Info
+----------------------------------
+Vendor         <span class="p">|</span> 0x10ee
+Device         <span class="p">|</span> 0x50b4
+Link Speed     <span class="p">|</span> Gen4 <span class="o">(</span>max Gen5<span class="o">)</span>
+Link Width     <span class="p">|</span> x8 <span class="o">(</span>max x8<span class="o">)</span>
+NUMA Node      <span class="p">|</span> <span class="m">0</span>
+CPU Affinity   <span class="p">|</span> <span class="m">0</span>-7,16-23
+
+~$
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<hr class="docutils"/>
+</section>
+</section>
+<section id="reload">
+<span id="avedmanagementinterfaceuserguide-ami-tool-reload"></span><h3>reload<a class="headerlink" href="#reload" title="Permalink to this headline">¶</a></h3>
+<section id="avedmanagementinterfaceuserguide-ami-tool-description-4">
+<span id="id11"></span><h4>Description<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-description-4" title="Permalink to this headline">¶</a></h4>
+<p>Reloads the AMI installation.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool reload --help
+reload - reload a device/devices
+
+This <span class="nb">command</span> requires root/sudo permissions.
+
+Usage:
+        ami_tool reload -t &lt;type&gt; <span class="o">[</span>-d &lt;bdf&gt;<span class="o">]</span>
+
+Options:
+        -h --help            Show this screen
+        -d &lt;b&gt;:<span class="o">[</span>d<span class="o">]</span>.<span class="o">[</span>f<span class="o">]</span>       Specify the device BDF
+        -t &lt;type&gt;            Specify reload <span class="nb">type</span>
+                             Possible values are:
+                               <span class="nv">driver</span><span class="o">=</span>reload the entire driver
+                               <span class="nv">pci</span><span class="o">=</span>force a pci removal and bus rescan
+                               <span class="nv">sbr</span><span class="o">=</span>trigger a secondary bus reset
+~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-exampleoutput-4">
+<span id="id12"></span><h4>Example output<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-4" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool reload -d <span class="m">21</span>:00.0 -t pci
+Removing PCI device and rescanning bus...
+Done.
+~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-notes-4">
+<span id="id13"></span><h4>Notes<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-notes-4" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>This command requires root/sudo privileges.</p></li>
+<li><p>The ‘pci’ reload type may be used with devices which are not attached to the AMI driver (i.e., devices which do not show up when running the ‘overview’ command). This allows recovery of broken devices.</p></li>
+<li><p>The ‘driver’ reload type does not accept a device (-d) argument.</p></li>
+<li><p>The ‘sbr’ reload type will trigger a reset on the device (the image on the device will reload).</p></li>
+</ul>
+<hr class="docutils"/>
+</section>
+</section>
+<section id="sensors">
+<span id="avedmanagementinterfaceuserguide-ami-tool-sensors"></span><h3>sensors<a class="headerlink" href="#sensors" title="Permalink to this headline">¶</a></h3>
+<section id="avedmanagementinterfaceuserguide-ami-tool-description-5">
+<span id="id14"></span><h4>Description<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-description-5" title="Permalink to this headline">¶</a></h4>
+<p>Retrieves and displays sensor information from the AMC (if available).</p>
+<p>This output can be logged to a file using the <strong>-o</strong> option, and the logged format specified by the <strong>-f</strong> option.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% ami_tool sensors --help
+sensors - view device sensor information
+
+Usage:
+        ami_tool sensors <span class="o">[</span>-d &lt;bdf&gt;<span class="o">]</span> <span class="o">[</span>options...<span class="o">]</span>
+
+Options:
+        -h --help             Show this screen.
+        -d &lt;b&gt;:<span class="o">[</span>d<span class="o">]</span>.<span class="o">[</span>f<span class="o">]</span>        Specify the device BDF
+        -f &lt;table<span class="p">|</span>json&gt;       Set the output format
+        -o &lt;file&gt;             Specify output file
+        -n &lt;sensor&gt;           Fetch specific sensor
+        -x &lt;field,...&gt;        Print extra fields
+                              Possible values are:
+                                <span class="o">{</span>max, average<span class="o">}</span>
+        -v                    Print all extra fields
+~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-exampleoutput-5">
+<span id="id15"></span><h4>Example output<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-5" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~$ ami_tool sensors -d <span class="m">21</span>:00.0
+
+Name            <span class="p">|</span>      Value <span class="p">|</span> Status
+----------------------------------------
+PCB             <span class="p">|</span>   <span class="m">87</span>.000 C <span class="p">|</span> valid
+----------------------------------------
+Device          <span class="p">|</span>   <span class="m">62</span>.000 C <span class="p">|</span> valid*
+----------------------------------------
+VCCINT          <span class="p">|</span>   <span class="m">42</span>.000 C <span class="p">|</span> valid*
+                <span class="p">|</span>   <span class="m">37</span>.000 A <span class="p">|</span> valid
+                <span class="p">|</span>    <span class="m">0</span>.800 V <span class="p">|</span> valid
+----------------------------------------
+Module_0        <span class="p">|</span>   <span class="m">43</span>.000 C <span class="p">|</span> invalid
+----------------------------------------
+Module_1        <span class="p">|</span>   <span class="m">38</span>.000 C <span class="p">|</span> invalid
+----------------------------------------
+Module_2        <span class="p">|</span>   <span class="m">33</span>.000 C <span class="p">|</span> invalid
+----------------------------------------
+Module_3        <span class="p">|</span>   <span class="m">30</span>.000 C <span class="p">|</span> invalid
+----------------------------------------
+1V2_VCC_HBM     <span class="p">|</span>   <span class="m">67</span>.000 C <span class="p">|</span> valid*
+                <span class="p">|</span>    <span class="m">4</span>.000 A <span class="p">|</span> valid*
+                <span class="p">|</span>    <span class="m">1</span>.200 V <span class="p">|</span> valid*
+----------------------------------------
+1V2_GTXAVTT     <span class="p">|</span>   <span class="m">40</span>.000 C <span class="p">|</span> valid*
+                <span class="p">|</span>    <span class="m">9</span>.000 A <span class="p">|</span> valid*
+                <span class="p">|</span>    <span class="m">1</span>.199 V <span class="p">|</span> valid*
+----------------------------------------
+Total_Power     <span class="p">|</span>   <span class="m">85</span>.525 W <span class="p">|</span> valid
+----------------------------------------
+0V88_VCC_CPM5   <span class="p">|</span>    <span class="m">0</span>.880 V <span class="p">|</span> valid*
+----------------------------------------
+12V_AUX1        <span class="p">|</span>    <span class="m">2</span>.639 A <span class="p">|</span> valid*
+                <span class="p">|</span>   <span class="m">12</span>.168 V <span class="p">|</span> valid*
+----------------------------------------
+12V_AUX2        <span class="p">|</span>    <span class="m">1</span>.579 A <span class="p">|</span> valid*
+                <span class="p">|</span>   <span class="m">12</span>.168 V <span class="p">|</span> valid*
+----------------------------------------
+1V2_VCCO_DIMM   <span class="p">|</span>    <span class="m">1</span>.119 A <span class="p">|</span> valid*
+                <span class="p">|</span>    <span class="m">1</span>.200 V <span class="p">|</span> valid*
+----------------------------------------
+3V3_PEX         <span class="p">|</span>    <span class="m">1</span>.820 A <span class="p">|</span> valid*
+                <span class="p">|</span>    <span class="m">3</span>.304 V <span class="p">|</span> valid*
+----------------------------------------
+12V_PEX         <span class="p">|</span>    <span class="m">2</span>.339 A <span class="p">|</span> valid*
+                <span class="p">|</span>   <span class="m">12</span>.168 V <span class="p">|</span> valid*
+----------------------------------------
+3V3_QSFP        <span class="p">|</span>   <span class="m">81</span>.900 A <span class="p">|</span> valid*
+                <span class="p">|</span>    <span class="m">0</span>.144 V <span class="p">|</span> valid*
+----------------------------------------
+1V5_VCCAUX      <span class="p">|</span>    <span class="m">1</span>.491 V <span class="p">|</span> valid*
+
+~$
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-notes-5">
+<span id="id16"></span><h4>Notes<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-notes-5" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>The <strong>*</strong> displayed after a sensor status indicates that the value retrieved was from a cached store (i.e., the value had been previously updated within the refresh timeframe (1 second)).</p></li>
+<li><p>A status of invalid indicates that no value could be read for that sensor. For removable sensors (such as QSFP devices), this usually indicates that no devices is inserted.</p></li>
+<li><p>If the <strong>-d</strong> option was not selected, AMI will enumerate each available device.</p></li>
+</ul>
+<hr class="docutils"/>
+</section>
+</section>
+<section id="cfgmem-info">
+<span id="avedmanagementinterfaceuserguide-ami-tool-cfgmem-info"></span><h3>cfgmem_info<a class="headerlink" href="#cfgmem-info" title="Permalink to this headline">¶</a></h3>
+<section id="avedmanagementinterfaceuserguide-ami-tool-description-6">
+<span id="id17"></span><h4>Description<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-description-6" title="Permalink to this headline">¶</a></h4>
+<p>Displays the file partition table (FPT) currently available on the selected card.</p>
+<p>On a cold boot, partition 0 is the default boot location.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% ami_tool cfgmem_info --help
+cfgmem_info - get fpt information
+
+Usage:
+        ami_tool cfgmem_info -d &lt;bdf&gt; <span class="o">[</span>options...<span class="o">]</span>
+
+Options:
+        -h --help            Show this screen
+        -d &lt;b&gt;:<span class="o">[</span>d<span class="o">]</span>.<span class="o">[</span>f<span class="o">]</span>       Specify the device BDF
+        -f &lt;table<span class="p">|</span>json&gt;      Set the output format
+        -o &lt;file&gt;            Specify output file
+~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-exampleoutput-6">
+<span id="id18"></span><h4>Example output<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-6" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% ami_tool cfgmem_info -d <span class="m">21</span>:00.0
+
+FPT
+---------------------
+Version       <span class="p">|</span> <span class="m">1</span>
+Header Size   <span class="p">|</span> <span class="m">128</span>
+Entry Size    <span class="p">|</span> <span class="m">128</span>
+Entries       <span class="p">|</span> <span class="m">2</span>
+
+Partition   <span class="p">|</span> Type       <span class="p">|</span> Address      <span class="p">|</span> Size
+------------------------------------------------------
+<span class="m">0</span>           <span class="p">|</span> PDI_BOOT   <span class="p">|</span> 0x00008000   <span class="p">|</span> 0x07e00000
+<span class="m">1</span>           <span class="p">|</span> PDI_BOOT   <span class="p">|</span> 0x07e08000   <span class="p">|</span> 0x07e00000
+~%
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<hr class="docutils"/>
+</section>
+</section>
+<section id="cfgmem-program">
+<span id="avedmanagementinterfaceuserguide-ami-tool-cfgmem-program"></span><h3>cfgmem_program<a class="headerlink" href="#cfgmem-program" title="Permalink to this headline">¶</a></h3>
+<section id="avedmanagementinterfaceuserguide-ami-tool-description-7">
+<span id="id19"></span><h4>Description<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-description-7" title="Permalink to this headline">¶</a></h4>
+<p>Uploads a PDI for AMC to program onto the card.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool cfgmem_program --help
+cfgmem_program - program a bitstream onto a device
+
+This <span class="nb">command</span> requires root/sudo permissions.
+
+Usage:
+        ami_tool cfgmem_program -d &lt;bdf&gt; -i &lt;path&gt; -p &lt;n&gt;
+
+Options:
+        -h --help             Show this screen
+        -d &lt;b&gt;:<span class="o">[</span>d<span class="o">]</span>.<span class="o">[</span>f<span class="o">]</span>        Specify the device BDF
+        -i &lt;path&gt;             Path to image file
+        -p &lt;partition&gt;        Partition to flash
+        -y                    Skip confirmation
+        -q                    Quit after programming
+~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-exampleoutput-7">
+<span id="id20"></span><h4>Example output<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-7" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool cfgmem_program -d <span class="m">21</span>:00.0 -i /home/builds/latest/design.pdi -p <span class="m">1</span>
+----------------------------------------------
+Device <span class="p">|</span> <span class="m">21</span>:00.0
+----------------------------------------------
+Current Configuration
+----------------------------------------------
+UUID   <span class="p">|</span> 7574dae0cea793ae3b0503b136a3bfd0
+----------------------------------------------
+Incoming Configuration
+----------------------------------------------
+UUID      <span class="p">|</span> 7574dae0cea793ae3b0503b136a3bfd0
+Path      <span class="p">|</span> /home/builds/latest/design.pdi
+Partition <span class="p">|</span> <span class="m">1</span>
+----------------------------------------------
+Are you sure you wish to proceed? <span class="o">[</span>Y/n<span class="o">]</span>: Y
+
+Updating base flash image...
+<span class="o">[</span><span class="c1">####################################################################################################] 100% |</span>
+Image programming complete.
+Will <span class="k">do</span> a hot reset to boot into partition <span class="m">1</span>. This may take a minute...
+
+OK. Image has been programmed successfully.
+***********************************************
+Hot reset has been performed into partition <span class="m">1</span>.
+***********************************************
+~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-notes-6">
+<span id="id21"></span><h4>Notes<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-notes-6" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p><strong>If this command reports a failure or an error, the card’s storage device is in an unknown state and the card should not be reset or rebooted. It is advised to reattempt this command.</strong></p></li>
+<li><p>This command requires root/sudo privileges.</p></li>
+<li><p>The path (provided with the <strong>-i</strong> option) must be the absolute path, not the relative path.</p></li>
+<li><p>The incoming UUID may be reported as “N/A” if no UUID metadata is provided with the PDI. This is normal behaviour and does not affect the programming.</p></li>
+<li><p>The provided file will be broken into chunks; each chunk will be submitted individually with a timeout of 30s.</p></li>
+</ul>
+<hr class="docutils"/>
+</section>
+</section>
+<section id="cfgmem-fpt">
+<span id="avedmanagementinterfaceuserguide-ami-tool-cfgmem-fpt"></span><h3>cfgmem_fpt<a class="headerlink" href="#cfgmem-fpt" title="Permalink to this headline">¶</a></h3>
+<section id="avedmanagementinterfaceuserguide-ami-tool-description-8">
+<span id="id22"></span><h4>Description<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-description-8" title="Permalink to this headline">¶</a></h4>
+<p>Uploads a PDI containing a valid FPT (file partition table) for AMC to program onto the card. The PDI is always programmed to location 0x00 on the flash.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool cfgmem_fpt --help
+cfgmem_fpt - program a device and update the fpt
+
+This <span class="nb">command</span> requires root/sudo permissions.
+
+Usage:
+    ami_tool cfgmem_fpt -d &lt;bdf&gt; -i &lt;path&gt;
+
+Options:
+    -h --help             Show this screen
+    -d &lt;b&gt;:<span class="o">[</span>d<span class="o">]</span>.<span class="o">[</span>f<span class="o">]</span>        Specify the device BDF
+    -i &lt;path&gt;             Path to image file
+    -y                    Skip confirmation
+ ~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-exampleoutput-8">
+<span id="id23"></span><h4>Example output<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-8" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool cfgmem_fpt -d <span class="m">21</span>:00.0 -i /home/builds/latest/fpt_setup.pdi
+----------------------------------------------
+Device <span class="p">|</span> <span class="m">21</span>:00.0
+----------------------------------------------
+Current Configuration
+----------------------------------------------
+UUID   <span class="p">|</span> 7574dae0cea793ae3b0503b136a3bfd0
+----------------------------------------------
+Incoming Configuration
+----------------------------------------------
+UUID      <span class="p">|</span> 7574dae0cea793ae3b0503b136a3bfd0
+Path      <span class="p">|</span> /home/builds/latest/fpt_setup.pdi
+----------------------------------------------
+Will update FPT!
+Are you sure you wish to proceed? <span class="o">[</span>Y/n<span class="o">]</span>: Y
+
+Updating FPT...
+<span class="o">[</span><span class="c1">####################################################################################################] 100% |</span>
+
+OK. Image has been programmed successfully.
+****************************************************
+Cold reboot machine to load the new image on device.
+****************************************************
+~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-notes-7">
+<span id="id24"></span><h4>Notes<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-notes-7" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p><strong>If this command reports a failure or an error, the card’s storage device is in an unknown state and the card should not be reset or rebooted. It is advised to reattempt this command.</strong></p></li>
+<li><p>This command requires root/sudo privileges.</p></li>
+<li><p>The provided image must contain a valid FPT.</p></li>
+<li><p>The path (provided with the <strong>-i</strong> option) must be the absolute path, not the relative path.</p></li>
+<li><p>The incoming UUID may be reported as “N/A” if no UUID metadata is provided with the PDI. This is normal behaviour and does not affect the programming.</p></li>
+<li><p>The provided file will be broken into chunks and each chunk will be submitted individually with a timeout of 30s.</p></li>
+</ul>
+<hr class="docutils"/>
+</section>
+</section>
+<section id="cfgmem-copy">
+<span id="avedmanagementinterfaceuserguide-ami-tool-cfgmem-copy"></span><h3>cfgmem_copy<a class="headerlink" href="#cfgmem-copy" title="Permalink to this headline">¶</a></h3>
+<section id="avedmanagementinterfaceuserguide-ami-tool-description-9">
+<span id="id25"></span><h4>Description<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-description-9" title="Permalink to this headline">¶</a></h4>
+<p>Copies the contents of one partition on the card to another.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool cfgmem_copy --help
+cfgmem_copy - copy one partition to another
+
+This <span class="nb">command</span> requires root/sudo permissions.
+
+Usage:
+        ami_tool cfgmem_copy -d &lt;bdf&gt; -i &lt;n&gt; -p &lt;n&gt;
+
+Options:
+        -h --help            Show this screen
+        -d &lt;b&gt;:<span class="o">[</span>d<span class="o">]</span>.<span class="o">[</span>f<span class="o">]</span>       Specify the device BDF
+        -i &lt;partition&gt;       Partition to copy from <span class="o">(</span><span class="nb">source</span><span class="o">)</span>
+        -p &lt;partition&gt;       Partition to copy to <span class="o">(</span>destination<span class="o">)</span>
+~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-exampleoutput-9">
+<span id="id26"></span><h4>Example output<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-9" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool cfgmem_copy -d <span class="m">21</span>:00.0 -i <span class="m">1</span> -p <span class="m">0</span>
+Copying partition <span class="m">1</span> to partition <span class="m">0</span>...
+Done. Partition copied successfully.
+~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-notes-8">
+<span id="id27"></span><h4>Notes<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-notes-8" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>This command requires root/sudo privileges.</p></li>
+<li><p>The source partition must be smaller than or equal in size to the destination partition.</p></li>
+<li><p>The timeout value of this command is 45 minutes - this is to allow a maximum-sized FPT partition (126MB) to be copied.</p></li>
+</ul>
+<hr class="docutils"/>
+</section>
+</section>
+<section id="bar-wr">
+<span id="avedmanagementinterfaceuserguide-ami-tool-bar-wr"></span><h3>bar_wr<a class="headerlink" href="#bar-wr" title="Permalink to this headline">¶</a></h3>
+<section id="avedmanagementinterfaceuserguide-ami-tool-description-10">
+<span id="id28"></span><h4>Description<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-description-10" title="Permalink to this headline">¶</a></h4>
+<p>Writes a value to the PCI BAR memory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool bar_wr --help
+bar_wr - Write to PCI BAR memory
+
+This <span class="nb">command</span> requires root/sudo permissions.
+
+Usage:
+        ami_tool bar_wr -d &lt;bdf&gt; -b &lt;bar&gt; -a &lt;addr&gt; <span class="o">(</span>-i<span class="p">|</span>-I<span class="o">)</span> &lt;input&gt;
+
+Options:
+        -h --help          Show this screen
+        -d &lt;b&gt;:<span class="o">[</span>d<span class="o">]</span>.<span class="o">[</span>f<span class="o">]</span>     Specify the device BDF
+        -b &lt;bar&gt;           Specify the BAR to write
+        -a &lt;addr&gt;          Specify the offset to write to
+        -i &lt;value&gt;         Register value to write
+        -I &lt;file&gt;          File to write
+~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-exampleoutput-10">
+<span id="id29"></span><h4>Example output<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-10" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool bar_wr -d <span class="m">21</span>:00.0 -b <span class="m">0</span> -a 0x1000 -i 0x22
+Writing the following data to device <span class="m">21</span>:00.0 and BAR <span class="m">0</span> at offset 0x0000000000001000
+
+<span class="o">[</span> 0x0000000000001000 <span class="o">]</span> <span class="m">00000022</span>
+
+Are you sure you wish to proceed? <span class="o">[</span>Y/n<span class="o">]</span>: Y
+Successfully wrote to <span class="m">1</span> register<span class="o">(</span>s<span class="o">)</span>
+~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-notes-9">
+<span id="id30"></span><h4>Notes<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-notes-9" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>This command requires root/sudo privileges.</p></li>
+<li><p>If <strong>-i</strong> is selected, the following variable is the value you wish to write.</p></li>
+<li><p>If <strong>-I</strong> is selected, the following variable is the path to the file you wish to write from.</p></li>
+<li><p>The file must be of the format of a single 4-byte hexadecimal value per line, e.g.:</p>
+<ul>
+<li><p>0x00112233</p></li>
+<li><p>0xaabbccdd</p></li>
+</ul>
+</li>
+</ul>
+<hr class="docutils"/>
+</section>
+</section>
+<section id="bar-rd">
+<span id="avedmanagementinterfaceuserguide-ami-tool-bar-rd"></span><h3>bar_rd<a class="headerlink" href="#bar-rd" title="Permalink to this headline">¶</a></h3>
+<section id="avedmanagementinterfaceuserguide-ami-tool-description-11">
+<span id="id31"></span><h4>Description<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-description-11" title="Permalink to this headline">¶</a></h4>
+<p>Reads a value from the PCI BAR memory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool bar_rd --help
+bar_rd - Read from PCI BAR memory
+
+This <span class="nb">command</span> requires root/sudo permissions.
+
+Usage:
+        ami_tool bar_rd -d &lt;bdf&gt; -b &lt;bar&gt; -a &lt;addr&gt;
+
+Options:
+        -h --help          Show this screen
+        -d &lt;b&gt;:<span class="o">[</span>d<span class="o">]</span>.<span class="o">[</span>f<span class="o">]</span>     Specify the device BDF
+        -b &lt;bar&gt;           Specify the BAR to <span class="nb">read</span>
+        -a &lt;addr&gt;          Specify the offset to <span class="nb">read</span> from
+        -l &lt;len&gt;           Number of registers to <span class="nb">read</span> <span class="o">(</span><span class="nv">default</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+        -o &lt;file&gt;          Output file
+~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-exampleoutput-11">
+<span id="id32"></span><h4>Example output<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-11" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool bar_rd -d <span class="m">21</span>:00.0 -b <span class="m">0</span> -a 0x1000 -l <span class="m">10</span>
+Reading <span class="m">10</span> register<span class="o">(</span>s<span class="o">)</span> from device <span class="m">21</span>:00.0 and BAR <span class="m">0</span> at offset 0x0000000000001000
+
+<span class="o">[</span> 0x0000000000001000 <span class="o">]</span> ffffffff ffffffff ffffffff ffffffff
+<span class="o">[</span> 0x0000000000001010 <span class="o">]</span> ffffffff ffffffff ffffffff ffffffff
+<span class="o">[</span> 0x0000000000001020 <span class="o">]</span> ffffffff ffffffff
+ ~%
+</pre></div>
+</div>
+<p>Notes</p>
+<ul class="simple">
+<li><p>This command requires root/sudo privileges.</p></li>
+<li><p>If <strong>-o</strong> is selected, the data read will be written to the file path provided.</p></li>
+<li><p>The output file will be of the format of a single 4-byte hexadecimal value per line, e.g.:</p>
+<ul>
+<li><p>0x00112233</p></li>
+<li><p>0xaabbccdd</p></li>
+</ul>
+</li>
+</ul>
+<hr class="docutils"/>
+</section>
+</section>
+<section id="device-boot">
+<span id="avedmanagementinterfaceuserguide-ami-tool-device-boot"></span><h3>device_boot<a class="headerlink" href="#device-boot" title="Permalink to this headline">¶</a></h3>
+<section id="avedmanagementinterfaceuserguide-ami-tool-description-12">
+<span id="id33"></span><h4>Description<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-description-12" title="Permalink to this headline">¶</a></h4>
+<p>Selects the boot partition for the card to reboot from.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool device_boot --help
+device_boot - <span class="nb">set</span> device boot partition
+
+This <span class="nb">command</span> requires root/sudo permissions.
+
+Usage:
+        ami_tool device_boot -d &lt;bdf&gt; -p &lt;n&gt;
+
+Options:
+        -h --help           Show this screen
+        -d &lt;b&gt;:<span class="o">[</span>d<span class="o">]</span>.<span class="o">[</span>f<span class="o">]</span>      Specify the device BDF
+        -p &lt;partition&gt;      Partition to <span class="k">select</span>
+~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-exampleoutput-12">
+<span id="id34"></span><h4>Example output<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-12" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool device_boot -d <span class="m">21</span>:00.0 -p <span class="m">0</span>
+Will <span class="k">do</span> a hot reset to boot into partition <span class="m">0</span>. This may take a minute...
+
+OK. Partition selected <span class="o">(</span><span class="m">0</span><span class="o">)</span> - quitting.
+***********************************************
+Hot reset has been performed into partition <span class="m">0</span>.
+***********************************************
+~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-notes-10">
+<span id="id35"></span><h4>Notes<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-notes-10" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>This command requires root/sudo privileges.</p></li>
+<li><p>This causes a hot reset of the card from the selected partition.</p></li>
+</ul>
+<hr class="docutils"/>
+</section>
+</section>
+<section id="mfg-info">
+<span id="avedmanagementinterfaceuserguide-ami-tool-mfg-info"></span><h3>mfg_info<a class="headerlink" href="#mfg-info" title="Permalink to this headline">¶</a></h3>
+<section id="avedmanagementinterfaceuserguide-ami-tool-description-13">
+<span id="id36"></span><h4>Description<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-description-13" title="Permalink to this headline">¶</a></h4>
+<p>Displays the manufacturing information for a selected card.</p>
+<p>This output can be logged to a file using the <strong>-o</strong> option and the logged format specified by the <strong>-f</strong> option.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% ami_tool mfg_info --help
+mfg_info - view manufacturing information
+
+Options:
+        -h --help           Show this screen
+        -d &lt;b&gt;:<span class="o">[</span>d<span class="o">]</span>.<span class="o">[</span>f<span class="o">]</span>      Specify the device BDF
+        -f &lt;table<span class="p">|</span>json&gt;     Set the output format
+        -o &lt;file&gt;           Specify output file
+~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-exampleoutput-13">
+<span id="id37"></span><h4>Example output<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-13" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% ami_tool mfg_info -d <span class="m">21</span>:00.0
+
+Manufacturing Information
+-----------------------------------------------------------------------------------------
+Eeprom Version                                   <span class="p">|</span> <span class="m">3</span>.1
+Product Name                                     <span class="p">|</span> V80 ES1
+Board Revision                                   <span class="p">|</span> A01
+Serial Number                                    <span class="p">|</span> 51131A237M22
+Mac Address <span class="m">1</span>                                    <span class="p">|</span> <span class="m">00</span>:0a:35:18:85:41
+Mac Address N                                    <span class="p">|</span> <span class="m">00</span>:0a:35:18:85:81
+Memory Size                                      <span class="p">|</span> 16G
+FPGA Config Mode                                 <span class="p">|</span> OSPI
+Max Power Mode                                   <span class="p">|</span> 300W
+Active State                                     <span class="p">|</span> Passive
+Manufacturing Date                               <span class="p">|</span> Sun Sep  <span class="m">3</span> <span class="m">20</span>:42:00 <span class="m">2023</span>
+UUID                                             <span class="p">|</span> d2d6dbed-dada-1044-b364-73f611ce4e42
+PCIe Ids<span class="o">(</span>Vendor, Device, SS Vendor, SS Device<span class="o">)</span>   <span class="p">|</span> 10ee, <span class="m">5004</span>, 10ee, 000e
+OEM ID                                           <span class="p">|</span> AMD
+Capability Word                                  <span class="p">|</span> 00a7
+Board Part Num                                   <span class="p">|</span> <span class="m">05113</span>-01
+
+~% ami_tool mfg_info -d c1:00.0
+
+Manufacturing Information
+-----------------------------------------------------------------------------------------
+Eeprom Version                                   <span class="p">|</span> <span class="m">4</span>.0
+Product Name                                     <span class="p">|</span> V80 ES1
+Board Revision                                   <span class="p">|</span> A01
+Serial Number                                    <span class="p">|</span> 51131A136M0Q
+Mac Address <span class="m">1</span>                                    <span class="p">|</span> <span class="m">00</span>:0a:35:18:82:3e
+Mac Address N                                    <span class="p">|</span> <span class="m">00</span>:0a:35:18:82:7e
+Manufacturing Date                               <span class="p">|</span> Fri Aug <span class="m">11</span> <span class="m">14</span>:16:00 <span class="m">2023</span>
+UUID                                             <span class="p">|</span> 36d0316b-9e59-0544-b9f7-1a3604cb1281
+Board Part Num                                   <span class="p">|</span> <span class="m">05113</span>-01
+Mfg Part Num                                     <span class="p">|</span> <span class="m">043</span>-05113-01
+
+~%
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<hr class="docutils"/>
+</section>
+</section>
+<section id="eeprom-rd">
+<span id="avedmanagementinterfaceuserguide-ami-tool-eeprom-rd"></span><h3>eeprom_rd<a class="headerlink" href="#eeprom-rd" title="Permalink to this headline">¶</a></h3>
+<section id="avedmanagementinterfaceuserguide-ami-tool-description-14">
+<span id="id38"></span><h4>Description<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-description-14" title="Permalink to this headline">¶</a></h4>
+<p>Allows performing a raw data read of the device EEPROM.</p>
+<p>This output can be logged to a file using the <strong>-o</strong> option.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% ami_tool eeprom_rd --help
+eeprom_rd - Read the device EEPROM
+
+Usage:
+    ami_tool eeprom_rd -d &lt;bdf&gt; -a &lt;addr&gt;
+
+Options:
+    -h --help          Show this screen
+    -d &lt;b&gt;:<span class="o">[</span>d<span class="o">]</span>.<span class="o">[</span>f<span class="o">]</span>     Specify the device BDF
+    -a &lt;addr&gt;          Specify the offset to <span class="nb">read</span> from
+    -l &lt;len&gt;           Number of registers to <span class="nb">read</span> <span class="o">(</span><span class="nv">default</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+    -o &lt;file&gt;          Output file
+ ~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-exampleoutput-14">
+<span id="id39"></span><h4>Example output<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-14" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% ami_tool eeprom_rd -d <span class="m">21</span>:00.0 -a <span class="m">0</span> -l <span class="m">128</span>
+Reading <span class="m">128</span> byte<span class="o">(</span>s<span class="o">)</span> from device <span class="m">21</span>:00.0 at offset 0x00
+
+<span class="o">[</span> 0x0000000000000000 <span class="o">]</span>   <span class="m">34</span> 2e <span class="m">30</span> ff <span class="m">71</span> c3 <span class="m">41</span> 6c <span class="m">76</span> <span class="m">65</span> 6f <span class="m">20</span> <span class="m">56</span> <span class="m">38</span> <span class="m">30</span> <span class="m">20</span>
+<span class="o">[</span> 0x0000000000000010 <span class="o">]</span>   <span class="m">45</span> <span class="m">53</span> <span class="m">33</span> ff ff ff ff ff ff ff ff ff ff ff ff ff
+<span class="o">[</span> 0x0000000000000020 <span class="o">]</span>   ff ff ff ff ff ff ff ff ff ff <span class="m">41</span> 2d <span class="m">56</span> <span class="m">38</span> <span class="m">30</span> 2d
+<span class="o">[</span> 0x0000000000000030 <span class="o">]</span>   <span class="m">50</span> <span class="m">36</span> <span class="m">34</span> <span class="m">47</span> 2d <span class="m">45</span> <span class="m">53</span> <span class="m">33</span> 2d <span class="m">47</span> ff ff ff ff ff ff
+<span class="o">[</span> 0x0000000000000040 <span class="o">]</span>   ff ff <span class="m">30</span> <span class="m">34</span> <span class="m">33</span> 2d <span class="m">30</span> <span class="m">35</span> <span class="m">31</span> <span class="m">31</span> <span class="m">33</span> 2d <span class="m">30</span> <span class="m">31</span> <span class="m">45</span> <span class="m">53</span>
+<span class="o">[</span> 0x0000000000000050 <span class="o">]</span>   ff ff <span class="m">42</span> <span class="m">30</span> <span class="m">31</span> ff ff <span class="m">35</span> <span class="m">31</span> <span class="m">31</span> <span class="m">33</span> <span class="m">31</span> <span class="m">42</span> <span class="m">31</span> <span class="m">33</span> <span class="m">39</span>
+<span class="o">[</span> 0x0000000000000060 <span class="o">]</span>   <span class="m">50</span> <span class="m">34</span> 4f ff ff <span class="m">15</span> c1 de <span class="m">00</span> <span class="m">10</span> <span class="m">00</span> 0a <span class="m">35</span> <span class="m">18</span> 8b <span class="m">21</span>
+<span class="o">[</span> 0x0000000000000070 <span class="o">]</span>   <span class="m">19</span> <span class="m">16</span> f5 <span class="m">04</span> 5b <span class="m">73</span> ff 4b bf <span class="m">39</span> e7 <span class="m">20</span> e9 <span class="m">71</span> <span class="m">03</span> <span class="m">97</span>
+~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-notes-11">
+<span id="id40"></span><h4>Notes<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-notes-11" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>The <strong>-l &lt;len&gt;</strong> option specifies the number of bytes to read from the EEPROM.</p></li>
+<li><p>If <strong>-o</strong> is selected, the data read will be written to the file path provided.</p></li>
+<li><p>The output file will be of the format of a single 1-byte hexadecimal value per line, e.g.:</p>
+<ul>
+<li><p>0x00</p></li>
+<li><p>0x11</p></li>
+</ul>
+</li>
+</ul>
+<hr class="docutils"/>
+</section>
+</section>
+<section id="eeprom-wr">
+<span id="avedmanagementinterfaceuserguide-ami-tool-eeprom-wr"></span><h3>eeprom_wr<a class="headerlink" href="#eeprom-wr" title="Permalink to this headline">¶</a></h3>
+<section id="avedmanagementinterfaceuserguide-ami-tool-description-15">
+<span id="id41"></span><h4>Description<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-description-15" title="Permalink to this headline">¶</a></h4>
+<p>Allows performing a raw data write to the device EEPROM.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% ami_tool eeprom_wr --help
+eeprom_wr - Write to the device EEPROM
+
+Usage:
+    ami_tool eeprom_wr -d &lt;bdf&gt; -a &lt;addr&gt; <span class="o">(</span>-i<span class="p">|</span>-I<span class="o">)</span> &lt;input&gt;
+
+Options:
+    -h --help          Show this screen
+    -d &lt;b&gt;:<span class="o">[</span>d<span class="o">]</span>.<span class="o">[</span>f<span class="o">]</span>     Specify the device BDF
+    -a &lt;addr&gt;          Specify the offset to write to
+    -i &lt;value&gt;         Register value to write
+    -I &lt;file&gt;          File to write
+ ~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-exampleoutput-15">
+<span id="id42"></span><h4>Example output<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-15" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% ami_tool eeprom_wr -d <span class="m">21</span> -a 0x80 -i 0x33
+Writing the following data to device <span class="m">21</span>:00.0 at offset 0x80
+
+<span class="o">[</span> 0x0000000000000080 <span class="o">]</span>   <span class="m">33</span>
+
+Are you sure you wish to proceed? <span class="o">[</span>Y/n<span class="o">]</span>: Y
+Successfully wrote to <span class="m">1</span> register<span class="o">(</span>s<span class="o">)</span>
+~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-notes-12">
+<span id="id43"></span><h4>Notes<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-notes-12" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>If <strong>-i</strong> is selected, the following variable is the value you wish to write.</p></li>
+<li><p>If <strong>-I</strong> is selected, the following variable is the path to the file you wish to write from.</p></li>
+<li><p>The file must be of the format of a single 1-byte hexadecimal value per line, e.g.:</p>
+<ul>
+<li><p>0x00</p></li>
+<li><p>0x11</p></li>
+</ul>
+</li>
+</ul>
+<hr class="docutils"/>
+</section>
+</section>
+<section id="module-byte-rd">
+<span id="avedmanagementinterfaceuserguide-ami-tool-module-byte-rd"></span><h3>module_byte_rd<a class="headerlink" href="#module-byte-rd" title="Permalink to this headline">¶</a></h3>
+<section id="avedmanagementinterfaceuserguide-ami-tool-description-16">
+<span id="id44"></span><h4>Description<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-description-16" title="Permalink to this headline">¶</a></h4>
+<p>Allows performing a raw data read of a device QSFP module.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% ami_tool module_byte_rd --help
+module_byte_rd - Read from a QSFP module
+
+Usage:
+    ami_tool module_byte_rd -d &lt;bdf&gt; -c &lt;n&gt; -p &lt;n&gt; -b &lt;n&gt;
+
+Options:
+    -h --help          Show this screen
+    -d &lt;b&gt;:<span class="o">[</span>d<span class="o">]</span>.<span class="o">[</span>f<span class="o">]</span>     Specify the device BDF
+    -c &lt;cage&gt;          Module ID to write to
+    -p &lt;page&gt;          Page number to write
+    -b &lt;byte&gt;          Specify the offset to write to
+~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-exampleoutput-16">
+<span id="id45"></span><h4>Example output<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-16" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% ami_tool module_byte_rd -d <span class="m">21</span> -c <span class="m">1</span> -p <span class="m">0</span> -b <span class="m">5</span>
+
+Reading byte 0x05 from page <span class="m">0</span> <span class="o">(</span>device <span class="m">21</span>:00.0, cage <span class="m">1</span><span class="o">)</span>
+Value 0x00
+~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-notes-13">
+<span id="id46"></span><h4>Notes<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-notes-13" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>The cage numbers are 1-indexed (i.e. 0 is invalid).</p></li>
+</ul>
+<hr class="docutils"/>
+</section>
+</section>
+<section id="module-byte-wr">
+<span id="avedmanagementinterfaceuserguide-ami-tool-module-byte-wr"></span><h3>module_byte_wr<a class="headerlink" href="#module-byte-wr" title="Permalink to this headline">¶</a></h3>
+<section id="avedmanagementinterfaceuserguide-ami-tool-description-17">
+<span id="id47"></span><h4>Description<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-description-17" title="Permalink to this headline">¶</a></h4>
+<p>Allows performing a raw data write to a device QSFP module.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% ami_tool eeprom_wr --help
+module_byte_wr - Write to PCI BAR memory
+
+Usage:
+    ami_tool module_byte_wr -d &lt;bdf&gt; -c &lt;n&gt; -p &lt;n&gt; -b &lt;n&gt; -i &lt;val&gt;
+
+Options:
+    -h --help          Show this screen
+    -d &lt;b&gt;:<span class="o">[</span>d<span class="o">]</span>.<span class="o">[</span>f<span class="o">]</span>     Specify the device BDF
+    -c &lt;cage&gt;          Module ID to write to
+    -p &lt;page&gt;          Page number to write
+    -b &lt;byte&gt;          Specify the offset to write to
+    -i &lt;value&gt;         Byte value to write
+~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-exampleoutput-17">
+<span id="id48"></span><h4>Example output<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-exampleoutput-17" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~% ami_tool module_byte_wr -d <span class="m">21</span> -c <span class="m">1</span> -p <span class="m">0</span> -b <span class="m">5</span> -i 0x01
+
+Writing value 0x01 to page <span class="m">0</span>, byte 0x05 <span class="o">(</span>device <span class="m">21</span>:00.0, cage <span class="m">1</span><span class="o">)</span>
+OK - value written successfully
+~%
+</pre></div>
+</div>
+</section>
+<section id="avedmanagementinterfaceuserguide-ami-tool-notes-14">
+<span id="id49"></span><h4>Notes<a class="headerlink" href="#avedmanagementinterfaceuserguide-ami-tool-notes-14" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>The cage numbers are 1-indexed (i.e. 0 is invalid).</p></li>
+</ul>
+<p>Page Revision: v. 64</p>
+</section>
+</section>
+</section>
+</section>
+</div>
+</div>
+<footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+<a accesskey="p" class="btn btn-neutral float-left" href="AVED%2BJTAG%2BBoot%2BRecovery.html" rel="prev" title="AVED JTAG Boot Recovery"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+<a accesskey="n" class="btn btn-neutral float-right" href="xbtest/user-guide/source/index.html" rel="next" title="Xbtest Userguide">Next <span aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<p>© Copyright 2023, Advanced Micro Devices Inc.</p>
+</div>
+<div class="aem-Grid aem-Grid--16">
+<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+<div class="container-fluid sub-footer">
+<div class="row">
+<div class="col-xs-24">
+<p><a href="https://www.amd.com/en/corporate/copyright" target="_blank">Terms and Conditions</a> | <a href="https://www.amd.com/en/corporate/privacy" target="_blank">Privacy</a> | <a href="https://www.amd.com/en/corporate/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.amd.com/en/corporate/trademarks" target="_blank">Trademarks</a> | <a href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf" target="_blank">Statement on Forced Labor</a> | <a href="https://www.amd.com/en/corporate/competition" target="_blank">Fair and Open Competition</a> | <a href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf" target="_blank">UK Tax Strategy</a> | <a href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA" target="_blank">Inclusive Terminology</a> | <a class="ot-sdk-show-settings" href="#cookiessettings">Cookies Settings</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+</div>
+</div>
+</section>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+</body>
+</html>

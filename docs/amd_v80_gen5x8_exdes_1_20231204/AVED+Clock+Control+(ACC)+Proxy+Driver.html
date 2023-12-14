@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script charset="UTF-8" data-document-language="true" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script class="optanon-category-C0002" type="text/plain">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+<title>AVED Clock Control (ACC) Proxy Driver — AVED  documentation</title>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="_static/xbtest.css" rel="stylesheet" type="text/css"/>
+<link href="_static/_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="https://docs.xilinx.com/favicon.ico" rel="shortcut icon"/>
+<!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/js/theme.js"></script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="AVED%2BInBand%2BTelemetry%2BApplication.html" rel="next" title="AVED InBand Telemetry Application"/>
+<link href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html" rel="prev" title="AVED Management Controller (AMC) - Architecture and Design"/>
+<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager -->
+<noscript><iframe class="optanon-category-C0002" height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager -->
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="index.html"> AVED
+            <img alt="Logo" class="logo" src="_static/xilinx-header-logo.svg"/>
+</a>
+<div role="search">
+<form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" type="text"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+</div>
+</div><div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BUser%2BApplication.html">AVED - User Application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80/V80P</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BHierarchy%2BOverview.html">AVED V80/V80P - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BCIPS%2BConfiguration.html">AVED V80/V80P - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BMemory%2BResources.html">AVED V80/V80P - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BMemory%2BMap.html">AVED V80/V80P - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BNoC%2BConfiguration.html">AVED V80/V80P - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BBase%2BLogic.html">AVED V80/V80P - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BClock%2BReset%2BModule.html">AVED V80/V80P - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BSource%2BFile%2BOverview.html">AVED V80/V80P - Source File Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BXBTEST%2BDesign.html">AVED V80/V80P - XBTEST Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">AVED Clock Control (ACC) Proxy Driver</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api">API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#initialize-driver">Initialize Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bind-callbacks">Bind Callbacks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#print-statistics">Print Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clear-statistics">Clear Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enable-clock-shutdown">Enable Clock Shutdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#disable-clock-shutdown">Disable Clock Shutdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sensor-exceeded-fatal-limit">Sensor exceeded fatal limit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sensor-exceeded-critical-limit">Sensor exceeded critical limit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sensor-has-exceeded-warning-limit">Sensor has exceeded warning limit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reset-limit">Reset Limit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sequence-diagrams">Sequence Diagrams</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#acc-proxy-initialisation">ACC Proxy Initialisation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#acc-proxy-task">ACC Proxy Task</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#avedclockcontrol-acc-proxydriver-initializedriver-1">Initialize Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#register-for-callback">Register For Callback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#avedclockcontrol-acc-proxydriver-enableclockshutdown-1">Enable Clock Shutdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#avedclockcontrol-acc-proxydriver-disableclockshutdown-1">Disable Clock Shutdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#avedclockcontrol-acc-proxydriver-sensorexceededfatallimit-1">Sensor exceeded fatal limit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#avedclockcontrol-acc-proxydriver-sensorexceededcriticallimit-1">Sensor exceeded critical limit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#avedclockcontrol-acc-proxydriver-sensorhasexceededwarninglimit-1">Sensor has exceeded warning limit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#avedclockcontrol-acc-proxydriver-resetlimit-1">Reset Limit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI &amp; xbtest)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest%2Bbuild.html">xbtest build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift"><nav aria-label="Mobile navigation menu" class="wy-nav-top" style="background: black">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="index.html">AVED</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="Page navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a class="icon icon-home" href="index.html"></a> »</li>
+<li>AVED Clock Control (ACC) Proxy Driver</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<section id="aved-clock-control-acc-proxy-driver">
+<h1>AVED Clock Control (ACC) Proxy Driver<a class="headerlink" href="#aved-clock-control-acc-proxy-driver" title="Permalink to this headline">¶</a></h1>
+<section id="overview">
+<span id="avedclockcontrol-acc-proxydriver-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The ACC proxy driver will store an internal list of sensors required for the throttling algorithm during initialization. It will also create a number of resources, including a mutex for protection, a mailbox to handle asynchronous responses and a
+task to implement the clock control features.</p>
+<p>The ACC proxy task will:</p>
+<ul class="simple">
+<li><p>Implement clock shutdown for fatal and critical threshold levels.</p></li>
+<li><p>Enable/Disable clock shutdown feature.</p></li>
+<li><p>Re-enable clock shutdown.</p></li>
+</ul>
+<p>The proxy API consists of a number of functions to report to the ACC that a sensor has exceeded various threshold limits. The APIs will post an internal message with the required data onto the mailbox. The ACC proxy will service this mailbox and
+implement the appropriate clock control features. The required sensor ID and Type passed into the APIs, are checked against the internal list of clock shutdown sensors by the ACC proxy task.</p>
+<p>The API also provides two debug functions to display and clear of the stat/error counters.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Note: Clock shutdown is currently not implemented.</p>
+</section>
+<section id="api">
+<span id="avedclockcontrol-acc-proxydriver-api"></span><h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<section id="initialize-driver">
+<span id="avedclockcontrol-acc-proxydriver-initializedriver"></span><h3>Initialize Driver<a class="headerlink" href="#initialize-driver" title="Permalink to this headline">¶</a></h3>
+<p><strong>iACC_Initialise</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Main initialisation point <span class="k">for</span> the ACC Proxy Driver
+ *
+ * @param   ucProxyId       Unique ID <span class="k">for</span> this Proxy driver
+ * @param   ulTaskPrio      Priority of the Proxy driver task <span class="o">(</span> <span class="k">if</span> RR disabled <span class="o">)</span>
+ * @param   ulTaskStack     Stack size of the Proxy driver task
+ * @param   pxShutdownData  Sensor IDs required to monitor <span class="k">for</span> shutdown
+ * @param   User            Clock Control Base Address
+ *
+ * @return  OK              Proxy driver initialised correctly
+ *          ERROR           Proxy driver not initialised, or was already initialised
+ *
+ * @note    Proxy drivers can have <span class="m">0</span> or more firmware interfaces
+ */
+int iACC_Initialise<span class="o">(</span> uint8_t ucProxyId, uint32_t ulTaskPrio, uint32_t ulTaskStack,
+                        ACC_PROXY_DRIVER_SHUTDOWN_SENSOR_DATA* pxShutdownData,
+                        void* pvUCCBaseAddress <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="bind-callbacks">
+<span id="avedclockcontrol-acc-proxydriver-bindcallbacks"></span><h3>Bind Callbacks<a class="headerlink" href="#bind-callbacks" title="Permalink to this headline">¶</a></h3>
+<p><strong>iACC_BindCallback</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Bind into this proxy driver
+ *
+ * @param   pxCallback  Callback to <span class="nb">bind</span> into the proxy driver
+ *
+ * @return  OK          Callback successfully bound
+ *          ERROR       Callback not bound
+ *
+ */
+int iACC_BindCallback<span class="o">(</span> EVL_CALLBACK *pxCallback <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="print-statistics">
+<span id="avedclockcontrol-acc-proxydriver-printstatistics"></span><h3>Print Statistics<a class="headerlink" href="#print-statistics" title="Permalink to this headline">¶</a></h3>
+<p><strong>iACC_PrintStatistics</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Print all the stats gathered <span class="k">in</span> this driver
+ *
+ * @return  OK              Stats retrieved from proxy driver successfully
+ *          ERROR           Stats not retrieved successfully
+ *
+ */
+int iACC_PrintStatistics<span class="o">(</span> void <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="clear-statistics">
+<span id="avedclockcontrol-acc-proxydriver-clearstatistics"></span><h3>Clear Statistics<a class="headerlink" href="#clear-statistics" title="Permalink to this headline">¶</a></h3>
+<p><strong>iACC_ClearStatistics</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Clear all the stats <span class="k">in</span> this driver
+ *
+ * @return  OK              Stats cleared successfully
+ *          ERROR           Stats not cleared successfully
+ *
+ */
+int iACC_ClearStatistics<span class="o">(</span> void <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="enable-clock-shutdown">
+<span id="avedclockcontrol-acc-proxydriver-enableclockshutdown"></span><h3>Enable Clock Shutdown<a class="headerlink" href="#enable-clock-shutdown" title="Permalink to this headline">¶</a></h3>
+<p><strong>iACC_EnableShutdown</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Enable Clock Shutdown <span class="k">for</span> threshold crossing
+ *
+ * @return  OK              Shutdown enabled successfully
+ *          ERROR           Shutdown <span class="nb">enable</span> unsuccessful
+ *
+ */
+int iACC_EnableShutdown<span class="o">(</span> void <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="disable-clock-shutdown">
+<span id="avedclockcontrol-acc-proxydriver-disableclockshutdown"></span><h3>Disable Clock Shutdown<a class="headerlink" href="#disable-clock-shutdown" title="Permalink to this headline">¶</a></h3>
+<p><strong>iACC_DisableShutdown</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Disable Clock Shutdown <span class="k">for</span> threshold crossing
+ *
+ * @return  OK              Shutdown disabled successfully
+ *          ERROR           Shutdown disable unsuccessful
+ *
+ */
+int iACC_DisableShutdown<span class="o">(</span> void <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="sensor-exceeded-fatal-limit">
+<span id="avedclockcontrol-acc-proxydriver-sensorexceededfatallimit"></span><h3>Sensor exceeded fatal limit<a class="headerlink" href="#sensor-exceeded-fatal-limit" title="Permalink to this headline">¶</a></h3>
+<p><strong>iACC_FatalLimitExceeded</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Report to ACC that a sensor has exceeded fatal limit
+ *
+ * @param   ucSensorId      The ID to identify the sensor
+ * @param   ucSensorType    The <span class="nb">type</span> of sensor, temp, current, voltage or power
+ *
+ * @return  OK              Fatal Limit reported successfully
+ *          ERROR           Fatal Limit report was unsuccessful
+ */
+int iACC_FatalLimitExceeded<span class="o">(</span> uint8_t ucSensorId, uint8_t ucSensorType  <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="sensor-exceeded-critical-limit">
+<span id="avedclockcontrol-acc-proxydriver-sensorexceededcriticallimit"></span><h3>Sensor exceeded critical limit<a class="headerlink" href="#sensor-exceeded-critical-limit" title="Permalink to this headline">¶</a></h3>
+<p><strong>iACC_CriticalLimitExceeded</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Report to ACC that a sensor has exceeded critical limit
+ *
+ * @param   ucSensorId      The ID to identify the sensor
+ * @param   ucSensorType    The <span class="nb">type</span> of sensor, temp, current, voltage or power
+ *
+ * @return  OK              Critical Limit reported successfully
+ *          ERROR           Critical Limit report was unsuccessful
+ */
+int iACC_CriticalLimitExceeded<span class="o">(</span> uint8_t ucSensorId, uint8_t ucSensorType  <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="sensor-has-exceeded-warning-limit">
+<span id="avedclockcontrol-acc-proxydriver-sensorhasexceededwarninglimit"></span><h3>Sensor has exceeded warning limit<a class="headerlink" href="#sensor-has-exceeded-warning-limit" title="Permalink to this headline">¶</a></h3>
+<p><strong>iACC_WarningLimitExceeded</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Report to ACC that a sensor has exceeded warning limit
+ *
+ * @param   ucSensorId      The ID to identify the sensor
+ * @param   ucSensorType    The <span class="nb">type</span> of sensor, temp, current, voltage or power
+ *
+ * @return  OK              Warning Limit reported successfully
+ *          ERROR           Warning Limit report was unsuccessful
+ */
+int iACC_WarningLimitExceeded<span class="o">(</span> uint8_t ucSensorId, uint8_t ucSensorType  <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="reset-limit">
+<span id="avedclockcontrol-acc-proxydriver-resetlimit"></span><h3>Reset Limit<a class="headerlink" href="#reset-limit" title="Permalink to this headline">¶</a></h3>
+<p><strong>iACC_ResetLimit</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Re-enable the clock <span class="k">if</span> previously shutdown
+ *
+ * @return  OK              Reset Limit successful
+ *          ERROR           Reset Limit was unsuccessful
+ */
+int iACC_ResetLimit<span class="o">(</span> void  <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="sequence-diagrams">
+<span id="avedclockcontrol-acc-proxydriver-sequencediagrams"></span><h2>Sequence Diagrams<a class="headerlink" href="#sequence-diagrams" title="Permalink to this headline">¶</a></h2>
+<section id="acc-proxy-initialisation">
+<span id="avedclockcontrol-acc-proxydriver-accproxyinitialisation"></span><h3>ACC Proxy Initialisation<a class="headerlink" href="#acc-proxy-initialisation" title="Permalink to this headline">¶</a></h3>
+<p>Two ACC API functions are called from the AMC main task (iACC_Initialise, iACC_BindCallback), in order to initialise the proxy.</p>
+<p>iACC_Initialise will create a shared proxy mutex and mailbox, and create the proxy task. It will also copy the provided number of sensors and their provided data, along with setting an initialized flag.</p>
+<p>iACC_BindCallback will bind the appropriate top-level callback function.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+<section id="acc-proxy-task">
+<span id="avedclockcontrol-acc-proxydriver-accproxytask"></span><h3>ACC Proxy Task<a class="headerlink" href="#acc-proxy-task" title="Permalink to this headline">¶</a></h3>
+<p>The Task within ACC has a number of responsibilities:</p>
+<ul class="simple">
+<li><p>Pend to its mailbox, and handle the incoming messages.</p></li>
+<li><p>Implement clock shutdown for fatal and critical threshold levels.</p></li>
+<li><p>Enable/Disable clock shutdown feature.</p></li>
+<li><p>Re-enable clock shutdown.</p></li>
+</ul>
+<p>The sequence flow diagram below outlines the top-level functionality of the ACC proxy task.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/8f649443b3a8b55d1a7ed9f5ce06385245277284.png"><img alt="image1" class="drawio-diagram-image" src="_images/8f649443b3a8b55d1a7ed9f5ce06385245277284.png" style="width: 873px;"/></a></p>
+</section>
+</section>
+<section id="examples">
+<span id="avedclockcontrol-acc-proxydriver-examples"></span><h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<section id="avedclockcontrol-acc-proxydriver-initializedriver-1">
+<span id="id1"></span><h3>Initialize Driver<a class="headerlink" href="#avedclockcontrol-acc-proxydriver-initializedriver-1" title="Permalink to this headline">¶</a></h3>
+<p>This function should only be called once. It requires a unique ID for the proxy, used for signaling new events, a task priority and stack size. It also requires pointers to three structures, clock throttling sensor IDs, profile, default parameters,
+and a final pointer to the clock control base address.</p>
+<p><strong>iAQC_Initialise Example</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> <span class="nv">OK</span> <span class="o">==</span> iACC_Initialise<span class="o">(</span> AMC_EVENT_UNIQUE_ID_ACC, AMC_TASK_PRIO_DEFAULT, AMC_TASK_DEFAULT_STACK,
+                           <span class="p">&amp;</span>xThrottlingSensors, <span class="p">&amp;</span>xClockThrottlingProfile,
+                           <span class="p">&amp;</span>xClockThrottlingParams, <span class="o">(</span> void * <span class="o">)</span>HAL_USER_CLOCK_CONTROL_BASE_ADDRESS <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    AMC_PRINTF<span class="o">(</span> <span class="s2">"ACC Proxy Driver initialised\r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    AMC_PRINTF<span class="o">(</span> <span class="s2">"Error initialising ACC Proxy Driver\r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="register-for-callback">
+<span id="avedclockcontrol-acc-proxydriver-registerforcallback"></span><h3>Register For Callback<a class="headerlink" href="#register-for-callback" title="Permalink to this headline">¶</a></h3>
+<p>Define a function based on the function pointer prototype and bind in using the API.</p>
+<p><strong>iACC_BindCallback Example</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/* Define a callback to handle the events */
+static int iAccCallback<span class="o">(</span> EVL_SIGNAL *pxSignal <span class="o">)</span>
+<span class="o">{</span>
+    int <span class="nv">iStatus</span> <span class="o">=</span> ERROR<span class="p">;</span>
+
+    <span class="k">if</span><span class="o">(</span> <span class="o">(</span> NULL !<span class="o">=</span> pxSignal <span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> <span class="nv">AMC_EVENT_UNIQUE_ID_ACC</span> <span class="o">==</span> pxSignal-&gt;ucModule <span class="o">)</span> <span class="o">)</span>
+    <span class="o">{</span>
+        /* AMC_PRINTF<span class="o">(</span> <span class="s2">"ACC Proxy Driver (0x%02X), Instance %d, "</span>, pxSignal-&gt;ucModule, pxSignal-&gt;ucInstance <span class="o">)</span><span class="p">;</span> */
+        switch<span class="o">(</span> pxSignal-&gt;ucEventType <span class="o">)</span>
+        <span class="o">{</span>
+
+        <span class="k">case</span> ACC_PROXY_DRIVER_E_CLOCK_SHUTDOWN_ENABLED:
+        <span class="o">{</span>
+            AMC_PRINTF<span class="o">(</span> <span class="s2">"Event ACC_PROXY_DRIVER_E_CLOCK_SHUTDOWN_ENABLED (0x%02X)\r\n"</span>, pxSignal-&gt;ucEventType <span class="o">)</span><span class="p">;</span>
+            <span class="nv">iStatus</span> <span class="o">=</span> OK<span class="p">;</span>
+            break<span class="p">;</span>
+        <span class="o">}</span>
+
+        <span class="k">case</span> ACC_PROXY_DRIVER_E_CLOCK_SHUTDOWN_DISABLED:
+        <span class="o">{</span>
+            AMC_PRINTF<span class="o">(</span> <span class="s2">"Event ACC_PROXY_DRIVER_E_CLOCK_SHUTDOWN_DISABLED (0x%02X)\r\n"</span>, pxSignal-&gt;ucEventType <span class="o">)</span><span class="p">;</span>
+            <span class="nv">iStatus</span> <span class="o">=</span> OK<span class="p">;</span>
+            break<span class="p">;</span>
+        <span class="o">}</span>
+
+        <span class="k">case</span> ACC_PROXY_DRIVER_E_CLOCK_SHUTDOWN_ACTIVATED:
+        <span class="o">{</span>
+            AMC_PRINTF<span class="o">(</span> <span class="s2">"Event ACC_PROXY_DRIVER_E_CLOCK_SHUTDOWN_ACTIVATED (0x%02X)\r\n"</span>, pxSignal-&gt;ucEventType <span class="o">)</span><span class="p">;</span>
+            <span class="nv">iStatus</span> <span class="o">=</span> OK<span class="p">;</span>
+            break<span class="p">;</span>
+        <span class="o">}</span>
+
+        <span class="k">case</span> ACC_PROXY_DRIVER_E_CLOCK_SHUTDOWN_CLOCK_REENABLED:
+        <span class="o">{</span>
+            AMC_PRINTF<span class="o">(</span> <span class="s2">"Event ACC_PROXY_DRIVER_E_CLOCK_SHUTDOWN_CLOCK_REENABLED (0x%02X)\r\n"</span>, pxSignal-&gt;ucEventType <span class="o">)</span><span class="p">;</span>
+            <span class="nv">iStatus</span> <span class="o">=</span> OK<span class="p">;</span>
+            break<span class="p">;</span>
+        <span class="o">}</span>
+        default:
+            break<span class="p">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> iStatus<span class="p">;</span>
+<span class="o">}</span>
+
+/* Bind into the callback during the application initialisation */
+<span class="k">if</span><span class="o">(</span> <span class="nv">OK</span> <span class="o">==</span> iACC_BindCallback<span class="o">(</span> <span class="p">&amp;</span>iAccCallback <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    AMC_PRINTF<span class="o">(</span> <span class="s2">"ACC Proxy Driver initialised and bound\r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    AMC_PRINTF<span class="o">(</span> <span class="s2">"Error binding to ACC Proxy Driver\r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="avedclockcontrol-acc-proxydriver-enableclockshutdown-1">
+<span id="id2"></span><h3>Enable Clock Shutdown<a class="headerlink" href="#avedclockcontrol-acc-proxydriver-enableclockshutdown-1" title="Permalink to this headline">¶</a></h3>
+<p>Simply call iACC_EnableShutdown to Enable Clock Shutdown for threshold crossing, no params are required.</p>
+<p><strong>iACC_EnableShutdown Example</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> OK !<span class="o">=</span> iACC_EnableShutdown<span class="o">()</span> <span class="o">)</span>
+<span class="o">{</span>
+    ACC_DBG_PRINTF<span class="o">(</span> <span class="s2">"Error calling EnableShutdown\r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="avedclockcontrol-acc-proxydriver-disableclockshutdown-1">
+<span id="id3"></span><h3>Disable Clock Shutdown<a class="headerlink" href="#avedclockcontrol-acc-proxydriver-disableclockshutdown-1" title="Permalink to this headline">¶</a></h3>
+<p>Simply call iACC_DisableShutdown to Disable Clock Shutdown for threshold crossing, no params are required.</p>
+<p><strong>iACC_DisableShutdown Example</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> OK !<span class="o">=</span> iACC_DisableShutdown<span class="o">()</span> <span class="o">)</span>
+<span class="o">{</span>
+    ACC_DBG_PRINTF<span class="o">(</span> <span class="s2">"Error calling DisableShutdown\r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="avedclockcontrol-acc-proxydriver-sensorexceededfatallimit-1">
+<span id="id4"></span><h3>Sensor exceeded fatal limit<a class="headerlink" href="#avedclockcontrol-acc-proxydriver-sensorexceededfatallimit-1" title="Permalink to this headline">¶</a></h3>
+<p>Example calling ACC Fatal Limit Exceeded, taking two params, iSensorId and iSensorType.</p>
+<p><strong>iACC_FatalLimitExceeded Example</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>int <span class="nv">iSensorId</span>   <span class="o">=</span> <span class="m">0</span><span class="p">;</span> /* Set Sensor Id <span class="o">(</span><span class="m">0</span> - <span class="m">255</span><span class="o">)</span> */
+int <span class="nv">iSensorType</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span> /* Set Sensor Type <span class="o">(</span><span class="m">0</span>-Temp, <span class="m">1</span>-Voltage, <span class="m">2</span>-Current, <span class="m">4</span>-Power<span class="o">)</span> */
+
+<span class="k">if</span><span class="o">(</span> OK !<span class="o">=</span> iACC_FatalLimitExceeded<span class="o">(</span> <span class="o">(</span> uint8_t <span class="o">)</span>iSensorId, <span class="o">(</span> uint32_t <span class="o">)</span>iSensorType <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    ACC_DBG_PRINTF<span class="o">(</span> <span class="s2">"Error calling iACC_FatalLimitExceeded\r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    ACC_DBG_PRINTF<span class="o">(</span> <span class="s2">"iACC_FatalLimitExceeded called successfully \r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="avedclockcontrol-acc-proxydriver-sensorexceededcriticallimit-1">
+<span id="id5"></span><h3>Sensor exceeded critical limit<a class="headerlink" href="#avedclockcontrol-acc-proxydriver-sensorexceededcriticallimit-1" title="Permalink to this headline">¶</a></h3>
+<p>Example calling ACC Critical Limit Exceeded, taking two params, iSensorId and iSensorType.</p>
+<p><strong>iACC_CriticalLimitExceeded Example</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>int <span class="nv">iSensorId</span>   <span class="o">=</span> <span class="m">0</span><span class="p">;</span> /* Set Sensor Id <span class="o">(</span><span class="m">0</span> - <span class="m">255</span><span class="o">)</span> */
+int <span class="nv">iSensorType</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span> /* Set Sensor Type <span class="o">(</span><span class="m">0</span>-Temp, <span class="m">1</span>-Voltage, <span class="m">2</span>-Current, <span class="m">4</span>-Power<span class="o">)</span> */
+
+<span class="k">if</span><span class="o">(</span> OK !<span class="o">=</span> iACC_CriticalLimitExceeded<span class="o">(</span> <span class="o">(</span> uint8_t <span class="o">)</span>iSensorId, <span class="o">(</span> uint32_t <span class="o">)</span>iSensorType <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    ACC_DBG_PRINTF<span class="o">(</span> <span class="s2">"Error calling iACC_CriticalLimitExceeded\r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    ACC_DBG_PRINTF<span class="o">(</span> <span class="s2">"iACC_CriticalLimitExceeded called successfully \r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="avedclockcontrol-acc-proxydriver-sensorhasexceededwarninglimit-1">
+<span id="id6"></span><h3>Sensor has exceeded warning limit<a class="headerlink" href="#avedclockcontrol-acc-proxydriver-sensorhasexceededwarninglimit-1" title="Permalink to this headline">¶</a></h3>
+<p>Example calling ACC Warning Limit Exceeded, taking two params, iSensorId and iSensorType.</p>
+<p><strong>iACC_WarningLimitExceeded Example</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>int <span class="nv">iSensorId</span>   <span class="o">=</span> <span class="m">0</span><span class="p">;</span> /* Set Sensor Id <span class="o">(</span><span class="m">0</span> - <span class="m">255</span><span class="o">)</span> */
+int <span class="nv">iSensorType</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span> /* Set Sensor Type <span class="o">(</span><span class="m">0</span>-Temp, <span class="m">1</span>-Voltage, <span class="m">2</span>-Current, <span class="m">4</span>-Power<span class="o">)</span> */
+
+<span class="k">if</span><span class="o">(</span> OK !<span class="o">=</span> iACC_WarningLimitExceeded<span class="o">(</span> <span class="o">(</span> uint8_t <span class="o">)</span>iSensorId, <span class="o">(</span> uint32_t <span class="o">)</span>iSensorType <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    ACC_DBG_PRINTF<span class="o">(</span> <span class="s2">"Error calling iACC_WarningLimitExceeded\r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    ACC_DBG_PRINTF<span class="o">(</span> <span class="s2">"iACC_WarningLimitExceeded called successfully \r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="avedclockcontrol-acc-proxydriver-resetlimit-1">
+<span id="id7"></span><h3>Reset Limit<a class="headerlink" href="#avedclockcontrol-acc-proxydriver-resetlimit-1" title="Permalink to this headline">¶</a></h3>
+<p>Simply call iACC_ResetLimit to re-enable the clock if previously shutdown, no params are required.</p>
+<p><strong>iACC_ResetLimit Example</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> OK !<span class="o">=</span> iACC_ResetLimit<span class="o">(</span> <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    ACC_DBG_PRINTF<span class="o">(</span> <span class="s2">"Error calling iACC_ResetLimit\r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    ACC_DBG_PRINTF<span class="o">(</span> <span class="s2">"iACC_ResetLimit called successfully \r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Page Revision: v. 19</p>
+</section>
+</section>
+</section>
+</div>
+</div>
+<footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+<a accesskey="p" class="btn btn-neutral float-left" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html" rel="prev" title="AVED Management Controller (AMC) - Architecture and Design"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+<a accesskey="n" class="btn btn-neutral float-right" href="AVED%2BInBand%2BTelemetry%2BApplication.html" rel="next" title="AVED InBand Telemetry Application">Next <span aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<p>© Copyright 2023, Advanced Micro Devices Inc.</p>
+</div>
+<div class="aem-Grid aem-Grid--16">
+<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+<div class="container-fluid sub-footer">
+<div class="row">
+<div class="col-xs-24">
+<p><a href="https://www.amd.com/en/corporate/copyright" target="_blank">Terms and Conditions</a> | <a href="https://www.amd.com/en/corporate/privacy" target="_blank">Privacy</a> | <a href="https://www.amd.com/en/corporate/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.amd.com/en/corporate/trademarks" target="_blank">Trademarks</a> | <a href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf" target="_blank">Statement on Forced Labor</a> | <a href="https://www.amd.com/en/corporate/competition" target="_blank">Fair and Open Competition</a> | <a href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf" target="_blank">UK Tax Strategy</a> | <a href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA" target="_blank">Inclusive Terminology</a> | <a class="ot-sdk-show-settings" href="#cookiessettings">Cookies Settings</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+</div>
+</div>
+</section>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+</body>
+</html>

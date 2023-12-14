@@ -1,0 +1,2057 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script charset="UTF-8" data-document-language="true" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script class="optanon-category-C0002" type="text/plain">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+<title>Operating System Abstraction Layer (OSAL) — AVED  documentation</title>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="_static/xbtest.css" rel="stylesheet" type="text/css"/>
+<link href="_static/_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="https://docs.xilinx.com/favicon.ico" rel="shortcut icon"/>
+<!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/js/theme.js"></script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html" rel="next" title="Profiles and CMake build process"/>
+<link href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html" rel="prev" title="Firmware Interface (FW_IF) Abstraction Layer"/>
+<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager -->
+<noscript><iframe class="optanon-category-C0002" height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager -->
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="index.html"> AVED
+            <img alt="Logo" class="logo" src="_static/xilinx-header-logo.svg"/>
+</a>
+<div role="search">
+<form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" type="text"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+</div>
+</div><div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BUser%2BApplication.html">AVED - User Application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80/V80P</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BHierarchy%2BOverview.html">AVED V80/V80P - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BCIPS%2BConfiguration.html">AVED V80/V80P - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BMemory%2BResources.html">AVED V80/V80P - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BMemory%2BMap.html">AVED V80/V80P - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BNoC%2BConfiguration.html">AVED V80/V80P - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BBase%2BLogic.html">AVED V80/V80P - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BClock%2BReset%2BModule.html">AVED V80/V80P - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BSource%2BFile%2BOverview.html">AVED V80/V80P - Source File Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BXBTEST%2BDesign.html">AVED V80/V80P - XBTEST Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BClock%2BControl%2B%28ACC%29%2BProxy%2BDriver.html">AVED Clock Control (ACC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Operating System Abstraction Layer (OSAL)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api">API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#general">General</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#get-os-version">Get OS Version</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#scheduler-apis">Scheduler APIs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#start-rtos-scheduler">Start RTOS scheduler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-tick-count-since-scheduler-started">Get Tick count since scheduler started</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-ms-count-since-scheduler-started">Get ms count since scheduler started</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#task-apis">Task APIs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#create-osal-task">Create OSAL Task</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delete-osal-task">Delete OSAL Task</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#suspend-osal-task">Suspend OSAL Task</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#resume-osal-task">Resume OSAL Task</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#osal-task-sleep-ticks">OSAL Task Sleep (Ticks)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#osal-task-sleep-ms">OSAL Task Sleep (ms)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#semaphore-apis">Semaphore APIs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#create-osal-semaphore">Create OSAL Semaphore</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delete-osal-semaphore">Delete OSAL Semaphore</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pend-to-osal-semaphore">Pend to OSAL Semaphore</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#post-to-osal-semaphore">Post to OSAL Semaphore</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#post-to-osal-semaphore-from-isr">Post to OSAL Semaphore (From ISR)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mutex-apis">Mutex APIs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#create-osal-mutex">Create OSAL Mutex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delete-osal-mutex">Delete OSAL Mutex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#take-osal-mutex">Take OSAL Mutex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-osal-mutex">Release OSAL Mutex</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mailbox-apis">Mailbox APIs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#create-osal-mailbox">Create OSAL Mailbox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delete-osal-mailbox">Delete OSAL Mailbox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pend-to-osal-mailbox">Pend to OSAL Mailbox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#post-to-osal-mailbox">Post to OSAL Mailbox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#post-to-osal-mailbox-from-isr">Post to OSAL Mailbox (From ISR)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#event-apis">Event APIs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#create-osal-event-group">Create OSAL Event Group</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delete-osal-event-group">Delete OSAL Event Group</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pend-to-osal-event-group">Pend to OSAL Event Group</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#post-to-osal-event-group">Post to OSAL Event Group</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#post-to-osal-event-group-from-isr">Post to OSAL Event Group (From ISR)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#timer-apis">Timer APIs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#create-osal-timer">Create OSAL Timer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delete-osal-timer">Delete OSAL Timer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#start-osal-timer">Start OSAL Timer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#stop-osal-timer">Stop OSAL Timer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reset-osal-timer">Reset OSAL Timer</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#interrupt-apis">Interrupt APIs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#setup-osal-interrupt">Setup OSAL Interrupt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enable-osal-interrupt">Enable OSAL Interrupt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#disable-osal-interrupt">Disable OSAL Interrupt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#thread-safe-apis">Thread safe APIs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mark-the-start-of-critical-code-region">Mark the start of critical code region</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mark-the-end-of-critical-code-region">Mark the end of critical code region</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#osal-malloc">OSAL malloc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#osal-memset">OSAL memset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#osal-memcpy">OSAL memcpy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#osal-free">OSAL free</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#osal-printf">OSAL printf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#osal-getchar">OSAL getchar</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#debug-stats-apis">Debug stats APIs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#print-all-stats">Print all stats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#clear-all-stats">Clear all stats</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-schedulerapis-1">Scheduler APIs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#start-rtos-scheduler-example">Start RTOS scheduler example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-tick-count-since-scheduler-started-example">Get Tick count since scheduler started example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-ms-count-since-scheduler-started-example">Get ms count since scheduler started example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-taskapis-1">Task APIs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#create-osal-task-example">Create OSAL Task Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delete-osal-task-example">Delete OSAL Task Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#suspend-osal-task-example">Suspend OSAL Task Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#resume-osal-task-example">Resume OSAL Task Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-osaltasksleep-ticks-1">OSAL Task Sleep (Ticks)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-osaltasksleep-ms-1">OSAL Task Sleep (ms)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-semaphoreapis-1">Semaphore APIs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-createosalsemaphore-1">Create OSAL Semaphore</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-deleteosalsemaphore-1">Delete OSAL Semaphore</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-pendtoosalsemaphore-1">Pend to OSAL Semaphore</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-posttoosalsemaphore-1">Post to OSAL Semaphore</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-mutexapis-1">Mutex APIs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-createosalmutex-1">Create OSAL Mutex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-deleteosalmutex-1">Delete OSAL Mutex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-takeosalmutex-1">Take OSAL Mutex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-releaseosalmutex-1">Release OSAL Mutex</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-mailboxapis-1">Mailbox APIs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-createosalmailbox-1">Create OSAL Mailbox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-deleteosalmailbox-1">Delete OSAL Mailbox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-pendtoosalmailbox-1">Pend to OSAL Mailbox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-posttoosalmailbox-1">Post to OSAL Mailbox</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-eventapis-1">Event APIs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-createosaleventgroup-1">Create OSAL Event Group</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-deleteosaleventgroup-1">Delete OSAL Event Group</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-pendtoosaleventgroup-1">Pend to OSAL Event Group</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-posttoosaleventgroup-1">Post to OSAL Event Group</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-timerapis-1">Timer APIs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-createosaltimer-1">Create OSAL Timer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-deleteosaltimer-1">Delete OSAL Timer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-startosaltimer-1">Start OSAL Timer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-stoposaltimer-1">Stop OSAL Timer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-resetosaltimer-1">Reset OSAL Timer</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-interruptapis-1">Interrupt APIs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-setuposalinterrupt-1">Setup OSAL Interrupt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-enableosalinterrupt-1">Enable OSAL Interrupt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-disableosalinterrupt-1">Disable OSAL Interrupt</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-threadsafeapis-1">Thread safe APIs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-markthestartofcriticalcoderegion-1">Mark the start of critical code region</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-marktheendofcriticalcoderegion-1">Mark the end of critical code region</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#osal-malloc-memset-memcpy-free">OSAL malloc / memset / memcpy / free</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-osalprintf-1">OSAL printf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-osalgetchar-1">OSAL getchar</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-debugstatsapis-1">Debug stats APIs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-printallstats-1">Print all stats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-clearallstats-1">Clear all stats</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI &amp; xbtest)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest%2Bbuild.html">xbtest build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift"><nav aria-label="Mobile navigation menu" class="wy-nav-top" style="background: black">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="index.html">AVED</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="Page navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a class="icon icon-home" href="index.html"></a> »</li>
+<li>Operating System Abstraction Layer (OSAL)</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<section id="operating-system-abstraction-layer-osal">
+<h1>Operating System Abstraction Layer (OSAL)<a class="headerlink" href="#operating-system-abstraction-layer-osal" title="Permalink to this headline">¶</a></h1>
+<section id="overview">
+<span id="operatingsystemabstractionlayer-osal-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The OSAL has been developed to allow AMC source to be agnostic to any target operating system, allowing target OS to be configured at compilation via the cmake build process (see - <a class="reference external" href="Profiles+and+CMake+build+process.html">Profiles and CMake build
+process</a>).</p>
+<p>A common API has been developed, and used throughout AMC source code. OS specific source implementations of the OSAL prevent any code changes throughout AMC when porting to a new OS. Two implementations of the OSAL are currently available with AMC
+(Linux and FreeRTOS).</p>
+</section>
+<section id="api">
+<span id="operatingsystemabstractionlayer-osal-api"></span><h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<section id="general">
+<span id="operatingsystemabstractionlayer-osal-general"></span><h3>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h3>
+<section id="get-os-version">
+<span id="operatingsystemabstractionlayer-osal-getosversion"></span><h4>Get OS Version<a class="headerlink" href="#get-os-version" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_GetOsVersion</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   This <span class="k">function</span> will <span class="k">return</span> OS <span class="nb">type</span> and version information <span class="k">for</span> the OSAL
+ *          implementation being used.
+ *
+ * @param   pcOs            Pointer to OS Name buffer.
+ * @param   ucVersionMajor  Pointer to uint8_t holding OS version major.
+ * @param   ucVersionMinor  Pointer to uint8_t holding OS version minor.
+ * @param   ucVersionBuild  Pointer to uint8_t holding OS version build.
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_PARAMS              invalid parameters passed <span class="k">in</span> to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ */
+int iOSAL_GetOsVersion<span class="o">(</span> char pcOs<span class="o">[</span> OSAL_OS_NAME_LEN <span class="o">]</span>,
+                        uint8_t* pucVersionMajor,
+                        uint8_t* pucVersionMinor,
+                        uint8_t* pucVersionBuild <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="scheduler-apis">
+<span id="operatingsystemabstractionlayer-osal-schedulerapis"></span><h3>Scheduler APIs<a class="headerlink" href="#scheduler-apis" title="Permalink to this headline">¶</a></h3>
+<section id="start-rtos-scheduler">
+<span id="operatingsystemabstractionlayer-osal-startrtosscheduler"></span><h4>Start RTOS scheduler<a class="headerlink" href="#start-rtos-scheduler" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_StartOS</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   This function will create an initial task, and then start the RTOS Scheduler.
+ *
+ * @param   iRoundRobinEnabled   Flag indicating if round robin scheduling should be used.
+ *                               If TRUE, Round-Robin is enabled. If FALSE, Round-Robin is disabled.
+ * @param   ppvTaskHandle        Pointer-to-pointer that will be cast to appropriate OS Task Handle data type
+ * @param   pvStartTask          Pointer to Start Task function
+ * @param   usStartTaskStackSize The number of bytes to allocate for use as the start task's stack.
+ * @param   ulStartTaskPriority  The priority at which the the created start task will execute
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_PARAMS              invalid parameters passed in to function
+ *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to function
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ * @note    If successful, this function should never return.
+ */
+int iOSAL_StartOS( int         iRoundRobinEnabled,
+                   void**      ppvTaskHandle,
+                   void        ( *pvStartTask )( void ),
+                   uint16_t    usStartTaskStackSize,
+                   uint32_t    ulStartTaskPriority );
+</pre></div>
+</div>
+</section>
+<section id="get-tick-count-since-scheduler-started">
+<span id="operatingsystemabstractionlayer-osal-gettickcountsinceschedulerstarted"></span><h4>Get Tick count since scheduler started<a class="headerlink" href="#get-tick-count-since-scheduler-started" title="Permalink to this headline">¶</a></h4>
+<p><strong>ulOSAL_GetUptimeTicks</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Returns tick count since OS was initialised.
+ *
+ * @return  Count of ticks since OS was initialised.
+ *
+ * @note    This <span class="k">function</span> cannot be called from an ISR.
+ */
+uint32_t ulOSAL_GetUptimeTicks<span class="o">(</span> void <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="get-ms-count-since-scheduler-started">
+<span id="operatingsystemabstractionlayer-osal-getmscountsinceschedulerstarted"></span><h4>Get ms count since scheduler started<a class="headerlink" href="#get-ms-count-since-scheduler-started" title="Permalink to this headline">¶</a></h4>
+<p><strong>ulOSAL_GetUptimeMs</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Returns ms count since OS was initialised.
+ *
+ * @return  Ms since OS was initialised.
+ *
+ * @note    This <span class="k">function</span> cannot be called from an ISR.
+ */
+uint32_t ulOSAL_GetUptimeMs<span class="o">(</span> void <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="task-apis">
+<span id="operatingsystemabstractionlayer-osal-taskapis"></span><h3>Task APIs<a class="headerlink" href="#task-apis" title="Permalink to this headline">¶</a></h3>
+<section id="create-osal-task">
+<span id="operatingsystemabstractionlayer-osal-createosaltask"></span><h4>Create OSAL Task<a class="headerlink" href="#create-osal-task" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Task_Create</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Create a new OSAL task.
+ *
+ * @param   ppvTaskHandle   Pointer-to-pointer that will be cast to appropriate OS Task Handle data type
+ * @param   pvTaskFunction  Pointer to Task function
+ * @param   usTaskStackSize The number of bytes to allocate for use as the task's stack.
+ * @param   pvTaskParam     The value to be passed as the parameter to the Task function
+ * @param   ulTaskPriority  The priority at which the the created task will execute
+ * @param   pcTaskName      Descriptive name for the task
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to function
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *          OSAL_ERRORS_OS_NOT_STARTED      OS has not been started
+ *
+ * @note    The Task Handle must be initialised as NULL.
+ */
+int iOSAL_Task_Create( void**      ppvTaskHandle,
+                       void        ( *pvTaskFunction )( void* pvTaskParam ),
+                       uint16_t    usTaskStackSize,
+                       void*       pvTaskParam,
+                       uint32_t    ulTaskPriority,
+                       const char* pcTaskName );
+</pre></div>
+</div>
+</section>
+<section id="delete-osal-task">
+<span id="operatingsystemabstractionlayer-osal-deleteosaltask"></span><h4>Delete OSAL Task<a class="headerlink" href="#delete-osal-task" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Task_Delete</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Remove OSAL task from RTOS Kernal.
+ *
+ * @param   ppvTaskHandle   Pointer-to-pointer that will be cast to appropriate OS Task Handle data <span class="nb">type</span>
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_NOT_STARTED      OS has not been started
+ *
+ * @note    pvTaskHandle must have been previously initialised with iOSAL_Task_Create.
+ *          If successful, the handle will be reset to NULL.
+ */
+int iOSAL_Task_Delete<span class="o">(</span> void** ppvTaskHandle <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="suspend-osal-task">
+<span id="operatingsystemabstractionlayer-osal-suspendosaltask"></span><h4>Suspend OSAL Task<a class="headerlink" href="#suspend-osal-task" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Task_Suspend</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Suspend any OSAL task.
+ *
+ * @param   pvTaskHandle   Pointer that will be cast to appropriate OS Task Handle data <span class="nb">type</span>
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_NOT_STARTED      OS has not been started
+ *
+ * @note    Setting pvTaskHandle NULL, should cause calling task to be suspended
+ */
+int iOSAL_Task_Suspend<span class="o">(</span> void* pvTaskHandle <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="resume-osal-task">
+<span id="operatingsystemabstractionlayer-osal-resumeosaltask"></span><h4>Resume OSAL Task<a class="headerlink" href="#resume-osal-task" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Task_Resume</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Resume any OSAL task.
+ *
+ * @param   pvTaskHandle   Pointer that will be cast to appropriate OS Task Handle data <span class="nb">type</span>
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_NOT_STARTED      OS has not been started
+ *
+ * @note    Setting pvTaskHandle NULL, should cause calling task to be resumed
+ */
+int iOSAL_Task_Resume<span class="o">(</span> void* pvTaskHandle <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="osal-task-sleep-ticks">
+<span id="operatingsystemabstractionlayer-osal-osaltasksleep-ticks"></span><h4>OSAL Task Sleep (Ticks)<a class="headerlink" href="#osal-task-sleep-ticks" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Task_SleepTicks</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Delay a task <span class="k">for</span> a given number of ticks.
+ *
+ * @param   ulSleepTicks  The amount of time, <span class="k">in</span> tick periods, that the calling task should block.
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_PARAMS              invalid parameters passed <span class="k">in</span> to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *          OSAL_ERRORS_OS_NOT_STARTED      OS has not been started
+ *
+ */
+int iOSAL_Task_SleepTicks<span class="o">(</span> uint32_t ulSleepTicks <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="osal-task-sleep-ms">
+<span id="operatingsystemabstractionlayer-osal-osaltasksleep-ms"></span><h4>OSAL Task Sleep (ms)<a class="headerlink" href="#osal-task-sleep-ms" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Task_SleepMs</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Delay a task <span class="k">for</span> a given number of ms.
+ *
+ * @param   ulSleepMs  The amount of time, <span class="k">in</span> ms, that the calling task should block.
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_PARAMS              invalid parameters passed <span class="k">in</span> to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *          OSAL_ERRORS_OS_NOT_STARTED      OS has not been started
+ *
+ */
+int iOSAL_Task_SleepMs<span class="o">(</span> uint32_t ulSleepMs <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="semaphore-apis">
+<span id="operatingsystemabstractionlayer-osal-semaphoreapis"></span><h3>Semaphore APIs<a class="headerlink" href="#semaphore-apis" title="Permalink to this headline">¶</a></h3>
+<section id="create-osal-semaphore">
+<span id="operatingsystemabstractionlayer-osal-createosalsemaphore"></span><h4>Create OSAL Semaphore<a class="headerlink" href="#create-osal-semaphore" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Semaphore_Create</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Creates a binary or counting semaphore, and sets OS Semaphore Handle by which the semaphore can be referenced.
+ *
+ * @param   ppvSemHandle Pointer-to-pointer that will be cast to appropriate OS Semaphore Handle data type.
+ * @param   ullCount     The initial count value assigned to the semaphore when it is created.
+ * @param   ullBucket    The maximum count value that can be reached.
+ * @param   pcSemName    Descriptive name <span class="k">for</span> the semaphore.
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ * @note    The Semaphore Handle must be initialised as NULL.
+ *          To create a binary semaphore, <span class="nb">set</span> ullBucket to <span class="m">1</span>.
+ */
+int iOSAL_Semaphore_Create<span class="o">(</span> void** ppvSemHandle,
+                            uint32_t ullCount,
+                            uint32_t ullBucket,
+                            const char* pcSemName <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="delete-osal-semaphore">
+<span id="operatingsystemabstractionlayer-osal-deleteosalsemaphore"></span><h4>Delete OSAL Semaphore<a class="headerlink" href="#delete-osal-semaphore" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Semaphore_Destroy</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Deletes the binary or counting semaphore, to which the handle refers.
+ *
+ * @param   ppvSemHandle Pointer-to-pointer that will be cast to appropriate OS Semaphore Handle data type.
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to <span class="k">function</span>
+ *
+ * @note    If successful, the handle will be reset to NULL.
+ */
+int iOSAL_Semaphore_Destroy<span class="o">(</span> void** ppvSemHandle <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="pend-to-osal-semaphore">
+<span id="operatingsystemabstractionlayer-osal-pendtoosalsemaphore"></span><h4>Pend to OSAL Semaphore<a class="headerlink" href="#pend-to-osal-semaphore" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Semaphore_Pend</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Pends to / obtains a previously created semaphore, to which the handle refers.
+ *
+ * @param   pvSemHandle Pointer that will be cast to appropriate OS Semaphore Handle data type.
+ * @param   ulTimeoutMs Timeout <span class="k">in</span> ms to <span class="nb">wait</span> <span class="k">for</span> a semaphore to become available.
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_PARAMS              invalid parameters passed <span class="k">in</span> to <span class="k">function</span>
+ *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ */
+int iOSAL_Semaphore_Pend<span class="o">(</span> void* pvSemHandle, uint32_t ulTimeoutMs <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="post-to-osal-semaphore">
+<span id="operatingsystemabstractionlayer-osal-posttoosalsemaphore"></span><h4>Post to OSAL Semaphore<a class="headerlink" href="#post-to-osal-semaphore" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Semaphore_Post</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Posts / Releases a previously created semaphore, to which the handle refers.
+ *
+ * @param   pvSemHandle Pointer that will be cast to appropriate OS Semaphore Handle data <span class="nb">type</span>
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ * @note    If calling from an ISR, iOSAL_Semaphore_PostFromISR is recommended.
+ */
+int iOSAL_Semaphore_Post<span class="o">(</span> void* pvSemHandle <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="post-to-osal-semaphore-from-isr">
+<span id="operatingsystemabstractionlayer-osal-posttoosalsemaphore-fromisr"></span><h4>Post to OSAL Semaphore (From ISR)<a class="headerlink" href="#post-to-osal-semaphore-from-isr" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Semaphore_PostFromISR</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   A version of iOSAL_Semaphore_Post<span class="o">()</span> that can be called from an ISR.
+ *
+ * @param   pvSemHandle Pointer that will be cast to appropriate OS Semaphore Handle data <span class="nb">type</span>
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ */
+int iOSAL_Semaphore_PostFromISR<span class="o">(</span> void* pvSemHandle <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="mutex-apis">
+<span id="operatingsystemabstractionlayer-osal-mutexapis"></span><h3>Mutex APIs<a class="headerlink" href="#mutex-apis" title="Permalink to this headline">¶</a></h3>
+<section id="create-osal-mutex">
+<span id="operatingsystemabstractionlayer-osal-createosalmutex"></span><h4>Create OSAL Mutex<a class="headerlink" href="#create-osal-mutex" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Mutex_Create</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Creates a Mutex, and sets OS Mutex Handle by which the Mutex can be referenced.
+ *
+ * @param   ppvMutexHandle Pointer-to-pointer that will be cast to appropriate OS Mutex Handle data <span class="nb">type</span>
+ * @param   pcMutexName    Descriptive name <span class="k">for</span> the Mutex
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ * @note    The Mutex Handle must be initialised as NULL.
+ */
+int iOSAL_Mutex_Create<span class="o">(</span> void**      ppvMutexHandle,
+                        const char* pcMutexName <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="delete-osal-mutex">
+<span id="operatingsystemabstractionlayer-osal-deleteosalmutex"></span><h4>Delete OSAL Mutex<a class="headerlink" href="#delete-osal-mutex" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Mutex_Destroy</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Deletes a Mutex, to which the handle refers.
+ *
+ * @param   ppvMutexHandle Pointer-to-pointer that will be cast to appropriate OS Mutex Handle data <span class="nb">type</span>
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ * @note    If successful, the handle will be reset to NULL.
+ */
+int iOSAL_Mutex_Destroy<span class="o">(</span> void** ppvMutexHandle <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="take-osal-mutex">
+<span id="operatingsystemabstractionlayer-osal-takeosalmutex"></span><h4>Take OSAL Mutex<a class="headerlink" href="#take-osal-mutex" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Mutex_Take</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Obtains a previously created Mutex, to which the handle refers.
+ *
+ * @param   pvMutexHandle Pointer that will be cast to appropriate OS Mutex Handle data type.
+ * @param   ulTimeoutMs Timeout <span class="k">in</span> ms to <span class="nb">wait</span> <span class="k">for</span> a Mutex to become available.
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_PARAMS              invalid parameters passed <span class="k">in</span> to <span class="k">function</span>
+ *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ */
+int iOSAL_Mutex_Take<span class="o">(</span> void*    pvMutexHandle,
+                      uint32_t ulTimeoutMs <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="release-osal-mutex">
+<span id="operatingsystemabstractionlayer-osal-releaseosalmutex"></span><h4>Release OSAL Mutex<a class="headerlink" href="#release-osal-mutex" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Mutex_Release</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Releases a previously created Mutex, to which the handle refers.
+ *
+ * @param   pvMutexHandle Pointer that will be cast to appropriate OS Mutex Handle data type.
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ */
+int iOSAL_Mutex_Release<span class="o">(</span> void* pvMutexHandle <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="mailbox-apis">
+<span id="operatingsystemabstractionlayer-osal-mailboxapis"></span><h3>Mailbox APIs<a class="headerlink" href="#mailbox-apis" title="Permalink to this headline">¶</a></h3>
+<section id="create-osal-mailbox">
+<span id="operatingsystemabstractionlayer-osal-createosalmailbox"></span><h4>Create OSAL Mailbox<a class="headerlink" href="#create-osal-mailbox" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_MBox_Create</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Creates a new MailBox, and sets OS MailBox Handle by which the MailBox can be referenced.
+ *
+ * @param   ppvMBoxHandle  Pointer-to-pointer that will be cast to appropriate OS MailBox Handle data type.
+ * @param   ulMBoxLength   The max number of items the MailBox can hold.
+ * @param   ulItemSize     Size <span class="o">(</span>Bytes<span class="o">)</span> of each item <span class="k">in</span> the MailBox.
+ * @param   pcMBoxName     Descriptive name <span class="k">for</span> the MailBox.
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ * @note    The MailBox Handle must be initialised as NULL.
+ */
+int iOSAL_MBox_Create<span class="o">(</span> void**      ppvMBoxHandle,
+                       uint32_t    ulMBoxLength,
+                       uint32_t    ulItemSize,
+                       const char* pcMBoxName <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="delete-osal-mailbox">
+<span id="operatingsystemabstractionlayer-osal-deleteosalmailbox"></span><h4>Delete OSAL Mailbox<a class="headerlink" href="#delete-osal-mailbox" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_MBox_Destroy</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Resets a MailBox, to which the handle refers.
+ *
+ * @param   ppvMBoxHandle Pointer-to-pointer that will be cast to appropriate OS MailBox Handle data type.
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ * @note    If successful, the handle will be reset to NULL.
+ */
+int iOSAL_MBox_Destroy<span class="o">(</span> void** ppvMBoxHandle <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="pend-to-osal-mailbox">
+<span id="operatingsystemabstractionlayer-osal-pendtoosalmailbox"></span><h4>Pend to OSAL Mailbox<a class="headerlink" href="#pend-to-osal-mailbox" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_MBox_Pend</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Recieve an item from a message Mailbox, to which the handle refers.
+ *
+ * @param   pvMBoxHandle   Pointer that will be cast to appropriate OS Mailbox Handle data type.
+ * @param   pvMBoxBuffer   A pointer to the buffer into which the received item will be copied.
+ * @param   ulTimeoutMs      The maximum amount of <span class="nb">time</span> <span class="o">(</span>ms<span class="o">)</span> the task should block waiting <span class="k">for</span> an item to receive.
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_PARAMS              invalid parameters passed <span class="k">in</span> to <span class="k">function</span>
+ *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ */
+int iOSAL_MBox_Pend<span class="o">(</span> void*    pvMBoxHandle,
+                     void*    pvMBoxBuffer,
+                     uint32_t ulTimeoutMs <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="post-to-osal-mailbox">
+<span id="operatingsystemabstractionlayer-osal-posttoosalmailbox"></span><h4>Post to OSAL Mailbox<a class="headerlink" href="#post-to-osal-mailbox" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_MBox_Post</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Posts an item onto a MailBox, to which the handle refers.
+ *
+ * @param   pvMBoxHandle Pointer that will be cast to appropriate OS MailBox Handle data type.
+ * @param   pvMBoxItem   A pointer to the item that is to be placed on the mailBox.
+ * @param   ulTimeoutMs  The maximum amount of <span class="nb">time</span> <span class="o">(</span>ms<span class="o">)</span> the task should block waiting <span class="k">for</span> space to become available on the mailBox.
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_PARAMS              invalid parameters passed <span class="k">in</span> to <span class="k">function</span>
+ *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ * @note    If calling from an ISR, iOSAL_MBox_PostFromISR is recommended.
+ */
+int iOSAL_MBox_Post<span class="o">(</span> void*    pvMBoxHandle,
+                     void*    pvMBoxItem,
+                     uint32_t ulTimeoutMs <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="post-to-osal-mailbox-from-isr">
+<span id="operatingsystemabstractionlayer-osal-posttoosalmailbox-fromisr"></span><h4>Post to OSAL Mailbox (From ISR)<a class="headerlink" href="#post-to-osal-mailbox-from-isr" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_MBox_PostFromISR</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   A version of iOSAL_MBox_Post<span class="o">()</span> that can be called from an ISR.
+ *
+ * @param   pvMBoxHandle Pointer that will be cast to appropriate OS MailBox Handle data type.
+ * @param   pvMBoxItem   A pointer to the item that is to be placed on the mailBox.
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_PARAMS              invalid parameters passed <span class="k">in</span> to <span class="k">function</span>
+ *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ */
+int iOSAL_MBox_PostFromISR<span class="o">(</span> void* pvMBoxHandle, void* pvMBoxItem <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="event-apis">
+<span id="operatingsystemabstractionlayer-osal-eventapis"></span><h3>Event APIs<a class="headerlink" href="#event-apis" title="Permalink to this headline">¶</a></h3>
+<section id="create-osal-event-group">
+<span id="operatingsystemabstractionlayer-osal-createosaleventgroup"></span><h4>Create OSAL Event Group<a class="headerlink" href="#create-osal-event-group" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_EventFlag_Create</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Creates a new Event Flag group, and sets OS Handle by which the Event Flag group can be referenced.
+ *
+ * @param   ppvEventFlagHandle  Pointer-to-pointer that will be cast to appropriate OS Event Flag Handle data type.
+ * @param   pcEventFlagName     Descriptive name <span class="k">for</span> the MailBox.
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ * @note    The Event Flag Handle must be initialised as NULL.
+ */
+int iOSAL_EventFlag_Create<span class="o">(</span> void** ppvEventFlagHandle, const char* pcEventFlagName <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="delete-osal-event-group">
+<span id="operatingsystemabstractionlayer-osal-deleteosaleventgroup"></span><h4>Delete OSAL Event Group<a class="headerlink" href="#delete-osal-event-group" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_EventFlag_Destroy</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Deletes an Event Flag group, to which the handle refers.
+ *
+ * @param   pvEventFlagHandle Pointer that will be cast to appropriate OS Event Flag Handle data type.
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ * @note    If successful, the handle will be reset to NULL.
+ */
+int iOSAL_EventFlag_Destroy<span class="o">(</span> void** ppvEventFlagHandle <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="pend-to-osal-event-group">
+<span id="operatingsystemabstractionlayer-osal-pendtoosaleventgroup"></span><h4>Pend to OSAL Event Group<a class="headerlink" href="#pend-to-osal-event-group" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_EventFlag_Pend</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Pend task to Wait <span class="k">for</span> a bit or group of bits to become set.
+ *
+ * @param   pvEventFlagHandle Pointer that will be cast to appropriate OS Event Flag Handle data type.
+ * @param   ulFlagWait Bitwise value to specify the bits to <span class="nb">wait</span> on being <span class="nb">set</span> or cleared.
+ * @param   ulTimeoutMs The maximum amount of <span class="nb">time</span> <span class="o">(</span>ms<span class="o">)</span> the task should block waiting specified bits to be set.
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_PARAMS              invalid parameters passed <span class="k">in</span> to <span class="k">function</span>
+ *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ * @note    This <span class="k">function</span> cannot be called from an ISR.
+ */
+int iOSAL_EventFlag_Pend<span class="o">(</span> void* pvEventFlagHandle, uint32_t ulFlagWait, uint32_t ulTimeoutMs <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="post-to-osal-event-group">
+<span id="operatingsystemabstractionlayer-osal-posttoosaleventgroup"></span><h4>Post to OSAL Event Group<a class="headerlink" href="#post-to-osal-event-group" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_EventFlag_Post</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Sets or clears event flag bits, to which the handle refers.
+ *
+ * @param   pvEventFlagHandle Pointer that will be cast to appropriate OS Event Flag Handle data type.
+ * @param   ulFlagSet Bitwise value to specify the bits to be <span class="nb">set</span> or cleared.
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_PARAMS              invalid parameters passed <span class="k">in</span> to <span class="k">function</span>
+ *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ * @note    If calling from an ISR, iOSAL_EventFlag_PostFromISR is recommended.
+ */
+int iOSAL_EventFlag_Post<span class="o">(</span> void* pvEventFlagHandle, uint32_t ulFlagSet <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="post-to-osal-event-group-from-isr">
+<span id="operatingsystemabstractionlayer-osal-posttoosaleventgroup-fromisr"></span><h4>Post to OSAL Event Group (From ISR)<a class="headerlink" href="#post-to-osal-event-group-from-isr" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_EventFlag_PostFromISR</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   A version of iOSAL_EventFlag_Post<span class="o">()</span> that can be called from an ISR.
+ *
+ * @param   pvEventFlagHandle Pointer that will be cast to appropriate OS Event Flag Handle data type.
+ * @param   ulFlagSet Bitwise value to specify the bits to be <span class="nb">set</span> or cleared.
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_PARAMS              invalid parameters passed <span class="k">in</span> to <span class="k">function</span>
+ *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ */
+int iOSAL_EventFlag_PostFromISR<span class="o">(</span> void* pvEventFlagHandle, uint32_t ulFlagSet <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="timer-apis">
+<span id="operatingsystemabstractionlayer-osal-timerapis"></span><h3>Timer APIs<a class="headerlink" href="#timer-apis" title="Permalink to this headline">¶</a></h3>
+<section id="create-osal-timer">
+<span id="operatingsystemabstractionlayer-osal-createosaltimer"></span><h4>Create OSAL Timer<a class="headerlink" href="#create-osal-timer" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Timer_Create</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Creates a new software timer instance, and sets OS Handle by which the Timer can be referenced.
+ *
+ * @param   ppvTimerHandle   Pointer-to-pointer that will be cast to appropriate OS Timer Handle data type.
+ * @param   xTimerConfig     Timer config defining <span class="k">if</span> timer is one-shot or periodic
+ * @param   pvTimerCallback  The <span class="k">function</span> to call when the timer expires.
+ * @param   pcTimerName      A human readable text name assigned to the timer.
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_PARAMS              invalid parameters passed <span class="k">in</span> to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ * @note    The Timer Handle must be initialised as NULL.
+ */
+int iOSAL_Timer_Create<span class="o">(</span> void** ppvTimerHandle,
+                        OSAL_TIMER_CONFIG xTimerConfig,
+                        void <span class="o">(</span> *pvTimerCallback <span class="o">)(</span> void* pvTimerHandle <span class="o">)</span>,
+                        const char* pcTimerName <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="delete-osal-timer">
+<span id="operatingsystemabstractionlayer-osal-deleteosaltimer"></span><h4>Delete OSAL Timer<a class="headerlink" href="#delete-osal-timer" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Timer_Destroy</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Deletes a Timer, to which the handle refers.
+ *
+ * @param   ppvTimerHandle Pointer-to-pointer that will be cast to appropriate OS Timer Handle data type.
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_PARAMS              invalid parameters passed <span class="k">in</span> to <span class="k">function</span>
+ *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ * @note    If successful, the handle will be reset to NULL.
+ */
+int iOSAL_Timer_Destroy<span class="o">(</span> void** ppvTimerHandle <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="start-osal-timer">
+<span id="operatingsystemabstractionlayer-osal-startosaltimer"></span><h4>Start OSAL Timer<a class="headerlink" href="#start-osal-timer" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Timer_Start</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Starts a Timer, to which the handle refers.
+ *
+ * @param   pvTimerHandle  Pointer that will be cast to appropriate OS Timer Handle data type.
+ * @param   ulDurationMs   Number of ms <span class="k">until</span> the timer callback is triggered.
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_PARAMS              invalid parameters passed <span class="k">in</span> to <span class="k">function</span>
+ *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ */
+int iOSAL_Timer_Start<span class="o">(</span> void* pvTimerHandle, uint32_t ulDurationMs <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="stop-osal-timer">
+<span id="operatingsystemabstractionlayer-osal-stoposaltimer"></span><h4>Stop OSAL Timer<a class="headerlink" href="#stop-osal-timer" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Timer_Stop</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Stops a Timer, to which the handle refers.
+ *
+ * @param   pvTimerHandle  Pointer that will be cast to appropriate OS Timer Handle data type.
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_PARAMS              invalid parameters passed <span class="k">in</span> to <span class="k">function</span>
+ *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ */
+int iOSAL_Timer_Stop<span class="o">(</span> void* pvTimerHandle <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="reset-osal-timer">
+<span id="operatingsystemabstractionlayer-osal-resetosaltimer"></span><h4>Reset OSAL Timer<a class="headerlink" href="#reset-osal-timer" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Timer_Reset</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Re-Starts a Timer, to which the handle refers.
+ *
+ * @param   pvTimerHandle  Pointer that will be cast to appropriate OS Timer Handle data type.
+ * @param   ulDurationMs   Number of ms <span class="k">until</span> the timer callback is triggered.
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_PARAMS              invalid parameters passed <span class="k">in</span> to <span class="k">function</span>
+ *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ */
+int iOSAL_Timer_Reset<span class="o">(</span> void* pvTimerHandle, uint32_t ulDurationMs <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="interrupt-apis">
+<span id="operatingsystemabstractionlayer-osal-interruptapis"></span><h3>Interrupt APIs<a class="headerlink" href="#interrupt-apis" title="Permalink to this headline">¶</a></h3>
+<section id="setup-osal-interrupt">
+<span id="operatingsystemabstractionlayer-osal-setuposalinterrupt"></span><h4>Setup OSAL Interrupt<a class="headerlink" href="#setup-osal-interrupt" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Interrupt_Setup</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Sets up interrupt handler callback with appropriate interrupt ID
+ *
+ * @param   ucInterruptID       Interrupt ID <span class="o">(</span>defined <span class="k">in</span> BSP<span class="o">)</span>
+ * @param   pvInterruptHandler  Pointer to interrupt handler callback <span class="k">function</span>.
+ * @param   pvCallBackRef       Param to be passed into interrupt handler callback <span class="k">function</span>
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_PARAMS              invalid parameters passed <span class="k">in</span> to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ */
+int iOSAL_Interrupt_Setup<span class="o">(</span> uint8_t ucInterruptID,
+                           void    <span class="o">(</span> *pvInterruptHandler <span class="o">)(</span> void* pvCallBackRef <span class="o">)</span>,
+                           void*   pvCallBackRef <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="enable-osal-interrupt">
+<span id="operatingsystemabstractionlayer-osal-enableosalinterrupt"></span><h4>Enable OSAL Interrupt<a class="headerlink" href="#enable-osal-interrupt" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Interrupt_Enable</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Enable OSAL interrupts
+ *
+ * @param   ucInterruptID       Interrupt ID <span class="o">(</span>defined <span class="k">in</span> BSP<span class="o">)</span>
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_PARAMS              invalid parameters passed <span class="k">in</span> to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ */
+int iOSAL_Interrupt_Enable<span class="o">(</span> uint8_t ucInterruptID <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="disable-osal-interrupt">
+<span id="operatingsystemabstractionlayer-osal-disableosalinterrupt"></span><h4>Disable OSAL Interrupt<a class="headerlink" href="#disable-osal-interrupt" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Interrupt_Disable</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Disable OSAL interrupts
+ *
+ * @param   ucInterruptID       Interrupt ID <span class="o">(</span>defined <span class="k">in</span> BSP<span class="o">)</span>
+ *
+ * @return  OSAL_ERRORS_NONE                no errors, call was successful
+ *          OSAL_ERRORS_PARAMS              invalid parameters passed <span class="k">in</span> to <span class="k">function</span>
+ *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+ *
+ */
+int iOSAL_Interrupt_Disable<span class="o">(</span> uint8_t ucInterruptID <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="thread-safe-apis">
+<span id="operatingsystemabstractionlayer-osal-threadsafeapis"></span><h4>Thread safe APIs<a class="headerlink" href="#thread-safe-apis" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="mark-the-start-of-critical-code-region">
+<span id="operatingsystemabstractionlayer-osal-markthestartofcriticalcoderegion"></span><h4>Mark the start of critical code region<a class="headerlink" href="#mark-the-start-of-critical-code-region" title="Permalink to this headline">¶</a></h4>
+<p><strong>vOSAL_EnterCritical</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Mark the start of critical code region.
+ *
+ * @return  N/A.
+ *
+ */
+void vOSAL_EnterCritical<span class="o">(</span> void <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="mark-the-end-of-critical-code-region">
+<span id="operatingsystemabstractionlayer-osal-marktheendofcriticalcoderegion"></span><h4>Mark the end of critical code region<a class="headerlink" href="#mark-the-end-of-critical-code-region" title="Permalink to this headline">¶</a></h4>
+<p><strong>vOSAL_ExitCritical</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Mark the end of critical code region.
+ *
+ * @return  N/A.
+ *
+ */
+void vOSAL_ExitCritical<span class="o">(</span> void <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="osal-malloc">
+<span id="operatingsystemabstractionlayer-osal-osalmalloc"></span><h4>OSAL malloc<a class="headerlink" href="#osal-malloc" title="Permalink to this headline">¶</a></h4>
+<p><strong>pvOSAL_MemAlloc</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   OSAL wrapper <span class="k">for</span> task/thread safe memory allocation.
+ *
+ * @param   uint16_t  The number of bytes to allocate.
+ *
+ * @return  Pointer to the beginning of newly allocated memory.
+ *          NULL <span class="k">if</span> unsuccessful.
+ *
+ */
+void* pvOSAL_MemAlloc<span class="o">(</span> uint16_t xSize <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="osal-memset">
+<span id="operatingsystemabstractionlayer-osal-osalmemset"></span><h4>OSAL memset<a class="headerlink" href="#osal-memset" title="Permalink to this headline">¶</a></h4>
+<p><strong>pvOSAL_MemSet</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   OSAL wrapper <span class="k">for</span> task/thread safe memory set.
+ *
+ * @param   pvDestination Pointer to the block of memory to be set.
+ * @param   iValue        The value to be set.
+ * @param   usSize        The number of bytes to be set, to the specified valve.
+ *
+ * @return  Pointer to the beginning of newly <span class="nb">set</span> memory.
+ *          NULL <span class="k">if</span> unsuccessful.
+ *
+ */
+void* pvOSAL_MemSet<span class="o">(</span> void* pvDestination, int iValue, uint16_t usSize <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="osal-memcpy">
+<span id="operatingsystemabstractionlayer-osal-osalmemcpy"></span><h4>OSAL memcpy<a class="headerlink" href="#osal-memcpy" title="Permalink to this headline">¶</a></h4>
+<p><strong>pvOSAL_MemCpy</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   OSAL wrapper <span class="k">for</span> task/thread safe memory copy.
+ *
+ * @param   pvDestination  Pointer to the destination where the content is to be copied.
+ * @param   pvSource       Pointer to the <span class="nb">source</span> of data to be copied.
+ * @param   usSize         The number of bytes to copy.
+ *
+ * @return  Pointer to the destination where the content is copied.
+ *          NULL <span class="k">if</span> unsuccessful.
+ *
+ */
+void* pvOSAL_MemCpy<span class="o">(</span> void* pvDestination, const void* pvSource, uint16_t usSize <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="osal-free">
+<span id="operatingsystemabstractionlayer-osal-osalfree"></span><h4>OSAL free<a class="headerlink" href="#osal-free" title="Permalink to this headline">¶</a></h4>
+<p><strong>vOSAL_MemFree</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   OSAL wrapper for task/thread safe memory deallocation.
+ *
+ * @param   ppv  Pointer-to-pointer to the memory to deallocate.
+ *
+ * @return  N/A.
+ *
+ * @note    After free'ing the allocated memory, this function will also
+ *          nullify the pointer to the deallocated memory.
+ */
+void vOSAL_MemFree( void** ppv );
+</pre></div>
+</div>
+</section>
+<section id="osal-printf">
+<span id="operatingsystemabstractionlayer-osal-osalprintf"></span><h4>OSAL printf<a class="headerlink" href="#osal-printf" title="Permalink to this headline">¶</a></h4>
+<p><strong>vOSAL_Printf</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   OSAL wrapper <span class="k">for</span> task/thread safe prints.
+ *
+ * @param   pcFormat  C string that contains the text to be written.
+ *
+ * @return  N/A.
+ *
+ */
+void vOSAL_Printf<span class="o">(</span> const char* pcFormat, ... <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="osal-getchar">
+<span id="operatingsystemabstractionlayer-osal-osalgetchar"></span><h4>OSAL getchar<a class="headerlink" href="#osal-getchar" title="Permalink to this headline">¶</a></h4>
+<p><strong>cOSAL_GetChar</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   OSAL wrapper <span class="k">for</span> task/thread safe char reading.
+ *
+ * @return  character <span class="nb">read</span> from STDIN.
+ *
+ */
+char cOSAL_GetChar<span class="o">(</span> void <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="debug-stats-apis">
+<span id="operatingsystemabstractionlayer-osal-debugstatsapis"></span><h3>Debug stats APIs<a class="headerlink" href="#debug-stats-apis" title="Permalink to this headline">¶</a></h3>
+<section id="print-all-stats">
+<span id="operatingsystemabstractionlayer-osal-printallstats"></span><h4>Print all stats<a class="headerlink" href="#print-all-stats" title="Permalink to this headline">¶</a></h4>
+<p><strong>vOSAL_PrintAllStats</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Prints OSAL debug stats.
+ *
+ * @param   eVerbosity  Verbosity level <span class="k">for</span> the debug data.
+ * @param   eStatType   Type of stat to print.
+ *
+ */
+void vOSAL_PrintAllStats<span class="o">(</span> OSAL_STATS_VERBOSITY eVerbosity, OSAL_STATS_TYPE eStatType <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="clear-all-stats">
+<span id="operatingsystemabstractionlayer-osal-clearallstats"></span><h4>Clear all stats<a class="headerlink" href="#clear-all-stats" title="Permalink to this headline">¶</a></h4>
+<p><strong>vOSAL_ClearAllStats</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Clears debug stats and frees associated memory.
+ *
+ */
+void vOSAL_ClearAllStats<span class="o">(</span> void <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="examples">
+<span id="operatingsystemabstractionlayer-osal-examples"></span><h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p><strong>iOSAL_GetOsVersion</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>char pcOs<span class="o">[</span> OSAL_OS_NAME_LEN <span class="o">]</span> <span class="o">=</span> <span class="o">{</span> <span class="m">0</span> <span class="o">}</span><span class="p">;</span>
+uint8_t <span class="nv">ucVersionMajor</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span>
+uint8_t <span class="nv">ucVersionMinor</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span>
+uint8_t <span class="nv">ucVersionBuild</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span>
+
+<span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_GetOsVersion<span class="o">(</span> pcOs,
+                                            <span class="p">&amp;</span>ucVersionMajor,
+                                            <span class="p">&amp;</span>ucVersionMinor,
+                                            <span class="p">&amp;</span>ucVersionBuild<span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* Get OS version failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* Get OS version success */
+<span class="o">}</span>
+</pre></div>
+</div>
+<section id="operatingsystemabstractionlayer-osal-schedulerapis-1">
+<span id="id1"></span><h3>Scheduler APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-schedulerapis-1" title="Permalink to this headline">¶</a></h3>
+<section id="start-rtos-scheduler-example">
+<span id="operatingsystemabstractionlayer-osal-startrtosschedulerexample"></span><h4>Start RTOS scheduler example<a class="headerlink" href="#start-rtos-scheduler-example" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_StartOS</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>void* <span class="nv">pvMainTaskHandle</span> <span class="o">=</span> NULL<span class="p">;</span>
+
+void vTaskFuncMain<span class="o">(</span> void <span class="o">)</span>
+<span class="o">{</span>
+    /* implement main task <span class="k">function</span>  */
+<span class="o">}</span>
+
+/* Start scheduler <span class="o">(</span>with Round Robin Enabled<span class="o">)</span> and create main <span class="nb">test</span> task */
+<span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_StartOS<span class="o">(</span> TRUE,
+                                       <span class="p">&amp;</span>pvMainTaskHandle,
+                                       <span class="p">&amp;</span>vTaskFuncMain,
+                                       0x1000,
+                                       <span class="m">1</span>  <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* Start OS failed */
+<span class="o">}</span>
+<span class="k">else</span> <span class="k">if</span><span class="o">(</span> <span class="nv">NULL</span> <span class="o">==</span> pvMainTaskHandle <span class="o">)</span>
+<span class="o">{</span>
+    /* Start OS failed */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="get-tick-count-since-scheduler-started-example">
+<span id="operatingsystemabstractionlayer-osal-gettickcountsinceschedulerstartedexample"></span><h4>Get Tick count since scheduler started example<a class="headerlink" href="#get-tick-count-since-scheduler-started-example" title="Permalink to this headline">¶</a></h4>
+<p><strong>ulOSAL_GetUptimeTicks</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uint32_t <span class="nv">UpTimeTicksBeforeSleep</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span>
+uint32_t <span class="nv">UpTimeTicksAfterSleep</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span>
+
+<span class="nv">UpTimeTicksBeforeSleep</span> <span class="o">=</span> ulOSAL_GetUptimeTicks<span class="o">()</span><span class="p">;</span>
+iOSAL_Task_SleepTicks<span class="o">(</span> <span class="m">500</span> <span class="o">)</span><span class="p">;</span> /* delay task - <span class="m">500</span> Ticks */
+<span class="nv">UpTimeTicksAfterSleep</span> <span class="o">=</span> ulOSAL_GetUptimeTicks<span class="o">()</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="get-ms-count-since-scheduler-started-example">
+<span id="operatingsystemabstractionlayer-osal-getmscountsinceschedulerstartedexample"></span><h4>Get ms count since scheduler started example<a class="headerlink" href="#get-ms-count-since-scheduler-started-example" title="Permalink to this headline">¶</a></h4>
+<p><strong>ulOSAL_GetUptimeMs</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uint32_t <span class="nv">UpTimeMsBeforeSleep</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span>
+uint32_t <span class="nv">UpTimeMsAfterSleep</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span>
+
+<span class="nv">UpTimeMsBeforeSleep</span> <span class="o">=</span> ulOSAL_GetUptimeMs<span class="o">()</span><span class="p">;</span>
+iOSAL_Task_SleepMs<span class="o">(</span> <span class="m">5000</span> <span class="o">)</span><span class="p">;</span> /* delay task - 2s */
+<span class="nv">UpTimeMsAfterSleep</span> <span class="o">=</span> ulOSAL_GetUptimeMs<span class="o">()</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="operatingsystemabstractionlayer-osal-taskapis-1">
+<span id="id2"></span><h3>Task APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-taskapis-1" title="Permalink to this headline">¶</a></h3>
+<section id="create-osal-task-example">
+<span id="operatingsystemabstractionlayer-osal-createosaltaskexample"></span><h4>Create OSAL Task Example<a class="headerlink" href="#create-osal-task-example" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Task_Create</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>void *pvTaskHandle <span class="o">=</span> NULL<span class="p">;</span>
+void *pvArg <span class="o">=</span> NULL<span class="p">;</span> /* <span class="nb">set</span> to task argument */
+
+/* Define task <span class="k">function</span> */
+void vTaskFunc<span class="o">(</span> void* pvArg <span class="o">)</span>
+<span class="o">{</span>
+    FOREVER
+    <span class="o">{</span>
+       /* Task implementation */
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_Task_Create<span class="o">(</span> <span class="p">&amp;</span>pvTaskHandle, <span class="p">&amp;</span>vTaskFunc, pvArg, <span class="m">10</span>, 0x1000, <span class="s2">"test_task"</span> <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* task create failed */
+<span class="o">}</span>
+<span class="k">else</span> <span class="k">if</span><span class="o">(</span> <span class="nv">NULL</span> <span class="o">==</span> pvTaskHandle <span class="o">)</span>
+<span class="o">{</span>
+    /* task create failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* task create success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="delete-osal-task-example">
+<span id="operatingsystemabstractionlayer-osal-deleteosaltaskexample"></span><h4>Delete OSAL Task Example<a class="headerlink" href="#delete-osal-task-example" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Task_Delete</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> OSAL_ERRRORS_NONE !<span class="o">=</span> iOSAL_Task_Delete<span class="o">(</span> <span class="p">&amp;</span>pvTaskHandle <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* task delete failed */
+<span class="o">}</span>
+<span class="k">else</span> <span class="k">if</span><span class="o">(</span> NULL !<span class="o">=</span> pvTaskHandle0 <span class="o">)</span>
+<span class="o">{</span>
+    /* task delete failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* task delete success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="suspend-osal-task-example">
+<span id="operatingsystemabstractionlayer-osal-suspendosaltaskexample"></span><h4>Suspend OSAL Task Example<a class="headerlink" href="#suspend-osal-task-example" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Task_Suspend</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> OSAL_ERRRORS_NONE !<span class="o">=</span> iOSAL_Task_Suspend<span class="o">(</span> pvTaskHandle <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* task <span class="nb">suspend</span> failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* task <span class="nb">suspend</span> success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="resume-osal-task-example">
+<span id="operatingsystemabstractionlayer-osal-resumeosaltaskexample"></span><h4>Resume OSAL Task Example<a class="headerlink" href="#resume-osal-task-example" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Task_Resume</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> OSAL_ERRRORS_NONE !<span class="o">=</span> iOSAL_Task_Resume<span class="o">(</span>  pvTaskHandle <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* task resume failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* task resume success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-osaltasksleep-ticks-1">
+<span id="id3"></span><h4>OSAL Task Sleep (Ticks)<a class="headerlink" href="#operatingsystemabstractionlayer-osal-osaltasksleep-ticks-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Task_SleepTicks</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>iOSAL_Task_SleepTicks<span class="o">(</span> <span class="m">500</span> <span class="o">)</span><span class="p">;</span> /* delay main task - <span class="m">500</span> Ticks */
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-osaltasksleep-ms-1">
+<span id="id4"></span><h4>OSAL Task Sleep (ms)<a class="headerlink" href="#operatingsystemabstractionlayer-osal-osaltasksleep-ms-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Task_SleepMs</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>iOSAL_Task_SleepMs<span class="o">(</span> <span class="m">2000</span> <span class="o">)</span><span class="p">;</span> /* delay main task - 2s */
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-semaphoreapis-1">
+<span id="id5"></span><h4>Semaphore APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-semaphoreapis-1" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="operatingsystemabstractionlayer-osal-createosalsemaphore-1">
+<span id="id6"></span><h4>Create OSAL Semaphore<a class="headerlink" href="#operatingsystemabstractionlayer-osal-createosalsemaphore-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Semaphore_Create</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>static void* <span class="nv">pvSemBinaryHandle</span>      <span class="o">=</span> NULL<span class="p">;</span>
+static void* <span class="nv">pvSemCountingHandle</span>    <span class="o">=</span> NULL<span class="p">;</span>
+
+/* Create Binary Semaphore */
+<span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_Semaphore_Create<span class="o">(</span> <span class="p">&amp;</span>pvSemBinaryHandle,
+                                                <span class="m">1</span>,
+                                                <span class="m">1</span>,
+                                                <span class="s2">"Test Binary Semaphore"</span> <span class="o">)</span>  <span class="o">)</span> <span class="o">{</span>
+    /* semaphore create failed */
+<span class="o">}</span>
+<span class="k">else</span> <span class="k">if</span><span class="o">(</span> <span class="nv">NULL</span> <span class="o">==</span> pvSemBinaryHandle <span class="o">)</span>
+<span class="o">{</span>
+    /* semaphore create failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* semaphore create success */
+<span class="o">}</span>
+
+/* Create Counting Semaphore */
+<span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_Semaphore_Create<span class="o">(</span> <span class="p">&amp;</span>pvSemCountingHandle,
+                                                <span class="m">5</span>,
+                                                <span class="m">5</span>,
+                                                <span class="s2">"Test Binary Semaphore"</span> <span class="o">)</span>  <span class="o">)</span> <span class="o">{</span>
+    /* semaphore create failed */
+<span class="o">}</span>
+<span class="k">else</span> <span class="k">if</span><span class="o">(</span> <span class="nv">NULL</span> <span class="o">==</span> pvSemCountingHandle <span class="o">)</span>
+<span class="o">{</span>
+    /* semaphore create failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* semaphore create success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-deleteosalsemaphore-1">
+<span id="id7"></span><h4>Delete OSAL Semaphore<a class="headerlink" href="#operatingsystemabstractionlayer-osal-deleteosalsemaphore-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Semaphore_Destroy</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_Semaphore_Destroy<span class="o">(</span> <span class="p">&amp;</span>pvSemBinaryHandle <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* semaphore delete failed */
+<span class="o">}</span>
+<span class="k">else</span> <span class="k">if</span><span class="o">(</span> NULL !<span class="o">=</span> pvSemBinaryHandle <span class="o">)</span>
+<span class="o">{</span>
+    /* semaphore delete failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* semaphore delete success */
+<span class="o">}</span>
+
+<span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_Semaphore_Destroy<span class="o">(</span> <span class="p">&amp;</span>pvSemCountingHandle <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* semaphore delete failed */
+<span class="o">}</span>
+<span class="k">else</span> <span class="k">if</span><span class="o">(</span> NULL !<span class="o">=</span> pvSemCountingHandle <span class="o">)</span>
+<span class="o">{</span>
+    /* semaphore delete failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* semaphore delete success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-pendtoosalsemaphore-1">
+<span id="id8"></span><h4>Pend to OSAL Semaphore<a class="headerlink" href="#operatingsystemabstractionlayer-osal-pendtoosalsemaphore-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Semaphore_Pend</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_Semaphore_Pend<span class="o">(</span> pvSemBinaryHandle, OSAL_TIMEOUT_WAIT_FOREVER <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* semaphore pend failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* semaphore pend success */
+<span class="o">}</span>
+
+<span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_Semaphore_Pend<span class="o">(</span> pvSemCountingHandle, OSAL_TIMEOUT_WAIT_FOREVER <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* semaphore pend failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* semaphore pend success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-posttoosalsemaphore-1">
+<span id="id9"></span><h4>Post to OSAL Semaphore<a class="headerlink" href="#operatingsystemabstractionlayer-osal-posttoosalsemaphore-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Semaphore_Post</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_Semaphore_Post<span class="o">(</span> pvSemBinaryHandle <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* semaphore post failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* semaphore post success */
+<span class="o">}</span>
+
+<span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_Semaphore_Post<span class="o">(</span> pvSemCountingHandle <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* semaphore post failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* semaphore post success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="operatingsystemabstractionlayer-osal-mutexapis-1">
+<span id="id10"></span><h3>Mutex APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-mutexapis-1" title="Permalink to this headline">¶</a></h3>
+<section id="operatingsystemabstractionlayer-osal-createosalmutex-1">
+<span id="id11"></span><h4>Create OSAL Mutex<a class="headerlink" href="#operatingsystemabstractionlayer-osal-createosalmutex-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Mutex_Create</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>static void* <span class="nv">pvMutexHandle</span> <span class="o">=</span> NULL<span class="p">;</span>
+
+<span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_Mutex_Create<span class="o">(</span> <span class="p">&amp;</span>pvMutexHandle, <span class="s2">"test_mutex"</span> <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* mutex create failed */
+<span class="o">}</span>
+<span class="k">else</span> <span class="k">if</span><span class="o">(</span> <span class="nv">NULL</span> <span class="o">==</span> pvMutexHandle <span class="o">)</span>
+<span class="o">{</span>
+    /* mutex create failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* mutex create success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-deleteosalmutex-1">
+<span id="id12"></span><h4>Delete OSAL Mutex<a class="headerlink" href="#operatingsystemabstractionlayer-osal-deleteosalmutex-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Mutex_Destroy</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_Mutex_Destroy<span class="o">(</span> <span class="p">&amp;</span>pvMutexHandle <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* mutex delete failed */
+<span class="o">}</span>
+<span class="k">else</span> <span class="k">if</span><span class="o">(</span> NULL !<span class="o">=</span> pvMutexHandle <span class="o">)</span>
+<span class="o">{</span>
+    /* mutex delete failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* mutex delete success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-takeosalmutex-1">
+<span id="id13"></span><h4>Take OSAL Mutex<a class="headerlink" href="#operatingsystemabstractionlayer-osal-takeosalmutex-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Mutex_Take</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_Mutex_Take<span class="o">(</span> pvMutexHandle, OSAL_TIMEOUT_WAIT_FOREVER <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* mutex take failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* mutex take success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-releaseosalmutex-1">
+<span id="id14"></span><h4>Release OSAL Mutex<a class="headerlink" href="#operatingsystemabstractionlayer-osal-releaseosalmutex-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Mutex_Release</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_Mutex_Release<span class="o">(</span> pvMutexHandle <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* mutex release failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* mutex release success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="operatingsystemabstractionlayer-osal-mailboxapis-1">
+<span id="id15"></span><h3>Mailbox APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-mailboxapis-1" title="Permalink to this headline">¶</a></h3>
+<section id="operatingsystemabstractionlayer-osal-createosalmailbox-1">
+<span id="id16"></span><h4>Create OSAL Mailbox<a class="headerlink" href="#operatingsystemabstractionlayer-osal-createosalmailbox-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_MBox_Create</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>static void* <span class="nv">pvMBoxHandle</span> <span class="o">=</span> NULL<span class="p">;</span>
+uint32_t <span class="nv">ulMBoxLength</span> <span class="o">=</span> <span class="m">10</span><span class="p">;</span> /* <span class="nb">set</span> to mailbox length */
+uint32_t <span class="nv">ulItemSize</span> <span class="o">=</span> sizeof<span class="o">(</span> uint32_t <span class="o">)</span><span class="p">;</span> /* <span class="nb">set</span> to item size */
+
+<span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_MBox_Create<span class="o">(</span> <span class="p">&amp;</span>pvMBoxHandle, ulMBoxLength, ulItemSize, <span class="s2">"test_mbox"</span> <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* Mailbox create failed */
+<span class="o">}</span>
+<span class="k">else</span> <span class="k">if</span><span class="o">(</span> <span class="nv">NULL</span> <span class="o">==</span> pvMBoxHandle <span class="o">)</span>
+<span class="o">{</span>
+    /* Mailbox create failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* Mailbox create success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-deleteosalmailbox-1">
+<span id="id17"></span><h4>Delete OSAL Mailbox<a class="headerlink" href="#operatingsystemabstractionlayer-osal-deleteosalmailbox-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_MBox_Destroy</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_MBox_Destroy<span class="o">(</span> <span class="p">&amp;</span>pvMBoxHandle <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* Mailbox delete failed */
+<span class="o">}</span>
+<span class="k">else</span> <span class="k">if</span><span class="o">(</span> NULL !<span class="o">=</span> pvMBoxHandle <span class="o">)</span>
+<span class="o">{</span>
+    /* Mailbox delete failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* Mailbox delete success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-pendtoosalmailbox-1">
+<span id="id18"></span><h4>Pend to OSAL Mailbox<a class="headerlink" href="#operatingsystemabstractionlayer-osal-pendtoosalmailbox-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_MBox_Pend</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">ulRxData</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span>
+uint32_t <span class="nv">ulTimeoutMs</span> <span class="o">=</span>  <span class="m">2000</span><span class="p">;</span> /* <span class="nb">set</span> to desired timeout <span class="o">(</span>ms<span class="o">)</span> */
+
+<span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_MBox_Pend<span class="o">(</span> pvMBoxHandle, <span class="o">(</span> void* <span class="o">)</span><span class="p">&amp;</span>ulRxData, ulTimeoutMs <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* Mailbox pend failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* Mailbox pend success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-posttoosalmailbox-1">
+<span id="id19"></span><h4>Post to OSAL Mailbox<a class="headerlink" href="#operatingsystemabstractionlayer-osal-posttoosalmailbox-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_MBox_Post</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>static uint32_t <span class="nv">ulTxData</span> <span class="o">=</span> 0x12345678<span class="p">;</span> /* <span class="nb">set</span> to desired data */
+
+<span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_MBox_Post<span class="o">(</span> pvMBoxHandle, <span class="o">(</span> void* <span class="o">)</span><span class="p">&amp;</span>ulTxData <span class="o">)</span>, OSAL_NO_WAIT <span class="o">)</span>
+<span class="o">{</span>
+    /* Mailbox post failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* Mailbox post success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="operatingsystemabstractionlayer-osal-eventapis-1">
+<span id="id20"></span><h3>Event APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-eventapis-1" title="Permalink to this headline">¶</a></h3>
+<section id="operatingsystemabstractionlayer-osal-createosaleventgroup-1">
+<span id="id21"></span><h4>Create OSAL Event Group<a class="headerlink" href="#operatingsystemabstractionlayer-osal-createosaleventgroup-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_EventFlag_Create</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>static void* <span class="nv">pvEventFlagHandle</span> <span class="o">=</span> NULL<span class="p">;</span>
+
+/* Create Event Flag Group */
+<span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_EventFlag_Create<span class="o">(</span> <span class="p">&amp;</span>pvEventFlagHandle, <span class="s2">"test_event"</span> <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* Event Group create failed */
+<span class="o">}</span>
+<span class="k">else</span> <span class="k">if</span><span class="o">(</span> <span class="nv">NULL</span> <span class="o">==</span> pvEventFlagHandle <span class="o">)</span>
+<span class="o">{</span>
+    /* Event Group create failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* Event Group create success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-deleteosaleventgroup-1">
+<span id="id22"></span><h4>Delete OSAL Event Group<a class="headerlink" href="#operatingsystemabstractionlayer-osal-deleteosaleventgroup-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_EventFlag_Destroy</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_EventFlag_Destroy<span class="o">(</span> <span class="p">&amp;</span>pvEventFlagHandle <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* Event Group delete failed */
+<span class="o">}</span>
+<span class="k">else</span> <span class="k">if</span><span class="o">(</span> NULL !<span class="o">=</span> pvEventFlagHandle <span class="o">)</span>
+<span class="o">{</span>
+    /* Event Group delete failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* Event Group delete success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-pendtoosaleventgroup-1">
+<span id="id23"></span><h4>Pend to OSAL Event Group<a class="headerlink" href="#operatingsystemabstractionlayer-osal-pendtoosaleventgroup-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_EventFlag_Pend</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#define EVENT_BIT_0 ( 1 &lt;&lt; 0 )</span>
+<span class="c1">#define EVENT_BIT_1 ( 1 &lt;&lt; 1 )</span>
+
+/* pend <span class="k">for</span> event bits <span class="m">0</span> and <span class="m">1</span> */
+<span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_EventFlag_Pend<span class="o">(</span> pvEventFlagHandle,
+                                              <span class="o">(</span> EVENT_BIT_0 <span class="p">|</span> EVENT_BIT_1 <span class="o">)</span>,
+                                              OSAL_TIMEOUT_WAIT_FOREVER <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* Event Group pend failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* Event Group pend success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-posttoosaleventgroup-1">
+<span id="id24"></span><h4>Post to OSAL Event Group<a class="headerlink" href="#operatingsystemabstractionlayer-osal-posttoosaleventgroup-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_EventFlag_Post</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#define EVENT_BIT_0 ( 1 &lt;&lt; 0 )</span>
+<span class="c1">#define EVENT_BIT_1 ( 1 &lt;&lt; 1 )</span>
+
+/* Post Event Flag bits <span class="m">0</span> and <span class="m">1</span> */
+<span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_EventFlag_Post<span class="o">(</span> pvEventFlagHandle,
+                                              <span class="o">(</span> EVENT_BIT_0 <span class="p">|</span> EVENT_BIT_1 <span class="o">)</span> <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* Event Group post failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* Event Group post success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="operatingsystemabstractionlayer-osal-timerapis-1">
+<span id="id25"></span><h3>Timer APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-timerapis-1" title="Permalink to this headline">¶</a></h3>
+<section id="operatingsystemabstractionlayer-osal-createosaltimer-1">
+<span id="id26"></span><h4>Create OSAL Timer<a class="headerlink" href="#operatingsystemabstractionlayer-osal-createosaltimer-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Timer_Create</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>void* <span class="nv">pvTimerHandle</span> <span class="o">=</span> NULL<span class="p">;</span>
+
+void vTimerCallback<span class="o">(</span> void* pvTimerHandle <span class="o">)</span>
+<span class="o">{</span>
+    TEST_PRINTF<span class="o">(</span> <span class="s2">"Timer Callback Called"</span> <span class="o">)</span><span class="p">;</span>
+    iOSAL_Timer_Stop<span class="o">(</span> pvTimerHandle <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+
+<span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_Timer_Create<span class="o">(</span> <span class="p">&amp;</span>pvTimerHandle,
+                                            OSAL_TIMER_CONFIG_ONE_SHOT,
+                                            <span class="o">(</span> void* <span class="o">)</span><span class="m">0</span>,
+                                            vTimerCallback,
+                                            <span class="s2">"Timer 1"</span> <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* Timer create failed */
+<span class="o">}</span>
+<span class="k">else</span> <span class="k">if</span><span class="o">(</span> <span class="nv">NULL</span> <span class="o">==</span> pvTimerHandle <span class="o">)</span>
+<span class="o">{</span>
+    /* Timer create failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* Timer create success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-deleteosaltimer-1">
+<span id="id27"></span><h4>Delete OSAL Timer<a class="headerlink" href="#operatingsystemabstractionlayer-osal-deleteosaltimer-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Timer_Destroy</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_Timer_Destroy<span class="o">(</span> <span class="p">&amp;</span>pvTimerHandle <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* Timer delete failed */
+<span class="o">}</span>
+<span class="k">else</span> <span class="k">if</span><span class="o">(</span> NULL !<span class="o">=</span> pvTimerHandle <span class="o">)</span>
+<span class="o">{</span>
+    /* Timer delete failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* Timer delete success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-startosaltimer-1">
+<span id="id28"></span><h4>Start OSAL Timer<a class="headerlink" href="#operatingsystemabstractionlayer-osal-startosaltimer-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Timer_Start</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_Timer_Start<span class="o">(</span> pvTimerHandle,
+                                           <span class="m">1000</span> <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* Timer start failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* Timer start success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-stoposaltimer-1">
+<span id="id29"></span><h4>Stop OSAL Timer<a class="headerlink" href="#operatingsystemabstractionlayer-osal-stoposaltimer-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Timer_Stop</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_Timer_Stop<span class="o">(</span> pvTimerHandle <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* Timer stop failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* Timer stop success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-resetosaltimer-1">
+<span id="id30"></span><h4>Reset OSAL Timer<a class="headerlink" href="#operatingsystemabstractionlayer-osal-resetosaltimer-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Timer_Reset</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_Timer_Reset<span class="o">(</span> pvTimerHandle,
+                                           <span class="m">2000</span> <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* Timer reset failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* Timer reset success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="operatingsystemabstractionlayer-osal-interruptapis-1">
+<span id="id31"></span><h3>Interrupt APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-interruptapis-1" title="Permalink to this headline">¶</a></h3>
+<section id="operatingsystemabstractionlayer-osal-setuposalinterrupt-1">
+<span id="id32"></span><h4>Setup OSAL Interrupt<a class="headerlink" href="#operatingsystemabstractionlayer-osal-setuposalinterrupt-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Interrupt_Setup</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#define FABRIC_INTERRUPT_HANDLE ( XPAR_FABRIC_UARTLITE_1_VEC_ID )</span>
+
+void vInterruptHandler<span class="o">(</span> void* pvCallBackRef <span class="o">)</span>
+<span class="o">{</span>
+    <span class="k">if</span><span class="o">(</span> NULL !<span class="o">=</span> pvCallBackRef <span class="o">)</span>
+    <span class="o">{</span>
+        /* interrupt handler implementation */
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_Interrupt_Setup<span class="o">(</span> FABRIC_INTERRUPT_HANDLE,
+                                               vInterruptHandler,
+                                               NULL <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* Interrupt setup failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* Interrupt setup success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-enableosalinterrupt-1">
+<span id="id33"></span><h4>Enable OSAL Interrupt<a class="headerlink" href="#operatingsystemabstractionlayer-osal-enableosalinterrupt-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Interrupt_Enable</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#define FABRIC_INTERRUPT_HANDLE ( XPAR_FABRIC_UARTLITE_1_VEC_ID )</span>
+
+<span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_Interrupt_Enable<span class="o">(</span> FABRIC_INTERRUPT_HANDLE <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* Interrupt <span class="nb">enable</span> failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* Interrupt <span class="nb">enable</span> success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-disableosalinterrupt-1">
+<span id="id34"></span><h4>Disable OSAL Interrupt<a class="headerlink" href="#operatingsystemabstractionlayer-osal-disableosalinterrupt-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>iOSAL_Interrupt_Disable</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#define FABRIC_INTERRUPT_HANDLE ( XPAR_FABRIC_UARTLITE_1_VEC_ID )</span>
+
+<span class="k">if</span><span class="o">(</span> OSAL_ERRORS_NONE !<span class="o">=</span> iOSAL_Interrupt_Disable<span class="o">(</span> FABRIC_INTERRUPT_HANDLE <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    /* Interrupt disable failed */
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    /* Interrupt disable success */
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="operatingsystemabstractionlayer-osal-threadsafeapis-1">
+<span id="id35"></span><h3>Thread safe APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-threadsafeapis-1" title="Permalink to this headline">¶</a></h3>
+<section id="operatingsystemabstractionlayer-osal-markthestartofcriticalcoderegion-1">
+<span id="id36"></span><h4>Mark the start of critical code region<a class="headerlink" href="#operatingsystemabstractionlayer-osal-markthestartofcriticalcoderegion-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>vOSAL_EnterCritical</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/* simply call API where needed. No parameters required */
+vOSAL_EnterCritical<span class="o">()</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-marktheendofcriticalcoderegion-1">
+<span id="id37"></span><h4>Mark the end of critical code region<a class="headerlink" href="#operatingsystemabstractionlayer-osal-marktheendofcriticalcoderegion-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>vOSAL_ExitCritical</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/* simply call API where needed. No parameters required */
+vOSAL_ExitCritical<span class="o">()</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="osal-malloc-memset-memcpy-free">
+<span id="operatingsystemabstractionlayer-osal-osalmalloc-memset-memcpy-free"></span><h4>OSAL malloc / memset / memcpy / free<a class="headerlink" href="#osal-malloc-memset-memcpy-free" title="Permalink to this headline">¶</a></h4>
+<p><strong>pvOSAL_MemAlloc</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/* all OSAL memory functions can be safely called from within tasks */
+void vMemoryTaskFunc<span class="o">(</span> void* pvArg <span class="o">)</span>
+<span class="o">{</span>
+    /* allocate <span class="m">5</span> bytes memory */
+    <span class="nv">pucMemBuff1</span> <span class="o">=</span> <span class="o">(</span> uint8_t* <span class="o">)</span>pvOSAL_MemAlloc<span class="o">(</span> <span class="m">5</span>*sizeof<span class="o">(</span> uint8_t <span class="o">)</span> <span class="o">)</span><span class="p">;</span>
+
+    /* store values <span class="k">in</span> memory */
+    pucMemBuff1<span class="o">[</span> <span class="m">0</span> <span class="o">]</span> <span class="o">=</span> 0x11<span class="p">;</span>
+    pucMemBuff1<span class="o">[</span> <span class="m">1</span> <span class="o">]</span> <span class="o">=</span> 0x22<span class="p">;</span>
+    pucMemBuff1<span class="o">[</span> <span class="m">2</span> <span class="o">]</span> <span class="o">=</span> 0x33<span class="p">;</span>
+    pucMemBuff1<span class="o">[</span> <span class="m">3</span> <span class="o">]</span> <span class="o">=</span> 0x44<span class="p">;</span>
+    pucMemBuff1<span class="o">[</span> <span class="m">4</span> <span class="o">]</span> <span class="o">=</span> 0x55<span class="p">;</span>
+
+    /* <span class="nb">set</span> memory */
+    pvOSAL_MemSet<span class="o">(</span> pucMemBuff1, <span class="m">0</span>, <span class="m">5</span> <span class="o">)</span><span class="p">;</span>
+
+    /* copy memory */
+    pvOSAL_MemCpy<span class="o">(</span> pucMemBuff1, pucMemSourceBuff, <span class="m">5</span> <span class="o">)</span><span class="p">;</span>
+
+    vOSAL_MemFree<span class="o">(</span> pucMemBuff1 <span class="o">)</span><span class="p">;</span> /* free allocated memory */
+    <span class="nv">pucMemBuff1</span> <span class="o">=</span> NULL<span class="p">;</span> /* nullify pointer */
+
+    FOREVER
+    <span class="o">{</span>
+        iOSAL_Task_SleepMs<span class="o">(</span> <span class="m">100</span> <span class="o">)</span><span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-osalprintf-1">
+<span id="id38"></span><h4>OSAL printf<a class="headerlink" href="#operatingsystemabstractionlayer-osal-osalprintf-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>vOSAL_Printf</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/* OSAL <span class="nb">printf</span> can be safely called from within tasks */
+void vPrintTaskFunc<span class="o">(</span> void* pvArg <span class="o">)</span>
+<span class="o">{</span>
+    int* <span class="nv">iThisTask</span> <span class="o">=</span> <span class="o">(</span> int* <span class="o">)(</span> pvArg <span class="o">)</span><span class="p">;</span>
+
+    <span class="k">for</span><span class="o">(</span> <span class="o">(</span> *iThisTask <span class="o">)</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span> <span class="o">(</span> *iThisTask <span class="o">)</span> &lt; <span class="m">5</span><span class="p">;</span> <span class="o">(</span> *iThisTask <span class="o">)</span>++ <span class="o">)</span>
+    <span class="o">{</span>
+        vOSAL_Printf<span class="o">(</span><span class="s2">"Print statement %d, from Task 1"</span>, <span class="o">(</span> *iThisTask <span class="o">)</span> <span class="o">)</span><span class="p">;</span>
+    <span class="o">}</span>
+
+    FOREVER
+    <span class="o">{</span>
+        iOSAL_Task_SleepMs<span class="o">(</span> <span class="m">100</span> <span class="o">)</span><span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-osalgetchar-1">
+<span id="id39"></span><h4>OSAL getchar<a class="headerlink" href="#operatingsystemabstractionlayer-osal-osalgetchar-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>cOSAL_GetChar</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#define DAL_MAX_INPUT ( 256 )</span>
+
+int  <span class="nv">iInputLen</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span>
+char <span class="nv">cLastChar</span> <span class="o">=</span> <span class="s1">'\0'</span><span class="p">;</span>
+char pcLastCmd<span class="o">[</span> DAL_MAX_INPUT <span class="o">]</span> <span class="o">=</span> <span class="o">{</span> <span class="m">0</span> <span class="o">}</span><span class="p">;</span>
+
+<span class="k">while</span><span class="o">(</span> <span class="o">(</span> <span class="s1">'\r'</span> !<span class="o">=</span> cLastChar <span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> <span class="s1">'\n'</span> !<span class="o">=</span> cLastChar <span class="o">)</span> <span class="o">&amp;&amp;</span>
+         <span class="o">(</span> DAL_MAX_INPUT &gt; iInputLen <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    <span class="nv">cLastChar</span> <span class="o">=</span> cOSAL_GetChar<span class="o">()</span><span class="p">;</span>
+    pcLastCmd<span class="o">[</span> iInputLen++ <span class="o">]</span> <span class="o">=</span> cLastChar<span class="p">;</span>
+    vOSAL_Printf<span class="o">(</span> <span class="s2">"%c"</span>, cLastChar <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="operatingsystemabstractionlayer-osal-debugstatsapis-1">
+<span id="id40"></span><h3>Debug stats APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-debugstatsapis-1" title="Permalink to this headline">¶</a></h3>
+<section id="operatingsystemabstractionlayer-osal-printallstats-1">
+<span id="id41"></span><h4>Print all stats<a class="headerlink" href="#operatingsystemabstractionlayer-osal-printallstats-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>vOSAL_PrintAllStats</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/* specify verbosity level and stats <span class="nb">type</span> */
+vOSAL_PrintAllStats<span class="o">(</span> OSAL_STATS_VERBOSITY_FULL, OSAL_STATS_TYPE_ALL <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="operatingsystemabstractionlayer-osal-clearallstats-1">
+<span id="id42"></span><h4>Clear all stats<a class="headerlink" href="#operatingsystemabstractionlayer-osal-clearallstats-1" title="Permalink to this headline">¶</a></h4>
+<p><strong>vOSAL_ClearAllStats</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/* simply call API, no params needed */
+vOSAL_ClearAllStats<span class="o">()</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Page Revision: v. 64</p>
+</section>
+</section>
+</section>
+</section>
+</div>
+</div>
+<footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+<a accesskey="p" class="btn btn-neutral float-left" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html" rel="prev" title="Firmware Interface (FW_IF) Abstraction Layer"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+<a accesskey="n" class="btn btn-neutral float-right" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html" rel="next" title="Profiles and CMake build process">Next <span aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<p>© Copyright 2023, Advanced Micro Devices Inc.</p>
+</div>
+<div class="aem-Grid aem-Grid--16">
+<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+<div class="container-fluid sub-footer">
+<div class="row">
+<div class="col-xs-24">
+<p><a href="https://www.amd.com/en/corporate/copyright" target="_blank">Terms and Conditions</a> | <a href="https://www.amd.com/en/corporate/privacy" target="_blank">Privacy</a> | <a href="https://www.amd.com/en/corporate/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.amd.com/en/corporate/trademarks" target="_blank">Trademarks</a> | <a href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf" target="_blank">Statement on Forced Labor</a> | <a href="https://www.amd.com/en/corporate/competition" target="_blank">Fair and Open Competition</a> | <a href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf" target="_blank">UK Tax Strategy</a> | <a href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA" target="_blank">Inclusive Terminology</a> | <a class="ot-sdk-show-settings" href="#cookiessettings">Cookies Settings</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+</div>
+</div>
+</section>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+</body>
+</html>

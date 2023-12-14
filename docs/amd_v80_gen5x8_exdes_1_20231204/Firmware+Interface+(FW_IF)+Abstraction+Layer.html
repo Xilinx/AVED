@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script charset="UTF-8" data-document-language="true" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script class="optanon-category-C0002" type="text/plain">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+<title>Firmware Interface (FW_IF) Abstraction Layer — AVED  documentation</title>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="_static/xbtest.css" rel="stylesheet" type="text/css"/>
+<link href="_static/_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="https://docs.xilinx.com/favicon.ico" rel="shortcut icon"/>
+<!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/js/theme.js"></script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html" rel="next" title="Operating System Abstraction Layer (OSAL)"/>
+<link href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html" rel="prev" title="AVED External Device Control (AXC) Proxy Driver"/>
+<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager -->
+<noscript><iframe class="optanon-category-C0002" height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager -->
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="index.html"> AVED
+            <img alt="Logo" class="logo" src="_static/xilinx-header-logo.svg"/>
+</a>
+<div role="search">
+<form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" type="text"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+</div>
+</div><div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BUser%2BApplication.html">AVED - User Application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80/V80P</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BHierarchy%2BOverview.html">AVED V80/V80P - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BCIPS%2BConfiguration.html">AVED V80/V80P - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BMemory%2BResources.html">AVED V80/V80P - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BMemory%2BMap.html">AVED V80/V80P - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BNoC%2BConfiguration.html">AVED V80/V80P - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BBase%2BLogic.html">AVED V80/V80P - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BClock%2BReset%2BModule.html">AVED V80/V80P - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BSource%2BFile%2BOverview.html">AVED V80/V80P - Source File Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BXBTEST%2BDesign.html">AVED V80/V80P - XBTEST Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BClock%2BControl%2B%28ACC%29%2BProxy%2BDriver.html">AVED Clock Control (ACC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Firmware Interface (FW_IF) Abstraction Layer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#firmware-abstraction">Firmware Abstraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#terminology">Terminology</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#file-structure">File Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#top-level">Top level</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#protocols">Protocols</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#common">Common</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementation">Implementation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#api">API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#standard-definitions">Standard definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#errors-and-return-values">Errors and return values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initializing-the-driver">Initializing the driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-an-interface">Creating an interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#opening-closing-an-interface">Opening / Closing an interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#writing-data-from-an-interface">Writing data from an interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reading-data-from-an-interface">Reading data from an interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#binding-callbacks">Binding callbacks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#io-ctrl">IO Ctrl</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#initialising-the-driver">Initialising the driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-an-interface-instance">Creating an interface instance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#firmwareinterface-fw-if-abstractionlayer-opening-closinganinterface-1">Opening / Closing an interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#firmwareinterface-fw-if-abstractionlayer-writingdatafromaninterface-1">Writing data from an interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#firmwareinterface-fw-if-abstractionlayer-readingdatafromaninterface-1">Reading data from an interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#firmwareinterface-fw-if-abstractionlayer-ioctrl-1">IO Ctrl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#callbacks-and-binding">Callbacks and Binding</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI &amp; xbtest)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest%2Bbuild.html">xbtest build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift"><nav aria-label="Mobile navigation menu" class="wy-nav-top" style="background: black">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="index.html">AVED</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="Page navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a class="icon icon-home" href="index.html"></a> »</li>
+<li>Firmware Interface (FW_IF) Abstraction Layer</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<section id="firmware-interface-fw-if-abstraction-layer">
+<h1>Firmware Interface (FW_IF) Abstraction Layer<a class="headerlink" href="#firmware-interface-fw-if-abstraction-layer" title="Permalink to this headline">¶</a></h1>
+<section id="overview">
+<span id="firmwareinterface-fw-if-abstractionlayer-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<section id="firmware-abstraction">
+<span id="firmwareinterface-fw-if-abstractionlayer-firmwareabstraction"></span><h3>Firmware Abstraction<a class="headerlink" href="#firmware-abstraction" title="Permalink to this headline">¶</a></h3>
+<p>The Firmware Interface (FW_IF) is an abstraction layer to any driver, providing a common API regardless of the physical interface.</p>
+<p>The purpose of this layer is to allow user applications to be developed agnostic of the platform they are to be used on, and (as far as is possible) agnostic of the protocol they are using.</p>
+<p>To an extent, this is object oriented (OO) as it allows the user application to treat each interface as an object with public methods.</p>
+</section>
+<section id="terminology">
+<span id="firmwareinterface-fw-if-abstractionlayer-terminology"></span><h3>Terminology<a class="headerlink" href="#terminology" title="Permalink to this headline">¶</a></h3>
+<table class="wrapped confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Terminology</th><th class="confluenceTh">Meaning</th></tr><tr><th class="confluenceTh">Interface</th><td class="confluenceTd"><p>An abstraction of a data flow device, E.g.</p><ul><li>a device driver.</li><li>a data layer on top of a driver (parser, protocol, etc.).</li></ul></td></tr><tr><th class="confluenceTh">Instance</th><td class="confluenceTd">A C object that provides the API to control a specific port of a driver interface.</td></tr><tr><th class="confluenceTh" colspan="1">Common header</th><td class="confluenceTd" colspan="1"><strong>fw_if.h</strong> - the header file common to all interfaces and instances, agnostic to the protocol or the platform.</td></tr><tr><th class="confluenceTh" colspan="1">Common protocol header</th><td class="confluenceTd" colspan="1"><strong>fw_if_XXX.h</strong> (e.g. <strong>fw_if_smbus.h</strong>) - the header file specific to a protocol but common to all platform-implementations of that protocol.</td></tr></tbody></table>
+</section>
+</section>
+<section id="file-structure">
+<span id="firmwareinterface-fw-if-abstractionlayer-filestructure"></span><h2>File Structure<a class="headerlink" href="#file-structure" title="Permalink to this headline">¶</a></h2>
+<p>Note: This is provided as an example only. Individual protocol/hardware names are dependent on implementation.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/0fcb43c51b24e48ff9464770c194c5a17177dc6d.png"><img alt="image1" class="drawio-diagram-image" src="_images/0fcb43c51b24e48ff9464770c194c5a17177dc6d.png" style="width: 851px;"/></a></p>
+<section id="top-level">
+<span id="firmwareinterface-fw-if-abstractionlayer-toplevel"></span><h3>Top level<a class="headerlink" href="#top-level" title="Permalink to this headline">¶</a></h3>
+<p>The top level contains the public header file for the abstraction layer <strong>fw_if.h</strong>. This provides the generic API common to all interfaces and protocols.</p>
+</section>
+<section id="protocols">
+<span id="firmwareinterface-fw-if-abstractionlayer-protocols"></span><h3>Protocols<a class="headerlink" href="#protocols" title="Permalink to this headline">¶</a></h3>
+<p>Each protocol is in a separate directory (e.g. <strong>smbus</strong>, <strong>i2c</strong>, etc.).</p>
+<p>New protocols get a new directory.</p>
+<p>There should never be any overlap or ‘merging’ of protocols. Instead, each should be separated.</p>
+<section id="common">
+<span id="firmwareinterface-fw-if-abstractionlayer-common"></span><h4>Common<a class="headerlink" href="#common" title="Permalink to this headline">¶</a></h4>
+<p>Within each protocol is the common header file, named <strong>fw_if_XXX.h</strong>, where “XXX” is the protocol (e.g. <strong>fw_if_smbus.h</strong>). This is the public header file which is <strong>specific to the protocol</strong> but <strong>agnostic to the platform</strong>.</p>
+<p>This file provides the API for the <strong>init()</strong> and <strong>create()</strong> functions of a protocol, and the protocol-specific configuration structures, enums, and events.</p>
+<p>If a system was changing from one protocol to another, this is the only aspect they would have to change their references to.</p>
+</section>
+<section id="implementation">
+<span id="firmwareinterface-fw-if-abstractionlayer-implementation"></span><h4>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h4>
+<p>Each protocol directory then has a subdirectory for each platform (e.g. <strong>v80</strong>, <strong>linux</strong>, etc). Additional subdirectories can be used for adapter-specific implementations (e.g. <strong>aardvark</strong>), which should be treated the same as platforms.</p>
+<p>Within each implementation directory is the source file for that platform and protocol (e.g. <strong>fw_if_smbus_aved.c</strong>). It should implement the generic API provided in <strong>fw_if.h</strong>, and the protocol-specific API provided in the common protocol header
+file (in this example, <strong>fw_if_smbus.h</strong>).</p>
+</section>
+</section>
+</section>
+<section id="api">
+<span id="firmwareinterface-fw-if-abstractionlayer-api"></span><h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<p><strong>Note: The examples shown are from the SMBus implementation of the FW_IF and are for demonstration purposes only. Individual implementations may have been modified since the time of this documentation.</strong></p>
+<section id="standard-definitions">
+<span id="firmwareinterface-fw-if-abstractionlayer-standarddefinitions"></span><h3>Standard definitions<a class="headerlink" href="#standard-definitions" title="Permalink to this headline">¶</a></h3>
+<p><strong>Boolean values</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#define FW_IF_TRUE                  ( 1 )</span>
+<span class="cp">#define FW_IF_FALSE                 ( 0 )</span>
+</pre></div>
+</div>
+<p>Use in place of standard boolean definitions.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><strong>Timeout flags</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#define FW_IF_TIMEOUT_NO_WAIT       ( 0 )</span>
+<span class="cp">#define FW_IF_TIMEOUT_WAIT_FOREVER  ( -1 )</span>
+</pre></div>
+</div>
+<p>Use for write/read operations if the requested timeout is a non-standard wait.</p>
+</section>
+<section id="errors-and-return-values">
+<span id="firmwareinterface-fw-if-abstractionlayer-errorsandreturnvalues"></span><h3>Errors and return values<a class="headerlink" href="#errors-and-return-values" title="Permalink to this headline">¶</a></h3>
+<p>Function return values and errors are common to all protocols so that a user application may be ported to another driver without requiring any change to return checks or logic.</p>
+<p><strong>Return values</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @enum    FW_IF_ERRORS</span>
+<span class="cm"> * @brief   Return values from an fw_if function</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">_FW_IF_ERRORS</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_ERRORS_NONE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">               </span><span class="cm">/* no errors, call was successful */</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_ERRORS_PARAMS</span><span class="p">,</span><span class="w">                 </span><span class="cm">/* invalid parameters passed in to function */</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_ERRORS_INVALID_HANDLE</span><span class="p">,</span><span class="w">         </span><span class="cm">/* invalid handle to the fw_if */</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_ERRORS_INVALID_CFG</span><span class="p">,</span><span class="w">            </span><span class="cm">/* invalid config in the fw_if */</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_ERRORS_UNRECOGNISED_OPTION</span><span class="p">,</span><span class="w">    </span><span class="cm">/* invalid option passed in to ioctrl function */</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_ERRORS_DRIVER_IN_USE</span><span class="p">,</span><span class="w">          </span><span class="cm">/* driver was in use by another process */</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_ERRORS_DRIVER_NOT_INITIALISED</span><span class="p">,</span><span class="w"> </span><span class="cm">/* driver was not initialised correctly */</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_ERRORS_TIMEOUT</span><span class="p">,</span><span class="w">                </span><span class="cm">/* a non-0 timeout value was requested and expired */</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_ERRORS_BINDING</span><span class="p">,</span><span class="w">                </span><span class="cm">/* the callback was not successfully bound in */</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_ERRORS_OPEN</span><span class="p">,</span><span class="w">                   </span><span class="cm">/* this should cause a driver-specific event to be raised to the bound callback */</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_ERRORS_CLOSE</span><span class="p">,</span><span class="w">                  </span><span class="cm">/* this should cause a driver-specific event to be raised to the bound callback */</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_ERRORS_WRITE</span><span class="p">,</span><span class="w">                  </span><span class="cm">/* this should cause a driver-specific event to be raised to the bound callback */</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_ERRORS_READ</span><span class="p">,</span><span class="w">                   </span><span class="cm">/* this should cause a driver-specific event to be raised to the bound callback */</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_ERRORS_IOCTRL</span><span class="p">,</span><span class="w">                 </span><span class="cm">/* this should cause a driver-specific event to be raised to the bound callback */</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">MAX_FW_IF_ERROR</span><span class="p">,</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">FW_IF_ERRORS</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This is not an exhaustive list, however, any additions must take into consideration that they must be available to all protocols.</p>
+<p>All FW_IF functions must return the above values as a <strong>uint32_t</strong>.</p>
+</section>
+<section id="initializing-the-driver">
+<span id="firmwareinterface-fw-if-abstractionlayer-initializingthedriver"></span><h3>Initializing the driver<a class="headerlink" href="#initializing-the-driver" title="Permalink to this headline">¶</a></h3>
+<p>Driver initialization must happen once before an interface instance can be created or used.</p>
+<p>The driver initialization is specific to the protocol. Therefore, the initialization function and the configuration structure are defined in the <strong>common protocol header</strong>.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Within each common protocol header is an “INIT_CONFIG” - a structure used during initialization of the driver but not needed for individual instances of that interface.</p>
+<p><strong>Example init config</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @struct  FW_IF_SMBUS_INIT_CFG</span>
+<span class="cm"> * @brief   config options for smbus initialisation (generic across all smbus interfaces)</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">_FW_IF_SMBUS_INIT_CFG</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w">        </span><span class="n">baseAddr</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w">        </span><span class="n">baudRate</span><span class="p">;</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">FW_IF_SMBUS_INIT_CFG</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>In this example, <strong>baseAddr</strong> and <strong>baudRate</strong> are configuration values that will be required for all implementation’s of an SMBus driver.</p>
+<p>If any configuration values aren’t required for a specific implementation, they can be ignored (e.g. the Linux implementation probably won’t need a Base Address value).</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><strong>Example init function</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @brief   initialisation function for smbus interfaces (generic across all smbus interfaces)</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   cfg     pointer to the config to initialise the driver with</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  See FW_IF_ERRORS</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">extern</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">FW_IF_smbus_init</span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_SMBUS_INIT_CFG</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cfg</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The initialization function should only pass in a pointer to the initialization structure, so that porting a user application from one driver to another takes minimal effort (only the structure contents and the name of the function need changed).</p>
+<p><strong>Note: The user application is responsible for the storage of the configuration structure.</strong></p>
+</section>
+<section id="creating-an-interface">
+<span id="firmwareinterface-fw-if-abstractionlayer-creatinganinterface"></span><h3>Creating an interface<a class="headerlink" href="#creating-an-interface" title="Permalink to this headline">¶</a></h3>
+<p>This functionality requires that a driver has been initialized.</p>
+<p>As with the driver initialization, interface creation is specific to the protocol and therefore the API is provided in the <strong>common protocol header</strong>.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Within a driver, there may be multiple <strong>instances</strong> that can be created and used.</p>
+<p>An instance can be thought of as a port or an address on a driver that can be used for a single stream of read/write data (it may be write-only or read-only in practice).</p>
+<p>For example, a single SMBus driver might allow up to 7 instances to be created on it. Within the FW_IF, these can be handled as 7 individual and separate interfaces.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Each interface has public methods and private data, held in a config.</p>
+<p><strong>FW_IF_CFG</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @struct  FW_IF_CFG</span>
+<span class="cm"> * @brief   Structure to hold a fw_if instance</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">_FW_IF_CFG</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w">                </span><span class="n">upperFirewall</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">FW_IF_open</span><span class="w">          </span><span class="o">*</span><span class="w">   </span><span class="n">open</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_close</span><span class="w">         </span><span class="o">*</span><span class="w">   </span><span class="n">close</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_write</span><span class="w">         </span><span class="o">*</span><span class="w">   </span><span class="n">write</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_read</span><span class="w">          </span><span class="o">*</span><span class="w">   </span><span class="n">read</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_ioctrl</span><span class="w">        </span><span class="o">*</span><span class="w">   </span><span class="n">ioctrl</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_bindCallback</span><span class="w">  </span><span class="o">*</span><span class="w">   </span><span class="n">bindCallback</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">FW_IF_callback</span><span class="w">      </span><span class="o">*</span><span class="w">   </span><span class="n">raiseEvent</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w">                </span><span class="o">*</span><span class="w">   </span><span class="n">cfg</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w">                </span><span class="n">lowerFirewall</span><span class="p">;</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">FW_IF_CFG</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Note: The user application is responsible for the storage of the interface structure.</strong></p>
+<p>The <strong>cfg</strong> parameter holds the private data that is passed in during the interface creation.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Within each common protocol header is an “CONFIG” - a structure used during interface creation and throughout any logic that the interface may use in its implementation.</p>
+<p><strong>Example interface config</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/* additional enums, etc, specific to this interface */</span><span class="w"></span>
+
+<span class="cp">#define FW_IF_SMBUS_UDID_LEN    ( 16 )</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * @enum    FW_IF_SMBUS_ROLE</span>
+<span class="cm"> * @brief   Controller or Target</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">_FW_IF_SMBUS_ROLE</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_SMBUS_ROLE_CONTROLLER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_SMBUS_ROLE_TARGET</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">MAX_FW_IF_SMBUS_ROLE</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">FW_IF_SMBUS_ROLE</span><span class="p">;</span><span class="w"></span>
+
+<span class="p">...</span><span class="w"></span>
+
+<span class="cm">/*</span>
+<span class="cm"> * @struct  FW_IF_SMBUS_CFG</span>
+<span class="cm"> * @brief   config options for smbus interfaces (generic across all smbus interfaces)</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">_FW_IF_SMBUS_CFG</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w">            </span><span class="n">port</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_SMBUS_ROLE</span><span class="w">    </span><span class="n">role</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w">             </span><span class="n">udid</span><span class="p">[</span><span class="w"> </span><span class="n">FW_IF_SMBUS_UDID_LEN</span><span class="w"> </span><span class="p">];</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">FW_IF_SMBUS_CFG</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>In this example, <strong>port</strong>, <strong>arpCapable</strong> and <strong>udid</strong> are configuration values that each interface needs to know about itself.</p>
+<p><strong>Note: Port is a generic term that can be thought of as simply the ID of an interface. It may be the address or simply an index. In the SMBus example, it would be a Target address</strong>.</p>
+<p>As before, if any values aren’t required for a specific implementation, they can be ignored.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><strong>Example creation function</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @brief   creates an instance of the smbus interface</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   fwIf        fw_if handle to the interface instance</span>
+<span class="cm"> * @param   smbusCfg    unique data of this instance (port, address, etc)</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  See FW_IF_ERRORS</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">extern</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">FW_IF_smbus_create</span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_CFG</span><span class="w"> </span><span class="o">*</span><span class="n">fwIf</span><span class="p">,</span><span class="w"> </span><span class="n">FW_IF_SMBUS_CFG</span><span class="w"> </span><span class="o">*</span><span class="n">smbusCfg</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The parameter <strong>*fw_if</strong> is the handle to the interface that will be used for all subsequent calls (e.g. <strong>open</strong>, <strong>write</strong>, etc). It must be initialised in the user application as an empty structure.</p></li>
+<li><p>The parameter <strong>*smbusCfg</strong> is a pointer to the instance configuration structure shown previously - within the implementation, the contents will be copied to the private structure of the <strong>fw_if</strong> handle.</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><strong>Note - the user application is responsible for the storage of the configuration structure.</strong></p>
+</section>
+<section id="opening-closing-an-interface">
+<span id="firmwareinterface-fw-if-abstractionlayer-opening-closinganinterface"></span><h3>Opening / Closing an interface<a class="headerlink" href="#opening-closing-an-interface" title="Permalink to this headline">¶</a></h3>
+<p>This functionality is common to all protocols, and so is provided in the <strong>common header</strong>.</p>
+<p>It requires that a driver has been initialized and an interface has been created on it.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Each implementation source file must provide a local (static) implementation of this function.</p>
+<p><strong>FW_IF_open</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @brief   Open the specific fw_if</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   fwIf        Pointer to this fw_if</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  See FW_IF_ERRORS</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_open</span><span class="w"> </span><span class="p">)(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">fwIf</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Within the SMBus example, this will create a target device with the values provided in the <strong>device creation function</strong>.</p>
+<p>In another protocol, it may be as simple as setting a flag, or it may be more involved.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><strong>FW_IF_close</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @brief   Close the specific fw_if</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   fwIf        Pointer to this fw_if</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  See FW_IF_ERRORS</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_close</span><span class="w"> </span><span class="p">)(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">fwIf</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This must close the interface. Within the SMBus example, this will delete the previously created target device.</p>
+</section>
+<section id="writing-data-from-an-interface">
+<span id="firmwareinterface-fw-if-abstractionlayer-writingdatafromaninterface"></span><h3>Writing data from an interface<a class="headerlink" href="#writing-data-from-an-interface" title="Permalink to this headline">¶</a></h3>
+<p>This functionality is common to all protocols, and so is provided in the <strong>common header</strong>.</p>
+<p>It requires that a driver has been initialized and an interface has been created on it.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Once an interface has been opened, outgoing data (Tx) can be written from it.</p>
+<p><strong>FW_IF_write</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @brief   Writes data from an instance of the specific fw_if</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   fwIf        Pointer to this fw_if</span>
+<span class="cm"> * @param   dstPort     Remote port to write to</span>
+<span class="cm"> * @param   data        Data buffer to write</span>
+<span class="cm"> * @param   size        Number of bytes in data buffer</span>
+<span class="cm"> * @param   timeoutMs   Time (in ms) to wait for write to complete</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  See FW_IF_ERRORS</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_write</span><span class="w"> </span><span class="p">)(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">fwIf</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">dstPort</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">timeoutMs</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>For the <strong>timeoutMs</strong> parameter, the additional <strong>#defines</strong> may also be used:</p>
+<ul class="simple">
+<li><p>FW_IF_TIMEOUT_NO_WAIT - the function will return as soon as the write is attempted, regardless of any delay.</p></li>
+<li><p>FW_IF_TIMEOUT_WAIT_FOREVER - the function will not return until the write is successful or has failed.</p></li>
+</ul>
+</section>
+<section id="reading-data-from-an-interface">
+<span id="firmwareinterface-fw-if-abstractionlayer-readingdatafromaninterface"></span><h3>Reading data from an interface<a class="headerlink" href="#reading-data-from-an-interface" title="Permalink to this headline">¶</a></h3>
+<p>This functionality is common to all protocols and so it is provided in the <strong>common header</strong>.</p>
+<p>It requires that a driver has been initialized and an interface has been created on it.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Once an interface has been opened, incoming data (Rx) can be read from it.</p>
+<p><strong>FW_IF_read</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @brief   Reads data from an instance of the specific fw_if</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   fwIf        Pointer to this fw_if</span>
+<span class="cm"> * @param   srcPort     Remote port to read from</span>
+<span class="cm"> * @param   data        Data buffer to read</span>
+<span class="cm"> * @param   size        Pointer to maximum number of bytes allowed in data buffer</span>
+<span class="cm"> *                          This value is updated to the actual number of bytes read</span>
+<span class="cm"> * @param   timeoutMs   Time (in ms) to wait for read to complete</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  See FW_IF_ERRORS</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_read</span><span class="w"> </span><span class="p">)(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">fwIf</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">srcPort</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">timeoutMs</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>For the <strong>timeoutMs</strong> parameter, the additional <strong>#defines</strong> may also be used:</p>
+<ul class="simple">
+<li><p>FW_IF_TIMEOUT_NO_WAIT - the function will return as soon as the write is attempted, regardless of any delay.</p></li>
+<li><p>FW_IF_TIMEOUT_WAIT_FOREVER - the function will not return until the write is successful or has failed.</p></li>
+</ul>
+<p>This function is best called in an Rx task loop. If the user application does not want to use a task to pend on incoming data and wants real-time data, it is advised to use the <strong>callbacks</strong> method instead. However, if an implementation is designed
+to only use interrupt-based Rx’ing, it limits moving between alternative implementation, as needed.</p>
+<p>To determine if a FW_IF implementation provides polling and/or event-driven Rx data, see the <strong>IO CTRL</strong> “<strong>FW_IF_COMMON_IOCTRL_GET_RX_MODE</strong>” option.</p>
+</section>
+<section id="binding-callbacks">
+<span id="firmwareinterface-fw-if-abstractionlayer-bindingcallbacks"></span><h3>Binding callbacks<a class="headerlink" href="#binding-callbacks" title="Permalink to this headline">¶</a></h3>
+<p>This functionality is common to all protocols, and so is provided in the <strong>common header</strong>.</p>
+<p>It requires that a driver has been initialized and an interface has been created on it.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>The <strong>common header</strong> provides some generic events that are usable by all protocols:</p>
+<p><strong>Example events</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @enum    FW_IF_COMMON_EVENTS</span>
+<span class="cm"> * @brief   common events raised in the callback (generic across all interfaces)</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">_FW_IF_COMMON_EVENTS</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_COMMON_EVENT_NEW_RX_DATA</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_COMMON_EVENT_NEW_TX_COMPLETE</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_COMMON_EVENT_WARNING</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_COMMON_EVENT_ERROR</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">MAX_FW_IF_COMMON_EVENT</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">FW_IF_COMMON_EVENTS</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Each protocol provides specific <strong>events</strong> - these are specific to the protocol and so are provided in the <strong>common protocol header</strong>. They must begin with the value of <strong>MAX_FW_IF_COMMON_EVENT</strong>.</p>
+<p><strong>Example events</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @enum    FW_IF_SMBUS_EVENTS</span>
+<span class="cm"> * @brief   smbus events raised in the callback (generic across all smbus interface)</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">_FW_IF_SMBUS_EVENTS</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_SMBUS_EVENT_ADDRESS_CHANGE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MAX_FW_IF_COMMON_EVENT</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">MAX_FW_IF_SMBUS_EVENT</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">FW_IF_SMBUS_EVENTS</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The maximum allowed value of an event is 0xFFFF.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Events are raised through a pre-defined callback.</p>
+<p><strong>FW_IF_callback</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @brief   Callback to raise to calling layer</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   eventId     Unique ID to identify the event</span>
+<span class="cm"> * @param   data        Pointer to data buffer</span>
+<span class="cm"> * @param   size        Number of bytes in data</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  See FW_IF_ERRORS</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_callback</span><span class="w"> </span><span class="p">)(</span><span class="w"> </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">eventId</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>If a user application wishes to receive real-time events from an interface, they must implement the above function.</p>
+<p>A different function can be implemented per interface, or a common function can be used for all of them if the interface itself is not important (e.g. the application only cares about the data or the eventId itself).</p>
+<ul class="simple">
+<li><p>The <strong>eventId</strong> parameter must be one of the values defined in the previously shown event enum.</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>If a user application does not want to use a task to pend on incoming data and wants real-time data, it can use the <strong>NEW_RX_DATA</strong> event to receive data whenever it is received by the underlying interface. For this to be possible, each
+implementation must call the <strong>raiseEvent()</strong> callback in the <strong>*fw_if</strong> handle upon receiving new data.</p>
+<p>For example, each target device created has its own callback that is triggered when new data is received for the SMBus driver implementation. That callback would in turn call the <strong>raiseEvent</strong> callback associated with the interface instance of that
+target address, with the eventID set to <strong>FW_IF_SMBUS_EVENT_NEW_RX_DATA</strong>.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>The above callback must be bound to interface instance before it can be triggered.</p>
+<p><strong>FW_IF_bindCallback</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @brief   Binds a user-defined callback into the fw_if</span>
+<span class="cm"> *</span>
+<span class="cm"> * @parmam  fwIf        Pointer too this fw_if</span>
+<span class="cm"> * @param   newFunc     Function pointer to call</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  See FW_IF_ERRORS</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_bindCallback</span><span class="w"> </span><span class="p">)(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">fwIf</span><span class="p">,</span><span class="w"> </span><span class="n">FW_IF_callback</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">newFunc</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>A user does not need to bind a callback if they do not need one.</p>
+</section>
+<section id="io-ctrl">
+<span id="firmwareinterface-fw-if-abstractionlayer-ioctrl"></span><h3>IO Ctrl<a class="headerlink" href="#io-ctrl" title="Permalink to this headline">¶</a></h3>
+<p>This functionality is common to all protocols, and so is provided in the <strong>common header</strong>.</p>
+<p>It requires that a driver has been initialized and an interface has been created on it.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>There is some IO ctrl that is common to all protocols, and so is defined the <strong>common header.</strong></p>
+<p><strong>FW_IF_COMMON_IOCTRL_OPTIONS</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> *  @enum   FW_IF_RX_MODE</span>
+<span class="cm"> *  @brief  Mode of Rx operation</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">_FW_IF_RX_MODE</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_RX_MODE_POLLING</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mh">0x01</span><span class="p">,</span><span class="w">         </span><span class="cm">/* driver must be polled for new data */</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_RX_MODE_EVENT</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mh">0x02</span><span class="p">,</span><span class="w">         </span><span class="cm">/* driver will raise an event to announce new data */</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">FW_IF_RX_MODE</span><span class="p">;</span><span class="w"></span>
+
+<span class="cm">/*</span>
+<span class="cm"> * @enum    FW_IF_COMMON_IOCTRL_OPTIONS</span>
+<span class="cm"> * @brief   IO ctrl options common to all fw_ifs</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">_FW_IF_COMMON_IOCTRL_OPTIONS</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_COMMON_IOCTRL_FLUSH_TX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_COMMON_IOCTRL_FLUSH_RX</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_COMMON_IOCTRL_GET_RX_MODE</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">MAX_FW_IF_COMMON_IOCTRL_OPTION</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">FW_IF_COMMON_IOCTRL_OPTIONS</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<ul class="simple">
+<li><p><strong>FW_IF_COMMON_IOCTRL_FLUSH_TX</strong> : clears any data currently in the Tx buffer.</p></li>
+<li><p><strong>FW_IF_COMMON_IOCTRL_FLUSH_RX</strong> : clears any data currently in the Rx buffer.</p></li>
+<li><p><strong>FW_IF_COMMON_IOCTRL_GET_RX_MODE</strong>: returns the implementation’s <strong>FW_IF_RX_MODE</strong> (polling, event-driven, or both) as a uint8_t with bit-flags.</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Additional IO Ctrl options for a specific protocol can then be provided in the <strong>common protocol header</strong>.</p>
+<p><strong>Example protocol IO Ctrl options</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @enum    FW_IF_SMBUS_IOCTRL_OPTION</span>
+<span class="cm"> * @brief   ioctrl options for smbus interfaces (generic across all smbus interfaces)</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">_FW_IF_SMBUS_IOCTRL_OPTIONS</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_SMBUS_IOCTRL_SET_CONTROLLER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MAX_FW_IF_COMMON_IOCTRL_OPTION</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_SMBUS_IOCTRL_SET_TARGET</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">MAX_FW_IF_SMBUS_IOCTRL_OPTION</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">FW_IF_SMBUS_IOCTRL_OPTIONS</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Note: The first protocol-specific IO option must always be set to <strong>MAX_FW_IF_COMMON_IOCTRL_OPTION</strong>.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>The user application can then set an option (and pass an associated value, if necessary).</p>
+<p><strong>FW_IF_ioctrl</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @brief   Set/get specific IO options to/from the specific fw_if</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   fwIf        Pointer to this fw_if</span>
+<span class="cm"> * @param   option      Unique IO Ctrl option to set/get</span>
+<span class="cm"> * @param   value       Pointer to value to set/get</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  See FW_IF_ERRORS</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_ioctrl</span><span class="w"> </span><span class="p">)(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">fwIf</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">option</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The parameter <strong>option</strong> must be an enum value from either the common list or the protocol specific list.</p></li>
+<li><p>The parameter <strong>value</strong> can be <strong>NULL</strong> if no value is required for the option. This parameter allows the user application to set or get data from an interface.</p>
+<ul>
+<li><p>For the common IOCTRL options “FW_IF_COMMON_IOCTRL_GET_RX_MODE”, this value will be a <strong>uint8_t</strong> with the appropriate <strong>FW_IF_RX_MODE</strong> flags set.</p></li>
+</ul>
+</li>
+</ul>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Note: To avoid losing the benefits of the firmware abstraction, the user application should keep IO Ctrl calls to a minimum.</p>
+</section>
+</section>
+<section id="examples">
+<span id="firmwareinterface-fw-if-abstractionlayer-examples"></span><h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>Unless otherwise stated, each example shown here uses the V80 SMBus driver implementation.</p>
+<section id="initialising-the-driver">
+<span id="firmwareinterface-fw-if-abstractionlayer-initialisingthedriver"></span><h3>Initialising the driver<a class="headerlink" href="#initialising-the-driver" title="Permalink to this headline">¶</a></h3>
+<p>This function should only be called once. Drivers should be developed to cater for this, either with an API that returns the initialization status or by returning a recognizable return code if a user attempts to initialize the driver a 2nd time.</p>
+<p><strong>Driver initialise example</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">FW_IF_SMBUS_INIT_CFG</span><span class="w"> </span><span class="n">mySmbusIf</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">     </span><span class="mh">0x12345678</span><span class="p">,</span><span class="w"> </span><span class="cm">/* baseAddr */</span><span class="w"></span>
+<span class="w">     </span><span class="mi">100000</span><span class="w">      </span><span class="cm">/* baudRate */</span><span class="w"></span>
+<span class="w"> </span><span class="p">};</span><span class="w"></span>
+
+<span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_ERRORS_NONE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">FW_IF_smbus_init</span><span class="p">(</span><span class="w"> </span><span class="o">&amp;</span><span class="n">mySmbusIf</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">     </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"SMBus initialised OK</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w"> </span><span class="k">else</span><span class="w"></span>
+<span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">     </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"Error initialising SMBus</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w"> </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Within the <strong>FW_IF_smbus_init()</strong> function, the implementation:</p>
+<ol class="arabic simple">
+<li><p>Checks if the driver has not already been initialized.</p></li>
+<li><p>Takes a local copy of the <strong>FW_IF_SMBUS_INIT_CFG</strong> structure (it only needs one local copy, so no dynamic memory allocation is required).</p></li>
+<li><p>Calls the driver-specific initialization function.</p></li>
+</ol>
+</section>
+<section id="creating-an-interface-instance">
+<span id="firmwareinterface-fw-if-abstractionlayer-creatinganinterfaceinstance"></span><h3>Creating an interface instance<a class="headerlink" href="#creating-an-interface-instance" title="Permalink to this headline">¶</a></h3>
+<p><strong>Interface creation example</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">FW_IF_CFG</span><span class="w"> </span><span class="n">myIf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span><span class="w">     </span><span class="cm">/* always initialised as empty */</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="n">FW_IF_CFG</span><span class="w"> </span><span class="o">*</span><span class="n">pIf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">myIf</span><span class="p">;</span><span class="w">      </span><span class="cm">/* not necessary, but it's helpful to consider the FW_IF as a handle, not a struct */</span><span class="w"></span>
+
+<span class="k">static</span><span class="w"> </span><span class="n">FW_IF_SMBUS_CFG</span><span class="w"> </span><span class="n">cfg</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="mh">0x56</span><span class="p">,</span><span class="w">                           </span><span class="cm">/* port */</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_SMBUS_ROLE_CONTROLLER</span><span class="p">,</span><span class="w">    </span><span class="cm">/* role */</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="mh">0x11</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span><span class="w">                   </span><span class="cm">/* udid */</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="p">...</span><span class="w"></span>
+
+<span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_ERRORS_NONE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">FW_IF_smbus_create</span><span class="p">(</span><span class="w"> </span><span class="n">pIf</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cfg</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"SMBus %02X created OK</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">cfg</span><span class="p">.</span><span class="n">port</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="k">else</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"Error creating SMBus %02X</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">cfg</span><span class="p">.</span><span class="n">port</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Within the <strong>FW_IF_smbus_create()</strong> function, the implementation:</p>
+<ol class="arabic simple">
+<li><p>Sanity checks the config.</p></li>
+<li><p>Populates the variables within <strong>FW_IF_CFG</strong> parameter with the local implementation functions.</p></li>
+<li><p>Copies the contents of the <strong>FW_IF_SMBUS_CFG</strong> to the private data area of the handle.</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><strong>Interface creation example implementation</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">FW_IF_smbus_create</span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_CFG</span><span class="w"> </span><span class="o">*</span><span class="n">fwIf</span><span class="p">,</span><span class="w"> </span><span class="n">FW_IF_SMBUS_CFG</span><span class="w"> </span><span class="o">*</span><span class="n">smbusCfg</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FW_IF_ERRORS_NONE</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">fwIf</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">smbusCfg</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">MAX_FW_IF_SMBUS_ROLE</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">smbusCfg</span><span class="o">-&gt;</span><span class="n">role</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">smbusCfg</span><span class="o">-&gt;</span><span class="n">udid</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">FW_IF_CFG</span><span class="w"> </span><span class="n">myLocalIf</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="n">upperFirewall</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">SMBUS_UPPER_FIREWALL</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="n">open</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">smbusOpen</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="n">close</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">smbusClose</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="n">write</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">smbusWrite</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="n">read</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">smbusRead</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="n">ioctrl</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">smbusIoctrl</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="n">bindCallback</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">smbusBindCallback</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="n">cfg</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="p">)</span><span class="n">smbusCfg</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="n">lowerFirewall</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">SMBUS_LOWER_FIREWALL</span><span class="w"></span>
+<span class="w">            </span><span class="p">};</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">memcpy</span><span class="p">(</span><span class="w"> </span><span class="n">fwIf</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">myLocalIf</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_CFG</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">FW_IF_SMBUS_CFG</span><span class="w"> </span><span class="o">*</span><span class="n">thisSmbusCfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_SMBUS_CFG</span><span class="o">*</span><span class="w"> </span><span class="p">)</span><span class="n">fwIf</span><span class="o">-&gt;</span><span class="n">cfg</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"smbus_create for port %u</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">thisSmbusCfg</span><span class="o">-&gt;</span><span class="n">port</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">else</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FW_IF_ERRORS_INVALID_CFG</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FW_IF_ERRORS_PARAMS</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">status</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="firmwareinterface-fw-if-abstractionlayer-opening-closinganinterface-1">
+<span id="id1"></span><h3>Opening / Closing an interface<a class="headerlink" href="#firmwareinterface-fw-if-abstractionlayer-opening-closinganinterface-1" title="Permalink to this headline">¶</a></h3>
+<p>Once created, the public methods of the FW_IF_CFG instance can be called without needing to know about the underlying functionality.</p>
+<p><strong>Interface open example</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_ERRORS_NONE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pIf</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">(</span><span class="w"> </span><span class="n">pIf</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"SMBus opened OK</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="k">else</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"Error opening SMBus</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Within the <strong>FW_IF_open</strong> implementation, the function:</p>
+<ol class="arabic simple">
+<li><p>Checks if the driver is initialized.</p></li>
+<li><p>Creates a target device on the SMBus with the address set to the <strong>port</strong> variable in the <strong>FW_IF_SMBUS_CFG</strong> structure (pointed to by the <strong>*cfg</strong> pointer in the <strong>FW_IF_CFG</strong> handle).</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>To close:</p>
+<p><strong>Interface close example</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_ERRORS_NONE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pIf</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">(</span><span class="w"> </span><span class="n">pIf</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"SMBus closed OK</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="k">else</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"Error closing SMBus</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Within the <strong>FW_IF_open</strong> implementation, the function:</p>
+<ol class="arabic simple">
+<li><p>Checks if the driver is initialized.</p></li>
+<li><p>Destroys the target device on the SMBus that it created in the <strong>FW_IF_open</strong> function.</p></li>
+</ol>
+</section>
+<section id="firmwareinterface-fw-if-abstractionlayer-writingdatafromaninterface-1">
+<span id="id2"></span><h3>Writing data from an interface<a class="headerlink" href="#firmwareinterface-fw-if-abstractionlayer-writingdatafromaninterface-1" title="Permalink to this headline">¶</a></h3>
+<p><strong>Interface write example</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#define TEST_DATA_SIZE  ( 64 )</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">txData</span><span class="p">[</span><span class="w"> </span><span class="n">TEST_DATA_SIZE</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span><span class="w"></span>
+
+
+<span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_ERRORS_NONE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pIf</span><span class="o">-&gt;</span><span class="n">write</span><span class="p">(</span><span class="w"> </span><span class="n">pIf</span><span class="p">,</span><span class="w"> </span><span class="mh">0x56</span><span class="p">,</span><span class="w"> </span><span class="n">txData</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="n">FW_IF_TIMEOUT_NO_WAIT</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"SMBus data written OK</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="k">else</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"Error writing from SMBus</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Within the <strong>FW_IF_write</strong> implementation, the function:</p>
+<ol class="arabic simple">
+<li><p>Checks if the driver is initialized.</p></li>
+<li><p>If operating as a Controller:</p>
+<ol class="arabic simple">
+<li><p>Uses the <strong>size</strong> parameter to determine which SMBus protocol command to use.</p></li>
+<li><p>Initiates an SMBus Controller command write command.</p></li>
+</ol>
+</li>
+<li><p>If operating as a Target:</p>
+<ol class="arabic simple">
+<li><p>Loads the data and size into the <strong>readCallback</strong> that will be triggered if a remote Controller sends a read command to the interface.</p></li>
+</ol>
+</li>
+</ol>
+</section>
+<section id="firmwareinterface-fw-if-abstractionlayer-readingdatafromaninterface-1">
+<span id="id3"></span><h3>Reading data from an interface<a class="headerlink" href="#firmwareinterface-fw-if-abstractionlayer-readingdatafromaninterface-1" title="Permalink to this headline">¶</a></h3>
+<p><strong>Interface read example</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#define TEST_DATA_SIZE  ( 64 )</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">rxData</span><span class="p">[</span><span class="w"> </span><span class="n">TEST_DATA_SIZE</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">rxSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TEST_DATA_SIZE</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_ERRORS_NONE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pIf</span><span class="o">-&gt;</span><span class="n">read</span><span class="p">(</span><span class="w"> </span><span class="n">pIf</span><span class="p">,</span><span class="w"> </span><span class="mh">0x57</span><span class="p">,</span><span class="w"> </span><span class="n">rxData</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rxSize</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"SMBus data read OK</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="k">else</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"Error reading from SMBus</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Within the <strong>FW_IF_read</strong> implementation, the function:</p>
+<ol class="arabic simple">
+<li><p>Checks if the driver is initialized.</p></li>
+<li><p>If operating as a Controller:</p>
+<ol class="arabic simple">
+<li><p>Uses the <strong>*size</strong> parameter to determine which SMBus protocol command to use.</p></li>
+<li><p>Initiates an SMBus Controller read command.</p></li>
+<li><p>Waits <strong>timeoutMs</strong> (in this example, 50ms) and then (if data has been received in that timeframe) loads the received data into the <strong>data</strong> parameter and the number of bytes read into the <strong>*size</strong> parameter.</p></li>
+</ol>
+</li>
+<li><p>If operating as a Target:</p>
+<ol class="arabic simple">
+<li><p>Waits <strong>timeoutMs</strong> (in this example, 50ms) for <strong>writeCallback</strong> to be triggered (if a remote Controller sends a write command to the interface) and loads the data and size in it into the <strong>data</strong> and <strong>*size</strong> parameters.</p></li>
+</ol>
+</li>
+</ol>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>If the user doesn’t want to wait for the response and simply wants to trigger a read, they can call the <strong>read()</strong> function with the <strong>timeoutMs</strong> set to <strong>FW_IF_TIMEOUT_NO_WAIT</strong> and use the bound callback to trigger with new data.</p>
+</section>
+<section id="firmwareinterface-fw-if-abstractionlayer-ioctrl-1">
+<span id="id4"></span><h3>IO Ctrl<a class="headerlink" href="#firmwareinterface-fw-if-abstractionlayer-ioctrl-1" title="Permalink to this headline">¶</a></h3>
+<p><strong>Interface ioctrl example</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_ERRORS_NONE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pIf</span><span class="o">-&gt;</span><span class="n">ioctrl</span><span class="p">(</span><span class="w"> </span><span class="n">pIf</span><span class="p">,</span><span class="w"> </span><span class="n">FW_IF_SMBUS_IOCTRL_SET_TARGET</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"SMBus ioctrl OK</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="k">else</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"Error ioctrl SMBus</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Within the <strong>FW_IF_write</strong> implementation, the function:</p>
+<ol class="arabic simple">
+<li><p>Checks if the driver is initialised.</p></li>
+<li><p>Checks if the <strong>option</strong> variable (in this case, <strong>FW_IF_SMBUS_SET_TARGET</strong>) is a valid option.</p></li>
+<li><p>Handles it accordingly.</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><strong>Interface ioctrl example implementation</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">smbusIoctrl</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">fwIf</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">option</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FW_IF_ERRORS_NONE</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">FW_IF_CFG</span><span class="w"> </span><span class="o">*</span><span class="n">thisIf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_CFG</span><span class="o">*</span><span class="w"> </span><span class="p">)</span><span class="n">fwIf</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">FW_IF_SMBUS_CFG</span><span class="w"> </span><span class="o">*</span><span class="n">thisSmbusCfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_SMBUS_CFG</span><span class="o">*</span><span class="w"> </span><span class="p">)</span><span class="n">thisIf</span><span class="o">-&gt;</span><span class="n">cfg</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">switch</span><span class="p">(</span><span class="w"> </span><span class="n">option</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nl">FW_IF_SMBUS_IOCTRL_SET_CONTROLLER</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="n">iIsController</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FW_IF_TRUE</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nl">FW_IF_SMBUS_IOCTRL_SET_TARGET</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="n">iIsController</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FW_IF_FALSE</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">default</span><span class="o">:</span><span class="w"></span>
+<span class="w">            </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FW_IF_ERRORS_UNRECOGNISED_OPTION</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"smbus_ioctrl for port %u (option %u)</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">thisSmbusCfg</span><span class="o">-&gt;</span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="n">option</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">status</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>For options requiring passing in additional variables or retrieving data, the parameter <strong>*value</strong> can be used.</p>
+</section>
+<section id="callbacks-and-binding">
+<span id="firmwareinterface-fw-if-abstractionlayer-callbacksandbinding"></span><h3>Callbacks and Binding<a class="headerlink" href="#callbacks-and-binding" title="Permalink to this headline">¶</a></h3>
+<p>The user application must implement its own version of the <strong>FW_IF_callback</strong> function.</p>
+<p><strong>Interface FW_IF_callback example</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">myLocalFunc</span><span class="p">(</span><span class="w"> </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">eventId</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FW_IF_ERRORS_NONE</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"Callback called: %u</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">eventId</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">switch</span><span class="p">(</span><span class="w"> </span><span class="n">eventId</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nl">FW_IF_SMBUS_EVENT_NEW_RX_DATA</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"New data arrived (%u bytes(s))</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_SMBUS_MAX_DATA</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"Data[%02d] : %02d</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="k">else</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"Invalid size</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FW_IF_ERRORS_PARAMS</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nl">FW_IF_SMBUS_EVENT_TX_COMPLETE</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"Data successfully tx'd</span><span class="se">\r\n</span><span class="s">"</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nl">FW_IF_SMBUS_EVENT_ADDRESS_CHANGE</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"Port ID changed to 0x%02X</span><span class="se">\r\n</span><span class="s">, *( uint32_t* )data );</span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="k">else</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FW_IF_ERRORS_PARAMS</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nl">FW_IF_SMBUS_EVENT_WARNING</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="cm">/* Handle warning */</span><span class="w"></span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nl">FW_IF_SMBUS_EVENT_ERROR</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="cm">/* Handle error */</span><span class="w"></span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">default</span><span class="o">:</span><span class="w"></span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">status</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Then, the user application binds the callback into the FW_IF handle.</p>
+<p><strong>Interface FW_IF_bindCallback example</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_ERRORS_NONE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pIf1</span><span class="o">-&gt;</span><span class="n">bindCallback</span><span class="p">(</span><span class="w"> </span><span class="n">pIf1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">myLocalFunc</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"SMBus callback bound OK</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="k">else</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"Error binding SMBus callback</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Within the <strong>FW_IF_write</strong> implementation, the function stores the function pointer as the <strong>raiseEvent</strong> variable in the <strong>FW_IF_CFG</strong> handle.</p>
+<p><strong>Interface FW_IF_bindCallback example</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">smbusBindCallback</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">fwIf</span><span class="p">,</span><span class="w"> </span><span class="n">FW_IF_callback</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">newFunc</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FW_IF_ERRORS_NONE</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">FW_IF_CFG</span><span class="w"> </span><span class="o">*</span><span class="n">thisIf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_CFG</span><span class="o">*</span><span class="w"> </span><span class="p">)</span><span class="n">fwIf</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">newFunc</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">FW_IF_SMBUS_CFG</span><span class="w"> </span><span class="o">*</span><span class="n">thisSmbusCfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_SMBUS_CFG</span><span class="o">*</span><span class="w"> </span><span class="p">)</span><span class="n">thisIf</span><span class="o">-&gt;</span><span class="n">cfg</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">thisIf</span><span class="o">-&gt;</span><span class="n">raiseEvent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newFunc</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"smbusBindCallback called for port %u</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">thisSmbusCfg</span><span class="o">-&gt;</span><span class="n">port</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FW_IF_ERRORS_PARAMS</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">status</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Now, at specific places in the implementation, the <strong>raiseEvent()</strong> can be called with any relevant data for the appropriate event.</p>
+<p><strong>Interface FW_IF_bindCallback example</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/* E.g. in the callback trigger by an SMBus receiving data */</span><span class="w"></span>
+<span class="p">...</span><span class="w"></span>
+
+<span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">thisIf</span><span class="o">-&gt;</span><span class="n">raiseEvent</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">thisIf</span><span class="o">-&gt;</span><span class="n">raiseEvent</span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_SMBUS_EVENT_NEW_RX_DATA</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">dataBuffer</span><span class="p">,</span><span class="w"> </span><span class="n">bufferSize</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="p">...</span><span class="w"></span>
+
+<span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_TRUE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">thereIsAnError</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">thisIf</span><span class="o">-&gt;</span><span class="n">raiseEvent</span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_SMBUS_EVENT_ERROR</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="p">...</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Some local caching may be required if the <strong>FW_IF_CFG</strong> handle is not in context at the time of raising the event as each handle is associated with a specific port/address.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Page Revision: v. 37</p>
+</section>
+</section>
+</section>
+</div>
+</div>
+<footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+<a accesskey="p" class="btn btn-neutral float-left" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html" rel="prev" title="AVED External Device Control (AXC) Proxy Driver"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+<a accesskey="n" class="btn btn-neutral float-right" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html" rel="next" title="Operating System Abstraction Layer (OSAL)">Next <span aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<p>© Copyright 2023, Advanced Micro Devices Inc.</p>
+</div>
+<div class="aem-Grid aem-Grid--16">
+<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+<div class="container-fluid sub-footer">
+<div class="row">
+<div class="col-xs-24">
+<p><a href="https://www.amd.com/en/corporate/copyright" target="_blank">Terms and Conditions</a> | <a href="https://www.amd.com/en/corporate/privacy" target="_blank">Privacy</a> | <a href="https://www.amd.com/en/corporate/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.amd.com/en/corporate/trademarks" target="_blank">Trademarks</a> | <a href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf" target="_blank">Statement on Forced Labor</a> | <a href="https://www.amd.com/en/corporate/competition" target="_blank">Fair and Open Competition</a> | <a href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf" target="_blank">UK Tax Strategy</a> | <a href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA" target="_blank">Inclusive Terminology</a> | <a class="ot-sdk-show-settings" href="#cookiessettings">Cookies Settings</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+</div>
+</div>
+</section>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+  <title>Power test case description &mdash; AVED  documentation</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/xbtest.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/_static/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="https://docs.xilinx.com/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="GT test cases description" href="gt-test-case-description.html" />
+    <link rel="prev" title="Memory test case description" href="memory-test-case-description.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
+<!-- End Google Tag Manager --> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+            <a href="../../../../../index.html" class="icon icon-home"> AVED
+            <img src="../../../../../_static/xilinx-header-logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2B-%2BUser%2BApplication.html">AVED - User Application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Xbtest Userguide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pre-canned-tests.html">Pre-canned tests</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../test-cases.html">Test cases</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="test-cases-overview.html">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="verify-test-case-description.html">Verify</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mmio-test-case-description.html">MMIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dma-test-case-description.html">DMA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memory-test-case-description.html">Memory</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Power</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#test-parameters">Test parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#main-test-steps">Main test steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#power-and-temperature-limits">Power and temperature limits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#power-budget-and-calibration">Power budget and calibration</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#toggle-rate-step-requirement">Toggle rate step requirement</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#actual-power-available">Actual power available</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#components-present-on-the-card">Components present on the card</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#tests-running">Tests running</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#power-test-json-members">Power test JSON members</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#definition">Definition</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#test-sequence"><code class="docutils literal notranslate"><span class="pre">test_sequence</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#disable-reg-disable-dsp-disable-bram-disable-uram-disable-aie"><code class="docutils literal notranslate"><span class="pre">disable_reg</span></code>, <code class="docutils literal notranslate"><span class="pre">disable_dsp</span></code>, <code class="docutils literal notranslate"><span class="pre">disable_bram</span></code>, <code class="docutils literal notranslate"><span class="pre">disable_uram</span></code>, <code class="docutils literal notranslate"><span class="pre">disable_aie</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#disable-toggle-ramp"><code class="docutils literal notranslate"><span class="pre">disable_toggle_ramp</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#output-files">Output files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gt-test-case-description.html">GT</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tasks.html">Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../card-definition.html">Card definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#alveo-data-center-accelerator-card-compatibility">Alveo data center accelerator card compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#what-s-new">What’s new</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80/V80P</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%26V80P%2B-%2BHierarchy%2BOverview.html">AVED V80/V80P - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%26V80P%2B-%2BCIPS%2BConfiguration.html">AVED V80/V80P - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%26V80P%2B-%2BMemory%2BResources.html">AVED V80/V80P - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%26V80P%2B-%2BMemory%2BMap.html">AVED V80/V80P - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%26V80P%2B-%2BNoC%2BConfiguration.html">AVED V80/V80P - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%26V80P%2B-%2BBase%2BLogic.html">AVED V80/V80P - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%26V80P%2B-%2BClock%2BReset%2BModule.html">AVED V80/V80P - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%26V80P%2B-%2BSource%2BFile%2BOverview.html">AVED V80/V80P - Source File Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%26V80P%2B-%2BXBTEST%2BDesign.html">AVED V80/V80P - XBTEST Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BClock%2BControl%2B%28ACC%29%2BProxy%2BDriver.html">AVED Clock Control (ACC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI &amp; xbtest)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../xbtest%2Bbuild.html">xbtest build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: black" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">AVED</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Xbtest Userguide</a> &raquo;</li>
+          <li><a href="../../test-cases.html">Test cases</a> &raquo;</li>
+      <li>Power test case description</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="power-test-case-description">
+<span id="id2"></span><h1>Power test case description<a class="headerlink" href="#power-test-case-description" title="Permalink to this headline">¶</a></h1>
+<p>The goal of this test case is to allow the control of the card power consumption.
+This is achieved by adjusting the <a class="reference internal" href="#power-parameter-test-sequence-toggle-rate"><span class="std std-ref">toggle_rate</span></a> of the clock, which drives all flip-flops, DSPs, block RAMs, UltraRAMs and AIEs present in the power <a class="reference internal" href="../introduction/overview.html#hardware-overview"><span class="std std-ref">xbtest hardware IP (xbtIP)</span></a> of <a class="reference external" href="../../doc_not_available.html">Alveo Versal Example Design (AVED)</a>.
+Sensor values (power, temperature, power rails current/voltage and fan speed) are read every second using <a class="reference external" href="../../doc_not_available.html">AVED Management Interface (AMI) APIs</a>.</p>
+<section id="test-parameters">
+<h2>Test parameters<a class="headerlink" href="#test-parameters" title="Permalink to this headline">¶</a></h2>
+<p>The mandatory test configuration parameters are listed below.
+For more information, see <a class="reference internal" href="#power-test-json-members"><span class="std std-ref">Power test JSON members</span></a>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="#power-parameter-test-sequence-duration"><span class="std std-ref">duration</span></a>: The duration of the test, measured in seconds.</p></li>
+<li><p><a class="reference internal" href="#power-parameter-test-sequence-toggle-rate"><span class="std std-ref">toggle_rate</span></a>: The toggle rate, specified in %, driving the sites present in the Power <a class="reference internal" href="../introduction/overview.html#hardware-overview"><span class="std std-ref">xbtIP</span></a> of <a class="reference external" href="../../doc_not_available.html">Alveo Versal Example Design (AVED)</a>.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="main-test-steps">
+<h2>Main test steps<a class="headerlink" href="#main-test-steps" title="Permalink to this headline">¶</a></h2>
+<p>The measurement of the card rest power, which lasts a few seconds, is always performed when the <a class="reference internal" href="#power-test-case-description"><span class="std std-ref">Power</span></a> test case starts.
+For each test configuration, the following steps are repeated:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>The <a class="reference internal" href="#power-parameter-test-sequence-toggle-rate"><span class="std std-ref">toggle_rate</span></a> is set to the power <a class="reference internal" href="../introduction/overview.html#hardware-overview"><span class="std std-ref">xbtIP</span></a>.</p></li>
+<li><p>For the defined <a class="reference internal" href="#power-parameter-test-sequence-duration"><span class="std std-ref">duration</span></a>, sensor values are read and reported every second.</p></li>
+<li><p>When the test completes, it always passes because no checks are made on the consumed power.
+The user is responsible for monitoring the consumed power, which is displayed by <a class="reference internal" href="../introduction/overview.html#application-software"><span class="std std-ref">xbtest application software (xbtSW)</span></a>.</p></li>
+</ol>
+</div></blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The Power <a class="reference internal" href="../introduction/overview.html#hardware-overview"><span class="std std-ref">xbtIP</span></a> has been intentionally designed to exceed the power capacity of the card.
+You might damage your card and cause your server/workstation to reboot if you try to for example (but not limited to):</p>
+<ul class="simple">
+<li><p>Use a high <a class="reference internal" href="#power-parameter-test-sequence-toggle-rate"><span class="std std-ref">toggle_rate</span></a>.</p></li>
+<li><p>Use a particularly demanding test sequence (for example, alternating between a low and a high <a class="reference internal" href="#power-parameter-test-sequence-toggle-rate"><span class="std std-ref">toggle_rate</span></a> for short periods of time).</p></li>
+</ul>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>xbtest reports the entire power consumed by the card (for active card, fan speed is also reported).</p>
+</div>
+</section>
+<section id="power-and-temperature-limits">
+<h2>Power and temperature limits<a class="headerlink" href="#power-and-temperature-limits" title="Permalink to this headline">¶</a></h2>
+<p>To limit potential damage to the <a class="reference external" href="https://www.xilinx.com/products/boards-and-kits/alveo.html">Alveo™</a> card in cases of accidental misuse or demanding test environmental conditions, the following basic safety mechanisms are in place.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Temperature Limit</strong>: A critical warning is generated when the temperature limit is reached.</p></li>
+<li><p><strong>Power Limit</strong>: A critical warning is generated when the power limit is reached.</p></li>
+</ul>
+</div></blockquote>
+<p>Temperature and power limits are defined in <a class="reference internal" href="../introduction/overview.html#card-definition-json-file"><span class="std std-ref">Card definition JSON file</span></a>.</p>
+<p>The list of sensors monitored is available in the <a class="reference internal" href="../tasks/device-management-task-description.html#device-management-task-description"><span class="std std-ref">Device management task description</span></a>.</p>
+</section>
+<section id="power-budget-and-calibration">
+<h2>Power budget and calibration<a class="headerlink" href="#power-budget-and-calibration" title="Permalink to this headline">¶</a></h2>
+<p>To establish the relationship between <a class="reference internal" href="#power-parameter-test-sequence-toggle-rate"><span class="std std-ref">toggle_rate</span></a> and power, a simple calibration method can be used.
+An example of calibration is starting from 0%, increasing the <a class="reference internal" href="#power-parameter-test-sequence-toggle-rate"><span class="std std-ref">toggle_rate</span></a> by 5 %, and for each <a class="reference internal" href="#power-parameter-test-sequence-toggle-rate"><span class="std std-ref">toggle_rate</span></a> step, letting the power and temperature stabilize for two minutes.
+There are numerous considerations to consider when creating this relationship.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul class="simple">
+<li><p>xbtest always reports the total power of the card obtained via the <a class="reference external" href="../../doc_not_available.html">AVED Management Interface (AMI) APIs</a>.</p></li>
+<li><p>Ensure that the environmental conditions (for example, temperature) used during calibration are similar to the conditions used in testing.</p></li>
+</ul>
+</div>
+<section id="toggle-rate-step-requirement">
+<span id="id3"></span><h3>Toggle rate step requirement<a class="headerlink" href="#toggle-rate-step-requirement" title="Permalink to this headline">¶</a></h3>
+<p>By default, xbtest limits the toggle rate steps to 10 % per second as most of the power regulators (&amp; the FPGA) have a step load requirement.</p>
+<p>For example, if the <a class="reference internal" href="#power-parameter-test-sequence-toggle-rate"><span class="std std-ref">toggle_rate</span></a> is initially set to 25 %, it will take 4 seconds to set a new target <a class="reference internal" href="#power-parameter-test-sequence-toggle-rate"><span class="std std-ref">toggle_rate</span></a> of 65 % as the actual toggle rate will gradually increase every second: 35 %, 45 %, 55 % and finally 65 %.</p>
+<p>This ramp can be disabled using the parameter <a class="reference internal" href="#power-parameter-disable-toggle-ramp"><span class="std std-ref">disable_toggle_ramp</span></a>. When disabled, ensure that <a class="reference internal" href="#power-parameter-test-sequence-toggle-rate"><span class="std std-ref">toggle_rate</span></a> never steps (down or up) by more than around 20 % per second.</p>
+</section>
+<section id="actual-power-available">
+<h3>Actual power available<a class="headerlink" href="#actual-power-available" title="Permalink to this headline">¶</a></h3>
+<p>The distribution of the power across the various regulators also limits which power is available for xbtest to control.
+For example, on an Alveo U50 card, although the power budget of the card is 75W, up to 10W are reserved for the HBM.
+This means that Power <a class="reference internal" href="../introduction/overview.html#hardware-overview"><span class="std std-ref">xbtest hardware IP (xbtIP)</span></a> can only control up to 65W. It also means that the Memory <a class="reference internal" href="../introduction/overview.html#hardware-overview"><span class="std std-ref">xbtIP</span></a> must be in use to have a card power consumption higher than 65W.</p>
+<p>Moreover, the total power budget of the card is not entirely available.
+The actual power available would be impacted by the efficiency and current limitation of the various regulators.
+For information about various sensors and power rails limits, refer to the specific <a class="reference external" href="https://www.xilinx.com/products/boards-and-kits/alveo.html#cards">documentation for your card</a>.
+With the same example (U50 card), the actual power thresholds will be lower than 65W and 10W.</p>
+</section>
+<section id="components-present-on-the-card">
+<h3>Components present on the card<a class="headerlink" href="#components-present-on-the-card" title="Permalink to this headline">¶</a></h3>
+<p>The card might be fitted with other ICs (such as co-processor, memories, and so forth) on which xbtest has no control.
+During calibration, ensure these components behave like similarly to normal test operations.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>xbtest can only control power of memory directly connected to the FPGA.</p>
+</div>
+</section>
+<section id="tests-running">
+<h3>Tests running<a class="headerlink" href="#tests-running" title="Permalink to this headline">¶</a></h3>
+<p>Other test cases, like memory (DDR or HBM) and GT MAC, have a significant impact on the power consumed.
+Make sure that the calibration is done while using these other feature as per nominal load.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>DDR</strong>: When running four DDRs simultaneously, the memory test consumes approximately 20 W (write mode) or 15 W (read mode).</p></li>
+<li><p><strong>HBM</strong>: For example, when eight HBM ports are used, the memory test consumes between 7 W and 8 W.</p></li>
+<li><p><strong>GT</strong>: When two GT MAC <a class="reference internal" href="../introduction/overview.html#hardware-overview"><span class="std std-ref">xbtest hardware IP (xbtIP)</span></a> are present, the 25 GbE mode uses ±6 W more than the 10 GbE mode.</p></li>
+<li><p><strong>Logic</strong>: Memory and GT <a class="reference internal" href="../introduction/overview.html#hardware-overview"><span class="std std-ref">xbtIP</span></a>, and the memory subsystem also consume several watts.</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These values are indicative and might vary from card to card. They also depend on test environmental conditions, such as cooling.</p>
+</div>
+<p>Care must be taken when mixing test case types or when changing the mode of other tests while the power test is running.
+For example, power varies when the memory test changes from <code class="docutils literal notranslate"><span class="pre">only_rd</span></code> to <code class="docutils literal notranslate"><span class="pre">only_wr</span></code> mode.
+Power will decrease when a <a class="reference internal" href="memory-test-case-description.html#memory-test-case-description"><span class="std std-ref">Memory</span></a> test case ends.
+<code class="docutils literal notranslate"><span class="pre">simultaneous_wr_rd</span></code> mode is usually the memory test mode consuming the most power.</p>
+</section>
+</section>
+<section id="power-test-json-members">
+<span id="id4"></span><h2>Power test JSON members<a class="headerlink" href="#power-test-json-members" title="Permalink to this headline">¶</a></h2>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p>The following is an example of a <a class="reference internal" href="#power-test-case-description"><span class="std std-ref">Power</span></a> test case running for 60 seconds at a <a class="reference internal" href="#power-parameter-test-sequence-toggle-rate"><span class="std std-ref">toggle_rate</span></a> of 15 %.</p>
+<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;power&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;global_config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;test_sequence&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;toggle_rate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="definition">
+<h3>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">¶</a></h3>
+<p>The following table shows all members available for this test case.
+More details are provided for each member in the subsequent sections.</p>
+<table class="docutils align-default" id="id5">
+<caption><span class="caption-text">Power test case members</span><a class="headerlink" href="#id5" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 15%" />
+<col style="width: 56%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Member</p></th>
+<th class="head"><p>Mandatory / Optional</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#power-parameter-test-sequence"><span class="std std-ref">test_sequence</span></a></p></td>
+<td><p>Mandatory</p></td>
+<td><p>Describes the sequence of tests to perform.
+A test is defined by the following values:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="#power-parameter-test-sequence-duration"><span class="std std-ref">duration</span></a>: In seconds.</p></li>
+<li><p><a class="reference internal" href="#power-parameter-test-sequence-toggle-rate"><span class="std std-ref">toggle_rate</span></a>: Toggle rate.</p></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#power-parameter-disable-reg"><span class="std std-ref">disable_reg</span></a></p></td>
+<td><p>Optional</p></td>
+<td><p>Disable usage of all flip-flops present in the Power <a class="reference internal" href="../introduction/overview.html#hardware-overview"><span class="std std-ref">xbtIP</span></a> of <a class="reference external" href="../../doc_not_available.html">Alveo Versal Example Design (AVED)</a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#power-parameter-disable-dsp"><span class="std std-ref">disable_dsp</span></a></p></td>
+<td><p>Optional</p></td>
+<td><p>Disable usage of all DSPs present in the Power <a class="reference internal" href="../introduction/overview.html#hardware-overview"><span class="std std-ref">xbtIP</span></a> of <a class="reference external" href="../../doc_not_available.html">Alveo Versal Example Design (AVED)</a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#power-parameter-disable-bram"><span class="std std-ref">disable_bram</span></a></p></td>
+<td><p>Optional</p></td>
+<td><p>Disable usage of all block RAMs present in the Power <a class="reference internal" href="../introduction/overview.html#hardware-overview"><span class="std std-ref">xbtIP</span></a> of <a class="reference external" href="../../doc_not_available.html">Alveo Versal Example Design (AVED)</a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#power-parameter-disable-uram"><span class="std std-ref">disable_uram</span></a></p></td>
+<td><p>Optional</p></td>
+<td><p>Disable usage of all UltraRAMs present in the Power <a class="reference internal" href="../introduction/overview.html#hardware-overview"><span class="std std-ref">xbtIP</span></a> of <a class="reference external" href="../../doc_not_available.html">Alveo Versal Example Design (AVED)</a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#power-parameter-disable-aie"><span class="std std-ref">disable_aie</span></a></p></td>
+<td><p>Optional</p></td>
+<td><p>Disable usage of all AIEs present in the Power <a class="reference internal" href="../introduction/overview.html#hardware-overview"><span class="std std-ref">xbtIP</span></a> of <a class="reference external" href="../../doc_not_available.html">Alveo Versal Example Design (AVED)</a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#power-parameter-disable-toggle-ramp"><span class="std std-ref">disable_toggle_ramp</span></a></p></td>
+<td><p>Optional</p></td>
+<td><p>Disable ramp to reach target toggle rate (see <a class="reference internal" href="#toggle-rate-step-requirement"><span class="std std-ref">Toggle rate step requirement</span></a>).</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="test-sequence">
+<span id="power-parameter-test-sequence"></span><h3><code class="docutils literal notranslate"><span class="pre">test_sequence</span></code><a class="headerlink" href="#test-sequence" title="Permalink to this headline">¶</a></h3>
+<p>Mandatory. Describes the sequence of tests to perform.
+Tests are performed serially, and a failure in one test does not stop the sequence (the next test will be launched).
+There is no limitation to the length of the test sequence.</p>
+<p>This field contains a list of tests, each test being defined by an object of key–value parameters pairs: <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">{},</span> <span class="pre">{},</span> <span class="pre">{}</span> <span class="pre">]</span></code>.</p>
+<p>The following table defines the parameters supported in the Power test sequence:</p>
+<span id="power-parameter-test-sequence-toggle-rate"></span><span id="power-parameter-test-sequence-duration"></span><table class="docutils align-default" id="id6">
+<caption><span class="caption-text">Power test sequence parameters</span><a class="headerlink" href="#id6" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 15%" />
+<col style="width: 72%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Member</p></th>
+<th class="head"><p>Mandatory / optional</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">duration</span></code></p></td>
+<td><p>Mandatory</p></td>
+<td><p>The duration of the test in seconds; Range [1, 2<sup>32</sup>-1].</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">toggle_rate</span></code></p></td>
+<td><p>Mandatory</p></td>
+<td><p>Toggle rate (in %) driving the sites present in the Power <a class="reference internal" href="../introduction/overview.html#hardware-overview"><span class="std std-ref">xbtIP</span></a> of <a class="reference external" href="../../doc_not_available.html">Alveo Versal Example Design (AVED)</a>; Range [0, 100].</p></td>
+</tr>
+</tbody>
+</table>
+<p>For example:</p>
+<blockquote>
+<div><ul>
+<li><p><strong>Single test</strong>:</p>
+<blockquote>
+<div><ul>
+<li><div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;test_sequence&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;toggle_rate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">75</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+</li>
+<li><div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;test_sequence&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;toggle_rate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">85</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Multiple tests</strong>:</p>
+<blockquote>
+<div><ul>
+<li><div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;test_sequence&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w">  </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;toggle_rate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">240</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;toggle_rate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;toggle_rate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w">  </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;toggle_rate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</section>
+<section id="disable-reg-disable-dsp-disable-bram-disable-uram-disable-aie">
+<span id="power-parameter-disable-aie"></span><span id="power-parameter-disable-uram"></span><span id="power-parameter-disable-bram"></span><span id="power-parameter-disable-dsp"></span><span id="power-parameter-disable-reg"></span><span id="power-parameter-disable-reg-dsp-bram-uram-aie"></span><h3><code class="docutils literal notranslate"><span class="pre">disable_reg</span></code>, <code class="docutils literal notranslate"><span class="pre">disable_dsp</span></code>, <code class="docutils literal notranslate"><span class="pre">disable_bram</span></code>, <code class="docutils literal notranslate"><span class="pre">disable_uram</span></code>, <code class="docutils literal notranslate"><span class="pre">disable_aie</span></code><a class="headerlink" href="#disable-reg-disable-dsp-disable-bram-disable-uram-disable-aie" title="Permalink to this headline">¶</a></h3>
+<p>Optional;
+Type           : boolean;
+Possible values: <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>;
+Default        : <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
+<p>By default, all flip-flops, DSPs, block RAMs, and UltraRAMs present in the power <a class="reference internal" href="../introduction/overview.html#hardware-overview"><span class="std std-ref">xbtest hardware IP (xbtIP)</span></a> of <a class="reference external" href="../../doc_not_available.html">Alveo Versal Example Design (AVED)</a> are enabled.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>When <code class="docutils literal notranslate"><span class="pre">disable_reg</span></code> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, all flip-flops present are disabled.</p></li>
+<li><p>When <code class="docutils literal notranslate"><span class="pre">disable_dsp</span></code> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, all DSPs present are disabled.</p></li>
+<li><p>When <code class="docutils literal notranslate"><span class="pre">disable_bram</span></code> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, all block RAMs present are disabled.</p></li>
+<li><p>When <code class="docutils literal notranslate"><span class="pre">disable_uram</span></code> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, all UltraRAMs present are disabled.</p></li>
+<li><p>When <code class="docutils literal notranslate"><span class="pre">disable_aie</span></code> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, all AIEs present are disabled.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="disable-toggle-ramp">
+<span id="power-parameter-disable-toggle-ramp"></span><h3><code class="docutils literal notranslate"><span class="pre">disable_toggle_ramp</span></code><a class="headerlink" href="#disable-toggle-ramp" title="Permalink to this headline">¶</a></h3>
+<p>Optional;
+Type           : boolean;
+Possible values: <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>;
+Default        : <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
+<p>By default, the target <a class="reference internal" href="#power-parameter-test-sequence-toggle-rate"><span class="std std-ref">toggle_rate</span></a> will be set gradually to the power <a class="reference internal" href="../introduction/overview.html#hardware-overview"><span class="std std-ref">xbtest hardware IP (xbtIP)</span></a> load using steps (see <a class="reference internal" href="#toggle-rate-step-requirement"><span class="std std-ref">Toggle rate step requirement</span></a>).</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>When set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, the target <a class="reference internal" href="#power-parameter-test-sequence-toggle-rate"><span class="std std-ref">toggle_rate</span></a> will be set directly to the Power <a class="reference internal" href="../introduction/overview.html#hardware-overview"><span class="std std-ref">xbtIP</span></a>.</p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+<section id="output-files">
+<h2>Output files<a class="headerlink" href="#output-files" title="Permalink to this headline">¶</a></h2>
+<p>All power measurements are stored in an output CSV file named <code class="docutils literal notranslate"><span class="pre">power.csv</span></code> which is generated in xbtest logging directory.
+The values are stored in CSV type format with one column for each information type.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If the command line option <a class="reference internal" href="../usage/command-line-options.html#cmdoption-L"><code class="xref std std-option docutils literal notranslate"><span class="pre">-L</span></code></a> is used while calling <a class="reference internal" href="../introduction/overview.html#application-software"><span class="std std-ref">xbtest application software (xbtSW)</span></a>, no output file is generated.</p>
+</div>
+<p>All measurements from all <a class="reference internal" href="#power-parameter-test-sequence"><span class="std std-ref">test_sequence</span></a> are combined into a single file.</p>
+<p>A new line is written in this file every time power measurements are available.
+At a minimum, the following values are recorded:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Global time (s)</strong>: Global elapsed time since <a class="reference internal" href="../introduction/overview.html#application-software"><span class="std std-ref">xbtest application software (xbtSW)</span></a>  execution started.</p></li>
+<li><p><strong>Test</strong>: Index of current test within the <a class="reference internal" href="#power-parameter-test-sequence"><span class="std std-ref">test_sequence</span></a>. Index of first test is 1.
+The first rows of the file with test and <a class="reference internal" href="#power-parameter-test-sequence-toggle-rate"><span class="std std-ref">toggle_rate</span></a> set to 0 corresponds to the measurement of the card rest power.</p></li>
+<li><p><strong>Test time (s)</strong>: Timestamp of the measurement.
+Timestamp of first measurement is 0 for a given test within the <a class="reference internal" href="#power-parameter-test-sequence"><span class="std std-ref">test_sequence</span></a>.</p></li>
+<li><p><strong>Toggle rate (%)</strong>: <a class="reference internal" href="#power-parameter-test-sequence-toggle-rate"><span class="std std-ref">toggle_rate</span></a> in % currently set to the power <a class="reference internal" href="../introduction/overview.html#hardware-overview"><span class="std std-ref">xbtIP</span></a>.</p></li>
+<li><p><strong>measurement ID</strong>: Measurement identifier. ID of first measurement is 1.</p></li>
+<li><p><strong>Measurement valid</strong>: Set to <code class="docutils literal notranslate"><span class="pre">OK</span></code> if <a class="reference internal" href="../introduction/overview.html#application-software"><span class="std std-ref">xbtSW</span></a>  was able to successfully gets power and temperature measurements via the <a class="reference external" href="../../doc_not_available.html">AVED Management Interface (AMI) APIs</a>, otherwise set to <code class="docutils literal notranslate"><span class="pre">KO</span></code>.</p></li>
+<li><p><strong>Thermal measurements</strong>: Group of one or more columns recording measurements and status for each thermal sensor source monitored by xbtest.</p>
+<ul>
+<li><p>FPGA temperature.</p></li>
+</ul>
+</li>
+<li><p><strong>Electrical measurements</strong>: Group of one or more columns recording detailed measurements and status for each electrical sensor source monitored by xbtest.</p>
+<ul>
+<li><p>Card power.</p></li>
+<li><p>Current, voltage and power of 3v3_pex, 12v_pex, vccint and 12v_aux (and an auxiliary cable is used).</p></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<p>See <a class="reference internal" href="../tasks/device-management-task-description.html#device-management-task-description"><span class="std std-ref">Device management task description</span></a> for more information on the sensor sources monitored by xbtest.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+				  
+				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="memory-test-case-description.html" class="btn btn-neutral float-left" title="Memory test case description" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gt-test-case-description.html" class="btn btn-neutral float-right" title="GT test cases description" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Advanced Micro Devices Inc.</p>
+  </div>
+
+
+
+										<div class="aem-Grid aem-Grid--16">
+											<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+												<div class="container-fluid sub-footer">
+
+													                    <div class="row">
+                        <div class="col-xs-24">
+                          <p><a target="_blank" href="https://www.amd.com/en/corporate/copyright">Terms and Conditions</a> | <a target="_blank" href="https://www.amd.com/en/corporate/privacy">Privacy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/cookies">Cookie Policy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/trademarks">Trademarks</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf">Statement on Forced Labor</a> | <a target="_blank" href="https://www.amd.com/en/corporate/competition">Fair and Open Competition</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf">UK Tax Strategy</a> | <a target="_blank" href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA">Inclusive Terminology</a> | <a href="#cookiessettings" class="ot-sdk-show-settings">Cookies Settings</a></p>
+                        </div>
+                    </div>
+												</div>
+											</div>
+										</div>
+										
+</br>
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

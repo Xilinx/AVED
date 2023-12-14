@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script charset="UTF-8" data-document-language="true" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script class="optanon-category-C0002" type="text/plain">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+<title>AVED Programming Control (APC) Proxy Driver — AVED  documentation</title>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="_static/xbtest.css" rel="stylesheet" type="text/css"/>
+<link href="_static/_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="https://docs.xilinx.com/favicon.ico" rel="shortcut icon"/>
+<!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/js/theme.js"></script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html" rel="next" title="AVED Sensor Control (ASC) Proxy Driver"/>
+<link href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html" rel="prev" title="AVED Management Interface (AMI) Proxy Driver"/>
+<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager -->
+<noscript><iframe class="optanon-category-C0002" height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager -->
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="index.html"> AVED
+            <img alt="Logo" class="logo" src="_static/xilinx-header-logo.svg"/>
+</a>
+<div role="search">
+<form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" type="text"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+</div>
+</div><div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BUser%2BApplication.html">AVED - User Application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80/V80P</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BHierarchy%2BOverview.html">AVED V80/V80P - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BCIPS%2BConfiguration.html">AVED V80/V80P - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BMemory%2BResources.html">AVED V80/V80P - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BMemory%2BMap.html">AVED V80/V80P - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BNoC%2BConfiguration.html">AVED V80/V80P - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BBase%2BLogic.html">AVED V80/V80P - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BClock%2BReset%2BModule.html">AVED V80/V80P - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BSource%2BFile%2BOverview.html">AVED V80/V80P - Source File Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BXBTEST%2BDesign.html">AVED V80/V80P - XBTEST Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BClock%2BControl%2B%28ACC%29%2BProxy%2BDriver.html">AVED Clock Control (ACC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">AVED Programming Control (APC) Proxy Driver</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api">API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#initialise-the-apc-proxy-driver">Initialise the APC proxy driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bind-callbacks">Bind Callbacks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#download-image">Download Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#update-fpt">Update FPT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#copy-image">Copy Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-next-partition">Set Next Partition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enable-hot-reset">Enable Hot Reset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-fpt-header">Get FPT Header</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-fpt-partition">Get FPT Partition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#print-statistics">Print Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clear-statistics">Clear Statistics</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sequence-diagrams">Sequence Diagrams</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#apc-proxy-initialization">APC Proxy Initialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#apc-proxy-task">APC Proxy Task</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#initialize-driver">Initialize Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#register-for-callback">Register For Callback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Download image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Copy image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sets">Sets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">Set next partition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">Enable hot reset</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gets">Gets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id9">Get FPT header</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">Get FPT partition</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI &amp; xbtest)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest%2Bbuild.html">xbtest build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift"><nav aria-label="Mobile navigation menu" class="wy-nav-top" style="background: black">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="index.html">AVED</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="Page navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a class="icon icon-home" href="index.html"></a> »</li>
+<li>AVED Programming Control (APC) Proxy Driver</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<section id="aved-programming-control-apc-proxy-driver">
+<h1>AVED Programming Control (APC) Proxy Driver<a class="headerlink" href="#aved-programming-control-apc-proxy-driver" title="Permalink to this headline">¶</a></h1>
+<section id="overview">
+<span id="avedprogrammingcontrol-apc-proxydriver-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The APC proxy driver binds in the FAL provided in initialization. Internally, it also creates a number of resources including two mutexes for protection, a mailbox to handle asynchronous responses, and a task to handle the interaction with the FAL.</p>
+<p>The APC task will:</p>
+<ul class="simple">
+<li><p>Pend to its mailbox, and handle the incoming messages.</p></li>
+<li><p>Download new images to flash and update metadata.</p></li>
+<li><p>Copy images from one partition to another.</p></li>
+<li><p>Select partition to boot from next.</p></li>
+</ul>
+<p>The API consists of a number of functions to download/copy an image to a location in flash memory, select boot partition and receive Flash Partition Table (FPT) data. The flash APIs will post an internal message with the required data onto the
+mailbox. The APC proxy task will service this mailbox and make the appropriate calls to the FAL to download/copy an image or select a new boot partition.</p>
+<p>The API also provides two debug functions to display and clear of the stat/error counters.</p>
+</section>
+<section id="api">
+<span id="avedprogrammingcontrol-apc-proxydriver-api"></span><h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<section id="initialise-the-apc-proxy-driver">
+<span id="avedprogrammingcontrol-apc-proxydriver-initialisetheapcproxydriver"></span><h3>Initialise the APC proxy driver<a class="headerlink" href="#initialise-the-apc-proxy-driver" title="Permalink to this headline">¶</a></h3>
+<p>This will open the FAL using the provided handle and make use of the OSAL to create two mutexes, a mailbox, and the proxy task.</p>
+<p><strong>iAPC_Initialise</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Main initialisation point <span class="k">for</span> the APC Proxy Driver
+ *
+ * @param   ucProxyId   Unique ID <span class="k">for</span> this Proxy driver
+ * @param   pxFwIf      Handle to the Firmware Interface to use
+ * @param   ulTaskPrio  Priority of the Proxy driver task <span class="o">(</span><span class="k">if</span> RR disabled<span class="o">)</span>
+ * @param   ulTaskStack Stack size of the Proxy driver task
+ *
+ * @return  OK          Proxy driver initialised correctly
+ *          ERROR       Proxy driver not initialised, or was already initialised
+ *
+ */
+int iAPC_Initialise<span class="o">(</span> uint8_t ucProxyId, FW_IF_CFG *pxFwIf,
+                     uint32_t ulTaskPrio, uint32_t ulTaskStack <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="bind-callbacks">
+<span id="avedprogrammingcontrol-apc-proxydriver-bindcallbacks"></span><h3>Bind Callbacks<a class="headerlink" href="#bind-callbacks" title="Permalink to this headline">¶</a></h3>
+<p>This API can be used to bind into a callback to be notified of events generated by the APC proxy using the EVL library. The current supported events are:</p>
+<ul class="simple">
+<li><p><strong>APC_PROXY_DRIVER_E_DOWNLOAD_STARTED</strong></p></li>
+<li><p><strong>APC_PROXY_DRIVER_E_DOWNLOAD_COMPLETE</strong></p></li>
+<li><p><strong>APC_PROXY_DRIVER_E_DOWNLOAD_BUSY</strong></p></li>
+<li><p><strong>APC_PROXY_DRIVER_E_DOWNLOAD_FAILED</strong></p></li>
+<li><p><strong>APC_PROXY_DRIVER_E_COPY_STARTED</strong></p></li>
+<li><p><strong>APC_PROXY_DRIVER_E_COPY_COMPLETE</strong></p></li>
+<li><p><strong>APC_PROXY_DRIVER_E_COPY_BUSY</strong></p></li>
+<li><p><strong>APC_PROXY_DRIVER_E_COPY_FAILED</strong></p></li>
+<li><p><strong>APC_PROXY_DRIVER_E_PARTITION_SELECTED</strong></p></li>
+<li><p><strong>APC_PROXY_DRIVER_E_PARTITION_SELECTION_FAILED</strong></p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><strong>iAPC_BindCallback</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Bind into this proxy driver
+ *
+ * @param   pxCallback  Callback to <span class="nb">bind</span> into the proxy driver
+ *
+ * @return  OK          Callback successfully bound
+ *          ERROR       Callback not bound
+ *
+ */
+int iAPC_BindCallback<span class="o">(</span> EVL_CALLBACK *pxCallback <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="download-image">
+<span id="avedprogrammingcontrol-apc-proxydriver-downloadimage"></span><h3>Download Image<a class="headerlink" href="#download-image" title="Permalink to this headline">¶</a></h3>
+<p>This will post a message (<strong>APC_MSG_TYPE_DOWNLOAD_PDI</strong>) onto the APC mailbox to be handled within the internal APC task to download an image to a location in NV memory.</p>
+<p><strong>iAPC_DownloadImage</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Download an image to a location <span class="k">in</span> NV memory
+ *
+ * @param   pxSignal    Current event occurance <span class="o">(</span>used <span class="k">for</span> tracking<span class="o">)</span>
+ * @param   iPartition  The partition <span class="k">in</span> the FPT to store this image <span class="k">in</span>
+ * @param   ulSrcAddr   Address <span class="o">(</span><span class="k">in</span> RAM<span class="o">)</span> to <span class="nb">read</span> the image from
+ * @param   ulImageSize Size of image <span class="o">(</span><span class="k">in</span> bytes<span class="o">)</span>
+ *
+ * @return  OK          Image downloaded successfully
+ *          ERROR       Image not downloaded successfully
+ *
+ */
+int iAPC_DownloadImage<span class="o">(</span> EVL_SIGNAL *pxSignal, int iPartition, uint32_t ulSrcAddr, uint32_t ulImageSize <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="update-fpt">
+<span id="avedprogrammingcontrol-apc-proxydriver-updatefpt"></span><h3>Update FPT<a class="headerlink" href="#update-fpt" title="Permalink to this headline">¶</a></h3>
+<p>This will post a message (<strong>APC_MSG_TYPE_DOWNLOAD_PDI</strong>) onto the APC mailbox to be handled within the internal APC task to download an image to a location in NV memory and update the FPT.</p>
+<p><strong>iAPC_UpdateFpt</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief Download an image with an FPT to a location <span class="k">in</span> NV memory
+ *
+ * @param pxSignal Current event occurance <span class="o">(</span>used <span class="k">for</span> tracking<span class="o">)</span>
+ * @param ulSrcAddr Address <span class="o">(</span><span class="k">in</span> RAM<span class="o">)</span> to <span class="nb">read</span> the image from
+ * @param ulImageSize Size of image <span class="o">(</span><span class="k">in</span> bytes<span class="o">)</span>
+ * @param usPacketNum Image packet number
+ * @param usPacketSize Size of image packet <span class="o">(</span><span class="k">in</span> KB<span class="o">)</span>
+ * @param iLastPacket Boolean indicating <span class="k">if</span> this is the last data packet
+ *
+ * @return OK Image downloaded successfully
+ * ERROR Image not downloaded successfully
+ *
+ */
+int iAPC_UpdateFpt<span class="o">(</span> EVL_SIGNAL *pxSignal, uint32_t ulSrcAddr, uint32_t ulImageSize,
+uint16_t usPacketNum, uint16_t usPacketSize, int iLastPacket <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="copy-image">
+<span id="avedprogrammingcontrol-apc-proxydriver-copyimage"></span><h3>Copy Image<a class="headerlink" href="#copy-image" title="Permalink to this headline">¶</a></h3>
+<p>This will post a message (<strong>APC_MSG_TYPE_COPY_PDI</strong>) onto the APC mailbox to be handled within the internal APC task to copy an image from one partition to another.</p>
+<p><strong>iAPC_CopyImage</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Copy an image from one partition to another
+ *
+ * @param   pxSignal        Current event occurance <span class="o">(</span>used <span class="k">for</span> tracking<span class="o">)</span>
+ * @param   iSrcPartition   The partition <span class="k">in</span> the FPT to copy this image from
+ * @param   iDestPartition  The partition <span class="k">in</span> the FPT to copy this image to
+ * @param   ulCpyAddr       Address <span class="o">(</span><span class="k">in</span> RAM<span class="o">)</span> to copy the <span class="nb">source</span> partition to before writing it
+ * @param   ulAllocatedSize Maximum size available to copy
+ *
+ * @return  OK          Image copied successfully
+ *          ERROR       Image not copied successfully
+ *
+ */
+int iAPC_CopyImage<span class="o">(</span> EVL_SIGNAL *pxSignal, int iSrcPartition, int iDestPartition, uint32_t ulCpyAddr, uint32_t ulAllocatedSize <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="set-next-partition">
+<span id="avedprogrammingcontrol-apc-proxydriver-setnextpartition"></span><h3>Set Next Partition<a class="headerlink" href="#set-next-partition" title="Permalink to this headline">¶</a></h3>
+<p>This will post a message (<strong>APC_MSG_TYPE_PARTITION_SELECT</strong>) onto the APC mailbox to be handled within the internal APC task to select which partition to boot from.</p>
+<p><strong>iAPC_SetNextPartition</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Select which partition to boot from
+ *
+ * @param   pxSignal    Current event occurance <span class="o">(</span>used <span class="k">for</span> tracking<span class="o">)</span>
+ * @param   iPartition  The partition to boot from on the next reset
+ *
+ * @return  OK          Partition successfully selected
+ *          ERROR       Partition not selected
+ */
+int iAPC_SetNextPartition<span class="o">(</span> EVL_SIGNAL *pxSignal, int iPartition <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="enable-hot-reset">
+<span id="avedprogrammingcontrol-apc-proxydriver-enablehotreset"></span><h3>Enable Hot Reset<a class="headerlink" href="#enable-hot-reset" title="Permalink to this headline">¶</a></h3>
+<p>This will post a message (<strong>APC_MSG_TYPE_ENABLE_HOT_RESET</strong>) onto the APC mailbox to be handled within the internal APC task to enable the hot reset capability.</p>
+<p><strong>iAPC_EnableHotReset</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Enable the hot reset capability
+ *
+ * @param   pxSignal    Current event occurance <span class="o">(</span>used <span class="k">for</span> tracking<span class="o">)</span>
+ *
+ * @return  OK          Hot reset successfully enabled
+ *          ERROR       Hot reset not enabled
+ */
+int iAPC_EnableHotReset<span class="o">(</span> EVL_SIGNAL *pxSignal <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="get-fpt-header">
+<span id="avedprogrammingcontrol-apc-proxydriver-getfptheader"></span><h3>Get FPT Header<a class="headerlink" href="#get-fpt-header" title="Permalink to this headline">¶</a></h3>
+<p>This will copy the locally stored Flash Partition Table (FPT) header data into the passed FPT header struct. This process is mutex protected.</p>
+<p><strong>iAPC_GetFptHeader</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Get the Flash Partition Table <span class="o">(</span>FPT<span class="o">)</span> Header
+ *
+ * @param   pxFptHeader     Pointer to the FPT header data
+ *
+ * @return  OK              FPT header retrieved successfully
+ *          ERROR           FPT header not retrieved successfully
+ *
+ */
+int iAPC_GetFptHeader<span class="o">(</span> APC_PROXY_DRIVER_FPT_HEADER *pxFptHeader <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="get-fpt-partition">
+<span id="avedprogrammingcontrol-apc-proxydriver-getfptpartition"></span><h3>Get FPT Partition<a class="headerlink" href="#get-fpt-partition" title="Permalink to this headline">¶</a></h3>
+<p>This will copy the locally stored Flash Partition Table (FPT) partition data into the passed FPT partition struct. This process is mutex protected.</p>
+<p><strong>iAPC_GetFptPartition</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Get a Flash Partition Table <span class="o">(</span>FPT<span class="o">)</span> Partition
+ *
+ * @param   iPartition      Index of partition to retrieve <span class="o">(</span><span class="m">0</span> is the 1st partition<span class="o">)</span>
+ * @param   pxFptPartition  Pointer to the FPT partition data
+ *
+ * @return  OK              FPT partition retrieved successfully
+ *          ERROR           FPT partition not retrieved successfully
+ *
+ */
+int iAPC_GetFptPartition<span class="o">(</span> int iPartition, APC_PROXY_DRIVER_FPT_PARTITION *pxFptPartition <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="print-statistics">
+<span id="avedprogrammingcontrol-apc-proxydriver-printstatistics"></span><h3>Print Statistics<a class="headerlink" href="#print-statistics" title="Permalink to this headline">¶</a></h3>
+<p>Debug function used to display the statistic counters and errors.</p>
+<p><strong>iAPC_PrintStatistics</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Print all the stats gathered by the proxy driver
+ *
+ * @return  OK          Stats retrieved from proxy driver successfully
+ *          ERROR       Stats not retrieved successfully
+ *
+ */
+int iAPC_PrintStatistics<span class="o">(</span> void <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="clear-statistics">
+<span id="avedprogrammingcontrol-apc-proxydriver-clearstatistics"></span><h3>Clear Statistics<a class="headerlink" href="#clear-statistics" title="Permalink to this headline">¶</a></h3>
+<p>Debug function used to clear the all statistics counters back to zero.</p>
+<p><strong>iAPC_ClearStatistics</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Clear all the stats <span class="k">in</span> the proxy driver
+ *
+ * @return  OK          Stats cleared successfully
+ *          ERROR       Stats not cleared successfully
+ *
+ */
+int iAPC_ClearStatistics<span class="o">(</span> void <span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="sequence-diagrams">
+<span id="avedprogrammingcontrol-apc-proxydriver-sequencediagrams"></span><h2>Sequence Diagrams<a class="headerlink" href="#sequence-diagrams" title="Permalink to this headline">¶</a></h2>
+<section id="apc-proxy-initialization">
+<span id="avedprogrammingcontrol-apc-proxydriver-apcproxyinitialization"></span><h3>APC Proxy Initialization<a class="headerlink" href="#apc-proxy-initialization" title="Permalink to this headline">¶</a></h3>
+<p>Two APC API functions are called from the AMC main task (iAPC_Initialise and iAPC_BindCallback), in order to initialize the proxy.</p>
+<p>iAPC_Initialise will call into the FAL to open with the provided handle, create two shared proxy mutexes, create a proxy mailbox and create the proxy task.</p>
+<p>iAPC_BindCallback will bind the appropriate top-level callback function.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/f9c934dc57e53dd2580829461d2cbb353ffa30c3.png"><img alt="image1" class="drawio-diagram-image" src="_images/f9c934dc57e53dd2580829461d2cbb353ffa30c3.png" style="width: 901px;"/></a></p>
+</section>
+<section id="apc-proxy-task">
+<span id="avedprogrammingcontrol-apc-proxydriver-apcproxytask"></span><h3>APC Proxy Task<a class="headerlink" href="#apc-proxy-task" title="Permalink to this headline">¶</a></h3>
+<p>The Task within APC has a number of responsibilities:</p>
+<ul class="simple">
+<li><p>Pend to its mailbox, and handle the incoming messages.</p></li>
+<li><p>Download new image to flash and update metadata.</p></li>
+<li><p>Copy image from one partition to another.</p></li>
+<li><p>Select partition to boot from next.</p></li>
+</ul>
+<p>The sequence flow diagram below outline the top-level functionality of the APC proxy task. Some complexity has been hidden within local functions, namely iDownloadImage(), iCopyImage() and iSelectPartition().</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/b4fe05c7812a0e5d93cf8a8805d752649f18f56f.png"><img alt="image2" class="drawio-diagram-image" src="_images/b4fe05c7812a0e5d93cf8a8805d752649f18f56f.png" style="width: 881px;"/></a></p>
+</section>
+</section>
+<section id="examples">
+<span id="avedprogrammingcontrol-apc-proxydriver-examples"></span><h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<section id="initialize-driver">
+<span id="avedprogrammingcontrol-apc-proxydriver-initializedriver"></span><h3>Initialize Driver<a class="headerlink" href="#initialize-driver" title="Permalink to this headline">¶</a></h3>
+<p>This function should only be called once. It requires an unique ID for the proxy, used for signaling new events from the proxy, along with a handle to a FW_IF (already created and initialized), proxy driver task priority and stack size.</p>
+<p><strong>iAPC_Initialise Example</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> <span class="nv">OK</span> <span class="o">==</span> iAPC_Initialise<span class="o">(</span> AMC_EVENT_UNIQUE_ID_APC, <span class="p">&amp;</span>xOspiIf, AMC_TASK_PRIO_DEFAULT, AMC_APC_TASK_STACK <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    AMC_PRINTF<span class="o">(</span> <span class="s2">"APC Proxy Driver initialised\r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    AMC_PRINTF<span class="o">(</span> <span class="s2">"Error initialising APC Proxy Driver\r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="register-for-callback">
+<span id="avedprogrammingcontrol-apc-proxydriver-registerforcallback"></span><h3>Register For Callback<a class="headerlink" href="#register-for-callback" title="Permalink to this headline">¶</a></h3>
+<p>Define a function based on the function pointer prototype and bind in using the API.</p>
+<p><strong>iAPC_BindCallback Example</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/* Define a callback to handle the events */
+static int iApcCallback<span class="o">(</span> EVL_SIGNAL *pxSignal <span class="o">)</span>
+<span class="o">{</span>
+    int <span class="nv">iStatus</span> <span class="o">=</span> ERROR<span class="p">;</span>
+
+    <span class="k">if</span><span class="o">(</span> <span class="o">(</span> NULL !<span class="o">=</span> pxSignal <span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> <span class="nv">AMC_EVENT_UNIQUE_ID_APC</span> <span class="o">==</span> pxSignal-&gt;ucModule <span class="o">)</span> <span class="o">)</span>
+    <span class="o">{</span>
+        switch<span class="o">(</span> pxSignal-&gt;ucEventType <span class="o">)</span>
+        <span class="o">{</span>
+            <span class="k">case</span> APC_PROXY_DRIVER_E_DOWNLOAD_STARTED:
+            <span class="k">case</span> APC_PROXY_DRIVER_E_DOWNLOAD_COMPLETE:
+            <span class="k">case</span> APC_PROXY_DRIVER_E_DOWNLOAD_FAILED:
+            <span class="k">case</span> APC_PROXY_DRIVER_E_DOWNLOAD_BUSY:
+            <span class="k">case</span> APC_PROXY_DRIVER_E_COPY_STARTED:
+            <span class="k">case</span> APC_PROXY_DRIVER_E_COPY_COMPLETE:
+            <span class="k">case</span> APC_PROXY_DRIVER_E_COPY_FAILED:
+            <span class="k">case</span> APC_PROXY_DRIVER_E_COPY_BUSY:
+            <span class="k">case</span> APC_PROXY_DRIVER_E_PARTITION_SELECTED:
+            <span class="k">case</span> APC_PROXY_DRIVER_E_PARTITION_SELECTION_FAILED:
+                /* TODO: handle events */
+                <span class="nv">iStatus</span> <span class="o">=</span> OK<span class="p">;</span>
+                break<span class="p">;</span>
+
+            default:
+                break<span class="p">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> iStatus<span class="p">;</span>
+<span class="o">}</span>
+
+
+/* Bind into the callback during the application initialisation */
+<span class="k">if</span><span class="o">(</span> <span class="nv">OK</span> <span class="o">==</span> iAPC_BindCallback<span class="o">(</span> <span class="p">&amp;</span>iApcCallback <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    AMC_PRINTF<span class="o">(</span> <span class="s2">"APC Proxy Driver initialised and bound\r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    AMC_PRINTF<span class="o">(</span> <span class="s2">"Error binding to Proxy Driver\r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<span id="id2"></span><h3>Download image<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Example of downloading an image to flash.</p>
+<p><strong>iAPC_DownloadImage Example</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>int <span class="nv">iInstance</span>      <span class="o">=</span> <span class="m">0</span><span class="p">;</span> /* <span class="nb">set</span> to desired request instance */
+int <span class="nv">iPartition</span>     <span class="o">=</span> <span class="m">0</span><span class="p">;</span> /* <span class="nb">set</span> to desired partition number */
+int <span class="nv">iImageSize</span>     <span class="o">=</span> <span class="m">0</span><span class="p">;</span> /* <span class="nb">set</span> to desired image size <span class="o">(</span>bytes<span class="o">)</span> */
+uint32_t <span class="nv">ulSrcAddr</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span> /* <span class="nb">set</span> to desired <span class="nb">source</span> <span class="o">(</span>RAM<span class="o">)</span> address */
+
+EVL_SIGNAL <span class="nv">xSignal</span> <span class="o">=</span> <span class="o">{</span> <span class="m">0</span> <span class="o">}</span><span class="p">;</span>
+xSignal.ucInstance <span class="o">=</span> iInstance<span class="p">;</span>
+
+<span class="k">if</span><span class="o">(</span> OK !<span class="o">=</span> iAPC_DownloadImage<span class="o">(</span> <span class="p">&amp;</span>xSignal, iPartition, ulSrcAddr, <span class="o">(</span> uint32_t <span class="o">)</span>iImageSize <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    APC_DBG_PRINTF<span class="o">(</span> <span class="s2">"Error writing %d bytes to partition %d\r\n"</span>, iImageSize, iPartition <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    APC_DBG_PRINTF<span class="o">(</span> <span class="s2">"%d bytes written from 0x%08X to partition %d\r\n"</span>,
+                    iImageSize, ulSrcAddr, iPartition <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<span id="id4"></span><h3>Copy image<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Example of copying an image to flash.</p>
+<p><strong>iAPC_CopyImage Example</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>int <span class="nv">iInstance</span>      <span class="o">=</span> <span class="m">0</span><span class="p">;</span> /* <span class="nb">set</span> to desired request instance */
+int <span class="nv">iSrcPartition</span>  <span class="o">=</span> <span class="m">0</span><span class="p">;</span> /* <span class="nb">set</span> to desired <span class="nb">source</span> partition number */
+int <span class="nv">iDestPartition</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span> /* <span class="nb">set</span> to desired destination partition number */
+int <span class="nv">iImageSize</span>     <span class="o">=</span> <span class="m">0</span><span class="p">;</span> /* <span class="nb">set</span> to desired image size <span class="o">(</span>max num bytes<span class="o">)</span> */
+uint32_t <span class="nv">ulSrcAddr</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span> /* <span class="nb">set</span> to desired <span class="nb">source</span> <span class="o">(</span>RAM<span class="o">)</span> address */
+
+EVL_SIGNAL <span class="nv">xSignal</span> <span class="o">=</span> <span class="o">{</span> <span class="m">0</span> <span class="o">}</span><span class="p">;</span>
+xSignal.ucInstance <span class="o">=</span> iInstance<span class="p">;</span>
+
+<span class="k">if</span><span class="o">(</span> OK !<span class="o">=</span> iAPC_CopyImage<span class="o">(</span> <span class="p">&amp;</span>xSignal, iSrcPartition, iDestPartition, ulSrcAddr, <span class="o">(</span> uint32_t <span class="o">)</span>iImageSize <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    APC_DBG_PRINTF<span class="o">(</span> <span class="s2">"Error copying partition %d partition %d\r\n"</span>, iSrcPartition, iDestPartition <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    APC_DBG_PRINTF<span class="o">(</span> <span class="s2">"Partition %d copied to partition %d\r\n"</span>,
+                    iSrcPartition, iDestPartition <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="sets">
+<span id="avedprogrammingcontrol-apc-proxydriver-sets"></span><h3>Sets<a class="headerlink" href="#sets" title="Permalink to this headline">¶</a></h3>
+<section id="id5">
+<span id="id6"></span><h4>Set next partition<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<p>Example of selecting the next boot partition.</p>
+<p><strong>iAPC_SetNextPartition Example</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>int <span class="nv">iInstance</span>  <span class="o">=</span> <span class="m">0</span><span class="p">;</span> /* <span class="nb">set</span> to desired request instance */
+int <span class="nv">iPartition</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span> /* <span class="nb">set</span> to desired partition number */
+
+EVL_SIGNAL <span class="nv">xSignal</span> <span class="o">=</span> <span class="o">{</span> <span class="m">0</span> <span class="o">}</span><span class="p">;</span>
+xSignal.ucInstance <span class="o">=</span> iInstance<span class="p">;</span>
+
+<span class="k">if</span><span class="o">(</span> OK !<span class="o">=</span> iAPC_SetNextPartition<span class="o">(</span> <span class="p">&amp;</span>xSignal, iPartition <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    APC_DBG_PRINTF<span class="o">(</span> <span class="s2">"Error selecting partition %d\r\n"</span>, iPartition <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    APC_DBG_PRINTF<span class="o">(</span> <span class="s2">"Selected partition %d\r\n"</span>, iPartition <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<span id="id8"></span><h4>Enable hot reset<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
+<p>Example of enabling hot rest capability.</p>
+<p><strong>iAPC_EnableHotReset Example</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>int <span class="nv">iInstance</span>  <span class="o">=</span> <span class="m">0</span><span class="p">;</span> /* <span class="nb">set</span> to desired request instance */
+
+EVL_SIGNAL <span class="nv">xSignal</span> <span class="o">=</span> <span class="o">{</span> <span class="m">0</span> <span class="o">}</span><span class="p">;</span>
+xSignal.ucInstance <span class="o">=</span> iInstance<span class="p">;</span>
+
+<span class="k">if</span><span class="o">(</span> OK !<span class="o">=</span> iAPC_EnableHotReset<span class="o">(</span> <span class="p">&amp;</span>xSignal <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    PLL_DAL<span class="o">(</span> APC_DBG_NAME, <span class="s2">"Error enabling hot reset\r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    PLL_DAL<span class="o">(</span> APC_DBG_NAME, <span class="s2">"Hot reset enabled\r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="gets">
+<span id="avedprogrammingcontrol-apc-proxydriver-gets"></span><h3>Gets<a class="headerlink" href="#gets" title="Permalink to this headline">¶</a></h3>
+<section id="id9">
+<span id="id10"></span><h4>Get FPT header<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
+<p>Example of retrieving the FPT header.</p>
+<p><strong>iAPC_GetFptHeader Example</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>APC_PROXY_DRIVER_FPT_HEADER <span class="nv">xFptHeader</span> <span class="o">=</span> <span class="o">{</span> <span class="m">0</span> <span class="o">}</span><span class="p">;</span>
+
+<span class="k">if</span><span class="o">(</span> OK !<span class="o">=</span> iAPC_GetFptHeader<span class="o">(</span> <span class="p">&amp;</span>xFptHeader <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    APC_DBG_PRINTF<span class="o">(</span> <span class="s2">"Error retrieving FPT header\r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    APC_DBG_PRINTF<span class="o">(</span> <span class="s2">"======================================================================\r\n"</span> <span class="o">)</span><span class="p">;</span>
+    APC_DBG_PRINTF<span class="o">(</span> <span class="s2">"FPT header:\r\n"</span> <span class="o">)</span><span class="p">;</span>
+    APC_DBG_PRINTF<span class="o">(</span> <span class="s2">"\tMagic number . . . . . : 0x%08X\r\n"</span>, xFptHeader.ulMagicNum <span class="o">)</span><span class="p">;</span>
+    APC_DBG_PRINTF<span class="o">(</span> <span class="s2">"\tFPT version. . . . . . : 0x%02X\r\n"</span>, xFptHeader.ucFptVersion <span class="o">)</span><span class="p">;</span>
+    APC_DBG_PRINTF<span class="o">(</span> <span class="s2">"\tFPT header size. . . . : 0x%02X\r\n"</span>, xFptHeader.ucFptHeaderSize <span class="o">)</span><span class="p">;</span>
+    APC_DBG_PRINTF<span class="o">(</span> <span class="s2">"\tEntry size . . . . . . : 0x%02X\r\n"</span>, xFptHeader.ucEntrySize <span class="o">)</span><span class="p">;</span>
+    APC_DBG_PRINTF<span class="o">(</span> <span class="s2">"\tNum entries. . . . . . : 0x%02X\r\n"</span>, xFptHeader.ucNumEntries <span class="o">)</span><span class="p">;</span>
+    APC_DBG_PRINTF<span class="o">(</span> <span class="s2">"======================================================================\r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id11">
+<span id="id12"></span><h4>Get FPT partition<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h4>
+<p>Example of retrieving an FPT partition.</p>
+<p><strong>iAPC_GetFptPartition Example</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>int <span class="nv">iPartition</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span> /* <span class="nb">set</span> to desired partition number */
+
+APC_PROXY_DRIVER_FPT_PARTITION <span class="nv">xFptPartition</span> <span class="o">=</span> <span class="o">{</span> <span class="m">0</span> <span class="o">}</span><span class="p">;</span>
+
+<span class="k">if</span><span class="o">(</span> OK !<span class="o">=</span> iAPC_GetFptPartition<span class="o">(</span> iPartition, <span class="p">&amp;</span>xFptPartition <span class="o">)</span> <span class="o">)</span>
+<span class="o">{</span>
+    APC_DBG_PRINTF<span class="o">(</span> <span class="s2">"Error retrieving FPT Partition %d\r\n"</span>, iPartition <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    APC_DBG_PRINTF<span class="o">(</span> <span class="s2">"======================================================================\r\n"</span> <span class="o">)</span><span class="p">;</span>
+    APC_DBG_PRINTF<span class="o">(</span> <span class="s2">"FPT partition %d:\r\n"</span>, iPartition <span class="o">)</span><span class="p">;</span>
+    APC_DBG_PRINTF<span class="o">(</span> <span class="s2">"\tPartition type . . . . : 0x%08X\r\n"</span>, xFptPartition.ulPartitionType <span class="o">)</span><span class="p">;</span>
+    APC_DBG_PRINTF<span class="o">(</span> <span class="s2">"\tPartition base address : 0x%08X\r\n"</span>, xFptPartition.ulPartitionBaseAddr <span class="o">)</span><span class="p">;</span>
+    APC_DBG_PRINTF<span class="o">(</span> <span class="s2">"\tPartition size . . . . : 0x%08X\r\n"</span>, xFptPartition.ulPartitionSize <span class="o">)</span><span class="p">;</span>
+    APC_DBG_PRINTF<span class="o">(</span> <span class="s2">"======================================================================\r\n"</span> <span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Page Revision: v. 28</p>
+</section>
+</section>
+</section>
+</section>
+</div>
+</div>
+<footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+<a accesskey="p" class="btn btn-neutral float-left" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html" rel="prev" title="AVED Management Interface (AMI) Proxy Driver"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+<a accesskey="n" class="btn btn-neutral float-right" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html" rel="next" title="AVED Sensor Control (ASC) Proxy Driver">Next <span aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<p>© Copyright 2023, Advanced Micro Devices Inc.</p>
+</div>
+<div class="aem-Grid aem-Grid--16">
+<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+<div class="container-fluid sub-footer">
+<div class="row">
+<div class="col-xs-24">
+<p><a href="https://www.amd.com/en/corporate/copyright" target="_blank">Terms and Conditions</a> | <a href="https://www.amd.com/en/corporate/privacy" target="_blank">Privacy</a> | <a href="https://www.amd.com/en/corporate/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.amd.com/en/corporate/trademarks" target="_blank">Trademarks</a> | <a href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf" target="_blank">Statement on Forced Labor</a> | <a href="https://www.amd.com/en/corporate/competition" target="_blank">Fair and Open Competition</a> | <a href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf" target="_blank">UK Tax Strategy</a> | <a href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA" target="_blank">Inclusive Terminology</a> | <a class="ot-sdk-show-settings" href="#cookiessettings">Cookies Settings</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+</div>
+</div>
+</section>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script charset="UTF-8" data-document-language="true" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script class="optanon-category-C0002" type="text/plain">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+<title>AVED V80/V80P - NoC Configuration — AVED  documentation</title>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="_static/xbtest.css" rel="stylesheet" type="text/css"/>
+<link href="_static/_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="https://docs.xilinx.com/favicon.ico" rel="shortcut icon"/>
+<!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/js/theme.js"></script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="AVED%2BV80%26V80P%2B-%2BBase%2BLogic.html" rel="next" title="AVED V80/V80P - Base Logic"/>
+<link href="AVED%2BV80%26V80P%2B-%2BMemory%2BMap.html" rel="prev" title="AVED V80/V80P - Memory Map"/>
+<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager -->
+<noscript><iframe class="optanon-category-C0002" height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager -->
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="index.html"> AVED
+            <img alt="Logo" class="logo" src="_static/xilinx-header-logo.svg"/>
+</a>
+<div role="search">
+<form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" type="text"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+</div>
+</div><div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BUser%2BApplication.html">AVED - User Application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80/V80P</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BHierarchy%2BOverview.html">AVED V80/V80P - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BCIPS%2BConfiguration.html">AVED V80/V80P - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BMemory%2BResources.html">AVED V80/V80P - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BMemory%2BMap.html">AVED V80/V80P - Memory Map</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">AVED V80/V80P - NoC Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#network-on-chip-noc-overview">Network-On-Chip (NoC) Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#noc-diagram">NoC Diagram</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#noc-components">NoC Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#noc-master-units-nmu">NoC Master Units (NMU)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nmu-512">NMU_512</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hbm-nmu">HBM_NMU</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nmu-128">NMU_128</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#noc-slave-units-nsu">NoC Slave Units (NSU)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nsu-512">NSU_512</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nsu-128">NSU_128</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ddrmc-nsu">DDRMC_NSU</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hbm-nsu">HBM_NSU</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#noc-packet-switches-nps">NoC Packet Switches (NPS)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#aved-v80-v80p-noc-overview">AVED V80/V80P NoC Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#axi-noc-instantiations">AXI NoC Instantiations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#axi-noc-performance">AXI NoC Performance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#noc-resources">NoC Resources</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#available-nmu-nsu">Available NMU &amp; NSU</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cips-specific-nmu-nsu">CIPS-Specific NMU &amp; NSU</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aved-nmu-nsu-usage">AVED NMU &amp; NSU Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#additional-resources">Additional Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#axi-noc-cips-configurations">AXI NoC CIPS Configurations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#axi-noc-cips-axi-noc-cips">AXI NoC CIPS (axi_noc_cips)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gui-configuration-of-axi-noc-cips">GUI Configuration of axi_noc_cips</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#general">General</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#inputs">Inputs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#outputs">Outputs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#connectivity">Connectivity</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#qos">QoS</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#address-remap">Address Remap</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#hbm-configuration">HBM Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#axi-noc-memory-controller-ddr-axi-noc-mc-ddr4-0">AXI NoC Memory Controller - DDR (axi_noc_mc_ddr4_0)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ports">Ports</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gui-configuration-of-axi-noc-mc-ddr4-0">GUI Configuration of axi_noc_mc_ddr4_0</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#avedv80-v80pnocconfiguration-general-1">General</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#avedv80-v80pnocconfiguration-inputs-1">Inputs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#avedv80-v80pnocconfiguration-outputs-1">Outputs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#avedv80-v80pnocconfiguration-connectivity-1">Connectivity</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#avedv80-v80pnocconfiguration-qos-1">QoS</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#avedv80-v80pnocconfiguration-addressremap-1">Address Remap</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#ddr-basic">DDR Basic</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#ddr-memory">DDR Memory</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#ddr-address-mapping">DDR Address Mapping</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#ddr-advanced">DDR Advanced</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#axi-noc-memory-controller-dimm-axi-noc-mc-ddr4-1-for-aved-v80-only">AXI NoC Memory Controller - DIMM (axi_noc_mc_ddr4_1) (for AVED V80 only)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#avedv80-v80pnocconfiguration-ports-1">Ports</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gui-configuration-of-axi-noc-mc-ddr4-1">GUI Configuration of axi_noc_mc_ddr4_1</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#avedv80-v80pnocconfiguration-general-2">General</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#avedv80-v80pnocconfiguration-inputs-2">Inputs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#avedv80-v80pnocconfiguration-outputs-2">Outputs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#avedv80-v80pnocconfiguration-connectivity-2">Connectivity</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#avedv80-v80pnocconfiguration-qos-2">QoS</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#avedv80-v80pnocconfiguration-addressremap-2">Address Remap</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#avedv80-v80pnocconfiguration-ddrbasic-1">DDR Basic</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#avedv80-v80pnocconfiguration-configuredimmaddressmapping">DDR Address Mapping</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#avedv80-v80pnocconfiguration-ddradvanced-1">DDR Advanced</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BBase%2BLogic.html">AVED V80/V80P - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BClock%2BReset%2BModule.html">AVED V80/V80P - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BSource%2BFile%2BOverview.html">AVED V80/V80P - Source File Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BXBTEST%2BDesign.html">AVED V80/V80P - XBTEST Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BClock%2BControl%2B%28ACC%29%2BProxy%2BDriver.html">AVED Clock Control (ACC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI &amp; xbtest)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest%2Bbuild.html">xbtest build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift"><nav aria-label="Mobile navigation menu" class="wy-nav-top" style="background: black">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="index.html">AVED</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="Page navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a class="icon icon-home" href="index.html"></a> »</li>
+<li>AVED V80/V80P - NoC Configuration</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<section id="aved-v80-v80p-noc-configuration">
+<h1>AVED V80/V80P - NoC Configuration<a class="headerlink" href="#aved-v80-v80p-noc-configuration" title="Permalink to this headline">¶</a></h1>
+<section id="network-on-chip-noc-overview">
+<span id="avedv80-v80pnocconfiguration-network-on-chip-noc-overview"></span><h2>Network-On-Chip (NoC) Overview<a class="headerlink" href="#network-on-chip-noc-overview" title="Permalink to this headline">¶</a></h2>
+<p>AMD Versal™ devices are designed around a programmable NoC interconnect based on AXI-4, which provides high bandwidth, long distance, communication throughout the device. NoC connections simplify the timing requirements needed when programmable logic
+creates a resource burden through congested logic, cross one or more SLRs, or connect to the opposite side of the device die. AVED is a three super logic region (SLR) device. Each SLR contains two Horizontal NoCs (HNoC) and four Vertical NoCs (VNoC),
+which connect to each other. The two HNoCs are located on the top and bottom of each SLR and span the entire width of the SLR. In addition to connecting to the VNoCs, the bottom HNoC also connects to the CIPS and DDRs. The top HNoC in SLR2 is
+optimized for connecting to the HBM. The four VNoCs in each SLR span the entire height of the SLR, and connect to adjacent SLRs. Connections to and from the NoC are made with the NoC packet switches (NPS). An illustration of the NoC is provided
+below. It illustrates the NoC resources (NMU, NSU, VNoC, HNoC, DDRMC, etc). Additional Information on NoC can be found in the <a class="reference external" href="#avedv80/v80pnocconfiguration-additionalresources">Additional Resources</a> section.</p>
+<section id="noc-diagram">
+<span id="avedv80-v80pnocconfiguration-nocdiagram"></span><h3>NoC Diagram<a class="headerlink" href="#noc-diagram" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><img alt="image1" class="confluence-embedded-image" src="_images/1126389684.png"/></p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</section>
+<section id="noc-components">
+<span id="avedv80-v80pnocconfiguration-noccomponents"></span><h2>NoC Components<a class="headerlink" href="#noc-components" title="Permalink to this headline">¶</a></h2>
+<section id="noc-master-units-nmu">
+<span id="avedv80-v80pnocconfiguration-nocmasterunits-nmu"></span><h3>NoC Master Units (NMU)<a class="headerlink" href="#noc-master-units-nmu" title="Permalink to this headline">¶</a></h3>
+<p>Versal HBM series devices contain NMU_512, NMU_128, and HBM_NMU connections to the NoC. These are described in more detail below.</p>
+<p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NoC-Master-Unit">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NoC-Master-Unit</a></p>
+<section id="nmu-512">
+<span id="avedv80-v80pnocconfiguration-nmu-512"></span><h4>NMU_512<a class="headerlink" href="#nmu-512" title="Permalink to this headline">¶</a></h4>
+<p>This is a full featured NoC master unit (NMU). It allows AXI masters in the PL to connect to the Vertical NoC. For memory mapped interfaces, the data width of the NMU can be configured from 32-bits to 512-bits. For AXI4-Stream interfaces, the data
+width of the NMU can be configured from 128-bits to 512-bits.</p>
+<p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NMU512-PL">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NMU512-PL</a></p>
+</section>
+<section id="hbm-nmu">
+<span id="avedv80-v80pnocconfiguration-hbm-nmu"></span><h4>HBM_NMU<a class="headerlink" href="#hbm-nmu" title="Permalink to this headline">¶</a></h4>
+<p>HBM_NMU are used to fully utilize the HBM bandwidth by providing direct access from the PL to the HBM. These NMU are distributed evenly across the top of SLR2 to help ease timing closure. The data width of the HBM_NMU is configurable from 32-bits to
+256-bits. It does not support the AXI4-Stream protocol.</p>
+<p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/HBM_NMU">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/HBM_NMU</a></p>
+</section>
+<section id="nmu-128">
+<span id="avedv80-v80pnocconfiguration-nmu-128"></span><h4>NMU_128<a class="headerlink" href="#nmu-128" title="Permalink to this headline">¶</a></h4>
+<p>These NMUs are optimized for the low latency requirements of the hardened blocks, such as CIPS. It has a fixed 128-bit AXI data width. It does not support the AXI4-Stream protocol or master-defined destination IDs.</p>
+<p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NMU128-Low-Latency">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NMU128-Low-Latency</a></p>
+</section>
+</section>
+<section id="noc-slave-units-nsu">
+<span id="avedv80-v80pnocconfiguration-nocslaveunits-nsu"></span><h3>NoC Slave Units (NSU)<a class="headerlink" href="#noc-slave-units-nsu" title="Permalink to this headline">¶</a></h3>
+<p>Versal HBM series devices contain NSU_512, NSU_128, DDRMC_NSU, and HBM_NSU connections to the NoC. These are described in more detail below.</p>
+<p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NoC-Slave-Unit">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NoC-Slave-Unit</a></p>
+<section id="nsu-512">
+<span id="avedv80-v80pnocconfiguration-nsu-512"></span><h4>NSU_512<a class="headerlink" href="#nsu-512" title="Permalink to this headline">¶</a></h4>
+<p>This is a full featured NoC slave unit (NSU). It allows Vertical NoC connections to AXI slaves in the PL. For memory mapped interfaces, the data width of the NSU can be configured from 32-bits to 512-bits. For AXI4-Stream interfaces, the data width
+of the NSU can be configured from 128-bits to 512-bits.</p>
+<p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NSU512-PL">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NSU512-PL</a></p>
+</section>
+<section id="nsu-128">
+<span id="avedv80-v80pnocconfiguration-nsu-128"></span><h4>NSU_128<a class="headerlink" href="#nsu-128" title="Permalink to this headline">¶</a></h4>
+<p>These NSUs are optimized for the low latency requirements of the hardened blocks, such as CIPS. It has a fixed 128-bit AXI data width. It does not support the AXI4-Stream protocol.</p>
+<p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NSU128-Low-Latency">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NSU128-Low-Latency</a></p>
+</section>
+<section id="ddrmc-nsu">
+<span id="avedv80-v80pnocconfiguration-ddrmc-nsu"></span><h4>DDRMC_NSU<a class="headerlink" href="#ddrmc-nsu" title="Permalink to this headline">¶</a></h4>
+<p>Each port of a DDRMC has a partial NSU (DDRMC_NSU). It converts the NoC packet domain to the memory controller domain without first converting it to the AXI protocol.</p>
+<p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/DDRMC-NSU">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/DDRMC-NSU</a></p>
+</section>
+<section id="hbm-nsu">
+<span id="avedv80-v80pnocconfiguration-hbm-nsu"></span><h4>HBM_NSU<a class="headerlink" href="#hbm-nsu" title="Permalink to this headline">¶</a></h4>
+<p>Each pseudo channel of the HBM has two NSU (HBM_NSU). It converts the NoC packet domain to the HBM controller domain without first converting it to the AXI protocol.</p>
+<p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/HBM_NSU">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/HBM_NSU</a></p>
+</section>
+</section>
+<section id="noc-packet-switches-nps">
+<span id="avedv80-v80pnocconfiguration-nocpacketswitches-nps"></span><h3>NoC Packet Switches (NPS)<a class="headerlink" href="#noc-packet-switches-nps" title="Permalink to this headline">¶</a></h3>
+<p>Connects NMUs to NSUs.</p>
+</section>
+</section>
+<section id="aved-v80-v80p-noc-overview">
+<span id="avedv80-v80pnocconfiguration-avedv80-v80pnocoverview"></span><h2>AVED V80/V80P NoC Overview<a class="headerlink" href="#aved-v80-v80p-noc-overview" title="Permalink to this headline">¶</a></h2>
+<section id="axi-noc-instantiations">
+<span id="avedv80-v80pnocconfiguration-axinocinstantiations"></span><h3>AXI NoC Instantiations<a class="headerlink" href="#axi-noc-instantiations" title="Permalink to this headline">¶</a></h3>
+<p>AVED uses multiple AXI NoC IP instantiations to connect AXI and Inter-NoC interconnect (INI) interfaces to the NoC. This allows the host and RPU to interface with the PL, HBM, DDR, and DIMM through CIPS. The DIMM is only available on the V80 card,
+therefore, any reference to the DIMM connectivity applies only to AVED V80.</p>
+<p>The configuration of each AXI NoC instantiation is described below.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="#avedv80/v80pnocconfiguration-axinoccips">axi_noc_cips</a></p>
+<ul>
+<li><p>NoC to PL AXI connections to allow the PCIe® Host to access the PL management and xbtest functionality.</p></li>
+<li><p>INI connections to allow the PCIe Host to access the DDR and DIMM MCs.</p></li>
+<li><p>INI connections to allow the Platform management controller (PMC) access to the DDR and DIMM MCs.</p></li>
+<li><p>INI connection to allow the RPU to access to the DDR MC.</p></li>
+<li><p>PL AXI to NoC connections to allow the xbtest HBM memory kernel to access the HBM controllers.</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="#avedv80/v80pnocconfiguration-axinocddrmc">axi_noc_mc_ddr4_0</a></p>
+<ul>
+<li><p>INI connection to allow the CIPS to connect to the DDR MC. Only two of the four MC ports are used.</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="#avedv80/v80pnocconfiguration-axinocdimmmc">axi_noc_mc_ddr4_1</a></p>
+<ul>
+<li><p>AXI connections to allow the xbtest memory kernel to connect to the DIMM MC (ports 2 and 3).</p></li>
+<li><p>INI connections to allow the CIPS to connect to the DIMM MC (ports 0 and 1).</p></li>
+</ul>
+</li>
+</ul>
+<p>AVED does not use the PS APUs, but if they were used, the AXI NoC IP could be configured to support these connections. Additional connections could also be made to the PL and memory controllers (MC).</p>
+</section>
+<section id="axi-noc-performance">
+<span id="avedv80-v80pnocconfiguration-axinocperformance"></span><h3>AXI NoC Performance<a class="headerlink" href="#axi-noc-performance" title="Permalink to this headline">¶</a></h3>
+<p>System performance depends on the NoC, DDR, DIMM, and HBM performance. There are various sources of overhead in the NoC which degrade the theoretical maximum bandwidth of a NoC NMU (NoC master unit) or NSU (NoC slave unit). These include contention,
+the amount of mixed traffic (rd% vs wr%), read address, write response packets, the number of NMUs/NSUs on each VNoC/HNoC and their requested QoS. To aid in the NoC configuration of routing and resources used, the Versal NoC compiler requires a
+traffic specification. The traffic specification consists of the NoC connections and the quality of service (QoS) requirements. QoS has two components:</p>
+<ul class="simple">
+<li><p>Traffic Class: This defines how traffic on the connection is prioritized in the NoC compiler and in the hardware. The traffic class must be set on the NMU and is used for all paths from that NMU. Normally, the best effort class is chosen, but
+other options are available. AVED uses ‘Best Effort’ for all its NoC settings. With this setting, the NoC compiler will work to satisfy the BW and latency requirements of all low latency and Isochronous paths first. Then after those requirements
+have been met, the NoC compiler will work to satisfy the BW and latency requirements with paths using best effort. With the ‘Best Effort’ setting, AVED is able to meet its requirements.</p>
+<ul>
+<li><p>Low latency: typically CPU to DDR memory transactions.</p></li>
+<li><p>Isochronous: real-time deadlines.</p></li>
+<li><p>Best effort: bulk transfers and not time critical. This is also the only available option for the HBM Read and Write traffic class.</p></li>
+</ul>
+</li>
+<li><p>Bandwidth requirements: This describes how much bandwidth is required in each direction (rd/wr). These requirements are associated with the slave ports. Each slave port can have a separate bandwidth requirement setting.</p></li>
+</ul>
+<p>In addition to creating the traffic specification, the DIMM MC and HBM Controllers were tuned to optimize performance by modifying the MC address mapping. A description of the HBM optimizations are documented in <a class="reference external" href="#avedv80/v80pnocconfiguration-configurehbmchannels">Configure HBM
+Channels</a> and the DIMM optimizations are documented in <a class="reference external" href="#avedv80/v80pnocconfiguration-configuredimmaddressmapping">Configure DIMM Address Mapping</a>.</p>
+<p>Additional information on the NoC, NoC performance, and performance tuning can be found in the <a class="reference external" href="#avedv80/v80pnocconfiguration-additionalresources">Additional Resources</a> section.</p>
+</section>
+</section>
+<section id="noc-resources">
+<span id="avedv80-v80pnocconfiguration-nocresources"></span><h2>NoC Resources<a class="headerlink" href="#noc-resources" title="Permalink to this headline">¶</a></h2>
+<section id="available-nmu-nsu">
+<span id="avedv80-v80pnocconfiguration-availablenmu-nsu"></span><h3>Available NMU &amp; NSU<a class="headerlink" href="#available-nmu-nsu" title="Permalink to this headline">¶</a></h3>
+<p>The table below shows the total number of NMU and NSU in the Versal device.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/75201565f724a9eb1212f9b3a139031fb314696b.png"><img alt="image2" class="drawio-diagram-image" src="_images/75201565f724a9eb1212f9b3a139031fb314696b.png" style="width: 811px;"/></a></p>
+</section>
+<section id="cips-specific-nmu-nsu">
+<span id="avedv80-v80pnocconfiguration-cips-specificnmu-nsu"></span><h3>CIPS-Specific NMU &amp; NSU<a class="headerlink" href="#cips-specific-nmu-nsu" title="Permalink to this headline">¶</a></h3>
+<p>All NMU_128 and NSU_128 connect to CIPS. The main CIPS core is located in SLR0 and it has multiple NoC connections which include PCIe, PMC, RPU, cache coherent, and Non-cache coherent. In V80 and V80P, there is also a CIPS core in SLR1 and SLR2. Each
+of these CIPS cores have one PMC_NMU and one PMC_NSU connection to it.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><a class="drawio-diagram-image reference internal" href="_images/b45ba73f0b5e1c8f062fd563058aec1064fbfbf3.png"><img alt="image3" class="drawio-diagram-image" src="_images/b45ba73f0b5e1c8f062fd563058aec1064fbfbf3.png" style="width: 1012px;"/></a></p>
+<p>NCI: Non-cache coherent interconnect</p>
+<p>CCI: Cache coherent interconnect</p>
+<p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg352-cips/PS-NoC-Interfaces">https://docs.xilinx.com/r/en-US/pg352-cips/PS-NoC-Interfaces</a></p>
+</section>
+<section id="aved-nmu-nsu-usage">
+<span id="avedv80-v80pnocconfiguration-avednmu-nsuusage"></span><h3>AVED NMU &amp; NSU Usage<a class="headerlink" href="#aved-nmu-nsu-usage" title="Permalink to this headline">¶</a></h3>
+<p>The following table shows the total number of NMU and NSU used by AVED.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/072dee33081121d2d12dd8a3c309d1617db216ed.png"><img alt="image4" class="drawio-diagram-image" src="_images/072dee33081121d2d12dd8a3c309d1617db216ed.png" style="width: 811px;"/></a></p>
+<p>*There are four DDRMC controllers, but AVED only uses two. The DDR uses two DDRMC NSU and the DIMM uses four DDRMC NSUs.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>A break down of the different NMU and NSU connections are given in the following tables.</p>
+<p>The host uses multiple connections (CPM_PCIE_NOC_0 and CPM_PCIE_NOC_1) to access multiple PL slaves, the DDR, and the DIMM for more optimal performance.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/d655fb0737e19d3f0667b3612f6480504e456ca3.png"><img alt="image5" class="drawio-diagram-image" src="_images/d655fb0737e19d3f0667b3612f6480504e456ca3.png" style="width: 801px;"/></a></p>
+<p>The host uses multiple connections (CPM_PCIE_NOC_0 and CPM_PCIE_NOC_1) to access multiple PL slaves, the DDR, and the DIMM for more optimal performance.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/c642451b174d8d0d3c57ebfb365a8c831bb82874.png"><img alt="image6" class="drawio-diagram-image" src="_images/c642451b174d8d0d3c57ebfb365a8c831bb82874.png" style="width: 801px;"/></a></p>
+<p>The PMC connects to the DDR and DIMM to manage primary pre-boot tasks and management of the hardware for reliable power-up and power-down of device resources.</p>
+<p>The host and RPU, which operates in the LPD, communicate through the use of the DDR.</p>
+<p>Xbtest connects to dedicated DIMM ports to exercise the the NoC and DIMM performance.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/32746e980548c95de6dcaf042ab5e1dc65bc454e.png"><img alt="image7" class="drawio-diagram-image" src="_images/32746e980548c95de6dcaf042ab5e1dc65bc454e.png" style="width: 801px;"/></a></p>
+<p>Xbtest connects to dedicated HBM_NMU ports exercise the the NoC and HBM performance.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/872e059fd013205f43490e82b51c0878d518a2ba.png"><img alt="image8" class="drawio-diagram-image" src="_images/872e059fd013205f43490e82b51c0878d518a2ba.png" style="width: 801px;"/></a></p>
+<p>Additional connections can be made to the NoC and memory ports as required by other designs. As more connections are made, additional tuning to the NoC components and DIMM/HBM addressing may be required for optimum performance.</p>
+</section>
+</section>
+<section id="additional-resources">
+<span id="avedv80-v80pnocconfiguration-additionalresources"></span><h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Permalink to this headline">¶</a></h2>
+<p>More information about the NoC can be found here:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Versal-Programmable-NoC-Overview">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Versal-Programmable-NoC-Overview</a></p></li>
+<li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Configuring-the-AXI-NoC">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Configuring-the-AXI-NoC</a></p></li>
+</ul>
+<p>The physical link raw BW information can be found here:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Physical-Link-Raw-Bandwidth">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Physical-Link-Raw-Bandwidth</a></p></li>
+</ul>
+<p>The peak <strong>expected</strong> bandwidths for AVED with different read/write ratios can be found here:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Packetization-Overhead">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Packetization-Overhead</a></p></li>
+</ul>
+<p>If more information is needed for more advanced NoC performance tuning, it can be found here:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NoC-Performance-Tuning">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NoC-Performance-Tuning</a></p></li>
+<li><p><a class="reference external" href="https://github.com/Xilinx/Vivado-Design-Tutorials/blob/master/Device_Architecture_Tutorials/Versal/NoC_DDRMC/Performance_Tuning/README.md">https://github.com/Xilinx/Vivado-Design-Tutorials/blob/master/Device_Architecture_Tutorials/Versal/NoC_DDRMC/Performance_Tuning/README.md</a></p></li>
+</ul>
+</section>
+<section id="axi-noc-cips-configurations">
+<span id="avedv80-v80pnocconfiguration-axinoccipsconfigurations"></span><h2>AXI NoC CIPS Configurations<a class="headerlink" href="#axi-noc-cips-configurations" title="Permalink to this headline">¶</a></h2>
+<section id="axi-noc-cips-axi-noc-cips">
+<span id="avedv80-v80pnocconfiguration-axinoccips"></span><h3>AXI NoC CIPS (axi_noc_cips)<a class="headerlink" href="#axi-noc-cips-axi-noc-cips" title="Permalink to this headline">¶</a></h3>
+<p>The axi_noc_cips block connects the CIPS to the PL logic and memory controllers through NoC connections. The port connections and configuration of this block are described below.</p>
+<p><img alt="image9" class="confluence-embedded-image" src="_images/1137217273.png"/></p>
+<section id="gui-configuration-of-axi-noc-cips">
+<span id="avedv80-v80pnocconfiguration-guiconfigurationofaxi-noc-cips"></span><h4>GUI Configuration of axi_noc_cips<a class="headerlink" href="#gui-configuration-of-axi-noc-cips" title="Permalink to this headline">¶</a></h4>
+<p>For AVED, the NoC configuration changes are described below. More documentation can be found at <a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Configuring-the-AXI-NoC">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Configuring-the-AXI-NoC</a>.</p>
+<section id="general">
+<span id="avedv80-v80pnocconfiguration-general"></span><h5>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h5>
+<p>The general tab allows the number of AXI master and slave interfaces, INI master and slave interfaces, and integrated memory controller connections to be specified. The settings are explained below.</p>
+<p><img alt="image10" class="confluence-embedded-image" src="_images/1126389826.png"/></p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><strong>AXI Interfaces</strong> - AXI Slave</p>
+<p>AVED connects the following slave interfaces to the CIPS master. The following table shows the AXI slave connections to axi_noc_cips. The frequencies in the following table were chosen to be high enough to meet the QoS requirements on the DDR and HBM
+interfaces without oversaturating the NoC interfaces. In particular, xbtest runs at ~400MHz to maximize the performance with the HBM core running at 200MHz. Since the HBM is a DDR memory, the data bus toggles at twice the HBM core clock rate. It is
+possible for the HBM to saturate the NoC when running at 400MHz because it is using all 64 256-bit HBM_NMU (64 NMUs * 12,800MB/s = 819.2 GB/s Total). See the Versal Adaptive SoC Programmable Network on Chip and Integrated Memory Controller 1.0
+LogiCORE IP Product Guide (<a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Raw-Throughput-Evaluation">PG313</a>) for more information.</p>
+<p>The axi_noc_cips connections outlined in the tables below are further illustrated in the <a class="reference external" href="#avedv80/v80pnocconfiguration-nocconnectiondiagrams">NoC Connection Diagrams</a>.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/e44a996de167e730f8238fcbda81a9136e6fabce.png"><img alt="image11" class="drawio-diagram-image" src="_images/e44a996de167e730f8238fcbda81a9136e6fabce.png" style="width: 884px;"/></a></p>
+<p><strong>AXI Interfaces</strong> - AXI Master</p>
+<p>AVED connects the following master interfaces to the PL peripheral slave devices. The following table shows the axi_noc_cips connections to the PL peripherals. All the interfaces below are AXI4-Lite which do not require high bandwidth.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/76bb7b12c0de12c03b46e612227184b9e7f2c919.png"><img alt="image12" class="drawio-diagram-image" src="_images/76bb7b12c0de12c03b46e612227184b9e7f2c919.png" style="width: 579px;"/></a></p>
+<p><strong>AXI Interfaces</strong> - AXI Clocks</p>
+<p>The AXI NoC IP uses the CIPS and peripheral clocks to manage the clock domain crossings to the NoC. The table below shows numerous clocks connected to axi_noc_cips.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/87716e1176385fdf5548f9b334eaa5b7b154be32.png"><img alt="image13" class="drawio-diagram-image" src="_images/87716e1176385fdf5548f9b334eaa5b7b154be32.png" style="width: 466px;"/></a></p>
+<p><strong>INI Interfaces</strong> - INI Slave</p>
+<p>No Connections</p>
+<p><strong>INI Interfaces</strong> - INI Master</p>
+<p>AVED V80 connects the following master INI interfaces to the DDR/DIMM memory controllers. The following table shows the axi_noc_cips INI connections to the DDR and DIMM MCs.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/2dbf97d07e5a1140521083f08b6d92e8ffb5ad04.png"><img alt="image14" class="drawio-diagram-image" src="_images/2dbf97d07e5a1140521083f08b6d92e8ffb5ad04.png" style="width: 381px;"/></a></p>
+<p><strong>Memory Controllers</strong> - DDR4</p>
+<p>No DDR memory controllers are connected to the axi_noc_cips.</p>
+<p><strong>Memory Controllers</strong> - HBM</p>
+<p>AVED axi_noc_cips is configured to connect to all 64 AXI Slave PL interfaces, to use all 32GB of the HBM memory, and allow for the maximum performance. It connects 64 ports from the xbtest memory kernel to the 64 ports of HBM in axi_noc_cips.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/9af8344780b1d8148db1e55e649348eac3c4c5e3.png"><img alt="image15" class="drawio-diagram-image" src="_images/9af8344780b1d8148db1e55e649348eac3c4c5e3.png" style="width: 397px;"/></a></p>
+</section>
+<section id="inputs">
+<span id="avedv80-v80pnocconfiguration-inputs"></span><h5>Inputs<a class="headerlink" href="#inputs" title="Permalink to this headline">¶</a></h5>
+<p>As mentioned in the <a class="reference external" href="#avedv80/v80pnocconfiguration-cipsmaster-to-axi-noc-cipsslave">AXI Interfaces Slave section</a> above, there are four CIPS AXI masters connected to the axi_noc_cips slaves.</p>
+<p><img alt="image16" class="confluence-embedded-image" src="_images/1126390821.png"/></p>
+</section>
+<section id="outputs">
+<span id="avedv80-v80pnocconfiguration-outputs"></span><h5>Outputs<a class="headerlink" href="#outputs" title="Permalink to this headline">¶</a></h5>
+<p>As mentioned in the <a class="reference external" href="#avedv80/v80pnocconfiguration-axi-noc-cipsmastertopl">AXI Interfaces Master section</a> above, there are four CIPS AXI masters connected to the PL.</p>
+<p><img alt="image17" class="confluence-embedded-image" src="_images/1126390836.png"/></p>
+</section>
+<section id="connectivity">
+<span id="avedv80-v80pnocconfiguration-connectivity"></span><h5>Connectivity<a class="headerlink" href="#connectivity" title="Permalink to this headline">¶</a></h5>
+<p>By default, there are no connections enabled in the connectivity tab. This tab is a large matrix where a check mark indicates a connection to the input indicated by the row, with the output indicated by the column. Connectivity to the inputs (slave
+AXI and HBM AXI) must be made to the outputs (master AXI, master INI, and HBM memory controller pseudo channels).</p>
+<p>As shown in the first row of the figure below, CIPS S00_AXI (pc_pcie) connects to all of the following:</p>
+<ol class="arabic simple">
+<li><p>axi_noc_cips/M00_AXI (which then connects to base_logic/pcie_slr0_mgmt_sc/S00_AXI in the Block Design)</p></li>
+<li><p>axi_noc_cips/M01_AXI (which then connects to xbtest/pcie_slr0_sc/S00_AXI in the Block Design)</p></li>
+<li><p>axi_noc_cips/M02_AXI (which then connects to xbtest/pcie_slr1_sc/S00_AXI in the Block Design)</p></li>
+<li><p>axi_noc_cips/M03_AXI (which then connects to xbtest/pcie_slr2_sc/S00_AXI in the Block Design)</p></li>
+<li><p>axi_noc_cips/M00_INI (which then connects to axi_noc_mc_ddr4_0/S00_INI of the DDR in the Block Design)</p></li>
+<li><p>axi_noc_cips/M02_INI (which then connects to axi_noc_mc_ddr4_1/S00_INI of the DIMM in the Block Design)</p></li>
+</ol>
+<p>See <a class="reference external" href="#avedv80/v80pnocconfiguration-nocconnectiondiagrams">NoC Connection Diagrams</a> for further details on the non HBM connections.</p>
+<p>While the table does not capture the complete connection to the HBM, the same pattern is followed through HBM63_AXI to HBM15_PC1.</p>
+<p><img alt="image18" class="confluence-embedded-image" src="_images/1126390902.png"/></p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>NoC Connection Diagrams</p>
+<p>The diagrams below capture the connections of the CIPS NoC interfaces. They do not capture the full AVED design, but capture enough information to illustrate the connections made in the connectivity matrix. The NoC connection from the CIPS interface
+can be followed to the axi_noc_cips block where the green line indicates the different connections made in the connectivity matrix. It also shows the egress port connections to the PL and DDRMCs.</p>
+<p><strong>CPM_PCIE_NOC_0 End-to-End NoC Connection Diagram</strong></p>
+<p>In the diagram below, the green lines in the axi_noc_cips block, illustrate the connections from CIPS PCIe (CPM_PCIE_NOC_0 ) to the base logic, xbtest, DDR, and DIMM. These are the same connections described above for the first row in the connection
+matrix:</p>
+<ol class="arabic simple">
+<li><p>axi_noc_cips/M00_AXI (which then connects to base_logic/pcie_slr0_mgmt_sc/S00_AXI in the Block Design)</p></li>
+<li><p>axi_noc_cips/M01_AXI (which then connects to xbtest/pcie_slr0_sc/S00_AXI in the Block Design)</p></li>
+<li><p>axi_noc_cips/M02_AXI (which then connects to xbtest/pcie_slr1_sc/S00_AXI in the Block Design)</p></li>
+<li><p>axi_noc_cips/M03_AXI (which then connects to xbtest/pcie_slr2_sc/S00_AXI in the Block Design)</p></li>
+<li><p>axi_noc_cips/M00_INI (which then connects to axi_noc_mc_ddr4_0/S00_INI of the DDR in the Block Design)</p></li>
+<li><p>axi_noc_cips/M02_INI (which then connects to axi_noc_mc_ddr4_1/S00_INI of the DIMM in the Block Design)</p></li>
+</ol>
+<p><img alt="image19" class="confluence-embedded-image" src="_images/1130184850.png"/></p>
+<p><strong>CPM_PCIE_NOC_1 End-to-End NoC Connection Diagram</strong></p>
+<p>In the diagram below, the green lines in the axi_noc_cips block, illustrate the connections from CIPS PCIe (CPM_PCIE_NOC_1) to the base logic, xbtest, DDR, and DIMM.</p>
+<p><img alt="image20" class="confluence-embedded-image" src="_images/1130184851.png"/></p>
+<p><strong>PMC_NOC_AXI_0 End-to-End NoC Connection Diagram</strong></p>
+<p>In the diagram below, the green lines in the axi_noc_cips block, illustrate the connections from PMC to DDR and DIMM.</p>
+<p><img alt="image21" class="confluence-embedded-image" src="_images/1130184852.png"/></p>
+<p><strong>LPD_AXI_NOC_0 End-to-End NoC Connection Diagram</strong></p>
+<p>In the diagram below, the green lines in the axi_noc_cips block, illustrate the connections from the RPU to the DDR.</p>
+<p><img alt="image22" class="confluence-embedded-image" src="_images/1130184853.png"/></p>
+</section>
+<section id="qos">
+<span id="avedv80-v80pnocconfiguration-qos"></span><h5>QoS<a class="headerlink" href="#qos" title="Permalink to this headline">¶</a></h5>
+<p>The QoS entries are used by the NoC compiler to determine routing of the NoC traffic through the device meeting the bandwidth requirements. If the requirements cannot be met, the NoC compiler can choose to use different NoC resources (NMU, NSU, NPS,
+etc.) to achieve the required performance.</p>
+<p><strong>Traffic Class</strong></p>
+<p>AVED uses the default ‘Best Effort’ setting for all its NoC settings, but other options are available.</p>
+<ul class="simple">
+<li><p>Low latency: typically CPU to DDR memory transactions.</p></li>
+<li><p>Isochronous: real-time deadlines.</p></li>
+<li><p>Best effort: bulk transfers and not time critical. This is also the only available option for the HBM Read and Write traffic class.</p></li>
+</ul>
+<p>Using ‘Best Effort’, the NoC compiler will work to satisfy the BW and latency requirements of all low latency and Isochronous paths first. After those requirements have been met, the NoC compiler will work to satisfy the BW and latency requirements
+with paths using best effort. With the ‘Best Effort’ setting, AVED is able to meet its requirements.</p>
+<p><strong>Bandwidth</strong></p>
+<p>Different NoC paths require different bandwidths. The M0x_AXI bandwidths are requesting 5MB/s because these are AXI4-Lite interfaces that do not require high bandwidth. The M0x_INI interfaces are higher performance than the AXI4-Lite interfaces.
+These are paths from the PMC, RPU, and Host PCIe that connect to the DDR (M00_INI and M01_INI) and DIMM (M02_INI and M03_INI). A bandwidth of 800MB/s satisfies the AVED bandwidth requirements while not saturating the NoC where multiple paths connect
+to the same DDR port (<a class="reference external" href="#avedv80/v80pnocconfiguration-ddranddimmportconnections">DDR and DIMM Port Connections</a>). The HBM paths are the highest performance and request 12,800MB/s on all 64 pseudo channels to saturate the HBM. The HBM will
+saturate when all the 64 256-bit HBM_NMUs operate at 400MHz (819.2 GB or 12.8GB * 64).</p>
+<p>More information can be found here:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Quality-of-Service">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Quality-of-Service</a></p></li>
+<li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/QoS-Tab?tocId=uWWJ5eZA6Mo5UolhhAKfOg">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/QoS-Tab?tocId=uWWJ5eZA6Mo5UolhhAKfOg</a></p></li>
+</ul>
+<p>The following figures show all the connections made to the axi_noc_cips inputs and their desired bandwidths.</p>
+<p><img alt="image23" class="confluence-embedded-image" src="_images/1126396245.png"/></p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><img alt="image24" class="confluence-embedded-image" src="_images/1126396247.png"/></p>
+<p>After the implemented design has been opened in AMD Vivado™, the NoC performance can be verified by opening the Vivado Window → NoC window. This will also show the routed NoC paths.</p>
+</section>
+<section id="address-remap">
+<span id="avedv80-v80pnocconfiguration-addressremap"></span><h5>Address Remap<a class="headerlink" href="#address-remap" title="Permalink to this headline">¶</a></h5>
+<p>The NMU supports address remapping as a way to override the default address map as well as to provide simple address virtualization. AVED uses this feature to remap the PCIe address to the DDR. This allows the PCIe host to have access to the DDR for
+communication with the RPU.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="AVED+V80&amp;V80P+-+Memory+Map.html">Memory Map</a></p></li>
+<li><p><a class="reference external" href="AVED+V80&amp;V80P+-+Memory+Resources.html">DDR Memory Organization</a></p></li>
+</ul>
+<p><a class="drawio-diagram-image reference internal" href="_images/562c161f34cfd71f615c88dcdca2176262f0acc6.png"><img alt="image25" class="drawio-diagram-image" src="_images/562c161f34cfd71f615c88dcdca2176262f0acc6.png" style="width: 501px;"/></a></p>
+<p>See the Address Re-mapping section of the Versal Adaptive SoC Programmable Network on Chip and Integrated Memory Controller 1.0 LogiCORE IP Product Guide (<a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Address-Re-mapping">PG313</a>) for more
+information.</p>
+<p><a class="confluence-embedded-image reference internal" href="_images/1126396301.png"><img alt="image26" class="confluence-embedded-image" src="_images/1126396301.png" style="height: 193px;"/></a></p>
+</section>
+<section id="hbm-configuration">
+<span id="avedv80-v80pnocconfiguration-hbmconfiguration"></span><h5>HBM Configuration<a class="headerlink" href="#hbm-configuration" title="Permalink to this headline">¶</a></h5>
+<p><strong>Channel Configuration</strong></p>
+<p>Each HBM channel can be configured with different values. Since the same traffic pattern is used for all channels, AVED configures all 16 of the HBM channels the same. As a result, there will only be one HBM window to configure when the ‘<a class="reference external" href="#avedv80/v80pnocconfiguration-configurechannels">Configure
+Channels</a>‘ button is selected.</p>
+<p><strong>Clocking</strong></p>
+<p>The HBM uses two external LVDS clocks operating at 200MHz. These are dedicated clock inputs from banks 800 and 801 of the Versal device. One clock is connected to each HBM stack. The HBM clock source (internal vs external), and IO standard must be
+the same for both clocks. Configure the HBM clocks as shown below. See the <a class="reference external" href="https://support.xilinx.com/s/article/000035001?language=en_US">Versal HBM Series - External Reference Clock Design Guidance Article</a> for more information.</p>
+<p>The ‘Configure Channels’ button opens a full set of HBM options. The options are explained in detail in the HBM Configuration Tab section of the Versal Adaptive SoC Programmable Network on Chip and Integrated Memory Controller 1.0 LogiCORE IP Product
+Guide (<a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/HBM-Configuration-Tab">PG313</a>):</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><img alt="image27" class="confluence-embedded-image" src="_images/1126396318.png"/></p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><strong>Configure Channels</strong></p>
+<p>The address mapping of the HBM has been modified to obtain optimum performance with xbtest. The change is described below.</p>
+<p><em>HBM Address Map Options</em></p>
+<p>HBM operation is similar to the AVED DDRs. In order to achieve maximum HBM performance, xbtest uses multiple linear pattern, traffic generators. Each traffic generator accesses a separate region of memory. Since the traffic pattern is well defined,
+the highest performance can be achieved by selecting the appropriate address mapping. Some general guidelines are provided below.</p>
+<ul class="simple">
+<li><p>Linear traffic:</p>
+<ul>
+<li><p>Map the column address (CA) to the second from rightmost entry. This will leave the page open as long as possible, minimizing the loss of efficiency caused by switching pages.</p></li>
+<li><p>Use the bank group interleave option by setting 1BG on the rightmost entry. This decreases the amount of time spent waiting for execution because the controller splits the accesses between two Banks in two separate Bank Groups.</p></li>
+</ul>
+</li>
+<li><p>Multi-channel: Map the Bank Group (BG) to the leftmost entry so each xbtest channel can access different banks. This is done to avoid one channel from causing a page miss in another channel.</p></li>
+</ul>
+<p>Xbtest uses two channels per HBM pseudo-channel (PC). By remapping 1BG, the HBM PC is split into two regions. This allows each xbtest channel to access different HBM PC regions.</p>
+<p>The following notation is used for address mapping:</p>
+<ul class="simple">
+<li><p>RA for Row Address</p></li>
+<li><p>SID for Stack ID</p></li>
+<li><p>BA for Bank Address</p></li>
+<li><p>BG for Bank Group</p></li>
+<li><p>CA for Column Address</p></li>
+</ul>
+<p>The default and modified address mapping is shown below:</p>
+<ul class="simple">
+<li><p>Default: 15RA-1SID-2BA-<strong>1BG</strong>-5CA-1BG</p></li>
+<li><p>Xbtest: <strong>1BG</strong>-15RA-1SID-2BA-5CA-1BG</p></li>
+</ul>
+<p>More thorough descriptions of the configuration tabs can be found in the HBM Address Map Options Tab of the Versal Adaptive SoC Programmable Network on Chip and Integrated Memory Controller 1.0 LogiCORE IP Product Guide
+(<a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/HBM-Address-Map-Options-Tab">PG313</a>) .</p>
+<p><img alt="image28" class="confluence-embedded-image" src="_images/1130173119.png"/></p>
+<p>AVED uses a TCL file to set the HBM Address Map options:</p>
+<p><strong>HBM Address Map Options</strong></p>
+<div class="highlight-tcl notranslate"><div class="highlight"><pre><span></span><span class="k">set</span><span class="w"> </span>hbm_ch_cfg<span class="w"> </span><span class="k">[</span><span class="nv">get_property</span><span class="w"> </span>CONFIG.HBM_CHNL0_CONFIG<span class="w"> </span><span class="k">[</span><span class="nv">get_bd_cells</span><span class="w"> </span><span class="o">/</span>axi_noc_cips<span class="k">]]</span>
+<span class="nb">dict</span><span class="w"> </span>set<span class="w"> </span>hbm_ch_cfg<span class="w"> </span>HBM_REFRESH_MODE<span class="w">                    </span><span class="k">{</span><span class="nv">SINGLE_BANK_REFRESH</span><span class="k">}</span>
+<span class="nb">dict</span><span class="w"> </span>set<span class="w"> </span>hbm_ch_cfg<span class="w"> </span>HBM_PC0_PRE_DEFINED_ADDRESS_MAP<span class="w">     </span><span class="k">{</span><span class="nv">USER_DEFINED_ADDRESS_MAP</span><span class="k">}</span>
+<span class="nb">dict</span><span class="w"> </span>set<span class="w"> </span>hbm_ch_cfg<span class="w"> </span>HBM_PC1_PRE_DEFINED_ADDRESS_MAP<span class="w">     </span><span class="k">{</span><span class="nv">USER_DEFINED_ADDRESS_MAP</span><span class="k">}</span>
+<span class="nb">dict</span><span class="w"> </span>set<span class="w"> </span>hbm_ch_cfg<span class="w"> </span>HBM_PC0_USER_DEFINED_ADDRESS_MAP<span class="w">    </span><span class="k">{</span><span class="nv">1BG-15RA-1SID-2BA-5CA-1BG</span><span class="k">}</span>
+<span class="nb">dict</span><span class="w"> </span>set<span class="w"> </span>hbm_ch_cfg<span class="w"> </span>HBM_PC1_USER_DEFINED_ADDRESS_MAP<span class="w">    </span><span class="k">{</span><span class="nv">1BG-15RA-1SID-2BA-5CA-1BG</span><span class="k">}</span>
+<span class="nb">dict</span><span class="w"> </span>set<span class="w"> </span>hbm_ch_cfg<span class="w"> </span>HBM_PC0_ADDRESS_MAP<span class="w">                 </span><span class="k">{</span><span class="nv">BA3</span>,RA14,RA13,RA12,RA11,RA10,RA9,RA8,RA7,RA6,RA5,RA4,RA3,RA2,RA1,RA0,SID,BA1,BA0,CA5,CA4,CA3,CA2,CA1,BA2,NC,NA,NA,NA,NA<span class="k">}</span>
+<span class="nb">dict</span><span class="w"> </span>set<span class="w"> </span>hbm_ch_cfg<span class="w"> </span>HBM_PC1_ADDRESS_MAP<span class="w">                 </span><span class="k">{</span><span class="nv">BA3</span>,RA14,RA13,RA12,RA11,RA10,RA9,RA8,RA7,RA6,RA5,RA4,RA3,RA2,RA1,RA0,SID,BA1,BA0,CA5,CA4,CA3,CA2,CA1,BA2,NC,NA,NA,NA,NA<span class="k">}</span>
+<span class="nv">set_property</span><span class="w"> </span>CONFIG.HBM_CHNL0_CONFIG<span class="w"> </span><span class="nv">$hbm_ch_cfg</span><span class="w"> </span><span class="k">[</span><span class="nv">get_bd_cells</span><span class="w"> </span><span class="o">/</span>axi_noc_cips<span class="k">]</span>
+</pre></div>
+</div>
+<p>Other designs may require different settings to meet performance requirements. More information on HBM addressing and routing can be found in the following links:</p>
+<ul class="simple">
+<li><p>The Address Mapping section of the <a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Address-Mapping">Versal Adaptive SoC Programmable Network on Chip and Integrated Memory Controller 1.0 LogiCORE IP</a> Product Guide
+(<a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Address-Mapping">PG313</a>).</p></li>
+<li><p>The Routing Use Cases and HBM Subsystems section of the <a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Address-Mapping">Versal Adaptive SoC Programmable Network on Chip and Integrated Memory Controller 1.0 LogiCORE IP</a> Product Guide
+(<a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Routing-Use-Cases-and-HBM-Subsystems">PG313</a>).</p></li>
+</ul>
+<p><em>HBM Refresh and Power Saving Options</em></p>
+<p>AVED uses Single Bank Refresh mode. When used in conjunction with the user defined address map above, it helps improve HBM performance. Temperature compensated refresh is not enabled because it could require more refreshes and impact performance.
+Power saving options are not enabled since they affect performance.</p>
+<p>For more information see the HBM Refresh and Power Savings Tab of the <a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Address-Mapping">Versal Adaptive SoC Programmable Network on Chip and Integrated Memory Controller 1.0 LogiCORE IP</a>Product Guide (<a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/HBM-Refresh-and-Power-Savings-Tab">PG313</a>).</p>
+<p><img alt="image29" class="confluence-embedded-image" src="_images/1130173144.png"/></p>
+<p><em>HBM Reliability Options</em></p>
+<p>AVED uses the default settings. Information on these settings can be found in the HBM Reliability Options Tab section of the Versal Adaptive SoC Programmable Network on Chip and Integrated Memory Controller 1.0 LogiCORE IP Product Guide
+(<a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/HBM-Reliability-Options-Tab">PG313</a>).</p>
+<ul class="simple">
+<li><p>Write Data Mask: This option is enabled and ECC is disabled.</p></li>
+<li><p>DBI: Dynamic bus inversion is enabled for read and write data.</p></li>
+</ul>
+<p><img alt="image30" class="confluence-embedded-image" src="_images/1130173145.png"/></p>
+</section>
+</section>
+</section>
+<section id="axi-noc-memory-controller-ddr-axi-noc-mc-ddr4-0">
+<span id="avedv80-v80pnocconfiguration-axinocddrmc"></span><h3>AXI NoC Memory Controller - DDR (axi_noc_mc_ddr4_0)<a class="headerlink" href="#axi-noc-memory-controller-ddr-axi-noc-mc-ddr4-0" title="Permalink to this headline">¶</a></h3>
+<p>AVED uses a high-efficiency, low-latency integrated DDR memory controller (MC) for general purpose CPU access to the DDR. Through INI connections, the CIPS PCIe Host, PMC, and RPU can access the DDR.</p>
+<section id="ports">
+<span id="avedv80-v80pnocconfiguration-ports"></span><h4>Ports<a class="headerlink" href="#ports" title="Permalink to this headline">¶</a></h4>
+<p>There are a minimal number of ports on axi_noc_mc_ddr4_0, as shown in the following figure.</p>
+<p><a class="confluence-embedded-image reference internal" href="_images/1133588360.png"><img alt="image31" class="confluence-embedded-image" src="_images/1133588360.png" style="height: 250px;"/></a></p>
+</section>
+<section id="gui-configuration-of-axi-noc-mc-ddr4-0">
+<span id="avedv80-v80pnocconfiguration-guiconfigurationofaxi-noc-mc-ddr4-0"></span><h4>GUI Configuration of axi_noc_mc_ddr4_0<a class="headerlink" href="#gui-configuration-of-axi-noc-mc-ddr4-0" title="Permalink to this headline">¶</a></h4>
+<p>For AVED, the NoC DDRMC configuration may be specified in a TCL file or through the GUI.</p>
+<div class="highlight-tcl notranslate"><div class="highlight"><pre><span></span># Create instance: axi_noc_mc_ddr4_0, and set properties
+set axi_noc_mc_ddr4_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_noc axi_noc_mc_ddr4_0 ]
+set_property -dict [list \
+  CONFIG.CONTROLLERTYPE {DDR4_SDRAM} \
+  CONFIG.MC_CHAN_REGION1 {DDR_CH1} \
+  CONFIG.MC_COMPONENT_WIDTH {x16} \
+  CONFIG.MC_DATAWIDTH {72} \
+  CONFIG.MC_DM_WIDTH {9} \
+  CONFIG.MC_DQS_WIDTH {9} \
+  CONFIG.MC_DQ_WIDTH {72} \
+  CONFIG.MC_INIT_MEM_USING_ECC_SCRUB {true} \
+  CONFIG.MC_INPUTCLK0_PERIOD {5000} \
+  CONFIG.MC_MEMORY_DEVICETYPE {Components} \
+  CONFIG.MC_MEMORY_SPEEDGRADE {DDR4-3200AA(22-22-22)} \
+  CONFIG.MC_NO_CHANNELS {Single} \
+  CONFIG.MC_RANK {1} \
+  CONFIG.MC_ROWADDRESSWIDTH {16} \
+  CONFIG.MC_STACKHEIGHT {1} \
+  CONFIG.MC_SYSTEM_CLOCK {Differential} \
+  CONFIG.NUM_CLKS {0} \
+  CONFIG.NUM_MC {1} \
+  CONFIG.NUM_MCP {4} \
+  CONFIG.NUM_MI {0} \
+  CONFIG.NUM_NMI {0} \
+  CONFIG.NUM_NSI {2} \
+  CONFIG.NUM_SI {0} \
+] $axi_noc_mc_ddr4_0
+</pre></div>
+</div>
+<section id="avedv80-v80pnocconfiguration-general-1">
+<span id="id1"></span><h5>General<a class="headerlink" href="#avedv80-v80pnocconfiguration-general-1" title="Permalink to this headline">¶</a></h5>
+<p>The General tab allows the number of AXI master and slave interfaces, INI master and slave interfaces, and Integrated memory controller connections to be specified. The settings are explained below.</p>
+<p><img alt="image32" class="confluence-embedded-image" src="_images/1130173189.png"/></p>
+<p><strong>AXI Interfaces</strong></p>
+<p><em>AXI Slave</em> - No Connections</p>
+<p><em>AXI Master</em> - No Connections</p>
+<p><strong>INI Interfaces</strong></p>
+<p><em>INI Slave</em></p>
+<p>AVED connects the following master interfaces to the DDRMC. The following table shows the INI master connections to axi_noc_mc_ddr4_0.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/c9e665375a5d07610d346cbd68154877d73765cf.png"><img alt="image33" class="drawio-diagram-image" src="_images/c9e665375a5d07610d346cbd68154877d73765cf.png" style="width: 385px;"/></a></p>
+<p>M00_INI connects to the CIPS PCIe, PMC, and RPU through the axi_noc_cips.</p>
+<p>M01_INI connects to the CIPS RPU through the axi_noc_cips.</p>
+<p><em>INI Master</em> - No Connections</p>
+<p><strong>Memory Controllers - DDR4</strong></p>
+<p>AVED uses a single memory controller with four ports. Access to the the 4GB DDR is design-specific as defined in the <a class="reference external" href="AVED+V80&amp;V80P+-+Memory+Resources.html">Discrete DDR Diagram</a>. There are two 2G address ranges that address this DDR:</p>
+<ul class="simple">
+<li><p>DDR LOW0 - 0x000_0000_0000 - 0x000_7FFF_FFFF</p></li>
+<li><p>DDR CH1 - 0x500_8000_0000 - 0x500_FFFF_FFFF</p></li>
+</ul>
+<p><strong>Memory Controllers - HBM</strong></p>
+<p>N/A</p>
+</section>
+<section id="avedv80-v80pnocconfiguration-inputs-1">
+<span id="id2"></span><h5>Inputs<a class="headerlink" href="#avedv80-v80pnocconfiguration-inputs-1" title="Permalink to this headline">¶</a></h5>
+<p>As mentioned in the <a class="reference external" href="#avedv80/v80pnocconfiguration-ddrinislave">INI Interfaces</a> section above, there are two CIPS INI masters connected to the axi_noc_mc_ddr4_0 slaves.</p>
+<p><img alt="image34" class="confluence-embedded-image" src="_images/1130173288.png"/></p>
+</section>
+<section id="avedv80-v80pnocconfiguration-outputs-1">
+<span id="id3"></span><h5>Outputs<a class="headerlink" href="#avedv80-v80pnocconfiguration-outputs-1" title="Permalink to this headline">¶</a></h5>
+<p>N/A</p>
+</section>
+<section id="avedv80-v80pnocconfiguration-connectivity-1">
+<span id="id4"></span><h5>Connectivity<a class="headerlink" href="#avedv80-v80pnocconfiguration-connectivity-1" title="Permalink to this headline">¶</a></h5>
+<p>By default, there are no connections enabled in the connectivity tab. Connectivity between the inputs (slave INI) and the outputs (DDR Ports) is established through checking boxes in a matrix, where a check mark indicates a connection between an
+input (indicated by the row) and an output (indicated by the column).</p>
+<p>The figure below captures the connectivity enabled in AVED:</p>
+<ul class="simple">
+<li><p>S00_INI (CIPS PCIe Host, PMC and RPU) connects to port 0 of the MC.</p></li>
+<li><p>S0I_INI (CIPS PCIe Host) connects to port 1 of the MC.</p></li>
+</ul>
+<p><img alt="image35" class="confluence-embedded-image" src="_images/1130173315.png"/></p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>DDR and DIMM Port Connections</p>
+<p>The diagram below shows the DDRMC access paths between CIPS and the DDRMC port through axi_noc_cips.</p>
+<p>Note: Multiple connections are made to DDR Port 0 and DIMM Port 0.</p>
+<ul class="simple">
+<li><p>CPM_PCIE_NOC_0</p></li>
+<li><p>CPM_PCIE_NOC_1</p></li>
+<li><p>PMC_NOC_AXI_0</p></li>
+<li><p>LPD_AXI_NOC_0</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><img alt="image36" class="confluence-embedded-image" src="_images/1133588453.png"/></div>
+</div>
+</section>
+<section id="avedv80-v80pnocconfiguration-qos-1">
+<span id="id5"></span><h5>QoS<a class="headerlink" href="#avedv80-v80pnocconfiguration-qos-1" title="Permalink to this headline">¶</a></h5>
+<p>The QoS entries are used by the NoC compiler to determine routing of the NoC traffic through the device, meeting the bandwidth requirements. If the requirements cannot be met, the NoC compiler can choose to use different NoC resources (NMU, NSU, NPS,
+etc.) to achieve the required performance.</p>
+<p><strong>Traffic Class</strong></p>
+<p>AVED uses the default ‘Best Effort’ setting for all its NoC settings, but other options are available.</p>
+<ul class="simple">
+<li><p>Low latency: typically CPU to DDR memory transactions.</p></li>
+<li><p>Isochronous: real-time deadlines.</p></li>
+<li><p>Best effort: bulk transfers and not time critical. This is also the only available option for the HBM Read and Write traffic class.</p></li>
+</ul>
+<p>Using ‘Best Effort’, the NoC compiler will work to satisfy the BW and latency requirements of all Low Latency and Isochronous paths first. Then after those requirements have been met, the NoC compiler will work to satisfy the BW and latency
+requirements with paths using best effort. With the ‘Best Effort’ setting, AVED is able to meet its requirements.</p>
+<p><strong>Bandwidth</strong></p>
+<p>The desired bandwidth of the transactions. The MC ports are requesting 800MB/s for transactions between the PMC, RPU, and Host PCIe and the DDR (M00_INI and M01_INI).</p>
+<p>More information can be found in the following:</p>
+<ul class="simple">
+<li><p>The Quality of Service section of the Versal Adaptive SoC Technical Reference Manual (<a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Quality-of-Service">AM011</a>).</p></li>
+<li><p>The QoS tab section of the Versal Adaptive SoC Programmable Network on Chip and Integrated Memory Controller 1.0 LogiCORE IP Product Guide (<a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/QoS-Tab?tocId=uWWJ5eZA6Mo5UolhhAKfOg">PG313</a>).</p></li>
+</ul>
+<p>The following figure shows all the connections made to the axi_noc_mc_ddr4_0 inputs and their desired bandwidths.</p>
+<p><img alt="image37" class="confluence-embedded-image" src="_images/1130173328.png"/></p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>After the implemented design has been opened in Vivado, the NoC performance can be verified by opening the Vivado Window → NoC window. This will also show the routed NoC paths.</p>
+</section>
+<section id="avedv80-v80pnocconfiguration-addressremap-1">
+<span id="id6"></span><h5>Address Remap<a class="headerlink" href="#avedv80-v80pnocconfiguration-addressremap-1" title="Permalink to this headline">¶</a></h5>
+<p>N/A</p>
+</section>
+<section id="ddr-basic">
+<span id="avedv80-v80pnocconfiguration-ddrbasic"></span><h5>DDR Basic<a class="headerlink" href="#ddr-basic" title="Permalink to this headline">¶</a></h5>
+<p>Information on the DDR Memory options is found 7in the Configuring the Memory Controller section of the Versal Adaptive SoC Programmable Network on Chip and Integrated Memory Controller 1.0 LogiCORE IP Product Guide
+(<a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Configuring-the-Memory-Controller">PG313</a>).</p>
+<p>AVED supports DDR4 running at 200MHz.</p>
+<p><img alt="image38" class="confluence-embedded-image" src="_images/1130173361.png"/></p>
+<p><strong>Clocks</strong></p>
+<p>The AXI NoC IP uses the DDR board clock to manage the clock domain crossings between the NoC and DDR.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/07e4d468d9c843940ef0e7dd6427aab2d1d50577.png"><img alt="image39" class="drawio-diagram-image" src="_images/07e4d468d9c843940ef0e7dd6427aab2d1d50577.png" style="width: 386px;"/></a></p>
+</section>
+<section id="ddr-memory">
+<span id="avedv80-v80pnocconfiguration-ddrmemory"></span><h5>DDR Memory<a class="headerlink" href="#ddr-memory" title="Permalink to this headline">¶</a></h5>
+<p>AVED supports a 4GB memory. Choose the settings below for the proper part and speed grade.</p>
+<p><img alt="image40" class="confluence-embedded-image" src="_images/1133582979.png"/></p>
+</section>
+<section id="ddr-address-mapping">
+<span id="avedv80-v80pnocconfiguration-ddraddressmapping"></span><h5>DDR Address Mapping<a class="headerlink" href="#ddr-address-mapping" title="Permalink to this headline">¶</a></h5>
+<p>No change - leave at defaults</p>
+<p><img alt="image41" class="confluence-embedded-image" src="_images/1130173440.png"/></p>
+</section>
+<section id="ddr-advanced">
+<span id="avedv80-v80pnocconfiguration-ddradvanced"></span><h5>DDR Advanced<a class="headerlink" href="#ddr-advanced" title="Permalink to this headline">¶</a></h5>
+<p>AVED requires ECC per design requirements.</p>
+<p><img alt="image42" class="confluence-embedded-image" src="_images/1133583037.png"/></p>
+</section>
+</section>
+</section>
+<section id="axi-noc-memory-controller-dimm-axi-noc-mc-ddr4-1-for-aved-v80-only">
+<span id="avedv80-v80pnocconfiguration-axinocdimmmc"></span><h3>AXI NoC Memory Controller - DIMM (axi_noc_mc_ddr4_1) (for AVED V80 only)<a class="headerlink" href="#axi-noc-memory-controller-dimm-axi-noc-mc-ddr4-1-for-aved-v80-only" title="Permalink to this headline">¶</a></h3>
+<p>AVED V80 uses a high-efficiency, low-latency integrated DDR memory controller (MC) that can be used for general purpose CPU access and other traditional FPGA applications such as video or network buffering. Through AXI and INI connections from xbtest
+and CIPS, the xbtest kernel and CIPS PCIe Host and PMC can access the DIMM. Each input connects to one of the four MC ports. As shown in the QoS tab, the NoC BW is not saturated, so additional connections could be made to the ports if desired.</p>
+<section id="avedv80-v80pnocconfiguration-ports-1">
+<span id="id7"></span><h4>Ports<a class="headerlink" href="#avedv80-v80pnocconfiguration-ports-1" title="Permalink to this headline">¶</a></h4>
+<p>There are a minimal number of ports on axi_noc_mc_ddr4_1 as shown in the following figure.</p>
+<p><a class="confluence-embedded-image reference internal" href="_images/1133588371.png"><img alt="image43" class="confluence-embedded-image" src="_images/1133588371.png" style="height: 250px;"/></a></p>
+</section>
+<section id="gui-configuration-of-axi-noc-mc-ddr4-1">
+<span id="avedv80-v80pnocconfiguration-guiconfigurationofaxi-noc-mc-ddr4-1"></span><h4>GUI Configuration of axi_noc_mc_ddr4_1<a class="headerlink" href="#gui-configuration-of-axi-noc-mc-ddr4-1" title="Permalink to this headline">¶</a></h4>
+<p>For AVED, the NoC DDRMC configuration may be specified in a TCL file or through the GUI.</p>
+<div class="highlight-tcl notranslate"><div class="highlight"><pre><span></span># Create instance: axi_noc_mc_ddr4_1, and set properties
+set axi_noc_mc_ddr4_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_noc axi_noc_mc_ddr4_1 ]
+set_property -dict [list \
+  CONFIG.CONTROLLERTYPE {DDR4_SDRAM} \
+  CONFIG.MC0_CONFIG_NUM {config21} \
+  CONFIG.MC0_FLIPPED_PINOUT {false} \
+  CONFIG.MC_CHAN_REGION0 {DDR_CH2} \
+  CONFIG.MC_COMPONENT_WIDTH {x4} \
+  CONFIG.MC_DATAWIDTH {72} \
+  CONFIG.MC_INIT_MEM_USING_ECC_SCRUB {true} \
+  CONFIG.MC_INPUTCLK0_PERIOD {5000} \
+  CONFIG.MC_MEMORY_DEVICETYPE {RDIMMs} \
+  CONFIG.MC_MEMORY_SPEEDGRADE {DDR4-3200AA(22-22-22)} \
+  CONFIG.MC_NO_CHANNELS {Single} \
+  CONFIG.MC_PARITY {true} \
+  CONFIG.MC_RANK {1} \
+  CONFIG.MC_ROWADDRESSWIDTH {18} \
+  CONFIG.MC_STACKHEIGHT {1} \
+  CONFIG.MC_SYSTEM_CLOCK {Differential} \
+  CONFIG.NUM_CLKS {1} \
+  CONFIG.NUM_MC {1} \
+  CONFIG.NUM_MCP {4} \
+  CONFIG.NUM_MI {0} \
+  CONFIG.NUM_NMI {0} \
+  CONFIG.NUM_NSI {2} \
+  CONFIG.NUM_SI {0} \
+] $axi_noc_mc_ddr4_1
+</pre></div>
+</div>
+<section id="avedv80-v80pnocconfiguration-general-2">
+<span id="id8"></span><h5>General<a class="headerlink" href="#avedv80-v80pnocconfiguration-general-2" title="Permalink to this headline">¶</a></h5>
+<p>The General tab allows the number of AXI master and slave interfaces, INI master and slave interfaces, and integrated memory controller connections to be specified. The settings are explained below.</p>
+<p><img alt="image44" class="confluence-embedded-image" src="_images/1130173672.png"/></p>
+<p><strong>AXI Interfaces</strong></p>
+<p><em>AXI Slave</em></p>
+<p>AVED V80 exercises the DIMM memory using two AXI connections from the xbtest memory controller. These interfaces operate at ~2x the DDR clock of 200MHz for maximum performance.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/8635137eca3a25fa76e3e789739e437cb3775409.png"><img alt="image45" class="drawio-diagram-image" src="_images/8635137eca3a25fa76e3e789739e437cb3775409.png" style="width: 636px;"/></a></p>
+<p><em>AXI Master</em> - No Connections</p>
+<p><em>Clocks</em></p>
+<p>The AXI NoC IP uses the DDR board clock, xbtest clock, and CIPS PL clock to manage the clock domain crossings between the NoC and DIMM.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/bb93b0a721a506bdb1fa789979567ce56018f460.png"><img alt="image46" class="drawio-diagram-image" src="_images/bb93b0a721a506bdb1fa789979567ce56018f460.png" style="width: 686px;"/></a></p>
+<p><strong>INI Interfaces</strong></p>
+<p><em>INI Slave</em></p>
+<p>AVED V80 connects the following master INI interfaces to the memory controller.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/65f347acb42e178f6272af4b9bda5f501b1b2ce0.png"><img alt="image47" class="drawio-diagram-image" src="_images/65f347acb42e178f6272af4b9bda5f501b1b2ce0.png" style="width: 406px;"/></a></p>
+<p>M00_INI connects to the CIPS PCIe, PMC, and RPU through the axi_noc_cips.</p>
+<p>M01_INI connects to the CIPS RPU through the axi_noc_cips.</p>
+<p><em>INI Master</em> - No Connections</p>
+<p><strong>Memory Controllers - DDR4</strong></p>
+<p>AVED V80 uses a single memory controller with four ports. Access to the the 32GB DIMM is design specific as defined in the <a class="reference external" href="AVED+V80&amp;V80P+-+Memory+Resources.html">DIMM Diagram</a>. There is one address ranges that addresses this DDR:</p>
+<ul class="simple">
+<li><p>DDR CH2 - 0x600_0000_0000 - 0x67F_FFFF_FFFF</p></li>
+</ul>
+<p><strong>Memory Controllers - HBM</strong></p>
+<p>N/A</p>
+</section>
+<section id="avedv80-v80pnocconfiguration-inputs-2">
+<span id="id9"></span><h5>Inputs<a class="headerlink" href="#avedv80-v80pnocconfiguration-inputs-2" title="Permalink to this headline">¶</a></h5>
+<p>As mentioned in the <a class="reference external" href="#avedv80/v80pnocconfiguration-dimmaxislave">AXI Interfaces</a> and <a class="reference external" href="#avedv80/v80pnocconfiguration-dimminislave">INI Interfaces</a> section above, there are two CIPS INI masters connected to the axi_noc_mc_ddr4_1 slaves.</p>
+<p><img alt="image48" class="confluence-embedded-image" src="_images/1130173691.png"/></p>
+</section>
+<section id="avedv80-v80pnocconfiguration-outputs-2">
+<span id="id10"></span><h5>Outputs<a class="headerlink" href="#avedv80-v80pnocconfiguration-outputs-2" title="Permalink to this headline">¶</a></h5>
+<p>N/A</p>
+</section>
+<section id="avedv80-v80pnocconfiguration-connectivity-2">
+<span id="id11"></span><h5>Connectivity<a class="headerlink" href="#avedv80-v80pnocconfiguration-connectivity-2" title="Permalink to this headline">¶</a></h5>
+<p>By default, there are no connections enabled in the connectivity tab. Connectivity between the inputs (slave INI) and the outputs (DDR Ports) is established through checking boxes in a matrix, where a check mark indicates a connection between an
+input (indicated by the row) and an output (indicated by the column).</p>
+<p>The figure below captures the connectivity enabled in AVED:</p>
+<ul class="simple">
+<li><p>S00_INI (CIPS PCIe Host and PMC) connects to port 0 of the MC.</p></li>
+<li><p>S0I_INI (CIPS PCIe Host) connects to port 1 of the MC.</p></li>
+<li><p>S00_AXI (/xbtest/krnl_memtest_ddr_02_00_1/m01_axi) connects to port 2 of the MC.</p></li>
+<li><p>S0I_AXI (/xbtest/krnl_memtest_ddr_02_00_1/m02_axi) connects to port 3 of the MC.</p></li>
+</ul>
+<p><img alt="image49" class="confluence-embedded-image" src="_images/1130173697.png"/></p>
+<p>DDRMC Access</p>
+<p>The diagram below shows the V80 DIMM DDRMC port access paths with CIPS and xbtest.</p>
+<ul class="simple">
+<li><p>CPM_PCIE_NOC_0</p></li>
+<li><p>CPM_PCIE_NOC_1</p></li>
+<li><p>PMC_NOC_AXI_0</p></li>
+<li><p>xbtest</p></li>
+</ul>
+<p><img alt="image50" class="confluence-embedded-image" src="_images/1133588453.png"/></p>
+</section>
+<section id="avedv80-v80pnocconfiguration-qos-2">
+<span id="id12"></span><h5>QoS<a class="headerlink" href="#avedv80-v80pnocconfiguration-qos-2" title="Permalink to this headline">¶</a></h5>
+<p>The QoS entries are used by the NoC compiler to determine routing of the NoC traffic through the device meeting the bandwidth requirements. If the requirements cannot be met, the NoC compiler can choose to use different NoC resources (NMU, NSU, NPS,
+etc) to achieve the required performance.</p>
+<p><strong>Traffic Class</strong></p>
+<p>Normally, the best effort class is chosen, but other options are available. AVED V80 uses best effort for all its NoC settings. With this setting, the NoC compiler will work to satisfy the BW and latency requirements after any paths with low latency
+and Isochronous have been met.</p>
+<ul class="simple">
+<li><p>Low latency: typically CPU to DDR memory transactions.</p></li>
+<li><p>Isochronous: real-time deadlines.</p></li>
+<li><p>Best effort: bulk transfers and not time critical.</p></li>
+</ul>
+<p><strong>Bandwidth</strong></p>
+<p>The desired bandwidth of the transactions. The MC ports are requesting 800MB/s for transactions between the PMC, RPU, and Host PCIe and the DDR (M00_INI and M01_INI).</p>
+<p>More information can be found here:</p>
+<ul class="simple">
+<li><p>The Quality of Service section of the Versal Adaptive SoC Technical Reference Manual (<a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Quality-of-Service">AM011</a>).</p></li>
+<li><p>The QoS tab section of the Versal Adaptive SoC Programmable Network on Chip and Integrated Memory Controller 1.0 LogiCORE IP Product Guide (<a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/QoS-Tab?tocId=uWWJ5eZA6Mo5UolhhAKfOg">PG313</a>).</p></li>
+</ul>
+<p>The following figure shows all the connections made to the axi_noc_mc_ddr4_1 inputs and their desired bandwidths.</p>
+<p><a class="confluence-embedded-image reference internal" href="_images/1130173706.png"><img alt="image51" class="confluence-embedded-image" src="_images/1130173706.png" style="height: 250px;"/></a></p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>After the implemented design has been opened in Vivado, the NoC performance can be verified by opening the Vivado Window → NoC window. This will also show the routed NoC paths.</p>
+</section>
+<section id="avedv80-v80pnocconfiguration-addressremap-2">
+<span id="id13"></span><h5>Address Remap<a class="headerlink" href="#avedv80-v80pnocconfiguration-addressremap-2" title="Permalink to this headline">¶</a></h5>
+<p>N/A</p>
+</section>
+<section id="avedv80-v80pnocconfiguration-ddrbasic-1">
+<span id="id14"></span><h5>DDR Basic<a class="headerlink" href="#avedv80-v80pnocconfiguration-ddrbasic-1" title="Permalink to this headline">¶</a></h5>
+<p>AVED V80 uses an external 200MHz clock for the DDR.</p>
+<p><img alt="image52" class="confluence-embedded-image" src="_images/1130173707.png"/></p>
+<p>DDR Memory</p>
+<p>AVED supports a 32GB DIMM memory (V80 only). Choose the settings below for the proper part and speed grade.</p>
+<p>These options are enabled for future growth:</p>
+<ul class="simple">
+<li><p>DRAM Command/Address Parity- Versal Adaptive SoC Programmable Network on Chip and Integrated Memory Controller 1.0 LogiCORE IP Product Guide (<a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/DRAM-Command/Address-Parity">PG313</a>)</p></li>
+<li><p>Future Expansion for PCB designs - Versal Adaptive SoC Programmable Network on Chip and Integrated Memory Controller 1.0 LogiCORE IP Product Guide
+(<a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Generating-Future-Expansion-Pinouts?tocId=FcWxmZBM7ow8K8MyIO97yA">PG313</a>).</p></li>
+</ul>
+<p><img alt="image53" class="confluence-embedded-image" src="_images/1130173715.png"/></p>
+</section>
+<section id="avedv80-v80pnocconfiguration-configuredimmaddressmapping">
+<span id="id15"></span><h5>DDR Address Mapping<a class="headerlink" href="#avedv80-v80pnocconfiguration-configuredimmaddressmapping" title="Permalink to this headline">¶</a></h5>
+<p>In order to achieve maximum DIMM performance, xbtest uses multiple linear pattern traffic generators. Each traffic generator accesses a separate region of memory. Since the traffic pattern is well defined, the highest performance can be achieved by
+selecting the appropriate address mapping. Some general guidelines are provided below.</p>
+<ul class="simple">
+<li><p>Linear traffic: Map the Column Address (CA) to the rightmost entry. This will leave the page open as long as possible, minimizing the loss of efficiency caused by switching pages.</p></li>
+<li><p>Multi-channel: Map the Bank Group (BG) to the leftmost entry so each xbtest channel can access different banks. This is to avoid one channel causing page misses in another channel.</p></li>
+</ul>
+<p>Xbtest uses two channels to access the DIMM. Based on the general description above, the DIMM is split into two regions by remapping 1BG so each xbtest channel targets different DDR regions.</p>
+<p>The following notation is used for address mapping:</p>
+<ul class="simple">
+<li><p>RA for Row Address</p></li>
+<li><p>BA for Bank Address</p></li>
+<li><p>BG for Bank Group</p></li>
+<li><p>CA for Column Address</p></li>
+</ul>
+<p>DIMM Address Mapping Change</p>
+<ul class="simple">
+<li><p>Default Setting = 18RA-2BA-<strong>1BG</strong>-7CA-1BG-3CA</p></li>
+<li><p>Xbtest Setting = 1BG-18RA-2BA-7CA-1BG-3CA</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><img alt="image54" class="confluence-embedded-image" src="_images/1130173717.png"/></p>
+<p>AVED V80 uses a TCL file to set the DIMM Address Map option:</p>
+<div class="highlight-tcl notranslate"><div class="highlight"><pre><span></span>set_property -dict [list \
+    CONFIG.MC_PRE_DEF_ADDR_MAP_SEL {USER_DEFINED_ADDRESS_MAP} \
+    CONFIG.MC_USER_DEFINED_ADDRESS_MAP {1BG-18RA-2BA-7CA-1BG-3CA} \
+] [get_bd_cells /axi_noc_mc_ddr4_1]
+</pre></div>
+</div>
+<p>Other designs may require different settings to meet routing and performance requirements. More information can be found in the DRAM Address Mapping section of the Versal Adaptive SoC Programmable Network on Chip and Integrated Memory Controller 1.0
+LogiCORE IP Product Guide (<a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/DRAM-Address-Mapping">PG313</a>).</p>
+</section>
+<section id="avedv80-v80pnocconfiguration-ddradvanced-1">
+<span id="id16"></span><h5>DDR Advanced<a class="headerlink" href="#avedv80-v80pnocconfiguration-ddradvanced-1" title="Permalink to this headline">¶</a></h5>
+<p>AVED V80 requires ECC.</p>
+<p><img alt="image55" class="confluence-embedded-image" src="_images/1130173720.png"/></p>
+<p>Page Revision: v. 158</p>
+</section>
+</section>
+</section>
+</section>
+</section>
+</div>
+</div>
+<footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+<a accesskey="p" class="btn btn-neutral float-left" href="AVED%2BV80%26V80P%2B-%2BMemory%2BMap.html" rel="prev" title="AVED V80/V80P - Memory Map"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+<a accesskey="n" class="btn btn-neutral float-right" href="AVED%2BV80%26V80P%2B-%2BBase%2BLogic.html" rel="next" title="AVED V80/V80P - Base Logic">Next <span aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<p>© Copyright 2023, Advanced Micro Devices Inc.</p>
+</div>
+<div class="aem-Grid aem-Grid--16">
+<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+<div class="container-fluid sub-footer">
+<div class="row">
+<div class="col-xs-24">
+<p><a href="https://www.amd.com/en/corporate/copyright" target="_blank">Terms and Conditions</a> | <a href="https://www.amd.com/en/corporate/privacy" target="_blank">Privacy</a> | <a href="https://www.amd.com/en/corporate/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.amd.com/en/corporate/trademarks" target="_blank">Trademarks</a> | <a href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf" target="_blank">Statement on Forced Labor</a> | <a href="https://www.amd.com/en/corporate/competition" target="_blank">Fair and Open Competition</a> | <a href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf" target="_blank">UK Tax Strategy</a> | <a href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA" target="_blank">Inclusive Terminology</a> | <a class="ot-sdk-show-settings" href="#cookiessettings">Cookies Settings</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+</div>
+</div>
+</section>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script charset="UTF-8" data-document-language="true" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script class="optanon-category-C0002" type="text/plain">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+<title>Profiles and CMake build process — AVED  documentation</title>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="_static/xbtest.css" rel="stylesheet" type="text/css"/>
+<link href="_static/_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="https://docs.xilinx.com/favicon.ico" rel="shortcut icon"/>
+<!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/js/theme.js"></script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="AVED%2BManagement%2BInterface%2B%28AMI%29.html" rel="next" title="AVED Management Interface (AMI)"/>
+<link href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html" rel="prev" title="Operating System Abstraction Layer (OSAL)"/>
+<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager -->
+<noscript><iframe class="optanon-category-C0002" height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager -->
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="index.html"> AVED
+            <img alt="Logo" class="logo" src="_static/xilinx-header-logo.svg"/>
+</a>
+<div role="search">
+<form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" type="text"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+</div>
+</div><div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BUser%2BApplication.html">AVED - User Application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80/V80P</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BHierarchy%2BOverview.html">AVED V80/V80P - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BCIPS%2BConfiguration.html">AVED V80/V80P - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BMemory%2BResources.html">AVED V80/V80P - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BMemory%2BMap.html">AVED V80/V80P - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BNoC%2BConfiguration.html">AVED V80/V80P - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BBase%2BLogic.html">AVED V80/V80P - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BClock%2BReset%2BModule.html">AVED V80/V80P - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BSource%2BFile%2BOverview.html">AVED V80/V80P - Source File Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BXBTEST%2BDesign.html">AVED V80/V80P - XBTEST Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BClock%2BControl%2B%28ACC%29%2BProxy%2BDriver.html">AVED Clock Control (ACC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Profiles and CMake build process</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#build">Build</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#full-freertos-build">Full FreeRTOS build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#partial-freertos-build">Partial FreeRTOS build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linux">Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#profiles">Profiles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#clocks-profile">Clocks Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#firmware-interface-abstraction-layer-fal-profile">Firmware Interface Abstraction Layer (FAL) Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#header-abstraction-layer-hal-profile">Header Abstraction Layer (HAL) Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#printing-profile">Printing Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qsfp-profile">QSFP Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sensors-profile">Sensors Profile</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#device-drivers">Device Drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fal-firmware-abstraction-layer">FAL (Firmware Abstraction Layer)</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI &amp; xbtest)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest%2Bbuild.html">xbtest build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift"><nav aria-label="Mobile navigation menu" class="wy-nav-top" style="background: black">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="index.html">AVED</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="Page navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a class="icon icon-home" href="index.html"></a> »</li>
+<li>Profiles and CMake build process</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<section id="profiles-and-cmake-build-process">
+<h1>Profiles and CMake build process<a class="headerlink" href="#profiles-and-cmake-build-process" title="Permalink to this headline">¶</a></h1>
+<section id="overview">
+<span id="profilesandcmakebuildprocess-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>AMC uses CMake for its build procedure, automating each stage of the compilation processes.</p>
+<p>AMC source code has been designed to be agnostic from target platform (hardware) and operating system. The CMake build process allows target platform and target OS to be configured at compilation.</p>
+</section>
+<section id="build">
+<span id="profilesandcmakebuildprocess-build"></span><h2>Build<a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h2>
+<p>See the AMC source ReadMe for full description of AMC build procedure.</p>
+<p>The build procedure can be broken into two key stages depending on the target OS and platform specified:</p>
+<ul class="simple">
+<li><p>Generation of BSP (Board support package)</p></li>
+<li><p>Source code compilation</p></li>
+</ul>
+<p>The following diagram outlines the build stage called by build.sh, depending on the parameters specified by the user.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/1e6e71521f34e3278c0964cda1e9cdae729ab70e.png"><img alt="image1" class="drawio-diagram-image" src="_images/1e6e71521f34e3278c0964cda1e9cdae729ab70e.png" style="width: 1441px;"/></a></p>
+<section id="full-freertos-build">
+<span id="profilesandcmakebuildprocess-fullfreertosbuild"></span><h3>Full FreeRTOS build<a class="headerlink" href="#full-freertos-build" title="Permalink to this headline">¶</a></h3>
+<p>To build AMC for FreeRTOS, targeting AMD Alveo™ vXX profiles (e.g. v80), the appropriate board support package (BSP) is required. The `scripts/build.sh` script will auto-generate the appropriate BSP with the AMD Vitis™, when an appropriate xsa file
+is specified.</p>
+</section>
+<section id="partial-freertos-build">
+<span id="profilesandcmakebuildprocess-partialfreertosbuild"></span><h3>Partial FreeRTOS build<a class="headerlink" href="#partial-freertos-build" title="Permalink to this headline">¶</a></h3>
+<p>When the `-amc` flag is used, the `scripts/build.sh` will not re-generate the BSP, instead, it will simply call cmake to compile the source, where it is expected the BSP has been previously generated. Useful for rebuilding an AMC-only change.</p>
+</section>
+<section id="linux">
+<span id="profilesandcmakebuildprocess-linux"></span><h3>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h3>
+<p>To build AMC for Linux, no BSP files are required, and the `scripts/build.sh` script will simply use cmake to compile the source for Linux OS using the appropriate Linux source files.</p>
+</section>
+</section>
+<section id="profiles">
+<span id="profilesandcmakebuildprocess-profiles"></span><h2>Profiles<a class="headerlink" href="#profiles" title="Permalink to this headline">¶</a></h2>
+<p>The profiles layer holds all profile-specific (board-specific) includes and definitions, allowing AMC to be ported to different target platform (hardware) without requiring code changes in the AMC or its layers.</p>
+<p>The profile directories currently supported on AMC can be seen the <strong>src/profiles/</strong>.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Cmake will include the appropriate set of header files, depending on the profile specified by the user (Linux, v80, etc.). This allows platform (hardware) specific data to be changed and AMC source code to remain the same.</p>
+<p>Porting AMC to new platforms in the future should only require additional profile directories to be created, with no source code changes required. See the following code snippet for detail.</p>
+<p><strong>CMakeLists.txt</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#set custom profile with -DPROFILE flag (v80, Linux, etc), Defaults to v80 if not specified</span>
+<span class="k">if</span><span class="o">(</span>NOT PROFILE<span class="o">)</span>
+    include_directories<span class="o">(</span>src/profiles/v80<span class="o">)</span>
+    set<span class="o">(</span>PROFILE <span class="s2">"v80"</span><span class="o">)</span>
+<span class="k">else</span><span class="o">()</span>
+    <span class="k">if</span><span class="o">(</span>PROFILE MATCHES <span class="s2">"^(v80*)</span>$<span class="s2">"</span><span class="o">)</span>
+        include_directories<span class="o">(</span>src/profiles/v80<span class="o">)</span>
+        set<span class="o">(</span>PROFILE <span class="s2">"v80"</span><span class="o">)</span>
+    elseif<span class="o">(</span>PROFILE MATCHES <span class="s2">"^(Linux)</span>$<span class="s2">"</span><span class="o">)</span>
+        include_directories<span class="o">(</span>src/profiles/Linux<span class="o">)</span>
+        set<span class="o">(</span>PROFILE <span class="s2">"Linux"</span><span class="o">)</span>
+    <span class="k">else</span><span class="o">()</span>
+        include_directories<span class="o">(</span>src/profiles/v80<span class="o">)</span>
+        set<span class="o">(</span>PROFILE <span class="s2">"v80"</span><span class="o">)</span>
+    endif<span class="o">()</span>
+endif<span class="o">()</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Each profile directory includes the following header files.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>profiles/
+├── Linux
+│   ├── profile_clocks.h
+│   ├── profile_fal.h
+│   ├── profile_hal.h
+│   ├── profile_hal_memory_base.c
+│   ├── profile_print.h
+│   ├── profile_qsfp.h
+│   └── profile_sensors.h
+└── v80
+    ├── profile_clocks.h
+    ├── profile_fal.h
+    ├── profile_hal.h
+    ├── profile_print.h
+    ├── profile_qsfp.h
+    └── profile_sensors.h
+└── etc...
+</pre></div>
+</div>
+<section id="clocks-profile">
+<span id="profilesandcmakebuildprocess-clocksprofile"></span><h3>Clocks Profile<a class="headerlink" href="#clocks-profile" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>profile_clocks.h</strong> header file provides profile (hardware) specific definitions for clock control (not currently supported).</p>
+</section>
+<section id="firmware-interface-abstraction-layer-fal-profile">
+<span id="profilesandcmakebuildprocess-firmwareinterfaceabstractionlayer-fal-profile"></span><h3>Firmware Interface Abstraction Layer (FAL) Profile<a class="headerlink" href="#firmware-interface-abstraction-layer-fal-profile" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>profile_fal.h</strong> header file provides profile (hardware) specific definitions for the FAL.</p>
+</section>
+<section id="header-abstraction-layer-hal-profile">
+<span id="profilesandcmakebuildprocess-headerabstractionlayer-hal-profile"></span><h3>Header Abstraction Layer (HAL) Profile<a class="headerlink" href="#header-abstraction-layer-hal-profile" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>profile_hal.h</strong> header file provides all other profile (hardware) specific definitions.</p>
+</section>
+<section id="printing-profile">
+<span id="profilesandcmakebuildprocess-printingprofile"></span><h3>Printing Profile<a class="headerlink" href="#printing-profile" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>profile_print.h</strong> header file provides profile (hardware) specific definitions for printing.</p>
+</section>
+<section id="qsfp-profile">
+<span id="profilesandcmakebuildprocess-qsfpprofile"></span><h3>QSFP Profile<a class="headerlink" href="#qsfp-profile" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>profile_qsfp.h</strong> header file provides profile (hardware) specific definitions for QSFPs.</p>
+</section>
+<section id="sensors-profile">
+<span id="profilesandcmakebuildprocess-sensorsprofile"></span><h3>Sensors Profile<a class="headerlink" href="#sensors-profile" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>profile_sensors.h</strong> header file provides profile (hardware) specific definitions for all sensors.</p>
+</section>
+</section>
+<section id="device-drivers">
+<span id="profilesandcmakebuildprocess-devicedrivers"></span><h2>Device Drivers<a class="headerlink" href="#device-drivers" title="Permalink to this headline">¶</a></h2>
+<p>The device drivers layer of AMC has similarly been designed to be abstracted from the target platform. Each device driver has been written with a common header file but separate source files for AVED and Linux, providing a common API over the
+BSP-provided drivers and utilities.</p>
+<p>Cmake will include the appropriate source code paths, depending on the profile specified by the user (Linux, v80, etc.), for each of the device drivers. This allows AMC to be easily compiled for Linux or FreeRTOS OS.</p>
+<p>See the following example of I2c and OSPI device drivers. The common header outlines the API used throughout AMC. OS specific source implementations prevent any further code changes throughout AMC when porting to a new OS/Platform.</p>
+<p>All future device drivers added to AMC should follow this design pattern.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>i2c
+│   ├── aved
+│   │   └── i2c.c
+│   └── linux
+│   │   └── i2c.c
+│   ├── i2c.h
+├── ospi
+│   ├── aved
+│   │   └── ospi.c
+│   ├── linux
+│   │   └── ospi.c
+│   └── ospi.h
+</pre></div>
+</div>
+</section>
+<section id="fal-firmware-abstraction-layer">
+<span id="profilesandcmakebuildprocess-fal-firmwareabstractionlayer"></span><h2>FAL (Firmware Abstraction Layer)<a class="headerlink" href="#fal-firmware-abstraction-layer" title="Permalink to this headline">¶</a></h2>
+<p>Similarly, the Firmware abstraction layer of AMC has been designed to be abstracted from the target platform. Each FAL implementation has been written with a common header file, providing a common API over the abstracted firmware, but with separate
+source files for Linux (stub) and AMC (AVED).</p>
+<p>Just as with the device drivers, cmake will include the appropriate source code paths, depending on the profile specified by the user (Linux, v80, etc.).</p>
+<p>See the following example of gcq, ospi and qsfp FALs. All future FAL implementations added to AMC should follow this design pattern.</p>
+<div class="line-block">
+<div class="line">├── gcq</div>
+<div class="line">│ ├── fw_if_gcq_amc.c</div>
+<div class="line">│ ├── fw_if_gcq.h</div>
+<div class="line">│ ├── fw_if_gcq_linux.c</div>
+<div class="line">│ └── fw_if_gcq_stub.c</div>
+<div class="line">├── ospi</div>
+<div class="line">│ ├── fw_if_ospi_amc.c</div>
+<div class="line">│ ├── fw_if_ospi.h</div>
+<div class="line">│ └── fw_if_ospi_stub.c</div>
+<div class="line">├── qsfp</div>
+<div class="line">│ ├── fw_if_qsfp_amc.c</div>
+<div class="line">│ ├── fw_if_qsfp.h</div>
+<div class="line">│ └── fw_if_qsfp_stub.c</div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>See the following code snippet for details.</p>
+<p>Note: cmake can specify paths for appropriate device driver, and FAL (firmware abstraction layer) implementations depending on the OS specified.</p>
+<p><strong>CMakeLists.txt</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span>OS MATCHES <span class="s2">"^(Linux)</span>$<span class="s2">"</span><span class="o">)</span>
+    set<span class="o">(</span>CMAKE_C_COMPILER gcc<span class="o">)</span>
+    set<span class="o">(</span>CMAKE_RUNTIME_OUTPUT_DIRECTORY <span class="si">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="si">}</span><span class="o">)</span>
+    set<span class="o">(</span>CMAKE_BUILD_TYPE Debug<span class="o">)</span>
+    set<span class="o">(</span>THREADS_PREFER_PTHREAD_FLAG ON<span class="o">)</span>
+    set<span class="o">(</span>CMAKE_C_FLAGS <span class="s2">"</span><span class="si">${</span><span class="nv">CMAKE_C_FLAGS</span><span class="si">}</span><span class="s2"> -Werror -Wall -Wno-missing-braces"</span><span class="o">)</span>
+
+    find_package<span class="o">(</span>Threads REQUIRED<span class="o">)</span>
+    set<span class="o">(</span>OSAL_PATH <span class="s2">"src/osal/osal_Linux.c"</span><span class="o">)</span>
+    set<span class="o">(</span>FW_IF_PATH <span class="s2">"src/fal/gcq/fw_if_gcq_linux.c"</span><span class="o">)</span>
+    set<span class="o">(</span>FW_I2C_PATH <span class="s2">"src/device_drivers/i2c/linux/i2c.c"</span><span class="o">)</span>
+    set<span class="o">(</span>FW_SYS_MON_PATH <span class="s2">"src/device_drivers/sensors/sys_mon/linux/sys_mon.c"</span><span class="o">)</span>
+    set<span class="o">(</span>FW_OSPI_PATH <span class="s2">"src/device_drivers/ospi/linux/ospi.c"</span><span class="o">)</span>
+    set<span class="o">(</span>FW_IF_OSPI_PATH <span class="s2">"src/fal/ospi/fw_if_ospi_stub.c"</span><span class="o">)</span>
+    set<span class="o">(</span>FW_IF_QSFP_PATH <span class="s2">"src/fal/qsfp/fw_if_qsfp_stub.c"</span><span class="o">)</span>
+    set<span class="o">(</span>LINUX_HAL_MEM_BASE <span class="s2">"src/profiles/Linux/profile_hal_memory_base.c"</span><span class="o">)</span>
+    set<span class="o">(</span>NAME <span class="s2">"amc"</span><span class="o">)</span>
+endif<span class="o">()</span>
+
+<span class="k">if</span><span class="o">(</span>OS MATCHES <span class="s2">"^(FreeRTOS)</span>$<span class="s2">"</span><span class="o">)</span>
+    set<span class="o">(</span>CMAKE_C_COMPILER armr5-none-eabi-gcc<span class="o">)</span>
+    set<span class="o">(</span>CMAKE_SYSTEM_NAME Generic<span class="o">)</span>
+    set<span class="o">(</span>CMAKE_SYSTEM_PROCESSOR arm<span class="o">)</span>
+    set<span class="o">(</span>CMAKE_CROSSCOMPILING <span class="m">1</span><span class="o">)</span>
+    set<span class="o">(</span>CMAKE_C_COMPILER_WORKS TRUE<span class="o">)</span>
+    set<span class="o">(</span>CMAKE_SHARED_LIBRARY_LINK_C_FLAGS <span class="s2">""</span><span class="o">)</span>
+
+    set<span class="o">(</span>CMAKE_C_FLAGS <span class="s2">"</span><span class="si">${</span><span class="nv">CMAKE_C_FLAGS</span><span class="si">}</span><span class="s2"> -mcpu=cortex-r5 -mfloat-abi=hard -mfpu=vfpv3-d16 -Werror -Wall"</span><span class="o">)</span>
+    set<span class="o">(</span>OSAL_PATH <span class="s2">"src/osal/osal_FreeRTOS.c"</span><span class="o">)</span>
+    set<span class="o">(</span>FW_IF_PATH <span class="s2">"src/fal/gcq/fw_if_gcq_amc.c"</span><span class="o">)</span>
+    set<span class="o">(</span>FW_I2C_PATH <span class="s2">"src/device_drivers/i2c/aved/i2c.c"</span><span class="o">)</span>
+    set<span class="o">(</span>FW_SYS_MON_PATH <span class="s2">"src/device_drivers/sensors/sys_mon/aved/sys_mon.c"</span><span class="o">)</span>
+    set<span class="o">(</span>FW_OSPI_PATH <span class="s2">"src/device_drivers/ospi/aved/ospi.c"</span><span class="o">)</span>
+    set<span class="o">(</span>FW_IF_OSPI_PATH <span class="s2">"src/fal/ospi/fw_if_ospi_amc.c"</span><span class="o">)</span>
+    set<span class="o">(</span>FW_IF_QSFP_PATH <span class="s2">"src/fal/qsfp/fw_if_qsfp_amc.c"</span><span class="o">)</span>
+    set<span class="o">(</span>NAME <span class="s2">"amc.elf"</span><span class="o">)</span>
+
+    <span class="k">if</span><span class="o">(</span> FREERTOS_DEBUG <span class="o">)</span>
+        add_definitions<span class="o">(</span>-DFREERTOS_DEBUG<span class="o">)</span>
+    endif<span class="o">()</span>
+
+endif<span class="o">()</span>
+</pre></div>
+</div>
+<p>Page Revision: v. 21</p>
+</section>
+</section>
+</div>
+</div>
+<footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+<a accesskey="p" class="btn btn-neutral float-left" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html" rel="prev" title="Operating System Abstraction Layer (OSAL)"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+<a accesskey="n" class="btn btn-neutral float-right" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html" rel="next" title="AVED Management Interface (AMI)">Next <span aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<p>© Copyright 2023, Advanced Micro Devices Inc.</p>
+</div>
+<div class="aem-Grid aem-Grid--16">
+<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+<div class="container-fluid sub-footer">
+<div class="row">
+<div class="col-xs-24">
+<p><a href="https://www.amd.com/en/corporate/copyright" target="_blank">Terms and Conditions</a> | <a href="https://www.amd.com/en/corporate/privacy" target="_blank">Privacy</a> | <a href="https://www.amd.com/en/corporate/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.amd.com/en/corporate/trademarks" target="_blank">Trademarks</a> | <a href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf" target="_blank">Statement on Forced Labor</a> | <a href="https://www.amd.com/en/corporate/competition" target="_blank">Fair and Open Competition</a> | <a href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf" target="_blank">UK Tax Strategy</a> | <a href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA" target="_blank">Inclusive Terminology</a> | <a class="ot-sdk-show-settings" href="#cookiessettings">Cookies Settings</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+</div>
+</div>
+</section>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+</body>
+</html>

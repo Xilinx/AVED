@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script charset="UTF-8" data-document-language="true" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script class="optanon-category-C0002" type="text/plain">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+<title>AMI - Kernel Driver Interaction — AVED  documentation</title>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="_static/xbtest.css" rel="stylesheet" type="text/css"/>
+<link href="_static/_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="https://docs.xilinx.com/favicon.ico" rel="shortcut icon"/>
+<!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/js/theme.js"></script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="AMI%2B-%2BAPI%2BDescription.html" rel="next" title="AMI - API Description"/>
+<link href="User%2BInterface.html" rel="prev" title="User Interface"/>
+<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager -->
+<noscript><iframe class="optanon-category-C0002" height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager -->
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="index.html"> AVED
+            <img alt="Logo" class="logo" src="_static/xilinx-header-logo.svg"/>
+</a>
+<div role="search">
+<form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" type="text"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+</div>
+</div><div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BUser%2BApplication.html">AVED - User Application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80/V80P</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BHierarchy%2BOverview.html">AVED V80/V80P - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BCIPS%2BConfiguration.html">AVED V80/V80P - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BMemory%2BResources.html">AVED V80/V80P - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BMemory%2BMap.html">AVED V80/V80P - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BNoC%2BConfiguration.html">AVED V80/V80P - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BBase%2BLogic.html">AVED V80/V80P - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BClock%2BReset%2BModule.html">AVED V80/V80P - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BSource%2BFile%2BOverview.html">AVED V80/V80P - Source File Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%26V80P%2B-%2BXBTEST%2BDesign.html">AVED V80/V80P - XBTEST Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BClock%2BControl%2B%28ACC%29%2BProxy%2BDriver.html">AVED Clock Control (ACC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI &amp; xbtest)</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="AMI%2BArchitecture.html">AMI Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Card%2BDetection%2C%2BSelection%2C%2Band%2BGeneral%2BOverview.html">Card Detection, Selection, and General Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors%2Band%2BHardware%2BMonitoring.html">Sensors and Hardware Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="User%2BInterface.html">User Interface</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">AMI - Kernel Driver Interaction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#initialization">Initialization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mapping-gcq-ip-payload">Mapping GCQ IP/Payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#partition-table">Partition Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#threading">Threading</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#normal-operation">Normal Operation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#supported-commands">Supported Commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basic-flow">Basic Flow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AMI%2B-%2BAPI%2BDescription.html">AMI - API Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AMI%2B-%2BHot%2BReset.html">AMI - Hot Reset</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest%2Bbuild.html">xbtest build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift"><nav aria-label="Mobile navigation menu" class="wy-nav-top" style="background: black">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="index.html">AVED</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="Page navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a class="icon icon-home" href="index.html"></a> »</li>
+<li><a href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a> »</li>
+<li>AMI - Kernel Driver Interaction</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<section id="ami-kernel-driver-interaction">
+<h1>AMI - Kernel Driver Interaction<a class="headerlink" href="#ami-kernel-driver-interaction" title="Permalink to this headline">¶</a></h1>
+<section id="initialization">
+<span id="amikerneldriverinteraction-initialization"></span><h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
+<section id="mapping-gcq-ip-payload">
+<span id="amikerneldriverinteraction-mappinggcqip-payload"></span><h3>Mapping GCQ IP/Payload<a class="headerlink" href="#mapping-gcq-ip-payload" title="Permalink to this headline">¶</a></h3>
+<p>For each physical function during initialization, the kernel module will parse the PCIe extended capabilities to get access to the VSEC capability.</p>
+<p>This capability contains the associated path (PCIe bar/offset &amp; length) to the GCQ IP block and to the shared memory interface.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/74337d76d092cd3a8ea8bd01d6e49fa820b13f1c.png"><img alt="image1" class="drawio-diagram-image" src="_images/74337d76d092cd3a8ea8bd01d6e49fa820b13f1c.png" style="width: 451px;"/></a></p>
+</section>
+<section id="partition-table">
+<span id="amikerneldriverinteraction-partitiontable"></span><h3>Partition Table<a class="headerlink" href="#partition-table" title="Permalink to this headline">¶</a></h3>
+<p>Using the information obtained from the VSEC capability, the driver will parse the top of the shared memory which contains a partition table populated by the AMC on initialization.</p>
+<p>The AMI driver uses this data to get the initial AMC status, information used to initialize the GCQ driver via FAL, obtain the AMC log and to read any populated response data.</p>
+<table class="wrapped relative-table confluenceTable" style="width: 27.6886%;"><colgroup><col style="width: 24.1629%;"/><col style="width: 75.8471%;"/></colgroup><tbody><tr><th class="confluenceTh" scope="col">Field</th><th class="confluenceTh" scope="col">Description</th></tr><tr><td class="confluenceTd">Magic Number</td><td class="confluenceTd">Unique identifier</td></tr><tr><td class="confluenceTd">GCQ Ring Buffer offset/length</td><td class="confluenceTd">Used by the GCQ driver to store CQ/SQ slot data</td></tr><tr><td class="confluenceTd">AMC Status</td><td class="confluenceTd">This will be set to a value of 0x1 when the AMC is fully initialized</td></tr><tr><td class="confluenceTd">AMC Logging Payload</td><td class="confluenceTd">The offset within the shared memory to be populated with the log</td></tr><tr><td class="confluenceTd">AMC Data Payload</td><td class="confluenceTd">The offset within the shared memory to be populated with the response data </td></tr></tbody></table>
+</section>
+<section id="threading">
+<span id="amikerneldriverinteraction-threading"></span><h3>Threading<a class="headerlink" href="#threading" title="Permalink to this headline">¶</a></h3>
+<p>Once the GCQ driver has been configured, the AMI kernel driver will spawn three different threads per physical function.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/90bccac6b9c128f4057484da49499b8e7f4379d0.png"><img alt="image2" class="drawio-diagram-image" src="_images/90bccac6b9c128f4057484da49499b8e7f4379d0.png" style="width: 981px;"/></a></p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<table class="wrapped relative-table confluenceTable" style="width: 27.8499%;"><colgroup><col style="width: 21.1216%;"/><col style="width: 78.8884%;"/></colgroup><tbody><tr><th class="confluenceTh" scope="col">Thread</th><th class="confluenceTh" scope="col">Description</th></tr><tr><td class="confluenceTd">Heartbeat Thread</td><td class="confluenceTd"><p>Periodically (every 0.5 seconds) send a message to the AMC and waits for appropriate response.</p><p>On failure/timeout a bound in callback will be invoked to the upper layer of the driver.</p></td></tr><tr><td class="confluenceTd">Logging Thread</td><td class="confluenceTd">Periodically (every second) checks the logging buffer (in shared memory) populated by the AMC and dumps anything found to info 'dmesg' kernel log. </td></tr><tr><td class="confluenceTd">Response Thread</td><td class="confluenceTd">Handles waiting for and parsing responses from from the AMC via the FAL GCQ. </td></tr></tbody></table>
+</section>
+</section>
+<section id="normal-operation">
+<span id="amikerneldriverinteraction-normaloperation"></span><h2>Normal Operation<a class="headerlink" href="#normal-operation" title="Permalink to this headline">¶</a></h2>
+<p>The AMI/AMC control layer contains the functionality to submit a synchronous request and blocks on a conditional variable waiting for the response from the AMC proxy layer.</p>
+<p>The AMC proxy layer is used to form up the lower level requests and interact with the GCQ driver to send requests and wait on responses (via AMC response thread).</p>
+<p>If a response isn’t received within the specified timeout the driver layer blocks any further requests as the assumption is the AMC has failed.</p>
+<p>In this instance the failure/timeout will be added to the dmesg error log.</p>
+<section id="supported-commands">
+<span id="amikerneldriverinteraction-supportedcommands"></span><h3>Supported Commands<a class="headerlink" href="#supported-commands" title="Permalink to this headline">¶</a></h3>
+<p>The following is a list of the currently supported commands with the associated timeouts.</p>
+<table class="relative-table wrapped confluenceTable" style="width: 27.8499%;"><colgroup><col style="width: 42.2415%;"/><col style="width: 33.0737%;"/><col style="width: 24.6948%;"/></colgroup><tbody><tr><th class="confluenceTh" scope="col"><span style="color: rgb(0,51,102);">Request</span></th><th class="confluenceTh" scope="col"><span style="color: rgb(0,51,102);">Description</span></th><th class="confluenceTh" scope="col"><span style="color: rgb(0,51,102);">Timeout</span></th></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">GCQ_SUBMIT_CMD_GET_GCQ_VERSION</span></p></td><td class="confluenceTd"><span style="color: rgb(0,51,102);">Get the GCQ version</span></td><td class="confluenceTd"><span style="color: rgb(0,51,102);">30 seconds</span></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">GCQ_SUBMIT_CMD_GET_SDR</span></p></td><td class="confluenceTd"><span style="color: rgb(0,51,102);">Get an SDR (Sensor Data Record)</span></td><td class="confluenceTd"><span style="color: rgb(0,51,102);">30 seconds</span></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">GCQ_SUBMIT_CMD_GET_SDR_SIZE</span></p></td><td class="confluenceTd"><span style="color: rgb(0,51,102);">Get an SDR Size</span></td><td class="confluenceTd"><span style="color: rgb(0,51,102);">30 seconds</span></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">GCQ_SUBMIT_CMD_DOWNLOAD_PDI</span></p></td><td class="confluenceTd"><span style="color: rgb(0,51,102);">Request to start PDI Download</span></td><td class="confluenceTd"><span style="color: rgb(0,51,102);">40 minutes</span></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">GCQ_SUBMIT_CMD_DEVICE_BOOT</span></p></td><td class="confluenceTd"><span style="color: rgb(0,51,102);">Select the bootable partition with the flash</span></td><td class="confluenceTd"><span style="color: rgb(0,51,102);">30 seconds</span></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">GCQ_SUBMIT_CMD_COPY_PARTITION</span></p></td><td class="confluenceTd"><span style="color: rgb(0,51,102);">Request to start copying a partition</span></td><td class="confluenceTd"><span style="color: rgb(0,51,102);">1 hour</span></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">GCQ_SUBMIT_CMD_GET_HEARTBEAT</span></p></td><td class="confluenceTd"><span style="color: rgb(0,51,102);">Heartbeat message (on its own thread)</span></td><td class="confluenceTd"><span style="color: rgb(0,51,102);">0.5 seconds</span></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">GCQ_SUBMIT_CMD_EEPROM_READ_WRITE</span></p></td><td class="confluenceTd"><span style="color: rgb(0,51,102);">Read/Write EEPROM request</span></td><td class="confluenceTd"><span style="color: rgb(0,51,102);">30 seconds</span></td></tr></tbody></table>
+</section>
+<section id="basic-flow">
+<span id="amikerneldriverinteraction-basicflow"></span><h3>Basic Flow<a class="headerlink" href="#basic-flow" title="Permalink to this headline">¶</a></h3>
+<p>The flow for each request/response is the same which the exception of the heartbeat which has operates on it’s own thread.</p>
+<p>The AMC control layer calls into the AMC proxy to form up a request, this request is then sent to the AMC via the FAL GCQ.</p>
+<p>The AMC control layer is then blocked waiting for the response.</p>
+<p>During this time the AMC response thread reads the incoming data from the FAL GCQ to check for any responses.</p>
+<p>If a matching response is received, it is signaled back to the control layer via the conditional variable with success and the data is processed.</p>
+<p>If no matching response is found within the timeout period, the conditional variable is signaled via a failure and returned to the calling function.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><a class="drawio-diagram-image reference internal" href="_images/234f0a4f0230fa9cbd566223d752e7f78bd2c4fb.png"><img alt="image3" class="drawio-diagram-image" src="_images/234f0a4f0230fa9cbd566223d752e7f78bd2c4fb.png" style="width: 702px;"/></a></p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Page Revision: v. 23</p>
+</section>
+</section>
+</section>
+</div>
+</div>
+<footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+<a accesskey="p" class="btn btn-neutral float-left" href="User%2BInterface.html" rel="prev" title="User Interface"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+<a accesskey="n" class="btn btn-neutral float-right" href="AMI%2B-%2BAPI%2BDescription.html" rel="next" title="AMI - API Description">Next <span aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<p>© Copyright 2023, Advanced Micro Devices Inc.</p>
+</div>
+<div class="aem-Grid aem-Grid--16">
+<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+<div class="container-fluid sub-footer">
+<div class="row">
+<div class="col-xs-24">
+<p><a href="https://www.amd.com/en/corporate/copyright" target="_blank">Terms and Conditions</a> | <a href="https://www.amd.com/en/corporate/privacy" target="_blank">Privacy</a> | <a href="https://www.amd.com/en/corporate/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.amd.com/en/corporate/trademarks" target="_blank">Trademarks</a> | <a href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf" target="_blank">Statement on Forced Labor</a> | <a href="https://www.amd.com/en/corporate/competition" target="_blank">Fair and Open Competition</a> | <a href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf" target="_blank">UK Tax Strategy</a> | <a href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA" target="_blank">Inclusive Terminology</a> | <a class="ot-sdk-show-settings" href="#cookiessettings">Cookies Settings</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+</div>
+</div>
+</section>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+</body>
+</html>
