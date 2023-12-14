@@ -1,0 +1,24 @@
+<: setFileUsedIn { out_of_context synthesis implementation } :>
+<: ;#Component and file information :>
+<: set ComponentName [getComponentNameString] :>
+<: setOutputDirectory "./" :>
+<: setFileName $ComponentName :>
+<: setFileExtension "_ooc.xdc" :>
+
+# Copyright (C) 2022 Xilinx, Inc.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+<: set c_board   [get_parameter_property "C_BOARD"]:>
+
+create_clock -period 6.667 [get_ports apb3clk]
+set_property HD.CLK_SRC BUFGCTRL_X0Y0 [get_ports apb3clk]

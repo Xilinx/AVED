@@ -1,0 +1,115 @@
+{
+  "comment": [
+    "This is an example of test JSON file",
+    "You can use this example as template for your own tests",
+    "Please refer to the User Guide for how to define or add/remove testcases",
+    "Comments can be added or removed anywhere in test JSON file"
+  ],
+  "testcases": {
+    "power": {
+      "comment": "Update toggle rate according to your test environment",
+      "global_config": {
+        "test_sequence": [
+          {
+            "duration": 300,
+            "toggle_rate": 10
+          }
+        ]
+      }
+    },
+    "memory": {
+      "DDR": {
+        "global_config": {
+          "test_sequence": [
+            {
+              "duration": 300,
+              "mode": "alternate_wr_rd"
+            }
+          ]
+        }
+      },
+      "HBM": {
+        "global_config": {
+          "test_sequence": [
+            {
+              "duration": 300,
+              "mode": "alternate_wr_rd"
+            }
+          ]
+        }
+      }
+    },
+    "gtm_prbs": {
+      "comment": [
+        "Make sure power duration is bigger than the total duration gt tests",
+        "reset gt only after power toggle rate is stable"
+      ],
+      "default": {
+        "global_config": {
+          "test_sequence": [
+            {
+              "duration": 1,
+              "mode": "conf_gt"
+            },
+            {
+              "duration": 1,
+              "mode": "tx_rx_rst"
+            },
+            {
+              "duration": 1,
+              "mode": "rx_datapath_rst"
+            },
+            {
+              "duration": 1,
+              "mode": "clear_status"
+            },
+            {
+              "duration": 250,
+              "mode": "run"
+            },
+            {
+              "duration": 1,
+              "mode": "check_status"
+            }
+          ]
+        }
+      }
+    },
+    "gtyp_prbs": {
+      "comment": [
+        "Make sure power duration is bigger than the total duration gt tests",
+        "reset gt only after power toggle rate is stable"
+      ],
+      "default": {
+        "global_config": {
+          "test_sequence": [
+            {
+              "duration": 1,
+              "mode": "conf_gt"
+            },
+            {
+              "duration": 1,
+              "mode": "tx_rx_rst"
+            },
+            {
+              "duration": 1,
+              "mode": "rx_datapath_rst"
+            },
+            {
+              "duration": 1,
+              "mode": "clear_status"
+            },
+            {
+              "duration": 250,
+              "mode": "run"
+            },
+            {
+              "duration": 1,
+              "mode": "check_status"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

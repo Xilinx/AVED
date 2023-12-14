@@ -1,0 +1,77 @@
+<: setFileUsedIn { simulation synthesis implementation } :>
+<: ;#Component and file information :>
+<: set Component_Name [getComponentNameString] :>
+<: if {[regexp -- "krnl_" $Component_Name]} { :>
+<: setOutputDirectory "./" :>
+<: setFileName "xbtest_pkg" :>
+<: setFileExtension ".sv" :>
+<: setFileProcessingOrder late :>
+<!: example/common.tcl :>
+<!: tcl/messages.tcl :>
+<: set MESSAGES_DICT   [get_parameter_property "MESSAGES_DICT"]     :>
+<: set messages_config [dict create MESSAGES_DICT $MESSAGES_DICT]   :>
+<!: tcl/power/gen_power_floorplan.tcl :>
+<: set c_stop_post_opt  [get_parameter_property "C_STOP_POST_OPT"]  :>
+<: set c_krnl_mode      [get_parameter_property "C_KRNL_MODE"]      :>
+
+// Copyright (C) 2022 Xilinx, Inc.
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package xbtest_pkg;
+// Definition of kernel parameters
+<: if {$c_krnl_mode == 0} { :>
+<:      if {$c_stop_post_opt} { :>
+// Power CU with single slice
+localparam integer C_DSP48E2_COL_SIZES_ARRRAY [0:199]  = '{200{0}};
+localparam integer C_RAMB36_COL_SIZES_ARRRAY [0:199]   = '{200{0}};
+localparam integer C_URAM288_COL_SIZES_ARRRAY [0:199]  = '{200{0}};
+localparam integer C_REG_BLOCK_SIZE_ARRAY [0:19][0:19] = '{
+    0:'{
+        0:1,
+        default:0
+    },
+    default:'{20{0}} //set unused indexes to 0
+};
+<:      } else { :>
+// Generated power CU specific parameters
+<:          log_message $messages_config "GEN_POWER_FLOORPLAN-20" [list "SV parameters"] :>
+<:          set c_krnl_slr          [get_parameter_property "C_KRNL_SLR"]           :>
+<:          set C_DYNAMIC_GEOMETRY  [get_parameter_property "C_DYNAMIC_GEOMETRY"]   :>
+<:          set C_INVALID           [get_parameter_property "C_INVALID"]            :>
+<:          set C_UTILIZATION       [get_parameter_property "C_UTILIZATION"]        :>
+<:          set const_out [ gen_power_floorplan [list $c_krnl_slr] ]  :>
+<:          set PKG_COL_SIZES_ARRRAY_LIST   [lindex $const_out 0]  :>
+<:          set PKG_SLICE_SIZES_ARRRAY_LIST [lindex $const_out 1]  :>
+<:          foreach {site_type PKG_COL_SIZES_ARRRAY_LIST_TYPE} $PKG_COL_SIZES_ARRRAY_LIST { :>
+<:              foreach {idx_slr params} $PKG_COL_SIZES_ARRRAY_LIST_TYPE { :>
+<:                  foreach line $params { :>
+<=: $line :>
+<:                  } :>
+<:              } :>
+<:          } :>
+<:          foreach {idx_slr params} $PKG_SLICE_SIZES_ARRRAY_LIST { :>
+<:              foreach line $params { :>
+<=: $line :>
+<:              } :>
+<:          } :>
+<:      } :>
+<: } else { :>
+// Power CU disabled
+localparam integer C_DSP48E2_COL_SIZES_ARRRAY [0:199]  = '{200{0}};
+localparam integer C_RAMB36_COL_SIZES_ARRRAY [0:199]   = '{200{0}};
+localparam integer C_URAM288_COL_SIZES_ARRRAY [0:199]  = '{200{0}};
+localparam integer C_REG_BLOCK_SIZE_ARRAY [0:19][0:19] = '{20{'{20{0}}}};
+<: } :>
+localparam string SIM_DEVICE_BUFGCE_DIV = "<=: [get_device_data D_SIM BUFGCE_DIV] :>";
+endpackage
+<: } :>

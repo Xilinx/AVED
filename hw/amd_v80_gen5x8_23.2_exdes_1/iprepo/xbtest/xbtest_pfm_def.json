@@ -1,0 +1,299 @@
+{
+    "device": {
+        "runtime": {
+            "download_time": 16
+        },
+        "sensor": {
+            "0": {
+                "type": "electrical",
+                "id": "12V_AUX1"
+            },
+            "1": {
+                "type": "electrical",
+                "id": "12V_AUX2"
+            }
+        },
+        "gt": {
+            "0": {
+                "transceiver_settings": {
+                    "module": {
+                        "tx_differential_swing_control": 0,
+                        "tx_pre_emphasis": 0,
+                        "tx_post_emphasis": 0,
+                        "tx_main_cursor": 15,
+                        "rx_equaliser": "DFE"
+                    },
+                    "cable": {
+                        "tx_differential_swing_control": 0,
+                        "tx_pre_emphasis": 0,
+                        "tx_post_emphasis": 0,
+                        "tx_main_cursor": 15,
+                        "rx_equaliser": "DFE"
+                    }
+                }
+            },
+            "1": {
+                "transceiver_settings": {
+                    "module": {
+                        "tx_differential_swing_control": 0,
+                        "tx_pre_emphasis": 0,
+                        "tx_post_emphasis": 0,
+                        "tx_main_cursor": 15,
+                        "rx_equaliser": "DFE"
+                    },
+                    "cable": {
+                        "tx_differential_swing_control": 0,
+                        "tx_pre_emphasis": 0,
+                        "tx_post_emphasis": 0,
+                        "tx_main_cursor": 15,
+                        "rx_equaliser": "DFE"
+                    }
+                }
+            },
+            "2": {
+                "transceiver_settings": {
+                    "module": {
+                        "tx_differential_swing_control": 0,
+                        "tx_pre_emphasis": 0,
+                        "tx_post_emphasis": 0,
+                        "tx_main_cursor": 15,
+                        "rx_equaliser": "DFE"
+                    },
+                    "cable": {
+                        "tx_differential_swing_control": 0,
+                        "tx_pre_emphasis": 0,
+                        "tx_post_emphasis": 0,
+                        "tx_main_cursor": 15,
+                        "rx_equaliser": "DFE"
+                    }
+                }
+            },
+            "3": {
+                "transceiver_settings": {
+                    "module": {
+                        "tx_differential_swing_control": 0,
+                        "tx_pre_emphasis": 0,
+                        "tx_post_emphasis": 0,
+                        "tx_main_cursor": 15,
+                        "rx_equaliser": "DFE"
+                    },
+                    "cable": {
+                        "tx_differential_swing_control": 0,
+                        "tx_pre_emphasis": 0,
+                        "tx_post_emphasis": 0,
+                        "tx_main_cursor": 15,
+                        "rx_equaliser": "DFE"
+                    }
+                }
+            },
+            "4": {
+                "transceiver_settings": {
+                    "module": {
+                        "tx_differential_swing_control": 11,
+                        "tx_pre_emphasis": 0,
+                        "tx_post_emphasis": 0,
+                        "rx_equaliser": "DFE"
+                    },
+                    "cable": {
+                        "tx_differential_swing_control": 11,
+                        "tx_pre_emphasis": 0,
+                        "tx_post_emphasis": 0,
+                        "rx_equaliser": "DFE"
+                    }
+                }
+            },
+            "5": {
+                "transceiver_settings": {
+                    "module": {
+                        "tx_differential_swing_control": 11,
+                        "tx_pre_emphasis": 0,
+                        "tx_post_emphasis": 0,
+                        "rx_equaliser": "DFE"
+                    },
+                    "cable": {
+                        "tx_differential_swing_control": 11,
+                        "tx_pre_emphasis": 0,
+                        "tx_post_emphasis": 0,
+                        "rx_equaliser": "DFE"
+                    }
+                }
+            },
+            "6": {
+                "transceiver_settings": {
+                    "module": {
+                        "tx_differential_swing_control": 11,
+                        "tx_pre_emphasis": 0,
+                        "tx_post_emphasis": 0,
+                        "rx_equaliser": "DFE"
+                    },
+                    "cable": {
+                        "tx_differential_swing_control": 11,
+                        "tx_pre_emphasis": 0,
+                        "tx_post_emphasis": 0,
+                        "rx_equaliser": "DFE"
+                    }
+                }
+            },
+            "7": {
+                "transceiver_settings": {
+                    "module": {
+                        "tx_differential_swing_control": 11,
+                        "tx_pre_emphasis": 0,
+                        "tx_post_emphasis": 0,
+                        "rx_equaliser": "DFE"
+                    },
+                    "cable": {
+                        "tx_differential_swing_control": 11,
+                        "tx_pre_emphasis": 0,
+                        "tx_post_emphasis": 0,
+                        "rx_equaliser": "DFE"
+                    }
+                }
+            }
+        },
+        "memory": {
+            "0": {
+                "name": "DDR",
+                "cu_bw": {
+                    "simul_wr_rd": {
+                        "write": {
+                            "high": 5511,
+                            "low": 3674
+                        },
+                        "read": {
+                            "high": 5511,
+                            "low": 3674
+                        }
+                    },
+                    "only_rd": {
+                        "read": {
+                            "high": 13806,
+                            "low": 9204
+                        }
+                    },
+                    "only_wr": {
+                        "write": {
+                            "high": 13501,
+                            "low": 9000
+                        }
+                    }
+                },
+                "cu_latency": {
+                    "simul_wr_rd": {
+                        "write": {
+                            "high": 757,
+                            "low": 374
+                        },
+                        "read": {
+                            "high": 3373,
+                            "low": 1800
+                        }
+                    },
+                    "only_rd": {
+                        "read": {
+                            "high": 961,
+                            "low": 481
+                        }
+                    },
+                    "only_wr": {
+                        "write": {
+                            "high": 288,
+                            "low": 142
+                        }
+                    }
+                },
+                "cu_outstanding": {
+                    "simul_wr_rd": {
+                        "write": {
+                            "nominal": 4
+                        },
+                        "read": {
+                            "nominal": 4
+                        }
+                    },
+                    "only_rd": {
+                        "read": {
+                            "nominal": 3
+                        }
+                    },
+                    "only_wr": {
+                        "write": {
+                            "nominal": 3
+                        }
+                    }
+                }
+            },
+            "1": {
+                "name": "HBM",
+                "cu_bw": {
+                    "simul_wr_rd": {
+                        "write": {
+                            "high": 5347,
+                            "low": 3564
+                        },
+                        "read": {
+                            "high": 5347,
+                            "low": 3564
+                        }
+                    },
+                    "only_rd": {
+                        "read": {
+                            "high": 13238,
+                            "low": 8825
+                        }
+                    },
+                    "only_wr": {
+                        "write": {
+                            "high": 14319,
+                            "low": 9546
+                        }
+                    }
+                },
+                "cu_latency": {
+                    "simul_wr_rd": {
+                        "write": {
+                            "high": 293,
+                            "low": 156
+                        },
+                        "read": {
+                            "high": 3504,
+                            "low": 1863
+                        }
+                    },
+                    "only_rd": {
+                        "read": {
+                            "high": 1394,
+                            "low": 735
+                        }
+                    },
+                    "only_wr": {
+                        "write": {
+                            "high": 120,
+                            "low": 53
+                        }
+                    }
+                },
+                "cu_outstanding": {
+                    "simul_wr_rd": {
+                        "write": {
+                            "nominal": 4
+                        },
+                        "read": {
+                            "nominal": 4
+                        }
+                    },
+                    "only_rd": {
+                        "read": {
+                            "nominal": 4
+                        }
+                    },
+                    "only_wr": {
+                        "write": {
+                            "nominal": 3
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

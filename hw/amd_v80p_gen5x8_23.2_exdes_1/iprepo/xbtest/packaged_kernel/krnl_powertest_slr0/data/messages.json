@@ -1,0 +1,1097 @@
+[
+    {
+        "id"            : "XBTEST_WIZARD-1",
+        "severity"      : "INFO",
+        "msg"           : "Starting example design",
+        "msg_edit"      : "",
+        "detail"        : "Example design is starting",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-2",
+        "severity"      : "INFO",
+        "msg"           : "Done!",
+        "msg_edit"      : "",
+        "detail"        : "Example design has completed",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-3",
+        "severity"      : "INFO",
+        "msg"           : "Ipdef parameters read for <IPDEF>",
+        "msg_edit"      : "Ipdef parameters read for %s",
+        "detail"        : "Ipdef parameters were successfully read",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-4",
+        "severity"      : "INFO",
+        "msg"           : "obsolete",
+        "msg_edit"      : "",
+        "detail"        : "obsolete",
+        "resolution"    : "",
+        "state"         : "obsolete"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-5",
+        "severity"      : "INFO",
+        "msg"           : "obsolete",
+        "msg_edit"      : "",
+        "detail"        : "obsolete",
+        "resolution"    : "",
+        "state"         : "obsolete"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-6",
+        "severity"      : "INFO",
+        "msg"           : "obsolete",
+        "msg_edit"      : "",
+        "detail"        : "obsolete",
+        "resolution"    : "",
+        "state"         : "obsolete"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-7",
+        "severity"      : "INFO",
+        "msg"           : "obsolete",
+        "msg_edit"      : "",
+        "detail"        : "obsolete",
+        "resolution"    : "",
+        "state"         : "obsolete"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-8",
+        "severity"      : "INFO",
+        "msg"           : "obsolete",
+        "msg_edit"      : "",
+        "detail"        : "obsolete",
+        "resolution"    : "",
+        "state"         : "obsolete"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-9",
+        "severity"      : "INFO",
+        "msg"           : "Unable to auto-configure user parameter <user_parameter>: <reason>",
+        "msg_edit"      : "Unable to auto-configure user parameter %s: %s",
+        "detail"        : "The auto-configuration either failed or is not available. Check reason displayed",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-10",
+        "severity"      : "INFO",
+        "msg"           : "Successfully auto-configured user parameter <user_parameter> to {<value>}",
+        "msg_edit"      : "Successfully auto-configured user parameter %s to {%s}",
+        "detail"        : "Report of the auto-configuration result of this parameter",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-11",
+        "severity"      : "INFO",
+        "msg"           : "obsolete",
+        "msg_edit"      : "",
+        "detail"        : "obsolete",
+        "resolution"    : "",
+        "state"         : "obsolete"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-13",
+        "severity"      : "ERROR",
+        "msg"           : "<user_parameter> user parameter is not specified",
+        "msg_edit"      : "%s user parameter is not specified",
+        "detail"        : "A mandatory user_parameter was not specified",
+        "resolution"    : "This parameter must be set using the user parameter",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-14",
+        "severity"      : "ERROR",
+        "msg"           : "<file/directory type> does not exist: <file name>",
+        "msg_edit"      : "%s does not exist: %s",
+        "detail"        : "The file or directory specified via the user parameters does not exists",
+        "resolution"    : "This file or directory is required, check that it exists",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-15",
+        "severity"      : "INFO",
+        "msg"           : "Reading <file>: <file path>",
+        "msg_edit"      : "Reading %s: %s",
+        "detail"        : "The wizard is reading a configuration file",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-16",
+        "severity"      : "INFO",
+        "msg"           : "Logging a configuration in <file>",
+        "msg_edit"      : "Logging a configuration in %s",
+        "detail"        : "An intermediary log file is written",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-17",
+        "severity"      : "INFO",
+        "msg"           : "Setting permissions (<permissions>) to the folder: <folder>",
+        "msg_edit"      : "Setting permissions (%s) to the folder: %s",
+        "detail"        : "Permissions are set",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-18",
+        "severity"      : "INFO",
+        "msg"           : "obsolete",
+        "msg_edit"      : "",
+        "detail"        : "obsolete",
+        "resolution"    : "",
+        "state"         : "obsolete"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-19",
+        "severity"      : "ERROR",
+        "msg"           : "Invalid value provided for user parameter <user_parameter>. Expecting a dictionary. For example: <example>",
+        "msg_edit"      : "Invalid value provided for user parameter %s. Expecting a dictionary. For example: {%s}",
+        "detail"        : "The value provided is not supported",
+        "resolution"    : "Check the value provided by the user or via auto-configuration",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-20",
+        "severity"      : "ERROR",
+        "msg"           : "Invalid dictionary key provided for user parameter <user_parameter>: <key>. Supported values are <values>",
+        "msg_edit"      : "Invalid dictionary key provided for user parameter %s: %s. Supported values are %s",
+        "detail"        : "The key provided in the dictionary is not supported",
+        "resolution"    : "Check the value provided by the user or via auto-configuration",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-21",
+        "severity"      : "INFO",
+        "msg"           : "obsolete",
+        "msg_edit"      : "",
+        "detail"        : "obsolete",
+        "resolution"    : "",
+        "state"         : "obsolete"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-22",
+        "severity"      : "INFO",
+        "msg"           : "Successfully validated <cfg_name> parameter <user_parameter>. Value (<value>) is used",
+        "msg_edit"      : "Successfully validated %s parameter %s. Value (%s) is used",
+        "detail"        : "The value provided by the user or via auto-configuration for this user parameter is correct. Value of the parameter is reported",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-23",
+        "severity"      : "ERROR",
+        "msg"           : "Invalid list value (<value>) provided for user parameter <user_parameter>. Supported values are <values>",
+        "msg_edit"      : "Invalid list value (%s) provided for user parameter %s. Supported values are %s",
+        "detail"        : "The value provided in the list is not supported",
+        "resolution"    : "Check the value provided by the user or via auto-configuration",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-24",
+        "severity"      : "ERROR",
+        "msg"           : "Invalid value (<value>) provided for user parameter <user_parameter>. Supported values are <values>",
+        "msg_edit"      : "Invalid value (%s) provided for user parameter %s. Supported values are %s",
+        "detail"        : "The value provided is not supported",
+        "resolution"    : "Check the value provided by the user or via auto-configuration",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-25",
+        "severity"      : "INFO",
+        "msg"           : "Setting user parameter <user parameter> with string read from file: <file name>",
+        "msg_edit"      : "Setting user parameter %s with string read from file: %s",
+        "detail"        : "Some string user parameters are imported from files (e.g. power floorplan sources)",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-26",
+        "severity"      : "INFO",
+        "msg"           : "Successfully set user parameter <user parameter> with <number of lines> lines read from file: <file name>",
+        "msg_edit"      : "Successfully set user parameter %s with %s lines read from file: %s",
+        "detail"        : "Report the number of lines imported from file",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-27",
+        "severity"      : "INFO",
+        "msg"           : "Reserved for build_xclbin.sh",
+        "msg_edit"      : "",
+        "detail"        : "Reserved for build_xclbin.sh",
+        "resolution"    : "",
+        "state"         : "reserved"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-28",
+        "severity"      : "INFO",
+        "msg"           : "Unable to auto-configure <user_parameter> for element %s: <info>",
+        "msg_edit"      : "Unable to auto-configure %s for element %s: %s",
+        "detail"        : "The auto-configuration of this parameter, initially set to {}, resulted in setting it as unused",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-29",
+        "severity"      : "INFO",
+        "msg"           : "Actual user parameter <param name> value (<param value>) is used",
+        "msg_edit"      : "Actual user parameter %s value (%s) is used",
+        "detail"        : "Reporting the actual value of user parameter either auto-configured or provided by the user",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-30",
+        "severity"      : "ERROR",
+        "msg"           : "Unknown node found in <file>: <node>",
+        "msg_edit"      : "Unknown node found in %s: %s",
+        "detail"        : "The wizard configuration JSON file is not valid",
+        "resolution"    : "Correct the wizard configuration JSON file",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-31",
+        "severity"      : "ERROR",
+        "msg"           : "Cannot find parameter <node> in auto-configuration or wizard configuration JSON file",
+        "msg_edit"      : "Cannot find parameter %s in auto-configuration or wizard configuration JSON file",
+        "detail"        : "The parameter was not found in auto-configuration (platform info or default value) and in wizard configuration JSON file (default and <wizard_config_name>",
+        "resolution"    : "Check auto-configuration and/or wizard-configuration JSON file",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-32",
+        "severity"      : "WARNING",
+        "msg"           : "Unsetting element <element> from auto-configured dictionary parameter <parameter> as <reason>",
+        "msg_edit"      : "Unsetting element %s from auto-configured dictionary parameter %s as %s",
+        "detail"        : "A parameter was not found or was found invalid during auto-configuration so the wizard will not use it",
+        "resolution"    : "Check platform metadata definition or (re)-define the element in the wizard-configuration JSON file",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-33",
+        "severity"      : "WARNING",
+        "msg"           : "Unsetting auto-configured parameter <parameter> as <reason>",
+        "msg_edit"      : "Unsetting auto-configured parameter %s as %s",
+        "detail"        : "A parameter was not found or was found invalid during auto-configuration so the wizard will not use it",
+        "resolution"    : "Check platform metadata definition or (re)-define the element in the wizard-configuration JSON file",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-34",
+        "severity"      : "CRITICAL WARNING",
+        "msg"           : "Auto-configuration of parameter is not supported for platform provided <xpfm>: <reason>",
+        "msg_edit"      : "Auto-configuration of parameter is not supported for platform provided %s: %s",
+        "detail"        : "xbtest wizard cannot find platform metadata it is expecting",
+        "resolution"    : "All parameters must be defined in the wizard-configuration JSON file",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-35",
+        "severity"      : "INFO",
+        "msg"           : "Loading platform metadata from provided <XSA/XPFM> with command: <cmd>",
+        "msg_edit"      : "Loading platform metadata from provided %s with command: %s",
+        "detail"        : "Trying to load platform info as HW XSA instead of XPFM",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-36",
+        "severity"      : "WARNING",
+        "msg"           : "<file/directory type> does not exist (<file name>). The power CUs will be generated with a single SLICE site and the build will be stopped after the implementation opt phase",
+        "msg_edit"      : "%s does not exist (%s). The power CUs will be generated with a single SLICE site and the build will be stopped after the implementation opt phase",
+        "detail"        : "A required power floorplan configuration file is missing but the build will continue to until a DCP is available which may be used to generate dynamic_geometry.json",
+        "resolution"    : "This file or directory is required, check that it exists or re-generate it",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-37",
+        "severity"      : "INFO",
+        "msg"           : "Loading <file/directory type>: <file name>",
+        "msg_edit"      : "Loading %s: %s",
+        "detail"        : "Load JSON file",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-38",
+        "severity"      : "CRITICAL WARNING",
+        "msg"           : "Required parameter <param name> not found in platform metadata and not specified in wizard configuration JSON file",
+        "msg_edit"      : "Required parameter %s not found in platform metadata and not specified in wizard configuration JSON file",
+        "detail"        : "This parameter is needed in platform metadata",
+        "resolution"    : "Check if the parameter is defined in the platform metadata and if not present then define it in wizard configuration",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-39",
+        "severity"      : "ERROR",
+        "msg"           : "Required file not found in provided Vitis options directory (vpp_options_dir): <file name>",
+        "msg_edit"      : "Required file not found in provided Vitis options directory (vpp_options_dir): %s",
+        "detail"        : "A required Vitis options file was not found in the directory provided",
+        "resolution"    : "This file or directory is required when a Vitis options directory is provided, make sure it exists",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-40",
+        "severity"      : "INFO",
+        "msg"           : "Output file sucessfully written: <file name>",
+        "msg_edit"      : "Output file sucessfully written: %s",
+        "detail"        : "Successfully wrote an output file",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-41",
+        "severity"      : "INFO",
+        "msg"           : "Verify CU location set to <slr> as <justification>",
+        "msg_edit"      : "Verify CU location set to %s as %s",
+        "detail"        : "Report verify CU SLR location",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-42",
+        "severity"      : "INFO",
+        "msg"           : "Verify CU DNA read <enabled/disabled> as <justification>",
+        "msg_edit"      : "Verify CU DNA read %s as %s",
+        "detail"        : "Report verify CU DNA read",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "XBTEST_WIZARD-43",
+        "severity"      : "CRITICAL WARNING",
+        "msg"           : "Verify CU DNA read enabled but no CONFIG_SITE was found in dynamic_geometry.json <justification>",
+        "msg_edit"      : "Verify CU DNA read enabled but no CONFIG_SITE was found in dynamic_geometry.json %s",
+        "detail"        : "Verify CU DNA read is enabled by user but that configuration might not be valid",
+        "resolution"    : "Define CONFIG_SITE in dynamic_geometry.json or remove dna_read from wizard configuration JSON file",
+        "state"         : "used"
+    },
+
+
+    {
+        "id"            : "GEN_CU_CONFIG-1",
+        "severity"      : "ERROR",
+        "msg"           : "<user_parameter> not defined by the user or via auto-configuration. Cannot configure <CU type> compute unit",
+        "msg_edit"      : "%s not defined by the user or via auto-configuration. Cannot configure %s compute unit",
+        "detail"        : "A required user parameter is not defined. See user guide",
+        "resolution"    : "If this parameter can be auto-configured, then check the platform metadata. Or set the user parameter manually",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_CU_CONFIG-2",
+        "severity"      : "INFO",
+        "msg"           : "The following configuration for a <CU type> compute unit has been generated: {<configuration>}",
+        "msg_edit"      : "The following configuration for a %s compute unit has been generated: {%s}",
+        "detail"        : "A compute unit configuration has successfully been generated",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_CU_CONFIG-3",
+        "severity"      : "INFO",
+        "msg"           : "No <CU type> compute unit is found in user configuration. Skipping",
+        "msg_edit"      : "No %s compute unit is found in user configuration. Skipping",
+        "detail"        : "No compute unit will be generated",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_CU_CONFIG-4",
+        "severity"      : "INFO",
+        "msg"           : "<number of configurations> configurations have been generated for <CU type> compute unit",
+        "msg_edit"      : "%s configurations have been generated for %s compute unit",
+        "detail"        : "Report the number of configurations generated for a compute unit type",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_CU_CONFIG-5",
+        "severity"      : "INFO",
+        "msg"           : "Starting generation of compute unit configurations",
+        "msg_edit"      : "",
+        "detail"        : "Initial message displayed at the beginning of the generation of the compute unit configurations",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_CU_CONFIG-6",
+        "severity"      : "ERROR",
+        "msg"           : "No compute unit configured. Check wizard configuration JSON file and selected configuration name: <config name>",
+        "msg_edit"      : "No compute unit configured. Check wizard configuration JSON file and selected configuration name: %s",
+        "detail"        : "At least one compute unit configuration must be generated",
+        "resolution"    : "Check the xbtest_wizard user parameters",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_CU_CONFIG-7",
+        "severity"      : "INFO",
+        "msg"           : "Total number of generated compute unit configurations: <number of configurations>",
+        "msg_edit"      : "Total number of generated compute unit configurations: %s",
+        "detail"        : "Report total number of configurations. One configuration is generated per compute unit",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_CU_CONFIG-8",
+        "severity"      : "ERROR",
+        "msg"           : "AIE utilization not defined in utilization.json (AIE_UTILIZATION) for SLR<idx>",
+        "msg_edit"      : "AIE utilization not defined in utilization.json (AIE_UTILIZATION) for SLR%s",
+        "detail"        : "When the platform supports AIE, the utilization must be defined",
+        "resolution"    : "Check the power floorplan definition",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_CU_CONFIG-9",
+        "severity"      : "INFO",
+        "msg"           : "Writing file: <file name>",
+        "msg_edit"      : "Writing file: %s",
+        "detail"        : "The necessary files to build the xclbin are generated",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_CU_CONFIG-10",
+        "severity"      : "INFO",
+        "msg"           : "AIE usage for power CU in SLR<idx> is enabled in <utilization.json>",
+        "msg_edit"      : "AIE usage for power CU in SLR%s is enabled in %s",
+        "detail"        : "Report AIE sites will be used by the power CU",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_CU_CONFIG-11",
+        "severity"      : "ERROR",
+        "msg"           : "AIE usage for power CU found in more than one SLR and is not supported",
+        "msg_edit"      : "",
+        "detail"        : "In this version, the AIE can be only used in one SLR",
+        "resolution"    : "Set utilisation > 0 only for one SLR in utilization.json",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_CU_CONFIG-12",
+        "severity"      : "INFO",
+        "msg"           : "Auto-configured power CU in SLR<idx> throttle mode from default to (<throttle_mode>)",
+        "msg_edit"      : "Auto-configured power CU in SLR%s throttle mode from default to (%s)",
+        "detail"        : "The throttle mode of the power CU is auto-configured when it is not provided for a SLR",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+
+
+    {
+        "id"            : "GEN_KERNEL_XML-1",
+        "severity"      : "INFO",
+        "msg"           : "Successfully generated kernel XML file: <file name>",
+        "msg_edit"      : "Successfully generated kernel XML file: %s",
+        "detail"        : "The kernel XML file was generated. This file will be included in the kernel XO file",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_KERNEL_XML-2",
+        "severity"      : "INFO",
+        "msg"           : "Setting in kernel XML file the scalar and AXI pointer arguments of compute unit: <CU name>",
+        "msg_edit"      : "Setting in kernel XML file the scalar and AXI pointer arguments of compute unit: %s",
+        "detail"        : "The arguments of the compute units  are configured in the kernel XML file",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+
+
+    {
+        "id"            : "PACKAGE_KERNEL-1",
+        "severity"      : "INFO",
+        "msg"           : "Starting generation of compute units XO files",
+        "msg_edit"      : "",
+        "detail"        : "Each compute unit has a different XO file which is being generated",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "PACKAGE_KERNEL-2",
+        "severity"      : "INFO",
+        "msg"           : "Successfully generated XO files for all compute units",
+        "msg_edit"      : "",
+        "detail"        : "The XO files generation for all compute unit has completed. See message above to see which compute units have been packaged",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "PACKAGE_KERNEL-3",
+        "severity"      : "INFO",
+        "msg"           : "Packaging compute unit: <CU name>",
+        "msg_edit"      : "Packaging compute unit: %s",
+        "detail"        : "Report the number of lines imported from file",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "PACKAGE_KERNEL-4",
+        "severity"      : "INFO",
+        "msg"           : "Setting user parameter <user_parameter> of <CU name> compute unit to: {<value>}",
+        "msg_edit"      : "Setting user parameter %s of %s compute unit to: {%s}",
+        "detail"        : "Report the value of a user parameter set for a compute unit",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "PACKAGE_KERNEL-5",
+        "severity"      : "ERROR",
+        "msg"           : "<user_parameter> not defined by the user or via auto-configuration. Cannot generate GT compute unit <CU name>",
+        "msg_edit"      : "%s not defined by the user or via auto-configuration. Cannot generate GT compute unit %s",
+        "detail"        : "A required user parameter is not defined. See user guide",
+        "resolution"    : "If this parameter can be auto-configured, then check the platform metadata. Or set the user parameter manually",
+        "state"         : "used"
+    },
+    {
+        "id"            : "PACKAGE_KERNEL-6",
+        "severity"      : "INFO",
+        "msg"           : "Creating <interface type> interface for <CU name> compute unit: {<interface name>}",
+        "msg_edit"      : "Creating %s interface for %s compute unit: {%s}",
+        "detail"        : "An additional interface has been created",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "PACKAGE_KERNEL-7",
+        "severity"      : "ERROR",
+        "msg"           : "Value (<value>) is not supported for user parameter (<user_parameter>). Supported values are: <values>. Cannot generate GT compute unit (<CU name>)",
+        "msg_edit"      : "Value (%s) is not supported for user parameter (%s). Supported values are: %s. Cannot generate GT compute unit (%s)",
+        "detail"        : "Value not supported. See user guide",
+        "resolution"    : "Provide a valid settings",
+        "state"         : "used"
+    },
+
+    {
+        "id"            : "GEN_BUILD_XCLBIN_SH-1",
+        "severity"      : "INFO",
+        "msg"           : "Starting generation of bash script to be executed to generate xclbin: <file name>",
+        "msg_edit"      : "Starting generation of bash script to be executed to generate xclbin: %s",
+        "detail"        : "Initial message displayed at the beginning of the generation of bash script",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_BUILD_XCLBIN_SH-2",
+        "severity"      : "ERROR",
+        "msg"           : "Kernel XO file does not exist: <file name>",
+        "msg_edit"      : "Kernel XO file does not exist: %s",
+        "detail"        : "Unable to find kernel XO file to be set as Vitis input for the xclbin generation",
+        "resolution"    : "Check if this file has not been moved",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_BUILD_XCLBIN_SH-3",
+        "severity"      : "INFO",
+        "msg"           : "Compute unit <CU name> interface <interface name> connectivity: {<SP tag>}",
+        "msg_edit"      : "Compute unit %s interface %s connectivity: {%s}",
+        "detail"        : "Report the connectivity of an interface of the compute unit instance",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_BUILD_XCLBIN_SH-4",
+        "severity"      : "INFO",
+        "msg"           : "Compute unit <CU name> SLR assignment: {<SLR>}",
+        "msg_edit"      : "Compute unit %s SLR assignment: {%s}",
+        "detail"        : "Report the SLR assignment of the compute unit instance",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_BUILD_XCLBIN_SH-5",
+        "severity"      : "INFO",
+        "msg"           : "Using Vitis INI options file specified in the user parameters: <file name>",
+        "msg_edit"      : "Using Vitis INI options file specified in the user parameters: %s",
+        "detail"        : "Report the Vitis INI options file name used. This file may overwrite options specified in Vitis INI options file generated by xbtest as it is sourced by Vitis at last",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_BUILD_XCLBIN_SH-6",
+        "severity"      : "INFO",
+        "msg"           : "Checking Vitis INI options file: <file name>",
+        "msg_edit"      : "Checking Vitis INI options file: %s",
+        "detail"        : "Some of the parameters in the provided Vitis INI options file are checked",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_BUILD_XCLBIN_SH-7",
+        "severity"      : "ERROR",
+        "msg"           : "The connectivity of compute unit interface <interface name> should not be set in the Vitis INI options file provided",
+        "msg_edit"      : "The connectivity of compute unit interface %s should not be set in the Vitis INI options file provided",
+        "detail"        : "The connectivity of compute unit interface <interface name> is already set in the generated Vitis INI options file",
+        "resolution"    : "Remove its connectivity from the provided Vitis INI options file",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_BUILD_XCLBIN_SH-8",
+        "severity"      : "INFO",
+        "msg"           : "After executing the bash script to generate xclbin, the xclbin file will be found here: <file name>",
+        "msg_edit"      : "After executing the bash script to generate xclbin, the xclbin file will be found here: %s",
+        "detail"        : "The xclbin is generated by Vitis, and the file name is set by xclbinutil while setting the USER_METADATA section",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_BUILD_XCLBIN_SH-9",
+        "severity"      : "CRITICAL WARNING",
+        "msg"           : "obsolete",
+        "msg_edit"      : "",
+        "detail"        : "obsolete",
+        "resolution"    : "obsolete",
+        "state"         : "obsolete"
+    },
+    {
+        "id"            : "GEN_BUILD_XCLBIN_SH-10",
+        "severity"      : "INFO",
+        "msg"           : "Writing file: <file name>",
+        "msg_edit"      : "Writing file: %s",
+        "detail"        : "The necessary files to build the xclbin are generated",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_BUILD_XCLBIN_SH-11",
+        "severity"      : "WARNING",
+        "msg"           : "Compute unit <CU name> interface <interface name> is NOT connected: {<SP tag>}",
+        "msg_edit"      : "Compute unit %s interface %s is NOT connected: {%s}",
+        "detail"        : "Report the connectivity of an interface of the compute unit instance",
+        "resolution"    : "Make sure that not having PLRAM connection is intentional",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_BUILD_XCLBIN_SH-12",
+        "severity"      : "INFO",
+        "msg"           : "Step: <free form message>",
+        "msg_edit"      : "Step: %s",
+        "detail"        : "Used to display intermediate message",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_BUILD_XCLBIN_SH-13",
+        "severity"      : "ERROR",
+        "msg"           : "Reference to TCL hook <hook> not found in the Vitis INI options file provided",
+        "msg_edit"      : "Reference to TCL hook %s not found in the Vitis INI options file provided",
+        "detail"        : "A mandtory TCL hook must be provided in Vitis option directory and it must be referenced in Vitis INI options file",
+        "resolution"    : "Add reference to this TCL hook in your Vitis INI options file",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_BUILD_XCLBIN_SH-14",
+        "severity"      : "CRITICAL WARNING",
+        "msg"           : "No master power CU found for connection to slave power CU",
+        "msg_edit"      : "",
+        "detail"        : "The wizard found some slave power CU but no power CU was configured as master. The slave power CU will not be able to consume power",
+        "resolution"    : "One power CU throttle_mode should be INTERNAL_CLK or INTERNAL_MACRO",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_BUILD_XCLBIN_SH-15",
+        "severity"      : "CRITICAL WARNING",
+        "msg"           : "Throttle mode were mixed. Found slave power CU <slave_inst> (<slave_mode>) mixed with master power CU <master_inst> (<master_mode>)",
+        "msg_edit"      : "Throttle mode were mixed. Found slave power CU %s (%s) mixed with master power CU %s (%s)",
+        "detail"        : "Destination power CU throttle_mode is set to EXTERNAL_CLK or EXTERNAL_MACRO, while the source power CU throttle mode must be respectively set to INTERNAL_CLK or INTERNAL_MACRO",
+        "resolution"    : "Use the same kind of throttling for all master/slave power CU (CLK or MACRO)",
+        "state"         : "used"
+    },
+
+
+    {
+        "id"            : "GEN_COMPILE_PS_KERNEL_SH-1",
+        "severity"      : "INFO",
+        "msg"           : "Starting generation of bash script to compile PS kernels: <file name>",
+        "msg_edit"      : "Starting generation of bash script to compile PS kernels: %s",
+        "detail"        : "Initial message displayed at the beginning of the generation of bash script",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_COMPILE_PS_KERNEL_SH-2",
+        "severity"      : "INFO",
+        "msg"           : "No PS kernel to be added to xclbin",
+        "msg_edit"      : "",
+        "detail"        : "PS kernel not applicable based on xclbin configuration",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_COMPILE_PS_KERNEL_SH-3",
+        "severity"      : "INFO",
+        "msg"           : "After executing the bash script to compile PS kernels, the PS kernels shared libraries <cu name> will be found here: <file name>",
+        "msg_edit"      : "After executing the bash script to compile PS kernels, the PS kernels shared libraries %s will be found here: %s",
+        "detail"        : "The bash script to compile PS kernels is run after Vitis. PS kernels can be added to xclbin after this script is run",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_COMPILE_PS_KERNEL_SH-4",
+        "severity"      : "INFO",
+        "msg"           : "Writing file: <file name>",
+        "msg_edit"      : "Writing file: %s",
+        "detail"        : "The necessary files to compile the PS kernels are generated",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+
+    {
+        "id"            : "GEN_PRE_CANNED-1",
+        "severity"      : "INFO",
+        "msg"           : "Starting generation of pre-canned test JSON files",
+        "msg_edit"      : "Starting generation of pre-canned test JSON files",
+        "detail"        : "Initial message displayed at the beginning of the generation of pre-canned test",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_PRE_CANNED-2",
+        "severity"      : "INFO",
+        "msg"           : "Generating <name> pre-canned test: <file>",
+        "msg_edit"      : "Generating %s pre-canned test: %s",
+        "detail"        : "Starting the generation of a pre-canned test",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_PRE_CANNED-3",
+        "severity"      : "INFO",
+        "msg"           : "Pre-canned <name> not applicable: <reason>",
+        "msg_edit"      : "Pre-canned %s not applicable: %s",
+        "detail"        : "Pre-canned test is not generated based on xclbin configuration",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+
+    {
+        "id"            : "GEN_XBTEST_PFM_DEF-1",
+        "severity"      : "INFO",
+        "msg"           : "Starting generation of platform definition JSON file: <file>",
+        "msg_edit"      : "Starting generation of platform definition JSON file: %s",
+        "detail"        : "Initial message displayed at the beginning of the generation of pre-canned test",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+
+    {
+        "id"            : "DISPLAY_PWR_FP-1",
+        "severity"      : "INFO",
+        "msg"           : "Starting generation of power floorplan and project that can be used to display them",
+        "msg_edit"      : "",
+        "detail"        : "A Vivado project is created and can be opened to display the sites used in the power floorplan",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "DISPLAY_PWR_FP-2",
+        "severity"      : "INFO",
+        "msg"           : "Successfully generated power floorplan and its display project is available",
+        "msg_edit"      : "",
+        "detail"        : "The Vivado project that can be used to display the sites used in the power floorplan is available",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "DISPLAY_PWR_FP-3",
+        "severity"      : "INFO",
+        "msg"           : "Creating Vivado project <project name> with part <FPGA part> in the target directory: <project directory>",
+        "msg_edit"      : "Creating Vivado project %s with part %s in the target directory: %s",
+        "detail"        : "The Vivado project is created for the reported FPGA part",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "DISPLAY_PWR_FP-4",
+        "severity"      : "INFO",
+        "msg"           : "<Display power floorplan info>",
+        "msg_edit"      : "%s",
+        "detail"        : "This explains the commands to run to display power floorplan",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+
+
+    {
+        "id"            : "ELABORATE_XBTEST-1",
+        "severity"      : "INFO",
+        "msg"           : "Starting elaboration of compute unit: <CU name>",
+        "msg_edit"      : "Starting elaboration of compute unit: %s",
+        "detail"        : "Initial message displayed at the beginning of the elaboration phase of a compute unit",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "ELABORATE_XBTEST-2",
+        "severity"      : "INFO",
+        "msg"           : "User parameter <user_parameter> of <CU name> compute unit is set to: {<value>}",
+        "msg_edit"      : "User parameter %s of %s compute unit is set to: {%s}",
+        "detail"        : "Report the value of a user parameter set for a compute unit",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "ELABORATE_XBTEST-3",
+        "severity"      : "INFO",
+        "msg"           : "Creating <sub-core name> sub-core <sub-core VLNV> of <CU name> compute unit",
+        "msg_edit"      : "Creating %s sub-core %s of %s compute unit",
+        "detail"        : "Starting creation and configuration of a sub-core of a compute unit",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "ELABORATE_XBTEST-4",
+        "severity"      : "INFO",
+        "msg"           : "Successfully created <sub-core name> sub-core <sub-core VLNV> of <CU name> compute unit",
+        "msg_edit"      : "Successfully created %s sub-core %s of %s compute unit",
+        "detail"        : "End of creation and configuration of a sub-core of a compute unit",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "ELABORATE_XBTEST-5",
+        "severity"      : "INFO",
+        "msg"           : "Setting the properties of <sub-core name> sub-core <sub-core VLNV> of <CU name> compute unit to: {<properties>}",
+        "msg_edit"      : "Setting the properties of %s sub-core %s of %s compute unit to: {%s}",
+        "detail"        : "Report the properties of a sub-core of a compute unit",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "ELABORATE_XBTEST-6",
+        "severity"      : "ERROR",
+        "msg"           : "User parameter not defined to set property of <sub-core name> sub-core <sub-core VLNV> of <CU name> compute unit: <user_parameter>",
+        "msg_edit"      : "User parameter not defined to set property of %s sub-core %s of %s compute unit: %s",
+        "detail"        : "A required user parameter is not defined. See user guide",
+        "resolution"    : "Check the user_parameters of xbtest_wizard",
+        "state"         : "used"
+    },
+    {
+        "id"            : "ELABORATE_XBTEST-7",
+        "severity"      : "INFO",
+        "msg"           : "Finished elaboration of compute unit: <CU name>",
+        "msg_edit"      : "Finished elaboration of compute unit: %s",
+        "detail"        : "Message displayed at the end of the elaboration phase of a compute unit",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "ELABORATE_XBTEST-8",
+        "severity"      : "INFO",
+        "msg"           : "<CU Name>: elaborate IP <IP>, version <Version>",
+        "msg_edit"      : "%s: elaborate IP %s, version %s",
+        "detail"        : "Report the IP and its version used during elaboration of the compute unit",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "ELABORATE_XBTEST-9",
+        "severity"      : "ERROR",
+        "msg"           : "<CU Name>: <IP>, version not >= min and < max. Cannot elaborate compute unit",
+        "msg_edit"      : "%s: %s, version not >= %s and < %s. Cannot elaborate compute unit",
+        "detail"        : "The version of the IP is not recent enough and not compatible with CU. See user guide",
+        "resolution"    : "Use recommended version of the IP, check Vivado version associated with this CU",
+        "state"         : "used"
+    },
+
+    {
+        "id"            : "GEN_POWER_FLOORPLAN-1",
+        "severity"      : "INFO",
+        "msg"           : "Starting generation of power floorplan for SLR: {<SLR>}",
+        "msg_edit"      : "Starting generation of power floorplan for SLR: {%s}",
+        "detail"        : "Initial message displayed at the beginning of the generation of power floorplan of a compute unit",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_POWER_FLOORPLAN-2",
+        "severity"      : "ERROR",
+        "msg"           : "<SLR> not defined in platform dynamic region geometry. Valid SLRs are: <SLR list>)",
+        "msg_edit"      : "%s not defined in platform dynamic region geometry. Valid SLRs are: %s",
+        "detail"        : "The SLR provided is not defined in platform dynamic region geometry (dynamic_geometry.json)",
+        "resolution"    : "Check dynamic_geometry.json or try to re-generate it (see user guide)",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_POWER_FLOORPLAN-3",
+        "severity"      : "INFO",
+        "msg"           : "Checking input: {<parameter name>}",
+        "msg_edit"      : "Checking input: {%s}",
+        "detail"        : "The inputs of the power floorplan generation are checked before the generation starts",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_POWER_FLOORPLAN-4",
+        "severity"      : "INFO",
+        "msg"           : "Starting generation of the list of sites defining the power floorplan",
+        "msg_edit"      : "",
+        "detail"        : "The list of actual sites present in  the power floorplan is generated base on the inputs provided",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_POWER_FLOORPLAN-5",
+        "severity"      : "INFO",
+        "msg"           : "Generating the physical constraints (LOC, timing) for each site in the power floorplan",
+        "msg_edit"      : "",
+        "detail"        : "For each site, placement constraints are used. Timing constraints are also set for some",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_POWER_FLOORPLAN-6",
+        "severity"      : "INFO",
+        "msg"           : "Generating SV package containing the number of sites to be instantiated",
+        "msg_edit"      : "",
+        "detail"        : "This will configure the number of sites to be synthesized",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_POWER_FLOORPLAN-7",
+        "severity"      : "INFO",
+        "msg"           : "Power floorplan successfully generated",
+        "msg_edit"      : "",
+        "detail"        : "The power floorplan was successfully generated",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_POWER_FLOORPLAN-8",
+        "severity"      : "ERROR",
+        "msg"           : "Failed to generate power floorplan",
+        "msg_edit"      : "",
+        "detail"        : "The power floorplan was not generated",
+        "resolution"    : "Check the errors displayed before",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_POWER_FLOORPLAN-9",
+        "severity"      : "INFO",
+        "msg"           : "obsolete",
+        "msg_edit"      : "",
+        "detail"        : "obsolete",
+        "resolution"    : "",
+        "state"         : "obsolete"
+    },
+    {
+        "id"            : "GEN_POWER_FLOORPLAN-10",
+        "severity"      : "ERROR",
+        "msg"           : "Incorrect definition of PL_INVALID: <error>",
+        "msg_edit"      : "Incorrect definition of PL_INVALID: %s",
+        "detail"        : "The definition of PL_INVALID in power floorplan input file invalid.json is incorrect",
+        "resolution"    : "Check the value of PL_INVALID",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_POWER_FLOORPLAN-11",
+        "severity"      : "ERROR",
+        "msg"           : "Incorrect definition of PL_UTILIZATION: <error>",
+        "msg_edit"      : "Incorrect definition of PL_UTILIZATION: %s",
+        "detail"        : "The definition of PL_UTILIZATION in power floorplan input file utilization.json is incorrect",
+        "resolution"    : "Check the value of PL_UTILIZATION",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_POWER_FLOORPLAN-12",
+        "severity"      : "INFO",
+        "msg"           : "Processing for site type: <site_type>",
+        "msg_edit"      : "Processing for site type: %s",
+        "detail"        : "Generation starts for a site type of the list of sites defining the power floorplan",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_POWER_FLOORPLAN-13",
+        "severity"      : "INFO",
+        "msg"           : "Processing for SLR: <SLR>",
+        "msg_edit"      : "Processing for SLR: %s",
+        "detail"        : "Generation starts for a SLR of the list of sites defining the power floorplan",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_POWER_FLOORPLAN-14",
+        "severity"      : "INFO",
+        "msg"           : "Saving physical constraints for site type <site type> in: <file name>",
+        "msg_edit"      : "Saving physical constraints for site type %s in: %s",
+        "detail"        : "The physical constraints are saved into a file for debug. These constraints are also output in a XDC file to be used during the implementation",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_POWER_FLOORPLAN-15",
+        "severity"      : "INFO",
+        "msg"           : "Saving number of sites for SLR <SLR> in: <file name>",
+        "msg_edit"      : "Saving number of sites for SLR %s in: %s",
+        "detail"        : "The physical constraints are saved into a file for debug. These parameters are also output in a SV file to be used during the synthesis",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_POWER_FLOORPLAN-16",
+        "severity"      : "ERROR",
+        "msg"           : "Invalid argument for report_utilization command option <option>: <argument>",
+        "msg_edit"      : "Invalid argument for report_utilization command option %s: %s",
+        "detail"        : "The provided argument is not correct",
+        "resolution"    : "For more info, try the command: report_utilization help",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_POWER_FLOORPLAN-17",
+        "severity"      : "ERROR",
+        "msg"           : "Invalid argument for display_pwr_fp command option <option>: <argument>",
+        "msg_edit"      : "Invalid argument for display_pwr_fp command option %s: %s",
+        "detail"        : "The provided argument is not correct",
+        "resolution"    : "For more info, try the command: display_pwr_fp help",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_POWER_FLOORPLAN-18",
+        "severity"      : "INFO",
+        "msg"           : "<statistics>",
+        "msg_edit"      : "%s",
+        "detail"        : "Report statistics of the power kernel floorplan (utilization, power estimation)",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_POWER_FLOORPLAN-19",
+        "severity"      : "INFO",
+        "msg"           : "Power floorplan input <parameter name> set to: {<parameter value>}",
+        "msg_edit"      : "Power floorplan input %s set to: {%s}",
+        "detail"        : "Report input of the power kernel floorplan generation",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_POWER_FLOORPLAN-20",
+        "severity"      : "INFO",
+        "msg"           : "Starting generation of power floorplan for <target SV or XDC>",
+        "msg_edit"      : "Starting generation of power floorplan for %s",
+        "detail"        : "Initial message displayed at the beginning of the generation of power floorplan of a compute unit for SV parameter or XDC in TTCL",
+        "resolution"    : "",
+        "state"         : "used"
+    },
+    {
+        "id"            : "GEN_POWER_FLOORPLAN-21",
+        "severity"      : "WARNING",
+        "msg"           : "No <site type> found in dynamic_geometry.json for SLR: <SLR>",
+        "msg_edit"      : "No %s found in dynamic_geometry.json for SLR: %s",
+        "detail"        : "The generation will continue for other sites",
+        "resolution"    : "If this is not expected, check dynamic_geometry.json or try to re-generate it (see user guide)",
+        "state"         : "used"
+    }
+]

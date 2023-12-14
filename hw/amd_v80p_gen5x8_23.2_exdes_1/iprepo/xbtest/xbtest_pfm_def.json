@@ -1,0 +1,90 @@
+{
+    "device": {
+        "runtime": {
+            "download_time": 16
+        },
+        "sensor": {
+            "0": {
+                "type": "electrical",
+                "id": "12V_AUX1"
+            },
+            "1": {
+                "type": "electrical",
+                "id": "12V_AUX2"
+            }
+        },
+        "memory": {
+            "0": {
+                "name": "HBM",
+                "cu_bw": {
+                    "simul_wr_rd": {
+                        "write": {
+                            "high": 5322,
+                            "low": 3548
+                        },
+                        "read": {
+                            "high": 5322,
+                            "low": 3548
+                        }
+                    },
+                    "only_rd": {
+                        "read": {
+                            "high": 13154,
+                            "low": 8769
+                        }
+                    },
+                    "only_wr": {
+                        "write": {
+                            "high": 14320,
+                            "low": 9547
+                        }
+                    }
+                },
+                "cu_latency": {
+                    "simul_wr_rd": {
+                        "write": {
+                            "high": 293,
+                            "low": 155
+                        },
+                        "read": {
+                            "high": 3499,
+                            "low": 1859
+                        }
+                    },
+                    "only_rd": {
+                        "read": {
+                            "high": 1390,
+                            "low": 727
+                        }
+                    },
+                    "only_wr": {
+                        "write": {
+                            "high": 120,
+                            "low": 53
+                        }
+                    }
+                },
+                "cu_outstanding": {
+                    "simul_wr_rd": {
+                        "write": {
+                            "nominal": 4
+                        },
+                        "read": {
+                            "nominal": 4
+                        }
+                    },
+                    "only_rd": {
+                        "read": {
+                            "nominal": 4
+                        }
+                    },
+                    "only_wr": {
+                        "write": {
+                            "nominal": 4
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

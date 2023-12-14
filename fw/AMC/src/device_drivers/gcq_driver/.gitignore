@@ -1,0 +1,10 @@
+build/
+
+*.tmp
+*.swp
+*.swo
+*.o
+*.cmd
+
+*version.h
+*version.json
