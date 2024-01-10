@@ -4,16 +4,13 @@
 *.swp
 *.swo
 *.elf
-
+*.d
 
 #includes specifics for perforce + any other non public
 output/
 
 # VS Code settings
 .vscode/
-
-# Build output (cmake, binary files, etc...)
-#build/
 
 #Deploy folder - pending discussion
 #deploy/
@@ -34,6 +31,7 @@ CMocka/
 componentTest/
 **/AMC/src/test/
 **/AMI/test/
+**/AMI/api/build/
 
 # Generated BSP
 amc_bsp/
