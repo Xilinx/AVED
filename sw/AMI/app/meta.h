@@ -42,11 +42,12 @@ int print_pcieinfo(ami_device *dev, struct app_option *options);
 /**
  * print_fpt_info() - Print FPT-related info.
  * @dev: Device handle.
+ * @boot_device: Target boot device.
  * @options: List of command line options.
  * 
  * Return: EXIT_SUCCESS or EXIT_FAILURE.
  */
-int print_fpt_info(ami_device *dev, struct app_option *options);
+int print_fpt_info(ami_device *dev, uint8_t boot_device, struct app_option *options);
 
 /**
  * print_mfg_info() - Print Manufacturing Information.

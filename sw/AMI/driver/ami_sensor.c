@@ -17,26 +17,26 @@
 
 
 static struct sensor_status_name_map_t sensor_status_name_map[] = {
-	{ SENSOR_NOT_PRESENT,          SENSOR_STATUS_NAME_NOT_PRESENT },
-	{ SENSOR_PRESENT_AND_VALID,    SENSOR_STATUS_NAME_PRESENT     },
-	{ DATA_NOT_AVAILABLE,          SENSOR_STATUS_NAME_UNAVAIL     },
-	{ SENSOR_STATUS_NOT_AVAILABLE, SENSOR_STATUS_NAME_NA          },
+	{ SENSOR_NOT_PRESENT,	       SENSOR_STATUS_NAME_NOT_PRESENT	       },
+	{ SENSOR_PRESENT_AND_VALID,    SENSOR_STATUS_NAME_PRESENT	       },
+	{ DATA_NOT_AVAILABLE,	       SENSOR_STATUS_NAME_UNAVAIL	       },
+	{ SENSOR_STATUS_NOT_AVAILABLE, SENSOR_STATUS_NAME_NA		       },
 };
 
 char *convert_sensor_status_name_map(int status)
 {
 	int i = 0;
-	for (i = 0; i < ARRAY_SIZE(sensor_status_name_map); i++) {
+
+	for (i = 0; i < ARRAY_SIZE(sensor_status_name_map); i++)
 		if (sensor_status_name_map[i].status == status)
 			return sensor_status_name_map[i].name;
-	}
 	return "";
 }
 
 /**
  * sdr_repo_type_to_str() - Get the human readable name of an SDR type.
  * @sdr: The SDR repo type.
- * 
+ *
  * Return: Human readable string (empty if type unknown).
  */
 const char *sdr_repo_type_to_str(enum gcq_sdr_repo_type sdr)
@@ -47,16 +47,16 @@ const char *sdr_repo_type_to_str(enum gcq_sdr_repo_type sdr)
 
 	case SDR_TYPE_BDINFO:
 		return "board info";
-	
+
 	case SDR_TYPE_TEMP:
 		return "temperature";
-	
+
 	case SDR_TYPE_VOLTAGE:
 		return "voltage";
-	
+
 	case SDR_TYPE_CURRENT:
 		return "current";
-	
+
 	case SDR_TYPE_POWER:
 		return "power";
 
@@ -73,12 +73,12 @@ const char *sdr_repo_type_to_str(enum gcq_sdr_repo_type sdr)
 /**
  * get_flags_for_repo() - Get the appropriate command flags for a repo type.
  * @repo_type: The repo type (SID).
- * 
+ *
  * This function is to be used when a GCQ/AMC command can take various
  * forms depending on the repo type. This means we can have a single
  * command (e.g. GET_SDR) and set the appropriate flag for the repo type,
  * rather than having many commands (GET_SDR_TEMP, GET_SDR_POWER, etc.).
- * 
+ *
  * Return: The relevant command flag or 0.
  */
 enum gcq_submit_cmd_req get_flags_for_repo(enum gcq_sdr_repo_type repo_type)
@@ -89,19 +89,19 @@ enum gcq_submit_cmd_req get_flags_for_repo(enum gcq_sdr_repo_type repo_type)
 	case SDR_TYPE_BDINFO:
 		ret = GCQ_CMD_FLAG_REPO_TYPE_BD_INFO;
 		break;
-	
+
 	case SDR_TYPE_TEMP:
 		ret = GCQ_CMD_FLAG_REPO_TYPE_TEMP;
 		break;
-	
+
 	case SDR_TYPE_VOLTAGE:
 		ret = GCQ_CMD_FLAG_REPO_TYPE_VOLTAGE;
 		break;
-	
+
 	case SDR_TYPE_CURRENT:
 		ret = GCQ_CMD_FLAG_REPO_TYPE_CURRENT;
 		break;
-	
+
 	case SDR_TYPE_POWER:
 		ret = GCQ_CMD_FLAG_REPO_TYPE_POWER;
 		break;
@@ -110,10 +110,10 @@ enum gcq_submit_cmd_req get_flags_for_repo(enum gcq_sdr_repo_type repo_type)
 		ret = GCQ_CMD_FLAG_REPO_TYPE_TOTAL_POWER;
 		break;
 
-        case SDR_TYPE_FPT:
+	case SDR_TYPE_FPT:
 		ret = GCQ_CMD_FLAG_REPO_TYPE_FPT;
 		break;
-	
+
 	default:
 		break;
 	}
@@ -126,11 +126,12 @@ enum gcq_submit_cmd_req get_flags_for_repo(enum gcq_sdr_repo_type repo_type)
  * @amc_ctrl_ctxt: Pointer to top level AMC struct.
  * @sdr_buf: Raw data buffer, including header.
  * @repo: Pointer to sdr_repo struct to be populated.
- * 
+ *
  * Return: 0 or negative error code.
  */
-int parse_sdr(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *sdr_buf,
-		struct sdr_repo *repo)  /* TODO: Test with board info SDR */
+int parse_sdr(struct amc_control_ctxt	*amc_ctrl_ctxt,
+	      uint8_t			*sdr_buf,
+	      struct sdr_repo		*repo) /* TODO: Test with board info SDR */
 {
 	int i = 0;
 	int ret = 0;
@@ -141,46 +142,90 @@ int parse_sdr(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *sdr_buf,
 		return -EINVAL;
 
 	/* Construct SDR header. */
-	repo->repo_type   = sdr_buf[buf_index++];
-	repo->repo_ver    = sdr_buf[buf_index++];
+	/* Note: Header packed to 5 bytes, 3 uint8_t, 1 uint16_t */
+	repo->repo_type = sdr_buf[buf_index++];
+	repo->repo_ver = sdr_buf[buf_index++];
 	repo->num_records = sdr_buf[buf_index++];
-	repo->size        = sdr_buf[buf_index++];
+	repo->size = sdr_buf[buf_index] | (sdr_buf[buf_index + 1] << 8);
+	buf_index += sizeof(uint16_t); /* Move past the two bytes read */
 
 	if (!repo->size)
 		return -EINVAL;
 
 	/* AMC may send empty SDR data with just the header and EoR. */
 	if (repo->num_records > 0) {
-		switch(repo->repo_type) {
+		switch (repo->repo_type) {
 		case SDR_TYPE_FPT:
-			repo->fpt.hdr.version = sdr_buf[buf_index++];
-			repo->fpt.hdr.header_size = sdr_buf[buf_index++];
-			repo->fpt.hdr.entry_size = sdr_buf[buf_index++];
-			repo->fpt.hdr.num_entries = sdr_buf[buf_index++];
-			repo->fpt.partition = devm_kzalloc(&(amc_ctrl_ctxt->pcie_dev->dev), repo->fpt.hdr.num_entries *
-				sizeof(struct fpt_partition), GFP_KERNEL);
+			/* Parse primary FPT */
+			repo->fpt.hdr_primary.version = sdr_buf[buf_index++];
+			repo->fpt.hdr_primary.header_size = sdr_buf[buf_index++];
+			repo->fpt.hdr_primary.entry_size = sdr_buf[buf_index++];
+			repo->fpt.hdr_primary.num_entries = sdr_buf[buf_index++];
 
-			for(i = 0; i < repo->fpt.hdr.num_entries; i++)
-			{
-				/* type */
-				memcpy(&repo->fpt.partition[i].type, &sdr_buf[buf_index],
-				sizeof(repo->fpt.partition[i].type));
-				buf_index += sizeof(repo->fpt.partition[i].type);
-				/* base address */
-				memcpy(&repo->fpt.partition[i].base_addr, &sdr_buf[buf_index],
-				sizeof(repo->fpt.partition[i].base_addr));
-				buf_index += sizeof(repo->fpt.partition[i].base_addr);
-				/* partition size */
-				memcpy(&repo->fpt.partition[i].partition_size, &sdr_buf[buf_index],
-				sizeof(repo->fpt.partition[i].partition_size));
-				buf_index += sizeof(repo->fpt.partition[i].partition_size);
+			if (0 < repo->fpt.hdr_primary.num_entries) {
+				repo->fpt.partition_primary = devm_kzalloc(&(amc_ctrl_ctxt->pcie_dev->dev),
+									   repo->fpt.hdr_primary.num_entries *
+									   sizeof(struct fpt_partition),
+									   GFP_KERNEL);
+
+				for (i = 0; i < repo->fpt.hdr_primary.num_entries; i++) {
+					/* type */
+					memcpy(&repo->fpt.partition_primary[i].type,
+					       &sdr_buf[buf_index],
+					       sizeof(repo->fpt.partition_primary[i].type));
+					buf_index += sizeof(repo->fpt.partition_primary[i].type);
+					/* base address */
+					memcpy(&repo->fpt.partition_primary[i].base_addr,
+					       &sdr_buf[buf_index],
+					       sizeof(repo->fpt.partition_primary[i].base_addr));
+					buf_index += sizeof(repo->fpt.partition_primary[i].base_addr);
+					/* partition size */
+					memcpy(&repo->fpt.partition_primary[i].partition_size,
+					       &sdr_buf[buf_index],
+					       sizeof(repo->fpt.partition_primary[i].partition_size));
+					buf_index += sizeof(repo->fpt.partition_primary[i].partition_size);
+				}
 			}
+
+			/* Parse secondary FPT */
+			repo->fpt.hdr_secondary.version = sdr_buf[buf_index++];
+			repo->fpt.hdr_secondary.header_size = sdr_buf[buf_index++];
+			repo->fpt.hdr_secondary.entry_size = sdr_buf[buf_index++];
+			repo->fpt.hdr_secondary.num_entries = sdr_buf[buf_index++];
+
+			if (0 < repo->fpt.hdr_secondary.num_entries) {
+				repo->fpt.partition_secondary = devm_kzalloc(&(amc_ctrl_ctxt->pcie_dev->dev),
+									     repo->fpt.hdr_secondary.num_entries *
+									     sizeof(struct fpt_partition),
+									     GFP_KERNEL);
+
+				for (i = 0; i < repo->fpt.hdr_secondary.num_entries; i++) {
+					/* type */
+					memcpy(&repo->fpt.partition_secondary[i].type,
+					       &sdr_buf[buf_index],
+					       sizeof(repo->fpt.partition_secondary[i].type));
+					buf_index += sizeof(repo->fpt.partition_secondary[i].type);
+					/* base address */
+					memcpy(&repo->fpt.partition_secondary[i].base_addr,
+					       &sdr_buf[buf_index],
+					       sizeof(repo->fpt.partition_secondary[i].base_addr));
+					buf_index += sizeof(repo->fpt.partition_secondary[i].base_addr);
+					/* partition size */
+					memcpy(&repo->fpt.partition_secondary[i].partition_size,
+					       &sdr_buf[buf_index],
+					       sizeof(repo->fpt.partition_secondary[i].partition_size));
+					buf_index += sizeof(repo->fpt.partition_secondary[i].partition_size);
+				}
+			}
+
 			break;
 
 		case SDR_TYPE_BDINFO:
 		{
-			repo->bd_info = devm_kzalloc(&(amc_ctrl_ctxt->pcie_dev->dev), repo->num_records *
-				sizeof(struct bd_info_record), GFP_KERNEL);
+			repo->bd_info = devm_kzalloc(&(amc_ctrl_ctxt->pcie_dev->dev),
+						     repo->num_records *
+						     sizeof(struct bd_info_record),
+						     GFP_KERNEL);
 
 			if (!repo->bd_info)
 				return -ENOMEM;
@@ -188,13 +233,17 @@ int parse_sdr(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *sdr_buf,
 			/* eeprom version */
 			repo->bd_info->eeprom_version.type = sdr_buf[buf_index++];
 			repo->bd_info->eeprom_version.len = sdr_buf[buf_index++];
-			memcpy(&repo->bd_info->eeprom_version.bytes, &sdr_buf[buf_index], repo->bd_info->eeprom_version.len);
+			memcpy(&repo->bd_info->eeprom_version.bytes,
+			       &sdr_buf[buf_index],
+			       repo->bd_info->eeprom_version.len);
 			buf_index += repo->bd_info->eeprom_version.len;
 
 			/* product name */
 			repo->bd_info->product_name.type = sdr_buf[buf_index++];
 			repo->bd_info->product_name.len = sdr_buf[buf_index++];
-			memcpy(&repo->bd_info->product_name.bytes, &sdr_buf[buf_index], repo->bd_info->product_name.len);
+			memcpy(&repo->bd_info->product_name.bytes,
+			       &sdr_buf[buf_index],
+			       repo->bd_info->product_name.len);
 			buf_index += repo->bd_info->product_name.len;
 
 			/* board revsion */
@@ -206,25 +255,33 @@ int parse_sdr(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *sdr_buf,
 			/* board serial */
 			repo->bd_info->board_serial.type = sdr_buf[buf_index++];
 			repo->bd_info->board_serial.len = sdr_buf[buf_index++];
-			memcpy(&repo->bd_info->board_serial.bytes, &sdr_buf[buf_index], repo->bd_info->board_serial.len);
+			memcpy(&repo->bd_info->board_serial.bytes,
+			       &sdr_buf[buf_index],
+			       repo->bd_info->board_serial.len);
 			buf_index += repo->bd_info->board_serial.len;
 
 			/* mac address count */
 			repo->bd_info->mac_addr_count.type = sdr_buf[buf_index++];
 			repo->bd_info->mac_addr_count.len = sdr_buf[buf_index++];
-			memcpy(&repo->bd_info->mac_addr_count.bytes, &sdr_buf[buf_index], repo->bd_info->mac_addr_count.len);
+			memcpy(&repo->bd_info->mac_addr_count.bytes,
+			       &sdr_buf[buf_index],
+			       repo->bd_info->mac_addr_count.len);
 			buf_index += repo->bd_info->mac_addr_count.len;
 
 			/* first mac address */
 			repo->bd_info->first_mac_addr.type = sdr_buf[buf_index++];
 			repo->bd_info->first_mac_addr.len = sdr_buf[buf_index++];
-			memcpy(&repo->bd_info->first_mac_addr.bytes, &sdr_buf[buf_index], repo->bd_info->first_mac_addr.len);
+			memcpy(&repo->bd_info->first_mac_addr.bytes,
+			       &sdr_buf[buf_index],
+			       repo->bd_info->first_mac_addr.len);
 			buf_index += repo->bd_info->first_mac_addr.len;
 
 			/* active state */
 			repo->bd_info->active_state.type = sdr_buf[buf_index++];
 			repo->bd_info->active_state.len = sdr_buf[buf_index++];
-			memcpy(&repo->bd_info->active_state.bytes, &sdr_buf[buf_index], repo->bd_info->active_state.len);
+			memcpy(&repo->bd_info->active_state.bytes,
+			       &sdr_buf[buf_index],
+			       repo->bd_info->active_state.len);
 			buf_index += repo->bd_info->active_state.len;
 
 			/* config mode */
@@ -236,7 +293,9 @@ int parse_sdr(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *sdr_buf,
 			/* manufacturing date */
 			repo->bd_info->manufacturing_date.type = sdr_buf[buf_index++];
 			repo->bd_info->manufacturing_date.len = sdr_buf[buf_index++];
-			memcpy(&repo->bd_info->manufacturing_date.bytes, &sdr_buf[buf_index], repo->bd_info->manufacturing_date.len);
+			memcpy(&repo->bd_info->manufacturing_date.bytes,
+			       &sdr_buf[buf_index],
+			       repo->bd_info->manufacturing_date.len);
 			buf_index += repo->bd_info->manufacturing_date.len;
 
 			/* part number */
@@ -262,13 +321,11 @@ int parse_sdr(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *sdr_buf,
 			repo->bd_info->power_mode.len = sdr_buf[buf_index++];
 			memcpy(&repo->bd_info->power_mode.bytes, &sdr_buf[buf_index], repo->bd_info->power_mode.len);
 			/*
-			* default power value of zero (75W) overridden when length of data
-			* is zero so that app can display 'N/A'
-			*/
-			if(repo->bd_info->power_mode.len == 0)
-			{
-				repo->bd_info->power_mode.bytes[ 0 ] = DEFAULT_BDINFO_POWER;
-			}
+			 * default power value of zero (75W) overridden when length of data
+			 * is zero so that app can display 'N/A'
+			 */
+			if (repo->bd_info->power_mode.len == 0)
+				repo->bd_info->power_mode.bytes[0] = DEFAULT_BDINFO_POWER;
 			buf_index += repo->bd_info->power_mode.len;
 
 			/* memory size */
@@ -292,7 +349,9 @@ int parse_sdr(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *sdr_buf,
 			/* mfg part number */
 			repo->bd_info->mfg_part_number.type = sdr_buf[buf_index++];
 			repo->bd_info->mfg_part_number.len = sdr_buf[buf_index++];
-			memcpy(&repo->bd_info->mfg_part_number.bytes, &sdr_buf[buf_index], repo->bd_info->mfg_part_number.len);
+			memcpy(&repo->bd_info->mfg_part_number.bytes,
+			       &sdr_buf[buf_index],
+			       repo->bd_info->mfg_part_number.len);
 			buf_index += repo->bd_info->mfg_part_number.len;
 			break;
 		}
@@ -303,8 +362,10 @@ int parse_sdr(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *sdr_buf,
 		case SDR_TYPE_POWER:
 		case SDR_TYPE_TOTAL_POWER:
 			/* Parse records. */
-			repo->records = devm_kzalloc(&(amc_ctrl_ctxt->pcie_dev->dev), repo->num_records *
-				sizeof(struct sdr_record), GFP_KERNEL);
+			repo->records = devm_kzalloc(&(amc_ctrl_ctxt->pcie_dev->dev),
+						     repo->num_records *
+						     sizeof(struct sdr_record),
+						     GFP_KERNEL);
 
 			if (!repo->records)
 				return -ENOMEM;
@@ -397,15 +458,15 @@ int parse_sdr(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *sdr_buf,
 	} else {
 		ret = -ENODATA;
 		AMI_WARN(amc_ctrl_ctxt,
-			"Received empty data for %s (SDR type %d)",
-			sdr_repo_type_to_str(repo->repo_type),
-			repo->repo_type
+			 "Received empty data for %s (SDR type %d)",
+			 sdr_repo_type_to_str(repo->repo_type),
+			 repo->repo_type
 		);
 	}
 
 	/* Verify End of Repo (EoR) */
 	if (((sdr_buf[buf_index] << 16) | (sdr_buf[buf_index + 1] << 8) |
-			(sdr_buf[buf_index + 2])) != SDR_EOR)
+	     (sdr_buf[buf_index + 2])) != SDR_EOR)
 		return -EILSEQ;  /* Illegal byte sequence */
 
 	return ret;
@@ -422,11 +483,12 @@ int parse_sdr(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *sdr_buf,
  * @amc_ctrl_ctxt: The top level AMC struct instance.
  * @repo_type: The repo type.
  * @sdr_size: Pointer to a variable which will hold the returned size.
- * 
+ *
  * Return: 0 or negative error code.
  */
-int get_sdr_size(struct amc_control_ctxt *amc_ctrl_ctxt, enum gcq_sdr_repo_type repo_type,
-		uint16_t *sdr_size)
+int get_sdr_size(struct amc_control_ctxt	*amc_ctrl_ctxt,
+		 enum gcq_sdr_repo_type		repo_type,
+		 uint16_t			*sdr_size)
 {
 	int ret = 0;
 	char *sdr_raw_buf = NULL;
@@ -445,8 +507,11 @@ int get_sdr_size(struct amc_control_ctxt *amc_ctrl_ctxt, enum gcq_sdr_repo_type 
 		goto done;
 	}
 
-	ret = submit_gcq_command(amc_ctrl_ctxt, GCQ_SUBMIT_CMD_GET_SDR_SIZE,
-		get_flags_for_repo(repo_type), sdr_raw_buf, SDR_RESP_LEN);
+	ret = submit_gcq_command(amc_ctrl_ctxt,
+				 GCQ_SUBMIT_CMD_GET_SDR_SIZE,
+				 get_flags_for_repo(repo_type),
+				 sdr_raw_buf,
+				 SDR_RESP_LEN);
 
 	if (ret) {
 		AMI_ERR(amc_ctrl_ctxt, "Submit command failed");
@@ -464,8 +529,10 @@ int get_sdr_size(struct amc_control_ctxt *amc_ctrl_ctxt, enum gcq_sdr_repo_type 
 
 	rid = (uint8_t)sdr_raw_buf[buf_index];
 	if (rid != repo_type) {
-		AMI_ERR(amc_ctrl_ctxt, "Sensor response ID %d does not match sensor request ID %d",
-			rid, AMC_PROXY_CMD_SENSOR_REQUEST_GET_SIZE);
+		AMI_ERR(amc_ctrl_ctxt,
+			"Sensor response ID %d does not match sensor request ID %d",
+			rid,
+			AMC_PROXY_CMD_SENSOR_REQUEST_GET_SIZE);
 		ret = -EINVAL;
 		goto done;
 	}
@@ -477,12 +544,12 @@ int get_sdr_size(struct amc_control_ctxt *amc_ctrl_ctxt, enum gcq_sdr_repo_type 
 done:
 	if (sdr_raw_buf)
 		vfree(sdr_raw_buf);
-	
+
 	if (ret == SUCCESS)
 		AMI_VDBG(amc_ctrl_ctxt, "Successfully fetched SDR size");
 	else
 		AMI_ERR(amc_ctrl_ctxt, "Failed to fetch SDR size");
-	
+
 	return ret;
 }
 
@@ -491,11 +558,12 @@ done:
  * @amc_ctrl_ctxt: The top level AMC struct instance.
  * @repo_type: The repo type.
  * @repo: Pointer to sdr_repo struct which will hold the SDR records.
- * 
+ *
  * Return: 0 or negative error code.
  */
-int get_sdr(struct amc_control_ctxt *amc_ctrl_ctxt, enum gcq_sdr_repo_type repo_type,
-		struct sdr_repo *repo)
+int get_sdr(struct amc_control_ctxt	*amc_ctrl_ctxt,
+	    enum gcq_sdr_repo_type	repo_type,
+	    struct sdr_repo		*repo)
 {
 	int ret = 0;
 	int buf_index = 0;
@@ -516,8 +584,11 @@ int get_sdr(struct amc_control_ctxt *amc_ctrl_ctxt, enum gcq_sdr_repo_type repo_
 		goto done;
 	}
 
-	ret = submit_gcq_command(amc_ctrl_ctxt, GCQ_SUBMIT_CMD_GET_SDR,
-			get_flags_for_repo(repo_type), sdr_raw_buf, SDR_RESP_LEN);
+	ret = submit_gcq_command(amc_ctrl_ctxt,
+				 GCQ_SUBMIT_CMD_GET_SDR,
+				 get_flags_for_repo(repo_type),
+				 sdr_raw_buf,
+				 SDR_RESP_LEN);
 	if (ret) {
 		AMI_ERR(amc_ctrl_ctxt, "Submit command failed");
 		ret = -EIO;
@@ -535,8 +606,10 @@ int get_sdr(struct amc_control_ctxt *amc_ctrl_ctxt, enum gcq_sdr_repo_type repo_
 
 	rid = (uint8_t)sdr_raw_buf[buf_index];
 	if (rid != repo_type) {
-		AMI_ERR(amc_ctrl_ctxt, "Sensor response ID %d does not match sensor request ID %d",
-			rid, AMC_PROXY_CMD_SENSOR_REQUEST_GET_SIZE);
+		AMI_ERR(amc_ctrl_ctxt,
+			"Sensor response ID %d does not match sensor request ID %d",
+			rid,
+			AMC_PROXY_CMD_SENSOR_REQUEST_GET_SIZE);
 		ret = -EINVAL;
 		goto done;
 	}
@@ -548,12 +621,12 @@ int get_sdr(struct amc_control_ctxt *amc_ctrl_ctxt, enum gcq_sdr_repo_type repo_
 done:
 	if (sdr_raw_buf)
 		vfree(sdr_raw_buf);
-	
+
 	if (ret == SUCCESS)
-		AMI_VDBG(amc_ctrl_ctxt, "Successfully fetched SDR");
+		AMI_DBG(amc_ctrl_ctxt, "Successfully fetched SDR");
 	else
 		AMI_ERR(amc_ctrl_ctxt, "Failed to fetch SDR");
-	
+
 	return ret;
 }
 
@@ -602,21 +675,21 @@ static enum gcq_sdr_repo_type discovery_repos[NUM_SENSOR_REPOS] = {
 	SDR_TYPE_POWER,
 	SDR_TYPE_TOTAL_POWER,
 	SDR_TYPE_BDINFO,
-        SDR_TYPE_FPT,
+	SDR_TYPE_FPT,
 };
 
 /**
  * discover_sensors() - Get the SDR for all repo types.
  * @pf_dev: Pointer to PCI device data.
  * @empty_sdr_count: Pointer to empty SDR counter.
- * 
+ *
  * This function should be called once for every PCI device. It will
  * allocate the necessary memory to store the fetched sensor data
  * and populate it with sensor data for each type of supported sensor.
  * This uses managed allocation and does not need to be freed by the caller.
- * 
+ *
  * This function updates the `last_update` member of each SDR repo.
- * 
+ *
  * Return: 0 or negative error code.
  */
 int discover_sensors(struct pf_dev_struct *pf_dev, int *empty_sdr_count)
@@ -624,27 +697,27 @@ int discover_sensors(struct pf_dev_struct *pf_dev, int *empty_sdr_count)
 	int i = 0;
 	int ret = 0;
 
-	if (!pf_dev  || !empty_sdr_count)
+	if (!pf_dev || !empty_sdr_count)
 		return -EINVAL;
-	
+
 	pf_dev->num_sensor_repos = NUM_SENSOR_REPOS;
 	pf_dev->sensor_repos = devm_kzalloc(&(pf_dev->pci->dev),
-		NUM_SENSOR_REPOS * sizeof(struct sdr_repo), GFP_KERNEL);
-	
+					    NUM_SENSOR_REPOS * sizeof(struct sdr_repo),
+					    GFP_KERNEL);
+
 	if (!pf_dev->sensor_repos)
 		return -ENOMEM;
 
 	for (i = 0; i < NUM_SENSOR_REPOS; i++) {
 		ret = get_sdr(pf_dev->amc_ctrl_ctxt, discovery_repos[i], &(pf_dev->sensor_repos[i]));
 
-		if(ret == -ENODATA) {
+		if (ret == -ENODATA) {
 			*empty_sdr_count = *empty_sdr_count + 1;
 			ret = SUCCESS;
-		}
-		else if (ret) {
+		} else if (ret) {
 			break;
 		}
-		
+
 		pf_dev->sensor_repos[i].last_update = jiffies;
 	}
 
@@ -671,13 +744,18 @@ static void delete_repo_records(struct pf_dev_struct *pf_dev, struct sdr_repo *r
 
 	switch (repo->repo_type) {
 	case SDR_TYPE_FPT:
-		if (repo->fpt.partition) {
-			devm_kfree(&(pf_dev->pci->dev), repo->fpt.partition);
-			repo->fpt.partition = NULL;
+		if (repo->fpt.partition_primary) {
+			devm_kfree(&(pf_dev->pci->dev), repo->fpt.partition_primary);
+			repo->fpt.partition_primary = NULL;
+			repo->num_records = 0;
+		}
+		if (repo->fpt.partition_secondary) {
+			devm_kfree(&(pf_dev->pci->dev), repo->fpt.partition_secondary);
+			repo->fpt.partition_secondary = NULL;
 			repo->num_records = 0;
 		}
 		break;
-	
+
 	case SDR_TYPE_BDINFO:
 		if (repo->bd_info) {
 			devm_kfree(&(pf_dev->pci->dev), repo->bd_info);
@@ -685,7 +763,7 @@ static void delete_repo_records(struct pf_dev_struct *pf_dev, struct sdr_repo *r
 			repo->num_records = 0;
 		}
 		break;
-	
+
 	case SDR_TYPE_TEMP:
 	case SDR_TYPE_VOLTAGE:
 	case SDR_TYPE_CURRENT:
@@ -697,7 +775,7 @@ static void delete_repo_records(struct pf_dev_struct *pf_dev, struct sdr_repo *r
 			repo->num_records = 0;
 		}
 		break;
-	
+
 	default:
 		break;
 	}
@@ -723,7 +801,8 @@ int update_sdr(struct pf_dev_struct *pf_dev, enum gcq_sdr_repo_type repo_type)
 		return -EINVAL;
 
 	repo = find_sdr_repo(pf_dev->sensor_repos,
-		pf_dev->num_sensor_repos, repo_type);
+			     pf_dev->num_sensor_repos,
+			     repo_type);
 
 	if (!repo)
 		return -ENODATA;
@@ -747,9 +826,9 @@ int update_sdr(struct pf_dev_struct *pf_dev, enum gcq_sdr_repo_type repo_type)
 /**
  * delete_sensors() - Delete ASDM sensor data.
  * @pf_dev: Pointer to PCI device data.
- * 
+ *
  * Note that this function should normally not be called.
- * 
+ *
  * Return: None.
  */
 void delete_sensors(struct pf_dev_struct *pf_dev)
@@ -759,7 +838,7 @@ void delete_sensors(struct pf_dev_struct *pf_dev)
 	if (!pf_dev || !pf_dev->sensor_repos || (pf_dev->num_sensor_repos == 0))
 		return;
 
-	for (i = 0; i < NUM_SENSOR_REPOS; i++) 
+	for (i = 0; i < NUM_SENSOR_REPOS; i++)
 		delete_repo_records(pf_dev, &(pf_dev->sensor_repos[i]));
 
 	devm_kfree(&(pf_dev->pci->dev), pf_dev->sensor_repos);
@@ -774,23 +853,24 @@ void delete_sensors(struct pf_dev_struct *pf_dev)
  *
  * Return: The matched SDR record or NULL.
  */
-struct sdr_record *find_sdr_record(struct sdr_repo *sensor_repos,
-		uint8_t num_sensor_repos, enum gcq_sdr_repo_type type, int sid)
+struct sdr_record *find_sdr_record(struct sdr_repo		*sensor_repos,
+				   uint8_t			num_sensor_repos,
+				   enum gcq_sdr_repo_type	type,
+				   int				sid)
 {
 	int i = 0, j = 0;
 
-	if (!sensor_repos) 
+	if (!sensor_repos)
 		return NULL;
-	
+
 	for (i = 0; i < num_sensor_repos; i++) {
 		if (sensor_repos[i].repo_type != type)
 			continue;
-		
+
 		for (j = 0; j < sensor_repos[i].num_records; j++) {
 			/* channel = id - 1 */
-			if (sensor_repos[i].records[j].id - 1 == sid) {
+			if (sensor_repos[i].records[j].id - 1 == sid)
 				return &sensor_repos[i].records[j];
-			}
 		}
 	}
 
@@ -804,21 +884,21 @@ struct sdr_record *find_sdr_record(struct sdr_repo *sensor_repos,
  * @type: Repo type.
  *
  * NOTE: This function may return an empty repo with no records!
- * 
+ *
  * Return: The matched SDR repo or NULL.
  */
-struct sdr_repo *find_sdr_repo(struct sdr_repo *sensor_repos,
-	uint8_t num_sensor_repos, enum gcq_sdr_repo_type type)
+struct sdr_repo *find_sdr_repo(struct sdr_repo		*sensor_repos,
+			       uint8_t			num_sensor_repos,
+			       enum gcq_sdr_repo_type	type)
 {
 	int i = 0;
 
 	if (!sensor_repos)
 		return NULL;
-	
-	for (i = 0; i < num_sensor_repos; i++) {
+
+	for (i = 0; i < num_sensor_repos; i++)
 		if (sensor_repos[i].repo_type == type)
 			return &sensor_repos[i];
-	}
 
 	return NULL;
 }
@@ -833,13 +913,14 @@ struct sdr_repo *find_sdr_repo(struct sdr_repo *sensor_repos,
  * any new sensors. It simply fetches all available sensor data and updates
  * the values in the, already existing, sensor repos which are passed as an
  * argument.
- * 
+ *
  * This function updates the `last_update` member of each SDR repo.
  *
  * Return: 0 on success or negative error code.
  */
-static int get_all_sensors(struct amc_control_ctxt *amc_ctrl_ctxt, enum gcq_submit_cmd_req gcq_cmd,
-		struct sdr_repo *sensor_repo)
+static int get_all_sensors(struct amc_control_ctxt	*amc_ctrl_ctxt,
+			   enum gcq_submit_cmd_req	gcq_cmd,
+			   struct sdr_repo		*sensor_repo)
 {
 	int ret = SUCCESS;
 	char *sdr_raw_buf = NULL;
@@ -862,8 +943,11 @@ static int get_all_sensors(struct amc_control_ctxt *amc_ctrl_ctxt, enum gcq_subm
 		goto done;
 	}
 
-	ret = submit_gcq_command(amc_ctrl_ctxt, gcq_cmd, GCQ_CMD_FLAG_NONE,
-			sdr_raw_buf, SENSOR_RSP_LEN);
+	ret = submit_gcq_command(amc_ctrl_ctxt,
+				 gcq_cmd,
+				 GCQ_CMD_FLAG_NONE,
+				 sdr_raw_buf,
+				 SENSOR_RSP_LEN);
 	if (ret) {
 		AMI_ERR(amc_ctrl_ctxt, "Submit command failed");
 		ret = -EIO;
@@ -882,7 +966,8 @@ static int get_all_sensors(struct amc_control_ctxt *amc_ctrl_ctxt, enum gcq_subm
 	if (get_rid(rid) != sid) {
 		AMI_ERR(amc_ctrl_ctxt,
 			"Sensor response ID %d does not match sensor request ID %d",
-			rid, sid);
+			rid,
+			sid);
 		ret = -EINVAL;
 		goto done;
 	}
@@ -893,7 +978,7 @@ static int get_all_sensors(struct amc_control_ctxt *amc_ctrl_ctxt, enum gcq_subm
 	num_sensor = 0;
 	rec_start_buf_index = buf_index;
 
-	while (buf_index < rec_start_buf_index + size) { 
+	while (buf_index < rec_start_buf_index + size) {
 		val_len = sdr_raw_buf[buf_index++];
 		rec = find_sdr_record(sensor_repo, 1, rid, num_sensor);
 
@@ -910,23 +995,22 @@ static int get_all_sensors(struct amc_control_ctxt *amc_ctrl_ctxt, enum gcq_subm
 		rec->value_len = val_len;
 
 		for (i = SDR_PARSE_BUF_INST_INDEX; i < SDR_PARSE_BUF_STATUS_INDEX; i++) {
-			switch (i)
-			{
+			switch (i) {
 			case SDR_PARSE_BUF_INST_INDEX:
 				memset(rec->value, 0x00, SDR_VALUE_MAX_LEN);
 				memcpy(rec->value, &sdr_raw_buf[buf_index], val_len);
 				break;
-			
+
 			case SDR_PARSE_BUF_MAX_INDEX:
 				memset(rec->max, 0x00, SDR_THRESHOLD_MAX_LEN);
 				memcpy(rec->max, &sdr_raw_buf[buf_index], val_len);
 				break;
-			
+
 			case SDR_PARSE_BUF_AVG_INDEX:
 				memset(rec->avg, 0x00, SDR_THRESHOLD_MAX_LEN);
 				memcpy(rec->avg, &sdr_raw_buf[buf_index], val_len);
 				break;
-			
+
 			default:
 				break;
 			}
@@ -943,7 +1027,7 @@ done:
 		vfree(sdr_raw_buf);
 
 	if (ret == SUCCESS) {
-		AMI_VDBG(amc_ctrl_ctxt, "Successfully fetched sensors");
+		AMI_DBG(amc_ctrl_ctxt, "Successfully fetched sensors");
 		sensor_repo->last_update = jiffies;
 	} else {
 		AMI_ERR(amc_ctrl_ctxt, "Failed to fetch sensors");
@@ -960,11 +1044,12 @@ done:
  * @pf_dev: Pointer to top level PCI data struct.
  * @gcq_cmd: The CMD code to submit; used to populate payload fields.
  * @fresh: boolean indicating if the value came from the cache or over GCQ
- * 
+ *
  * Return: 0 or negative error code.
  */
-static int read_sensors(struct pf_dev_struct *pf_dev,
-	enum gcq_submit_cmd_req gcq_cmd, bool *fresh)
+static int read_sensors(struct pf_dev_struct	*pf_dev,
+			enum gcq_submit_cmd_req gcq_cmd,
+			bool			*fresh)
 {
 	unsigned long stamp = 0;
 	unsigned long delta = 0;
@@ -980,19 +1065,19 @@ static int read_sensors(struct pf_dev_struct *pf_dev,
 	case GCQ_SUBMIT_CMD_GET_ALL_INST_TEMP_SENSOR:
 		repo_type = SDR_TYPE_TEMP;
 		break;
-	
+
 	case GCQ_SUBMIT_CMD_GET_ALL_INST_VOLTAGE_SENSOR:
 		repo_type = SDR_TYPE_VOLTAGE;
 		break;
-	
+
 	case GCQ_SUBMIT_CMD_GET_ALL_INST_CURRENT_SENSOR:
 		repo_type = SDR_TYPE_CURRENT;
 		break;
-	
+
 	case GCQ_SUBMIT_CMD_GET_ALL_INST_POWER_SENSOR:
 		repo_type = SDR_POWER_TYPE;
 		break;
-	
+
 	default:
 		break;
 	}
@@ -1012,7 +1097,7 @@ static int read_sensors(struct pf_dev_struct *pf_dev,
 	stamp = jiffies;
 	delta = (long)stamp - (long)repo->last_update;
 
-	if ((pf_dev->sensor_refresh == 0 ) || ((delta * 1000 / HZ) > pf_dev->sensor_refresh)) {
+	if ((pf_dev->sensor_refresh == 0) || ((delta * 1000 / HZ) > pf_dev->sensor_refresh)) {
 		if (fresh)
 			*fresh = true;
 
@@ -1022,7 +1107,7 @@ static int read_sensors(struct pf_dev_struct *pf_dev,
 			repo
 		);
 	}
-	
+
 	if (fresh)
 		*fresh = false;
 
@@ -1065,7 +1150,6 @@ int read_voltage_sensors(struct pf_dev_struct *pf_dev, bool *fresh)
 		GCQ_SUBMIT_CMD_GET_ALL_INST_VOLTAGE_SENSOR,
 		fresh
 	);
-
 }
 
 /**
@@ -1085,7 +1169,6 @@ int read_current_sensors(struct pf_dev_struct *pf_dev, bool *fresh)
 		GCQ_SUBMIT_CMD_GET_ALL_INST_CURRENT_SENSOR,
 		fresh
 	);
-
 }
 
 /**
@@ -1110,37 +1193,52 @@ int read_power_sensors(struct pf_dev_struct *pf_dev, bool *fresh)
 /*
  * read_fpt_hdr() - Retrieve the FPT header.
  * @pf_dev: Pointer to top level PCI data struct.
+ * @boot_device: Target boot device
  * @hdr: Pointer to populated with the header.
  *
  * Returns the stored FTP header
  *
  * Return: 0 on success or negative error code.
  */
-int read_fpt_hdr(struct pf_dev_struct *pf_dev, struct fpt_header *hdr)
+int read_fpt_hdr(struct pf_dev_struct *pf_dev, uint8_t boot_device, struct fpt_header *hdr)
 {
-        struct sdr_repo *repo = NULL;
+	struct sdr_repo *repo = NULL;
 
-        if (!pf_dev || !hdr)
-                return -EINVAL;
+	if (!pf_dev || !hdr || boot_device >= AMI_AMC_BOOT_DEVICE_MAX)
+		return -EINVAL;
 
-        repo = find_sdr_repo(
+	repo = find_sdr_repo(
 		pf_dev->sensor_repos,
 		pf_dev->num_sensor_repos,
 		SDR_TYPE_FPT);
 
-        if (!repo)
+	if (!repo)
 		return -EINVAL;
 
 	if (!(repo->num_records))
 		return -ENODATA;
 
-        *hdr = repo->fpt.hdr;
-        return 0;
+	switch (boot_device) {
+	case AMI_AMC_BOOT_DEVICE_PRIMARY:
+		*hdr = repo->fpt.hdr_primary;
+		break;
+
+	case AMI_AMC_BOOT_DEVICE_SECONDARY:
+		*hdr = repo->fpt.hdr_secondary;
+		break;
+
+	default:
+		return -EINVAL;
+		break;
+	}
+
+	return 0;
 }
 
 /*
  * read_fpt_partition() - Retrieve a FPT partition.
  * @pf_dev: Pointer to top level PCI data struct.
+ * @boot_device: Target boot device
  * @partition_id: The partition to fetch.
  * @partition: Pointer to populated with the partition information.
  *
@@ -1148,30 +1246,56 @@ int read_fpt_hdr(struct pf_dev_struct *pf_dev, struct fpt_header *hdr)
  *
  * Return: 0 on success or negative error code.
  */
-int read_fpt_partition(struct pf_dev_struct *pf_dev,
-		       uint32_t partition_id,
-		       struct fpt_partition *partition)
+int read_fpt_partition(struct pf_dev_struct	*pf_dev,
+		       uint8_t			boot_device,
+		       uint32_t			partition_id,
+		       struct fpt_partition	*partition)
 {
-        struct sdr_repo *repo = NULL;
+	struct sdr_repo *repo = NULL;
 
-        if (!pf_dev || !partition)
-                return -EINVAL;
+	if (!pf_dev || !partition || (boot_device >= AMI_AMC_BOOT_DEVICE_MAX))
+		return -EINVAL;
 
-        repo = find_sdr_repo(pf_dev->sensor_repos,
-		             pf_dev->num_sensor_repos,
-                             SDR_TYPE_FPT);
-        if (!repo)
-                return -EINVAL;
-	
+	repo = find_sdr_repo(pf_dev->sensor_repos,
+			     pf_dev->num_sensor_repos,
+			     SDR_TYPE_FPT);
+	if (!repo)
+		return -EINVAL;
+
 	if (!(repo->num_records))
 		return -ENODATA;
 
-        if (partition_id > (repo->fpt.hdr.num_entries - 1))
-                return -EINVAL;
+	switch (boot_device) {
+	case AMI_AMC_BOOT_DEVICE_PRIMARY:
+	{
+		if (partition_id > (repo->fpt.hdr_primary.num_entries - 1))
+			return -EINVAL;
 
-        *partition = repo->fpt.partition[partition_id];
+		if (repo->fpt.partition_primary == NULL)
+			return -ENODATA;
 
-        return 0;
+		*partition = repo->fpt.partition_primary[partition_id];
+		break;
+	}
+
+	case AMI_AMC_BOOT_DEVICE_SECONDARY:
+	{
+		if (partition_id > (repo->fpt.hdr_secondary.num_entries - 1))
+			return -EINVAL;
+
+		if (repo->fpt.partition_secondary == NULL)
+			return -ENODATA;
+
+		*partition = repo->fpt.partition_secondary[partition_id];
+		break;
+	}
+
+	default:
+		return -EINVAL;
+		break;
+	}
+
+	return 0;
 }
 
 /*
@@ -1185,21 +1309,21 @@ int read_fpt_partition(struct pf_dev_struct *pf_dev,
  */
 int read_board_info(struct pf_dev_struct *pf_dev, struct bd_info_record *bd_info)
 {
-        struct sdr_repo *repo = NULL;
+	struct sdr_repo *repo = NULL;
 
-        if (!pf_dev || !bd_info)
-                return -EINVAL;
+	if (!pf_dev || !bd_info)
+		return -EINVAL;
 
-        repo = find_sdr_repo(pf_dev->sensor_repos,
-		             pf_dev->num_sensor_repos,
-		             SDR_TYPE_BDINFO);
+	repo = find_sdr_repo(pf_dev->sensor_repos,
+			     pf_dev->num_sensor_repos,
+			     SDR_TYPE_BDINFO);
 
-        if (!repo)
+	if (!repo)
 		return -EINVAL;
 
 	if (!(repo->num_records))
 		return -ENODATA;
 
-        *bd_info = *repo->bd_info;
-        return 0;
+	*bd_info = *repo->bd_info;
+	return 0;
 }

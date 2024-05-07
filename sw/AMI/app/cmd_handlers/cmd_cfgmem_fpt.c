@@ -66,10 +66,11 @@ static void progress_handler(enum ami_event_status status, uint64_t ctr, void *d
 /*
  * h: Help
  * d: Device
+ * t: Boot device type
  * i: Image file
  * y: Skip user confirmation
  */
-static const char short_options[] = "hd:i:y";
+static const char short_options[] = "hd:t:i:y";
 
 static const struct option long_options[] = {
 	{ "help", no_argument, NULL, 'h' },  /* help screen */
@@ -80,10 +81,11 @@ static const char help_msg[] = \
 	"cfgmem_fpt - program a device and update the fpt\r\n"
 	"\r\nThis command requires root/sudo permissions.\r\n"
 	"\r\nUsage:\r\n"
-	"\t" APP_NAME " cfgmem_fpt -d <bdf> -i <path>\r\n"
+	"\t" APP_NAME " cfgmem_fpt -d <bdf> -t <type> -i <path>\r\n"
 	"\r\nOptions:\r\n"
 	"\t-h --help             Show this screen\r\n"
 	"\t-d <b>:[d].[f]        Specify the device BDF\r\n"
+	"\t-t <type>             Specify the boot device type (primary or secondary)\r\n"
 	"\t-i <path>             Path to image file\r\n"
 	"\t-y                    Skip confirmation\r\n"
 ;
@@ -103,6 +105,7 @@ struct app_cmd cmd_cfgmem_fpt = {
 /*
  * Event handler for PDI download.
  */
+
 static void progress_handler(enum ami_event_status status, uint64_t ctr, void *data)
 {
 	struct ami_pdi_progress *prog = NULL;
@@ -132,11 +135,13 @@ static int do_cmd_cfgmem_fpt(struct app_option *options, int num_args, char **ar
 
 	/* Required options */
 	struct app_option *device = NULL;
+	struct app_option *boot_device_type = NULL;
 	struct app_option *image = NULL;
 
 	/* Required data */
 	uint16_t bdf = 0;
 	ami_device *dev = NULL;
+	int selected_boot_device = 0;
 
 	/* For UUID checks */
 	int found_current_uuid = AMI_STATUS_ERROR;
@@ -152,10 +157,20 @@ static int do_cmd_cfgmem_fpt(struct app_option *options, int num_args, char **ar
 
 	/* Device and image are required. */
 	device = find_app_option('d', options);
+	boot_device_type = find_app_option('t', options);
 	image = find_app_option('i', options);
 
-	if (!device || !image) {
+	if (!device || !boot_device_type || !image) {
 		APP_USER_ERROR("not enough arguments", help_msg);
+		return AMI_STATUS_ERROR;
+	}
+
+	if (strcmp(boot_device_type->arg, "primary") == 0) {
+		selected_boot_device = AMI_BOOT_DEVICES_PRIMARY;
+	} else if (strcmp(boot_device_type->arg, "secondary") == 0) {
+		selected_boot_device = AMI_BOOT_DEVICES_SECONDARY;
+	} else{
+		APP_USER_ERROR("provided boot device does not exist", help_msg);
 		return AMI_STATUS_ERROR;
 	}
 
@@ -203,7 +218,7 @@ static int do_cmd_cfgmem_fpt(struct app_option *options, int num_args, char **ar
 	if ((NULL != find_app_option('y', options)) || confirm_action(APP_CONFIRM_PROMPT, 'Y', 3)) {
 		printf("\r\nUpdating FPT...\r\n");
 
-		if (ami_prog_update_fpt(dev, image->arg, progress_handler) == AMI_STATUS_OK) {
+		if (ami_prog_update_fpt(dev, image->arg, selected_boot_device, progress_handler) == AMI_STATUS_OK) {
 			printf(
 				"\r\n\r\nOK. Image has been programmed successfully.\r\n"
 				"****************************************************\r\n"

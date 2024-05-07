@@ -123,7 +123,7 @@ static uint32_t prvGCQClose( void *pvFWIf )
 /**
  * @brief   Local implementation of FW_IF_write
  */
-static uint32_t prvGCQWrite( void *pvFWIf, uint32_t ulDstPort, uint8_t *pucData, uint32_t ulSize, uint32_t ulTimeoutMs )
+static uint32_t prvGCQWrite( void *pvFWIf, uint64_t ullDstPort, uint8_t *pucData, uint32_t ulSize, uint32_t ulTimeoutMs )
 {
     FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_ERRORS_NONE;
 
@@ -155,7 +155,7 @@ static uint32_t prvGCQWrite( void *pvFWIf, uint32_t ulDstPort, uint8_t *pucData,
 /**
  * @brief   Local implementation of FW_IF_read
  */
-static uint32_t prvGCQRead( void *pvFWIf, uint32_t ulSrcPort, uint8_t *pucData, uint32_t * ulSize, uint32_t ulTimeoutMs )
+static uint32_t prvGCQRead( void *pvFWIf, uint64_t ullSrcPort, uint8_t *pucData, uint32_t *pulSize, uint32_t ulTimeoutMs )
 {
     FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_ERRORS_NONE;
 
@@ -168,7 +168,7 @@ static uint32_t prvGCQRead( void *pvFWIf, uint32_t ulSrcPort, uint8_t *pucData, 
     FW_IF_GCQ_CFG *pxCfg = ( FW_IF_GCQ_CFG* )pxThisIf->cfg;
     if( CHECK_PROFILE( pxCfg ) ) { return FW_IF_GCQ_ERRORS_INVALID_PROFILE; }
 
-    if( ( NULL != pucData ) && ( NULL != ulSize ) )
+    if( ( NULL != pucData ) && ( NULL != pulSize ) )
     {
         /*
          * This is where data will be read back from the relevant queue
@@ -242,11 +242,11 @@ static uint32_t prvGCQIOCtrl( void *pvFWIf, uint32_t ulOption, void *pvValue )
 /**
  * @brief   Local implementation of FW_IF_bindCallback
  */
-static uint32_t prvGCQBindCallback( void *vFWIf, FW_IF_callback *newFunc )
+static uint32_t prvGCQBindCallback( void *pvFwIf, FW_IF_callback *pxNewFunc )
 {
     FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_ERRORS_NONE;
 
-    FW_IF_CFG *pxThisIf = ( FW_IF_CFG* )vFWIf;
+    FW_IF_CFG *pxThisIf = ( FW_IF_CFG* )pvFwIf;
     if( CHECK_HDL( pxThisIf ) ) { return FW_IF_ERRORS_INVALID_HANDLE; }
     if( CHECK_CFG( pxThisIf ) ) { return FW_IF_ERRORS_INVALID_CFG; }
     if( CHECK_FIREWALLS( pxThisIf ) ) { return FW_IF_ERRORS_INVALID_HANDLE; }
@@ -255,13 +255,13 @@ static uint32_t prvGCQBindCallback( void *vFWIf, FW_IF_callback *newFunc )
     FW_IF_GCQ_CFG *pxCfg = ( FW_IF_GCQ_CFG* )pxThisIf->cfg;
     if( CHECK_PROFILE( pxCfg ) ) { return FW_IF_GCQ_ERRORS_INVALID_PROFILE; }
 
-    if( NULL != newFunc )
+    if( NULL != pxNewFunc )
     {
         /*
          * Binds in callback provided to the FW_IF.
          * Callback will be invoked when by the driver when event occurs.
          */
-        pxThisIf->raiseEvent = newFunc;
+        pxThisIf->raiseEvent = pxNewFunc;
         PLL_DBG( FW_IF_GCQ_NAME, "GCQ FW_IF_bindCallback called\r\n" );
     }
     else
@@ -280,7 +280,7 @@ static uint32_t prvGCQBindCallback( void *vFWIf, FW_IF_callback *newFunc )
 /**
  * @brief   initialisation function for GCQ interfaces (generic across all GCQ interfaces)
  */
-uint32_t ulFW_IF_GCQ_init( FW_IF_GCQ_INIT_CFG *xInitCfg )
+uint32_t ulFW_IF_GCQ_Init( FW_IF_GCQ_INIT_CFG *pxInitCfg )
 {
     FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_ERRORS_NONE;
 
@@ -288,12 +288,12 @@ uint32_t ulFW_IF_GCQ_init( FW_IF_GCQ_INIT_CFG *xInitCfg )
     {
         xRet = FW_IF_ERRORS_DRIVER_IN_USE;
     }
-    else if ( NULL != xInitCfg )
+    else if ( NULL != pxInitCfg )
     {
         /*
          * Initilise config data shared between all instances of GCQ.
          */
-        memcpy( &xLocalCfg, xInitCfg, sizeof( FW_IF_GCQ_INIT_CFG ) );
+        pvOSAL_MemCpy( &xLocalCfg, pxInitCfg, sizeof( FW_IF_GCQ_INIT_CFG ) );
         iInitialised = FW_IF_TRUE;
     }
     else
@@ -307,19 +307,19 @@ uint32_t ulFW_IF_GCQ_init( FW_IF_GCQ_INIT_CFG *xInitCfg )
 /**
  * @brief   opens an instance of the GCQ interface
  */
-uint32_t ulFW_IF_GCQ_create( FW_IF_CFG *xFWIf, FW_IF_GCQ_CFG *xGCQCfg )
+uint32_t ulFW_IF_GCQ_Create( FW_IF_CFG *pxFwIf, FW_IF_GCQ_CFG *pxGCQCfg )
 {
     FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_ERRORS_NONE;
 
     if( CHECK_DRIVER ) { return FW_IF_ERRORS_DRIVER_NOT_INITIALISED; }
 
-    if( ( NULL != xFWIf ) && ( NULL != xGCQCfg ) )
+    if( ( NULL != pxFwIf ) && ( NULL != pxGCQCfg ) )
     {
         if( ulProfilesAllocated >= ( FW_IF_GCQ_MAX_INSTANCES - 1 ) )
         {
             xRet = FW_IF_GCQ_ERRORS_NO_FREE_PROFILES;
         }
-        else if( MAX_FW_IF_GCQ_MODE > xGCQCfg->xMode )
+        else if( MAX_FW_IF_GCQ_MODE > pxGCQCfg->xMode )
         {
             FW_IF_CFG myLocalIf =
             {
@@ -330,13 +330,13 @@ uint32_t ulFW_IF_GCQ_create( FW_IF_CFG *xFWIf, FW_IF_GCQ_CFG *xGCQCfg )
                 .read           = &prvGCQRead,
                 .ioctrl         = &prvGCQIOCtrl,
                 .bindCallback   = &prvGCQBindCallback,
-                .cfg            = ( void* )xGCQCfg,
+                .cfg            = ( void* )pxGCQCfg,
                 .lowerFirewall  = GCQ_LOWER_FIREWALL
             };
 
-            memcpy( xFWIf, &myLocalIf, sizeof( FW_IF_CFG ) );
+            pvOSAL_MemCpy( pxFwIf, &myLocalIf, sizeof( FW_IF_CFG ) );
 
-            FW_IF_GCQ_CFG *pxCfg = ( FW_IF_GCQ_CFG* )xFWIf->cfg;
+            FW_IF_GCQ_CFG *pxCfg = ( FW_IF_GCQ_CFG* )pxFwIf->cfg;
 
             /*
              * Crude implementation of allocating the next free profile and assigning

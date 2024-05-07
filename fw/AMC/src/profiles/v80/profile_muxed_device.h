@@ -23,12 +23,13 @@
  */
 static inline int iGetNumExternalDevices( int iExpMax )
 {
-    static int      iNumQsfps          = 0;
-    static uint8_t  ucProductNameCheck = FALSE;
+    static int     iNumQsfps          = 0;
+    static uint8_t ucProductNameCheck = FALSE;
 
     if( FALSE == ucProductNameCheck )
     {
-        uint8_t pucField[ EEPROM_MAX_FIELD_SIZE ] = { 0 };
+        uint8_t pucField[ EEPROM_MAX_FIELD_SIZE ] =
+        { 0 };
         uint8_t ucSizeBytes = 0;
 
         if( OK == iEEPROM_GetProductName( pucField, &ucSizeBytes ) )
@@ -43,7 +44,7 @@ static inline int iGetNumExternalDevices( int iExpMax )
                     iNumQsfps = iExpMax;
                 }
             }
-            
+
             ucProductNameCheck = TRUE;
         }
     }
@@ -51,25 +52,24 @@ static inline int iGetNumExternalDevices( int iExpMax )
     return iNumQsfps;
 }
 
-/* 4 QSFPs mocked for linux build and 1 DIMM mocked for linux build */
 #define MAX_NUM_EXTERNAL_DEVICES_AVAILABLE iGetNumExternalDevices( 5 )
 
-#define QSFP_1_REG_BIT_OFFSET              ( 1 << 0 )
-#define QSFP_2_REG_BIT_OFFSET              ( 1 << 1 )
-#define QSFP_3_REG_BIT_OFFSET              ( 1 << 2 )
-#define QSFP_4_REG_BIT_OFFSET              ( 1 << 3 )
+#define QSFP_1_REG_BIT_OFFSET ( 1 << 0 )
+#define QSFP_2_REG_BIT_OFFSET ( 1 << 1 )
+#define QSFP_3_REG_BIT_OFFSET ( 1 << 2 )
+#define QSFP_4_REG_BIT_OFFSET ( 1 << 3 )
 
-#define MUXED_DEVICE_MUX_1_ADDR            ( 0x70 )
-#define MUXED_DEVICE_MUX_2_ADDR            ( 0x71 )
-#define MUXED_DEVICE_MUX_3_ADDR            ( 0x72 )
-#define MUXED_DEVICE_MUX_REG_BIT_1         ( 1 << 0 )
-#define MUXED_DEVICE_MUX_REG_BIT_2         ( 1 << 1 )
-#define MUXED_DEVICE_MUX_REG_BIT_3         ( 1 << 2 )
-#define MUXED_DEVICE_MUX_REG_BIT_4         ( 1 << 3 )
+#define MUXED_DEVICE_MUX_1_ADDR    ( 0x70 )
+#define MUXED_DEVICE_MUX_2_ADDR    ( 0x71 )
+#define MUXED_DEVICE_MUX_3_ADDR    ( 0x72 )
+#define MUXED_DEVICE_MUX_REG_BIT_1 ( 1 << 0 )
+#define MUXED_DEVICE_MUX_REG_BIT_2 ( 1 << 1 )
+#define MUXED_DEVICE_MUX_REG_BIT_3 ( 1 << 2 )
+#define MUXED_DEVICE_MUX_REG_BIT_4 ( 1 << 3 )
 
-#define QSFP_POWER_IO_EXPANDER_I2C_ADDR    ( 0x21 )
-#define QSFP_IO_EXPANDER_I2C_ADDR          ( 0x20 )
-#define QSFP_I2C_ADDR                      ( 0x50 )
-#define DIMM_I2C_ADDR                      ( 0x18 )
+#define QSFP_POWER_IO_EXPANDER_I2C_ADDR ( 0x21 )
+#define QSFP_IO_EXPANDER_I2C_ADDR       ( 0x20 )
+#define QSFP_I2C_ADDR                   ( 0x50 )
+#define DIMM_I2C_ADDR                   ( 0x18 )
 
 #endif

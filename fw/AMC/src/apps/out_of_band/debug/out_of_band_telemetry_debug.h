@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2024 Advanced Micro Devices, Inc. All rights reserved.
  * SPDX-License-Identifier: MIT
  *
  * This file contains the in band telemetry defintions
@@ -8,8 +8,8 @@
  *
  */
 
-#ifndef _OUT_OF_BAND_TELEMETRY_H_
-#define _OUT_OF_BAND_TELEMETRY_H_
+#ifndef _OUT_OF_BAND_TELEMETRY_DEBUG_H_
+#define _OUT_OF_BAND_TELEMETRY_DEBUG_H_
 
 
 /******************************************************************************/
@@ -17,33 +17,12 @@
 /******************************************************************************/
 
 /**
- * @brief   Initialise the in band telemetry application layer
- *          used to handle events and communication between the host
- *          and the sensors
- * 
- * @param   ullSharedMemBaseAddr  The base address of the shared memory
+ * @brief   Initialise the out of band telemetry application debug access
  *
- * @return  OK          Success
- *          ERROR       Failure
+ * @param   pxParentHandle  optional handle to the parent directory
+ *
+ * @return  N/A
  */
-int iOUT_OF_BAND_TELEMETRY_Initialise( uint64_t ullsharedMemBaseAddr );
-
-/**
- * @brief   Print all the stats gathered by the application
- *
- * @return  OK          Stats retrieved from proxy driver successfully
- *          ERROR       Stats not retrieved successfully
- *
- */
-int iOUT_OF_BAND_TELEMETRY_PrintStatistics( void );
-
-/**
- * @brief   Clear all the stats in the application
- *
- * @return  OK          Stats cleared successfully
- *          ERROR       Stats not cleared successfully
- *
- */
-int iOUT_OF_BAND_TELEMETRY_ClearStatistics( void );
+void vOUT_OF_BAND_TELEMETRY_DebugInit( DAL_HDL pxParentHandle );
 
 #endif /* _OUT_OF_BAND_TELEMETRY_H_ */

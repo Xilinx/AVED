@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * ami_sysfs.c - This file contains sysfs-related logic for the AMI driver.
- * 
+ *
  * Copyright (c) 2023-present Advanced Micro Devices, Inc. All rights reserved.
  */
 
@@ -27,33 +27,33 @@
  * @name: String representation of device state.
  */
 struct dev_state_map {
-	enum pf_dev_state  state;
-	const char        *name;
+	enum pf_dev_state state;
+	const char *name;
 };
 
 static const struct dev_state_map state_names[] = {
-	{ PF_DEV_STATE_INIT,         STATE_NAME_INIT         },
-	{ PF_DEV_STATE_READY,        STATE_NAME_READY        },
+	{ PF_DEV_STATE_INIT,	     STATE_NAME_INIT	     },
+	{ PF_DEV_STATE_READY,	     STATE_NAME_READY	     },
 	{ PF_DEV_STATE_MISSING_INFO, STATE_NAME_MISSING_INFO },
-	{ PF_DEV_STATE_NO_AMC,       STATE_NAME_NO_AMC       },
+	{ PF_DEV_STATE_NO_AMC,	     STATE_NAME_NO_AMC	     },
 	{ PF_DEV_STATE_INIT_ERROR,   STATE_NAME_INIT_ERROR   },
 	{ PF_DEV_STATE_SHUTDOWN,     STATE_NAME_SHUTDOWN     },
-	{ PF_DEV_STATE_COMPAT,       STATE_NAME_COMPAT       },
+	{ PF_DEV_STATE_COMPAT,	     STATE_NAME_COMPAT	     },
 };
 
 /**
  * get_state_name() - Get the string representation of a device state.
  * @state: Device state to lookup.
- * 
+ *
  * Return: Human readable string (empty string when state not found).
  */
 static const char *get_state_name(enum pf_dev_state state)
 {
 	int i = 0;
-	for (i = 0; i < ARRAY_SIZE(state_names); i++) {
+
+	for (i = 0; i < ARRAY_SIZE(state_names); i++)
 		if (state_names[i].state == state)
 			return state_names[i].name;
-	}
 	return "";
 }
 
@@ -62,11 +62,12 @@ static const char *get_state_name(enum pf_dev_state state)
  * @dev: Device this attribute belongs to.
  * @da: Pointer to device attribute struct.
  * @buf: Output character buffer.
- * 
+ *
  * Return: Number of bytes written to output buffer.
  */
-static ssize_t logic_uuid_show(struct device *dev, struct device_attribute *da,
-		char *buf)
+static ssize_t logic_uuid_show(struct device		*dev,
+			       struct device_attribute	*da,
+			       char			*buf)
 {
 	int ret = 0;
 	struct pf_dev_struct *pf_dev = NULL;
@@ -86,7 +87,7 @@ static ssize_t logic_uuid_show(struct device *dev, struct device_attribute *da,
 	} else {
 		ret = -ENODEV;
 	}
-	
+
 	return ret;
 }
 static DEVICE_ATTR_RO(logic_uuid);
@@ -102,18 +103,19 @@ static DEVICE_ATTR_RO(logic_uuid);
  * @dev: Device this attribute belongs to.
  * @da: Pointer to device attribute struct.
  * @buf: Output character buffer.
- * 
+ *
  * Return: Number of bytes written to output buffer.
  */
-static ssize_t link_speed_max_show(struct device *dev, struct device_attribute *da,
-		char *buf)
+static ssize_t link_speed_max_show(struct device		*dev,
+				   struct device_attribute	*da,
+				   char				*buf)
 {
 	int ret = 0;
 	struct pf_dev_struct *pf_dev = NULL;
 
 	if (!dev || !da || !buf)
 		return -EINVAL;
-	
+
 	pf_dev = get_pf_dev_entry(dev, PF_DEV_CACHE_DEV);
 
 	if (pf_dev) {
@@ -126,7 +128,7 @@ static ssize_t link_speed_max_show(struct device *dev, struct device_attribute *
 	} else {
 		ret = -ENODEV;
 	}
-	
+
 	return ret;
 }
 static DEVICE_ATTR_RO(link_speed_max);
@@ -136,18 +138,19 @@ static DEVICE_ATTR_RO(link_speed_max);
  * @dev: Device this attribute belongs to.
  * @da: Pointer to device attribute struct.
  * @buf: Output character buffer.
- * 
+ *
  * Return: Number of bytes written to output buffer.
  */
-static ssize_t link_speed_current_show(struct device *dev, struct device_attribute *da,
-		char *buf)
+static ssize_t link_speed_current_show(struct device		*dev,
+				       struct device_attribute	*da,
+				       char			*buf)
 {
 	int ret = 0;
 	struct pf_dev_struct *pf_dev = NULL;
 
 	if (!dev || !da || !buf)
 		return -EINVAL;
-	
+
 	pf_dev = get_pf_dev_entry(dev, PF_DEV_CACHE_DEV);
 
 	if (pf_dev) {
@@ -160,7 +163,7 @@ static ssize_t link_speed_current_show(struct device *dev, struct device_attribu
 	} else {
 		ret = -ENODEV;
 	}
-	
+
 	return ret;
 }
 static DEVICE_ATTR_RO(link_speed_current);
@@ -170,18 +173,19 @@ static DEVICE_ATTR_RO(link_speed_current);
  * @dev: Device this attribute belongs to.
  * @da: Pointer to device attribute struct.
  * @buf: Output character buffer.
- * 
+ *
  * Return: Number of bytes written to output buffer.
  */
-static ssize_t link_width_max_show(struct device *dev, struct device_attribute *da,
-		char *buf)
+static ssize_t link_width_max_show(struct device		*dev,
+				   struct device_attribute	*da,
+				   char				*buf)
 {
 	int ret = 0;
 	struct pf_dev_struct *pf_dev = NULL;
 
 	if (!dev || !da || !buf)
 		return -EINVAL;
-	
+
 	pf_dev = get_pf_dev_entry(dev, PF_DEV_CACHE_DEV);
 
 	if (pf_dev) {
@@ -194,7 +198,7 @@ static ssize_t link_width_max_show(struct device *dev, struct device_attribute *
 	} else {
 		ret = -ENODEV;
 	}
-	
+
 	return ret;
 }
 static DEVICE_ATTR_RO(link_width_max);
@@ -204,18 +208,19 @@ static DEVICE_ATTR_RO(link_width_max);
  * @dev: Device this attribute belongs to.
  * @da: Pointer to device attribute struct.
  * @buf: Output character buffer.
- * 
+ *
  * Return: Number of bytes written to output buffer.
  */
-static ssize_t link_width_current_show(struct device *dev, struct device_attribute *da,
-		char *buf)
+static ssize_t link_width_current_show(struct device		*dev,
+				       struct device_attribute	*da,
+				       char			*buf)
 {
 	int ret = 0;
 	struct pf_dev_struct *pf_dev = NULL;
 
 	if (!dev || !da || !buf)
 		return -EINVAL;
-	
+
 	pf_dev = get_pf_dev_entry(dev, PF_DEV_CACHE_DEV);
 
 	if (pf_dev) {
@@ -228,7 +233,7 @@ static ssize_t link_width_current_show(struct device *dev, struct device_attribu
 	} else {
 		ret = -ENODEV;
 	}
-	
+
 	return ret;
 }
 static DEVICE_ATTR_RO(link_width_current);
@@ -238,18 +243,19 @@ static DEVICE_ATTR_RO(link_width_current);
  * @dev: Device this attribute belongs to.
  * @da: Pointer to device attribute struct.
  * @buf: Output character buffer.
- * 
+ *
  * Return: Number of bytes written to output buffer.
  */
-static ssize_t dev_state_show(struct device *dev, struct device_attribute *da,
-		char *buf)
+static ssize_t dev_state_show(struct device		*dev,
+			      struct device_attribute	*da,
+			      char			*buf)
 {
 	int ret = 0;
 	struct pf_dev_struct *pf_dev = NULL;
 
 	if (!dev || !da || !buf)
 		return -EINVAL;
-	
+
 	pf_dev = get_pf_dev_entry(dev, PF_DEV_CACHE_DEV);
 
 	if (pf_dev) {
@@ -262,7 +268,7 @@ static ssize_t dev_state_show(struct device *dev, struct device_attribute *da,
 	} else {
 		ret = -ENODEV;
 	}
-	
+
 	return ret;
 }
 static DEVICE_ATTR_RO(dev_state);
@@ -272,11 +278,12 @@ static DEVICE_ATTR_RO(dev_state);
  * @dev: Device this attribute belongs to.
  * @da: Pointer to device attribute struct.
  * @buf: Output character buffer.
- * 
+ *
  * Return: Number of bytes written to output buffer.
  */
-static ssize_t dev_name_show(struct device *dev, struct device_attribute *da,
-		char *buf)
+static ssize_t dev_name_show(struct device		*dev,
+			     struct device_attribute	*da,
+			     char			*buf)
 {
 	int ret = 0;
 	struct pf_dev_struct *pf_dev = NULL;
@@ -326,18 +333,19 @@ static DEVICE_ATTR_RO(dev_name);
  * @dev: Device this attribute belongs to.
  * @da: Pointer to device attribute struct.
  * @buf: Output character buffer.
- * 
+ *
  * Return: Number of bytes written to output buffer.
  */
-static ssize_t amc_version_show(struct device *dev, struct device_attribute *da,
-		char *buf)
+static ssize_t amc_version_show(struct device		*dev,
+				struct device_attribute *da,
+				char			*buf)
 {
 	int ret = 0;
 	struct pf_dev_struct *pf_dev = NULL;
 
 	if (!dev || !da || !buf)
 		return -EINVAL;
-	
+
 	pf_dev = get_pf_dev_entry(dev, PF_DEV_CACHE_DEV);
 
 	if (pf_dev) {
@@ -357,7 +365,7 @@ static ssize_t amc_version_show(struct device *dev, struct device_attribute *da,
 	} else {
 		ret = -ENODEV;
 	}
-	
+
 	return ret;
 }
 static DEVICE_ATTR_RO(amc_version);
@@ -419,19 +427,20 @@ struct mfg_attribute {
  * This allows reusing a single 'show' function.
  */
 #define DEVICE_MFG_ATTR(_name, _show, _var) \
-	struct mfg_attribute dev_attr_##_name = \
-		{ __ATTR(_name, 0444, _show, NULL), _var }
+	struct mfg_attribute dev_attr_ ## _name = \
+	{ __ATTR(_name, 0444, _show, NULL), _var }
 
 /**
  * read_mfg_field() - Sysfs read callback for EEPROM attributes.
  * @dev: Device this attribute belongs to.
  * @da: Pointer to device attribute struct.
  * @buf: Output character buffer.
- * 
+ *
  * Return: Number of bytes written to output buffer.
  */
-static ssize_t read_mfg_field(struct device *dev, struct device_attribute *da,
-		char *buf)
+static ssize_t read_mfg_field(struct device		*dev,
+			      struct device_attribute	*da,
+			      char			*buf)
 {
 	int ret = 0;
 	struct sdr_repo *repo = NULL;
@@ -445,7 +454,7 @@ static ssize_t read_mfg_field(struct device *dev, struct device_attribute *da,
 
 	if (!pf_dev)
 		return -ENODEV;
-	
+
 	repo = find_sdr_repo(
 		pf_dev->sensor_repos,
 		pf_dev->num_sensor_repos,
@@ -468,7 +477,7 @@ static ssize_t read_mfg_field(struct device *dev, struct device_attribute *da,
 			repo->bd_info->eeprom_version.bytes
 		);
 		break;
-	
+
 	case SYSFS_MFG_PRODUCT_NAME:
 		ret = snprintf(
 			buf,
@@ -477,7 +486,7 @@ static ssize_t read_mfg_field(struct device *dev, struct device_attribute *da,
 			repo->bd_info->product_name.bytes
 		);
 		break;
-	
+
 	case SYSFS_MFG_BOARD_REV:
 		ret = snprintf(
 			buf,
@@ -486,7 +495,7 @@ static ssize_t read_mfg_field(struct device *dev, struct device_attribute *da,
 			repo->bd_info->board_rev.bytes
 		);
 		break;
-	
+
 	case SYSFS_MFG_BOARD_SERIAL:
 		ret = snprintf(
 			buf,
@@ -495,19 +504,20 @@ static ssize_t read_mfg_field(struct device *dev, struct device_attribute *da,
 			repo->bd_info->board_serial.bytes
 		);
 		break;
-	
+
 	case SYSFS_MFG_MEMORY_SIZE:
-		if (repo->bd_info->memory_size.len)
+		if (repo->bd_info->memory_size.len) {
 			ret = snprintf(
 				buf,
 				repo->bd_info->memory_size.len + 1,
 				"%s\n",
 				repo->bd_info->memory_size.bytes
 			);
-		else
+		} else {
 			ret = sprintf(buf, "%s\n", "N/A");
+		}
 		break;
-	
+
 	case SYSFS_MFG_PART_NUM:
 		ret = snprintf(
 			buf,
@@ -516,19 +526,20 @@ static ssize_t read_mfg_field(struct device *dev, struct device_attribute *da,
 			repo->bd_info->part_number.bytes
 		);
 		break;
-	
+
 	case SYSFS_MFG_M_PART_NUM:
-		if (repo->bd_info->mfg_part_number.len)
+		if (repo->bd_info->mfg_part_number.len) {
 			ret = snprintf(
 				buf,
 				repo->bd_info->mfg_part_number.len + 1,
 				"%s\n",
 				repo->bd_info->mfg_part_number.bytes
 			);
-		else
+		} else {
 			ret = sprintf(buf, "%s\n", "N/A");
+		}
 		break;
-	
+
 	case SYSFS_MFG_MAC_ADDR_C:
 		ret = sprintf(
 			buf,
@@ -536,7 +547,7 @@ static ssize_t read_mfg_field(struct device *dev, struct device_attribute *da,
 			repo->bd_info->mac_addr_count.bytes[0]
 		);
 		break;
-	
+
 	case SYSFS_MFG_MAC_ADDR:
 		ret = sprintf(
 			buf,
@@ -549,37 +560,53 @@ static ssize_t read_mfg_field(struct device *dev, struct device_attribute *da,
 			repo->bd_info->first_mac_addr.bytes[5]
 		);
 		break;
-	
+
 	case SYSFS_MFG_MAC_ADDR_N:
+	{
+		uint64_t mac_n = \
+			((uint64_t)repo->bd_info->first_mac_addr.bytes[0] << 40) | \
+			((uint64_t)repo->bd_info->first_mac_addr.bytes[1] << 32) | \
+			((uint64_t)repo->bd_info->first_mac_addr.bytes[2] << 24) | \
+			((uint64_t)repo->bd_info->first_mac_addr.bytes[3] << 16) | \
+			((uint64_t)repo->bd_info->first_mac_addr.bytes[4] << 8) | \
+			((uint64_t)repo->bd_info->first_mac_addr.bytes[5]);
+
+		/* Add count-1 because the first address is already accounted for */
+		if (0 != repo->bd_info->mac_addr_count.bytes[0])
+			mac_n += repo->bd_info->mac_addr_count.bytes[0] - 1;
+		else
+			mac_n = 0;
+
 		ret = sprintf(
 			buf,
 			"%02x:%02x:%02x:%02x:%02x:%02x\n",
-			repo->bd_info->first_mac_addr.bytes[0],
-			repo->bd_info->first_mac_addr.bytes[1],
-			repo->bd_info->first_mac_addr.bytes[2],
-			repo->bd_info->first_mac_addr.bytes[3],
-			repo->bd_info->first_mac_addr.bytes[4],
-			repo->bd_info->first_mac_addr.bytes[5] + \
-				repo->bd_info->mac_addr_count.bytes[0]
+			(uint8_t)(mac_n >> 40),
+			(uint8_t)(mac_n >> 32),
+			(uint8_t)(mac_n >> 24),
+			(uint8_t)(mac_n >> 16),
+			(uint8_t)(mac_n >> 8),
+			(uint8_t)(mac_n)
 		);
+
 		break;
-	
+	}
+
 	case SYSFS_MFG_ACTIVE_STATE:
 		switch (repo->bd_info->active_state.bytes[0]) {
 		case 'A':
 			ret = sprintf(buf, "%s\n", "Active");
 			break;
-		
+
 		case 'P':
 			ret = sprintf(buf, "%s\n", "Passive");
 			break;
-		
+
 		default:
 			ret = sprintf(buf, "%s\n", "N/A");
 			break;
 		}
 		break;
-	
+
 	case SYSFS_MFG_CONFIG_MODE:
 		switch (repo->bd_info->config_mode.bytes[0]) {
 		case FPGA_CONFIG_MODE_QSPIX4:
@@ -595,13 +622,13 @@ static ssize_t read_mfg_field(struct device *dev, struct device_attribute *da,
 			break;
 		}
 		break;
-	
+
 	case SYSFS_MFG_M_DATE:
 	{
 		/* Number of minutes from 0:00 hrs 1/1/96 in GMT LSbyte first*/
 		uint32_t timestamp = (uint32_t)(repo->bd_info->manufacturing_date.bytes[2] << 16) |
-			(uint32_t)(repo->bd_info->manufacturing_date.bytes[1] << 8) |
-			(uint32_t)(repo->bd_info->manufacturing_date.bytes[0]);
+				     (uint32_t)(repo->bd_info->manufacturing_date.bytes[1] << 8) |
+				     (uint32_t)(repo->bd_info->manufacturing_date.bytes[0]);
 
 		ret = sprintf(buf, "%d\n", timestamp);
 		break;
@@ -629,9 +656,9 @@ static ssize_t read_mfg_field(struct device *dev, struct device_attribute *da,
 			repo->bd_info->uuid.bytes[15]
 		);
 		break;
-	
+
 	case SYSFS_MFG_PCIE_ID:
-		if (repo->bd_info->pcie_id.len)
+		if (repo->bd_info->pcie_id.len) {
 			/* Vendor Id, Device Id, Subsystem Vendor Id, Subsystem Device Id */
 			ret = sprintf(
 				buf,
@@ -645,10 +672,11 @@ static ssize_t read_mfg_field(struct device *dev, struct device_attribute *da,
 				repo->bd_info->pcie_id.bytes[6],
 				repo->bd_info->pcie_id.bytes[7]
 			);
-		else
+		} else {
 			ret = sprintf(buf, "%s\n", "N/A");
+		}
 		break;
-	
+
 	case SYSFS_MFG_POWER_MODE:
 		switch (repo->bd_info->power_mode.bytes[0]) {
 		case MAX_POWER_MODE_75W:
@@ -672,21 +700,22 @@ static ssize_t read_mfg_field(struct device *dev, struct device_attribute *da,
 			break;
 		}
 		break;
-	
+
 	case SYSFS_MFG_OEM_ID:
-		if (repo->bd_info->capability.len)
+		if (repo->bd_info->capability.len) {
 			ret = sprintf(
 				buf,
 				"0x%02x%02x\n",
 				repo->bd_info->oem_id.bytes[1],
 				repo->bd_info->oem_id.bytes[0]
 			);
-		else
+		} else {
 			ret = sprintf(buf, "%s\n", "N/A");
+		}
 		break;
-	
+
 	case SYSFS_MFG_CAPABILITY:
-		if (repo->bd_info->capability.len)
+		if (repo->bd_info->capability.len) {
 			/* Vendor Id, Device Id, Subsystem Vendor Id, Subsystem Device Id */
 			ret = sprintf(
 				buf,
@@ -694,8 +723,9 @@ static ssize_t read_mfg_field(struct device *dev, struct device_attribute *da,
 				repo->bd_info->capability.bytes[1],
 				repo->bd_info->capability.bytes[0]
 			);
-		else
+		} else {
 			ret = sprintf(buf, "%s\n", "N/A");
+		}
 		break;
 
 	default:
@@ -706,24 +736,24 @@ static ssize_t read_mfg_field(struct device *dev, struct device_attribute *da,
 	put_pf_dev_entry(pf_dev);
 	return ret;
 }
-static DEVICE_MFG_ATTR(eeprom_version,   read_mfg_field, SYSFS_MFG_EEPROM_VERSION);
-static DEVICE_MFG_ATTR(product_name,     read_mfg_field, SYSFS_MFG_PRODUCT_NAME);
-static DEVICE_MFG_ATTR(board_rev,        read_mfg_field, SYSFS_MFG_BOARD_REV);
-static DEVICE_MFG_ATTR(board_serial,     read_mfg_field, SYSFS_MFG_BOARD_SERIAL);
-static DEVICE_MFG_ATTR(memory_size,      read_mfg_field, SYSFS_MFG_MEMORY_SIZE);
-static DEVICE_MFG_ATTR(part_num,         read_mfg_field, SYSFS_MFG_PART_NUM);
-static DEVICE_MFG_ATTR(mfg_part_num,     read_mfg_field, SYSFS_MFG_M_PART_NUM);
-static DEVICE_MFG_ATTR(mac_addr_count,   read_mfg_field, SYSFS_MFG_MAC_ADDR_C);
-static DEVICE_MFG_ATTR(mac_addr,         read_mfg_field, SYSFS_MFG_MAC_ADDR);
-static DEVICE_MFG_ATTR(mac_addr_n,       read_mfg_field, SYSFS_MFG_MAC_ADDR_N);
-static DEVICE_MFG_ATTR(active_state,     read_mfg_field, SYSFS_MFG_ACTIVE_STATE);
+static DEVICE_MFG_ATTR(eeprom_version, read_mfg_field, SYSFS_MFG_EEPROM_VERSION);
+static DEVICE_MFG_ATTR(product_name, read_mfg_field, SYSFS_MFG_PRODUCT_NAME);
+static DEVICE_MFG_ATTR(board_rev, read_mfg_field, SYSFS_MFG_BOARD_REV);
+static DEVICE_MFG_ATTR(board_serial, read_mfg_field, SYSFS_MFG_BOARD_SERIAL);
+static DEVICE_MFG_ATTR(memory_size, read_mfg_field, SYSFS_MFG_MEMORY_SIZE);
+static DEVICE_MFG_ATTR(part_num, read_mfg_field, SYSFS_MFG_PART_NUM);
+static DEVICE_MFG_ATTR(mfg_part_num, read_mfg_field, SYSFS_MFG_M_PART_NUM);
+static DEVICE_MFG_ATTR(mac_addr_count, read_mfg_field, SYSFS_MFG_MAC_ADDR_C);
+static DEVICE_MFG_ATTR(mac_addr, read_mfg_field, SYSFS_MFG_MAC_ADDR);
+static DEVICE_MFG_ATTR(mac_addr_n, read_mfg_field, SYSFS_MFG_MAC_ADDR_N);
+static DEVICE_MFG_ATTR(active_state, read_mfg_field, SYSFS_MFG_ACTIVE_STATE);
 static DEVICE_MFG_ATTR(fpga_config_mode, read_mfg_field, SYSFS_MFG_CONFIG_MODE);
-static DEVICE_MFG_ATTR(mfg_date,         read_mfg_field, SYSFS_MFG_M_DATE);
-static DEVICE_MFG_ATTR(mfg_uuid,         read_mfg_field, SYSFS_MFG_UUID);
-static DEVICE_MFG_ATTR(pcie_id,          read_mfg_field, SYSFS_MFG_PCIE_ID);
-static DEVICE_MFG_ATTR(power_mode,       read_mfg_field, SYSFS_MFG_POWER_MODE);
-static DEVICE_MFG_ATTR(oem_id,           read_mfg_field, SYSFS_MFG_OEM_ID);
-static DEVICE_MFG_ATTR(mfg_capability,   read_mfg_field, SYSFS_MFG_CAPABILITY);
+static DEVICE_MFG_ATTR(mfg_date, read_mfg_field, SYSFS_MFG_M_DATE);
+static DEVICE_MFG_ATTR(mfg_uuid, read_mfg_field, SYSFS_MFG_UUID);
+static DEVICE_MFG_ATTR(pcie_id, read_mfg_field, SYSFS_MFG_PCIE_ID);
+static DEVICE_MFG_ATTR(power_mode, read_mfg_field, SYSFS_MFG_POWER_MODE);
+static DEVICE_MFG_ATTR(oem_id, read_mfg_field, SYSFS_MFG_OEM_ID);
+static DEVICE_MFG_ATTR(mfg_capability, read_mfg_field, SYSFS_MFG_CAPABILITY);
 
 /*
  * PF0 attributes.
@@ -781,16 +811,16 @@ int register_sysfs(struct device *dev)
 	for (i = 0; i < ARRAY_SIZE(mgmt_attrs); i++) {
 		if (!mgmt_attrs[i])
 			break;
-		
+
 		ret = device_create_file(dev, mgmt_attrs[i]);
 
 		if (ret)
 			break;
 	}
-	
+
 	if (ret)
 		remove_sysfs(dev);
-	
+
 	return ret;
 }
 
@@ -807,7 +837,7 @@ void remove_sysfs(struct device *dev)
 	for (i = 0; i < ARRAY_SIZE(mgmt_attrs); i++) {
 		if (!mgmt_attrs[i])
 			break;
-		
+
 		device_remove_file(dev, mgmt_attrs[i]);
 	}
 }

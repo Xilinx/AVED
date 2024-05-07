@@ -33,6 +33,20 @@ struct sensor_status_name_map_t{
 /* Forward declaration of pf_dev_struct */
 struct pf_dev_struct;
 
+/**
+ * enum ami_amc_boot_devices - Enumeration of boot devices available
+ * @AMI_AMC_BOOT_DEVICE_PRIMARY: primary boot device
+ * @AMI_AMC_BOOT_DEVICE_SECONDARY: secondary boot device
+ * @AMI_AMC_BOOT_DEVICE_MAX: max boot device
+ *
+ */
+enum ami_amc_boot_devices {
+	AMI_AMC_BOOT_DEVICE_PRIMARY = 0,
+	AMI_AMC_BOOT_DEVICE_SECONDARY,
+	
+	AMI_AMC_BOOT_DEVICE_MAX
+};
+
 /* enum sensor_status defined in ami_amc_control.h */
 
 #define SENSOR_STATUS_NAME_NOT_PRESENT "Sensor Not Present"
@@ -58,9 +72,11 @@ int read_current_sensors(struct pf_dev_struct *pf_dev, bool *fresh);
 int read_voltage_sensors(struct pf_dev_struct *pf_dev, bool *fresh);
 int read_power_sensors(struct pf_dev_struct *pf_dev, bool *fresh);
 
-int read_fpt_hdr(struct pf_dev_struct *pf_dev, struct fpt_header *hdr);
-int read_fpt_partition(struct pf_dev_struct *pf_dev, uint32_t partition_id,
-                       struct fpt_partition *partition);
+int read_fpt_hdr(struct pf_dev_struct *pf_dev, uint8_t boot_device, struct fpt_header *hdr);
+int read_fpt_partition(struct pf_dev_struct *pf_dev,
+		       		   uint8_t boot_device,
+		       		   uint32_t partition_id,
+		       		   struct fpt_partition *partition);
 int read_board_info(struct pf_dev_struct *pf_dev, struct bd_info_record *bd_info);
 
 #endif /* AMI_SENSOR_H */

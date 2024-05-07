@@ -19,8 +19,8 @@
 /* Defines                                                                    */
 /******************************************************************************/
 
-#define I2C_NUM_INSTANCES               ( 2 )
-#define I2C_DEFAULT_BUS_IDLE_WAIT_MS    ( 20 )
+#define I2C_NUM_INSTANCES            ( 2 )
+#define I2C_DEFAULT_BUS_IDLE_WAIT_MS ( 2 * 1000 )
 
 
 /******************************************************************************/
@@ -33,10 +33,15 @@
  */
 typedef struct I2C_CFG_TYPE
 {
-    uint8_t ucDeviceId;         /* Unique ID  of device */
-    uint64_t ullBaseAddress;    /* Base address of the device */
-    uint32_t ulInputClockHz;    /* Input clock frequency */
-    uint8_t ucReTryCount;       /* Retry count in case of any communication failure */
+    uint8_t  ucDeviceId;                                                       /* Unique ID  of device */
+    uint64_t ullBaseAddress;                                                   /* Base address of the device */
+    uint32_t ulInputClockHz;                                                   /* Input clock frequency */
+    uint8_t  ucReTryCount;                                                     /* Retry count in case of any communication failure */
+    uint32_t ulSwResetOffset;                                                  /* Offset from the Base Address of the SW Reset Register */
+    uint8_t  ucResetDuringInit;                                                /* Do software reset during initialisation */
+    uint32_t ulHwResetAddress;                                                 /* Address of the HW Reset Register */
+    uint32_t ulHwResetMask;                                                    /* Bit mask of the bit to toggle in HW Reset Register */
+    uint8_t  ucHwResetDuringInit;                                              /* Do hardware reset during initialisation */
 
 } I2C_CFG_TYPE;
 

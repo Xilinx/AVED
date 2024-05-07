@@ -105,12 +105,13 @@ close:
  * do_image_download() - Perform an image download operation.
  * @dev: Device handle.
  * @path: Path to image file.
+ * @boot_device: Target boot device.
  * @partition: Partition number to program.
  * @progress_handler: Progress handler callback (optional).
  *
  * Return: AMI_STATUS_OK or AMI_STATUS_ERROR
  */
-static int do_image_download(ami_device *dev, const char *path, uint32_t partition,
+static int do_image_download(ami_device *dev, const char *path, uint8_t boot_device, uint32_t partition,
 	ami_event_handler progress_handler)
 {
 	uint8_t *img_data = NULL;
@@ -132,6 +133,7 @@ static int do_image_download(ami_device *dev, const char *path, uint32_t partiti
 		payload.size = img_size;
 		payload.addr = (unsigned long)(&img_data[0]);
 		payload.cap_override = dev->cap_override;
+		payload.boot_device = boot_device;
 		payload.partition = partition;
 		payload.efd = AMI_INVALID_FD;
 
@@ -169,8 +171,8 @@ static int do_image_download(ami_device *dev, const char *path, uint32_t partiti
 /*
  * Program a pdi bitstream onto a device.
  */
-int ami_prog_download_pdi(ami_device *dev, const char *path, uint32_t partition,
-	ami_event_handler progress_handler)
+int ami_prog_download_pdi(ami_device *dev, const char *path, uint8_t boot_device,
+	uint32_t partition, ami_event_handler progress_handler)
 {
 	if (!dev || !path || (partition == AMI_IOC_FPT_UPDATE_MAGIC))
 		return AMI_API_ERROR(AMI_ERROR_EINVAL);
@@ -178,6 +180,7 @@ int ami_prog_download_pdi(ami_device *dev, const char *path, uint32_t partition,
 	return do_image_download(
 		dev,
 		path,
+		boot_device,
 		partition,
 		progress_handler
 	);
@@ -186,7 +189,7 @@ int ami_prog_download_pdi(ami_device *dev, const char *path, uint32_t partition,
 /*
  * Update the device FPT.
  */
-int ami_prog_update_fpt(ami_device *dev, const char *path,
+int ami_prog_update_fpt(ami_device *dev, const char *path, uint8_t boot_device,
 	ami_event_handler progress_handler)
 {
 	if (!dev || !path)
@@ -195,6 +198,7 @@ int ami_prog_update_fpt(ami_device *dev, const char *path,
 	return do_image_download(
 		dev,
 		path,
+		boot_device,
 		AMI_IOC_FPT_UPDATE_MAGIC,
 		progress_handler
 	);
@@ -234,8 +238,8 @@ int ami_prog_device_boot(struct ami_device **dev, uint32_t partition)
 /*
  * Copy a device partition.
  */
-int ami_prog_copy_partition(ami_device *dev, uint32_t src, uint32_t dest,
-	ami_event_handler progress_handler)
+int ami_prog_copy_partition(ami_device *dev, uint32_t src_device, uint32_t src_part, 
+	uint32_t dest_device, uint32_t dest_part, ami_event_handler progress_handler)
 {
 	int ret = AMI_STATUS_ERROR;
 	struct ami_ioc_data_payload payload = { 0 };
@@ -249,8 +253,10 @@ int ami_prog_copy_partition(ami_device *dev, uint32_t src, uint32_t dest,
 	if (ami_open_cdev(dev) != AMI_STATUS_OK)
 		return AMI_STATUS_ERROR; /* last error is set by ami_open_cdev */
 	
-	payload.src = src;
-	payload.dest = dest;
+	payload.src_device = src_device;
+	payload.src_part = src_part;
+	payload.dest_device = dest_device;
+	payload.dest_part = dest_part;
 
 	/* NOTE: Progress tracking is currently not implemented driver side. */
 	if (progress_handler)
@@ -279,7 +285,7 @@ int ami_prog_copy_partition(ami_device *dev, uint32_t src, uint32_t dest,
 /*
  * Get the FPT header.
  */
-int ami_prog_get_fpt_header(ami_device *dev, struct ami_fpt_header *header)
+int ami_prog_get_fpt_header(ami_device *dev, uint8_t boot_device, struct ami_fpt_header *header)
 {
 	int ret = AMI_STATUS_ERROR;
 	struct ami_ioc_fpt_hdr_value data = { 0 };
@@ -289,6 +295,8 @@ int ami_prog_get_fpt_header(ami_device *dev, struct ami_fpt_header *header)
 	
 	if (ami_open_cdev(dev) != AMI_STATUS_OK)
 		return AMI_STATUS_ERROR; /* last error is set by ami_open_cdev */
+
+	data.boot_device = boot_device;
 	
 	errno = 0;
 	if (ioctl(dev->cdev, AMI_IOC_GET_FPT_HDR, &data) == AMI_LINUX_STATUS_ERROR) {
@@ -312,7 +320,7 @@ int ami_prog_get_fpt_header(ami_device *dev, struct ami_fpt_header *header)
 /*
  * Get FPT partition information.
  */
-int ami_prog_get_fpt_partition(ami_device *dev, uint32_t num, struct ami_fpt_partition *partition)
+int ami_prog_get_fpt_partition(ami_device *dev, uint8_t boot_device, uint32_t num, struct ami_fpt_partition *partition)
 {
 	int ret = AMI_STATUS_ERROR;
 	struct ami_ioc_fpt_partition_value data = { 0 };
@@ -323,6 +331,7 @@ int ami_prog_get_fpt_partition(ami_device *dev, uint32_t num, struct ami_fpt_par
 	if (ami_open_cdev(dev) != AMI_STATUS_OK)
 		return AMI_STATUS_ERROR; /* last error is set by ami_open_cdev */
 
+	data.boot_device = boot_device;
 	data.partition = num;
 	
 	errno = 0;

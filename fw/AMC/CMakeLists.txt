@@ -13,12 +13,11 @@ if( TEST_ENABLE )
     add_subdirectory( ./src/test )
     add_subdirectory( ./src/apps/in_band/test )
     add_subdirectory( ./src/osal/src/test/unittest )
-    add_subdirectory( ./src/proxy_drivers/acc/test )
     add_subdirectory( ./src/proxy_drivers/apc/test )
     add_subdirectory( ./src/proxy_drivers/axc/test )
     add_subdirectory( ./src/proxy_drivers/ami/test )
     add_subdirectory( ./src/proxy_drivers/asc/test )
-    add_subdirectory( ./src/proxy_drivers/rmi_handler/test )
+    add_subdirectory( ./src/proxy_drivers/bmc/test )
 else()
     #if OS not specified, default to FreeRTOS
     if(NOT OS)
@@ -43,15 +42,14 @@ else()
         set(OSAL_PATH "src/osal/src/linux/osal.c")
         set(FW_IF_PATH "src/fal/gcq/fw_if_gcq_linux.c")
         set(FW_I2C_PATH "src/device_drivers/i2c/linux/i2c.c")
-        set(FW_EMMC_PATH "src/device_drivers/emmc/linux/emmc.c")
         set(FW_SYS_MON_PATH "src/device_drivers/sensors/sys_mon/linux/sys_mon.c")
-        set(FW_OSPI_PATH "src/device_drivers/ospi/linux/ospi.c")
         set(FW_IF_OSPI_PATH "src/fal/ospi/fw_if_ospi_stub.c")
         set(FW_IF_MUXED_DEVICE_PATH "src/fal/muxed_device/fw_if_muxed_device_stub.c")
         set(FW_IF_MUXED_DEVICE_DEBUG_PATH "src/fal/muxed_device/debug/fw_if_muxed_device_debug.c")
         set(LINUX_HAL_MEM_BASE "src/profiles/Linux/profile_hal_memory_base.c")
         set(EEPROM_PATH "src/device_drivers/eeprom/linux/eeprom.c")
         set(FW_IF_EMMC_PATH "src/fal/emmc/fw_if_emmc_stub.c")
+        set(FW_IF_SMBUS_BLOCK_IO_PATH "src/fal/smbus/fw_if_smbus_stub.c")
         set(NAME "amc")
     endif()
 
@@ -74,7 +72,8 @@ else()
         set(FW_IF_MUXED_DEVICE_PATH "src/fal/muxed_device/fw_if_muxed_device_amc.c")
         set(FW_IF_MUXED_DEVICE_DEBUG_PATH "src/fal/muxed_device/debug/fw_if_muxed_device_debug.c")
         set(EEPROM_PATH "src/device_drivers/eeprom/aved/eeprom.c")
-        set(FW_IF_EMMC_PATH "src/fal/emmc/fw_if_emmc_stub.c")
+        set(FW_IF_EMMC_PATH "src/fal/emmc/fw_if_emmc_amc.c")
+        set(FW_IF_SMBUS_BLOCK_IO_PATH "src/fal/smbus/fw_if_smbus_block_io.c")
         set(NAME "amc.elf")
 
         if( FREERTOS_DEBUG )
@@ -101,25 +100,33 @@ else()
         include_directories(src/profiles/v80)
         set(PROFILE "v80")
         set(PROFILE_FAL_PATH "src/profiles/v80/profile_fal.c")
+        set(PROFILE_DEBUG_MENU_PATH "src/profiles/v80/profile_debug_menu.c")
+        add_definitions(-DOOB_ENABLED)
     else()
         if(PROFILE MATCHES "^(v80*)$")
             include_directories(src/profiles/v80)
             set(PROFILE "v80")
             set(PROFILE_FAL_PATH "src/profiles/v80/profile_fal.c")
+            set(PROFILE_DEBUG_MENU_PATH "src/profiles/v80/profile_debug_menu.c")
+            add_definitions(-DOOB_ENABLED)
         elseif(PROFILE MATCHES "^(v70)$")
             include_directories(src/profiles/v70)
             set(FW_IF_QSFP_PATH "")
             set(FW_IF_QSFP_DEBUG_PATH "")
             set(PROFILE "v70")
             set(PROFILE_FAL_PATH "src/profiles/v70/profile_fal.c")
+            set(PROFILE_DEBUG_MENU_PATH "src/profiles/v70/profile_debug_menu.c")
         elseif(PROFILE MATCHES "^(Linux)$")
             include_directories(src/profiles/Linux)
             set(PROFILE "Linux")
             set(PROFILE_FAL_PATH "src/profiles/Linux/profile_fal.c")
+            set(PROFILE_DEBUG_MENU_PATH "src/profiles/Linux/profile_debug_menu.c")
         else()
             include_directories(src/profiles/v80)
             set(PROFILE "v80")
             set(PROFILE_FAL_PATH "src/profiles/v80/profile_fal.c")
+            set(PROFILE_DEBUG_MENU_PATH "src/profiles/v80/profile_debug_menu.c")
+            add_definitions(-DOOB_ENABLED)
         endif()
     endif()
 
@@ -137,6 +144,7 @@ else()
     #Running prerequisite script
     execute_process(COMMAND ./scripts/getVersion.sh amc WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
     execute_process(COMMAND ./getVersion.sh gcq WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/src/device_drivers/gcq_driver )
+    execute_process(COMMAND ./getVersion.sh smbus WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/src/device_drivers/smbus_driver )
 
     #adding static libraries
     find_library(FREERTOS_LIB NAMES freertos PATHS amc_bsp/psv_cortexr5_0/freertos10_xilinx_domain/bsp/psv_cortexr5_0/lib)
@@ -158,6 +166,7 @@ else()
     include_directories(src/fal/ospi)
     include_directories(src/fal/muxed_device)
     include_directories(src/fal/emmc)
+    include_directories(src/fal/smbus)
     include_directories(src/device_drivers/gcq_driver/src)
     include_directories(src/device_drivers/ospi)
     include_directories(src/device_drivers/sensors/ina3221)
@@ -167,19 +176,24 @@ else()
     include_directories(src/device_drivers/i2c)
     include_directories(src/device_drivers/emmc)
     include_directories(src/device_drivers/eeprom)
-    include_directories(src/proxy_drivers/acc)
+    include_directories(src/device_drivers/smbus_driver/src)
     include_directories(src/proxy_drivers/axc)
     include_directories(src/proxy_drivers/apc)
     include_directories(src/proxy_drivers/asc)
     include_directories(src/proxy_drivers/ami)
-    include_directories(src/proxy_drivers/rmi_handler)
-    include_directories(src/proxy_drivers/rmi_handler/lib)
+    include_directories(src/proxy_drivers/bmc)
+    include_directories(src/proxy_drivers/bmc/mctp)
+    include_directories(src/proxy_drivers/bmc/pldm)
     include_directories(src/apps/asdm)
     include_directories(src/apps/in_band)
     include_directories(src/apps/out_of_band)
     include_directories(src/apps/bim)
 
     if(CMAKE_BUILD_TYPE MATCHES "^(Debug)$")
+        if((PROFILE MATCHES "^(v80)$") OR (PROFILE MATCHES "^(v70)$"))
+            include_directories(src/device_drivers/ospi/debug)
+            include_directories(src/device_drivers/emmc/debug)
+        endif()
         include_directories(src/osal/debug)
         include_directories(src/common/core_libs/pll/debug)
         include_directories(src/common/core_libs/dal/debug)
@@ -189,18 +203,17 @@ else()
         include_directories(src/device_drivers/sensors/cat34ts02/debug)
         include_directories(src/device_drivers/sensors/sys_mon/debug)
         include_directories(src/device_drivers/eeprom/debug)
-        include_directories(src/device_drivers/ospi/debug)
         include_directories(src/device_drivers/i2c/debug)
-        include_directories(src/device_drivers/emmc/debug)
         include_directories(src/fal/gcq/debug)
         include_directories(src/fal/ospi/debug)
         include_directories(src/fal/muxed_device/debug)
-        include_directories(src/proxy_drivers/acc/debug)
+        include_directories(src/fal/emmc/debug)
+        include_directories(src/fal/smbus/debug)
         include_directories(src/proxy_drivers/axc/debug)
         include_directories(src/proxy_drivers/apc/debug)
         include_directories(src/proxy_drivers/asc/debug)
         include_directories(src/proxy_drivers/ami/debug)
-        include_directories(src/proxy_drivers/rmi_handler/debug)
+        include_directories(src/proxy_drivers/bmc/debug)
         include_directories(src/apps/asdm/debug)
         include_directories(src/apps/in_band/debug)
         include_directories(src/apps/out_of_band/debug)
@@ -219,32 +232,54 @@ else()
                 ${FW_IF_OSPI_PATH}
                 ${FW_IF_MUXED_DEVICE_PATH}
                 ${FW_IF_EMMC_PATH}
+                ${FW_IF_SMBUS_BLOCK_IO_PATH}
                 src/device_drivers/gcq_driver/src/gcq_driver.c
                 src/device_drivers/gcq_driver/src/gcq_features.c
                 src/device_drivers/gcq_driver/src/gcq_hw.c
                 src/device_drivers/sensors/ina3221/ina3221.c
                 src/device_drivers/sensors/isl68221/isl68221.c
                 src/device_drivers/sensors/cat34ts02/cat34ts02.c
+                src/device_drivers/smbus_driver/src/smbus_action.c
+                src/device_drivers/smbus_driver/src/smbus_circular_log.c
+                src/device_drivers/smbus_driver/src/smbus_driver.c
+                src/device_drivers/smbus_driver/src/smbus_event_buffer.c
+                src/device_drivers/smbus_driver/src/smbus_event.c
+                src/device_drivers/smbus_driver/src/smbus_hardware_access.c
+                src/device_drivers/smbus_driver/src/smbus_interrupt_handler.c
+                src/device_drivers/smbus_driver/src/smbus_state.c
                 ${FW_SYS_MON_PATH}
                 ${FW_OSPI_PATH}
                 ${FW_I2C_PATH}
                 ${FW_EMMC_PATH}
                 ${EEPROM_PATH}
-                src/proxy_drivers/acc/acc_proxy_driver.c
                 src/proxy_drivers/axc/axc_proxy_driver.c
                 src/proxy_drivers/apc/apc_proxy_driver.c
                 src/proxy_drivers/asc/asc_proxy_driver.c
                 src/proxy_drivers/ami/ami_proxy_driver.c
-                src/proxy_drivers/rmi_handler/rmi_handler.c
+                src/proxy_drivers/bmc/bmc_proxy_driver.c
+                src/proxy_drivers/bmc/mctp/mctp_commands.c
+                src/proxy_drivers/bmc/mctp/mctp_interpreter.c
+                src/proxy_drivers/bmc/mctp/mctp_parser.c
+                src/proxy_drivers/bmc/pldm/pldm_commands.c
+                src/proxy_drivers/bmc/pldm/pldm_parser.c
+                src/proxy_drivers/bmc/pldm/pldm_pdr.c
+                src/proxy_drivers/bmc/pldm/pldm_processor.c
                 src/apps/asdm/asdm.c
                 src/apps/in_band/in_band_telemetry.c
                 src/apps/out_of_band/out_of_band_telemetry.c
                 src/apps/bim/bim.c
                 ${LINUX_HAL_MEM_BASE}
                 ${PROFILE_FAL_PATH}
+                ${PROFILE_DEBUG_MENU_PATH}
                 )
 
     if(CMAKE_BUILD_TYPE MATCHES "^(Debug)$")
+        if((PROFILE MATCHES "^(v80)$") OR (PROFILE MATCHES "^(v70)$"))
+            target_sources(${NAME}
+                PRIVATE src/device_drivers/ospi/debug/ospi_debug.c
+                PRIVATE src/device_drivers/emmc/debug/emmc_debug.c
+            )
+        endif()
         target_sources(${NAME}
                 PRIVATE src/osal/debug/osal_debug.c
                 PRIVATE src/common/core_libs/pll/debug/pll_debug.c
@@ -255,18 +290,17 @@ else()
                 PRIVATE src/device_drivers/sensors/cat34ts02/debug/cat34ts02_debug.c
                 PRIVATE src/device_drivers/sensors/sys_mon/debug/sys_mon_debug.c
                 PRIVATE src/device_drivers/eeprom/debug/eeprom_debug.c
-                PRIVATE src/device_drivers/ospi/debug/ospi_debug.c
                 PRIVATE src/device_drivers/i2c/debug/i2c_debug.c
-                PRIVATE src/device_drivers/emmc/debug/emmc_debug.c
                 PRIVATE src/fal/gcq/debug/fw_if_gcq_debug.c
                 PRIVATE src/fal/ospi/debug/fw_if_ospi_debug.c
                 PRIVATE ${FW_IF_MUXED_DEVICE_DEBUG_PATH}
-                PRIVATE src/proxy_drivers/acc/debug/acc_proxy_driver_debug.c
+                PRIVATE src/fal/emmc/debug/fw_if_emmc_debug.c
+                PRIVATE src/fal/smbus/debug/fw_if_smbus_debug.c
                 PRIVATE src/proxy_drivers/ami/debug/ami_proxy_driver_debug.c
                 PRIVATE src/proxy_drivers/apc/debug/apc_proxy_driver_debug.c
                 PRIVATE src/proxy_drivers/axc/debug/axc_proxy_driver_debug.c
                 PRIVATE src/proxy_drivers/asc/debug/asc_proxy_driver_debug.c
-                PRIVATE src/proxy_drivers/rmi_handler/debug/rmi_handler_debug.c
+                PRIVATE src/proxy_drivers/bmc/debug/bmc_proxy_driver_debug.c
                 PRIVATE src/apps/asdm/debug/asdm_debug.c
                 PRIVATE src/apps/in_band/debug/in_band_telemetry_debug.c
                 PRIVATE src/apps/out_of_band/debug/out_of_band_telemetry_debug.c

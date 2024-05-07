@@ -51,11 +51,9 @@ char *pcie_device_id_to_str(uint16_t id)
 {
 	switch (id) {
 	case AMI_PCIE_DEVICE_ID_V70_PF0:
-	case AMI_PCIE_DEVICE_ID_V70_PF1:
 		return "ALVEO V70";
 	
 	case AMI_PCIE_DEVICE_ID_VCK5000_PF0:
-	case AMI_PCIE_DEVICE_ID_VCK5000_PF1:
 		return "VCK5000";
 	
 	case AMI_PCIE_DEVICE_ID_V80:

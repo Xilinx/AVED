@@ -25,68 +25,70 @@
 /* Defines                                                                    */
 /******************************************************************************/
 
-#define UPPER_FIREWALL      ( 0xBABECAFE )
-#define LOWER_FIREWALL      ( 0xDEADFACE )
+#define UPPER_FIREWALL ( 0xBABECAFE )
+#define LOWER_FIREWALL ( 0xDEADFACE )
 
-#define DAL_NAME            "DAL"
+#define DAL_NAME "DAL"
 
-#define DAL_CMD_LEN_MIN     ( 1 )
-#define DAL_CMD_SINGLE_LEN  ( DAL_CMD_LEN_MIN + 1 )
-#define DAL_CMD_FULL_MENU   ( '?' )
-#define DAL_CMD_GO_TOP      ( '*' )
-#define DAL_CMD_GO_BACK     ( '0' )
+#define DAL_CMD_LEN_MIN    ( 1 )
+#define DAL_CMD_SINGLE_LEN ( DAL_CMD_LEN_MIN + 1 )
+#define DAL_CMD_FULL_MENU  ( '?' )
+#define DAL_CMD_GO_TOP     ( '*' )
+#define DAL_CMD_GO_BACK    ( '0' )
 
-#define DAL_PROMPT          ( "#>" )
-#define DAL_TOP_MENU_NAME   ( "*" )
+#define DAL_PROMPT        ( "#>" )
+#define DAL_TOP_MENU_NAME ( "*" )
 
-#define DAL_START_IDX       ( 1 )
-#define DAL_START_LVL       ( 1 )
+#define DAL_START_IDX ( 1 )
+#define DAL_START_LVL ( 1 )
 
-#define DAL_MAX_INPUT       ( 256 )
-#define DAL_MSG_MAX_LEN     ( 256 )
+#define DAL_MAX_INPUT   ( 256 )
+#define DAL_MSG_MAX_LEN ( 256 )
 
-#define BASE_DEC            ( 10 )
-#define BASE_HEX            ( 16 )
+#define BASE_DEC ( 10 )
+#define BASE_HEX ( 16 )
 
 /* Stat & Error definitions */
-#define DAL_STATS( DO )                          \
-    DO( DAL_STATS_INIT_OVERALL_COMPLETE )        \
-    DO( DAL_STATS_CREATE_MUTEX )                 \
-    DO( DAL_STATS_TAKE_MUTEX )                   \
-    DO( DAL_STATS_RELEASE_MUTEX )                \
-    DO( DAL_STATS_OPTION_CREATED )               \
-    DO( DAL_STATS_DIRECTORY_CREATED )            \
-    DO( DAL_STATS_SUB_DIRECTORY_CREATED )        \
-    DO( DAL_STATS_DEBUG_FUNCTION_CREATED )       \
-    DO( DAL_STATS_NEW_COMMAND )                  \
-    DO( DAL_STATS_MAX )
+#define DAL_STATS( DO )                        \
+        DO( DAL_STATS_INIT_OVERALL_COMPLETE )  \
+        DO( DAL_STATS_CREATE_MUTEX )           \
+        DO( DAL_STATS_TAKE_MUTEX )             \
+        DO( DAL_STATS_RELEASE_MUTEX )          \
+        DO( DAL_STATS_OPTION_CREATED )         \
+        DO( DAL_STATS_DIRECTORY_CREATED )      \
+        DO( DAL_STATS_SUB_DIRECTORY_CREATED )  \
+        DO( DAL_STATS_DEBUG_FUNCTION_CREATED ) \
+        DO( DAL_STATS_NEW_COMMAND )            \
+        DO( DAL_STATS_MAX )
 
-#define DAL_ERRORS( DO )                         \
-    DO( DAL_ERRORS_INIT_TASK_CREATE_FAILED )     \
-    DO( DAL_ERRORS_INIT_MUTEX_CREATE_FAILED )    \
-    DO( DAL_ERRORS_MUTEX_RELEASE_FAILED )        \
-    DO( DAL_ERRORS_MUTEX_TAKE_FAILED )           \
-    DO( DAL_ERRORS_OPTION_NOT_CREATED )          \
-    DO( DAL_ERRORS_DIRECTORY_NOT_CREATED )       \
-    DO( DAL_ERRORS_SUB_DIRECTORY_NOT_CREATED )   \
-    DO( DAL_ERRORS_DEBUG_FUNCTION_NOT_CREATED )  \
-    DO( DAL_ERRORS_VALIDATION_FAILED )           \
-    DO( DAL_ERRORS_COMMAND_LIST_NULL_POINTER )   \
-    DO( DAL_ERRORS_UNKNOWN_CHAR_IN_COMMAND_LINE )\
-    DO( DAL_ERRORS_UNKNOWN_COMMAND )             \
-    DO( DAL_ERRORS_NULL_INPUT_POINTER )          \
-    DO( DAL_ERRORS_WRONG_INPUT_BUF_SIZE )        \
-    DO( DAL_ERRORS_MAX )
+#define DAL_ERRORS( DO )                              \
+        DO( DAL_ERRORS_INIT_TASK_CREATE_FAILED )      \
+        DO( DAL_ERRORS_INIT_MUTEX_CREATE_FAILED )     \
+        DO( DAL_ERRORS_MUTEX_RELEASE_FAILED )         \
+        DO( DAL_ERRORS_MUTEX_TAKE_FAILED )            \
+        DO( DAL_ERRORS_OPTION_NOT_CREATED )           \
+        DO( DAL_ERRORS_DIRECTORY_NOT_CREATED )        \
+        DO( DAL_ERRORS_SUB_DIRECTORY_NOT_CREATED )    \
+        DO( DAL_ERRORS_DEBUG_FUNCTION_NOT_CREATED )   \
+        DO( DAL_ERRORS_VALIDATION_FAILED )            \
+        DO( DAL_ERRORS_COMMAND_LIST_NULL_POINTER )    \
+        DO( DAL_ERRORS_UNKNOWN_CHAR_IN_COMMAND_LINE ) \
+        DO( DAL_ERRORS_UNKNOWN_COMMAND )              \
+        DO( DAL_ERRORS_NULL_INPUT_POINTER )           \
+        DO( DAL_ERRORS_WRONG_INPUT_BUF_SIZE )         \
+        DO( DAL_ERRORS_MAX )
 
-#define PRINT_STAT_COUNTER( x )     PLL_INF( DAL_NAME, "%50s . . . . %d\r\n",          \
-                                             DAL_STATS_STR[ x ],                       \
-                                             pxThis->ulStats[ x ] )
-#define PRINT_ERROR_COUNTER( x )    PLL_INF( DAL_NAME, "%50s . . . . %d\r\n",          \
-                                             DAL_ERRORS_STR[ x ],                      \
-                                             pxThis->ulErrors[ x ] )
+#define PRINT_STAT_COUNTER( x )  PLL_INF( DAL_NAME,              \
+                                          "%50s . . . . %d\r\n", \
+                                          DAL_STATS_STR[ x ],    \
+                                          pxThis->ulStats[ x ] )
+#define PRINT_ERROR_COUNTER( x ) PLL_INF( DAL_NAME,              \
+                                          "%50s . . . . %d\r\n", \
+                                          DAL_ERRORS_STR[ x ],   \
+                                          pxThis->ulErrors[ x ] )
 
-#define INC_STAT_COUNTER( x )       { if( x < DAL_STATS_MAX )pxThis->ulStats[ x ]++; }
-#define INC_ERROR_COUNTER( x )      { if( x < DAL_ERRORS_MAX )pxThis->ulErrors[ x ]++; }
+#define INC_STAT_COUNTER( x )  { if( x < DAL_STATS_MAX ) pxThis->ulStats[ x ]++; }
+#define INC_ERROR_COUNTER( x ) { if( x < DAL_ERRORS_MAX ) pxThis->ulErrors[ x ]++; }
 
 
 
@@ -102,7 +104,6 @@ typedef enum DAL_MENU_OPTION_TYPE_ENUM
 {
     DAL_MENU_OPTION_TYPE_DIR = 0,
     DAL_MENU_OPTION_TYPE_FUNC,
-
     MAX_DAL_MENU_OPTION_TYPE
 
 } DAL_MENU_OPTION_TYPE_ENUM;
@@ -130,8 +131,8 @@ UTIL_MAKE_ENUM_AND_STRINGS( DAL_ERRORS, DAL_ERRORS, DAL_ERRORS_STR )
  */
 typedef union DAL_MENU_ACTION
 {
-    DAL_DEBUG_FUNCTION  pxDebugFunc;
-    DAL_HDL             pxLevelDown;
+    DAL_DEBUG_FUNCTION pxDebugFunc;
+    DAL_HDL            pxLevelDown;
 
 } DAL_MENU_ACTION;
 
@@ -141,16 +142,16 @@ typedef union DAL_MENU_ACTION
  */
 typedef struct DAL_MENU_OPTION
 {
-    char                        pcName[ DAL_MAX_NAME_LEN ];
-    DAL_MENU_OPTION_TYPE_ENUM   xNodeType;
+    char                      pcName[ DAL_MAX_NAME_LEN ];
+    DAL_MENU_OPTION_TYPE_ENUM xNodeType;
 
-    DAL_MENU_ACTION             xAction;
-    DAL_HDL                     pxLevelUp;
+    DAL_MENU_ACTION           xAction;
+    DAL_HDL                   pxLevelUp;
 
-    DAL_HDL                     pxNextNode;
-    DAL_HDL                     pxLastNode;
-    int                         iNumNodes;
-    int                         iDepth;
+    DAL_HDL                   pxNextNode;
+    DAL_HDL                   pxLastNode;
+    int                       iNumNodes;
+    int                       iDepth;
 
 } DAL_MENU_OPTION;
 
@@ -160,24 +161,25 @@ typedef struct DAL_MENU_OPTION
  */
 typedef struct DAL_PRIVATE_DATA
 {
-    uint32_t    ulUpperFirewall;
+    uint32_t           ulUpperFirewall;
 
-    int         iIsInitialised;
-    char        pcMenuName[ DAL_MAX_NAME_LEN ];
+    int                iIsInitialised;
+    char               pcMenuName[ DAL_MAX_NAME_LEN ];
+    DAL_DEBUG_FUNCTION pxInitFunc;
 
-    int         iNumNodes;
-    DAL_HDL     pxTopLevel;
-    DAL_HDL     pxCurrentLevel;
+    int                iNumNodes;
+    DAL_HDL            pxTopLevel;
+    DAL_HDL            pxCurrentLevel;
 
-    char        pcLastCmd[ DAL_MAX_INPUT ];
+    char               pcLastCmd[ DAL_MAX_INPUT ];
 
-    void        *pvTaskHdl;
-    void        *pvMtxHdl;
+    void               *pvTaskHdl;
+    void               *pvMtxHdl;
 
-    uint32_t    ulStats[ DAL_STATS_MAX ];
-    uint32_t    ulErrors[ DAL_ERRORS_MAX ];
+    uint32_t           ulStats[ DAL_STATS_MAX ];
+    uint32_t           ulErrors[ DAL_ERRORS_MAX ];
 
-    uint32_t    ulLowerFirewall;
+    uint32_t           ulLowerFirewall;
 
 } DAL_PRIVATE_DATA;
 
@@ -251,7 +253,7 @@ static int iNextInput( char *pcInput, int iInputBufSize );
  * @param iInputLen     Input length
  *
  * @return  N/A         Does not return
-*/
+ */
 static void vProcessCmd( char *pcCmd, int iInputLen );
 
 /**
@@ -270,21 +272,30 @@ static void vDalTask( void *pArg );
 
 static DAL_PRIVATE_DATA xLocalData =
 {
-    UPPER_FIREWALL, /* ulUpperFirewall */
-    FALSE,          /* iIsInitialised  */
-    { 0 },          /* pcMenuName      */
-    0,              /* iNumNodes       */
-    NULL,           /* pxTopLevel      */
-    NULL,           /* pxCurrentLevel  */
-    { 0 },          /* pcLastCmd       */
-    NULL,           /* pvTaskHdl       */
-    NULL,           /* pvMtxHdl        */
-    { 0 },          /* ulStats         */
-    { 0 },          /* ulErrors        */
+    UPPER_FIREWALL,                                                            /* ulUpperFirewall */
+    FALSE,                                                                     /* iIsInitialised  */
+    {
+        0
+    },                                                                         /* pcMenuName      */
+    NULL,                                                                      /* pxInitFunc      */
+    0,                                                                         /* iNumNodes       */
+    NULL,                                                                      /* pxTopLevel      */
+    NULL,                                                                      /* pxCurrentLevel  */
+    {
+        0
+    },                                                                         /* pcLastCmd       */
+    NULL,                                                                      /* pvTaskHdl       */
+    NULL,                                                                      /* pvMtxHdl        */
+    {
+        0
+    },                                                                         /* ulStats         */
+    {
+        0
+    },                                                                         /* ulErrors        */
     LOWER_FIREWALL
 };
 
-static DAL_PRIVATE_DATA * pxThis = &xLocalData;
+static DAL_PRIVATE_DATA *pxThis = &xLocalData;
 
 
 /******************************************************************************/
@@ -294,7 +305,10 @@ static DAL_PRIVATE_DATA * pxThis = &xLocalData;
 /**
  * @brief   Initialise the DAL and start the debug monitoring menu
  */
-int iDAL_Initialise( const char *pcMenuName, uint32_t ulTaskPrio, uint32_t ulStackSize )
+int iDAL_Initialise( const char *pcMenuName,
+                     uint32_t ulTaskPrio,
+                     uint32_t ulStackSize,
+                     DAL_DEBUG_FUNCTION pxPrintInitBanner )
 {
     int iStatus = ERROR;
 
@@ -302,15 +316,19 @@ int iDAL_Initialise( const char *pcMenuName, uint32_t ulTaskPrio, uint32_t ulSta
         ( LOWER_FIREWALL == pxThis->ulLowerFirewall ) &&
         ( NULL != pcMenuName ) &&
         ( DAL_MAX_NAME_LEN >= strlen( pcMenuName ) ) &&
-        ( FALSE == pxThis->iIsInitialised ) )
+        ( FALSE == pxThis->iIsInitialised ) &&
+        ( NULL != pxPrintInitBanner ) )
     {
         if( OSAL_ERRORS_NONE != iOSAL_Mutex_Create( &pxThis->pvMtxHdl, "DAL_Mutex" ) )
         {
             PLL_ERR( DAL_NAME, "Error initialising mutex\r\n" );
             INC_ERROR_COUNTER( DAL_ERRORS_INIT_MUTEX_CREATE_FAILED )
         }
-        else if( OSAL_ERRORS_NONE != iOSAL_Task_Create( &pxThis->pvTaskHdl, vDalTask,
-                                                        ulStackSize, NULL, ulTaskPrio,
+        else if( OSAL_ERRORS_NONE != iOSAL_Task_Create( &pxThis->pvTaskHdl,
+                                                        vDalTask,
+                                                        ulStackSize,
+                                                        NULL,
+                                                        ulTaskPrio,
                                                         "DAL_Task" ) )
         {
             INC_ERROR_COUNTER( DAL_ERRORS_INIT_TASK_CREATE_FAILED )
@@ -325,20 +343,22 @@ int iDAL_Initialise( const char *pcMenuName, uint32_t ulTaskPrio, uint32_t ulSta
             {
                 INC_STAT_COUNTER( DAL_STATS_OPTION_CREATED )
 
-                strncpy( pxThis->pcMenuName, pcMenuName, strlen( pcMenuName ) );
-                memcpy( pxThis->pxTopLevel->pcName, DAL_TOP_MENU_NAME, strlen( DAL_TOP_MENU_NAME ) );
-                pxThis->pxTopLevel->pxNextNode  = NULL;
-                pxThis->pxTopLevel->pxLastNode  = NULL;
-                pxThis->pxTopLevel->iNumNodes   = 0;
+                pcOSAL_StrNCpy( pxThis->pcMenuName, pcMenuName, strlen( pcMenuName ) );
+                pvOSAL_MemCpy( pxThis->pxTopLevel->pcName, DAL_TOP_MENU_NAME, strlen( DAL_TOP_MENU_NAME ) );
+                pxThis->pxTopLevel->pxNextNode          = NULL;
+                pxThis->pxTopLevel->pxLastNode          = NULL;
+                pxThis->pxTopLevel->iNumNodes           = 0;
                 pxThis->pxTopLevel->xAction.pxLevelDown = NULL;
-                pxThis->pxTopLevel->pxLevelUp   = NULL;
-                pxThis->pxTopLevel->xNodeType   = DAL_MENU_OPTION_TYPE_DIR;
+                pxThis->pxTopLevel->pxLevelUp           = NULL;
+                pxThis->pxTopLevel->xNodeType           = DAL_MENU_OPTION_TYPE_DIR;
 
                 pxThis->pxCurrentLevel = pxThis->pxTopLevel;
 
                 INC_STAT_COUNTER( DAL_STATS_INIT_OVERALL_COMPLETE )
+
+                pxThis->pxInitFunc     = pxPrintInitBanner;
                 pxThis->iIsInitialised = TRUE;
-                iStatus = OK;
+                iStatus                = OK;
             }
             else
             {
@@ -416,7 +436,7 @@ DAL_HDL pxDAL_NewSubDirectory( const char *pcSubDirName, DAL_HDL pxParent )
         ( NULL != pcSubDirName ) &&
         ( NULL != pxParent ) )
     {
-        if ( DAL_MENU_OPTION_TYPE_DIR == pxParent->xNodeType )
+        if( DAL_MENU_OPTION_TYPE_DIR == pxParent->xNodeType )
         {
             if( OSAL_ERRORS_NONE == iOSAL_Mutex_Take( pxThis->pvMtxHdl, OSAL_TIMEOUT_WAIT_FOREVER ) )
             {
@@ -470,7 +490,7 @@ DAL_HDL pxDAL_NewDebugFunction( const char *pcFunctionName, DAL_HDL pxParent, DA
         ( NULL != pxParent ) &&
         ( NULL != pxFunction ) )
     {
-        if ( DAL_MENU_OPTION_TYPE_DIR == pxParent->xNodeType )
+        if( DAL_MENU_OPTION_TYPE_DIR == pxParent->xNodeType )
         {
             if( OSAL_ERRORS_NONE == iOSAL_Mutex_Take( pxThis->pvMtxHdl, OSAL_TIMEOUT_WAIT_FOREVER ) )
             {
@@ -523,8 +543,11 @@ int iDAL_GetInt( const char *pcPrompt, int *piInput )
         ( NULL != pcPrompt ) &&
         ( NULL != piInput ) )
     {
-        int iInputLen = 0;
-        char pcGetInput[ DAL_MAX_INPUT ] = { 0 };
+        int  iInputLen                   = 0;
+        char pcGetInput[ DAL_MAX_INPUT ] =
+        {
+            0
+        };
 
         while( OK != iStatus )
         {
@@ -551,7 +574,7 @@ int iDAL_GetInt( const char *pcPrompt, int *piInput )
                     pcDigit++;
                 }
 
-                if( ( 0 < iInputLen ) && (  OK == iStatus ) )
+                if( ( 0 < iInputLen ) && ( OK == iStatus ) )
                 {
                     /* input is a number */
                     *piInput = ( int )strtol( pcGetInput, NULL, BASE_DEC );
@@ -581,7 +604,10 @@ int iDAL_GetIntInRange( const char *pcPrompt, int *piInput, int iMin, int iMax )
         ( NULL != pcPrompt ) &&
         ( NULL != piInput ) )
     {
-        char pcPromptWithRange[ DAL_MSG_MAX_LEN ] = { 0 };
+        char pcPromptWithRange[ DAL_MSG_MAX_LEN ] =
+        {
+            0
+        };
 
         snprintf( pcPromptWithRange, DAL_MSG_MAX_LEN, "%s (Min : %d, Max: %d)", pcPrompt, iMin, iMax );
         if( iMin < iMax )
@@ -611,8 +637,8 @@ int iDAL_GetIntInRange( const char *pcPrompt, int *piInput, int iMin, int iMax )
 
 /**
  * @brief Retrieve a user-inputted float number
-*/
-int iDAL_GetFloat( const char *pcPrompt, float *pfInput)
+ */
+int iDAL_GetFloat( const char *pcPrompt, float *pfInput )
 {
     int iStatus = ERROR;
 
@@ -622,9 +648,12 @@ int iDAL_GetFloat( const char *pcPrompt, float *pfInput)
         ( NULL != pcPrompt ) &&
         ( NULL != pfInput ) )
     {
-        int iInputLen = 0;
-        int iDotFlag  = 0;
-        char pcGetInput[ DAL_MAX_INPUT ] = { 0 };
+        int  iInputLen                   = 0;
+        int  iDotFlag                    = 0;
+        char pcGetInput[ DAL_MAX_INPUT ] =
+        {
+            0
+        };
 
         while( OK != iStatus )
         {
@@ -663,13 +692,13 @@ int iDAL_GetFloat( const char *pcPrompt, float *pfInput)
                     pcDigit++;
                 }
 
-                if( ( 0 < iInputLen ) && (  OK == iStatus ) )
+                if( ( 0 < iInputLen ) && ( OK == iStatus ) )
                 {
                     /* input is a float number */
                     *pfInput = ( float )strtof( pcGetInput, NULL );
                     if( 0.0 == *pfInput )
                     {
-                        vPLL_Printf("Not a valid input\r\n");
+                        vPLL_Printf( "Not a valid input\r\n" );
                     }
                     else
                     {
@@ -700,7 +729,10 @@ int iDAL_GetFloatInRange( const char *pcPrompt, float *pfInput, float fMin, floa
         ( NULL != pcPrompt ) &&
         ( NULL != pfInput ) )
     {
-        char pcPromptWithRange[ DAL_MSG_MAX_LEN ] = { 0 };
+        char pcPromptWithRange[ DAL_MSG_MAX_LEN ] =
+        {
+            0
+        };
 
         snprintf( pcPromptWithRange, DAL_MSG_MAX_LEN, "%s (Min : %f, Max: %f)", pcPrompt, fMin, fMax );
         if( fMin < fMax )
@@ -741,8 +773,11 @@ int iDAL_GetHex( const char *pcPrompt, uint32_t *pulInput )
         ( NULL != pcPrompt ) &&
         ( NULL != pulInput ) )
     {
-        int iInputLen = 0;
-        char pcGetInput[ DAL_MAX_INPUT ] = { 0 };
+        int  iInputLen                   = 0;
+        char pcGetInput[ DAL_MAX_INPUT ] =
+        {
+            0
+        };
 
         while( OK != iStatus )
         {
@@ -771,7 +806,7 @@ int iDAL_GetHex( const char *pcPrompt, uint32_t *pulInput )
                     pcDigit++;
                 }
 
-                if( ( 0 < iInputLen ) && (  OK == iStatus ) )
+                if( ( 0 < iInputLen ) && ( OK == iStatus ) )
                 {
                     /* input is a number */
                     *pulInput = ( uint32_t )strtoul( pcGetInput, NULL, BASE_HEX );
@@ -801,9 +836,17 @@ int iDAL_GetHexInRange( const char *pcPrompt, uint32_t *pulInput, uint32_t ulMin
         ( NULL != pcPrompt ) &&
         ( NULL != pulInput ) )
     {
-        char pcPromptWithRange[ DAL_MSG_MAX_LEN ] = { 0 };
+        char pcPromptWithRange[ DAL_MSG_MAX_LEN ] =
+        {
+            0
+        };
 
-        snprintf( pcPromptWithRange, DAL_MSG_MAX_LEN, "%s (Min : 0x%X, Max: 0x%X)", pcPrompt, ( unsigned int )ulMin, ( unsigned int )ulMax );
+        snprintf( pcPromptWithRange,
+                  DAL_MSG_MAX_LEN,
+                  "%s (Min : 0x%X, Max: 0x%X)",
+                  pcPrompt,
+                  ( unsigned int )ulMin,
+                  ( unsigned int )ulMax );
         if( ulMin < ulMax )
         {
             uint32_t ulInput = 0x00;
@@ -840,8 +883,11 @@ int iDAL_GetString( const char *pcPrompt, char *pcInput, int iMaxLen )
         ( NULL != pcInput ) &&
         ( DAL_MAX_INPUT >= iMaxLen ) )
     {
-        int iInputLen = 0;
-        char pcGetInput[ DAL_MAX_INPUT ] = { 0 };
+        int  iInputLen                   = 0;
+        char pcGetInput[ DAL_MAX_INPUT ] =
+        {
+            0
+        };
 
         while( OK != iStatus )
         {
@@ -855,14 +901,15 @@ int iDAL_GetString( const char *pcPrompt, char *pcInput, int iMaxLen )
 
                 if( iMaxLen >= iInputLen )
                 {
-                    strncpy( pcInput, pcGetInput, iInputLen );
+                    pcOSAL_StrNCpy( pcInput, pcGetInput, iInputLen );
                     vPLL_Printf( "\r\n" );
                     iStatus = OK;
                 }
                 else
                 {
                     vPLL_Printf( "Input length (%d) exceeds maximum length (%d)\r\n",
-                                      iInputLen, iMaxLen );
+                                 iInputLen,
+                                 iMaxLen );
                 }
             }
         }
@@ -876,7 +923,7 @@ int iDAL_GetString( const char *pcPrompt, char *pcInput, int iMaxLen )
  */
 int iDAL_PrintStatistics( void )
 {
-     int iStatus = ERROR;
+    int iStatus = ERROR;
 
     if( ( UPPER_FIREWALL == pxThis->ulUpperFirewall ) &&
         ( LOWER_FIREWALL == pxThis->ulLowerFirewall ) )
@@ -967,7 +1014,7 @@ static void vPrintCurrentLevel( void )
 static void vPrintNextLevel( DAL_HDL pxLevel, int iIncSubDirs )
 {
     DAL_MENU_OPTION *pxCurrNode = pxLevel;
-    int iIndex                  = DAL_START_IDX;
+    int             iIndex      = DAL_START_IDX;
 
     while( NULL != pxCurrNode )
     {
@@ -984,8 +1031,10 @@ static void vPrintNextLevel( DAL_HDL pxLevel, int iIncSubDirs )
             vPLL_Printf( "\t" );
         }
 
-        vPLL_Printf( "%d:%s%s\r\n", iIndex,  pxCurrNode->pcName,
-                        ( DAL_MENU_OPTION_TYPE_DIR == pxCurrNode->xNodeType )?( "/" ):( "()" ) );
+        vPLL_Printf( "%d:%s%s\r\n",
+                     iIndex,
+                     pxCurrNode->pcName,
+                     ( DAL_MENU_OPTION_TYPE_DIR == pxCurrNode->xNodeType )?( "/" ):( "()" ) );
 
         if( ( TRUE == iIncSubDirs ) &&
             ( DAL_MENU_OPTION_TYPE_DIR == pxCurrNode->xNodeType ) &&
@@ -1018,21 +1067,21 @@ static DAL_HDL xNewMenuItem( const char *pcItemName, DAL_HDL pxParent, DAL_DEBUG
         {
             INC_STAT_COUNTER( DAL_STATS_OPTION_CREATED )
 
-            strncpy( pxNewNode->pcName, pcItemName, strlen( pcItemName ) );
-            pxNewNode->pxNextNode  = NULL;
-            pxNewNode->pxLastNode  = NULL;
-            pxNewNode->iNumNodes   = 0;
+            pcOSAL_StrNCpy( pxNewNode->pcName, pcItemName, strlen( pcItemName ) );
+            pxNewNode->pxNextNode          = NULL;
+            pxNewNode->pxLastNode          = NULL;
+            pxNewNode->iNumNodes           = 0;
             pxNewNode->xAction.pxLevelDown = NULL;
-            pxNewNode->pxLevelUp   = pxParent;
+            pxNewNode->pxLevelUp           = pxParent;
 
             if( NULL != pxFunction )
             {
-                pxNewNode->xNodeType   = DAL_MENU_OPTION_TYPE_FUNC;
+                pxNewNode->xNodeType           = DAL_MENU_OPTION_TYPE_FUNC;
                 pxNewNode->xAction.pxDebugFunc = pxFunction;
             }
             else
             {
-                pxNewNode->xNodeType = DAL_MENU_OPTION_TYPE_DIR;
+                pxNewNode->xNodeType           = DAL_MENU_OPTION_TYPE_DIR;
                 pxNewNode->xAction.pxDebugFunc = NULL;
             }
 
@@ -1043,10 +1092,10 @@ static DAL_HDL xNewMenuItem( const char *pcItemName, DAL_HDL pxParent, DAL_DEBUG
             if( NULL == pxParent->xAction.pxLevelDown )
             {
                 /* no subdirectory level yet, add this new one as the first */
-                pxParent->xAction.pxLevelDown = pxNewNode;
+                pxParent->xAction.pxLevelDown             = pxNewNode;
                 pxParent->xAction.pxLevelDown->pxNextNode = NULL;
                 pxParent->xAction.pxLevelDown->pxLastNode = pxParent->xAction.pxLevelDown->pxNextNode;
-                pxParent->xAction.pxLevelDown->iNumNodes = 1;
+                pxParent->xAction.pxLevelDown->iNumNodes  = 1;
             }
             else
             {
@@ -1061,7 +1110,7 @@ static DAL_HDL xNewMenuItem( const char *pcItemName, DAL_HDL pxParent, DAL_DEBUG
                 {
                     /* add to end of this level */
                     pxParent->xAction.pxLevelDown->pxLastNode->pxNextNode = pxNewNode;
-                    pxParent->xAction.pxLevelDown->pxLastNode = pxNewNode;
+                    pxParent->xAction.pxLevelDown->pxLastNode             = pxNewNode;
                 }
                 pxParent->xAction.pxLevelDown->iNumNodes++;
             }
@@ -1080,14 +1129,14 @@ static DAL_HDL xNewMenuItem( const char *pcItemName, DAL_HDL pxParent, DAL_DEBUG
  */
 static int iSelectOption( int iCmd )
 {
-    int iStatus            = ERROR;
+    int     iStatus        = ERROR;
     DAL_HDL pxCurrentLevel = pxThis->pxCurrentLevel;
 
     if( ( 0 < iCmd ) &&
         ( NULL != pxCurrentLevel ) &&
         ( iCmd <= pxCurrentLevel->iNumNodes ) )
     {
-        int i          = DAL_START_IDX;
+        int i = DAL_START_IDX;
         pxCurrentLevel = pxCurrentLevel->xAction.pxLevelDown;
 
         while( ( NULL != pxCurrentLevel ) && ( i++ < iCmd ) )
@@ -1097,10 +1146,10 @@ static int iSelectOption( int iCmd )
 
         if( NULL != pxCurrentLevel )
         {
-            if ( DAL_MENU_OPTION_TYPE_DIR == pxCurrentLevel->xNodeType )
+            if( DAL_MENU_OPTION_TYPE_DIR == pxCurrentLevel->xNodeType )
             {
                 pxThis->pxCurrentLevel = pxCurrentLevel;
-                iStatus = OK;
+                iStatus                = OK;
             }
             else if( DAL_MENU_OPTION_TYPE_FUNC == pxCurrentLevel->xNodeType )
             {
@@ -1142,9 +1191,9 @@ static int iNextInput( char *pcInput, int iInputBufSize )
             fflush( stdin );
 
             while( ( '\r' != cLastChar ) && ( '\n' != cLastChar ) &&
-                 ( DAL_MAX_INPUT > iInputLen ) )
+                   ( DAL_MAX_INPUT > iInputLen ) )
             {
-                cLastChar = cOSAL_GetChar();
+                cLastChar              = cOSAL_GetChar();
                 pcInput[ iInputLen++ ] = cLastChar;
                 vPLL_Printf( "%c", cLastChar );
             }
@@ -1156,10 +1205,10 @@ static int iNextInput( char *pcInput, int iInputBufSize )
 
 /**
  * @brief   Local function that process each command
-*/
+ */
 static void vProcessCmd( char *pcCmd, int iInputLen )
 {
-    int iCmd          = 0;
+    int  iCmd         = 0;
     char *pcCmdCursor = pcCmd;
     char *pcEndPtr    = NULL;
 
@@ -1191,42 +1240,45 @@ static void vProcessCmd( char *pcCmd, int iInputLen )
                 {
                     switch( *pcCmdCursor )
                     {
-                        case DAL_CMD_FULL_MENU:
+                    case DAL_CMD_FULL_MENU:
+                    {
+                        vPrintMenu();
+                        pcEndPtr = ++pcCmdCursor;
+                    }
+                    break;
+
+                    case DAL_CMD_GO_TOP:
+                    {
+                        if( NULL != pxThis->pxTopLevel )
                         {
-                            vPrintMenu();
-                            pcEndPtr = ++pcCmdCursor;
+                            pxThis->pxCurrentLevel = pxThis->pxTopLevel;
                         }
-                        break;
-                        case DAL_CMD_GO_TOP:
+                        vPrintCurrentLevel();
+                        pcEndPtr = ++pcCmdCursor;
+                    }
+                    break;
+
+                    case DAL_CMD_GO_BACK:
+                    {
+                        if( NULL != pxThis->pxCurrentLevel->pxLevelUp )
                         {
-                            if( NULL != pxThis->pxTopLevel )
-                            {
-                                pxThis->pxCurrentLevel = pxThis->pxTopLevel;
-                            }
-                            vPrintCurrentLevel();
-                            pcEndPtr = ++pcCmdCursor;
+                            pxThis->pxCurrentLevel = pxThis->pxCurrentLevel->pxLevelUp;
                         }
-                        break;
-                        case DAL_CMD_GO_BACK:
-                        {
-                            if( NULL != pxThis->pxCurrentLevel->pxLevelUp )
-                            {
-                                pxThis->pxCurrentLevel = pxThis->pxCurrentLevel->pxLevelUp;
-                            }
-                            vPrintCurrentLevel();
-                        }
-                        break;
-                        default:
-                        {
-                            vPLL_Printf( "Unknown command: (%c)\r\n", *pcCmdCursor );
-                            INC_ERROR_COUNTER( DAL_ERRORS_UNKNOWN_COMMAND )
-                            *pcEndPtr = '\r';
-                        }
-                        break;
+                        vPrintCurrentLevel();
+                    }
+                    break;
+
+                    default:
+                    {
+                        vPLL_Printf( "Unknown command: (%c)\r\n", *pcCmdCursor );
+                        INC_ERROR_COUNTER( DAL_ERRORS_UNKNOWN_COMMAND )
+                        * pcEndPtr = '\r';
+                    }
+                    break;
                     }
                 }
 
-                if( NULL != pcEndPtr)
+                if( NULL != pcEndPtr )
                 {
                     pcCmdCursor = pcEndPtr;
 
@@ -1237,7 +1289,7 @@ static void vProcessCmd( char *pcCmd, int iInputLen )
 
                     if( ( ' ' != *pcEndPtr ) && ( '\r' != *pcEndPtr ) )
                     {
-                        vPLL_Printf( "Multiple commands need empty character in between\r\n");
+                        vPLL_Printf( "Multiple commands need empty character in between\r\n" );
                         INC_ERROR_COUNTER( DAL_ERRORS_UNKNOWN_CHAR_IN_COMMAND_LINE );
                         break;
                     }
@@ -1260,7 +1312,13 @@ static void vProcessCmd( char *pcCmd, int iInputLen )
  */
 static void vDalTask( void *pArg )
 {
-    int  iInputLen  = 0;
+    int iInputLen = 0;
+
+    /* Call the initialisation function if provided */
+    if( NULL != pxThis->pxInitFunc )
+    {
+        pxThis->pxInitFunc();
+    }
 
     FOREVER
     {
@@ -1271,9 +1329,10 @@ static void vDalTask( void *pArg )
         {
             INC_STAT_COUNTER( DAL_STATS_TAKE_MUTEX )
             vProcessCmd( pxThis->pcLastCmd, iInputLen );
-            vPLL_Printf( "\r\n%s[%s]%s ", pxThis->pcMenuName,
-                              pxThis->pxCurrentLevel->pcName,
-                              DAL_PROMPT );
+            vPLL_Printf( "\r\n%s[%s]%s ",
+                         pxThis->pcMenuName,
+                         pxThis->pxCurrentLevel->pcName,
+                         DAL_PROMPT );
 
             if( OSAL_ERRORS_NONE == iOSAL_Mutex_Release( pxThis->pvMtxHdl ) )
             {
@@ -1290,4 +1349,3 @@ static void vDalTask( void *pArg )
         }
     }
 }
-

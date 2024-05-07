@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2024 Advanced Micro Devices, Inc. All rights reserved.
  * SPDX-License-Identifier: MIT
  *
  * This file contains the implementation for the Alveo Management Interface (AMI)
@@ -54,70 +54,74 @@
 
 /* Stat & Error definitions */
 #define AMI_PROXY_STATS( DO )   \
-    DO( AMI_PROXY_STATS_INIT_OVERALL_COMPLETE )     \
-    DO( AMI_PROXY_STATS_CREATE_MUTEX )              \
-    DO( AMI_PROXY_STATS_CREATE_MBOX )               \
-    DO( AMI_PROXY_STATS_TAKE_MUTEX )                \
-    DO( AMI_PROXY_STATS_RELEASE_MUTEX )             \
-    DO( AMI_PROXY_STATS_PDI_DOWNLOAD_MBOX_POST )    \
-    DO( AMI_PROXY_STATS_PDI_COPY_MBOX_POST )        \
-    DO( AMI_PROXY_STATS_SENSOR_MBOX_POST )          \
-    DO( AMI_PROXY_STATS_IDENTITY_MBOX_POST )        \
-    DO( AMI_PROXY_STATS_BOOT_SELECT_MBOX_POST )     \
-    DO( AMI_PROXY_STATS_HEARTBEAT_MBOX_POST )       \
-    DO( AMI_PROXY_STATS_EEPROM_RW_MBOX_POST )       \
-    DO( AMI_PROXY_STATS_MODULE_RW_MBOX_POST )       \
-    DO( AMI_PROXY_STATS_PDI_DOWNLOAD_MBOX_PEND )    \
-    DO( AMI_PROXY_STATS_PDI_COPY_MBOX_PEND )        \
-    DO( AMI_PROXY_STATS_SENSOR_MBOX_PEND )          \
-    DO( AMI_PROXY_STATS_IDENTITY_MBOX_PEND )        \
-    DO( AMI_PROXY_STATS_BOOT_SELECT_MBOX_PEND )     \
-    DO( AMI_PROXY_STATS_HEARTBEAT_MBOX_PEND )       \
-    DO( AMI_PROXY_STATS_EEPROM_RW_MBOX_PEND )       \
-    DO( AMI_PROXY_STATS_MODULE_RW_MBOX_PEND )       \
-    DO( AMI_PROXY_STATS_GET_PDI_DOWNLOAD_REQUEST )  \
-    DO( AMI_PROXY_STATS_GET_PDI_COPY_REQUEST )      \
-    DO( AMI_PROXY_STATS_GET_SENSOR_REQUEST )        \
-    DO( AMI_PROXY_STATS_GET_BOOT_SELECT_REQUEST )   \
-    DO( AMI_PROXY_STATS_TASK_TIME_MS )              \
-    DO( AMI_PROXY_STATS_GET_EEPROM_RW_REQUEST )     \
-    DO( AMI_PROXY_STATS_STATUS_RETRIEVAL )          \
-    DO( AMI_PROXY_STATS_GET_MODULE_RW_REQUEST )     \
+    DO( AMI_PROXY_STATS_INIT_OVERALL_COMPLETE )        \
+    DO( AMI_PROXY_STATS_CREATE_MUTEX )                 \
+    DO( AMI_PROXY_STATS_CREATE_MBOX )                  \
+    DO( AMI_PROXY_STATS_TAKE_MUTEX )                   \
+    DO( AMI_PROXY_STATS_RELEASE_MUTEX )                \
+    DO( AMI_PROXY_STATS_PDI_DOWNLOAD_MBOX_POST )       \
+    DO( AMI_PROXY_STATS_PDI_COPY_MBOX_POST )           \
+    DO( AMI_PROXY_STATS_SENSOR_MBOX_POST )             \
+    DO( AMI_PROXY_STATS_IDENTITY_MBOX_POST )           \
+    DO( AMI_PROXY_STATS_BOOT_SELECT_MBOX_POST )        \
+    DO( AMI_PROXY_STATS_HEARTBEAT_MBOX_POST )          \
+    DO( AMI_PROXY_STATS_EEPROM_RW_MBOX_POST )          \
+    DO( AMI_PROXY_STATS_MODULE_RW_MBOX_POST )          \
+    DO( AMI_PROXY_STATS_DEBUG_VERBOSITY_MBOX_PEND )    \
+    DO( AMI_PROXY_STATS_PDI_DOWNLOAD_MBOX_PEND )       \
+    DO( AMI_PROXY_STATS_PDI_COPY_MBOX_PEND )           \
+    DO( AMI_PROXY_STATS_SENSOR_MBOX_PEND )             \
+    DO( AMI_PROXY_STATS_IDENTITY_MBOX_PEND )           \
+    DO( AMI_PROXY_STATS_BOOT_SELECT_MBOX_PEND )        \
+    DO( AMI_PROXY_STATS_HEARTBEAT_MBOX_PEND )          \
+    DO( AMI_PROXY_STATS_EEPROM_RW_MBOX_PEND )          \
+    DO( AMI_PROXY_STATS_MODULE_RW_MBOX_PEND )          \
+    DO( AMI_PROXY_STATS_GET_PDI_DOWNLOAD_REQUEST )     \
+    DO( AMI_PROXY_STATS_GET_PDI_COPY_REQUEST )         \
+    DO( AMI_PROXY_STATS_GET_SENSOR_REQUEST )           \
+    DO( AMI_PROXY_STATS_GET_BOOT_SELECT_REQUEST )      \
+    DO( AMI_PROXY_STATS_TASK_TIME_MS )                 \
+    DO( AMI_PROXY_STATS_GET_EEPROM_RW_REQUEST )        \
+    DO( AMI_PROXY_STATS_STATUS_RETRIEVAL )             \
+    DO( AMI_PROXY_STATS_GET_MODULE_RW_REQUEST )        \
     DO( AMI_PROXY_STATS_MAX )
 
 #define AMI_PROXY_ERRORS( DO )    \
-    DO( AMI_PROXY_ERRORS_MUTEX_RELEASE_FAILED )     \
-    DO( AMI_PROXY_ERRORS_MUTEX_TAKE_FAILED )        \
-    DO( AMI_PROXY_ERRORS_MAILBOX_POST_FAILED )      \
-    DO( AMI_PROXY_ERRORS_PDI_DOWNLOAD_REQUEST )     \
-    DO( AMI_PROXY_ERRORS_PDI_COPY_REQUEST )         \
-    DO( AMI_PROXY_ERRORS_EEPROM_RW_REQUEST )        \
-    DO( AMI_PROXY_ERRORS_MODULE_RW_REQUEST )        \
-    DO( AMI_PROXY_ERRORS_GET_SENSOR_REQUEST )       \
-    DO( AMI_PROXY_ERRORS_GET_BOOT_SELECT_REQUEST )  \
-    DO( AMI_PROXY_ERRORS_GET_HEARTBEAT_REQUEST )    \
-    DO( AMI_PROXY_ERRORS_GET_EEPROM_RW_REQUEST )    \
-    DO( AMI_PROXY_ERRORS_GET_MODULE_RW_REQUEST )    \
-    DO( AMI_PROXY_RAISE_EVENT_PDI_DOWNLOAD_FAILED ) \
-    DO( AMI_PROXY_RAISE_EVENT_PDI_COPY_FAILED )     \
-    DO( AMI_PROXY_RAISE_EVENT_GET_IDENTIFY_FAILED ) \
-    DO( AMI_PROXY_RAISE_EVENT_SENSOR_READ_FAILED )  \
-    DO( AMI_PROXY_RAISE_EVENT_BOOT_SELECT_FAILED )  \
-    DO( AMI_PROXY_RAISE_EVENT_HEARTBEAT_FAILED )    \
-    DO( AMI_PROXY_RAISE_EVENT_EEPROM_RW_FAILED )    \
-    DO( AMI_PROXY_RAISE_EVENT_MODULE_RW_FAILED )    \
-    DO( AMI_PROXY_INIT_FW_IF_OPEN_FAILED )          \
-    DO( AMI_PROXY_INIT_MUTEX_CREATE_FAILED )        \
-    DO( AMI_PROXY_INIT_MBOX_CREATE_FAILED )         \
-    DO( AMI_PROXY_INIT_TASK_CREATE_FAILED )         \
-    DO( AMI_PROXY_VALIDATION_FAILED )               \
-    DO( AMI_PROXY_UNSUPPORTED_OPCODE_RX )           \
-    DO( AMI_PROXY_UNKNOWN_MAILBOX_MSG )             \
-    DO( AMI_PROXY_UNKNOWN_RETURN_CODE )             \
-    DO( AMI_PROXY_FW_IF_WRITE_FAILED )              \
-    DO( AMI_PROXY_BIND_CB_FAILED )                  \
-    DO( AMI_PROXY_RX_DATA_INDEX_FAILED )            \
-    DO( AMI_PROXY_ERRORS_INIT_EVL_RECORD_FAILED )   \
+    DO( AMI_PROXY_ERRORS_MUTEX_RELEASE_FAILED )        \
+    DO( AMI_PROXY_ERRORS_MUTEX_TAKE_FAILED )           \
+    DO( AMI_PROXY_ERRORS_MAILBOX_POST_FAILED )         \
+    DO( AMI_PROXY_ERRORS_PDI_DOWNLOAD_REQUEST )        \
+    DO( AMI_PROXY_ERRORS_PDI_COPY_REQUEST )            \
+    DO( AMI_PROXY_ERRORS_EEPROM_RW_REQUEST )           \
+    DO( AMI_PROXY_ERRORS_MODULE_RW_REQUEST )           \
+    DO( AMI_PROXY_ERRORS_DEBUG_VERBOSITY_REQUEST )     \
+    DO( AMI_PROXY_ERRORS_GET_SENSOR_REQUEST )          \
+    DO( AMI_PROXY_ERRORS_GET_BOOT_SELECT_REQUEST )     \
+    DO( AMI_PROXY_ERRORS_GET_HEARTBEAT_REQUEST )       \
+    DO( AMI_PROXY_ERRORS_GET_EEPROM_RW_REQUEST )       \
+    DO( AMI_PROXY_ERRORS_GET_MODULE_RW_REQUEST )       \
+    DO( AMI_PROXY_ERRORS_GET_DEBUG_VERBOSITY_REQUEST ) \
+    DO( AMI_PROXY_RAISE_EVENT_PDI_DOWNLOAD_FAILED )    \
+    DO( AMI_PROXY_RAISE_EVENT_PDI_COPY_FAILED )        \
+    DO( AMI_PROXY_RAISE_EVENT_GET_IDENTIFY_FAILED )    \
+    DO( AMI_PROXY_RAISE_EVENT_SENSOR_READ_FAILED )     \
+    DO( AMI_PROXY_RAISE_EVENT_BOOT_SELECT_FAILED )     \
+    DO( AMI_PROXY_RAISE_EVENT_HEARTBEAT_FAILED )       \
+    DO( AMI_PROXY_RAISE_EVENT_EEPROM_RW_FAILED )       \
+    DO( AMI_PROXY_RAISE_EVENT_MODULE_RW_FAILED )       \
+    DO( AMI_PROXY_RAISE_EVENT_DEBUG_VERBOSITY_FAILED ) \
+    DO( AMI_PROXY_INIT_FW_IF_OPEN_FAILED )             \
+    DO( AMI_PROXY_INIT_MUTEX_CREATE_FAILED )           \
+    DO( AMI_PROXY_INIT_MBOX_CREATE_FAILED )            \
+    DO( AMI_PROXY_INIT_TASK_CREATE_FAILED )            \
+    DO( AMI_PROXY_VALIDATION_FAILED )                  \
+    DO( AMI_PROXY_UNSUPPORTED_OPCODE_RX )              \
+    DO( AMI_PROXY_UNKNOWN_MAILBOX_MSG )                \
+    DO( AMI_PROXY_UNKNOWN_RETURN_CODE )                \
+    DO( AMI_PROXY_FW_IF_WRITE_FAILED )                 \
+    DO( AMI_PROXY_BIND_CB_FAILED )                     \
+    DO( AMI_PROXY_RX_DATA_INDEX_FAILED )               \
+    DO( AMI_PROXY_ERRORS_INIT_EVL_RECORD_FAILED )      \
     DO( AMI_PROXY_ERRORS_MAX )
 
 #define PRINT_STAT_COUNTER( x )             PLL_INF( AMI_NAME, "%50s . . . . %d\r\n",          \
@@ -151,6 +155,7 @@ typedef enum AMI_MSG_TYPES
     AMI_MSG_TYPE_HEARTBEAT_COMPLETE,
     AMI_MSG_TYPE_EEPROM_RW_COMPLETE,
     AMI_MSG_TYPE_MODULE_RW_COMPLETE,
+    AMI_MSG_TYPE_DEBUG_VERBOSITY_COMPLETE,
 
     MAX_AMI_MSG_TYPE
 
@@ -162,14 +167,15 @@ typedef enum AMI_MSG_TYPES
  */
 typedef enum AMI_CMD_OPCODE_REQ
 {
-    AMI_CMD_OPCODE_BOOT_SEL_REQ = 0x0,
-    AMI_CMD_OPCODE_HEARTBEAT_REQ = 0x2,
-    AMI_CMD_OPCODE_EEPROM_RW_REQ = 0x3,
-    AMI_CMD_OPCODE_MODULE_RW_REQ = 0x4,
-    AMI_CMD_OPCODE_PDI_DOWNLOAD_REQ = 0xA,
-    AMI_CMD_OPCODE_SENSOR_REQ = 0xC,
-    AMI_CMD_OPCODE_PDI_COPY_REQ = 0xD,
-    AMI_CMD_OPCODE_IDENTIFY_REQ = 0x202,
+    AMI_CMD_OPCODE_BOOT_SEL_REQ        = 0x0,
+    AMI_CMD_OPCODE_HEARTBEAT_REQ       = 0x2,
+    AMI_CMD_OPCODE_EEPROM_RW_REQ       = 0x3,
+    AMI_CMD_OPCODE_MODULE_RW_REQ       = 0x4,
+    AMI_CMD_OPCODE_DEBUG_VERBOSITY_REQ = 0x5,
+    AMI_CMD_OPCODE_PDI_DOWNLOAD_REQ    = 0xA,
+    AMI_CMD_OPCODE_SENSOR_REQ          = 0xC,
+    AMI_CMD_OPCODE_PDI_COPY_REQ        = 0xD,
+    AMI_CMD_OPCODE_IDENTIFY_REQ        = 0x202,
 
     MAX_AMI_CMD_OPCODE
 
@@ -219,12 +225,13 @@ typedef struct AMI_RX_DATA
     uint16_t usCid;
     union
     {
-        AMI_PROXY_PDI_DOWNLOAD_REQUEST  xDownloadRequest;
-        AMI_PROXY_PDI_COPY_REQUEST      xCopyRequest;
-        AMI_PROXY_SENSOR_REQUEST        xSensorRequest;
-        AMI_PROXY_BOOT_SELECT_REQUEST   xBootSelectRequest;
-        AMI_PROXY_EEPROM_RW_REQUEST     xEepromReadWriteRequest;
-        AMI_PROXY_MODULE_RW_REQUEST     xModuleReadWriteRequest;
+        AMI_PROXY_PDI_DOWNLOAD_REQUEST     xDownloadRequest;
+        AMI_PROXY_PDI_COPY_REQUEST         xCopyRequest;
+        AMI_PROXY_SENSOR_REQUEST           xSensorRequest;
+        AMI_PROXY_BOOT_SELECT_REQUEST      xBootSelectRequest;
+        AMI_PROXY_EEPROM_RW_REQUEST        xEepromReadWriteRequest;
+        AMI_PROXY_MODULE_RW_REQUEST        xModuleReadWriteRequest;
+        uint8_t                            ucDebugVerbosityRequest;
     };
 
 } AMI_RX_DATA;
@@ -377,7 +384,10 @@ typedef struct AMI_CMD_DATA_PAYLOAD
     uint32_t ulDestPartition:4;
     uint32_t ulPartitionSel:4;
     uint32_t ulUpdateFpt:1;
-    uint32_t ulPartitionRsvd:19;
+    uint32_t ulBootDevice:1;
+    uint32_t ulSrcDevice:1;
+    uint32_t ulDestDevice:1;
+    uint32_t ulPartitionRsvd:16;
     uint16_t usLastPacket:1;
     uint16_t usPacketNum:15;
     uint16_t usPacketSize; /* packet size in KB */
@@ -441,6 +451,7 @@ typedef struct AMI_CMD_REQUEST
         AMI_CMD_HEARTBEAT_PAYLOAD xHeartbeatPayload;
         AMI_CMD_EEPROM_PAYLOAD xEepromPayload;
         AMI_CMD_MODULE_PAYLOAD xModulePayload;
+        uint8_t ucDebugVerbosityPayload;
     };
 
 } AMI_CMD_REQUEST;
@@ -524,6 +535,16 @@ static int iHandleEepromRequest( AMI_CMD_REQUEST *pxCmdRequest );
  *
  */
 static int iHandleModuleRequest( AMI_CMD_REQUEST *pxCmdRequest );
+
+/**
+ * @brief   Handle the debug verbosity request
+ *
+ * @param   pxCmdRequest The request details
+ *
+ * @return  OK/ERROR
+ *
+ */
+static int iHandleDebugVerbosityRequest( AMI_CMD_REQUEST *pxCmdRequest );
 
 
 /******************************************************************************/
@@ -894,6 +915,42 @@ int iAMI_SetModuleReadWriteCompleteResponse( EVL_SIGNAL *pxSignal, AMI_PROXY_RES
     return iStatus;
 }
 
+/**
+ * @brief   Set the debug verbosity response
+ */
+int iAMI_SetDebugVerbosityResponse( EVL_SIGNAL *pxSignal, AMI_PROXY_RESULT xResult )
+{
+    int iStatus = ERROR;
+
+    if( ( UPPER_FIREWALL == pxThis->ulUpperFirewall ) &&
+        ( LOWER_FIREWALL == pxThis->ulLowerFirewall ) &&
+        ( TRUE == pxThis->iInitialised ) &&
+        ( NULL != pxSignal ) )
+    {
+        AMI_MBOX_MSG xMsg = { 0 };
+        xMsg.ucRxDataIndex = pxSignal->ucInstance;
+        xMsg.eMsgType = AMI_MSG_TYPE_DEBUG_VERBOSITY_COMPLETE;
+        xMsg.xResult = xResult;
+        if( OSAL_ERRORS_NONE == iOSAL_MBox_Post( pxThis->pvOsalMBoxHdl,
+                                                 ( void* )&xMsg,
+                                                 OSAL_TIMEOUT_NO_WAIT ) )
+        {
+            INC_STAT_COUNTER( AMI_PROXY_STATS_MODULE_RW_MBOX_POST )
+            iStatus = OK;
+        }
+        else
+        {
+            INC_ERROR_COUNTER_WITH_STATE( AMI_PROXY_ERRORS_MAILBOX_POST_FAILED )
+        }
+    }
+    else
+    {
+        INC_ERROR_COUNTER( AMI_PROXY_VALIDATION_FAILED )
+    }
+
+    return iStatus;
+}
+
 /* Get Functions **************************************************************/
 
 /**
@@ -923,6 +980,8 @@ int iAMI_GetPdiDownloadRequest( EVL_SIGNAL *pxSignal,
                 ( TRUE == pxThis->xRxData[ ucIndex ].ucInUse ) &&
                 AMI_CMD_OPCODE_PDI_DOWNLOAD_REQ == pxThis->xRxData[ ucIndex ].xOpCode )
             {
+                pxDownloadRequest->iBootDevice =
+                            pxThis->xRxData[ ucIndex ].xDownloadRequest.iBootDevice;
                 pxDownloadRequest->ullAddress =
                             pxThis->xRxData[ ucIndex ].xDownloadRequest.ullAddress;
                 pxDownloadRequest->ulLength =
@@ -999,8 +1058,12 @@ int iAMI_GetPdiCopyRequest( EVL_SIGNAL *pxSignal,
                             pxThis->xRxData[ ucIndex ].xCopyRequest.ullAddress;
                 pxCopyRequest->ulMaxLength =
                             pxThis->xRxData[ ucIndex ].xCopyRequest.ulMaxLength;
+                pxCopyRequest->ulSrcDevice =
+                            pxThis->xRxData[ ucIndex ].xCopyRequest.ulSrcDevice;
                 pxCopyRequest->ulSrcPartition =
                             pxThis->xRxData[ ucIndex ].xCopyRequest.ulSrcPartition;
+                pxCopyRequest->ulDestDevice =
+                            pxThis->xRxData[ ucIndex ].xCopyRequest.ulDestDevice;
                 pxCopyRequest->ulDestPartition =
                             pxThis->xRxData[ ucIndex ].xCopyRequest.ulDestPartition;
                 iStatus = OK;
@@ -1301,6 +1364,65 @@ int iAMI_GetModuleReadWriteRequest( EVL_SIGNAL *pxSignal,
 }
 
 /**
+ * @brief   Get the debug verbosity request
+ */
+int iAMI_GetDebugVerbosityRequest( EVL_SIGNAL *pxSignal,
+                                   uint8_t *pucDebugVerbosityRequest )
+{
+    int iStatus = ERROR;
+
+    if( ( UPPER_FIREWALL == pxThis->ulUpperFirewall ) &&
+        ( LOWER_FIREWALL == pxThis->ulLowerFirewall ) &&
+        ( TRUE == pxThis->iInitialised ) &&
+        ( NULL != pxSignal ) &&
+        ( NULL != pucDebugVerbosityRequest ) )
+    {
+        INC_STAT_COUNTER( AMI_PROXY_STATS_GET_MODULE_RW_REQUEST )
+
+        if( OSAL_ERRORS_NONE == iOSAL_Mutex_Take( pxThis->pvOsalMutexHdl,
+                                                  OSAL_TIMEOUT_WAIT_FOREVER ) )
+        {
+            uint8_t ucIndex = pxSignal->ucInstance;
+
+            INC_STAT_COUNTER( AMI_PROXY_STATS_TAKE_MUTEX )
+
+            if( AMI_CHECK_VALID_INDEX( ucIndex ) &&
+                ( TRUE == pxThis->xRxData[ ucIndex ].ucInUse ) &&
+                ( AMI_CMD_OPCODE_DEBUG_VERBOSITY_REQ == pxThis->xRxData[ ucIndex ].xOpCode ) )
+            {
+                *pucDebugVerbosityRequest = pxThis->xRxData[ ucIndex ].ucDebugVerbosityRequest;
+                iStatus = OK;
+            }
+            else
+            {
+                PLL_ERR( AMI_NAME, "Error invalid get module request for instance\r\n" );
+                INC_ERROR_COUNTER_WITH_STATE( AMI_PROXY_ERRORS_DEBUG_VERBOSITY_REQUEST )
+            }
+
+            if( OSAL_ERRORS_NONE != iOSAL_Mutex_Release( pxThis->pvOsalMutexHdl ) )
+            {
+                INC_ERROR_COUNTER_WITH_STATE( AMI_PROXY_ERRORS_MUTEX_RELEASE_FAILED )
+                iStatus = ERROR;
+            }
+            else
+            {
+                INC_STAT_COUNTER( AMI_PROXY_STATS_RELEASE_MUTEX )
+            }
+        }
+        else
+        {
+            INC_ERROR_COUNTER_WITH_STATE( AMI_PROXY_ERRORS_MUTEX_TAKE_FAILED )
+        }
+    }
+    else
+    {
+        INC_ERROR_COUNTER( AMI_PROXY_VALIDATION_FAILED )
+    }
+
+    return iStatus;
+}
+
+/**
  * @brief   Display the current stats/errors
  */
 int iAMI_PrintStatistics( void )
@@ -1442,6 +1564,8 @@ static void vProxyDriverTask( void *pvArgs )
                         {
                             pxThis->xRxData[ ucIndex ].usCid = xCmdRequest.xHdr.usCid;
                             pxThis->xRxData[ ucIndex ].xOpCode = xCmdRequest.xHdr.ulOpCode;
+                            pxThis->xRxData[ ucIndex ].xDownloadRequest.iBootDevice =
+                                                                xCmdRequest.xPdiDownloadPayload.ulBootDevice;
                             pxThis->xRxData[ ucIndex ].xDownloadRequest.ullAddress =
                                                                 xCmdRequest.xPdiDownloadPayload.ullAddress;
                             pxThis->xRxData[ ucIndex ].xDownloadRequest.ulLength =
@@ -1508,8 +1632,12 @@ static void vProxyDriverTask( void *pvArgs )
                                                                 xCmdRequest.xPdiCopyPayload.ullAddress;
                             pxThis->xRxData[ ucIndex ].xCopyRequest.ulMaxLength =
                                                                 xCmdRequest.xPdiCopyPayload.ulSize;
+                            pxThis->xRxData[ ucIndex ].xCopyRequest.ulSrcDevice =
+                                                                xCmdRequest.xPdiCopyPayload.ulSrcDevice;
                             pxThis->xRxData[ ucIndex ].xCopyRequest.ulSrcPartition =
                                                                 xCmdRequest.xPdiCopyPayload.ulSrcPartition;
+                            pxThis->xRxData[ ucIndex ].xCopyRequest.ulDestDevice =
+                                                                xCmdRequest.xPdiCopyPayload.ulDestDevice;
                             pxThis->xRxData[ ucIndex ].xCopyRequest.ulDestPartition =
                                                                 xCmdRequest.xPdiCopyPayload.ulDestPartition;
                             pxThis->xRxData[ ucIndex ].ucInUse = TRUE;
@@ -1729,6 +1857,15 @@ static void vProxyDriverTask( void *pvArgs )
                     }
                     break;
                 }
+                case AMI_CMD_OPCODE_DEBUG_VERBOSITY_REQ:
+                {
+                    iStatus = iHandleDebugVerbosityRequest( &xCmdRequest );
+                    if( ERROR == iStatus )
+                    {
+                        INC_ERROR_COUNTER_WITH_STATE( AMI_PROXY_ERRORS_GET_DEBUG_VERBOSITY_REQUEST )
+                    }
+                    break;
+                }
                 default:
                     PLL_ERR( AMI_NAME, "Error unsupported opcode received 0x%x\r\n", xCmdRequest.xHdr.ulOpCode );
                     INC_ERROR_COUNTER_WITH_STATE( AMI_PROXY_UNSUPPORTED_OPCODE_RX )
@@ -1785,6 +1922,9 @@ static void vProxyDriverTask( void *pvArgs )
                     break;
                 case AMI_MSG_TYPE_MODULE_RW_COMPLETE:
                     INC_STAT_COUNTER( AMI_PROXY_STATS_MODULE_RW_MBOX_PEND )
+                    break;
+                case AMI_MSG_TYPE_DEBUG_VERBOSITY_COMPLETE:
+                    INC_STAT_COUNTER( AMI_PROXY_STATS_DEBUG_VERBOSITY_MBOX_PEND )
                     break;
 
                 default:
@@ -2085,6 +2225,68 @@ static int iHandleModuleRequest( AMI_CMD_REQUEST *pxCmdRequest )
                     PLL_ERR( AMI_NAME, "Error attempting to raise event 0x%x\r\n",
                                  AMI_PROXY_DRIVER_E_HEARTBEAT );
                     INC_ERROR_COUNTER_WITH_STATE( AMI_PROXY_RAISE_EVENT_MODULE_RW_FAILED )
+                }
+            }
+        }
+        else
+        {
+            INC_ERROR_COUNTER_WITH_STATE( AMI_PROXY_ERRORS_MUTEX_TAKE_FAILED )
+        }
+    }
+
+    return iStatus;
+}
+
+/**
+ * @brief   Handle the debug verbosity request
+ */
+static int iHandleDebugVerbosityRequest( AMI_CMD_REQUEST *pxCmdRequest )
+{
+    int iStatus = ERROR;
+
+    if( ( UPPER_FIREWALL == pxThis->ulUpperFirewall ) &&
+        ( LOWER_FIREWALL == pxThis->ulLowerFirewall ) &&
+        ( NULL != pxCmdRequest ) &&
+        ( TRUE == pxThis->iInitialised ) )
+    {
+        uint8_t ucIndex = 0;
+
+        if( OSAL_ERRORS_NONE == iOSAL_Mutex_Take( pxThis->pvOsalMutexHdl,
+                                                  OSAL_TIMEOUT_WAIT_FOREVER ) )
+        {
+            INC_STAT_COUNTER( AMI_PROXY_STATS_TAKE_MUTEX )
+
+            iStatus = iFindNextFreeRxDataIndex( &ucIndex );
+            if( ERROR != iStatus )
+            {
+                pxThis->xRxData[ ucIndex ].usCid = pxCmdRequest->xHdr.usCid;
+                pxThis->xRxData[ ucIndex ].xOpCode = pxCmdRequest->xHdr.ulOpCode;
+                pxThis->xRxData[ ucIndex ].ucDebugVerbosityRequest = pxCmdRequest->ucDebugVerbosityPayload;
+                pxThis->xRxData[ ucIndex ].ucInUse = TRUE;
+            }
+            else
+            {
+                INC_ERROR_COUNTER_WITH_STATE( AMI_PROXY_RX_DATA_INDEX_FAILED )
+            }
+
+            if( OSAL_ERRORS_NONE != iOSAL_Mutex_Release( pxThis->pvOsalMutexHdl ) )
+            {
+                INC_ERROR_COUNTER_WITH_STATE( AMI_PROXY_ERRORS_MUTEX_RELEASE_FAILED )
+            }
+
+            if( ERROR != iStatus )
+            {
+                INC_STAT_COUNTER( AMI_PROXY_STATS_RELEASE_MUTEX )
+                EVL_SIGNAL xNewSignal = { pxThis->ucMyId,
+                                          AMI_PROXY_DRIVER_E_DEBUG_VERBOSITY,
+                                          ucIndex,
+                                          0 };
+                iStatus = iEVL_RaiseEvent( pxThis->pxEvlRecord, &xNewSignal );
+                if( ERROR == iStatus )
+                {
+                    PLL_ERR( AMI_NAME, "Error attempting to raise event 0x%x\r\n",
+                             AMI_PROXY_DRIVER_E_DEBUG_VERBOSITY );
+                    INC_ERROR_COUNTER_WITH_STATE( AMI_PROXY_RAISE_EVENT_DEBUG_VERBOSITY_FAILED )
                 }
             }
         }

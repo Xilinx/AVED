@@ -31,7 +31,7 @@
 #define CHECK_HDL( f )          if( NULL == f ) return FW_IF_ERRORS_INVALID_HANDLE
 #define CHECK_CFG( f )          if( NULL == ( f )->cfg  ) return FW_IF_ERRORS_INVALID_CFG
 
-#define TEST_PRINT              if( FW_IF_FALSE == myLocalCfg.debugPrint) { } else vPLL_Printf
+#define TEST_PRINT              if( FW_IF_FALSE == xMyLocalCfg.debugPrint) { } else vPLL_Printf
 
 
 /*****************************************************************************/
@@ -40,13 +40,13 @@
 
 const uint8_t myRxMode = FW_IF_RX_MODE_POLLING;
 
-static FW_IF_TEST_INIT_CFG myLocalCfg = { 0 };
+static FW_IF_TEST_INIT_CFG xMyLocalCfg = { 0 };
 
 static int iInitialised = FW_IF_FALSE;
 static int iDebugPrint  = FW_IF_FALSE;
 
-static uint8_t  *   testRxData = NULL;
-static uint32_t     testRxSize = 0;
+static uint8_t  *pucTestRxData = NULL;
+static uint32_t ulTestRxSize = 0;
 
 
 /*****************************************************************************/
@@ -56,160 +56,159 @@ static uint32_t     testRxSize = 0;
 /**
  * @brief   Local implementation of FW_IF_open
  */
-static uint32_t testOpen( void *fwIf )
+static uint32_t testOpen( void *pvFwIf )
 {
-    uint32_t status = FW_IF_ERRORS_NONE;
+    uint32_t ulStatus = FW_IF_ERRORS_NONE;
 
-    FW_IF_CFG *thisIf = ( FW_IF_CFG* )fwIf;
-    CHECK_HDL( thisIf );
-    CHECK_CFG( thisIf );
-    CHECK_FIREWALLS( thisIf );    
+    FW_IF_CFG *pxThisIf = ( FW_IF_CFG* )pvFwIf;
+    CHECK_HDL( pxThisIf );
+    CHECK_CFG( pxThisIf );
+    CHECK_FIREWALLS( pxThisIf );
     CHECK_DRIVER;
 
-    FW_IF_TEST_CFG *thisTestCfg = ( FW_IF_TEST_CFG* )thisIf->cfg;
+    FW_IF_TEST_CFG *pxThisTestCfg = ( FW_IF_TEST_CFG* )pxThisIf->cfg;
         
     TEST_PRINT( "FW_IF_open for if.%u (%s)\r\n",
-            ( unsigned int )thisTestCfg->ifId,
-            thisTestCfg->ifName );
+            ( unsigned int )pxThisTestCfg->ifId,
+            pxThisTestCfg->ifName );
 
-    return status;
+    return ulStatus;
 }
 
 /**
  * @brief   Local implementation of FW_IF_close
  */
-static uint32_t testClose( void *fwIf )
+static uint32_t testClose( void *pvFwIf )
 {
-    uint32_t status = FW_IF_ERRORS_NONE;
+    uint32_t ulStatus = FW_IF_ERRORS_NONE;
 
-    FW_IF_CFG *thisIf = ( FW_IF_CFG* )fwIf;
-    CHECK_HDL( thisIf );
-    CHECK_CFG( thisIf );
-    CHECK_FIREWALLS( thisIf );    
+    FW_IF_CFG *pxThisIf = ( FW_IF_CFG* )pvFwIf;
+    CHECK_HDL( pxThisIf );
+    CHECK_CFG( pxThisIf );
+    CHECK_FIREWALLS( pxThisIf );
     CHECK_DRIVER;
 
-    FW_IF_TEST_CFG *thisTestCfg = ( FW_IF_TEST_CFG* )thisIf->cfg;
+    FW_IF_TEST_CFG *pxThisTestCfg = ( FW_IF_TEST_CFG* )pxThisIf->cfg;
     
     TEST_PRINT( "FW_IF_close for if.%u (%s)\r\n", 
-            ( unsigned int )thisTestCfg->ifId,
-            thisTestCfg->ifName );
+            ( unsigned int )pxThisTestCfg->ifId,
+            pxThisTestCfg->ifName );
 
-    return status;
+    return ulStatus;
 }
 
 
 /**
  * @brief   Local implementation of FW_IF_write
  */
-static uint32_t testWrite( void *fwIf, uint32_t dstPort, uint8_t * data, uint32_t size, uint32_t timeoutMs )
+static uint32_t testWrite( void *pvFwIf, uint64_t ullDstPort, uint8_t *pucData, uint32_t ulSize, uint32_t ulTimeoutMs )
 {
-    uint32_t status = FW_IF_ERRORS_NONE;
+    uint32_t ulStatus = FW_IF_ERRORS_NONE;
     int i = 0;
 
-    FW_IF_CFG *thisIf = ( FW_IF_CFG* )fwIf;
-    CHECK_HDL( thisIf );
-    CHECK_CFG( thisIf );
-    CHECK_FIREWALLS( thisIf );    
+    FW_IF_CFG *pxThisIf = ( FW_IF_CFG* )pvFwIf;
+    CHECK_HDL( pxThisIf );
+    CHECK_CFG( pxThisIf );
+    CHECK_FIREWALLS( pxThisIf );
     CHECK_DRIVER;
 
-    if( ( NULL != data ) && ( FW_IF_TEST_MAX_DATA >=size ) )
+    if( ( NULL != pucData ) && ( FW_IF_TEST_MAX_DATA >=ulSize ) )
     {
-        FW_IF_TEST_CFG *thisTestCfg = ( FW_IF_TEST_CFG* )thisIf->cfg;
+        FW_IF_TEST_CFG *pxThisTestCfg = ( FW_IF_TEST_CFG* )pxThisIf->cfg;
         
         TEST_PRINT( "FW_IF_write from if.%u (%s) to port.%u\r\n",
-                ( unsigned int )thisTestCfg->ifId,
-                thisTestCfg->ifName,
-                ( unsigned int )dstPort );
+                ( unsigned int )pxThisTestCfg->ifId,
+                pxThisTestCfg->ifName,
+                ( unsigned int )ullDstPort );
 
-        TEST_PRINT( "Writing %d bytes...", ( unsigned int )size );
-        for( i = 0; i < size; i++ )
+        TEST_PRINT( "Writing %d bytes...", ( unsigned int )ulSize );
+        for( i = 0; i < ulSize; i++ )
         {
             if( 0 == i % 16 )
             {
                 TEST_PRINT( "\r\n[%02x] ", i );
             }
             
-            TEST_PRINT( "%02x ", data[ i ] );
+            TEST_PRINT( "%02x ", pucData[ i ] );
         }
         TEST_PRINT( "\r\n" );
     }
     else
     {
-        status = FW_IF_ERRORS_PARAMS;
+        ulStatus = FW_IF_ERRORS_PARAMS;
     }
 
-    return status;
+    return ulStatus;
 }
 
 /**
  * @brief   Local implementation of FW_IF_read
  */
-static uint32_t testRead( void *fwIf, uint32_t srcPort, uint8_t * data, uint32_t * size, uint32_t timeoutMs )
+static uint32_t testRead( void *pvFwIf, uint64_t ullOffset, uint8_t *pucData, uint32_t *pulSize, uint32_t ulTimeoutMs )
 {
-    uint32_t status = FW_IF_ERRORS_NONE;
+    uint32_t ulStatus = FW_IF_ERRORS_NONE;
     int i = 0;
 
-    FW_IF_CFG *thisIf = ( FW_IF_CFG* )fwIf;
-    CHECK_HDL( thisIf );
-    CHECK_CFG( thisIf );
-    CHECK_FIREWALLS( thisIf );    
+    FW_IF_CFG *pxThisIf = ( FW_IF_CFG* )pvFwIf;
+    CHECK_HDL( pxThisIf );
+    CHECK_CFG( pxThisIf );
+    CHECK_FIREWALLS( pxThisIf );
     CHECK_DRIVER;
 
-    if( ( NULL != data ) && ( NULL != size ) && ( FW_IF_TEST_MAX_DATA >= *size ) )
+    if( ( NULL != pucData ) && ( NULL != pulSize ) && ( FW_IF_TEST_MAX_DATA >= *pulSize ) )
     {
-        FW_IF_TEST_CFG *thisTestCfg = ( FW_IF_TEST_CFG* )thisIf->cfg;
+        FW_IF_TEST_CFG *pxThisTestCfg = ( FW_IF_TEST_CFG* )pxThisIf->cfg;
         
-        TEST_PRINT( "FW_IF_read at if.%u (%s) from port.%u\r\n",
-                ( unsigned int )thisTestCfg->ifId,
-                thisTestCfg->ifName,
-                ( unsigned int )srcPort );
+        TEST_PRINT( "FW_IF_read at if.%u (%s) from address ullOffset.%u\r\n",
+                ( unsigned int )pxThisTestCfg->ifId,
+                pxThisTestCfg->ifName,
+                ( unsigned int )ullOffset );
 
-        *size = testRxSize;
-        memcpy( data, testRxData, *size );
+        pvOSAL_MemCpy( pucData, pucTestRxData+ullOffset, *pulSize );
         
-        TEST_PRINT( "Reading %u bytes...", ( unsigned int )*size );
-        for( i = 0; i < *size; i++ )
+        TEST_PRINT( "Reading %u bytes...", ( unsigned int )*pulSize );
+        for( i = 0; i < *pulSize; i++ )
         {
             if( 0 == i % 16 )
             {
                 TEST_PRINT( "\r\n[%02x] ", i );
             }
             
-            TEST_PRINT( "%02x ", data[ i ] );
+            TEST_PRINT( "%02x ", pucData[ i ] );
         }
         TEST_PRINT( "\r\n" );
     }
     else
     {
-        status = FW_IF_ERRORS_PARAMS;
+        ulStatus = FW_IF_ERRORS_PARAMS;
     }
 
-    return status;
+    return ulStatus;
 }
 
 /**
  * @brief   Local implementation of FW_IF_ioctrl
  */
-static uint32_t testIoctrl( void *fwIf, uint32_t option, void * value )
+static uint32_t testIoctrl( void *pvFwIf, uint32_t ulOption, void *pvValue )
 {
-    uint32_t status = FW_IF_ERRORS_NONE;
+    uint32_t ulStatus = FW_IF_ERRORS_NONE;
 
-    FW_IF_CFG *thisIf = ( FW_IF_CFG* )fwIf;
-    CHECK_HDL( thisIf );
-    CHECK_CFG( thisIf );
-    CHECK_FIREWALLS( thisIf );    
+    FW_IF_CFG *pxThisIf = ( FW_IF_CFG* )pvFwIf;
+    CHECK_HDL( pxThisIf );
+    CHECK_CFG( pxThisIf );
+    CHECK_FIREWALLS( pxThisIf );
     CHECK_DRIVER;
     
-    FW_IF_TEST_CFG *thisTestCfg = ( FW_IF_TEST_CFG* )thisIf->cfg;
+    FW_IF_TEST_CFG *pxThisTestCfg = ( FW_IF_TEST_CFG* )pxThisIf->cfg;
     
-    switch( option )
+    switch( ulOption )
     {
         case FW_IF_COMMON_IOCTRL_FLUSH_TX:
         case FW_IF_COMMON_IOCTRL_FLUSH_RX:
             break;
 
         case FW_IF_COMMON_IOCTRL_GET_RX_MODE:
-            *(uint8_t* )value = myRxMode;
+            *(uint8_t* )pvValue = myRxMode;
             break;
 
         case FW_IF_TEST_IOCTRL_ENABLE_DEBUG_PRINT:
@@ -221,91 +220,91 @@ static uint32_t testIoctrl( void *fwIf, uint32_t option, void * value )
             break;
 
         case FW_IF_TEST_IOCTRL_SET_NEXT_RX_DATA:
-            if( NULL != value )
+            if( NULL != pvValue )
             {
-                testRxData = ( uint8_t * )value;
+                pucTestRxData = ( uint8_t * )pvValue;
             }
             else
             {
-                status = FW_IF_ERRORS_PARAMS;
+                ulStatus = FW_IF_ERRORS_PARAMS;
             }
             break;
 
         case FW_IF_TEST_IOCTRL_SET_NEXT_RX_SIZE:
-            if( ( NULL != value ) && ( FW_IF_TEST_MAX_DATA >= *( uint32_t* )value ) )
+            if( ( NULL != pvValue ) && ( FW_IF_TEST_MAX_DATA >= *( uint32_t* )pvValue ) )
             {
-                testRxSize = *( uint32_t* )value;
+                ulTestRxSize = *( uint32_t* )pvValue;
             }
             else
             {
-                status = FW_IF_ERRORS_PARAMS;
+                ulStatus = FW_IF_ERRORS_PARAMS;
             }
             break;
 
         case FW_IF_TEST_IOCTRL_TRIGGER_EVENT:
-            if( NULL != value )
+            if( NULL != pvValue )
             {
-                if( NULL != thisIf->raiseEvent )
+                if( NULL != pxThisIf->raiseEvent )
                 {
-                    if( ( *( uint16_t* )value == FW_IF_COMMON_EVENT_NEW_RX_DATA ) && ( NULL != testRxData ) )
+                    if( ( *( uint16_t* )pvValue == FW_IF_COMMON_EVENT_NEW_RX_DATA ) && ( NULL != pucTestRxData ) )
                     {
-                        thisIf->raiseEvent( *( uint16_t* )value, testRxData, testRxSize );
+                        pxThisIf->raiseEvent( *( uint16_t* )pvValue, pucTestRxData, ulTestRxSize );
                     }
                     else
                     {
-                        thisIf->raiseEvent( *( uint16_t* )value, NULL, 0 );
+                        pxThisIf->raiseEvent( *( uint16_t* )pvValue, NULL, 0 );
                     }
                 }
             }
             else
             {
-                status = FW_IF_ERRORS_PARAMS;
+                ulStatus = FW_IF_ERRORS_PARAMS;
             }
             break;
         
         default:
-            status = FW_IF_ERRORS_UNRECOGNISED_OPTION;
+            ulStatus = FW_IF_ERRORS_UNRECOGNISED_OPTION;
             break;
     }
 
     TEST_PRINT( "FW_IF_ioctrl for if.%u (%s), (option %u)\r\n",
-            ( unsigned int )thisTestCfg->ifId,
-            thisTestCfg->ifName,
-            ( unsigned int )option );
+            ( unsigned int )pxThisTestCfg->ifId,
+            pxThisTestCfg->ifName,
+            ( unsigned int )ulOption );
 
-    return status;
+    return ulStatus;
 }
 
 /**
  * @brief   Local implementation of FW_IF_bindCallback
  */
-static uint32_t testBindCallback( void *fwIf, FW_IF_callback * newFunc )
+static uint32_t testBindCallback( void *pvFwIf, FW_IF_callback *pxNewFunc )
 {
-    uint32_t status = FW_IF_ERRORS_NONE;
+    uint32_t ulStatus = FW_IF_ERRORS_NONE;
 
-    FW_IF_CFG *thisIf = ( FW_IF_CFG* )fwIf;
-    CHECK_HDL( thisIf );
-    CHECK_CFG( thisIf );
-    CHECK_FIREWALLS( thisIf );    
+    FW_IF_CFG *pxThisIf = ( FW_IF_CFG* )pvFwIf;
+    CHECK_HDL( pxThisIf );
+    CHECK_CFG( pxThisIf );
+    CHECK_FIREWALLS( pxThisIf );
     CHECK_DRIVER;
 
-    if( NULL != newFunc )
+    if( NULL != pxNewFunc )
     {
-        FW_IF_TEST_CFG *thisTestCfg = ( FW_IF_TEST_CFG* )thisIf->cfg;
+        FW_IF_TEST_CFG *pxThisTestCfg = ( FW_IF_TEST_CFG* )pxThisIf->cfg;
         
-        thisIf->raiseEvent = newFunc;
+        pxThisIf->raiseEvent = pxNewFunc;
     
         TEST_PRINT( "FW_IF_bindCallback called for if.%u (%s)\r\n",
-                ( unsigned int )thisTestCfg->ifId,
-                thisTestCfg->ifName );
+                ( unsigned int )pxThisTestCfg->ifId,
+                pxThisTestCfg->ifName );
     }
     else
     {
-        status = FW_IF_ERRORS_PARAMS;
+        ulStatus = FW_IF_ERRORS_PARAMS;
     }
 
 
-    return status;
+    return ulStatus;
 }
 
 
@@ -316,41 +315,41 @@ static uint32_t testBindCallback( void *fwIf, FW_IF_callback * newFunc )
 /**
  * @brief   initialisation function for test interfaces (generic across all test interfaces)
  */
-uint32_t FW_IF_test_init( FW_IF_TEST_INIT_CFG * cfg )
+uint32_t FW_IF_test_init( FW_IF_TEST_INIT_CFG *pxCfg )
 {
-    uint32_t status = FW_IF_ERRORS_NONE;
+    uint32_t ulStatus = FW_IF_ERRORS_NONE;
 
     if( FW_IF_FALSE != iInitialised )
     {
-        status = FW_IF_ERRORS_DRIVER_IN_USE;
+        ulStatus = FW_IF_ERRORS_DRIVER_IN_USE;
     }
-    else if ( NULL == cfg )
+    else if ( NULL == pxCfg )
     {
-        status = FW_IF_ERRORS_PARAMS;
+        ulStatus = FW_IF_ERRORS_PARAMS;
     }
     else
     {
-        memcpy( &myLocalCfg, cfg, sizeof( FW_IF_TEST_INIT_CFG ) );
+        pvOSAL_MemCpy( &xMyLocalCfg, pxCfg, sizeof( FW_IF_TEST_INIT_CFG ) );
         iInitialised = FW_IF_TRUE;
 
         TEST_PRINT( "FW_IF_test_init for driver.%u (%s)\r\n",
-                ( unsigned int )myLocalCfg.driverId,
-                myLocalCfg.driverName );
+                ( unsigned int )xMyLocalCfg.driverId,
+                xMyLocalCfg.driverName );
     }
 
-    return status;
+    return ulStatus;
 }
 
 /**
  * @brief   opens an instance of the test interface
  */
-uint32_t FW_IF_test_create( FW_IF_CFG *fwIf, FW_IF_TEST_CFG *testCfg )
+uint32_t FW_IF_test_create( FW_IF_CFG *pxFwIf, FW_IF_TEST_CFG *pxTestCfg )
 {
-    uint32_t status = FW_IF_ERRORS_NONE;
+    uint32_t ulStatus = FW_IF_ERRORS_NONE;
 
     CHECK_DRIVER;
 
-    if( ( NULL != fwIf ) && ( NULL != testCfg ) )
+    if( ( NULL != pxFwIf ) && ( NULL != pxTestCfg ) )
     {
         FW_IF_CFG myLocalIf =
         {
@@ -361,18 +360,18 @@ uint32_t FW_IF_test_create( FW_IF_CFG *fwIf, FW_IF_TEST_CFG *testCfg )
             .read           = &testRead,
             .ioctrl         = &testIoctrl,
             .bindCallback   = &testBindCallback,
-            .cfg            = ( void* )testCfg,
+            .cfg            = ( void* )pxTestCfg,
             .lowerFirewall  = TEST_LOWER_FIREWALL
         };
 
-        memcpy( fwIf, &myLocalIf, sizeof( FW_IF_CFG ) );
+        pvOSAL_MemCpy( pxFwIf, &myLocalIf, sizeof( FW_IF_CFG ) );
 
-        FW_IF_TEST_CFG *thisTestCfg = ( FW_IF_TEST_CFG* )fwIf->cfg;
+        FW_IF_TEST_CFG *pxThisTestCfg = ( FW_IF_TEST_CFG* )pxFwIf->cfg;
 
         TEST_PRINT( "FW_IF_test_create for if.%u (%s)\r\n",
-                ( unsigned int )thisTestCfg->ifId,
-                thisTestCfg->ifName );
+                ( unsigned int )pxThisTestCfg->ifId,
+                pxThisTestCfg->ifName );
     }
         
-    return status;
+    return ulStatus;
 }

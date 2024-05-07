@@ -70,11 +70,11 @@ typedef struct PLL_LOG_MSG
  */
 typedef enum PLL_OUTPUT_LEVEL
 {
-    PLL_OUTPUT_LEVEL_INFO = 0,  /* used for stats - always print */
-    PLL_OUTPUT_LEVEL_ERROR,     /* used for errors               */ 
-    PLL_OUTPUT_LEVEL_WARNING,   /* used for warnings             */ 
-    PLL_OUTPUT_LEVEL_LOGGING,   /* used for general printing     */ 
-    PLL_OUTPUT_LEVEL_DEBUG,     /* used for debug prints         */ 
+    PLL_OUTPUT_LEVEL_LOGGING = 0, /* used for printing to the log */
+    PLL_OUTPUT_LEVEL_INFO,        /* used for stats - always print */
+    PLL_OUTPUT_LEVEL_ERROR,       /* used for errors               */
+    PLL_OUTPUT_LEVEL_WARNING,     /* used for warnings             */
+    PLL_OUTPUT_LEVEL_DEBUG,       /* used for debug prints         */
 
     MAX_PLL_OUTPUT_LEVEL
 
@@ -89,31 +89,52 @@ typedef enum PLL_OUTPUT_LEVEL
  * @brief   Main initialisation point for the PLL
  *
  * @param   xOutputLevel    Output verbosity level
+ * @param   xLoggingLevel   Logging verbosity level
  *
  * @return  OK     if PLL is initialised and running successfully
  *          ERROR  if the PLL is not initialised
  */ 
-int iPLL_Initialise( PLL_OUTPUT_LEVEL xOutputLevel );
+int iPLL_Initialise( PLL_OUTPUT_LEVEL xOutputLevel, PLL_OUTPUT_LEVEL xLoggingLevel );
 
 /**
- * @brief   Globally sets the PLL verbosity level
+ * @brief   Globally sets the PLL output verbosity level
  *
  * @param   xOutputLevel    Output verbosity level
  *
  * @return  OK     if Level set correctly
  *          ERROR  if level not set
  */
-int iPLL_SetLevel( PLL_OUTPUT_LEVEL xOutputLevel );
+int iPLL_SetOutputLevel( PLL_OUTPUT_LEVEL xOutputLevel );
 
 /**
- * @brief   Gets current PLL output level
+ * @brief   Gets current PLL output verbosity level
  *
  * @param   pxOutputLevel   Pointer to output level
  * 
  * @return  OK     if level retrieved successful
  *          ERROR  if level not retrieved successful
  */
-int iPLL_GetLevel( PLL_OUTPUT_LEVEL *pxOutputLevel );
+int iPLL_GetOutputLevel( PLL_OUTPUT_LEVEL *pxOutputLevel );
+
+/**
+ * @brief   Globally sets the PLL logging verbosity level
+ *
+ * @param   xLoggingLevel   Logging verbosity level
+ *
+ * @return  OK     if Level set correctly
+ *          ERROR  if level not set
+ */
+int iPLL_SetLoggingLevel( PLL_OUTPUT_LEVEL xLoggingLevel );
+
+/**
+ * @brief   Gets current PLL logging verbosity level
+ *
+ * @param   pxLoggingLevel  Pointer to logging level
+ * 
+ * @return  OK     if level retrieved successful
+ *          ERROR  if level not retrieved successful
+ */
+int iPLL_GetLoggingLevel( PLL_OUTPUT_LEVEL *pxLoggingLevel );
 
 /**
  * @brief   Function for task/thread safe prints.
@@ -149,6 +170,22 @@ int iPLL_DumpLog( void );
  *           ERROR if not successful. 
  */
 int iPLL_ClearLog( void );
+
+/**
+ * @brief    Reads and dumps the FSBL (First-Stage Bootloader) log
+ * 
+ * @return   OK if successful
+ *           ERROR if not successful. 
+ */
+int iPLL_DumpFsblLog( void );
+
+/**
+ * @brief    Sends collected AMC boot records to the log once communciation is available
+ * 
+ * @return   OK if successful
+ *           ERROR if not successful. 
+ */
+int iPLL_SendBootRecords( void );
 
 /**
  * @brief   Print all the stats gathered by the library

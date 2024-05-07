@@ -26,7 +26,7 @@
  * @return  OK          Success
  *          ERROR       Failure
  */
-int iIN_BAND_TELEMETRY_Initialise( uint64_t ullsharedMemBaseAddr );
+int iIN_BAND_TELEMETRY_Initialise( uint64_t ullSharedMemBaseAddr );
 
 /**
  * @brief   Print all the stats gathered by the application
@@ -45,5 +45,18 @@ int iIN_BAND_TELEMETRY_PrintStatistics( void );
  *
  */
 int iIN_BAND_TELEMETRY_ClearStatistics( void );
+
+/**
+ * @brief   Activating/Deactivating Test Mode
+ * 
+ * @param   iActivate   Setting test mode activated or deactivated
+ *                      TRUE for activating
+ *                      FALSE for deactivating
+ *
+ * @return  OK          Test mode is activated/deactivated successfully
+ *          ERROR       Test mode is not activated/deactivated successfully
+ *
+ */
+int iIN_BAND_TELEMETRY_TestMode( int iActivate );
 
 #endif /* _IN_BAND_TELEMETRY_H_ */

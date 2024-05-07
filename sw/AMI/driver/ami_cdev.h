@@ -34,9 +34,12 @@
  * struct ami_ioc_data_payload - payload struct for dynamically sized ioctl data
  * @size: Size of data buffer.
  * @addr: Location of data buffer in userspace memory.
+ * @boot_device: Target boot device (for fpt, download).
  * @partition: Partition number to flash (also used for boot select).
- * @src: Source partition (for copy operation).
- * @dest: Destination partition (for copy operation).
+ * @src_device: Source device (for copy operation).
+ * @src_part: Source partition (for copy operation).
+ * @dest_device: Destination device (for copy operation).
+ * @dest_part: Destination partition (for copy operation).
  * @cap_override: Bypass permission checks. This may not apply to all IOCTL's.
  * @efd: File descriptor for event notifications (used for progress reporting when
  *     performing long running operations like PDI downloads) - optional
@@ -52,9 +55,12 @@
 struct ami_ioc_data_payload {
 	uint32_t       size;
 	unsigned long  addr;
+	uint8_t        boot_device;
 	uint32_t       partition;
-	uint32_t       src;
-	uint32_t       dest;
+	uint32_t       src_device;
+	uint32_t       src_part;
+	uint32_t       dest_device;
+	uint32_t       dest_part;
 	bool           cap_override;
 	int            efd;
 };
@@ -122,6 +128,7 @@ struct ami_ioc_sensor_value {
 
 /**
  * struct ami_ioc_fpt_hdr_value - the fpt header
+ * @boot_device: Target boot device.
  * @version: The version. Populated by the driver.
  * @hdr_size: The size of the header in bytes. Populated by the driver.
  * @entry_size: The entry size in bytes. Populated by the driver.
@@ -131,6 +138,7 @@ struct ami_ioc_sensor_value {
  * individual partition information.
  */
 struct ami_ioc_fpt_hdr_value {
+	uint8_t boot_device;
 	uint8_t version;
 	uint8_t hdr_size;
 	uint8_t entry_size;
@@ -139,12 +147,14 @@ struct ami_ioc_fpt_hdr_value {
 
 /**
  * struct ami_ioc_fpt_partition_value - the individual partition information.
+ * @boot_device: Target boot device.
  * @partition: This is passed in from userspace.
  * @type: The partition type. Populated by the driver.
  * @base_addr: The partition base address. Populated by the driver.
  * @partition_size: The parition size. Populated by the driver.
  */
 struct ami_ioc_fpt_partition_value {
+	uint8_t  boot_device;
 	uint32_t partition;
 	uint32_t type;
 	uint32_t base_addr;
@@ -204,7 +214,8 @@ enum ami_ioc_app_setup {
 #define AMI_IOC_APP_SETUP		_IOW(AMI_IOC_MAGIC, 11, enum ami_ioc_app_setup)
 #define AMI_IOC_READ_MODULE		_IOW(AMI_IOC_MAGIC, 12, struct ami_ioc_module_payload*)
 #define AMI_IOC_WRITE_MODULE		_IOW(AMI_IOC_MAGIC, 13, struct ami_ioc_module_payload*)
-#define AMI_IOC_MAX			(14)
+#define AMI_IOC_DEBUG_VERBOSITY		_IOW(AMI_IOC_MAGIC, 14, uint8_t)
+#define AMI_IOC_MAX			(15)
 
 /* End shared data. */
 

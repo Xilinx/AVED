@@ -83,6 +83,7 @@ static const char help_msg[] = \
 	"\teeprom_wr          Write data to the device EEPROM\r\n"
 	"\tmodule_byte_rd     Read data from a QSFP module\r\n"
 	"\tmodule_byte_wr     Write data to a QSFP module\r\n"
+	"\tdebug_verbosity    Set the AMC debug level\r\n"
 ;
 
 /*
@@ -132,23 +133,24 @@ static struct app_cmd cmd_none = {
  * List of supported commands.
  */
 static const struct app_cmd_map commands[] = {
-	{ "",               &cmd_none           },
-	{ "sensors",        &cmd_sensors        },
-	{ "cfgmem_program", &cmd_cfgmem_program },
-	{ "cfgmem_copy",    &cmd_cfgmem_copy    },
-	{ "cfgmem_info",    &cmd_cfgmem_info    },
-	{ "bar_rd",         &cmd_bar_rd         },
-	{ "bar_wr",         &cmd_bar_wr         },
-	{ "overview",       &cmd_overview       },
-	{ "pcieinfo",       &cmd_pcieinfo       },
-	{ "reload",         &cmd_reload         },
-	{ "device_boot",    &cmd_device_boot    },
-	{ "mfg_info",       &cmd_mfg_info       },
-	{ "eeprom_rd",      &cmd_eeprom_rd      },
-	{ "eeprom_wr",      &cmd_eeprom_wr      },
-	{ "cfgmem_fpt",     &cmd_cfgmem_fpt     },
-	{ "module_byte_rd", &cmd_module_byte_rd },
-	{ "module_byte_wr", &cmd_module_byte_wr },
+	{ "",                &cmd_none            },
+	{ "sensors",         &cmd_sensors         },
+	{ "cfgmem_program",  &cmd_cfgmem_program  },
+	{ "cfgmem_copy",     &cmd_cfgmem_copy     },
+	{ "cfgmem_info",     &cmd_cfgmem_info     },
+	{ "bar_rd",          &cmd_bar_rd          },
+	{ "bar_wr",          &cmd_bar_wr          },
+	{ "overview",        &cmd_overview        },
+	{ "pcieinfo",        &cmd_pcieinfo        },
+	{ "reload",          &cmd_reload          },
+	{ "device_boot",     &cmd_device_boot     },
+	{ "mfg_info",        &cmd_mfg_info        },
+	{ "eeprom_rd",       &cmd_eeprom_rd       },
+	{ "eeprom_wr",       &cmd_eeprom_wr       },
+	{ "cfgmem_fpt",      &cmd_cfgmem_fpt      },
+	{ "module_byte_rd",  &cmd_module_byte_rd  },
+	{ "module_byte_wr",  &cmd_module_byte_wr  },
+	{ "debug_verbosity", &cmd_debug_verbosity },
 };
 
 /*****************************************************************************/

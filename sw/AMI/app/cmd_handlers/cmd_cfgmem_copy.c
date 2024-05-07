@@ -30,8 +30,8 @@
 
 #define PDI_CHUNK_MULTIPLIER		(1024)
 #define PDI_CHUNK_SIZE			(32)	/* Multiple of 1024 */
-#define COPY_CHUNK_DUR_MS		(800)	/* Est duration for partition chunk copy (ms) */
-#define MINUTE_IN_MS			(60000) 
+#define COPY_CHUNK_DUR_MS		(70)	/* Est duration for partition chunk copy (ms) */
+#define SECOND_IN_MS			(1000) 
 
 /*****************************************************************************/
 /* Function declarations                                                     */
@@ -93,12 +93,12 @@ static const char help_msg[] = \
 	"cfgmem_copy - copy one partition to another\r\n"
 	"\r\nThis command requires root/sudo permissions.\r\n"
 	"\r\nUsage:\r\n"
-	"\t" APP_NAME " cfgmem_copy -d <bdf> -i <n> -p <n>\r\n"
+	"\t" APP_NAME " cfgmem_copy -d <bdf> -i <d:p> -p <d:p>\r\n"
 	"\r\nOptions:\r\n"
-	"\t-h --help            Show this screen\r\n"
-	"\t-d <b>:[d].[f]       Specify the device BDF\r\n"
-	"\t-i <partition>       Partition to copy from (source)\r\n"
-	"\t-p <partition>       Partition to copy to (destination)\r\n"
+	"\t-h --help                  Show this screen\r\n"
+	"\t-d <b>:[d].[f]             Specify the device BDF\r\n"
+	"\t-i <device:partition>      Device (primary or secondary):Partition to copy from (source)\r\n"
+	"\t-p <device:partition>      Device (primary or secondary):Partition to copy to (destination)\r\n"
 ;
 
 struct app_cmd cmd_cfgmem_copy = {
@@ -127,14 +127,13 @@ static void progress_handler(enum ami_event_status status, uint64_t ctr, void *d
  */
 static uint32_t calc_est_time(uint32_t part_size)
 {
-	uint32_t est_dur_mins = 0;
+	uint32_t est_dur_seconds = 0;
 	uint32_t est_num_chunks = 0;
-
 	/* calc est copy duration */
 	est_num_chunks = (part_size + ((PDI_CHUNK_SIZE * PDI_CHUNK_MULTIPLIER) - 1)) /
 		                 (PDI_CHUNK_SIZE * PDI_CHUNK_MULTIPLIER);	
-	est_dur_mins = ((est_num_chunks*COPY_CHUNK_DUR_MS) / MINUTE_IN_MS) + 1;
-	return est_dur_mins;
+	est_dur_seconds = ((est_num_chunks*COPY_CHUNK_DUR_MS) / SECOND_IN_MS) + 1;
+	return est_dur_seconds;
 }
 
 /*
@@ -151,10 +150,12 @@ static int do_cmd_cfgmem_copy(struct app_option *options, int num_args, char **a
 
 	/* Required data */
 	ami_device *dev = NULL;
+	uint32_t source_device = 0;
 	uint32_t source_partition = 0;
+	uint32_t dest_device = 0;
 	uint32_t dest_partition = 0;
 	struct ami_fpt_partition part = { 0 };
-	uint32_t est_dur_mins = 0;
+	uint32_t est_dur_seconds = 0;
 
 	/* Must have device, source partition, destination partition. */
 	if (!options) {
@@ -178,21 +179,48 @@ static int do_cmd_cfgmem_copy(struct app_option *options, int num_args, char **a
 		return AMI_STATUS_ERROR;
 	}
 
-	source_partition = (uint32_t)strtoul(source->arg, NULL, 0);
-	dest_partition = (uint32_t)strtoul(dest->arg, NULL, 0);
+	/* parse source boot device */
+	char *source_token = strtok((char *)source->arg, ":");
+	if (strcmp(source_token, "primary") == 0) {
+		source_device = AMI_BOOT_DEVICES_PRIMARY;
+	} else if (strcmp(source_token, "secondary") == 0) {
+		source_device = AMI_BOOT_DEVICES_SECONDARY;
+	} else{
+		APP_USER_ERROR("provided source device does not exist", help_msg);
+		return AMI_STATUS_ERROR;
+	}
+
+	/* parse source partition */
+	source_token = strtok(NULL, ":");
+	source_partition = (uint32_t)strtoul(source_token, NULL, 0);
+
+	/* parse dest boot device */
+	char *dest_token = strtok((char *)dest->arg, ":");
+	if (strcmp(dest_token, "primary") == 0) {
+		dest_device = AMI_BOOT_DEVICES_PRIMARY;
+	} else if (strcmp(dest_token, "secondary") == 0) {
+		dest_device = AMI_BOOT_DEVICES_SECONDARY;
+	} else{
+		APP_USER_ERROR("provided destination device does not exist", help_msg);
+		return AMI_STATUS_ERROR;
+	}
+
+	/* parse dest partition */
+	dest_token = strtok(NULL, ":");
+	dest_partition = (uint32_t)strtoul(dest_token, NULL, 0);
 
 	printf("Copying partition %d to partition %d\r\n", source_partition, dest_partition);
 
-	ret = ami_prog_get_fpt_partition(dev, source_partition, &part); /* get src partition size */
+	ret = ami_prog_get_fpt_partition(dev, source_device, source_partition, &part); /* get src partition size */
 
 	if (ret == AMI_STATUS_ERROR) {
 		APP_API_ERROR("could not get source fpt partition");
 	} else {
-		est_dur_mins = calc_est_time(part.size);
-		printf("Estimated time to copy partition: %d (mins)...\r\n", est_dur_mins);
+		est_dur_seconds = calc_est_time(part.size);
+		printf("Estimated time to copy partition: %d (seconds) (NOTE: Changing logging levels may increase copy time)\r\n", est_dur_seconds);
 	}
 
-	ret = ami_prog_copy_partition(dev, source_partition, dest_partition, progress_handler);
+	ret = ami_prog_copy_partition(dev, source_device, source_partition, dest_device, dest_partition, progress_handler);
 	printf("\r\n");
 
 	if (ret == AMI_STATUS_ERROR)

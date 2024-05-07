@@ -91,7 +91,7 @@ void vFW_IF_MUXED_DEVICE_DebugInit( DAL_HDL pxParentHandle )
  */
 static void vPrintStats( void )
 {
-    if( FW_IF_ERRORS_NONE != FW_IF_MUXED_DEVICE_PrintStatistics() )
+    if( FW_IF_ERRORS_NONE != ulFW_IF_MUXED_DEVICE_PrintStatistics() )
     {
         PLL_DAL( FW_IF_MUXED_DEVICE_DBG_NAME, "Error printing statistics\r\n" );
     }
@@ -102,7 +102,7 @@ static void vPrintStats( void )
  */
 static void vClearStats( void )
 {
-    if( FW_IF_ERRORS_NONE != FW_IF_MUXED_DEVICE_ClearStatistics() )
+    if( FW_IF_ERRORS_NONE != ulFW_IF_MUXED_DEVICE_ClearStatistics() )
     {
         PLL_DAL( FW_IF_MUXED_DEVICE_DBG_NAME, "Error clearing statistics\r\n" );
     }

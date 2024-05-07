@@ -154,13 +154,8 @@ int read_vsec(struct pci_dev *dev, uint32_t vsec_base_addr,
 		(*endpoints)->hw_discovery.start_addr +
 		(*endpoints)->hw_discovery.bar_len - 1;
 
-	if (pcie_function_num == 0) {
-		strcpy((*endpoints)->hw_discovery.name,
-			XILINX_ENDPOINT_NAME_HW_DISCOVERY_PF0);
-	} else if (pcie_function_num == 1) {
-		strcpy((*endpoints)->hw_discovery.name,
-			XILINX_ENDPOINT_NAME_HW_DISCOVERY_PF1);
-	}
+	strcpy((*endpoints)->hw_discovery.name,
+		XILINX_ENDPOINT_NAME_HW_DISCOVERY_PF0);
 
 	print_endpoint_info(dev, (*endpoints)->hw_discovery);
 
@@ -343,13 +338,8 @@ int read_vsec(struct pci_dev *dev, uint32_t vsec_base_addr,
 				(*endpoints)->interpf_mailbox.start_addr +
 				(*endpoints)->interpf_mailbox.bar_len - 1;
 
-			if (pcie_function_num == 0) {
-				strcpy((*endpoints)->interpf_mailbox.name,
-					XILINX_ENDPOINT_NAME_INTERPF_MAILBOX_PF0);
-			} else if (pcie_function_num == 1) {
-				strcpy((*endpoints)->interpf_mailbox.name,
-					XILINX_ENDPOINT_NAME_INTERPF_MAILBOX_PF1);
-			}
+			strcpy((*endpoints)->interpf_mailbox.name,
+				XILINX_ENDPOINT_NAME_INTERPF_MAILBOX_PF0);
 
 			print_endpoint_info(dev, (*endpoints)->interpf_mailbox);
 			break;
@@ -416,11 +406,9 @@ int read_vsec(struct pci_dev *dev, uint32_t vsec_base_addr,
 	pci_iounmap(dev, hw_discovery_virt_addr);
 	hw_discovery_virt_addr = 0;
 
-	if (pcie_function_num == 0) {
-		ret = read_logic_uuid(dev, endpoints);
-		if (ret)
-			goto fail;
-	}
+	ret = read_logic_uuid(dev, endpoints);
+	if (ret)
+		goto fail;
 
 	DEV_VDBG(dev, "Successfully read Vendor Specific Region (VSEC)");
 	return SUCCESS;

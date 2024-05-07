@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2024 Advanced Micro Devices, Inc. All rights reserved.
  * SPDX-License-Identifier: MIT
  *
  * This file contains the API for the Alveo Sensor Control (ASC) proxy driver
@@ -24,12 +24,12 @@
 /* Defines                                                                    */
 /******************************************************************************/
 
-#define ASC_SENSOR_NAME_MAX         ( 20 )
+#define ASC_SENSOR_NAME_MAX ( 20 )
 
-#define ASC_SENSOR_INVALID_VAL      ( -1 )
+#define ASC_SENSOR_INVALID_VAL ( -1 )
 
-#define ASC_SENSOR_I2C_BUS_NUM      ( 0 )
-#define ASC_SENSOR_I2C_BUS_INVALID  ( -1 )
+#define ASC_SENSOR_I2C_BUS_NUM     ( 0 )
+#define ASC_SENSOR_I2C_BUS_INVALID ( -1 )
 
 
 /******************************************************************************/
@@ -54,7 +54,6 @@ typedef enum ASC_PROXY_DRIVER_EVENTS
     ASC_PROXY_DRIVER_E_SENSOR_UPPER_WARNING,
     ASC_PROXY_DRIVER_E_SENSOR_UPPER_CRITICAL,
     ASC_PROXY_DRIVER_E_SENSOR_UPPER_FATAL,
-
     MAX_ASC_PROXY_DRIVER_EVENTS
 
 } ASC_PROXY_DRIVER_EVENTS;
@@ -69,10 +68,22 @@ typedef enum ASC_PROXY_DRIVER_SENSOR_STATUS
     ASC_PROXY_DRIVER_SENSOR_STATUS_PRESENT_AND_VALID,
     ASC_PROXY_DRIVER_SENSOR_STATUS_DATA_NOT_AVAILABLE,
     ASC_PROXY_DRIVER_SENSOR_STATUS_NOT_AVAILABLE,
-
     MAX_ASC_PROXY_DRIVER_SENSOR_STATUS
 
 } ASC_PROXY_DRIVER_SENSOR_STATUS;
+
+/**
+ * @enum    ASC_PROXY_DRIVER_SENSOR_OPERATIONAL_STATUS
+ * @brief   Operational status of sensor
+ */
+typedef enum ASC_PROXY_DRIVER_SENSOR_OPERATIONAL_STATUS
+{
+    ASC_PROXY_DRIVER_SENSOR_OPERATIONAL_STATUS_ENABLED = 0,
+    ASC_PROXY_DRIVER_SENSOR_OPERATIONAL_STATUS_DISABLED,
+    ASC_PROXY_DRIVER_SENSOR_OPERATIONAL_STATUS_UNAVAILABLE,
+    MAX_ASC_PROXY_DRIVER_SENSOR_OPERATIONAL_STATUS
+
+} ASC_PROXY_DRIVER_SENSOR_OPERATIONAL_STATUS;
 
 /**
  * @enum   ASC_PROXY_DRIVER_SENSOR_UNIT_MOD
@@ -80,12 +91,11 @@ typedef enum ASC_PROXY_DRIVER_SENSOR_STATUS
  */
 typedef enum ASC_PROXY_DRIVER_SENSOR_UNIT_MOD
 {
-    ASC_PROXY_DRIVER_SENSOR_UNIT_MOD_MEGA  = 0,
+    ASC_PROXY_DRIVER_SENSOR_UNIT_MOD_MEGA = 0,
     ASC_PROXY_DRIVER_SENSOR_UNIT_MOD_KILO,
     ASC_PROXY_DRIVER_SENSOR_UNIT_MOD_NONE,
     ASC_PROXY_DRIVER_SENSOR_UNIT_MOD_MILLI,
     ASC_PROXY_DRIVER_SENSOR_UNIT_MOD_MICRO,
-
     MAX_ASC_PROXY_DRIVER_SENSOR_UNIT_MOD
 
 } ASC_PROXY_DRIVER_SENSOR_UNIT_MOD;
@@ -100,7 +110,6 @@ typedef enum ASC_PROXY_DRIVER_SENSOR_TYPE
     ASC_PROXY_DRIVER_SENSOR_TYPE_VOLTAGE,
     ASC_PROXY_DRIVER_SENSOR_TYPE_CURRENT,
     ASC_PROXY_DRIVER_SENSOR_TYPE_POWER,
-
     MAX_ASC_PROXY_DRIVER_SENSOR_TYPE
 
 } ASC_PROXY_DRIVER_SENSOR_TYPE;
@@ -115,10 +124,23 @@ typedef enum ASC_PROXY_DRIVER_SENSOR_BITFIELD
     ASC_PROXY_DRIVER_SENSOR_BITFIELD_VOLTAGE     = ( 1 << 1 ),
     ASC_PROXY_DRIVER_SENSOR_BITFIELD_CURRENT     = ( 1 << 2 ),
     ASC_PROXY_DRIVER_SENSOR_BITFIELD_POWER       = ( 1 << 3 ),
-
     MAX_ASC_PROXY_DRIVER_SENSOR_BITFIELD
 
 } ASC_PROXY_DRIVER_SENSOR_BITFIELD;
+
+/**
+ * @enum    ASC_PROXY_DRIVER_SENSOR_THRESHOLD_STATUS
+ * @brief   Bitfield of sensor types
+ */
+typedef enum ASC_PROXY_DRIVER_SENSOR_THRESHOLD_STATUS
+{
+    ASC_PROXY_DRIVER_SENSOR_THRESHOLD_STATUS_HEALTHY = 0,
+    ASC_PROXY_DRIVER_SENSOR_THRESHOLD_STATUS_WARNING,
+    ASC_PROXY_DRIVER_SENSOR_THRESHOLD_STATUS_CRITICAL,
+    ASC_PROXY_DRIVER_SENSOR_THRESHOLD_STATUS_FATAL,
+    MAX_ASC_PROXY_DRIVER_SENSOR_THRESHOLD_STATUS
+
+} ASC_PROXY_DRIVER_SENSOR_THRESHOLD_STATUS;
 
 
 /******************************************************************************/
@@ -129,13 +151,16 @@ typedef enum ASC_PROXY_DRIVER_SENSOR_BITFIELD
  * @typedef  ASC_PROXY_DRIVER_READ_SENSOR_FUNC
  * @brief    Function definition for sensor-reading APIs
  */
-typedef int ( ASC_PROXY_DRIVER_READ_SENSOR_FUNC ) ( uint8_t ucBusNum, uint8_t ucSlaveAddr, uint8_t ucChannelNum, float *pfValue );
+typedef int ( ASC_PROXY_DRIVER_READ_SENSOR_FUNC ) ( uint8_t ucBusNum,
+                                                    uint8_t ucSlaveAddr,
+                                                    uint8_t ucChannelNum,
+                                                    float *pfValue );
 
 /**
  * @typedef  ASC_PROXY_DRIVER_ENABLE_SENSOR_FUNC
- * 
+ *
  * @brief    Function definition for checking if sensor is enabled or disabled
- * 
+ *
  * @return   TRUE if sensor is enabled or FALSE if sensor is disabled
  */
 typedef int ( ASC_PROXY_DRIVER_ENABLE_SENSOR_FUNC ) ( void );
@@ -151,19 +176,20 @@ typedef int ( ASC_PROXY_DRIVER_ENABLE_SENSOR_FUNC ) ( void );
  */
 typedef struct ASC_PROXY_DRIVER_SENSOR_READINGS
 {
-    uint32_t                          ulSensorValue;
+    uint32_t                                   ulSensorValue;
 
-    const uint32_t                    ulLowerWarningLimit;
-    const uint32_t                    ulLowerCriticalLimit;
-    const uint32_t                    ulLowerFatalLimit;
-    const uint32_t                    ulUpperWarningLimit;
-    const uint32_t                    ulUpperCriticalLimit;
-    const uint32_t                    ulUpperFatalLimit;
-    uint32_t                          ulAverageSensorValue;
-    uint32_t                          ulMaxSensorValue;
+    const uint32_t                             ulLowerWarningLimit;
+    const uint32_t                             ulLowerCriticalLimit;
+    const uint32_t                             ulLowerFatalLimit;
+    const uint32_t                             ulUpperWarningLimit;
+    const uint32_t                             ulUpperCriticalLimit;
+    const uint32_t                             ulUpperFatalLimit;
+    uint32_t                                   ulAverageSensorValue;
+    uint32_t                                   ulMaxSensorValue;
 
-    ASC_PROXY_DRIVER_SENSOR_STATUS    xSensorStatus;
-    ASC_PROXY_DRIVER_SENSOR_UNIT_MOD  xSensorUnitModifier;
+    ASC_PROXY_DRIVER_SENSOR_STATUS             xSensorStatus;
+    ASC_PROXY_DRIVER_SENSOR_OPERATIONAL_STATUS xSensorOperationalStatus;
+    ASC_PROXY_DRIVER_SENSOR_UNIT_MOD           xSensorUnitModifier;
 
 } ASC_PROXY_DRIVER_SENSOR_READINGS;
 
@@ -173,19 +199,21 @@ typedef struct ASC_PROXY_DRIVER_SENSOR_READINGS
  */
 typedef struct ASC_PROXY_DRIVER_SENSOR_DATA
 {
-    const char                           pcSensorName[ ASC_SENSOR_NAME_MAX ];
+    const char                               pcSensorName[ ASC_SENSOR_NAME_MAX ];
 
-    const uint8_t                        ucSensorId;
-    const uint8_t                        ucSensorType;
-    const uint8_t                        ucTotalPowerSensor;
-    const uint8_t                        ucSensorAddress;
-    const uint8_t                        ucChannelNumber[ MAX_ASC_PROXY_DRIVER_SENSOR_TYPE ];
+    const uint8_t                            ucSensorId;
+    const uint8_t                            ucSensorType;
+    const uint8_t                            ucTotalPowerSensor;
+    const uint8_t                            ucSensorAddress;
+    const uint8_t                            ucChannelNumber[ MAX_ASC_PROXY_DRIVER_SENSOR_TYPE ];
 
-    ASC_PROXY_DRIVER_ENABLE_SENSOR_FUNC  *pxSensorEnabled;
+    ASC_PROXY_DRIVER_ENABLE_SENSOR_FUNC      *pxSensorEnabled;
 
-    ASC_PROXY_DRIVER_READ_SENSOR_FUNC    *ppxReadSensorFunc[ MAX_ASC_PROXY_DRIVER_SENSOR_TYPE ];
+    ASC_PROXY_DRIVER_READ_SENSOR_FUNC        *ppxReadSensorFunc[ MAX_ASC_PROXY_DRIVER_SENSOR_TYPE ];
 
-    ASC_PROXY_DRIVER_SENSOR_READINGS     pxReadings[ MAX_ASC_PROXY_DRIVER_SENSOR_TYPE ];
+    ASC_PROXY_DRIVER_SENSOR_READINGS         pxReadings[ MAX_ASC_PROXY_DRIVER_SENSOR_TYPE ];
+
+    ASC_PROXY_DRIVER_SENSOR_THRESHOLD_STATUS ulThresholdStatus;
 
 } ASC_PROXY_DRIVER_SENSOR_DATA;
 
@@ -210,8 +238,8 @@ typedef struct ASC_PROXY_DRIVER_SENSOR_DATA
  *
  * @note   Proxy drivers can have 0 or more firmware interfaces
  */
-int iASC_Initialise( uint8_t ucProxyId, 
-                     uint32_t ulTaskPrio, 
+int iASC_Initialise( uint8_t ucProxyId,
+                     uint32_t ulTaskPrio,
                      uint32_t ulTaskStack,
                      ASC_PROXY_DRIVER_SENSOR_DATA *pxSensorData,
                      uint8_t ucNumSensors );
@@ -223,7 +251,7 @@ int iASC_Initialise( uint8_t ucProxyId,
  *
  * @return  OK          Callback successfully bound
  *          ERROR       Callback not bound
- * 
+ *
  */
 int iASC_BindCallback( EVL_CALLBACK *pxCallback );
 
@@ -235,7 +263,7 @@ int iASC_BindCallback( EVL_CALLBACK *pxCallback );
  *
  * @return  OK          Data reset successfully
  *          ERROR       Data not reset successfully
- * 
+ *
  */
 int iASC_ResetAllSensorData( void );
 
@@ -246,7 +274,7 @@ int iASC_ResetAllSensorData( void );
  *
  * @return  OK          Data reset successfully
  *          ERROR       Data not reset successfully
- * 
+ *
  */
 int iASC_ResetSingleSensorDataById( uint8_t ucId );
 
@@ -257,7 +285,7 @@ int iASC_ResetSingleSensorDataById( uint8_t ucId );
  *
  * @return  OK          Data reset successfully
  *          ERROR       Data not reset successfully
- * 
+ *
  */
 int iASC_ResetSingleSensorDataByName( const char *pcName );
 
@@ -268,12 +296,12 @@ int iASC_ResetSingleSensorDataByName( const char *pcName );
  *
  * @param   pxData         Pointer to data to get
  * @param   pucNumSensors  Pointer to the number of sensors monitored
- *                         Orignally passed in as the maximum number of sensors that can be monitored but will then be 
+ *                         Orignally passed in as the maximum number of sensors that can be monitored but will then be
  *                         updated to the actual number of sensors that are monitored
  *
  * @return  OK             Data retrieved successfully
  *          ERROR          Data not retrieved successfully
- * 
+ *
  */
 int iASC_GetAllSensorData( ASC_PROXY_DRIVER_SENSOR_DATA *pxData, uint8_t *pucNumSensors );
 
@@ -285,7 +313,7 @@ int iASC_GetAllSensorData( ASC_PROXY_DRIVER_SENSOR_DATA *pxData, uint8_t *pucNum
  *
  * @return  OK          Data retrieved successfully
  *          ERROR       Data not retrieved successfully
- * 
+ *
  */
 int iASC_GetSingleSensorDataById( uint8_t ucId, ASC_PROXY_DRIVER_SENSOR_DATA *pxData );
 
@@ -297,16 +325,56 @@ int iASC_GetSingleSensorDataById( uint8_t ucId, ASC_PROXY_DRIVER_SENSOR_DATA *px
  *
  * @return  OK          Data retrieved successfully
  *          ERROR       Data not retrieved successfully
- * 
+ *
  */
 int iASC_GetSingleSensorDataByName( const char *pcName, ASC_PROXY_DRIVER_SENSOR_DATA *pxData );
+
+/**
+ * @brief   Sets the threshold status of a single sensor
+ *
+ * @param   ucId        Sensor ID
+ * @param   xStatus     New threshold status
+ *
+ * @return  OK          Status set successfully
+ *          ERROR       Satus not set
+ *
+ */
+int iASC_SetSingleSensorThresholdStatusById( uint8_t ucId, ASC_PROXY_DRIVER_SENSOR_THRESHOLD_STATUS xStatus );
+
+/**
+ * @brief   Set single sensor operational state by ID
+ *
+ * @param   ucId                Sensor ID
+ * @param   ucSensorType        The sensor type
+ * @param   ucOperationalState  The operational state to set
+ *
+ * @return  OK          operational state set successfully
+ *          ERROR       operational state not set
+ */
+int iASC_SetSingleSensorOperationalStateById( uint8_t ucId,
+                                              uint8_t ucSensorType,
+                                              ASC_PROXY_DRIVER_SENSOR_OPERATIONAL_STATUS ucOperationalState );
+
+/**
+ * @brief   Get single sensor operational state by ID
+ *
+ * @param   ucId                Sensor ID
+ * @param   ucSensorType        The sensor type
+ * @param   pucOperationalState Pointer to the operational state read
+ *
+ * @return  OK          operational state read successfully
+ *          ERROR       operational state not read
+ */
+int iASC_GetSingleSensorOperationalStateById( uint8_t ucId,
+                                              uint8_t ucSensorType,
+                                              ASC_PROXY_DRIVER_SENSOR_OPERATIONAL_STATUS *pucOperationalState );
 
 /**
  * @brief   Print all of the stats gathered by the application
  *
  * @return  OK          Stats retrieved from proxy driver successfully
  *          ERROR       Stats not retrieved successfully
- * 
+ *
  */
 int iASC_PrintStatistics( void );
 
@@ -315,7 +383,7 @@ int iASC_PrintStatistics( void );
  *
  * @return  OK          Stats cleared successfully
  *          ERROR       Stats not cleared successfully
- * 
+ *
  */
 int iASC_ClearStatistics( void );
 

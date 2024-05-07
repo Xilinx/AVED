@@ -59,7 +59,7 @@ typedef enum _FW_IF_TEST_IOCTRL_OPTIONS
 typedef struct _FW_IF_TEST_INIT_CFG
 {
     uint32_t        driverId;
-    char        *   driverName;
+    char            *driverName;
     int             debugPrint;
 
 } FW_IF_TEST_INIT_CFG;
@@ -71,7 +71,7 @@ typedef struct _FW_IF_TEST_INIT_CFG
 typedef struct _FW_IF_TEST_CFG
 {
     uint32_t        ifId;
-    char        *   ifName;
+    char            *ifName;
 
 } FW_IF_TEST_CFG;
 
@@ -83,11 +83,11 @@ typedef struct _FW_IF_TEST_CFG
 /**
  * @brief   initialisation function for test interfaces (generic across all test interfaces)
  *
- * @param   cfg         pointer to the config to initialise the driver with
+ * @param   pxCfg       pointer to the config to initialise the driver with
  *
  * @return  See FW_IF_ERRORS
  */
-extern uint32_t FW_IF_test_init( FW_IF_TEST_INIT_CFG * cfg );
+extern uint32_t FW_IF_test_init( FW_IF_TEST_INIT_CFG *pxCfg );
 
 /**
  * @brief   creates an instance of the test interface
@@ -97,6 +97,6 @@ extern uint32_t FW_IF_test_init( FW_IF_TEST_INIT_CFG * cfg );
  *
  * @return  See FW_IF_ERRORS
  */
-extern uint32_t FW_IF_test_create( FW_IF_CFG *fwIf, FW_IF_TEST_CFG *testCfg );
+extern uint32_t FW_IF_test_create( FW_IF_CFG *pxFwIf, FW_IF_TEST_CFG *pxTestCfg );
 
 #endif

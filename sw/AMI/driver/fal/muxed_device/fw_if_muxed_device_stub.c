@@ -88,7 +88,7 @@ typedef struct FW_IF_QSFP_PRIVATE_DATA
 {
     uint32_t                        ulUpperFirewall;
 
-    FW_IF_MUXED_DEVICE_INIT_CFG             xLocalCfg;
+    FW_IF_MUXED_DEVICE_INIT_CFG     xLocalCfg;
     int                             iInitialised;
     uint32_t                        ulStatCounters[ FW_IF_QSFP_STATS_MAX ];
     uint32_t                        ulErrorCounters[ FW_IF_QSFP_ERRORS_MAX ];
@@ -176,7 +176,7 @@ static uint32_t ulQsfpClose( void *pvFwIf )
 /**
  * @brief   Local implementation of FW_IF_write
  */
-static uint32_t ulQsfpWrite( void *pvFwIf, uint32_t ulDstPort, uint8_t *pucData, uint32_t ulSize, uint32_t ulTimeoutMs )
+static uint32_t ulQsfpWrite( void *pvFwIf, uint64_t ullDstPort, uint8_t *pucData, uint32_t ulSize, uint32_t ulTimeoutMs )
 {
     uint32_t ulStatus = FW_IF_ERRORS_NONE;
 
@@ -187,17 +187,12 @@ static uint32_t ulQsfpWrite( void *pvFwIf, uint32_t ulDstPort, uint8_t *pucData,
     CHECK_DRIVER;
 
     if( ( NULL != pucData ) &&
-        ( FW_IF_QSFP_MAX_DATA >= ulSize ) )
+        ( FAL_QSFP_MAX_DATA >= ulSize ) )
     {
-        FW_IF_MUXED_DEVICE_CFG *pxCfg = ( FW_IF_MUXED_DEVICE_CFG* )pxThisIf->cfg;
-
         /*
          * This is where data will be written to either QSFP IO expander,
          * or QSFP memory map register, depending on hw level set.
          */
-        PLL_DBG( FW_IF_QSFP_NAME, "QSFP FW_IF_write %s device (i2c address 0x%02X) \r\n",
-                ( ( FW_IF_DEVICE_QSFP == pxCfg->xDevice )? "QSFP" : "DIMM" ),
-                ( unsigned int )pxCfg->ucDeviceI2cAddr );
     }
     else
     {
@@ -210,7 +205,7 @@ static uint32_t ulQsfpWrite( void *pvFwIf, uint32_t ulDstPort, uint8_t *pucData,
 /**
  * @brief   Local implementation of FW_IF_read
  */
-static uint32_t ulQsfpRead( void *pvFwIf, uint32_t ulSrcPort, uint8_t *pucData, uint32_t *pulSize, uint32_t ulTimeoutMs )
+static uint32_t ulQsfpRead( void *pvFwIf, uint64_t ullSrcPort, uint8_t *pucData, uint32_t *pulSize, uint32_t ulTimeoutMs )
 {
     uint32_t ulStatus = FW_IF_ERRORS_NONE;
 
@@ -222,17 +217,12 @@ static uint32_t ulQsfpRead( void *pvFwIf, uint32_t ulSrcPort, uint8_t *pucData, 
 
     if( ( NULL != pucData ) &&
         ( NULL != pulSize ) &&
-        ( FW_IF_QSFP_MAX_DATA >= *pulSize ) )
+        ( FAL_QSFP_MAX_DATA >= *pulSize ) )
     {
-        FW_IF_MUXED_DEVICE_CFG *pxCfg = ( FW_IF_MUXED_DEVICE_CFG* )pxThisIf->cfg;
-
         /*
          * This is where data will be read from either QSFP IO expander,
          * or QSFP memory map register, depending on hw level set.
          */
-        PLL_DBG( FW_IF_QSFP_NAME, "QSFP FW_IF_read %s device (i2c address 0x%02X) \r\n",
-                ( ( FW_IF_DEVICE_QSFP == pxCfg->xDevice )? "QSFP" : "DIMM" ),
-                ( unsigned int )pxCfg->ucDeviceI2cAddr );
     }
     else
     {
@@ -299,20 +289,13 @@ static uint32_t ulQsfpIoctrl( void *pvFwIf, uint32_t ulOption, void *pvValue )
         }
     }
 
-    if( FW_IF_ERRORS_NONE == ulStatus )
-    {
-        PLL_DBG( FW_IF_QSFP_NAME, "QSFP FW_IF_ioctrl %s device (i2c address 0x%02X) \r\n",
-                ( ( FW_IF_DEVICE_QSFP == pxCfg->xDevice )? "QSFP" : "DIMM" ),
-                ( unsigned int )pxCfg->ucDeviceI2cAddr );
-    }
-
     return ulStatus;
 }
 
 /**
  * @brief   Local implementation of FW_IF_bindCallback
  */
-static uint32_t ulQsfpBindCallback( void *pvFwIf, FW_IF_callback *xpNewFunc )
+static uint32_t ulQsfpBindCallback( void *pvFwIf, FW_IF_callback *pxNewFunc )
 {
     uint32_t ulStatus = FW_IF_ERRORS_NONE;
 
@@ -322,7 +305,7 @@ static uint32_t ulQsfpBindCallback( void *pvFwIf, FW_IF_callback *xpNewFunc )
     CHECK_FIREWALLS( pxThisIf );
     CHECK_DRIVER;
 
-    if( NULL != xpNewFunc )
+    if( NULL != pxNewFunc )
     {
         FW_IF_MUXED_DEVICE_CFG *pxCfg = ( FW_IF_MUXED_DEVICE_CFG* )pxThisIf->cfg;
 
@@ -330,7 +313,7 @@ static uint32_t ulQsfpBindCallback( void *pvFwIf, FW_IF_callback *xpNewFunc )
          * Binds in callback provided to the FW_IF.
          * Callback will be invoked when driver event occurs.
          */
-        pxThisIf->raiseEvent = xpNewFunc;
+        pxThisIf->raiseEvent = pxNewFunc;
         PLL_DBG( FW_IF_QSFP_NAME, "QSFP FW_IF_bindCallback %s device (i2c address 0x%02X) \r\n",
                 ( ( FW_IF_DEVICE_QSFP == pxCfg->xDevice )? "QSFP" : "DIMM" ),
                 ( unsigned int )pxCfg->ucDeviceI2cAddr );
@@ -350,7 +333,7 @@ static uint32_t ulQsfpBindCallback( void *pvFwIf, FW_IF_callback *xpNewFunc )
 /**
  * @brief   initialisation function for QSFP interfaces (generic across all QSFP interfaces)
  */
-uint32_t FW_IF_MUXED_DEVICE_init( FW_IF_MUXED_DEVICE_INIT_CFG* pxInitCfg )
+uint32_t ulFW_IF_MUXED_DEVICE_Init( FW_IF_MUXED_DEVICE_INIT_CFG *pxInitCfg )
 {
     uint32_t ulStatus = FW_IF_ERRORS_NONE;
 
@@ -367,7 +350,7 @@ uint32_t FW_IF_MUXED_DEVICE_init( FW_IF_MUXED_DEVICE_INIT_CFG* pxInitCfg )
         /*
          * Initilise config data shared between all QSFPs.
          */
-        memcpy( &pxThis->xLocalCfg, pxInitCfg, sizeof( FW_IF_MUXED_DEVICE_INIT_CFG ) );
+        pvOSAL_MemCpy( &pxThis->xLocalCfg, pxInitCfg, sizeof( FW_IF_MUXED_DEVICE_INIT_CFG ) );
         pxThis->iInitialised = FW_IF_TRUE;
         INC_STAT_COUNTER( FW_IF_QSFP_STATS_INIT_OVERALL_COMPLETE )
     }
@@ -378,7 +361,7 @@ uint32_t FW_IF_MUXED_DEVICE_init( FW_IF_MUXED_DEVICE_INIT_CFG* pxInitCfg )
 /**
  * @brief   creates an instance of the QSFP interface
  */
-uint32_t FW_IF_MUXED_DEVICE_create( FW_IF_CFG* pxFwIf, FW_IF_MUXED_DEVICE_CFG* pxQsfpCfg )
+uint32_t ulFW_IF_MUXED_DEVICE_Create( FW_IF_CFG *pxFwIf, FW_IF_MUXED_DEVICE_CFG *pxQsfpCfg )
 {
     uint32_t ulStatus = FW_IF_ERRORS_NONE;
 
@@ -399,9 +382,9 @@ uint32_t FW_IF_MUXED_DEVICE_create( FW_IF_CFG* pxFwIf, FW_IF_MUXED_DEVICE_CFG* p
             .lowerFirewall  = QSFP_LOWER_FIREWALL
         };
 
-        memcpy( pxFwIf, &xLocalIf, sizeof( FW_IF_CFG ) );
+        pvOSAL_MemCpy( pxFwIf, &xLocalIf, sizeof( FW_IF_CFG ) );
         INC_STAT_COUNTER( FW_IF_QSFP_STATS_INSTANCE_CREATE );
-        PLL_DBG( FW_IF_QSFP_NAME, "FW_IF_MUXED_DEVICE_create\r\n" );
+        PLL_DBG( FW_IF_QSFP_NAME, "ulFW_IF_MUXED_DEVICE_Create\r\n" );
     }
     else
     {
@@ -415,32 +398,24 @@ uint32_t FW_IF_MUXED_DEVICE_create( FW_IF_CFG* pxFwIf, FW_IF_MUXED_DEVICE_CFG* p
 /**
  * @brief   Print all the stats gathered by the application
  */
-uint32_t FW_IF_MUXED_DEVICE_PrintStatistics( void )
+uint32_t ulFW_IF_MUXED_DEVICE_PrintStatistics( void )
 {
     uint32_t ulStatus = FW_IF_ERRORS_NONE;
 
-    if( FW_IF_TRUE == pxThis->iInitialised )
+    int i = 0;
+    PLL_INF( FW_IF_QSFP_NAME, "============================================================\n\r" );
+    PLL_INF( FW_IF_QSFP_NAME, "FWIF QSFP Statistics:\n\r" );
+    for( i = 0; i < FW_IF_QSFP_STATS_MAX; i++ )
     {
-        int i = 0;
-        PLL_INF( FW_IF_QSFP_NAME, "============================================================\n\r" );
-        PLL_INF( FW_IF_QSFP_NAME, "FWIF QSFP Statistics:\n\r" );
-        for( i = 0; i < FW_IF_QSFP_STATS_MAX; i++ )
-        {
-            PRINT_STAT_COUNTER( i );
-        }
-        PLL_INF( FW_IF_QSFP_NAME, "------------------------------------------------------------\n\r" );
-        PLL_INF( FW_IF_QSFP_NAME, "FWIF QSFP Errors:\n\r" );
-        for( i = 0; i < FW_IF_QSFP_ERRORS_MAX; i++ )
-        {
-            PRINT_ERROR_COUNTER( i );
-        }
-        PLL_INF( FW_IF_QSFP_NAME, "============================================================\n\r" );
+        PRINT_STAT_COUNTER( i );
     }
-    else
+    PLL_INF( FW_IF_QSFP_NAME, "------------------------------------------------------------\n\r" );
+    PLL_INF( FW_IF_QSFP_NAME, "FWIF QSFP Errors:\n\r" );
+    for( i = 0; i < FW_IF_QSFP_ERRORS_MAX; i++ )
     {
-        INC_ERROR_COUNTER( FW_IF_QSFP_ERRORS_VALIDATION_FAILED )
-        ulStatus = FW_IF_ERRORS_DRIVER_NOT_INITIALISED;
+        PRINT_ERROR_COUNTER( i );
     }
+    PLL_INF( FW_IF_QSFP_NAME, "============================================================\n\r" );
 
     return ulStatus;
 }
@@ -448,7 +423,7 @@ uint32_t FW_IF_MUXED_DEVICE_PrintStatistics( void )
 /**
  * @brief   Clear all the stats in the application
  */
-uint32_t FW_IF_MUXED_DEVICE_ClearStatistics( void )
+uint32_t ulFW_IF_MUXED_DEVICE_ClearStatistics( void )
 {
     uint32_t ulStatus = FW_IF_ERRORS_NONE;
 

@@ -84,7 +84,6 @@ enum pf_dev_cache_type {
 	PF_DEV_CACHE_DEV,
 };
 
-/* Same device structure reused for both PF0 and PF1 */
 /**
  * struct pf_dev_struct - Top level struct for a PCI device.
  * @state: Current device state.

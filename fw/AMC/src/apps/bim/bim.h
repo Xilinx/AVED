@@ -18,7 +18,7 @@
 #include "standard.h"
 #include "osal.h"
 
-#include "event_id.h"
+#include "amc_cfg.h"
 
 
 /******************************************************************************/
@@ -27,7 +27,7 @@
 
 /**
  * @enum    BIM_STATUS
- * @brief   Status levels for the overall health of AMC.   
+ * @brief   Status levels for the overall health of AMC.
  */
 typedef enum BIM_STATUS
 {
@@ -35,7 +35,6 @@ typedef enum BIM_STATUS
     BIM_STATUS_DEGRADED,
     BIM_STATUS_CRITICAL,
     BIM_STATUS_FATAL,
-
     MAX_BIM_STATUS
 
 } BIM_STATUS;
@@ -47,7 +46,7 @@ typedef enum BIM_STATUS
 
 /**
  * @struct  BIM_EVENTS
- * @brief   Structure to hold individual event info.   
+ * @brief   Structure to hold individual event info.
  */
 typedef struct BIM_EVENTS
 {
@@ -59,15 +58,15 @@ typedef struct BIM_EVENTS
 
 /**
  * @struct  BIM_MODULES
- * @brief   Structure to hold individual module health info.   
+ * @brief   Structure to hold individual module health info.
  */
 typedef struct BIM_MODULES
 {
-    AMC_EVENT_UNIQUE_IDS xModuleId;
-    BIM_STATUS           xCurrentStatus;
-    BIM_STATUS           xContextStatus;
-    BIM_EVENTS           *pxEvents;
-    uint32_t             ulEventsLen;
+    AMC_CFG_UNIQUE_IDS xModuleId;
+    BIM_STATUS         xCurrentStatus;
+    BIM_STATUS         xContextStatus;
+    BIM_EVENTS         *pxEvents;
+    uint32_t           ulEventsLen;
 
 } BIM_MODULES;
 
@@ -80,7 +79,7 @@ typedef struct BIM_MODULES
  * @brief   Main initialisation point for the Built in Monitoring (BIM) Application.
  *
  * @param   pxModuleData Pointer to module data array
- * 
+ *
  * @return  OK     if the application is initialised and running successfully
  *          ERROR  if the application is not initialised
  */
@@ -88,21 +87,21 @@ int iBIM_Initialise( BIM_MODULES *pxModuleData );
 
 /**
  * @brief   Returns the current health status of the AMC.
- * 
+ *
  * @param   pxStatus Pointer to status level
- * 
+ *
  * @return  OK     if successful
- *          ERROR  if not successful 
+ *          ERROR  if not successful
  */
 int iBIM_GetOverallHealthStatus( BIM_STATUS *pxStatus );
 
 /**
  * @brief   Updates the overall health status of the AMC
- * 
+ *
  * @param   xStatus BIM_STATUS - Health status level
- * 
+ *
  * @return  OK     if successful
- *          ERROR  if not successful 
+ *          ERROR  if not successful
  */
 int iBIM_SetOverallHealthStatus( BIM_STATUS xStatus );
 

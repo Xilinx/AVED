@@ -22,8 +22,7 @@
 /* Defines                                                                    */
 /******************************************************************************/
 
-#define BIM_DBG_NAME      "BIM_DBG"
-
+#define BIM_DBG_NAME "BIM_DBG"
 
 /******************************************************************************/
 /* Local variables                                                            */
@@ -36,7 +35,10 @@ static DAL_HDL pxGetDir = NULL;
 static DAL_HDL pxSetDir = NULL;
 
 /* BIM_STATUS string mapping */
-static const char *pcBimStatusStr[ ] = { "HEALTHY", "DEGRADED", "CRITICAL", "FATAL" };
+static const char *pcBimStatusStr[] =
+{
+    "HEALTHY", "DEGRADED", "CRITICAL", "FATAL"
+};
 
 
 /******************************************************************************/
@@ -142,7 +144,7 @@ static void vClearStats( void )
 static void vBIM_GetOverallHealthStatus( void )
 {
     BIM_STATUS *pxStatus = pvOSAL_MemAlloc( sizeof( BIM_STATUS ) );
-    
+
     if( NULL != pxStatus )
     {
         if( OK != iBIM_GetOverallHealthStatus( pxStatus ) )
@@ -157,7 +159,7 @@ static void vBIM_GetOverallHealthStatus( void )
             {
                 pcStatusStr = pcBimStatusStr[ *pxStatus ];
             }
-            
+
             PLL_DAL( BIM_DBG_NAME, "Current status: %d - %s\r\n", *pxStatus, pcStatusStr );
         }
 
@@ -171,7 +173,7 @@ static void vBIM_GetOverallHealthStatus( void )
 static void vBIM_SetOverallHealthStatus( void )
 {
     int iStatus = 0;
-    
+
     vPLL_Printf( "\r\n     %d: BIM_STATUS_HEALTHY",  BIM_STATUS_HEALTHY );
     vPLL_Printf( "\r\n     %d: BIM_STATUS_DEGRADED", BIM_STATUS_DEGRADED );
     vPLL_Printf( "\r\n     %d: BIM_STATUS_CRITICAL", BIM_STATUS_CRITICAL );

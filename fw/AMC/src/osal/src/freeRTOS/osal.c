@@ -31,6 +31,7 @@
 #include "osal.h"
 #include "standard.h"
 
+
 /*****************************************************************************/
 /* Defines                                                                   */
 /*****************************************************************************/
@@ -82,10 +83,13 @@ typedef struct OSAL_TASK_MEMORY
 
 static int iRoundRobinScheduler   = FALSE;
 static int iOsStarted             = FALSE;
-static void* pvPrintfMutexHandle  = NULL;
-static void* pvGetCharMutexHandle = NULL;
-static void* pvMemSetMutexHandle  = NULL;
-static void* pvMemCpyMutexHandle  = NULL;
+static void *pvPrintfMutexHandle  = NULL;
+static void *pvGetCharMutexHandle = NULL;
+static void *pvMemSetSemHandle    = NULL;
+static void *pvMemCpySemHandle    = NULL;
+static void *pvStrNCpySemHandle   = NULL;
+static void *pvMemCmpSemHandle    = NULL;
+static void *pvMemMoveSemHandle   = NULL;
 
 static OSAL_TASK_MEMORY xTaskMemoryPool[ OSAL_MAX_TASKS ] = { 0 };
 static BaseType_t xTaskMemoryUsed[ OSAL_MAX_TASKS ]       = { 0 }; /* 0 - unused, 1 - used */
@@ -193,7 +197,7 @@ static OSAL_OS_STATS xOsStatsHandle =
     NULL,   /* pxMemHead */
 
     0,      /* iMemAllocCallCount */
-    0       /* iMemFreeCallCount */
+    0      /* iMemFreeCallCount */
 };
 
 static OSAL_OS_STATS * pxOsStatsHandle = &xOsStatsHandle;
@@ -425,10 +429,13 @@ int iOSAL_StartOS( int         iRoundRobinEnabled,
         ( 0 != usStartTaskStackSize  ) &&
         ( CHECK_32BIT_ALIGNMENT( usStartTaskStackSize ) ) &&
         ( FALSE == iOsStarted ) &&
-        ( NULL == pvPrintfMutexHandle ) &&
+        ( NULL == pvPrintfMutexHandle  ) &&
         ( NULL == pvGetCharMutexHandle ) &&
-        ( NULL == pvMemSetMutexHandle ) &&
-        ( NULL == pvMemCpyMutexHandle ) )
+        ( NULL == pvMemSetSemHandle    ) &&
+        ( NULL == pvMemCpySemHandle    ) &&
+        ( NULL == pvStrNCpySemHandle   ) && 
+        ( NULL == pvMemCmpSemHandle    ) &&
+        ( NULL == pvMemMoveSemHandle   ) )
     {
         iRoundRobinScheduler = iRoundRobinEnabled;
 
@@ -458,18 +465,29 @@ int iOSAL_StartOS( int         iRoundRobinEnabled,
             {
                 pxMemory->xTaskHandle = *ppvTaskHandle;
 
-                /* Task created successfully, create thread safe mutexes */
+                /* Task created successfully, create thread safe mutexes and binary semaphores */
                 pvPrintfMutexHandle  = xSemaphoreCreateMutex();
                 pvGetCharMutexHandle = xSemaphoreCreateMutex();
-                pvMemSetMutexHandle  = xSemaphoreCreateMutex();
-                pvMemCpyMutexHandle  = xSemaphoreCreateMutex();
+                pvMemSetSemHandle  = xSemaphoreCreateBinary();
+                pvMemCpySemHandle  = xSemaphoreCreateBinary();
+                pvMemCmpSemHandle  = xSemaphoreCreateBinary();
+                pvStrNCpySemHandle = xSemaphoreCreateBinary();
+                pvMemMoveSemHandle = xSemaphoreCreateBinary();
 
-                if( ( NULL != pvPrintfMutexHandle ) &&
+                if( ( NULL != pvPrintfMutexHandle  ) &&
                     ( NULL != pvGetCharMutexHandle ) &&
-                    ( NULL != pvMemSetMutexHandle ) &&
-                    ( NULL != pvMemCpyMutexHandle ) )
+                    ( NULL != pvMemSetSemHandle    ) &&
+                    ( NULL != pvMemCpySemHandle    ) &&
+                    ( NULL != pvStrNCpySemHandle   ) &&
+                    ( NULL != pvMemCmpSemHandle    ) &&
+                    ( NULL != pvMemMoveSemHandle   ) )
                 {
-                    /* Mutexes created successfully, start scheduler */
+                    xSemaphoreGive( ( SemaphoreHandle_t ) pvMemSetSemHandle );
+                    xSemaphoreGive( ( SemaphoreHandle_t ) pvMemCpySemHandle );
+                    xSemaphoreGive( ( SemaphoreHandle_t ) pvMemCmpSemHandle );
+                    xSemaphoreGive( ( SemaphoreHandle_t ) pvStrNCpySemHandle );
+                    xSemaphoreGive( ( SemaphoreHandle_t ) pvMemMoveSemHandle );
+                    /* Mutexes and binary semaphores created successfully, start scheduler */
                     iOsStarted = TRUE;
                     iStatus = OSAL_ERRORS_NONE;
 
@@ -486,7 +504,7 @@ int iOSAL_StartOS( int         iRoundRobinEnabled,
                         pxOsStatsHandle->pxMemHead = NULL;
 
                         pxOsStatsHandle->iMemAllocCallCount = 0;
-                        pxOsStatsHandle->iMemFreeCallCount = 0;
+                        pxOsStatsHandle->iMemFreeCallCount  = 0;
 
                         /* Adding main task to linked list */
                         OSAL_TASK_STATS_LINKED_LIST *pxNewNode = ( OSAL_TASK_STATS_LINKED_LIST* ) pvOSAL_MemAlloc( sizeof( OSAL_TASK_STATS_LINKED_LIST ) );
@@ -553,6 +571,31 @@ uint32_t ulOSAL_GetUptimeMs( void )
     RETURN_IF_OS_NOT_STARTED;
 
     TickType_t xUpTimeTicks = xTaskGetTickCount();
+    uint32_t ulUpTimeMs = ( ( uint32_t )xUpTimeTicks / pdMS_TO_TICKS( 1 ) );
+
+    return ulUpTimeMs;
+}
+
+/**
+ * @brief   Returns tick count since OS was initialised, from ISR.
+ */
+uint32_t ulOSAL_GetUptimeTicksFromISR( void )
+{
+    RETURN_IF_OS_NOT_STARTED;
+
+    TickType_t xUpTimeTicks = xTaskGetTickCountFromISR();
+
+    return ( uint32_t )xUpTimeTicks;
+}
+
+/**
+ * @brief   Returns ms count since OS was initialised, from ISR.
+ */
+uint32_t ulOSAL_GetUptimeMsFromISR( void )
+{
+    RETURN_IF_OS_NOT_STARTED;
+
+    TickType_t xUpTimeTicks = xTaskGetTickCountFromISR();
     uint32_t ulUpTimeMs = ( ( uint32_t )xUpTimeTicks / pdMS_TO_TICKS( 1 ) );
 
     return ulUpTimeMs;
@@ -787,6 +830,7 @@ int iOSAL_Task_SleepMs( uint32_t ulSleepMs )
     return iStatus;
 }
 
+
 /*****************************************************************************/
 /* Semaphore APIs                                                            */
 /*****************************************************************************/
@@ -990,6 +1034,7 @@ int iOSAL_Semaphore_PostFromISR( void* pvSemHandle )
     return iStatus;
 }
 
+
 /*****************************************************************************/
 /* Mutex APIs                                                                */
 /*****************************************************************************/
@@ -1161,6 +1206,7 @@ int iOSAL_Mutex_Release( void* pvMutexHandle )
 
     return iStatus;
 }
+
 
 /*****************************************************************************/
 /* Mailbox APIs                                                              */
@@ -1410,6 +1456,7 @@ int iOSAL_MBox_PostFromISR( void* pvMBoxHandle, void* pvMBoxItem )
     return iStatus;
 }
 
+
 /*****************************************************************************/
 /* Event APIs                                                                */
 /*****************************************************************************/
@@ -1599,6 +1646,7 @@ int iOSAL_EventFlag_PostFromISR( void* pvEventFlagHandle, uint32_t ulFlagSet )
 
     return iStatus;
 }
+
 
 /*****************************************************************************/
 /* Timer APIs                                                                */
@@ -1850,6 +1898,7 @@ int iOSAL_Timer_Reset( void* pvTimerHandle, uint32_t ulDurationMs )
     return iStatus;
 }
 
+
 /*****************************************************************************/
 /* Interrupt APIs                                                            */
 /*****************************************************************************/
@@ -1912,6 +1961,7 @@ int iOSAL_Interrupt_Disable( uint8_t ucInterruptID )
     return iStatus;
 }
 
+
 /*****************************************************************************/
 /* Thread safe APIs                                                          */
 /*****************************************************************************/
@@ -1971,14 +2021,16 @@ void* pvOSAL_MemSet( void* pvDestination, int iValue, uint16_t usSize )
     {
         if( TRUE == iOsStarted )
         {
-            /* take mutex */
-            if( OSAL_ERRORS_NONE == iOSAL_Mutex_Take( pvMemSetMutexHandle, OSAL_TIMEOUT_TASK_WAIT_MS ) )
+            BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+
+            /* take semaphore */
+            if( pdPASS == xSemaphoreTakeFromISR( ( SemaphoreHandle_t ) pvMemSetSemHandle, &xHigherPriorityTaskWoken ) )
             {
-                /* mutex taken successfully, set memory */
+                /* semaphore taken successfully, set memory */
                 pvSetMemory = memset( pvDestination, iValue, ( size_t )usSize );
 
-                /* release mutex */
-                iOSAL_Mutex_Release( pvMemSetMutexHandle );
+                /* release semaphore */
+                xSemaphoreGiveFromISR( ( SemaphoreHandle_t ) pvMemSetSemHandle, &xHigherPriorityTaskWoken );
             }
         }
         else
@@ -2003,14 +2055,16 @@ void* pvOSAL_MemCpy( void* pvDestination, const void* pvSource, uint16_t usSize 
     {
         if( TRUE == iOsStarted )
         {
-            /* take mutex */
-            if( OSAL_ERRORS_NONE == iOSAL_Mutex_Take( pvMemCpyMutexHandle, OSAL_TIMEOUT_TASK_WAIT_MS ) )
+            BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+
+            /* take semaphore */
+            if( pdPASS == xSemaphoreTakeFromISR( ( SemaphoreHandle_t ) pvMemCpySemHandle, &xHigherPriorityTaskWoken ) )
             {
-                /* mutex taken successfully, copy memory */
+                /* semaphore taken successfully, copy memory */
                 pvSetMemory = memcpy( pvDestination, pvSource, ( size_t )usSize );
 
-                /* release mutex */
-                iOSAL_Mutex_Release( pvMemCpyMutexHandle );
+                /* release semaphore */
+                xSemaphoreGiveFromISR( ( SemaphoreHandle_t ) pvMemCpySemHandle, &xHigherPriorityTaskWoken );
             }
         }
         else
@@ -2021,6 +2075,39 @@ void* pvOSAL_MemCpy( void* pvDestination, const void* pvSource, uint16_t usSize 
     }
 
     return pvSetMemory;
+}
+
+/**
+ * @brief   OSAL wrapper for task/thread safe memory movement.
+ */
+void vOSAL_MemMove( void *pvDestination, void *pvSource, uint16_t usPayload_size )
+{
+    if( ( NULL != pvDestination ) &&
+        ( NULL != pvSource ) )
+    {
+        if( TRUE == iOsStarted )
+        {
+            /* thread safe */
+            BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+            /* take semaphore */
+            if( pdPASS == xSemaphoreTakeFromISR( ( SemaphoreHandle_t ) pvMemMoveSemHandle, &xHigherPriorityTaskWoken ) )
+            {
+                /* semaphore taken successfully, move memory */
+                memmove( pvDestination,
+                         pvSource,
+                         ( size_t )usPayload_size );
+                /* release semaphore */
+                xSemaphoreGiveFromISR( ( SemaphoreHandle_t ) pvMemMoveSemHandle, &xHigherPriorityTaskWoken );
+            }
+        }
+        else
+        {
+            /* note: Not thread safe */
+            memmove( pvDestination,
+                     pvSource,
+                     ( size_t )usPayload_size );
+        }
+    }
 }
 
 /**
@@ -2118,6 +2205,76 @@ char cOSAL_GetChar( void )
     }
 
     return cInput;
+}
+
+/**
+ * @brief   OSAL wrapper for task/thread safe string copy.
+ */
+char* pcOSAL_StrNCpy( char *pcDestination, const char *pcSource, uint16_t usSize )
+{
+    char *pcSetString = NULL;
+
+    if( ( NULL != pcDestination ) && 
+        ( NULL != pcSource ) && 
+        ( 0 < usSize ) )
+    {
+        if( TRUE == iOsStarted )
+        {
+            BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+
+            /* take semaphore */
+            if ( pdPASS == xSemaphoreTakeFromISR( ( SemaphoreHandle_t ) pvStrNCpySemHandle, &xHigherPriorityTaskWoken ) )
+            {
+                /* semaphore taken successfully, copy string */
+                pcSetString = strncpy( pcDestination, pcSource, ( size_t )usSize );
+
+                /* release semaphore */
+                xSemaphoreGiveFromISR( ( SemaphoreHandle_t ) pvStrNCpySemHandle, &xHigherPriorityTaskWoken );
+            }
+        }
+        else
+        {
+            /* copy string, note: Not thread safe */
+            pcSetString = strncpy( pcDestination, pcSource, ( size_t )usSize );
+        }
+    }
+
+    return pcSetString;
+}
+
+/**
+ * @brief   OSAL wrapper for task/thread safe memory compare.
+ */
+int iOSAL_MemCmp( const void *pvMemoryOne, const void *pvMemoryTwo, uint16_t usSize )
+{
+    int iStatus = ERROR;
+
+    if( ( NULL != pvMemoryOne ) && 
+        ( NULL != pvMemoryTwo ) &&
+        ( 0 < usSize ) )
+    {
+        if( TRUE == iOsStarted )
+        {
+            BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+
+            /* take semaphore */
+            if ( pdPASS == xSemaphoreTakeFromISR( ( SemaphoreHandle_t ) pvMemCmpSemHandle, &xHigherPriorityTaskWoken ) )
+            {
+                /* semaphore taken successfully, compare memory */
+                iStatus = memcmp( pvMemoryOne, pvMemoryTwo, ( size_t )usSize );
+
+                /* release semaphore */
+                xSemaphoreGiveFromISR( ( SemaphoreHandle_t ) pvMemCmpSemHandle, &xHigherPriorityTaskWoken );
+            }
+        }
+        else
+        {
+            /* compare memory, note: Not thread safe */
+            iStatus = memcmp( pvMemoryOne, pvMemoryTwo, ( size_t )usSize );
+        }
+    }
+
+    return iStatus;
 }
 
 

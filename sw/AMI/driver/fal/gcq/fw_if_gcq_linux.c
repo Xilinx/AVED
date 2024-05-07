@@ -14,7 +14,9 @@
 
 #ifdef __KERNEL__
 #include <asm/io.h>
+#include <linux/delay.h>
 #else
+#include <unistd.h>
 #include <string.h>
 #include <assert.h>
 #endif
@@ -44,6 +46,16 @@
 
 #define CHECK_INVALID_STATE( f )        ( ( FW_IF_GCQ_STATE_OPENED != ( f )->xState ) &&\
                                           ( FW_IF_GCQ_STATE_ATTACHED != ( f )->xState ) )
+
+#define GCQ_ATTACH_MAX_ATTEMPTS         ( 30 )  /* Roughly 30 seconds */
+#define GCQ_ATTACH_RETRY_TIMEOUT_MS     ( 1000 )
+
+/* TODO: Replace the OSAL #define's with an appropriate OSAL implementation */
+#ifdef __KERNEL__
+#define iOSAL_Task_SleepMs( c )              msleep( c )
+#else
+#define iOSAL_Task_SleepMs( c )              do { } while ( 0 )
+#endif
 
 
 /*****************************************************************************/
@@ -118,7 +130,6 @@ static inline void prvvWriteMemReg32( uint64_t ullDestAddr, uint32_t ulValue )
 #ifdef __KERNEL__
     iowrite32( ulValue, ( void __iomem * ) ullDestAddr );
 #else
-    PLL_DBG( FW_IF_GCQ_NAME, "W [0x%llx: 0x%x]\r\n", ullDestAddr, ulValue );
     *( ( volatile uint32_t * )ullDestAddr ) = ulValue;
 #endif
 }
@@ -138,7 +149,6 @@ static inline uint32_t prvulReadMemReg32( uint64_t ullSrcAddr )
     return ( ioread32( ( void __iomem * ) ullSrcAddr ) );
 #else
     uint32_t ulValue = *( ( volatile uint64_t * )ullSrcAddr );
-    PLL_DBG( FW_IF_GCQ_NAME, "R [0x%lx: 0x%x]\r\n", ullSrcAddr, ulValue );
     return ( ulValue );
 #endif
 }
@@ -281,7 +291,7 @@ static uint32_t prvGCQOpen( void *pvFWIf )
         GCQ_INTERRUPT_MODE_TYPE xIntMode = MAX_GCQ_INTERRUPT_MODE;
         GCQ_MODE_TYPE xMode = MAX_GCQ_MODE_TYPE;
         GCQ_FLAGS_TYPE xFlags = 0;
-        FW_IF_GCQ_CFG * pxCfg = ( FW_IF_GCQ_CFG* )pxThisIf->cfg;
+        FW_IF_GCQ_CFG *pxCfg = ( FW_IF_GCQ_CFG* )pxThisIf->cfg;
         FW_IF_GCQ_PROFILE_TYPE *pxGCQProfile = NULL;
 
         if( FW_IF_ERRORS_NONE != prvFindNextFreeProfile( &pxGCQProfile ) ) { return FW_IF_GCQ_ERRORS_NO_FREE_PROFILES; }
@@ -327,7 +337,27 @@ static uint32_t prvGCQOpen( void *pvFWIf )
 
                 if( FW_IF_GCQ_MODE_CONSUMER == pxCfg->xMode )
                 {
-                    xStatus = xGCQAttachConsumer( pxProfile->pxGCQInstance );
+                    /*
+                     * Sometimes (very rarely) the consumer is not yet ready when we reach this point.
+                     * This can happen if a hot reset was performed and not enough time was given
+                     * on the host before attempting to perform GCQ setup. To mitigate this
+                     * we need a retry mechanism here.
+                     */
+                    int iAttempts = 0;
+
+                    while( 1 )
+                    {
+                        xStatus = xGCQAttachConsumer( pxProfile->pxGCQInstance );
+                        iAttempts++;
+
+                        if( ( GCQ_ATTACH_MAX_ATTEMPTS <= iAttempts ) || ( GCQ_ERRORS_NONE == xStatus ) )
+                        {
+                            break;
+                        }
+
+                        iOSAL_Task_SleepMs( GCQ_ATTACH_RETRY_TIMEOUT_MS );
+                    }
+
                     if( GCQ_ERRORS_NONE == xStatus )
                     {
                         pxProfile->xState = FW_IF_GCQ_STATE_ATTACHED;
@@ -361,7 +391,7 @@ static uint32_t prvGCQClose( void *pvFWIf )
 
     {
         FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_ERRORS_NONE;
-        FW_IF_GCQ_PROFILE_TYPE * pxProfile = NULL;
+        FW_IF_GCQ_PROFILE_TYPE *pxProfile = NULL;
         FW_IF_GCQ_CFG *pxCfg = NULL;
         GCQ_ERRORS_TYPE xStatus = GCQ_ERRORS_NONE;
 
@@ -389,7 +419,7 @@ static uint32_t prvGCQClose( void *pvFWIf )
 /**
  * @brief   Local implementation of FW_IF_write
  */
-static uint32_t prvGCQWrite( void *pvFWIf, uint32_t ulDstPort, uint8_t *pucData, uint32_t ulSize, uint32_t ulTimeoutMs )
+static uint32_t prvGCQWrite( void *pvFWIf, uint64_t ullDstPort, uint8_t *pucData, uint32_t ulSize, uint32_t ulTimeoutMs )
 {
 
     FW_IF_CFG *pxThisIf = ( FW_IF_CFG* )pvFWIf;
@@ -423,7 +453,7 @@ static uint32_t prvGCQWrite( void *pvFWIf, uint32_t ulDstPort, uint8_t *pucData,
 /**
  * @brief   Local implementation of FW_IF_read
  */
-static uint32_t prvGCQRead( void *pvFWIf, uint32_t ulSrcPort, uint8_t *pucData, uint32_t *pulSize, uint32_t ulTimeoutMs )
+static uint32_t prvGCQRead( void *pvFWIf, uint64_t ullSrcPort, uint8_t *pucData, uint32_t *pulSize, uint32_t ulTimeoutMs )
 {
     FW_IF_CFG *pxThisIf = ( FW_IF_CFG* )pvFWIf;
     if( CHECK_NULL( pxThisIf ) ) { return FW_IF_ERRORS_INVALID_HANDLE; }
@@ -527,21 +557,21 @@ static uint32_t prvGCQIOCtrl( void *pvFWIf, uint32_t ulOption, void *pvValue )
 /**
  * @brief   Local implementation of FW_IF_bindCallback
  */
-static uint32_t prvGCQBindCallback( void *vFWIf, FW_IF_callback *newFunc )
+static uint32_t prvGCQBindCallback( void *pvFWIf, FW_IF_callback *pxNewFunc )
 {
     FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_ERRORS_NONE;
-    FW_IF_CFG *pxThisIf = ( FW_IF_CFG* )vFWIf;
+    FW_IF_CFG *pxThisIf = ( FW_IF_CFG* )pvFWIf;
     if( CHECK_NULL( pxThisIf ) ) { return FW_IF_ERRORS_INVALID_HANDLE; }
     if( CHECK_CFG( pxThisIf ) ) { return FW_IF_ERRORS_INVALID_CFG; }
     if( CHECK_FIREWALLS( pxThisIf ) ) { return FW_IF_ERRORS_INVALID_HANDLE; }
     if( CHECK_DRIVER ) { return FW_IF_ERRORS_DRIVER_NOT_INITIALISED; }
-    if( CHECK_NULL( newFunc ) ) { return FW_IF_ERRORS_PARAMS; };
+    if( CHECK_NULL( pxNewFunc ) ) { return FW_IF_ERRORS_PARAMS; };
 
     /*
      * Binds in callback provided to the FW_IF.
      * Callback will be invoked when by the driver when event occurs.
      */
-    pxThisIf->raiseEvent = newFunc;
+    pxThisIf->raiseEvent = pxNewFunc;
     PLL_DBG( FW_IF_GCQ_NAME, "FW_IF_bindCallback called\r\n" );
 
     return xRet;
@@ -554,11 +584,11 @@ static uint32_t prvGCQBindCallback( void *vFWIf, FW_IF_callback *newFunc )
 /**
  * @brief   initialisation function for GCQ interfaces (generic across all GCQ interfaces)
  */
-uint32_t ulFW_IF_GCQ_init( FW_IF_GCQ_INIT_CFG *cfg )
+uint32_t ulFW_IF_GCQ_Init( FW_IF_GCQ_INIT_CFG *pxCfg )
 {
     FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_ERRORS_NONE;
-    if( CHECK_NULL( cfg ) ) { return FW_IF_ERRORS_PARAMS; };
-    if( CHECK_NOT_NULL( cfg->pvIOAccess ) ) { return FW_IF_ERRORS_PARAMS; };
+    if( CHECK_NULL( pxCfg ) ) { return FW_IF_ERRORS_PARAMS; };
+    if( CHECK_NOT_NULL( pxCfg->pvIOAccess ) ) { return FW_IF_ERRORS_PARAMS; };
 
     if( FW_IF_FALSE != iInitialised )
     {
@@ -587,7 +617,7 @@ uint32_t ulFW_IF_GCQ_init( FW_IF_GCQ_INIT_CFG *cfg )
 /**
  * @brief   opens an instance of the GCQ interface
  */
-uint32_t ulFW_IF_GCQ_create( FW_IF_CFG *xFWIf, FW_IF_GCQ_CFG *xGCQCfg )
+uint32_t ulFW_IF_GCQ_Create( FW_IF_CFG *xFWIf, FW_IF_GCQ_CFG *xGCQCfg )
 {
     FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_ERRORS_NONE;
     if( CHECK_DRIVER ) { return FW_IF_ERRORS_DRIVER_NOT_INITIALISED; }

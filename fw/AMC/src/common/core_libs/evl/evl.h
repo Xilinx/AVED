@@ -23,10 +23,10 @@
 
 
 #ifndef EVL_LOG_LEN
-#define EVL_LOG_LEN         ( 100 )
+#define EVL_LOG_LEN ( 100 )
 #endif
 
-#define EVL_MAX_BINDINGS    ( 10 )
+#define EVL_MAX_BINDINGS ( 10 )
 
 
 /******************************************************************************/
@@ -39,11 +39,11 @@
  */
 typedef struct EVL_SIGNAL
 {
-    uint8_t         ucModule;           /* Unique ID of the module raising the event   */
-    uint8_t         ucEventType;        /* Unique ID of the event raised by the module */
-    uint8_t         ucInstance;         /* Specific instance of the event raised       */
-                                        /* - for optional tracking                     */
-    uint8_t         ucAdditionalData;   /* Additional data if required.                */
+    uint8_t ucModule;                                                          /* Unique ID of the module raising the event   */
+    uint8_t ucEventType;                                                       /* Unique ID of the event raised by the module */
+    uint8_t ucInstance;                                                        /* Specific instance of the event raised       */
+    /* - for optional tracking                     */
+    uint8_t ucAdditionalData;                                                  /* Additional data if required.                */
 
 } EVL_SIGNAL;
 
@@ -80,12 +80,12 @@ int iEVL_Initialise( void );
 
 /**
  * @brief Initialise Event Library Record
- * 
+ *
  * @param ppxRecord  Record to be initialised
- * 
+ *
  * @return OK if record initialised successfully
  *         ERROR if record not initialised
-*/
+ */
 int iEVL_CreateRecord( EVL_RECORD **ppxRecord );
 
 /**
@@ -149,5 +149,10 @@ int iEVL_ClearStatistics( void );
  *          ERROR       Log not retrieved
  */
 int iEVL_PrintLog( void );
+
+/**
+ * @brief   Toggle verbosity of EVL, TRUE or FALSE
+ */
+void vEVL_SetVerbosity( int iVerbosity );
 
 #endif

@@ -164,7 +164,7 @@ static uint32_t testRead( void *pvFwIf, uint64_t ullOffset, uint8_t *pucData, ui
                 pxThisTestCfg->ifName,
                 ( unsigned int )ullOffset );
 
-        memcpy( pucData, pucTestRxData+ullOffset, *pulSize );
+        pvOSAL_MemCpy( pucData, pucTestRxData+ullOffset, *pulSize );
         
         TEST_PRINT( "Reading %u bytes...", ( unsigned int )*pulSize );
         for( i = 0; i < *pulSize; i++ )
@@ -329,7 +329,7 @@ uint32_t FW_IF_test_init( FW_IF_TEST_INIT_CFG *pxCfg )
     }
     else
     {
-        memcpy( &xMyLocalCfg, pxCfg, sizeof( FW_IF_TEST_INIT_CFG ) );
+        pvOSAL_MemCpy( &xMyLocalCfg, pxCfg, sizeof( FW_IF_TEST_INIT_CFG ) );
         iInitialised = FW_IF_TRUE;
 
         TEST_PRINT( "FW_IF_test_init for driver.%u (%s)\r\n",
@@ -364,7 +364,7 @@ uint32_t FW_IF_test_create( FW_IF_CFG *pxFwIf, FW_IF_TEST_CFG *pxTestCfg )
             .lowerFirewall  = TEST_LOWER_FIREWALL
         };
 
-        memcpy( pxFwIf, &myLocalIf, sizeof( FW_IF_CFG ) );
+        pvOSAL_MemCpy( pxFwIf, &myLocalIf, sizeof( FW_IF_CFG ) );
 
         FW_IF_TEST_CFG *pxThisTestCfg = ( FW_IF_TEST_CFG* )pxFwIf->cfg;
 

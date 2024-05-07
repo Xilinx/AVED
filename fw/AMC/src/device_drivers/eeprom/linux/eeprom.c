@@ -107,7 +107,7 @@
 /* Eeprom Stub defines */
 #define EEPROM_STUB_VERSION                      "Stb"
 #define EEPROM_STUB_PRODUCT_NAME                 "Product Name Stub"
-#define EEPROM_STUB_BOARD_REV                    "Board Rev Stub"
+#define EEPROM_STUB_BOARD_REV                    "Stb"
 #define EEPROM_STUB_BOARD_SERIAL                 "Serial Stub"
 #define EEPROM_STUB_BOARD_PART_NUM               "Part Num Stub"
 

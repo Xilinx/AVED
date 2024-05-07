@@ -34,12 +34,7 @@
 #define CHECK_HDL( f )                  ( NULL == f )
 #define CHECK_CFG( f )                  ( NULL == ( f )->cfg )
 
-#define FW_IF_OSPI_STATE_ENTRY( _s )    [ FW_IF_OSPI_STATE_ ## _s ] = #_s
-
-
-/******************************************************************************/
-/* Structs                                                                    */
-/******************************************************************************/
+#define FAL_OSPI_STATE_ENTRY( _s )    [ FW_IF_OSPI_STATE_ ## _s ] = #_s
 
 
 /*****************************************************************************/
@@ -50,10 +45,10 @@ static FW_IF_OSPI_INIT_CFG xLocalCfg = { 0 };
 
 static int iInitialised = FW_IF_FALSE;
 
-static const char* const pcOspiStateModeStr[ ] = { FW_IF_OSPI_STATE_ENTRY( INIT ),
-                                                   FW_IF_OSPI_STATE_ENTRY( OPENED ),
-                                                   FW_IF_OSPI_STATE_ENTRY( CLOSED ),
-                                                   FW_IF_OSPI_STATE_ENTRY( ERROR ) };
+static const char* const pcOspiStateModeStr[ ] = { FAL_OSPI_STATE_ENTRY( INIT ),
+                                                   FAL_OSPI_STATE_ENTRY( OPENED ),
+                                                   FAL_OSPI_STATE_ENTRY( CLOSED ),
+                                                   FAL_OSPI_STATE_ENTRY( ERROR ) };
 
 
 /******************************************************************************/
@@ -82,7 +77,7 @@ static uint32_t ulOspiClose( void *pvFwIf );
  * @brief   Writes data from an instance of the specific fw_if
  *
  * @param   pvFwIf          Local implementation of FW_IF_write
- * @param   ulAddrOffset    The address offset from the start address specified in the create
+ * @param   ullAddrOffset   The address offset from the start address specified in the create
  * @param   pucData         Data buffer to write
  * @param   ulLength        Number of bytes in data buffer
  * @param   ulTimeoutMs     Time (in ms) to wait for write to complete
@@ -90,7 +85,7 @@ static uint32_t ulOspiClose( void *pvFwIf );
  * @return  See FW_IF_ERRORS
  */
 static uint32_t ulOspiWrite( void *pvFwIf,
-                              uint32_t ulAddrOffset,
+                              uint64_t ullAddrOffset,
                               uint8_t *pucData,
                               uint32_t ulLength,
                               uint32_t ulTimeoutMs );
@@ -99,7 +94,7 @@ static uint32_t ulOspiWrite( void *pvFwIf,
  * @brief   Local implementation of FW_IF_read
  *
  * @param   pvFwIf          Pointer to this fw_if
- * @param   ulAddrOffset    The address offset from the start address specified in the create
+ * @param   ullAddrOffset   The address offset from the start address specified in the create
  * @param   pucData         Data buffer to read
  * @param   pulLength       Pointer to maximum number of bytes allowed in data buffer
  *                          This value is updated to the actual number of bytes read
@@ -108,7 +103,7 @@ static uint32_t ulOspiWrite( void *pvFwIf,
  * @return  See FW_IF_ERRORS
  */
 static uint32_t ulOspiRead( void *pvFwIf,
-                             uint32_t ulAddrOffset,
+                             uint64_t ullAddrOffset,
                              uint8_t *pucData,
                              uint32_t *pulLength,
                              uint32_t ulTimeoutMs );
@@ -127,7 +122,7 @@ static uint32_t ulOspiIoCtrl( void *pvFwIf, uint32_t ulOption, void *pvValue );
 /**
  * @brief   Local implementation of FW_IF_bindCallback
  *
- * @parmam  vFwIf           Pointer to this fw_if
+ * @param   vFwIf           Pointer to this fw_if
  * @param   pxNewFunc       Function pointer to call
  *
  * @return  See FW_IF_ERRORS
@@ -153,7 +148,7 @@ static uint32_t ulValidateAddressRange( FW_IF_OSPI_CFG *pxCfg, uint32_t ulAddrOf
 /**
  * @brief   initialisation function for OSPI interfaces (generic across all OSPI interfaces)
  */
-uint32_t ulFW_IF_OSPI_init( FW_IF_OSPI_INIT_CFG *xInitCfg )
+uint32_t ulFW_IF_OSPI_Init( FW_IF_OSPI_INIT_CFG *pxInitCfg )
 {
     FW_IF_OSPI_ERRORS xRet = FW_IF_ERRORS_NONE;
 
@@ -161,12 +156,12 @@ uint32_t ulFW_IF_OSPI_init( FW_IF_OSPI_INIT_CFG *xInitCfg )
     {
         xRet = FW_IF_ERRORS_DRIVER_IN_USE;
     }
-    else if ( NULL != xInitCfg )
+    else if ( NULL != pxInitCfg )
     {
         /*
          * Initilise config data shared between all instances of OSPI.
          */
-        memcpy( &xLocalCfg, xInitCfg, sizeof( FW_IF_OSPI_INIT_CFG ) );
+        pvOSAL_MemCpy( &xLocalCfg, pxInitCfg, sizeof( FW_IF_OSPI_INIT_CFG ) );
 
         /*
          * Initialise the driver based on the device id supplied in the xparameters.h
@@ -187,14 +182,14 @@ uint32_t ulFW_IF_OSPI_init( FW_IF_OSPI_INIT_CFG *xInitCfg )
 /**
  * @brief   opens an instance of the OSPI interface
  */
-uint32_t ulFW_IF_OSPI_create( FW_IF_CFG *xFwIf, FW_IF_OSPI_CFG *xOspiCfg )
+uint32_t ulFW_IF_OSPI_Create( FW_IF_CFG *pxFwIf, FW_IF_OSPI_CFG *pxOspiCfg )
 {
     FW_IF_OSPI_ERRORS xRet = FW_IF_ERRORS_NONE;
 
     if( CHECK_DRIVER ) { return FW_IF_ERRORS_DRIVER_NOT_INITIALISED; }
 
-    if( ( NULL != xFwIf ) &&
-        ( NULL != xOspiCfg ) )
+    if( ( NULL != pxFwIf ) &&
+        ( NULL != pxOspiCfg ) )
     {
 
         FW_IF_CFG myLocalIf =
@@ -206,13 +201,13 @@ uint32_t ulFW_IF_OSPI_create( FW_IF_CFG *xFwIf, FW_IF_OSPI_CFG *xOspiCfg )
             .read           = &ulOspiRead,
             .ioctrl         = &ulOspiIoCtrl,
             .bindCallback   = &ulOspiBindCallback,
-            .cfg            = ( void* )xOspiCfg,
+            .cfg            = ( void* )pxOspiCfg,
             .lowerFirewall  = OSPI_LOWER_FIREWALL
         };
 
-        memcpy( xFwIf, &myLocalIf, sizeof( FW_IF_CFG ) );
+        pvOSAL_MemCpy( pxFwIf, &myLocalIf, sizeof( FW_IF_CFG ) );
 
-        FW_IF_OSPI_CFG *pxCfg = ( FW_IF_OSPI_CFG* )xFwIf->cfg;
+        FW_IF_OSPI_CFG *pxCfg = ( FW_IF_OSPI_CFG* )pxFwIf->cfg;
 
         /*
          * Configuration options, start address will the offset to the RPU/APU
@@ -299,12 +294,13 @@ static uint32_t ulOspiClose( void *pvFwIf )
  * @brief   Local implementation of FW_IF_write
  */
 static uint32_t ulOspiWrite( void *pvFwIf,
-                             uint32_t ulAddrOffset,
+                             uint64_t ullAddrOffset,
                              uint8_t *pucData,
                              uint32_t ulLength,
                              uint32_t ulTimeoutMs )
 {
     FW_IF_ERRORS xRet = FW_IF_ERRORS_NONE;
+    uint32_t ulAddrOffset = ( uint32_t )ullAddrOffset;
 
     FW_IF_CFG *pxThisIf = ( FW_IF_CFG* )pvFwIf;
     if( CHECK_HDL( pxThisIf ) ) { return FW_IF_ERRORS_INVALID_HANDLE; }
@@ -353,12 +349,13 @@ static uint32_t ulOspiWrite( void *pvFwIf,
  * @brief   Local implementation of FW_IF_read
  */
 static uint32_t ulOspiRead( void *pvFwIf,
-                            uint32_t ulAddrOffset,
+                            uint64_t ullAddrOffset,
                             uint8_t *pucData,
                             uint32_t *pulLength,
                             uint32_t ulTimeoutMs )
 {
     FW_IF_ERRORS xRet = FW_IF_ERRORS_NONE;
+    uint32_t ulAddrOffset = ( uint32_t )ullAddrOffset;
 
     FW_IF_CFG *pxThisIf = ( FW_IF_CFG* )pvFwIf;
     if( CHECK_HDL( pxThisIf ) ) { return FW_IF_ERRORS_INVALID_HANDLE; }

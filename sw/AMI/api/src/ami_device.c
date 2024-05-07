@@ -67,7 +67,7 @@
  * if improper delays are used!
  */
 #define HOT_RESET_SBR_SET_DELAY_MS	(2)
-#define HOT_RESET_RESCAN_DELAY_MS	(4000)
+#define HOT_RESET_RESCAN_DELAY_MS	(5000)
 #define HOT_RESET_GPIO_SET_DELAY_MS	(1)
 
 #define PCI_DEV_DIR			"/sys/bus/pci/devices/0000:%02x:%02x.%1x"
@@ -756,6 +756,32 @@ int ami_dev_hot_reset(ami_device **dev)
 
 close_config:
 	close(config);
+	return ret;
+}
+
+/*
+ * Set the AMC debug verbosity.
+ */
+int ami_dev_set_amc_debug_level(ami_device *dev, enum ami_amc_debug_level level)
+{
+	int ret = AMI_STATUS_ERROR;
+
+	if (!dev)
+		return AMI_API_ERROR(AMI_ERROR_EINVAL);
+	
+	if (ami_open_cdev(dev) != AMI_STATUS_OK)
+		return AMI_STATUS_ERROR;
+
+	if (ioctl(dev->cdev, AMI_IOC_DEBUG_VERBOSITY, (uint8_t)level) == AMI_LINUX_STATUS_ERROR)
+		ret = AMI_API_ERROR_M(
+			AMI_ERROR_EIO,
+			"errno %d (%s)",
+			errno,
+			strerror(errno)
+		);
+	else
+		ret = AMI_STATUS_OK;
+
 	return ret;
 }
 

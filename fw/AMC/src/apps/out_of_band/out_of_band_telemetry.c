@@ -16,7 +16,7 @@
 #include "standard.h"
 #include "util.h"
 #include "pll.h"
-#include "event_id.h"
+#include "amc_cfg.h"
 #include "asdm.h"
 
 /* profile */
@@ -26,62 +26,58 @@
 #include "evl.h"
 
 /* proxy drivers */
-#include "rmi_handler.h"
+#include "asc_proxy_driver.h"
+#include "bmc_proxy_driver.h"
+
+/* apps */
+#include "out_of_band_telemetry.h"
 
 
 /******************************************************************************/
 /* Defines                                                                    */
 /******************************************************************************/
 
-#define OUT_OF_BAND_NAME                        "AMC_OUT_OF_BAND"
+#define OUT_OF_BAND_NAME "AMC_OUT_OF_BAND"
 
-#define UPPER_FIREWALL                          ( 0xBABECAFE )
-#define LOWER_FIREWALL                          ( 0xDEADFACE )
+#define UPPER_FIREWALL ( 0xBABECAFE )
+#define LOWER_FIREWALL ( 0xDEADFACE )
 
-#define SENSOR_RESPONSE_VALUES                  ( 0x3 )
-#define SENSOR_RESP_BUFFER_SIZE                 ( 512 )
-#define INVALID_SENSOR_ID                       ( 0xFF )
 
 /* Stat & Error definitions */
-#define OUT_OF_BAND_STATS( DO )                             \
-    DO( OUT_OF_BAND_STATS_INIT_OVERALL_COMPLETE )           \
-    DO( OUT_OF_BAND_STATS_AMI_SENSOR_REQUEST )              \
-    DO( OUT_OF_BAND_STATS_AMI_UNSUPPORTED_REQUEST )         \
-    DO( OUT_OF_BAND_STATS_AMI_SENSOR_REQUEST_SUCCESS )      \
-    DO( OUT_OF_BAND_STATS_AMI_EEPROM_RW_REQUEST )           \
-    DO( OUT_OF_BAND_STATS_TAKE_MUTEX )                      \
-    DO( OUT_OF_BAND_STATS_RELEASE_MUTEX )                   \
-    DO( OUT_OF_BAND_STATS_RMI_HANDLER_UNSUPPORTED_REQUEST ) \
-    DO( OUT_OF_BAND_STATS_MAX )
+#define OUT_OF_BAND_STATS( DO )                           \
+        DO( OUT_OF_BAND_STATS_INIT_OVERALL_COMPLETE )     \
+        DO( OUT_OF_BAND_STATS_TAKE_MUTEX )                \
+        DO( OUT_OF_BAND_STATS_RELEASE_MUTEX )             \
+        DO( OUT_OF_BAND_STATS_BMC_SENSOR_INFO_REQUEST )   \
+        DO( OUT_OF_BAND_STATS_BMC_SENSOR_ENABLE_REQUEST ) \
+        DO( OUT_OF_BAND_STATS_BMC_PDR_REQUEST )           \
+        DO( OUT_OF_BAND_STATS_BMC_PDR_INFO_REQUEST )      \
+        DO( OUT_OF_BAND_STATS_BMC_UNSUPPORTED_REQUEST )   \
+        DO( OUT_OF_BAND_STATS_MAX )
 
-#define OUT_OF_BAND_ERRORS( DO )                                    \
-    DO( OUT_OF_BAND_ERRORS_INIT_MUTEX_FAILED )                      \
-    DO( OUT_OF_BAND_ERRORS_INIT_BIND_AMI_CB_FAILED )                \
-    DO( OUT_OF_BAND_ERRORS_INIT_OVERALL_FAILED )                    \
-    DO( OUT_OF_BAND_ERRORS_AMI_SENSOR_RESP_SIZE_TOO_SMALL )         \
-    DO( OUT_OF_BAND_ERRORS_AMI_SENSOR_REQUEST_EMPTY_SDR )           \
-    DO( OUT_OF_BAND_ERRORS_AMI_SENSOR_REQUEST_UNKNOWN_API )         \
-    DO( OUT_OF_BAND_ERRORS_AMI_SENSOR_REQUEST_FAILED )              \
-    DO( OUT_OF_BAND_ERRORS_AMI_UNSUPPORTED_REPO )                   \
-    DO( OUT_OF_BAND_ERRORS_AMI_EEPROM_RW_UNKNOWN_REQ )              \
-    DO( OUT_OF_BAND_ERRORS_MUTEX_RELEASE_FAILED )                   \
-    DO( OUT_OF_BAND_ERRORS_MUTEX_TAKE_FAILED )                      \
-    DO( OUT_OF_BAND_ERRORS_MALLOC_FAILED )                          \
-    DO( OUT_OF_BAND_ERRORS_MAP_REQUEST_FAILED )                     \
-    DO( OUT_OF_BAND_ERRORS_RMI_HANDLER_GET_SENSOR_REQUEST_FAILED )  \
-    DO( OUT_OF_BAND_ERRORS_RMI_HANDLER_SENSOR_REQUEST_UNKNOWN_API ) \
-    DO( OUT_OF_BAND_ERRORS_RMI_HANDLER_SENSOR_RESP_SIZE_TOO_SMALL ) \
-    DO( OUT_OF_BAND_ERRORS_MAX )
+#define OUT_OF_BAND_ERRORS( DO )                                         \
+        DO( OUT_OF_BAND_ERRORS_INIT_MUTEX_FAILED )                       \
+        DO( OUT_OF_BAND_ERRORS_INIT_BIND_BMC_CB_FAILED )                 \
+        DO( OUT_OF_BAND_ERRORS_INIT_OVERALL_FAILED )                     \
+        DO( OUT_OF_BAND_ERRORS_MUTEX_RELEASE_FAILED )                    \
+        DO( OUT_OF_BAND_ERRORS_MUTEX_TAKE_FAILED )                       \
+        DO( OUT_OF_BAND_ERRORS_MALLOC_FAILED )                           \
+        DO( OUT_OF_BAND_ERRORS_BMC_GET_SENSOR_REQUEST_FAILED )           \
+        DO( OUT_OF_BAND_ERRORS_ASC_GET_SENSOR_DATA_FAILED )              \
+        DO( OUT_OF_BAND_ERRORS_ASC_SET_SENSOR_OPERATIONAL_STATE_FAILED ) \
+        DO( OUT_OF_BAND_ERRORS_MAX )
 
-#define PRINT_STAT_COUNTER( x )             PLL_INF( OUT_OF_BAND_NAME, "%50s . . . . %d\r\n",          \
-                                                     OUT_OF_BAND_STATS_STR[ x ],                       \
-                                                     pxThis->pulStatCounters[ x ] )
-#define PRINT_ERROR_COUNTER( x )            PLL_INF( OUT_OF_BAND_NAME, "%50s . . . . %d\r\n",          \
-                                                     OUT_OF_BAND_ERRORS_STR[ x ],                      \
-                                                     pxThis->pulErrorCounters[ x ] )
+#define PRINT_STAT_COUNTER( x )  PLL_INF( OUT_OF_BAND_NAME,           \
+                                          "%50s . . . . %d\r\n",      \
+                                          OUT_OF_BAND_STATS_STR[ x ], \
+                                          pxThis->pulStatCounters[ x ] )
+#define PRINT_ERROR_COUNTER( x ) PLL_INF( OUT_OF_BAND_NAME,            \
+                                          "%50s . . . . %d\r\n",       \
+                                          OUT_OF_BAND_ERRORS_STR[ x ], \
+                                          pxThis->pulErrorCounters[ x ] )
 
-#define INC_STAT_COUNTER( x )               { if( x < OUT_OF_BAND_STATS_MAX )pxThis->pulStatCounters[ x ]++; }
-#define INC_ERROR_COUNTER( x )              { if( x < OUT_OF_BAND_ERRORS_MAX )pxThis->pulErrorCounters[ x ]++; }
+#define INC_STAT_COUNTER( x )  { if( x < OUT_OF_BAND_STATS_MAX ) pxThis->pulStatCounters[ x ]++; }
+#define INC_ERROR_COUNTER( x ) { if( x < OUT_OF_BAND_ERRORS_MAX ) pxThis->pulErrorCounters[ x ]++; }
 
 
 /******************************************************************************/
@@ -111,12 +107,12 @@ UTIL_MAKE_ENUM_AND_STRINGS( OUT_OF_BAND_ERRORS, OUT_OF_BAND_ERRORS, OUT_OF_BAND_
  */
 typedef struct OUT_OF_BAND_PRIVATE_DATA
 {
-    uint32_t                        ulUpperFirewall;
-    int                             iInitialised;
-    void                            *pvOsalMutexHdl;
-    uint32_t                        pulStatCounters[ OUT_OF_BAND_STATS_MAX ];
-    uint32_t                        pulErrorCounters[ OUT_OF_BAND_ERRORS_MAX ];
-    uint32_t                        ulLowerFirewall;
+    uint32_t ulUpperFirewall;
+    int      iInitialised;
+    void     *pvOsalMutexHdl;
+    uint32_t pulStatCounters[ OUT_OF_BAND_STATS_MAX ];
+    uint32_t pulErrorCounters[ OUT_OF_BAND_ERRORS_MAX ];
+    uint32_t ulLowerFirewall;
 
 } OUT_OF_BAND_PRIVATE_DATA;
 
@@ -127,12 +123,16 @@ typedef struct OUT_OF_BAND_PRIVATE_DATA
 
 static OUT_OF_BAND_PRIVATE_DATA xLocalData =
 {
-    UPPER_FIREWALL, /* ulUpperFirewall      */
-    FALSE,          /* iInitialised         */
-    NULL,           /* pvOsalMutexHdl       */
-    { 0 },          /* pulStatCounters       */
-    { 0 },          /* pulErrorCounters      */
-    LOWER_FIREWALL  /* ulLowerFirewall      */
+    UPPER_FIREWALL,                                                            /* ulUpperFirewall      */
+    FALSE,                                                                     /* iInitialised         */
+    NULL,                                                                      /* pvOsalMutexHdl       */
+    {
+        0
+    },                                                                         /* pulStatCounters       */
+    {
+        0
+    },                                                                         /* pulErrorCounters      */
+    LOWER_FIREWALL                                                             /* ulLowerFirewall      */
 };
 static OUT_OF_BAND_PRIVATE_DATA *pxThis = &xLocalData;
 
@@ -149,17 +149,7 @@ static OUT_OF_BAND_PRIVATE_DATA *pxThis = &xLocalData;
  * @return  OK if no errors were raised in the callback
  *          ERROR if an error was raised in the callback
  */
-static int iRmiHandlerCallback( EVL_SIGNAL *pxSignal );
-
-/**
- * @brief   Map the request repo into the ASDM version
- *
- * @param   xRepo     The RMI Handler request repo
- * @param   pxRepo    The ASDM repo
- *
- * @return  OK or ERROR
- */
-static int iMapRmiHandlerProxyRequestRepo( RMI_HANDLER_REPO_TYPE xRepo, ASDM_REPOSITORY_TYPE *pxRepo );
+static int iBmcProxyCallback( EVL_SIGNAL *pxSignal );
 
 
 /******************************************************************************/
@@ -179,21 +169,20 @@ int iOUT_OF_BAND_TELEMETRY_Initialise( void )
         ( LOWER_FIREWALL == pxThis->ulLowerFirewall ) &&
         ( FALSE == pxThis->iInitialised ) )
     {
-        /* Create mutex to protect ASDM access */
         if( OSAL_ERRORS_NONE != iOSAL_Mutex_Create( &pxThis->pvOsalMutexHdl, "out of band" ) )
         {
             INC_ERROR_COUNTER( OUT_OF_BAND_ERRORS_INIT_MUTEX_FAILED )
         }
         else
         {
-            if( OK == iRMI_HANDLER_BindCallback( &iRmiHandlerCallback ) )
+            if( OK == iBMC_BindCallback( &iBmcProxyCallback ) )
             {
-                PLL_DBG( OUT_OF_BAND_NAME, "RMI Handler bound\r\n" );
+                PLL_DBG( OUT_OF_BAND_NAME, "BMC proxy bound\r\n" );
                 iStatus = OK;
             }
             else
             {
-                INC_ERROR_COUNTER( OUT_OF_BAND_ERRORS_INIT_BIND_AMI_CB_FAILED )
+                INC_ERROR_COUNTER( OUT_OF_BAND_ERRORS_INIT_BIND_BMC_CB_FAILED )
                 iStatus = ERROR;
             }
 
@@ -272,143 +261,150 @@ int iOUT_OF_BAND_TELEMETRY_ClearStatistics( void )
 /**
  * @brief   RMI Handler EVL callback
  */
-static int iRmiHandlerCallback( EVL_SIGNAL *pxSignal )
+static int iBmcProxyCallback( EVL_SIGNAL *pxSignal )
 {
     int iStatus = ERROR;
 
-    if( ( NULL != pxSignal ) && ( AMC_EVENT_UNIQUE_ID_RMI_HANDLER == pxSignal->ucModule ) )
+    if( ( NULL != pxSignal ) && ( AMC_CFG_UNIQUE_ID_BMC == pxSignal->ucModule ) )
     {
-        if( MAX_RMI_HANDLER_EVENTS >= pxSignal->ucEventType )
+        if( MAX_BMC_PROXY_DRIVER_EVENTS >= pxSignal->ucEventType )
         {
             switch( pxSignal->ucEventType )
             {
-                case RMI_HANDLER_E_SENSOR_REQUEST:
+            case BMC_PROXY_DRIVER_E_GET_PDR:
+            {
+                INC_STAT_COUNTER( OUT_OF_BAND_STATS_BMC_PDR_REQUEST )
+                break;
+            }
+
+            case BMC_PROXY_DRIVER_E_GET_PDR_REPOSITORY_INFO:
+            {
+                INC_STAT_COUNTER( OUT_OF_BAND_STATS_BMC_PDR_INFO_REQUEST )
+                break;
+
+            }
+
+            case BMC_PROXY_DRIVER_E_GET_SENSOR_INFO:
+            {
+                INC_STAT_COUNTER( OUT_OF_BAND_STATS_BMC_SENSOR_INFO_REQUEST )
+
+                int16_t ssSensorDataResponse = 0;
+                int16_t ssSensorId = 0;
+                ASC_PROXY_DRIVER_SENSOR_OPERATIONAL_STATUS ucSensorOperationalState = 0;
+                uint32_t ulSensorType = 0;
+
+                /* call into BMC Proxy to get required sensor id */
+                if( OK != iBMC_GetSensorIdRequest( pxSignal, &ssSensorId, ( uint8_t * )&ucSensorOperationalState ) )
                 {
-                    RMI_HANDLER_SENSOR_REQUEST xSensorRequest = { 0 };
+                    INC_ERROR_COUNTER( OUT_OF_BAND_ERRORS_BMC_GET_SENSOR_REQUEST_FAILED )
+                }
+                else
+                {
+                    uint32_t ulSensorId = 0;
 
-                    iStatus = iRMI_HANDLER_GetSensorRequest( pxSignal, &xSensorRequest );
-                    if( OK == iStatus )
+                    ASC_PROXY_DRIVER_SENSOR_DATA xSensorData =
                     {
-                        ASDM_REPOSITORY_TYPE xRepo = 0;
-                        int iResult = ERROR;
-                        uint16_t usResponseSize = 0;
-                        uint8_t ucRespBuffer[ SENSOR_RESP_BUFFER_SIZE ] = { 0 };
-                        uint8_t *pucDestAdd = ( uint8_t* )( xSensorRequest.xPayloadAddress );
+                        0
+                    };
 
-                        /* Reset iStatus */
-                        iStatus = ERROR;
+                    /* decode PLDM sensor ID to AMC ID */
+                    ulSensorId = ssSensorId & 0xFF;
 
-                        if( SENSOR_RESP_BUFFER_SIZE > xSensorRequest.usPayloadSize )
-                        {
-                            PLL_DBG( OUT_OF_BAND_NAME, "Response size 0x%x exceeding request size 0x%x",
-                                    SENSOR_RESP_BUFFER_SIZE,
-                                    xSensorRequest.usPayloadSize );
-                            INC_ERROR_COUNTER( OUT_OF_BAND_ERRORS_RMI_HANDLER_SENSOR_RESP_SIZE_TOO_SMALL )
-                        }
-                        else
-                        {
-                            iStatus = iMapRmiHandlerProxyRequestRepo( xSensorRequest.xType, &xRepo );
-
-                            if( OK == iStatus )
-                            {
-                                switch( xSensorRequest.xReq )
-                                {
-                                    case RMI_HANDLER_REQUEST_TYPE_GET_SDR:
-                                        iStatus = iASDM_PopulateResponse( ASDM_API_ID_TYPE_GET_SDR_V2, xRepo, 0, ucRespBuffer, &usResponseSize );
-                                        break;
-
-                                    case RMI_HANDLER_REQUEST_TYPE_GET_ALL_SENSOR_DATA:
-                                        iStatus = iASDM_PopulateResponse( ASDM_API_ID_TYPE_GET_ALL_SENSOR_DATA_V2, xRepo, 0, ucRespBuffer, &usResponseSize );
-                                        break;
-
-                                    case RMI_HANDLER_REQUEST_TYPE_CONFIG_WRITES:
-                                    case RMI_HANDLER_REQUEST_TYPE_SEND_EVENTS:
-                                    default:
-                                        INC_ERROR_COUNTER( OUT_OF_BAND_ERRORS_RMI_HANDLER_SENSOR_REQUEST_UNKNOWN_API )
-                                        iStatus = ERROR;
-                                        break;
-                                }
-                            }
-                        }
-
-                        /* Check the response is not greater than the memory supplied */
-                        if( OK == iStatus && ( usResponseSize <= xSensorRequest.usPayloadSize ) )
-                        {
-                            /* Copy the data into the supplied memory */
-                            pvOSAL_MemCpy( pucDestAdd, ucRespBuffer, usResponseSize );
-
-                            iResult = OK;
-                            INC_STAT_COUNTER( OUT_OF_BAND_STATS_AMI_SENSOR_REQUEST_SUCCESS )
-                        }
-                        else
-                        {
-                            /* Single byte response for failure */
-                            pucDestAdd[ ASDM_SDR_RESP_BYTE_CC ] = ASDM_SDR_COMPLETION_CODE_OPERATION_FAILED;
-                            pucDestAdd[ ASDM_SDR_RESP_BYTE_SIZE ] = 1;
-                            INC_ERROR_COUNTER( OUT_OF_BAND_ERRORS_AMI_SENSOR_REQUEST_FAILED )
-                        }
-
-                        iStatus = iRMI_HANDLER_SetSensorResponse( pxSignal, iResult, usResponseSize );
+                    BMC_GET_SENSOR_RESPONSE xSensorResponse = BMC_GET_SENSOR_RESP_INVALID_SENSOR_ID;
+                    if( OK != iASC_GetSingleSensorDataById( ulSensorId, &xSensorData ) )
+                    {
+                        INC_ERROR_COUNTER( OUT_OF_BAND_ERRORS_ASC_GET_SENSOR_DATA_FAILED );
+                        iBMC_SendResponseForGetSensor( pxSignal,
+                                                       ssSensorId,
+                                                       ssSensorDataResponse,
+                                                       ucSensorOperationalState,
+                                                       xSensorResponse );
                     }
                     else
                     {
-                        INC_ERROR_COUNTER( OUT_OF_BAND_ERRORS_RMI_HANDLER_GET_SENSOR_REQUEST_FAILED )
+                        ulSensorType = ssSensorId >> 8;
+
+                        if( OK != iASC_GetSingleSensorOperationalStateById( ulSensorId,
+                                                                            ulSensorType,
+                                                                            &ucSensorOperationalState ) )
+                        {
+                            INC_ERROR_COUNTER( OUT_OF_BAND_ERRORS_ASC_GET_SENSOR_DATA_FAILED );
+                            iBMC_SendResponseForGetSensor( pxSignal,
+                                                           ssSensorId,
+                                                           ssSensorDataResponse,
+                                                           ucSensorOperationalState,
+                                                           xSensorResponse );
+                        }
+                        else
+                        {
+                            ssSensorDataResponse =
+                                ( int16_t )xSensorData.pxReadings[ ulSensorType ].ulSensorValue;
+                            xSensorResponse = BMC_GET_SENSOR_RESP_OK;
+                            iBMC_SendResponseForGetSensor( pxSignal,
+                                                           ssSensorId,
+                                                           ssSensorDataResponse,
+                                                           ucSensorOperationalState,
+                                                           xSensorResponse );
+                        }
                     }
-                    break;
                 }
+                break;
 
-                case RMI_HANDLER_E_CONFIG_REQUEST:
-                    /* TODO: handle request - more details rquired */
-                    break;
-
-                case RMI_HANDLER_E_SEND_EVENTS_REQUEST:
-                    /* TODO: handle request - FUTURE WORK */
-                    break;
-
-                default:
-                    INC_STAT_COUNTER( OUT_OF_BAND_STATS_RMI_HANDLER_UNSUPPORTED_REQUEST )
-                    iStatus = OK;
-                    break;
             }
-        }
-    }
 
-    return iStatus;
-}
+            case BMC_PROXY_DRIVER_E_ENABLE_SENSOR:
+            {
+                INC_STAT_COUNTER( OUT_OF_BAND_STATS_BMC_SENSOR_ENABLE_REQUEST )
 
-/*
- * @brief   Map the request repo into the inband version
- */
-static int iMapRmiHandlerProxyRequestRepo( RMI_HANDLER_REPO_TYPE xRepo, ASDM_REPOSITORY_TYPE *pxRepo )
-{
-    int iStatus = ERROR;
+                int16_t ssSensorId = 0;
+                uint8_t ucSensorOperationalState = 0;
 
-    if( ( UPPER_FIREWALL == pxThis->ulUpperFirewall ) &&
-        ( LOWER_FIREWALL == pxThis->ulLowerFirewall ) &&
-        ( NULL != pxRepo ) )
-    {
-        switch( xRepo )
-        {
-        case RMI_HANDLER_REPO_TYPE_TEMPERATURE:
-            *pxRepo = ASDM_REPOSITORY_TYPE_TEMP;
+                /* call into BMC Proxy to get required sensor id */
+                if( OK != iBMC_GetSensorIdRequest( pxSignal, &ssSensorId, &ucSensorOperationalState ) )
+                {
+                    INC_ERROR_COUNTER( OUT_OF_BAND_ERRORS_BMC_GET_SENSOR_REQUEST_FAILED )
+                }
+                else
+                {
+                    uint32_t ulSensorId   = 0;
+                    uint32_t ulSensorType = 0;
+
+                    /* decode PLDM sensor ID to AMC ID */
+                    ulSensorId   = ssSensorId & 0xFF;
+                    ulSensorType = ssSensorId >> 8;
+
+                    BMC_GET_SENSOR_RESPONSE xSensorResponse = BMC_GET_SENSOR_RESP_INVALID_SENSOR_ID;
+
+                    if( OK != iASC_SetSingleSensorOperationalStateById( ulSensorId,
+                                                                        ulSensorType,
+                                                                        ucSensorOperationalState ) )
+                    {
+                        INC_ERROR_COUNTER( OUT_OF_BAND_ERRORS_ASC_SET_SENSOR_OPERATIONAL_STATE_FAILED );
+
+                        BMC_GET_SENSOR_RESPONSE xSensorResponse = BMC_GET_SENSOR_RESP_INVALID_SENSOR_ID;
+                        iBMC_SetResponse( pxSignal,
+                                          ssSensorId,
+                                          xSensorResponse );
+                    }
+                    else
+                    {
+                        xSensorResponse = BMC_GET_SENSOR_RESP_OK;
+                        iBMC_SetResponse( pxSignal,
+                                          ssSensorId,
+                                          xSensorResponse );
+                    }
+                }
+                break;
+            }
+
+            default:
+            {
+                INC_STAT_COUNTER( OUT_OF_BAND_STATS_BMC_UNSUPPORTED_REQUEST )
+                break;
+            }
+            }
+
             iStatus = OK;
-            break;
-        case RMI_HANDLER_REPO_TYPE_VOLTAGE:
-            *pxRepo = ASDM_REPOSITORY_TYPE_VOLTAGE;
-            iStatus = OK;
-            break;
-        case RMI_HANDLER_REPO_TYPE_CURRENT:
-            *pxRepo = ASDM_REPOSITORY_TYPE_CURRENT;
-            iStatus = OK;
-            break;
-        case RMI_HANDLER_REPO_TYPE_POWER:
-            /* return the total power repo as opposed to the individual power sensor values */
-            *pxRepo = ASDM_REPOSITORY_TYPE_POWER;
-            iStatus = OK;
-            break;
-        default:
-            INC_ERROR_COUNTER( OUT_OF_BAND_ERRORS_AMI_UNSUPPORTED_REPO )
-            break;
         }
     }
 

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * cmd_cfgmem_program.c - This file contains the implementation for the command "cfgmem_program"
- * 
+ *
  * Copyright (c) 2023-present Advanced Micro Devices, Inc. All rights reserved.
  */
 
@@ -40,10 +40,10 @@
  * @options:  Ordered list of options passed in at the command line
  * @num_args:  Number of non-option arguments (excluding command)
  * @args:  List of non-option arguments (excluding command)
- * 
+ *
  * `args` may be an invalid pointer. It is the function's responsibility
  * to validate the `num_args` parameter.
- * 
+ *
  * Return: EXIT_SUCCESS or EXIT_FAILURE
  */
 static int do_cmd_cfgmem_program(struct app_option *options, int num_args, char **args);
@@ -53,7 +53,7 @@ static int do_cmd_cfgmem_program(struct app_option *options, int num_args, char 
  * @status: Event status.
  * @ctr: Event counter - equal to the number of bytes written.
  * @data: Pointer to PDI progress struct.
- * 
+ *
  * Return: None.
  */
 static void progress_handler(enum ami_event_status status, uint64_t ctr, void *data);
@@ -65,12 +65,13 @@ static void progress_handler(enum ami_event_status status, uint64_t ctr, void *d
 /*
  * h: Help
  * d: Device
+ * t: Boot device type
  * i: Image file
  * p: Partition number
  * y: Skip user confirmation
  * q: Quit after programming
  */
-static const char short_options[] = "hd:i:p:yq";
+static const char short_options[] = "hd:t:i:p:yq";
 
 static const struct option long_options[] = {
 	{ "help", no_argument, NULL, 'h' },  /* help screen */
@@ -81,10 +82,11 @@ static const char help_msg[] = \
 	"cfgmem_program - program a bitstream onto a device\r\n"
 	"\r\nThis command requires root/sudo permissions.\r\n"
 	"\r\nUsage:\r\n"
-	"\t" APP_NAME " cfgmem_program -d <bdf> -i <path> -p <n>\r\n"
+	"\t" APP_NAME " cfgmem_program -d <bdf> -t <type> -i <path> -p <n>\r\n"
 	"\r\nOptions:\r\n"
 	"\t-h --help             Show this screen\r\n"
 	"\t-d <b>:[d].[f]        Specify the device BDF\r\n"
+	"\t-t <type>             Specify the boot device type (primary or secondary)\r\n"
 	"\t-i <path>             Path to image file\r\n"
 	"\t-p <partition>        Partition to flash\r\n"
 	"\t-y                    Skip confirmation\r\n"
@@ -92,11 +94,11 @@ static const char help_msg[] = \
 ;
 
 struct app_cmd cmd_cfgmem_program = {
-	.callback      = &do_cmd_cfgmem_program,
-	.short_options = short_options,
-	.long_options  = long_options,
-	.root_required = true,
-	.help_msg      = help_msg
+	.callback	= &do_cmd_cfgmem_program,
+	.short_options	= short_options,
+	.long_options	= long_options,
+	.root_required	= true,
+	.help_msg	= help_msg
 };
 
 /*****************************************************************************/
@@ -121,7 +123,11 @@ static void progress_handler(enum ami_event_status status, uint64_t ctr, void *d
 	prog->reserved = print_progress_bar(
 		prog->bytes_written,
 		prog->bytes_to_write,
-		PROGRESS_BAR_WIDTH, '[', ']', '#', '.',
+		PROGRESS_BAR_WIDTH,
+		'[',
+		']',
+		'#',
+		'.',
 		prog->reserved
 	);
 }
@@ -135,12 +141,14 @@ static int do_cmd_cfgmem_program(struct app_option *options, int num_args, char 
 
 	/* Required options */
 	struct app_option *device = NULL;
+	struct app_option *boot_device_type = NULL;
 	struct app_option *image = NULL;
 	struct app_option *partition = NULL;
 
 	/* Required data */
 	uint16_t bdf = 0;
 	ami_device *dev = NULL;
+	int selected_boot_device = 0;
 	uint32_t partition_number = 0;
 
 	/* For UUID checks */
@@ -157,11 +165,21 @@ static int do_cmd_cfgmem_program(struct app_option *options, int num_args, char 
 
 	/* Device and image are required. TODO: Should these be positional args? */
 	device = find_app_option('d', options);
+	boot_device_type = find_app_option('t', options);
 	image = find_app_option('i', options);
 	partition = find_app_option('p', options);
 
-	if (!device || !image || !partition) {
+	if (!device || !boot_device_type || !image || !partition) {
 		APP_USER_ERROR("not enough arguments", help_msg);
+		return AMI_STATUS_ERROR;
+	}
+
+	if (strcmp(boot_device_type->arg, "primary") == 0) {
+		selected_boot_device = AMI_BOOT_DEVICES_PRIMARY;
+	} else if (strcmp(boot_device_type->arg, "secondary") == 0) {
+		selected_boot_device = AMI_BOOT_DEVICES_SECONDARY;
+	} else {
+		APP_USER_ERROR("provided boot device does not exist", help_msg);
 		return AMI_STATUS_ERROR;
 	}
 
@@ -185,7 +203,7 @@ static int do_cmd_cfgmem_program(struct app_option *options, int num_args, char 
 
 	found_current_uuid = ami_dev_read_uuid(dev, current_uuid);
 	found_new_uuid = find_logic_uuid(image->arg, new_uuid);
-	partition_number =  (uint32_t)strtoul(partition->arg, NULL, 0);
+	partition_number = (uint32_t)strtoul(partition->arg, NULL, 0);
 
 	printf(
 		"----------------------------------------------\r\n"
@@ -201,7 +219,9 @@ static int do_cmd_cfgmem_program(struct app_option *options, int num_args, char 
 		"Path      | %s\r\n"
 		"Partition | %d\r\n"
 		"----------------------------------------------\r\n",
-		AMI_PCI_BUS(bdf), AMI_PCI_DEV(bdf), AMI_PCI_FUNC(bdf),
+		AMI_PCI_BUS(bdf),
+		AMI_PCI_DEV(bdf),
+		AMI_PCI_FUNC(bdf),
 		((found_current_uuid != AMI_STATUS_OK) ? ("N/A") : (current_uuid)),
 		((found_new_uuid != AMI_STATUS_OK) ? ("N/A") : (new_uuid)),
 		image->arg,
@@ -211,13 +231,18 @@ static int do_cmd_cfgmem_program(struct app_option *options, int num_args, char 
 	if ((NULL != find_app_option('y', options)) || confirm_action(APP_CONFIRM_PROMPT, 'Y', 3)) {
 		printf("\r\nUpdating base flash image...\r\n");
 
-		if (ami_prog_download_pdi(dev, image->arg, partition_number, progress_handler) == AMI_STATUS_OK) {
+		if (ami_prog_download_pdi(dev,
+					  image->arg,
+					  selected_boot_device,
+					  partition_number,
+					  progress_handler) == AMI_STATUS_OK) {
 			printf("\r\nImage programming complete.\r\n");
 
-			if (NULL == find_app_option('q', options)) {
+			if ((NULL == find_app_option('q', options)) &&
+			    (AMI_BOOT_DEVICES_PRIMARY == selected_boot_device)) {
 				/* If we're not quitting, set the device boot partition */
 				printf("Will do a hot reset to boot into partition %d. This may take a minute...\r\n",
-					partition_number);
+				       partition_number);
 
 				if (ami_prog_device_boot(&dev, partition_number) == AMI_STATUS_OK) {
 					ret = EXIT_SUCCESS;

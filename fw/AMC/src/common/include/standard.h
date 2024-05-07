@@ -25,8 +25,13 @@
 /* Defines                                                                    */
 /******************************************************************************/
 
+#ifndef OK
 #define OK          ( 0 )
+#endif
+
+#ifndef ERROR
 #define ERROR       ( -1 )
+#endif
 
 #ifndef TRUE
 #define TRUE        ( 1 )
@@ -46,16 +51,16 @@
 
 /**
  * @enum   MODULE_STATE
- * 
+ *
  * @brief  Module states
  */
 typedef enum MODULE_STATE
 {
-    MODULE_STATE_OK = 0,
-    MODULE_STATE_UNINITIALISED,
-    MODULE_STATE_ERROR,
+	MODULE_STATE_OK = 0,
+	MODULE_STATE_UNINITIALISED,
+	MODULE_STATE_ERROR,
 
-    MAX_MODULE_STATE
+	MAX_MODULE_STATE
 
 } MODULE_STATE;
 

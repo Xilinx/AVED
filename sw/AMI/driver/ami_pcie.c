@@ -17,9 +17,7 @@
 /* List of supported PCI devices */
 static enum AMI_PCIE_DEVICE_ID SUPPORTED_PCIE_DEVICE_ID[] = {
 	AMI_PCIE_DEVICE_ID_V70_PF0,
-	AMI_PCIE_DEVICE_ID_V70_PF1,
 	AMI_PCIE_DEVICE_ID_VCK5000_PF0,
-	AMI_PCIE_DEVICE_ID_VCK5000_PF1,
 	AMI_PCIE_DEVICE_ID_V80,
 	AMI_PCIE_DEVICE_ID_V80P,
 };
@@ -31,9 +29,9 @@ void get_pcie_bar_info(struct pci_dev *dev, int bar_idx, struct bar_header_struc
 		return;
 
 	bar->start_addr = pci_resource_start(dev, bar_idx);
-	bar->end_addr   = pci_resource_end(dev, bar_idx);
-	bar->flags      = pci_resource_flags(dev, bar_idx);
-	bar->len        = pci_resource_len(dev, bar_idx);
+	bar->end_addr = pci_resource_end(dev, bar_idx);
+	bar->flags = pci_resource_flags(dev, bar_idx);
+	bar->len = pci_resource_len(dev, bar_idx);
 }
 
 int read_pcie_config_header(struct pci_dev *dev, pcie_header_struct **header)
@@ -53,12 +51,12 @@ int read_pcie_config_header(struct pci_dev *dev, pcie_header_struct **header)
 		goto fail;
 	}
 
-	ret = pci_read_config_word(dev, PCI_VENDOR_ID , &((*header)->vendor_id));
+	ret = pci_read_config_word(dev, PCI_VENDOR_ID, &((*header)->vendor_id));
 	if (ret)
 		goto fail;
 	print_pcie_vendor_id(dev, (*header)->vendor_id);
 
-	ret = pci_read_config_word(dev, PCI_DEVICE_ID ,&((*header)->device_id));
+	ret = pci_read_config_word(dev, PCI_DEVICE_ID, &((*header)->device_id));
 	if (ret)
 		goto fail;
 	print_pcie_device_id(dev, (*header)->device_id);
@@ -66,7 +64,7 @@ int read_pcie_config_header(struct pci_dev *dev, pcie_header_struct **header)
 	ret = pci_read_config_word(dev, PCI_COMMAND, &((*header)->command));
 	if (ret)
 		goto fail;
-	print_pcie_command (dev, (*header)->command);
+	print_pcie_command(dev, (*header)->command);
 
 	ret = pci_read_config_word(dev, PCI_STATUS, &((*header)->status));
 	if (ret)
@@ -104,7 +102,7 @@ int read_pcie_config_header(struct pci_dev *dev, pcie_header_struct **header)
 	if (ret)
 		goto fail;
 
-	ret = pci_read_config_word(dev,PCI_SUBSYSTEM_VENDOR_ID, &((*header)->subsystem_vendor_id));
+	ret = pci_read_config_word(dev, PCI_SUBSYSTEM_VENDOR_ID, &((*header)->subsystem_vendor_id));
 	if (ret)
 		goto fail;
 
@@ -128,7 +126,7 @@ int read_pcie_config_header(struct pci_dev *dev, pcie_header_struct **header)
 	if (ret)
 		goto fail;
 
-	ret = pci_read_config_byte(dev,PCI_MIN_GNT, &((*header)->min_gnt));
+	ret = pci_read_config_byte(dev, PCI_MIN_GNT, &((*header)->min_gnt));
 	if (ret)
 		goto fail;
 
@@ -145,8 +143,9 @@ fail:
 	return ret;
 }
 
-int read_pcie_capabilities(struct pci_dev *dev, pcie_header_struct *header,
-	pcie_cap_struct **cap)
+int read_pcie_capabilities(struct pci_dev	*dev,
+			   pcie_header_struct	*header,
+			   pcie_cap_struct	**cap)
 {
 	int ret = 0;
 	uint8_t current_cap_index = 0;
@@ -193,14 +192,15 @@ int read_pcie_capabilities(struct pci_dev *dev, pcie_header_struct *header,
 
 	do {
 		DEV_VDBG(dev, "current_cap_index : 0x%X", current_cap_index);
-		ret = pci_read_config_dword(dev, current_cap_index,
-			&capability_read_buf);
+		ret = pci_read_config_dword(dev,
+					    current_cap_index,
+					    &capability_read_buf);
 		if (ret)
 			goto fail;
 
-		switch(get_pcie_capability_cap_id(capability_read_buf)) {
+		switch (get_pcie_capability_cap_id(capability_read_buf)) {
 		case PCI_CAP_ID_PM:
-			DEV_VDBG(dev, "********************************* PCI_CAP_ID_PM *********************************");
+			DEV_VDBG(dev, "****************************** PCI_CAP_ID_PM ******************************");
 
 			(*cap)->pwr_mgt->power_mgt_cap_base_addr = \
 				current_cap_index;
@@ -209,101 +209,106 @@ int read_pcie_capabilities(struct pci_dev *dev, pcie_header_struct *header,
 			(*cap)->pwr_mgt->next_cap = \
 				get_pcie_capability_next_cap(capability_read_buf);
 
-			DEV_VDBG(dev, "Capability ID : 0x%X",
-				(*cap)->pwr_mgt->cap_id);
-			DEV_VDBG(dev, "Next Item Ptr : 0x%X",
-				(*cap)->pwr_mgt->next_cap);
+			DEV_VDBG(dev,
+				 "Capability ID : 0x%X",
+				 (*cap)->pwr_mgt->cap_id);
+			DEV_VDBG(dev,
+				 "Next Item Ptr : 0x%X",
+				 (*cap)->pwr_mgt->next_cap);
 
 			(*cap)->pwr_mgt->power_mgt_cap_reg = \
 				get_pcie_cap_pm(capability_read_buf);
 			print_pcie_cap_power_management(dev,
-				(*cap)->pwr_mgt->power_mgt_cap_reg);
+							(*cap)->pwr_mgt->power_mgt_cap_reg);
 
 			ret = pci_read_config_dword(dev,
-				current_cap_index + 0x04, &read_buf);
+						    current_cap_index + 0x04,
+						    &read_buf);
 			if (ret)
 				goto fail;
 
 			(*cap)->pwr_mgt->power_mgt_status_ctrl = \
 				get_pcie_cap_pm_status_cntrl(read_buf);
 			print_pcie_cap_pm_status_cntrl(dev,
-				(*cap)->pwr_mgt->power_mgt_status_ctrl);
+						       (*cap)->pwr_mgt->power_mgt_status_ctrl);
 
 			(*cap)->pwr_mgt->power_mgt_ctrl_status_bridge_ext = \
 				get_pcie_cap_pm_cntrl_bridge_ext(read_buf);
 			print_pcie_cap_pm_cntrl_bridge_ext(dev,
-				(*cap)->pwr_mgt->power_mgt_ctrl_status_bridge_ext);
+							   (*cap)->pwr_mgt->power_mgt_ctrl_status_bridge_ext);
 
 			(*cap)->pwr_mgt->power_mgt_data = \
 				get_pcie_cap_pm_data(read_buf);
 			print_pcie_cap_pm_data(dev,
-				(*cap)->pwr_mgt->power_mgt_data);
+					       (*cap)->pwr_mgt->power_mgt_data);
 
 			break;
 
 		case PCI_CAP_ID_MSI:
-			DEV_VDBG(dev, "********************************* PCI_CAP_ID_MSI *********************************");
+			DEV_VDBG(dev,
+				 "********************************* PCI_CAP_ID_MSI *********************************");
 			(*cap)->msi->msi_msg_cap_base_addr = \
 				current_cap_index;
 			(*cap)->msi->cap_id = \
-				get_pcie_capability_cap_id (capability_read_buf);
+				get_pcie_capability_cap_id(capability_read_buf);
 			(*cap)->msi->next_cap = \
 				get_pcie_capability_next_cap(capability_read_buf);
 
-			DEV_VDBG(dev, "Capability ID : 0x%X",
-				(*cap)->msi->cap_id);
-			DEV_VDBG(dev, "Next Item ptr : 0x%X",
-				(*cap)->msi->next_cap);
+			DEV_VDBG(dev,
+				 "Capability ID : 0x%X",
+				 (*cap)->msi->cap_id);
+			DEV_VDBG(dev,
+				 "Next Item ptr : 0x%X",
+				 (*cap)->msi->next_cap);
 
 			(*cap)->msi->msi_config_status_reg = \
 				get_pcie_cap_msi_config_status(capability_read_buf);
 
 			ret = pci_read_config_dword(dev,
-				(*cap)->msi->msi_msg_cap_base_addr + MSI_MESSAGE_ADDR_OFFSET, 
-				&((*cap)->msi->msi_msg_addr));
+						    (*cap)->msi->msi_msg_cap_base_addr + MSI_MESSAGE_ADDR_OFFSET,
+						    &((*cap)->msi->msi_msg_addr));
 			if (ret)
 				goto fail;
 
 			if (get_pcie_cap_msi_msg_ctrl_64_bit_addr(
-					(*cap)->msi->msi_config_status_reg) == \
-					MSI_32_BIT_ADDRESSING) {
-
-				ret = pci_read_config_word(dev, 
-						(*cap)->msi->msi_msg_cap_base_addr + \
-						MSI_MESSAGE_32_BIT_DATA_OFFSET,
-						&((*cap)->msi->msi_msg_data));
+				    (*cap)->msi->msi_config_status_reg) == \
+			    MSI_32_BIT_ADDRESSING) {
+				ret = pci_read_config_word(dev,
+							   (*cap)->msi->msi_msg_cap_base_addr + \
+							   MSI_MESSAGE_32_BIT_DATA_OFFSET,
+							   &((*cap)->msi->msi_msg_data));
 				if (ret)
 					goto fail;
 			} else {
 				ret = pci_read_config_dword(dev,
-						(*cap)->msi->msi_msg_cap_base_addr + \
-						MSI_MESSAGE_UPPR_ADDR_OFFSET,
-						&((*cap)->msi->msi_msg_uppr_addr));
+							    (*cap)->msi->msi_msg_cap_base_addr + \
+							    MSI_MESSAGE_UPPR_ADDR_OFFSET,
+							    &((*cap)->msi->msi_msg_uppr_addr));
 				if (ret)
 					goto fail;
 
 				ret = pci_read_config_word(dev,
-						(*cap)->msi->msi_msg_cap_base_addr + \
-						MSI_MESSAGE_64_BIT_DATA_OFFSET,
-						&((*cap)->msi->msi_msg_data));
+							   (*cap)->msi->msi_msg_cap_base_addr + \
+							   MSI_MESSAGE_64_BIT_DATA_OFFSET,
+							   &((*cap)->msi->msi_msg_data));
 				if (ret)
 					goto fail;
 			}
 
 			print_pcie_cap_msi(dev,
-				(*cap)->msi->msi_config_status_reg,
-				(*cap)->msi->msi_msg_addr,
-				(*cap)->msi->msi_msg_data,
-				(*cap)->msi->msi_msg_uppr_addr);
+					   (*cap)->msi->msi_config_status_reg,
+					   (*cap)->msi->msi_msg_addr,
+					   (*cap)->msi->msi_msg_data,
+					   (*cap)->msi->msi_msg_uppr_addr);
 
 			break;
 
 		case PCI_CAP_ID_MSIX:
-			DEV_VDBG(dev, "********************************* PCI_CAP_ID_MSIX *********************************");
+			DEV_VDBG(dev, "****************************** PCI_CAP_ID_MSIX ******************************");
 			break;
 
 		case PCI_CAP_ID_EXP:
-			DEV_VDBG(dev, "********************************* PCI_CAP_ID_EXP *********************************");
+			DEV_VDBG(dev, "****************************** PCI_CAP_ID_EXP ******************************");
 			(*cap)->exp->pcie_exp_cap_base_addr = \
 				current_cap_index;
 			(*cap)->exp->pcie_exp_cap_id = \
@@ -311,44 +316,46 @@ int read_pcie_capabilities(struct pci_dev *dev, pcie_header_struct *header,
 			(*cap)->exp->next_cap = \
 				get_pcie_capability_next_cap(capability_read_buf);
 
-			DEV_VDBG(dev, "Capability ID : 0x%X",
-				(*cap)->exp->pcie_exp_cap_id);
-			DEV_VDBG(dev, "Next Item ptr : 0x%X",
-				(*cap)->exp->next_cap);
+			DEV_VDBG(dev,
+				 "Capability ID : 0x%X",
+				 (*cap)->exp->pcie_exp_cap_id);
+			DEV_VDBG(dev,
+				 "Next Item ptr : 0x%X",
+				 (*cap)->exp->next_cap);
 
 			(*cap)->exp->pcie_exp_cap_reg = \
 				get_pcie_exp_cap(capability_read_buf);
 			print_pcie_cap_cap(dev, (*cap)->exp->pcie_exp_cap_reg);
 
 			ret = pci_read_config_dword(dev,
-					(*cap)->exp->pcie_exp_cap_base_addr + \
-					PCIE_CAP_DEV_CAPABILITIES_OFFSET,
-					&((*cap)->exp->pcie_exp_dev_cap));
+						    (*cap)->exp->pcie_exp_cap_base_addr + \
+						    PCIE_CAP_DEV_CAPABILITIES_OFFSET,
+						    &((*cap)->exp->pcie_exp_dev_cap));
 			if (ret)
 				goto fail;
 			print_pcie_cap_dev(dev, (*cap)->exp->pcie_exp_dev_cap);
 
 			ret = pci_read_config_word(dev,
-					(*cap)->exp->pcie_exp_cap_base_addr + \
-					PCIE_CAP_DEV_CNTRL_OFFSET,
-					&((*cap)->exp->pcie_exp_dev_ctrl));
+						   (*cap)->exp->pcie_exp_cap_base_addr + \
+						   PCIE_CAP_DEV_CNTRL_OFFSET,
+						   &((*cap)->exp->pcie_exp_dev_ctrl));
 			if (ret)
 				goto fail;
 			print_pcie_cap_dev_ctrl(dev, (*cap)->exp->pcie_exp_dev_ctrl);
 
 			ret = pci_read_config_word(dev,
-					(*cap)->exp->pcie_exp_cap_base_addr + \
-					PCIE_CAP_DEV_STATUS_OFFSET,
-					&((*cap)->exp->pcie_exp_dev_status));
+						   (*cap)->exp->pcie_exp_cap_base_addr + \
+						   PCIE_CAP_DEV_STATUS_OFFSET,
+						   &((*cap)->exp->pcie_exp_dev_status));
 			if (ret)
 				goto fail;
 			print_pcie_cap_dev_status(dev,
-				(*cap)->exp->pcie_exp_dev_status);
+						  (*cap)->exp->pcie_exp_dev_status);
 
 			ret = pci_read_config_dword(dev,
-					(*cap)->exp->pcie_exp_cap_base_addr + \
-					PCIE_CAP_LINK_CAPABILITIES_OFFSET,
-					&((*cap)->exp->pcie_exp_link_cap));
+						    (*cap)->exp->pcie_exp_cap_base_addr + \
+						    PCIE_CAP_LINK_CAPABILITIES_OFFSET,
+						    &((*cap)->exp->pcie_exp_link_cap));
 			if (ret)
 				goto fail;
 
@@ -360,21 +367,21 @@ int read_pcie_capabilities(struct pci_dev *dev, pcie_header_struct *header,
 					(*cap)->exp->pcie_exp_link_cap);
 
 			print_pcie_cap_link_cap(dev,
-				(*cap)->exp->pcie_exp_link_cap);
+						(*cap)->exp->pcie_exp_link_cap);
 
-			ret = pci_read_config_word(dev, 
-					(*cap)->exp->pcie_exp_cap_base_addr + \
-					PCIE_CAP_LINK_CNTRL_OFFSET,
-					&((*cap)->exp->pcie_exp_link_ctrl));
+			ret = pci_read_config_word(dev,
+						   (*cap)->exp->pcie_exp_cap_base_addr + \
+						   PCIE_CAP_LINK_CNTRL_OFFSET,
+						   &((*cap)->exp->pcie_exp_link_ctrl));
 			if (ret)
 				goto fail;
 			print_pcie_cap_link_ctrl(dev,
-				(*cap)->exp->pcie_exp_link_ctrl);
+						 (*cap)->exp->pcie_exp_link_ctrl);
 
 			ret = pci_read_config_word(dev,
-					(*cap)->exp->pcie_exp_cap_base_addr + \
-					PCIE_CAP_LINK_STATUS_OFFSET,
-					&((*cap)->exp->pcie_exp_link_status));
+						   (*cap)->exp->pcie_exp_cap_base_addr + \
+						   PCIE_CAP_LINK_STATUS_OFFSET,
+						   &((*cap)->exp->pcie_exp_link_status));
 			if (ret)
 				goto fail;
 
@@ -387,118 +394,117 @@ int read_pcie_capabilities(struct pci_dev *dev, pcie_header_struct *header,
 					(*cap)->exp->pcie_exp_link_status);
 
 			print_pcie_cap_link_status(dev,
-				(*cap)->exp->pcie_exp_link_status);
+						   (*cap)->exp->pcie_exp_link_status);
 
 			ret = pci_read_config_dword(dev,
-					(*cap)->exp->pcie_exp_cap_base_addr + \
-					PCIE_CAP_SLOT_CAPABILITIES_OFFSET,
-					&((*cap)->exp->pcie_exp_slot_cap));
+						    (*cap)->exp->pcie_exp_cap_base_addr + \
+						    PCIE_CAP_SLOT_CAPABILITIES_OFFSET,
+						    &((*cap)->exp->pcie_exp_slot_cap));
 			if (ret)
 				goto fail;
 			print_pcie_cap_slot_cap(dev,
-				(*cap)->exp->pcie_exp_slot_cap);
+						(*cap)->exp->pcie_exp_slot_cap);
 
 			ret = pci_read_config_word(dev,
-					(*cap)->exp->pcie_exp_cap_base_addr + \
-					PCIE_CAP_SLOT_CNTRL_OFFSET,
-					&((*cap)->exp->pcie_exp_slot_ctrl));
+						   (*cap)->exp->pcie_exp_cap_base_addr + \
+						   PCIE_CAP_SLOT_CNTRL_OFFSET,
+						   &((*cap)->exp->pcie_exp_slot_ctrl));
 			if (ret)
 				goto fail;
 			print_pcie_cap_slot_ctrl(dev,
-				(*cap)->exp->pcie_exp_slot_ctrl);
+						 (*cap)->exp->pcie_exp_slot_ctrl);
 
 			ret = pci_read_config_word(dev,
-					(*cap)->exp->pcie_exp_cap_base_addr + \
-					PCIE_CAP_SLOT_STATUS_OFFSET,
-					&((*cap)->exp->pcie_exp_slot_status));
+						   (*cap)->exp->pcie_exp_cap_base_addr + \
+						   PCIE_CAP_SLOT_STATUS_OFFSET,
+						   &((*cap)->exp->pcie_exp_slot_status));
 			if (ret)
 				goto fail;
 			print_pcie_cap_slot_status(dev,
-				(*cap)->exp->pcie_exp_slot_status);
+						   (*cap)->exp->pcie_exp_slot_status);
 
 			ret = pci_read_config_word(dev,
-					(*cap)->exp->pcie_exp_cap_base_addr + \
-					PCIE_CAP_ROOT_CNTRL_OFFSET,
-					&((*cap)->exp->pcie_exp_root_ctrl));
+						   (*cap)->exp->pcie_exp_cap_base_addr + \
+						   PCIE_CAP_ROOT_CNTRL_OFFSET,
+						   &((*cap)->exp->pcie_exp_root_ctrl));
 			if (ret)
 				goto fail;
 			print_pcie_cap_root_ctrl(dev,
-				(*cap)->exp->pcie_exp_root_ctrl);
+						 (*cap)->exp->pcie_exp_root_ctrl);
 
 			ret = pci_read_config_word(dev,
-					(*cap)->exp->pcie_exp_cap_base_addr + \
-					PCIE_CAP_ROOT_CAPABILITIES_OFFSET,
-					&((*cap)->exp->pcie_exp_root_cap));
+						   (*cap)->exp->pcie_exp_cap_base_addr + \
+						   PCIE_CAP_ROOT_CAPABILITIES_OFFSET,
+						   &((*cap)->exp->pcie_exp_root_cap));
 			if (ret)
 				goto fail;
-			print_pcie_cap_root_cap (dev,
-			(*cap)->exp->pcie_exp_root_cap);
+			print_pcie_cap_root_cap(dev,
+						(*cap)->exp->pcie_exp_root_cap);
 
 			ret = pci_read_config_dword(dev,
-					(*cap)->exp->pcie_exp_cap_base_addr + \
-					PCIE_CAP_ROOT_STATUS_OFFSET, 
-					&((*cap)->exp->pcie_exp_root_status));
+						    (*cap)->exp->pcie_exp_cap_base_addr + \
+						    PCIE_CAP_ROOT_STATUS_OFFSET,
+						    &((*cap)->exp->pcie_exp_root_status));
 			if (ret)
 				goto fail;
 			print_pcie_cap_root_status(dev,
-				(*cap)->exp->pcie_exp_root_status);
+						   (*cap)->exp->pcie_exp_root_status);
 
 			ret = pci_read_config_dword(dev,
-					(*cap)->exp->pcie_exp_cap_base_addr + \
-					PCIE_CAP_DEV_CAPABILITIES_2_OFFSET, 
-					&((*cap)->exp->pcie_exp_dev_cap_2));
+						    (*cap)->exp->pcie_exp_cap_base_addr + \
+						    PCIE_CAP_DEV_CAPABILITIES_2_OFFSET,
+						    &((*cap)->exp->pcie_exp_dev_cap_2));
 			if (ret)
 				goto fail;
 			print_pcie_cap_dev_cap_2(dev,
-				(*cap)->exp->pcie_exp_dev_cap_2);
+						 (*cap)->exp->pcie_exp_dev_cap_2);
 
 			ret = pci_read_config_word(dev,
-					(*cap)->exp->pcie_exp_cap_base_addr + \
-					PCIE_CAP_DEV_CNTRL_2_OFFSET, 
-					&((*cap)->exp->pcie_exp_dev_ctrl_2));
+						   (*cap)->exp->pcie_exp_cap_base_addr + \
+						   PCIE_CAP_DEV_CNTRL_2_OFFSET,
+						   &((*cap)->exp->pcie_exp_dev_ctrl_2));
 			if (ret)
 				goto fail;
 			print_pcie_cap_dev_ctrl_2(dev,
-				(*cap)->exp->pcie_exp_dev_ctrl_2);
+						  (*cap)->exp->pcie_exp_dev_ctrl_2);
 
 			ret = pci_read_config_dword(dev,
-					(*cap)->exp->pcie_exp_cap_base_addr + \
-					PCIE_CAP_LINK_CAPABILITIES_2_OFFSET, 
-					&((*cap)->exp->pcie_exp_link_cap_2));
+						    (*cap)->exp->pcie_exp_cap_base_addr + \
+						    PCIE_CAP_LINK_CAPABILITIES_2_OFFSET,
+						    &((*cap)->exp->pcie_exp_link_cap_2));
 			if (ret)
 				goto fail;
-			print_pcie_cap_link_cap_2 (dev,
-				(*cap)->exp->pcie_exp_link_cap_2);
+			print_pcie_cap_link_cap_2(dev,
+						  (*cap)->exp->pcie_exp_link_cap_2);
 
 			ret = pci_read_config_word(dev,
-					(*cap)->exp->pcie_exp_cap_base_addr + \
-					PCIE_CAP_LINK_CNTRL_2_OFFSET,
-					&((*cap)->exp->pcie_exp_link_ctrl_2));
+						   (*cap)->exp->pcie_exp_cap_base_addr + \
+						   PCIE_CAP_LINK_CNTRL_2_OFFSET,
+						   &((*cap)->exp->pcie_exp_link_ctrl_2));
 			if (ret)
 				goto fail;
 			print_pcie_cap_link_ctrl_2(dev,
-				(*cap)->exp->pcie_exp_link_ctrl_2);
+						   (*cap)->exp->pcie_exp_link_ctrl_2);
 
 			ret = pci_read_config_word(dev,
-					(*cap)->exp->pcie_exp_cap_base_addr + \
-					PCIE_CAP_LINK_STATUS_2_OFFSET,
-					 &((*cap)->exp->pcie_exp_link_status_2));
+						   (*cap)->exp->pcie_exp_cap_base_addr + \
+						   PCIE_CAP_LINK_STATUS_2_OFFSET,
+						   &((*cap)->exp->pcie_exp_link_status_2));
 			if (ret)
 				goto fail;
 			print_pcie_cap_link_status_2(dev,
-				(*cap)->exp->pcie_exp_link_status_2);
+						     (*cap)->exp->pcie_exp_link_status_2);
 			break;
 
 		default:
-			DEV_VDBG(dev, "Capabilities not defined - ID : 0x%X",
-				capability_read_buf & 0xFF);
+			DEV_VDBG(dev,
+				 "Capabilities not defined - ID : 0x%X",
+				 capability_read_buf & 0xFF);
 			break;
-
 		}
 		current_cap_index = get_pcie_capability_next_cap(
 			capability_read_buf);
-
-	} while(current_cap_index != 0);
+	} while (current_cap_index != 0);
 
 	DEV_VDBG(dev, "Successfully read PCI Capabilities");
 	return SUCCESS;
@@ -547,21 +553,21 @@ int read_pcie_ext_capabilities(struct pci_dev *dev, pcie_ext_cap_struct **ext_ca
 		goto fail;
 	}
 	(*ext_cap)->lane_mar_rec = kmalloc(sizeof(pcie_ext_cap_lane_mar_rec_struct),
-		GFP_KERNEL);
+					   GFP_KERNEL);
 	if (!((*ext_cap)->lane_mar_rec)) {
 		DEV_ERR(dev, "Unable to allocate kernel memory");
 		ret = -ENOMEM;
 		goto fail;
 	}
 	(*ext_cap)->phy_16_gts = kmalloc(sizeof(pcie_ext_cap_phy_16_gts_struct),
-		GFP_KERNEL);
+					 GFP_KERNEL);
 	if (!((*ext_cap)->phy_16_gts)) {
 		DEV_ERR(dev, "Unable to allocate kernel memory");
 		ret = -ENOMEM;
 		goto fail;
 	}
 	(*ext_cap)->secondary_pci = kmalloc(sizeof(pcie_ext_cap_secondary_pci_struct),
-		GFP_KERNEL);
+					    GFP_KERNEL);
 	if (!((*ext_cap)->secondary_pci)) {
 		DEV_ERR(dev, "Unable to allocate kernel memory");
 		ret = -ENOMEM;
@@ -574,7 +580,7 @@ int read_pcie_ext_capabilities(struct pci_dev *dev, pcie_ext_cap_struct **ext_ca
 #endif
 
 	do {
-		ret = pci_read_config_dword(dev, ext_cap_ptr , &ext_header_read_buf);
+		ret = pci_read_config_dword(dev, ext_cap_ptr, &ext_header_read_buf);
 		if (ret)
 			goto fail;
 
@@ -583,7 +589,7 @@ int read_pcie_ext_capabilities(struct pci_dev *dev, pcie_ext_cap_struct **ext_ca
 		current_ext_header.version = \
 			get_pcie_capability_ext_cap_version(ext_header_read_buf);
 		current_ext_header.next = \
-			get_pcie_capability_ext_cap_next(ext_header_read_buf);\
+			get_pcie_capability_ext_cap_next(ext_header_read_buf); \
 
 		DEV_VDBG(dev, "\t - ID      : 0x%X", current_ext_header.id);
 		DEV_VDBG(dev, "\t - VERSION : 0x%X", current_ext_header.version);
@@ -592,114 +598,131 @@ int read_pcie_ext_capabilities(struct pci_dev *dev, pcie_ext_cap_struct **ext_ca
 		switch (get_pcie_capability_ext_cap_id(ext_header_read_buf)) {
 		case PCI_EXT_CAP_ID_ERR:
 
-			(*ext_cap)->aer->aer_header.id  = \
+			(*ext_cap)->aer->aer_header.id = \
 				current_ext_header.id;
 			(*ext_cap)->aer->aer_header.version = \
 				current_ext_header.version;
-			(*ext_cap)->aer->aer_header.next  = \
+			(*ext_cap)->aer->aer_header.next = \
 				current_ext_header.next;
 
 			DEV_VDBG(dev, "PCI Express Extended Capability - Advanced Error Reporting");
 
-			ret = pci_read_config_dword(dev, ext_cap_ptr +
-				PCIE_EXT_AER_UNCOR_ERR_STATUS_OFFSET,
-				&((*ext_cap)->aer->aer_uncorrectable_err_status_reg));
+			ret = pci_read_config_dword(dev,
+						    ext_cap_ptr +
+						    PCIE_EXT_AER_UNCOR_ERR_STATUS_OFFSET,
+						    &((*ext_cap)->aer->aer_uncorrectable_err_status_reg));
 			if (ret)
 				goto fail;
 
-			ret = pci_read_config_dword(dev, ext_cap_ptr +
-				PCIE_EXT_AER_UNCOR_ERR_MASK_OFFSET,
-				&((*ext_cap)->aer->aer_uncorrectable_err_mask_reg));
+			ret = pci_read_config_dword(dev,
+						    ext_cap_ptr +
+						    PCIE_EXT_AER_UNCOR_ERR_MASK_OFFSET,
+						    &((*ext_cap)->aer->aer_uncorrectable_err_mask_reg));
 			if (ret)
 				goto fail;
 
-			ret = pci_read_config_dword(dev, ext_cap_ptr +
-				PCIE_EXT_AER_UNCOR_ERR_SEV_OFFSET,
-				&((*ext_cap)->aer->aer_uncorrectable_err_sev_reg));
+			ret = pci_read_config_dword(dev,
+						    ext_cap_ptr +
+						    PCIE_EXT_AER_UNCOR_ERR_SEV_OFFSET,
+						    &((*ext_cap)->aer->aer_uncorrectable_err_sev_reg));
 			if (ret)
 				goto fail;
 
-			ret = pci_read_config_dword(dev, ext_cap_ptr +
-				PCIE_EXT_AER_COR_ERR_STATUS_OFFSET,
-				&((*ext_cap)->aer->aer_correctable_err_status_reg));
+			ret = pci_read_config_dword(dev,
+						    ext_cap_ptr +
+						    PCIE_EXT_AER_COR_ERR_STATUS_OFFSET,
+						    &((*ext_cap)->aer->aer_correctable_err_status_reg));
 			if (ret)
 				goto fail;
 
-			ret = pci_read_config_dword(dev, ext_cap_ptr +
-				PCIE_EXT_AER_COR_ERR_MASK_OFFSET,
-				&((*ext_cap)->aer->aer_correctable_err_mask_reg));
+			ret = pci_read_config_dword(dev,
+						    ext_cap_ptr +
+						    PCIE_EXT_AER_COR_ERR_MASK_OFFSET,
+						    &((*ext_cap)->aer->aer_correctable_err_mask_reg));
 			if (ret)
 				goto fail;
 
-			ret = pci_read_config_dword(dev,  ext_cap_ptr +
-				PCIE_EXT_AER_ADV_ERR_CAP_CNTRL_OFFSET,
-				&((*ext_cap)->aer->aer_advanced_err_cap_cntrl_reg));
+			ret = pci_read_config_dword(dev,
+						    ext_cap_ptr +
+						    PCIE_EXT_AER_ADV_ERR_CAP_CNTRL_OFFSET,
+						    &((*ext_cap)->aer->aer_advanced_err_cap_cntrl_reg));
 			if (ret)
 				goto fail;
 
-			ret = pci_read_config_dword(dev, ext_cap_ptr +
-				PCIE_EXT_AER_HEADER_LOG_REG_DW1_OFFSET,
-				&((*ext_cap)->aer->aer_header_log_reg[0]));
+			ret = pci_read_config_dword(dev,
+						    ext_cap_ptr +
+						    PCIE_EXT_AER_HEADER_LOG_REG_DW1_OFFSET,
+						    &((*ext_cap)->aer->aer_header_log_reg[0]));
 			if (ret)
 				goto fail;
 
-			ret = pci_read_config_dword(dev, ext_cap_ptr +
-				PCIE_EXT_AER_HEADER_LOG_REG_DW2_OFFSET,
-				&((*ext_cap)->aer->aer_header_log_reg[1]));
+			ret = pci_read_config_dword(dev,
+						    ext_cap_ptr +
+						    PCIE_EXT_AER_HEADER_LOG_REG_DW2_OFFSET,
+						    &((*ext_cap)->aer->aer_header_log_reg[1]));
 			if (ret)
 				goto fail;
 
-			ret = pci_read_config_dword(dev, ext_cap_ptr +
-				PCIE_EXT_AER_HEADER_LOG_REG_DW3_OFFSET,
-				&((*ext_cap)->aer->aer_header_log_reg[2]));
+			ret = pci_read_config_dword(dev,
+						    ext_cap_ptr +
+						    PCIE_EXT_AER_HEADER_LOG_REG_DW3_OFFSET,
+						    &((*ext_cap)->aer->aer_header_log_reg[2]));
 			if (ret)
 				goto fail;
 
-			ret = pci_read_config_dword(dev, ext_cap_ptr +
-				PCIE_EXT_AER_HEADER_LOG_REG_DW4_OFFSET,
-				&((*ext_cap)->aer->aer_header_log_reg[3]));
+			ret = pci_read_config_dword(dev,
+						    ext_cap_ptr +
+						    PCIE_EXT_AER_HEADER_LOG_REG_DW4_OFFSET,
+						    &((*ext_cap)->aer->aer_header_log_reg[3]));
 			if (ret)
 				goto fail;
 
-			ret = pci_read_config_dword(dev, ext_cap_ptr +
-				PCIE_EXT_AER_ROOT_ERR_CMD_OFFSET,
-				&((*ext_cap)->aer->aer_root_err_cmd_reg));
+			ret = pci_read_config_dword(dev,
+						    ext_cap_ptr +
+						    PCIE_EXT_AER_ROOT_ERR_CMD_OFFSET,
+						    &((*ext_cap)->aer->aer_root_err_cmd_reg));
 			if (ret)
 				goto fail;
 
-			ret = pci_read_config_dword(dev, ext_cap_ptr +
-				PCIE_EXT_AER_ROOT_ERR_STATUS_OFFSET,
-				&((*ext_cap)->aer->aer_root_err_status_reg));
+			ret = pci_read_config_dword(dev,
+						    ext_cap_ptr +
+						    PCIE_EXT_AER_ROOT_ERR_STATUS_OFFSET,
+						    &((*ext_cap)->aer->aer_root_err_status_reg));
 			if (ret)
 				goto fail;
 
-			ret = pci_read_config_dword(dev, ext_cap_ptr +
-				PCIE_EXT_AER_ERR_SRC_ID_OFFSET,
-				&((*ext_cap)->aer->aer_err_source_id_reg));
+			ret = pci_read_config_dword(dev,
+						    ext_cap_ptr +
+						    PCIE_EXT_AER_ERR_SRC_ID_OFFSET,
+						    &((*ext_cap)->aer->aer_err_source_id_reg));
 			if (ret)
 				goto fail;
 
-			ret = pci_read_config_dword(dev, ext_cap_ptr +
-				PCIE_EXT_AER_FIRST_TLP_PREFIX_LOG_OFFSET,
-				&((*ext_cap)->aer->aer_first_tlp_prefix_log_reg));
+			ret = pci_read_config_dword(dev,
+						    ext_cap_ptr +
+						    PCIE_EXT_AER_FIRST_TLP_PREFIX_LOG_OFFSET,
+						    &((*ext_cap)->aer->aer_first_tlp_prefix_log_reg));
 			if (ret)
 				goto fail;
 
-			ret = pci_read_config_dword(dev, ext_cap_ptr +
-				PCIE_EXT_AER_SECOND_TLP_PREFIX_LOG_OFFSET,
-				&((*ext_cap)->aer->aer_second_tlp_prefix_log_reg));
+			ret = pci_read_config_dword(dev,
+						    ext_cap_ptr +
+						    PCIE_EXT_AER_SECOND_TLP_PREFIX_LOG_OFFSET,
+						    &((*ext_cap)->aer->aer_second_tlp_prefix_log_reg));
 			if (ret)
 				goto fail;
 
-			ret = pci_read_config_dword(dev, ext_cap_ptr +
-				PCIE_EXT_AER_THIRD_TLP_PREFIX_LOG_OFFSET,
-				&((*ext_cap)->aer->aer_third_tlp_prefix_log_reg));
+			ret = pci_read_config_dword(dev,
+						    ext_cap_ptr +
+						    PCIE_EXT_AER_THIRD_TLP_PREFIX_LOG_OFFSET,
+						    &((*ext_cap)->aer->aer_third_tlp_prefix_log_reg));
 			if (ret)
 				goto fail;
 
-			ret = pci_read_config_dword(dev, ext_cap_ptr +
-				PCIE_EXT_AER_FOURTH_TLP_PREFIX_LOG_OFFSET,
-				&((*ext_cap)->aer->aer_fourth_tlp_prefix_log_reg));
+			ret = pci_read_config_dword(dev,
+						    ext_cap_ptr +
+						    PCIE_EXT_AER_FOURTH_TLP_PREFIX_LOG_OFFSET,
+						    &((*ext_cap)->aer->aer_fourth_tlp_prefix_log_reg));
 			if (ret)
 				goto fail;
 
@@ -707,9 +730,10 @@ int read_pcie_ext_capabilities(struct pci_dev *dev, pcie_ext_cap_struct **ext_ca
 
 		case PCI_EXT_CAP_ID_VNDR:
 			(*ext_cap)->vsec_base_addr_found = true;
-			(*ext_cap)->vsec_base_addr  = ext_cap_ptr;
-			DEV_VDBG(dev, "VSEC base address: 0x%X",
-				(*ext_cap)->vsec_base_addr );
+			(*ext_cap)->vsec_base_addr = ext_cap_ptr;
+			DEV_VDBG(dev,
+				 "VSEC base address: 0x%X",
+				 (*ext_cap)->vsec_base_addr);
 			break;
 
 		case PCI_EXT_CAP_ID_ARI:
@@ -718,15 +742,17 @@ int read_pcie_ext_capabilities(struct pci_dev *dev, pcie_ext_cap_struct **ext_ca
 			(*ext_cap)->ari->ari_header.version = current_ext_header.version;
 			(*ext_cap)->ari->ari_header.next = current_ext_header.next;
 
-			ret = pci_read_config_word(dev, ext_cap_ptr +
-				PCIE_EXT_ARI_CAP_OFFSET,
-				&((*ext_cap)->ari->ari_cap_reg));
+			ret = pci_read_config_word(dev,
+						   ext_cap_ptr +
+						   PCIE_EXT_ARI_CAP_OFFSET,
+						   &((*ext_cap)->ari->ari_cap_reg));
 			if (ret)
 				goto fail;
 
-			ret = pci_read_config_word(dev, ext_cap_ptr +
-				PCIE_EXT_ARI_CNTRL_OFFSET,
-				&((*ext_cap)->ari->ari_cntrl_reg));
+			ret = pci_read_config_word(dev,
+						   ext_cap_ptr +
+						   PCIE_EXT_ARI_CNTRL_OFFSET,
+						   &((*ext_cap)->ari->ari_cntrl_reg));
 			if (ret)
 				goto fail;
 
@@ -740,15 +766,17 @@ int read_pcie_ext_capabilities(struct pci_dev *dev, pcie_ext_cap_struct **ext_ca
 			(*ext_cap)->secondary_pci->secondary_pci_header.next = \
 				current_ext_header.next;
 
-			ret = pci_read_config_dword(dev, ext_cap_ptr +
-				PCIE_EXT_SEC_LINK_CNTRL3_OFFSET,
-				&((*ext_cap)->secondary_pci->secondary_pci_link_cntrl3_reg));
+			ret = pci_read_config_dword(dev,
+						    ext_cap_ptr +
+						    PCIE_EXT_SEC_LINK_CNTRL3_OFFSET,
+						    &((*ext_cap)->secondary_pci->secondary_pci_link_cntrl3_reg));
 			if (ret)
 				goto fail;
 
-			ret = pci_read_config_dword(dev, ext_cap_ptr +
-				PCIE_EXT_SEC_LINK_ERR_STATUS_OFFSET,
-				&((*ext_cap)->secondary_pci->secondary_pci_lane_err_status_reg));
+			ret = pci_read_config_dword(dev,
+						    ext_cap_ptr +
+						    PCIE_EXT_SEC_LINK_ERR_STATUS_OFFSET,
+						    &((*ext_cap)->secondary_pci->secondary_pci_lane_err_status_reg));
 			if (ret)
 				goto fail;
 
@@ -759,54 +787,62 @@ int read_pcie_ext_capabilities(struct pci_dev *dev, pcie_ext_cap_struct **ext_ca
 			(*ext_cap)->dlf->dlf_header.version = current_ext_header.version;
 			(*ext_cap)->dlf->dlf_header.next = current_ext_header.next;
 
-			ret = pci_read_config_dword(dev, ext_cap_ptr +
-				PCIE_EXT_DLF_CAP_OFFSET, &((*ext_cap)->dlf->dlf_cap_reg));
+			ret = pci_read_config_dword(dev,
+						    ext_cap_ptr +
+						    PCIE_EXT_DLF_CAP_OFFSET,
+						    &((*ext_cap)->dlf->dlf_cap_reg));
 			if (ret)
 				goto fail;
 
 			break;
 
 		case PCI_EXT_CAP_ID_PL_16GT:
-			(*ext_cap)->phy_16_gts->phy_16_gts_header.id =\
+			(*ext_cap)->phy_16_gts->phy_16_gts_header.id = \
 				current_ext_header.id;
-			(*ext_cap)->phy_16_gts->phy_16_gts_header.version =\
+			(*ext_cap)->phy_16_gts->phy_16_gts_header.version = \
 				current_ext_header.version;
-			(*ext_cap)->phy_16_gts->phy_16_gts_header.next =\
+			(*ext_cap)->phy_16_gts->phy_16_gts_header.next = \
 				current_ext_header.next;
 
 			ret = pci_read_config_dword(dev,
-				ext_cap_ptr + PCIE_EXT_PHY_16_GTS_CAP_OFFSET,
-				&((*ext_cap)->phy_16_gts->phy_16_gts_cap_reg));
+						    ext_cap_ptr + PCIE_EXT_PHY_16_GTS_CAP_OFFSET,
+						    &((*ext_cap)->phy_16_gts->phy_16_gts_cap_reg));
 			if (ret)
 				goto fail;
 
 			ret = pci_read_config_dword(dev,
-				ext_cap_ptr + PCIE_EXT_PHY_16_GTS_CNTRL_OFFSET,
-				&((*ext_cap)->phy_16_gts->phy_16_gts_cntrl_reg));
+						    ext_cap_ptr + PCIE_EXT_PHY_16_GTS_CNTRL_OFFSET,
+						    &((*ext_cap)->phy_16_gts->phy_16_gts_cntrl_reg));
 			if (ret)
 				goto fail;
 
 			ret = pci_read_config_dword(dev,
-				ext_cap_ptr + PCIE_EXT_PHY_16_GTS_STATUS_OFFSET,
-				&((*ext_cap)->phy_16_gts->phy_16_gts_status_reg));
+						    ext_cap_ptr + PCIE_EXT_PHY_16_GTS_STATUS_OFFSET,
+						    &((*ext_cap)->phy_16_gts->phy_16_gts_status_reg));
 			if (ret)
 				goto fail;
 
 			ret = pci_read_config_dword(dev,
-				ext_cap_ptr + PCIE_EXT_PHY_16_GTS_LOCAL_PARITY_MISMATCH_STATUS_OFFSET,
-				&((*ext_cap)->phy_16_gts->phy_16_gts_local_parity_mismatch_status_reg));
+						    ext_cap_ptr +
+						    PCIE_EXT_PHY_16_GTS_LOCAL_PARITY_MISMATCH_STATUS_OFFSET,
+						    &((*ext_cap)->phy_16_gts->
+						      phy_16_gts_local_parity_mismatch_status_reg));
 			if (ret)
 				goto fail;
 
 			ret = pci_read_config_dword(dev,
-				ext_cap_ptr + PCIE_EXT_PHY_16_GTS_FIRST_PARITY_MISMATCH_STATUS_OFFSET,
-				&((*ext_cap)->phy_16_gts->phy_16_gts_first_data_parity_mismatch_status_reg));
+						    ext_cap_ptr +
+						    PCIE_EXT_PHY_16_GTS_FIRST_PARITY_MISMATCH_STATUS_OFFSET,
+						    &((*ext_cap)->phy_16_gts->
+						      phy_16_gts_first_data_parity_mismatch_status_reg));
 			if (ret)
 				goto fail;
 
 			ret = pci_read_config_dword(dev,
-				ext_cap_ptr + PCIE_EXT_PHY_16_GTS_SECOND_PARITY_MISMATCH_STATUS_OFFSET,
-				&((*ext_cap)->phy_16_gts->phy_16_gts_second_data_parity_mismatch_status_reg));
+						    ext_cap_ptr +
+						    PCIE_EXT_PHY_16_GTS_SECOND_PARITY_MISMATCH_STATUS_OFFSET,
+						    &((*ext_cap)->phy_16_gts->
+						      phy_16_gts_second_data_parity_mismatch_status_reg));
 			if (ret)
 				goto fail;
 
@@ -822,13 +858,14 @@ int read_pcie_ext_capabilities(struct pci_dev *dev, pcie_ext_cap_struct **ext_ca
 			break;
 
 		default:
-			DEV_VDBG(dev, "Extended Capabilities not used - ID : 0x%X",
-				get_pcie_capability_ext_cap_id(ext_header_read_buf));
+			DEV_VDBG(dev,
+				 "Extended Capabilities not used - ID : 0x%X",
+				 get_pcie_capability_ext_cap_id(ext_header_read_buf));
 			break;
 		}
 
 		ext_cap_ptr = current_ext_header.next;
-	} while(ext_cap_ptr != 0x000);
+	} while (ext_cap_ptr != 0x000);
 
 	DEV_VDBG(dev, "Successfully read PCI Extended Capabilities");
 	return SUCCESS;
@@ -848,7 +885,7 @@ fail:
 int read_pcie_configuration(struct pci_dev *dev, pcie_config_struct **pcie_config)
 {
 	int ret = 0;
-	
+
 	if (!dev || !pcie_config)
 		return -EINVAL;
 
@@ -869,8 +906,9 @@ int read_pcie_configuration(struct pci_dev *dev, pcie_config_struct **pcie_confi
 	if (ret)
 		goto fail;
 
-	ret = read_pcie_capabilities(dev, (*pcie_config)->header,
-		&((*pcie_config)->cap));
+	ret = read_pcie_capabilities(dev,
+				     (*pcie_config)->header,
+				     &((*pcie_config)->cap));
 	if (ret)
 		goto fail;
 
@@ -911,8 +949,9 @@ int write_pcie_configuration(struct pci_dev *dev)
 	DEV_VDBG(dev, "Current maximum memory read request: %d Bytes", ret);
 
 	if (ret > PCIE_MAX_READ_BYTES) {
-		DEV_VDBG(dev, "Reducing maximum memory read request to %d Bytes",
-			PCIE_MAX_READ_BYTES);
+		DEV_VDBG(dev,
+			 "Reducing maximum memory read request to %d Bytes",
+			 PCIE_MAX_READ_BYTES);
 		ret = pcie_set_readrq(dev, PCIE_MAX_READ_BYTES);
 		if (ret) {
 			DEV_ERR(dev, "Failed to set the maximum memory read request");
@@ -955,14 +994,18 @@ fail:
  * @num: Number of registers to read/write.
  * @val: Buffer to be written to/read from.
  * @write: Boolean indicating if we should write data.
- * 
+ *
  * If `write` is false, we will only read. If it is true, we will write data.
  * This function does not support combined transactions.
- * 
- * Return: 0 on success, negative error code otherwise. 
+ *
+ * Return: 0 on success, negative error code otherwise.
  */
-static int do_bar_transaction(struct pci_dev *dev, uint8_t bar_idx,
-	uint64_t offset, uint32_t num, uint32_t *val, bool write)
+static int do_bar_transaction(struct pci_dev	*dev,
+			      uint8_t		bar_idx,
+			      uint64_t		offset,
+			      uint32_t		num,
+			      uint32_t		*val,
+			      bool		write)
 {
 	int i = 0;
 	int ret = 0;
@@ -978,7 +1021,7 @@ static int do_bar_transaction(struct pci_dev *dev, uint8_t bar_idx,
 
 	if (!pf_dev)
 		return -EINVAL;
-	
+
 	bar = &(pf_dev->pcie_config->header->bar[bar_idx]);
 
 	if ((bar->len == 0) || ((offset + num) > bar->len))
@@ -1004,7 +1047,7 @@ static int do_bar_transaction(struct pci_dev *dev, uint8_t bar_idx,
 		ret = -EIO;
 		goto release_region;
 	}
-	
+
 	for (i = 0; i < num; i++) {
 		if (write)
 			iowrite32(val[i], virt_addr + (sizeof(uint32_t) * i));
@@ -1026,8 +1069,11 @@ release_region:
 /*
  * Read from a PCI BAR.
  */
-int read_pcie_bar(struct pci_dev *dev, uint8_t bar_idx, uint64_t offset,
-	uint32_t num, uint32_t *val)
+int read_pcie_bar(struct pci_dev	*dev,
+		  uint8_t		bar_idx,
+		  uint64_t		offset,
+		  uint32_t		num,
+		  uint32_t		*val)
 {
 	if (!dev || !val || (num == 0))
 		return -EINVAL;
@@ -1045,8 +1091,11 @@ int read_pcie_bar(struct pci_dev *dev, uint8_t bar_idx, uint64_t offset,
 /*
  * Write to a PCI BAR.
  */
-int write_pcie_bar(struct pci_dev *dev, uint8_t bar_idx, uint64_t offset,
-	uint32_t num, uint32_t *val)
+int write_pcie_bar(struct pci_dev	*dev,
+		   uint8_t		bar_idx,
+		   uint64_t		offset,
+		   uint32_t		num,
+		   uint32_t		*val)
 {
 	if (!dev || !val || (num == 0))
 		return -EINVAL;
@@ -1065,10 +1114,9 @@ bool is_supported_pcie_device_id(uint16_t pcie_device_id)
 {
 	int i = 0;
 
-	for (i = 0; i < ARRAY_SIZE(SUPPORTED_PCIE_DEVICE_ID); i++) {
+	for (i = 0; i < ARRAY_SIZE(SUPPORTED_PCIE_DEVICE_ID); i++)
 		if (pcie_device_id == SUPPORTED_PCIE_DEVICE_ID[i])
 			return true;
-	}
 	return false;
 }
 

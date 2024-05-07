@@ -67,17 +67,17 @@
     DO( FW_IF_GCQ_ERRORS_VALIDATION_FAILED_COUNT )     \
     DO( FW_IF_GCQ_ERRORS_INVALID_PROFILE_COUNT )       \
     DO( FW_IF_GCQ_ERRORS_NOT_SUPPORTED_COUNT )         \
-    DO( FW_IF_GCQ_ERRORS_MAX )                          
+    DO( FW_IF_GCQ_ERRORS_MAX )
 
 #define PRINT_STAT_COUNTER( x )             PLL_INF( FW_IF_GCQ_NAME, "%50s . . . . %d\r\n",          \
                                                      FW_IF_GCQ_STATS_STR[ x ],                       \
-                                                     pxThis->ulStatCounters[ x ] )
+                                                     pxThis->pulStatCounters[ x ] )
 #define PRINT_ERROR_COUNTER( x )            PLL_INF( FW_IF_GCQ_NAME, "%50s . . . . %d\r\n",          \
                                                      FW_IF_GCQ_ERRORS_STR[ x ],                      \
-                                                     pxThis->ulErrorCounters[ x ] )
+                                                     pxThis->pulErrorCounters[ x ] )
 
-#define INC_STAT_COUNTER( x )               { if( x < FW_IF_GCQ_STATS_MAX )pxThis->ulStatCounters[ x ]++; }
-#define INC_ERROR_COUNTER( x )              { if( x < FW_IF_GCQ_ERRORS_MAX )pxThis->ulErrorCounters[ x ]++; }
+#define INC_STAT_COUNTER( x )               { if( x < FW_IF_GCQ_STATS_MAX )pxThis->pulStatCounters[ x ]++; }
+#define INC_ERROR_COUNTER( x )              { if( x < FW_IF_GCQ_ERRORS_MAX )pxThis->pulErrorCounters[ x ]++; }
 
 
 /*****************************************************************************/
@@ -144,9 +144,9 @@ typedef struct FW_IF_GCQ_PRIVATE_DATA
     FW_IF_GCQ_PROFILE_TYPE  xGcqProfile[ GCQ_MAX_INSTANCES ];
     uint32_t                ulProfilesAllocated;
 
-    uint32_t                ulStatCounters[ FW_IF_GCQ_STATS_MAX ];
-    uint32_t                ulErrorCounters[ FW_IF_GCQ_ERRORS_MAX ];
-    
+    uint32_t                pulStatCounters[ FW_IF_GCQ_STATS_MAX ];
+    uint32_t                pulErrorCounters[ FW_IF_GCQ_ERRORS_MAX ];
+
     uint32_t                ulLowerFirewall;
 
 } FW_IF_GCQ_PRIVATE_DATA;
@@ -166,8 +166,8 @@ static FW_IF_GCQ_PRIVATE_DATA xLocalData =
     { { 0 } },              /* xGcqProfile */
     0,                      /* ulProfilesAllocated */
 
-    { 0 },                  /* ulStatCounters */
-    { 0 },                  /* ulErrorCounters */
+    { 0 },                  /* pulStatCounters */
+    { 0 },                  /* pulErrorCounters */
 
     GCQ_LOWER_FIREWALL      /* ulLowerFirewall */
 };
@@ -459,7 +459,7 @@ static uint32_t prvGCQClose( void *pvFWIf )
 /**
  * @brief   Local implementation of FW_IF_write
  */
-static uint32_t prvGCQWrite( void *pvFWIf, uint32_t ulDstPort, uint8_t *pucData, uint32_t ulSize, uint32_t ulTimeoutMs )
+static uint32_t prvGCQWrite( void *pvFWIf, uint64_t ullDstPort, uint8_t *pucData, uint32_t ulSize, uint32_t ulTimeoutMs )
 {
     FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_ERRORS_NONE;
 
@@ -524,7 +524,7 @@ static uint32_t prvGCQWrite( void *pvFWIf, uint32_t ulDstPort, uint8_t *pucData,
 /**
  * @brief   Local implementation of FW_IF_read
  */
-static uint32_t prvGCQRead( void *pvFWIf, uint32_t ulSrcPort, uint8_t *pucData, uint32_t *pulSize, uint32_t ulTimeoutMs )
+static uint32_t prvGCQRead( void *pvFWIf, uint64_t ullSrcPort, uint8_t *pucData, uint32_t *pulSize, uint32_t ulTimeoutMs )
 {
     FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_ERRORS_NONE;
 
@@ -687,11 +687,11 @@ static uint32_t prvGCQIOCtrl( void *pvFWIf, uint32_t ulOption, void *pvValue )
 /**
  * @brief   Local implementation of FW_IF_bindCallback
  */
-static uint32_t prvGCQBindCallback( void *vFWIf, FW_IF_callback *newFunc )
+static uint32_t prvGCQBindCallback( void *pvFWIf, FW_IF_callback *pxNewFunc )
 {
     FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_ERRORS_NONE;
 
-    FW_IF_CFG *pxThisIf = ( FW_IF_CFG* )vFWIf;
+    FW_IF_CFG *pxThisIf = ( FW_IF_CFG* )pvFWIf;
     if( CHECK_NULL( pxThisIf ) )
     {
         xRet = FW_IF_ERRORS_INVALID_HANDLE;
@@ -716,7 +716,7 @@ static uint32_t prvGCQBindCallback( void *vFWIf, FW_IF_callback *newFunc )
         INC_ERROR_COUNTER( FW_IF_ERRORS_DRIVER_NOT_INITIALISED_COUNT );
     }
 
-    if( CHECK_NULL( newFunc ) )
+    if( CHECK_NULL( pxNewFunc ) )
     {
         xRet = FW_IF_ERRORS_PARAMS;
         INC_ERROR_COUNTER( FW_IF_ERRORS_PARAMS_COUNT );
@@ -728,7 +728,7 @@ static uint32_t prvGCQBindCallback( void *vFWIf, FW_IF_callback *newFunc )
         * Binds in callback provided to the FW_IF.
         * Callback will be invoked when by the driver when event occurs.
         */
-        pxThisIf->raiseEvent = newFunc;
+        pxThisIf->raiseEvent = pxNewFunc;
         PLL_DBG( FW_IF_GCQ_NAME, "FW_IF_bindCallback called\r\n" );
         INC_STAT_COUNTER( FW_IF_GCQ_STATS_BIND_CALLBACK_CALLED_COUNT );
     }
@@ -744,7 +744,7 @@ static uint32_t prvGCQBindCallback( void *vFWIf, FW_IF_callback *newFunc )
 /**
  * @brief   initialisation function for GCQ interfaces (generic across all GCQ interfaces)
  */
-uint32_t ulFW_IF_GCQ_init( FW_IF_GCQ_INIT_CFG *cfg )
+uint32_t ulFW_IF_GCQ_Init( FW_IF_GCQ_INIT_CFG *pxCfg )
 {
     FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_GCQ_ERRORS_DRIVER_INVALID_ARG;
 
@@ -754,13 +754,13 @@ uint32_t ulFW_IF_GCQ_init( FW_IF_GCQ_INIT_CFG *cfg )
     {   
         xRet = FW_IF_ERRORS_NONE;
 
-        if( CHECK_NULL( cfg ) )
-        { 
+        if( CHECK_NULL( pxCfg ) )
+        {
             xRet = FW_IF_ERRORS_PARAMS;
             INC_ERROR_COUNTER( FW_IF_ERRORS_PARAMS_COUNT );
         }
 
-        if( CHECK_NOT_NULL( cfg->pvIOAccess ) )
+        if( CHECK_NOT_NULL( pxCfg->pvIOAccess ) )
         {
             xRet = FW_IF_ERRORS_PARAMS;
             INC_ERROR_COUNTER( FW_IF_ERRORS_PARAMS_COUNT );
@@ -797,7 +797,7 @@ uint32_t ulFW_IF_GCQ_init( FW_IF_GCQ_INIT_CFG *cfg )
 /**
  * @brief   opens an instance of the GCQ interface
  */
-uint32_t ulFW_IF_GCQ_create( FW_IF_CFG *xFWIf, FW_IF_GCQ_CFG *xGCQCfg )
+uint32_t ulFW_IF_GCQ_Create( FW_IF_CFG *pxFWIf, FW_IF_GCQ_CFG *pxGCQCfg )
 {
     FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_GCQ_ERRORS_DRIVER_INVALID_ARG;
 
@@ -812,13 +812,13 @@ uint32_t ulFW_IF_GCQ_create( FW_IF_CFG *xFWIf, FW_IF_GCQ_CFG *xGCQCfg )
             INC_ERROR_COUNTER( FW_IF_ERRORS_DRIVER_NOT_INITIALISED_COUNT );
         }
 
-        if( CHECK_NULL( xFWIf ) )
+        if( CHECK_NULL( pxFWIf ) )
         {
             xRet = FW_IF_ERRORS_INVALID_CFG;
             INC_ERROR_COUNTER( FW_IF_ERRORS_INVALID_CFG_COUNT );
         }
 
-        if( CHECK_NULL( xGCQCfg ) )
+        if( CHECK_NULL( pxGCQCfg ) )
         {
             xRet = FW_IF_ERRORS_INVALID_CFG;
             INC_ERROR_COUNTER( FW_IF_ERRORS_INVALID_CFG_COUNT );
@@ -832,8 +832,8 @@ uint32_t ulFW_IF_GCQ_create( FW_IF_CFG *xFWIf, FW_IF_GCQ_CFG *xGCQCfg )
                 xRet = FW_IF_GCQ_ERRORS_NO_FREE_PROFILES;
                 INC_ERROR_COUNTER( FW_IF_GCQ_ERRORS_NO_FREE_PROFILES_COUNT );
             }
-            else if( ( MAX_FW_IF_GCQ_MODE > xGCQCfg->xMode ) &&
-                    ( MAX_FW_IF_GCQ_INTERRUPT_MODE > xGCQCfg->xInterruptMode ) )
+            else if( ( MAX_FW_IF_GCQ_MODE > pxGCQCfg->xMode ) &&
+                    ( MAX_FW_IF_GCQ_INTERRUPT_MODE > pxGCQCfg->xInterruptMode ) )
             {
                 FW_IF_CFG myLocalIf =
                 {
@@ -844,13 +844,13 @@ uint32_t ulFW_IF_GCQ_create( FW_IF_CFG *xFWIf, FW_IF_GCQ_CFG *xGCQCfg )
                     .read           = &prvGCQRead,
                     .ioctrl         = &prvGCQIOCtrl,
                     .bindCallback   = &prvGCQBindCallback,
-                    .cfg            = ( void* )xGCQCfg,
+                    .cfg            = ( void* )pxGCQCfg,
                     .lowerFirewall  = GCQ_LOWER_FIREWALL
                 };
 
-                pvOSAL_MemCpy( xFWIf, &myLocalIf, sizeof( FW_IF_CFG ) );
+                pvOSAL_MemCpy( pxFWIf, &myLocalIf, sizeof( FW_IF_CFG ) );
 
-                FW_IF_GCQ_CFG *pxCfg = ( FW_IF_GCQ_CFG* )xFWIf->cfg;
+                FW_IF_GCQ_CFG *pxCfg = ( FW_IF_GCQ_CFG* )pxFWIf->cfg;
                 pxThis->xGcqProfile[ pxThis->ulProfilesAllocated ].ulIOHandle = 0;
                 pxThis->xGcqProfile[ pxThis->ulProfilesAllocated ].xState = FW_IF_GCQ_STATE_INIT;
                 pxThis->xGcqProfile[ pxThis->ulProfilesAllocated ].pxGCQInstance = NULL;
@@ -878,8 +878,7 @@ int iFW_IF_GCQ_PrintStatistics( void )
     int iStatus = ERROR;
 
     if( ( GCQ_UPPER_FIREWALL == pxThis->ulUpperFirewall ) &&
-        ( GCQ_LOWER_FIREWALL == pxThis->ulLowerFirewall ) &&
-        ( TRUE == pxThis->iInitialised ) )
+        ( GCQ_LOWER_FIREWALL == pxThis->ulLowerFirewall ) )
     {
         int i = 0;
         PLL_INF( FW_IF_GCQ_NAME, "============================================================\r\n" );
@@ -916,8 +915,8 @@ int iFW_IF_GCQ_ClearStatistics( void )
         ( GCQ_LOWER_FIREWALL == pxThis->ulLowerFirewall ) &&
         ( TRUE == pxThis->iInitialised ) )
     {
-        pvOSAL_MemSet( pxThis->ulStatCounters, 0, sizeof( pxThis->ulStatCounters ) );
-        pvOSAL_MemSet( pxThis->ulErrorCounters, 0, sizeof( pxThis->ulErrorCounters ) );
+        pvOSAL_MemSet( pxThis->pulStatCounters, 0, sizeof( pxThis->pulStatCounters ) );
+        pvOSAL_MemSet( pxThis->pulErrorCounters, 0, sizeof( pxThis->pulErrorCounters ) );
         iStatus = OK;
     }
     else

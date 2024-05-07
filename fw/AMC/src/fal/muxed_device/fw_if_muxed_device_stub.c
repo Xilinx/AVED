@@ -187,7 +187,7 @@ static uint32_t ulQsfpWrite( void *pvFwIf, uint64_t ullDstPort, uint8_t *pucData
     CHECK_DRIVER;
 
     if( ( NULL != pucData ) &&
-        ( FW_IF_QSFP_MAX_DATA >= ulSize ) )
+        ( FAL_QSFP_MAX_DATA >= ulSize ) )
     {
         /*
          * This is where data will be written to either QSFP IO expander,
@@ -217,7 +217,7 @@ static uint32_t ulQsfpRead( void *pvFwIf, uint64_t ullSrcPort, uint8_t *pucData,
 
     if( ( NULL != pucData ) &&
         ( NULL != pulSize ) &&
-        ( FW_IF_QSFP_MAX_DATA >= *pulSize ) )
+        ( FAL_QSFP_MAX_DATA >= *pulSize ) )
     {
         /*
          * This is where data will be read from either QSFP IO expander,
@@ -350,7 +350,7 @@ uint32_t ulFW_IF_MUXED_DEVICE_Init( FW_IF_MUXED_DEVICE_INIT_CFG *pxInitCfg )
         /*
          * Initilise config data shared between all QSFPs.
          */
-        memcpy( &pxThis->xLocalCfg, pxInitCfg, sizeof( FW_IF_MUXED_DEVICE_INIT_CFG ) );
+        pvOSAL_MemCpy( &pxThis->xLocalCfg, pxInitCfg, sizeof( FW_IF_MUXED_DEVICE_INIT_CFG ) );
         pxThis->iInitialised = FW_IF_TRUE;
         INC_STAT_COUNTER( FW_IF_QSFP_STATS_INIT_OVERALL_COMPLETE )
     }
@@ -382,7 +382,7 @@ uint32_t ulFW_IF_MUXED_DEVICE_Create( FW_IF_CFG *pxFwIf, FW_IF_MUXED_DEVICE_CFG 
             .lowerFirewall  = QSFP_LOWER_FIREWALL
         };
 
-        memcpy( pxFwIf, &xLocalIf, sizeof( FW_IF_CFG ) );
+        pvOSAL_MemCpy( pxFwIf, &xLocalIf, sizeof( FW_IF_CFG ) );
         INC_STAT_COUNTER( FW_IF_QSFP_STATS_INSTANCE_CREATE );
         PLL_DBG( FW_IF_QSFP_NAME, "ulFW_IF_MUXED_DEVICE_Create\r\n" );
     }

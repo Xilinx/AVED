@@ -670,16 +670,15 @@ static int populate_partition_values(ami_device *dev, void *values,
 {
 	int i = 0;
 	int ret = EXIT_SUCCESS;
-	struct ami_fpt_header *hdr = NULL;
 	struct ami_fpt_partition part = { 0 };
 
 	if (!dev || !values || !n_rows || !n_fields || !data)
 		return EXIT_FAILURE;
-	
-	hdr = (struct ami_fpt_header*)data;
 
-	while ((i < *n_rows) && (i < hdr->num_entries)) {
-		if (ami_prog_get_fpt_partition(dev, i, &part) != AMI_STATUS_OK) {
+	uint8_t *boot_device = (uint8_t*)data;
+
+	while (i < *n_rows) {
+		if (ami_prog_get_fpt_partition(dev, *boot_device, i, &part) != AMI_STATUS_OK) {
 			ret = EXIT_FAILURE;
 			break;
 		}
@@ -1871,7 +1870,7 @@ int print_pcieinfo(ami_device *dev, struct app_option *options)
 /*
  * Callback for the "cfgmem_info" command.
  */
-int print_fpt_info(ami_device *dev, struct app_option *options)
+int print_fpt_info(ami_device *dev, uint8_t boot_device, struct app_option *options)
 {
 	int ret = EXIT_FAILURE;
 	enum app_out_format format = APP_OUT_FORMAT_TABLE;  /* default: table */
@@ -1884,11 +1883,18 @@ int print_fpt_info(ami_device *dev, struct app_option *options)
 	if (parse_output_options(options, &format, NULL, &stream,
 			NULL, NULL) == EXIT_FAILURE)
 		return EXIT_FAILURE;
+		
 	
 	/* Must fetch FPT header */
-	if (ami_prog_get_fpt_header(dev, &hdr) != EXIT_SUCCESS) {
+	if (ami_prog_get_fpt_header(dev, boot_device, &hdr) != EXIT_SUCCESS) {
 		APP_API_ERROR("could not fetch FPT header");
 		goto fail;
+	} else if ((hdr.version == 0) && (hdr.hdr_size == 0) &&
+		   (hdr.entry_size == 0) && (hdr.num_entries == 0)) {
+		printf("No %s FPT available\r\n", (boot_device == 0)?("Primary"):("Secondary"));
+		goto fail;
+	} else {
+		printf("\r\n%s FPT: \r\n", (boot_device == 0)?("Primary"):("Secondary"));
 	}
 
 	/* Print FPT header information. */
@@ -1918,7 +1924,7 @@ int print_fpt_info(ami_device *dev, struct app_option *options)
 		TABLE_DIVIDER_HEADER_ONLY,
 		&populate_partition_values,
 		&populate_partition_header,
-		&hdr,
+		&boot_device,
 		NULL
 	);
 
@@ -1945,7 +1951,7 @@ int print_fpt_info(ami_device *dev, struct app_option *options)
 					NUM_PARTITION_COLS,
 					hdr.num_entries,
 					&populate_partition_values,
-					&hdr,
+					&boot_device,
 					&p
 				);
 

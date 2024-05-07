@@ -96,6 +96,19 @@ enum ami_event_status {
 	AMI_EVENT_STATUS_TIMEOUT,
 };
 
+/**
+ * enum ami_boot_devices - list of available boot devices
+ * @AMI_BOOT_DEVICES_PRIMARY: primary boot device
+ * @AMI_BOOT_DEVICES_SECONDARY: secondary boot device
+ * @AMI_BOOT_DEVICES_MAX: max boot device
+ */
+enum ami_boot_devices {
+	AMI_BOOT_DEVICES_PRIMARY = 0,
+	AMI_BOOT_DEVICES_SECONDARY,
+
+	AMI_BOOT_DEVICES_MAX,
+};
+
 /*****************************************************************************/
 /* Typedefs                                                                  */
 /*****************************************************************************/

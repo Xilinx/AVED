@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2024 Advanced Micro Devices, Inc. All rights reserved.
  * SPDX-License-Identifier: MIT
  *
  * This file contains the API for the Alveo Management Interface (AMI) proxy driver
@@ -46,6 +46,7 @@ typedef enum AMI_PROXY_DRIVER_EVENTS
     AMI_PROXY_DRIVER_E_HEARTBEAT,
     AMI_PROXY_DRIVER_E_EEPROM_READ_WRITE,
     AMI_PROXY_DRIVER_E_MODULE_READ_WRITE,
+    AMI_PROXY_DRIVER_E_DEBUG_VERBOSITY,
 
     MAX_AMI_PROXY_DRIVER_EVENTS
 
@@ -143,6 +144,7 @@ typedef struct AMI_PROXY_SENSOR_REQUEST
  */
 typedef struct AMI_PROXY_PDI_DOWNLOAD_REQUEST
 {
+    int      iBootDevice;
     int      iUpdateFpt;
     int      iLastPacket;
     uint64_t ullAddress;
@@ -161,7 +163,9 @@ typedef struct AMI_PROXY_PDI_COPY_REQUEST
 {
     uint64_t ullAddress;
     uint32_t ulMaxLength;
+    uint32_t ulSrcDevice;
     uint32_t ulSrcPartition;
+    uint32_t ulDestDevice;
     uint32_t ulDestPartition;
 
 } AMI_PROXY_PDI_COPY_REQUEST;
@@ -348,6 +352,17 @@ int iAMI_SetEepromReadWriteCompleteResponse( EVL_SIGNAL *pxSignal, AMI_PROXY_RES
  */
 int iAMI_SetModuleReadWriteCompleteResponse( EVL_SIGNAL *pxSignal, AMI_PROXY_RESULT xResult );
 
+/**
+ * @brief   Set the response after the debug verbosity request has completed
+ *
+ * @param   pxSignal    Current event occurance (used for tracking)
+ * @param   xResult     The result of the debug verbosity request
+ *
+ * @return  OK          Data passed to proxy driver successfully
+ *          ERROR       Data not passed successfully
+ */
+int iAMI_SetDebugVerbosityResponse( EVL_SIGNAL *pxSignal, AMI_PROXY_RESULT xResult );
+
 /* Get Functions **************************************************************/
 
 /**
@@ -422,6 +437,19 @@ int iAMI_GetEepromReadWriteRequest( EVL_SIGNAL *pxSignal,
  */
 int iAMI_GetModuleReadWriteRequest( EVL_SIGNAL *pxSignal,
                                     AMI_PROXY_MODULE_RW_REQUEST *pxModuleReadWriteRequest );
+
+/**
+ * @brief   Get the debug verbosity request
+ *
+ * @param   pxSignal                    Current event occurance (used for tracking)
+ * @param   pucDebugVerbosityRequest    Pointer to store requested debug verbosity
+ *
+ * @return  OK                          Data retrieved from proxy driver successfully
+ *          ERROR                       Data not retrieved successfully
+ *
+ */
+int iAMI_GetDebugVerbosityRequest( EVL_SIGNAL *pxSignal,
+                                   uint8_t *pucDebugVerbosityRequest );
 
 /**
  * @brief   Print all the stats gathered by the application

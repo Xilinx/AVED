@@ -14,7 +14,6 @@ The AVED Management Controller (AMC) provides management and control of the AVED
 - Host (AMI) communication
 - Sensor Control
 - QSFP Control
-- Clock Control
 - Download and Programming to Flash
 
 In addition, the AMC is fully abstracted from:

@@ -22,7 +22,7 @@
 /* Defines                                                                    */
 /******************************************************************************/
 
-#define EVL_DBG_NAME      "EVL_DBG"
+#define EVL_DBG_NAME "EVL_DBG"
 
 
 /******************************************************************************/
@@ -60,6 +60,13 @@ static void vClearStats( void );
  */
 static void vGetLog( void );
 
+/**
+ * @brief   Debug function to set EVL verbosity
+ *
+ * @return  N/A
+ */
+static void vSetVerbosity( void );
+
 
 /******************************************************************************/
 /* Public function implementations                                            */
@@ -83,11 +90,12 @@ void vEVL_DebugInit( DAL_HDL pxParentHandle )
 
         if( NULL != pxEvlTop )
         {
-            pxDAL_NewDebugFunction( "print_stats", pxEvlTop, vPrintStats );
-            pxDAL_NewDebugFunction( "clear_stats", pxEvlTop, vClearStats );
+            pxDAL_NewDebugFunction( "print_stats",    pxEvlTop, vPrintStats );
+            pxDAL_NewDebugFunction( "clear_stats",    pxEvlTop, vClearStats );
+            pxDAL_NewDebugFunction( "set_verbosity",  pxEvlTop, vSetVerbosity );
             pxGetDir = pxDAL_NewSubDirectory( "gets", pxEvlTop );
 
-            if( NULL!= pxGetDir )
+            if( NULL != pxGetDir )
             {
                 pxDAL_NewDebugFunction( "get_log", pxGetDir, vGetLog );
             }
@@ -96,6 +104,10 @@ void vEVL_DebugInit( DAL_HDL pxParentHandle )
         iIsInitialised = TRUE;
     }
 }
+
+/******************************************************************************/
+/* Private function implementations                                           */
+/******************************************************************************/
 
 /**
  * @brief   Debug function to print this module's stats
@@ -130,3 +142,29 @@ static void vGetLog( void )
     }
 }
 
+/**
+ * @brief   Debug function to set EVL verbosity
+ */
+static void vSetVerbosity( void )
+{
+    int iInput = 0;
+
+    PLL_DAL( EVL_DBG_NAME, "0 to disable EVL verbosity, 1 to enable EVL verbosity." );
+    if( iDAL_GetIntInRange( EVL_DBG_NAME, &iInput, 0, 1 ) )
+    {
+        PLL_DAL( EVL_DBG_NAME, "Error retrieving input.\r\n" );
+    }
+
+    if( FALSE == iInput )
+    {
+        vEVL_SetVerbosity( FALSE );
+    }
+    else if( TRUE == iInput )
+    {
+        vEVL_SetVerbosity( TRUE );
+    }
+    else
+    {
+        PLL_DAL( EVL_DBG_NAME, "Error setting EVL verbosity.\r\n" );
+    }
+}

@@ -52,7 +52,7 @@ static int do_cmd_cfgmem_info(struct app_option *options, int num_args, char **a
  * f: Output format
  * o: Output file
  */
-static const char short_options[] = "hd:f:o:";
+static const char short_options[] = "hd:t:f:o:";
 
 static const struct option long_options[] = {
 	{ "help", no_argument, NULL, 'h' },  /* help screen */
@@ -62,10 +62,11 @@ static const struct option long_options[] = {
 static const char help_msg[] = \
 	"cfgmem_info - get fpt information\r\n"
 	"\r\nUsage:\r\n"
-	"\t" APP_NAME " cfgmem_info -d <bdf> [options...]\r\n"
+	"\t" APP_NAME " cfgmem_info -d <bdf> -t <type> [options...]\r\n"
 	"\r\nOptions:\r\n"
 	"\t-h --help            Show this screen\r\n"
 	"\t-d <b>:[d].[f]       Specify the device BDF\r\n"
+	"\t-t <type>            Specify the boot device type (primary or secondary)\r\n"
 	"\t-f <table|json>      Set the output format\r\n"
 	"\t-o <file>            Specify output file\r\n"
 ;
@@ -90,9 +91,11 @@ static int do_cmd_cfgmem_info(struct app_option *options, int num_args, char **a
 	int ret = EXIT_FAILURE;
 	/* Required options */
 	struct app_option *device = NULL;
+	struct app_option *boot_device_type = NULL;
 
 	/* Required data */
 	ami_device *dev = NULL;
+	int selected_boot_device = 0;
 
 	/* Must have device at least. */
 	if (!options) {
@@ -102,9 +105,19 @@ static int do_cmd_cfgmem_info(struct app_option *options, int num_args, char **a
 
 	/* Device is required. */
 	device = find_app_option('d', options);
+	boot_device_type = find_app_option('t', options);
 
-	if (!device) {
+	if (!device || !boot_device_type) {
 		APP_USER_ERROR("not enough arguments", help_msg);
+		return AMI_STATUS_ERROR;
+	}
+
+	if (strcmp(boot_device_type->arg, "primary") == 0) {
+		selected_boot_device = AMI_BOOT_DEVICES_PRIMARY;
+	} else if (strcmp(boot_device_type->arg, "secondary") == 0) {
+		selected_boot_device = AMI_BOOT_DEVICES_SECONDARY;
+	} else{
+		APP_USER_ERROR("provided boot device does not exist", help_msg);
 		return AMI_STATUS_ERROR;
 	}
 
@@ -114,7 +127,8 @@ static int do_cmd_cfgmem_info(struct app_option *options, int num_args, char **a
 		return AMI_STATUS_ERROR;
 	}
 
-	ret = print_fpt_info(dev, options);
+	ret = print_fpt_info(dev, selected_boot_device, options); 
+
 	ami_dev_delete(&dev);
 	return ret;
 }

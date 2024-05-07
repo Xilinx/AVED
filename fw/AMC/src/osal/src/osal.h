@@ -168,6 +168,24 @@ uint32_t ulOSAL_GetUptimeTicks( void );
  */
 uint32_t ulOSAL_GetUptimeMs( void );
 
+/**
+ * @brief   Returns tick count since OS was initialised, from ISR.
+ *
+ * @return  Count of ticks since OS was initialised.
+ *
+ * @note    This function can be called from an ISR.
+ */
+uint32_t ulOSAL_GetUptimeTicksFromISR( void );
+
+/**
+ * @brief   Returns ms count since OS was initialised, from ISR.
+ *
+ * @return  Ms since OS was initialised.
+ *
+ * @note    This function can be called from an ISR.
+ */
+uint32_t ulOSAL_GetUptimeMsFromISR( void );
+
 /*****************************************************************************/
 /* Task APIs                                                                 */
 /*****************************************************************************/
@@ -280,7 +298,7 @@ int iOSAL_Task_SleepMs( uint32_t ulSleepMs );
  * @note    The Semaphore Handle must be initialised as NULL.
  *          To create a binary semaphore, set ullBucket to 1.
  */
-int iOSAL_Semaphore_Create( void** ppvSemHandle, 
+int iOSAL_Semaphore_Create( void** ppvSemHandle,
                             uint32_t ullCount, 
                             uint32_t ullBucket, 
                             const char* pcSemName );
@@ -309,7 +327,7 @@ int iOSAL_Semaphore_Destroy( void** ppvSemHandle );
  *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
  * 
  */
-int iOSAL_Semaphore_Pend( void* pvSemHandle, uint32_t ulTimeoutMs ); 
+int iOSAL_Semaphore_Pend( void* pvSemHandle, uint32_t ulTimeoutMs );
 
 /**
  * @brief   Posts / Releases a previously created semaphore, to which the handle refers. 
@@ -745,6 +763,19 @@ void* pvOSAL_MemCpy( void* pvDestination, const void* pvSource, uint16_t usSize 
 void vOSAL_MemFree( void** ppv );
 
 /**
+ * @brief   OSAL wrapper for task/thread safe memory movement.
+ *
+ * @param   pvDestination  Pointer to the destination array where the content is to be copied, 
+ *                         type-casted to a pointer of type void*.
+ * @param   pvSource       Pointer to the source of data to be copied, type-casted to a pointer of type const void*.
+ * @param   usPayload_size Number of bytes to copy.
+ *
+ * @return  N/A.
+ *
+ */
+void vOSAL_MemMove( void *pvDestination, void *pvSource, uint16_t usPayload_size );
+
+/**
  * @brief   OSAL wrapper for task/thread safe prints.
  *
  * @param   pcFormat  C string that contains the text to be written.
@@ -761,6 +792,33 @@ void vOSAL_Printf( const char* pcFormat, ... );
  * 
  */
 char cOSAL_GetChar( void );
+
+/**
+ * @brief   OSAL wrapper for task/thread safe string copy.
+ *
+ * @param   pcDestination  Pointer to the destination char array where the content is to be copied.
+ * @param   pcSource       Pointer to the string to be copied.
+ * @param   usSize         The number of bytes to copy.
+ *
+ * @return  Pointer to the destination where the string is copied.
+ *          NULL if unsuccessful.
+ * 
+ */
+char* pcOSAL_StrNCpy( char *pcDestination, const char *pcSource, uint16_t usSize );
+
+/**
+ * @brief   OSAL wrapper for task/thread safe memory compare.
+ * 
+ * @param   pvMemoryOne Pointer to the first memory block.
+ * @param   pvMemoryTwo Pointer to the second memory block.
+ * @param   usSize      Number of bytes to compare.
+ * 
+ * @return  0 if the the contents of both memory blocks are equal, non 0 if not. 
+ *
+ */
+int iOSAL_MemCmp( const void  *pvMemoryOne, const void *pvMemoryTwo, uint16_t usSize );
+
+
 
 /*****************************************************************************/
 /* Debug Stats APIs                                                          */

@@ -30,6 +30,9 @@ FREERTOS_DEBUG=0
 ### FreeRTOS number of ticks per second ###
 TICK_RATE_HZ=10000
 
+### Heap size ###
+HEAP_SIZE=131072
+
 ################################################################################
 ###                                 Functions                                ###
 ################################################################################
@@ -126,7 +129,7 @@ function set_freertos_config() {
 #
 ################################################################################
 function set_config_tick_rate() {
-    
+
     FREERTOS_CONFIG_DIR=$(find ./amc_bsp/psv_cortexr5_0/freertos10_xilinx_domain/bsp/psv_cortexr5_0/libsrc/ -type d -name "freertos10_xilinx_v*")
 
     if [ ! -d "${FREERTOS_CONFIG_DIR[0]}" ]; then
@@ -152,7 +155,7 @@ function set_config_tick_rate() {
 #
 ################################################################################
 function set_config_static_allocation() {
-    
+
     FREERTOS_CONFIG_DIR=$(find ./amc_bsp/psv_cortexr5_0/freertos10_xilinx_domain/bsp/psv_cortexr5_0/libsrc/ -type d -name "freertos10_xilinx_v*")
 
     if [ ! -d "${FREERTOS_CONFIG_DIR[0]}" ]; then
@@ -171,6 +174,31 @@ function set_config_static_allocation() {
     make -C ./amc_bsp/psv_cortexr5_0/freertos10_xilinx_domain/bsp/ clean all
 }
 
+################################################################################
+#
+# This function sets config configTOTAL_HEAP_SIZE in the FreeRTOSConfig.h file
+#
+################################################################################
+function set_config_heap_size() {
+
+    FREERTOS_CONFIG_DIR=$(find ./amc_bsp/psv_cortexr5_0/freertos10_xilinx_domain/bsp/psv_cortexr5_0/libsrc/ -type d -name "freertos10_xilinx_v*")
+
+    if [ ! -d "${FREERTOS_CONFIG_DIR[0]}" ]; then
+        echo "Error: FreeRTOS Config not found!"
+        exit 1
+    fi
+
+    FREERTOS_CONFIG_FILE="$FREERTOS_CONFIG_DIR/src/FreeRTOSConfig.h"
+
+    stringreplacement="#define configTOTAL_HEAP_SIZE ( ( size_t ) ( "
+    stringreplacement+=$HEAP_SIZE
+    stringreplacement+=" ) )"
+    echo "Replacing configTOTAL_HEAP_SIZE value in FreeRTOSConfig.h"
+    sed -i "s/#define configTOTAL_HEAP_SIZE ( ( size_t ) ( 65536 ) )/$stringreplacement/g" $FREERTOS_CONFIG_FILE
+
+    # Re-run the makefile to regenerate libraries with new config
+    make -C ./amc_bsp/psv_cortexr5_0/freertos10_xilinx_domain/bsp/ clean all
+}
 
 ################################################################################
 
@@ -257,6 +285,7 @@ cd ..
 xsct ./scripts/create_bsp.tcl $xsa $os
 set_config_tick_rate
 set_config_static_allocation
+set_config_heap_size
 if [ "$FREERTOS_DEBUG" == 1 ]; then
     set_freertos_config
 fi

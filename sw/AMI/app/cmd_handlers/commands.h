@@ -66,4 +66,7 @@ extern struct app_cmd cmd_module_byte_rd;
 /* "module_byte_wr" handler */
 extern struct app_cmd cmd_module_byte_wr;
 
+/* "debug_verbosity" handler */
+extern struct app_cmd cmd_debug_verbosity;
+
 #endif

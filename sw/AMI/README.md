@@ -13,18 +13,6 @@ See:
 * https://www.kernel.org/doc/html/v4.10/process/coding-style.html
 * https://www.kernel.org/doc/html/next/doc-guide/kernel-doc.html
 
-To get started, you must clone the repo into your working directory.
-
-```
-git clone --recurse-submodules https://gitenterprise.xilinx.com/XBB/AMI.git
-```
-
-If you've already cloned the repo and want to fetch only the required submodules, run:
-
-```
-git submodule update --init --recursive
-```
-
 ## Building
 
 AMI is built using standard Makefiles for the API and command line app. For the driver, a kernel Makefile is used.
@@ -36,32 +24,38 @@ When finished with the build process, you should be left with the following buil
 * API static library (libami.a)
 * Command line application (ami_tool)
 
+### Build script
+
+The easiest way to build AMI is to use the `./scripts/build.sh` script which automates the process.
+Try running `./scripts/build.sh -help` for usage and examples. **Note that this script must be run from the top-level
+project directory.**
+
+If you wish to build the source manually without using this script, see the build steps
+described below (this is roughly the same procedure as that performed by the build script).
+
 ### 1. Driver
 
 ```
-cd driver
+./scripts/getVersion.sh ami
+cd driver/gcq-driver
+./getVersion.sh gcq
+cd ..
 make
 ```
 
 After running the above commands, you should see a file **ami.ko** in the driver directory. This is the AMI kernel module.
 
-#### Supported Platforms
-
-The following systems have been tested and are confirmed to work as expected with the AMI kernel driver. If a system is not listed
-in the below list, you can assume that AMI will not work!
-
-* Ubuntu 20.04
-
 ### 2. API
 
 ```
-./getVersion.sh ami
+./scripts/getVersion.sh ami
 cd api
 make clean && make
 ```
 
 This creates a build directory and generates a **libami.a** file which you can link your applications against to use the
-AMI API. The public header files are located in **api/include**.
+AMI API. The public header files are located in **api/include**. Note, if you already ran the 'getVersion.sh' script as
+part of the driver build steps, you do not need to run it again here.
 
 ### 3. CLI App
 
@@ -90,10 +84,13 @@ For usage you can run `./build/ami_tool --help`.
 To build .deb/.rpm packages, use the provided `gen_package.py` script.
 
 ```
-./gen_package.py
+./scripts/gen_package.py
 cd output/<timestamp>/
 sudo apt install ./ami_xxx.deb
 ```
+
+This script may be run from either the top-level project directory or the scripts directory itself. Note, however,
+that the output directory (containing the built package) will be created in your current working directory.
 
 The generated packages produce the following artifacts:
 

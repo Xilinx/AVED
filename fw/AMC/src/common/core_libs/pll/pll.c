@@ -29,10 +29,13 @@
 /* Defines                                                                    */
 /******************************************************************************/
 
-#define UPPER_FIREWALL       ( 0xBABECAFE )
-#define LOWER_FIREWALL       ( 0xDEADFACE )
+#define UPPER_FIREWALL         ( 0xBABECAFE )
+#define LOWER_FIREWALL         ( 0xDEADFACE )
 
-#define PLL_NAME             "PLL"
+#define PLL_NAME               "PLL"
+
+#define PLL_SLEEP_INTERVAL_MS  ( 1000 )
+
 
 /* Stat & Error definitions */
 #define PLL_STATS( DO )                         \
@@ -48,6 +51,8 @@
     DO( PLL_STATS_LEVEL_CHANGE )                \
     DO( PLL_STATS_LEVEL_RETRIEVAL )             \
     DO( PLL_STATS_LOG_COLLECT_SUCCESS )         \
+    DO( PLL_STATS_MALLOC )                      \
+    DO( PLL_STATS_FREE )                        \
     DO( PLL_STATS_MAX )
 
 #define PLL_ERRORS( DO )                          \
@@ -62,13 +67,14 @@
     DO( PLL_ERRORS_LOAD_PT_FAILED )               \
     DO( PLL_ERRORS_STORE_PT_FAILED )              \
     DO( PLL_ERRORS_LOG_COLLECT_FAILED )           \
+    DO( PLL_ERRORS_MALLOC_FAILED )                \
     DO( PLL_ERRORS_MAX )
 
 
-#define PRINT_STAT_COUNTER( x )     PLL_LOG( PLL_NAME, "%50s . . . . %d\r\n",          \
+#define PRINT_STAT_COUNTER( x )     PLL_INF( PLL_NAME, "%50s . . . . %d\r\n",          \
                                              PLL_STATS_STR[ x ],                       \
                                              pxThis->ulStats[ x ] )
-#define PRINT_ERROR_COUNTER( x )    PLL_LOG( PLL_NAME, "%50s . . . . %d\r\n",          \
+#define PRINT_ERROR_COUNTER( x )    PLL_INF( PLL_NAME, "%50s . . . . %d\r\n",          \
                                              PLL_ERRORS_STR[ x ],                      \
                                              pxThis->ulErrors[ x ] )
 
@@ -108,6 +114,11 @@ typedef struct PLL_PRIVATE_DATA
     int                 iIsInitialised;
 
     PLL_OUTPUT_LEVEL    xOutputLevel;
+    PLL_OUTPUT_LEVEL    xLoggingLevel;
+
+    char                pcBootLogs[ PLL_LOG_MAX_RECS ][ PLL_LOG_ENTRY_SIZE ];
+    int                 iBootLogIndex;
+    int                 iIsLogReady;
 
     void                *pvMtxHdl;
     void                *pvSemHdl;
@@ -126,17 +137,23 @@ typedef struct PLL_PRIVATE_DATA
 
 static PLL_PRIVATE_DATA xLocalData =
 {
-    UPPER_FIREWALL, /* ulUpperFirewall */
+    UPPER_FIREWALL, /* ulUpperFirewall   */
 
-    FALSE,          /* iIsInitialised  */
+    FALSE,          /* iIsInitialised    */
 
-    0,              /* xOutputLevel    */
+    0,              /* xOutputLevel      */
+    0,              /* xLoggingLevel     */
 
-    NULL,           /* pvMtxHdl        */
-    NULL,           /* pvSemHdl        */
+    { { 0 } },      /* pcBootLogs        */
+    0,              /* iBootLogIndex     */
+    FALSE,          /* iIsLogReady       */
 
-    { 0 },          /* ulStats         */
-    { 0 },          /* ulErrors        */
+
+    NULL,           /* pvMtxHdl          */
+    NULL,           /* pvSemHdl          */
+
+    { 0 },          /* ulStats           */
+    { 0 },          /* ulErrors          */
 
     LOWER_FIREWALL
 };
@@ -166,7 +183,7 @@ static int iLogCollect( char *pcBuf );
 /**
  * @brief   Initialise the PLL
  */
-int iPLL_Initialise( PLL_OUTPUT_LEVEL xOutputLevel )
+int iPLL_Initialise( PLL_OUTPUT_LEVEL xOutputLevel, PLL_OUTPUT_LEVEL xLoggingLevel )
 {
     int iStatus = ERROR;
 
@@ -193,6 +210,7 @@ int iPLL_Initialise( PLL_OUTPUT_LEVEL xOutputLevel )
             INC_STAT_COUNTER( PLL_STATS_CREATE_SEMAPHORE )
 
             pxThis->xOutputLevel = xOutputLevel;
+            pxThis->xLoggingLevel = xLoggingLevel;
 
             INC_STAT_COUNTER( PLL_STATS_INIT_OVERALL_COMPLETE )
             pxThis->iIsInitialised = TRUE;
@@ -209,15 +227,16 @@ int iPLL_Initialise( PLL_OUTPUT_LEVEL xOutputLevel )
 }
 
 /**
- * @brief   Sets PLL verbosity level
+ * @brief   Sets PLL output verbosity level
  */
-int iPLL_SetLevel( PLL_OUTPUT_LEVEL xOutputLevel )
+int iPLL_SetOutputLevel( PLL_OUTPUT_LEVEL xOutputLevel )
 {
     int iStatus = ERROR;
 
     if( ( UPPER_FIREWALL == pxThis->ulUpperFirewall ) &&
         ( LOWER_FIREWALL == pxThis->ulLowerFirewall ) &&
-        ( TRUE == pxThis->iIsInitialised ) )
+        ( TRUE == pxThis->iIsInitialised ) &&
+        ( MAX_PLL_OUTPUT_LEVEL > xOutputLevel ) )
     {
         if( OSAL_ERRORS_NONE == iOSAL_Mutex_Take( pxThis->pvMtxHdl, OSAL_TIMEOUT_WAIT_FOREVER ) )
         {
@@ -251,9 +270,9 @@ int iPLL_SetLevel( PLL_OUTPUT_LEVEL xOutputLevel )
 }
 
 /**
- * @brief   Gets current PLL verbosity level
+ * @brief   Gets current PLL output verbosity level
  */
-int iPLL_GetLevel( PLL_OUTPUT_LEVEL *pxOutputLevel )
+int iPLL_GetOutputLevel( PLL_OUTPUT_LEVEL *pxOutputLevel )
 {
     int iStatus = ERROR;
 
@@ -267,6 +286,92 @@ int iPLL_GetLevel( PLL_OUTPUT_LEVEL *pxOutputLevel )
             INC_STAT_COUNTER( PLL_STATS_TAKE_MUTEX );
 
             *pxOutputLevel = pxThis->xOutputLevel;
+
+            INC_STAT_COUNTER( PLL_STATS_LEVEL_RETRIEVAL );
+
+            if( OSAL_ERRORS_NONE == iOSAL_Mutex_Release( pxThis->pvMtxHdl ) )
+            {
+                INC_STAT_COUNTER( PLL_STATS_RELEASE_MUTEX );
+                iStatus = OK;
+            }
+            else
+            {
+                INC_ERROR_COUNTER( PLL_ERRORS_MUTEX_RELEASE_FAILED );
+            }
+        }
+        else
+        {
+            INC_ERROR_COUNTER( PLL_ERRORS_MUTEX_TAKE_FAILED );
+        }
+    }
+    else
+    {
+        INC_ERROR_COUNTER( PLL_ERRORS_VALIDATION_FAILED );
+    }
+
+    return iStatus;
+}
+
+/**
+ * @brief   Sets PLL logging verbosity level
+ */
+int iPLL_SetLoggingLevel( PLL_OUTPUT_LEVEL xLoggingLevel )
+{
+    int iStatus = ERROR;
+
+    if( ( UPPER_FIREWALL == pxThis->ulUpperFirewall ) &&
+        ( LOWER_FIREWALL == pxThis->ulLowerFirewall ) &&
+        ( TRUE == pxThis->iIsInitialised ) &&
+        ( MAX_PLL_OUTPUT_LEVEL > xLoggingLevel ) )
+    {
+        if( OSAL_ERRORS_NONE == iOSAL_Mutex_Take( pxThis->pvMtxHdl, OSAL_TIMEOUT_WAIT_FOREVER ) )
+        {
+            INC_STAT_COUNTER( PLL_STATS_TAKE_MUTEX );
+
+            pxThis->xLoggingLevel = xLoggingLevel;
+
+            INC_STAT_COUNTER( PLL_STATS_LEVEL_CHANGE );
+
+            if( OSAL_ERRORS_NONE == iOSAL_Mutex_Release( pxThis->pvMtxHdl ) )
+            {
+                INC_STAT_COUNTER( PLL_STATS_RELEASE_MUTEX );
+                iStatus = OK;
+            }
+            else
+            {
+                INC_ERROR_COUNTER( PLL_ERRORS_MUTEX_RELEASE_FAILED );
+            }
+        }
+        else
+        {
+            INC_ERROR_COUNTER( PLL_ERRORS_MUTEX_TAKE_FAILED );
+        }
+    }
+    else
+    {
+        INC_ERROR_COUNTER( PLL_ERRORS_VALIDATION_FAILED );
+    }
+
+    return iStatus;
+}
+
+/**
+ * @brief   Gets current PLL logging verbosity level
+ */
+int iPLL_GetLoggingLevel( PLL_OUTPUT_LEVEL *pxLoggingLevel )
+{
+    int iStatus = ERROR;
+
+    if( ( UPPER_FIREWALL == pxThis->ulUpperFirewall ) &&
+        ( LOWER_FIREWALL == pxThis->ulLowerFirewall ) &&
+        ( TRUE == pxThis->iIsInitialised ) &&
+        ( NULL != pxLoggingLevel ) )
+    {
+        if( OSAL_ERRORS_NONE == iOSAL_Mutex_Take( pxThis->pvMtxHdl, OSAL_TIMEOUT_WAIT_FOREVER ) )
+        {
+            INC_STAT_COUNTER( PLL_STATS_TAKE_MUTEX );
+
+            *pxLoggingLevel = pxThis->xLoggingLevel;
 
             INC_STAT_COUNTER( PLL_STATS_LEVEL_RETRIEVAL );
 
@@ -314,7 +419,15 @@ void vPLL_Output( PLL_OUTPUT_LEVEL xOutputLevel, const char *pcFormat, ... )
         {
             INC_STAT_COUNTER( PLL_STATS_PEND_SEMAPHORE );
 
-            if( PLL_OUTPUT_LEVEL_LOGGING == xOutputLevel )
+            /* Check output level */
+            if( pxThis->xOutputLevel >= xOutputLevel )
+            {
+                PRINT( "%s", pcBuffer );
+                INC_STAT_COUNTER( PLL_STATS_THREAD_SAFE_PRINT_COUNT );
+            }
+
+            /* Check logging level */
+            if( pxThis->xLoggingLevel >= xOutputLevel )
             {
                 /* TODO: Add string formatting once health thread application is ready -
                     see: https://confluence.xilinx.com/display/DCG/AMC+Debug+logging */
@@ -326,12 +439,6 @@ void vPLL_Output( PLL_OUTPUT_LEVEL xOutputLevel, const char *pcFormat, ... )
                 {
                     INC_ERROR_COUNTER( PLL_ERRORS_LOG_COLLECT_FAILED )
                 }
-            }
-
-            if( pxThis->xOutputLevel >= xOutputLevel )
-            {
-                PRINT( "%s", pcBuffer );
-                INC_STAT_COUNTER( PLL_STATS_THREAD_SAFE_PRINT_COUNT );
             }
 
             if( OSAL_ERRORS_NONE == iOSAL_Semaphore_Post( pxThis->pvSemHdl ) )
@@ -416,65 +523,6 @@ void vPLL_Printf( const char *pcFormat, ... )
     {
         INC_ERROR_COUNTER( PLL_ERRORS_VALIDATION_FAILED );
     }
-}
-
-/**
- * @brief   Display the current stats/errors
- */
-int iPLL_PrintStatistics( void )
-{
-     int iStatus = ERROR;
-
-    if( ( UPPER_FIREWALL == pxThis->ulUpperFirewall ) &&
-        ( LOWER_FIREWALL == pxThis->ulLowerFirewall ) )
-    {
-        int i = 0;
-        PLL_LOG( PLL_NAME, "============================================================\n\r" );
-        PLL_LOG( PLL_NAME, "PLL Library Statistics:\n\r" );
-        for( i = 0; i < PLL_STATS_MAX; i++ )
-        {
-            PRINT_STAT_COUNTER( i );
-        }
-        PLL_LOG( PLL_NAME, "------------------------------------------------------------\n\r" );
-        PLL_LOG( PLL_NAME, "PLL Library Errors:\n\r" );
-        for( i = 0; i < PLL_ERRORS_MAX; i++ )
-        {
-            PRINT_ERROR_COUNTER( i );
-        }
-        PLL_LOG( PLL_NAME, "============================================================\n\r" );
-
-        iStatus = OK;
-    }
-    else
-    {
-        INC_ERROR_COUNTER( PLL_ERRORS_VALIDATION_FAILED )
-    }
-
-    return iStatus;
-}
-
-/**
- * @brief   Set all stats/error values back to zero
- */
-int iPLL_ClearStatistics( void )
-{
-    int iStatus = ERROR;
-
-    if( ( UPPER_FIREWALL == pxThis->ulUpperFirewall ) &&
-        ( LOWER_FIREWALL == pxThis->ulLowerFirewall ) &&
-        ( TRUE == pxThis->iIsInitialised ) )
-    {
-        pvOSAL_MemSet( pxThis->ulStats, 0, sizeof( pxThis->ulStats ) );
-        pvOSAL_MemSet( pxThis->ulErrors, 0, sizeof( pxThis->ulErrors ) );
-
-        iStatus = OK;
-    }
-    else
-    {
-        INC_ERROR_COUNTER( PLL_ERRORS_VALIDATION_FAILED )
-    }
-
-    return iStatus;
 }
 
 /**
@@ -570,6 +618,186 @@ int iPLL_ClearLog( void )
     return iStatus;
 }
 
+/**
+ * @brief    Reads and dumps the FSBL (First-Stage Bootloader) log
+ */
+int iPLL_DumpFsblLog( void )
+{
+    int iStatus = ERROR;
+
+    if( ( UPPER_FIREWALL == pxThis->ulUpperFirewall ) &&
+        ( LOWER_FIREWALL == pxThis->ulLowerFirewall ) &&
+        ( TRUE == pxThis->iIsInitialised ) )
+    {
+        char *pcFsblLogBuffer = NULL;
+
+        PLL_LOG( PLL_NAME, "FSBL boot logs:\r\n" );
+
+        pcFsblLogBuffer = pvOSAL_MemAlloc( HAL_FSBL_LOG_SIZE );
+        if( NULL != pcFsblLogBuffer )
+        {
+            char *pcCurrentMessage = NULL;
+            char *pcNextMessage = NULL;
+
+            INC_STAT_COUNTER( PLL_STATS_MALLOC )
+
+            pvOSAL_MemCpy( pcFsblLogBuffer, ( uint32_t* )HAL_FSBL_LOG_ADDRESS, HAL_FSBL_LOG_SIZE );
+
+            /* We keep track of two messages to avoid printing any uninitialised data at the end */
+            pcCurrentMessage = strtok( pcFsblLogBuffer, "\r\n" );
+            pcNextMessage = strtok( NULL, "\r\n" );
+
+            while( NULL != pcNextMessage )
+            {
+                PLL_LOG( PLL_NAME, "%s\r\n", pcCurrentMessage );
+
+                pcCurrentMessage = pcNextMessage;
+                pcNextMessage = strtok( NULL, "\r\n" );
+            }
+
+            vOSAL_MemFree( ( void** )&pcFsblLogBuffer );
+            INC_STAT_COUNTER( PLL_STATS_FREE )
+
+            iStatus = OK;
+        }
+        else
+        {
+            INC_ERROR_COUNTER( PLL_ERRORS_MALLOC_FAILED )
+        }
+    }
+    else
+    {
+        INC_ERROR_COUNTER( PLL_ERRORS_VALIDATION_FAILED )
+    }
+
+    return iStatus;
+}
+
+/**
+ * @brief    Sends collected AMC boot records to the log once communciation is available
+ */
+int iPLL_SendBootRecords( void )
+{
+    int iStatus = ERROR;
+
+    if( ( UPPER_FIREWALL == pxThis->ulUpperFirewall ) &&
+        ( LOWER_FIREWALL == pxThis->ulLowerFirewall ) )
+    {
+        int i = 0;
+        char *pcFsblLogBuffer = NULL;
+        uintptr_t ulLogMsgAddr = HAL_RPU_SHARED_MEMORY_BASE_ADDR + offsetof( HAL_PARTITION_TABLE, xLogMsg );
+
+        HAL_IO_WRITE32( 0, ulLogMsgAddr );
+
+        /* Enable logging comms */
+        pxThis->iIsLogReady = TRUE;
+
+        /* FSBL records */
+        pcFsblLogBuffer = pvOSAL_MemAlloc( HAL_FSBL_LOG_SIZE );
+        if( NULL != pcFsblLogBuffer )
+        {
+            char *pcCurrentMessage = NULL;
+            char *pcNextMessage = NULL;
+
+            INC_STAT_COUNTER( PLL_STATS_MALLOC )
+
+            pvOSAL_MemCpy( pcFsblLogBuffer, ( uint32_t* )HAL_FSBL_LOG_ADDRESS, HAL_FSBL_LOG_SIZE );
+
+            pcCurrentMessage = strtok( pcFsblLogBuffer, "\r\n" );
+            pcNextMessage    = strtok( NULL, "\r\n" );
+            
+            while( NULL != pcNextMessage )
+            {
+                iLogCollect( pcCurrentMessage );
+
+                pcCurrentMessage = pcNextMessage;
+                pcNextMessage = strtok( NULL, "\r\n" );
+            }
+
+            vOSAL_MemFree( ( void** )&pcFsblLogBuffer );
+            INC_STAT_COUNTER( PLL_STATS_FREE )
+        }
+                
+        /* Sleep is needed to allow the first chunk to be read fully before we overwrite the ring buffer */
+        iOSAL_Task_SleepMs( PLL_SLEEP_INTERVAL_MS );
+
+        /* AMC boot records */
+        for( i = 0; i < PLL_LOG_MAX_RECS; i++ )
+        {
+            if( '\0' != pxThis->pcBootLogs[ i ][ 0 ] )
+            {                
+                iLogCollect( pxThis->pcBootLogs[ i ] );
+            }
+        }
+
+        iStatus = OK;
+    }
+    else
+    {
+        INC_ERROR_COUNTER( PLL_ERRORS_VALIDATION_FAILED )
+    }
+
+    return iStatus;
+}
+
+/**
+ * @brief   Display the current stats/errors
+ */
+int iPLL_PrintStatistics( void )
+{
+     int iStatus = ERROR;
+
+    if( ( UPPER_FIREWALL == pxThis->ulUpperFirewall ) &&
+        ( LOWER_FIREWALL == pxThis->ulLowerFirewall ) )
+    {
+        int i = 0;
+        PLL_INF( PLL_NAME, "============================================================\n\r" );
+        PLL_INF( PLL_NAME, "PLL Library Statistics:\n\r" );
+        for( i = 0; i < PLL_STATS_MAX; i++ )
+        {
+            PRINT_STAT_COUNTER( i );
+        }
+        PLL_INF( PLL_NAME, "------------------------------------------------------------\n\r" );
+        PLL_INF( PLL_NAME, "PLL Library Errors:\n\r" );
+        for( i = 0; i < PLL_ERRORS_MAX; i++ )
+        {
+            PRINT_ERROR_COUNTER( i );
+        }
+        PLL_INF( PLL_NAME, "============================================================\n\r" );
+
+        iStatus = OK;
+    }
+    else
+    {
+        INC_ERROR_COUNTER( PLL_ERRORS_VALIDATION_FAILED )
+    }
+
+    return iStatus;
+}
+
+/**
+ * @brief   Set all stats/error values back to zero
+ */
+int iPLL_ClearStatistics( void )
+{
+    int iStatus = ERROR;
+
+    if( ( UPPER_FIREWALL == pxThis->ulUpperFirewall ) &&
+        ( LOWER_FIREWALL == pxThis->ulLowerFirewall ) &&
+        ( TRUE == pxThis->iIsInitialised ) )
+    {
+        pvOSAL_MemSet( pxThis->ulStats, 0, sizeof( pxThis->ulStats ) );
+        pvOSAL_MemSet( pxThis->ulErrors, 0, sizeof( pxThis->ulErrors ) );
+
+        iStatus = OK;
+    }
+    else
+    {
+        INC_ERROR_COUNTER( PLL_ERRORS_VALIDATION_FAILED )
+    }
+
+    return iStatus;
+}
 
 /******************************************************************************/
 /* Local Function implementations                                             */
@@ -585,44 +813,62 @@ static int iLogCollect( char *pcBuf )
     HAL_PARTITION_TABLE_LOG_MSG xLogMsg = { 0 };
     uintptr_t ulLogMsgAddr = HAL_RPU_SHARED_MEMORY_BASE_ADDR + offsetof( HAL_PARTITION_TABLE, xLogMsg );
 
-    /* Load partition table */
-    if( NULL != pvOSAL_MemCpy( &xLogMsg, ( void * )ulLogMsgAddr, sizeof( xLogMsg ) ) )
+    /* Logging is enabled, we can send logs directly to shared memory */
+    if( TRUE == pxThis->iIsLogReady )
     {
-        char pcTempBuf[PLL_LOG_ENTRY_SIZE] = { 0 };
-        uint32_t ulLogIdx = 0;
-        PLL_LOG_MSG xLog = { 0 };
-
-        uint32_t ulMsgBufAddr = HAL_RPU_SHARED_MEMORY_BASE_ADDR + xLogMsg.ulLogMsgBufferOff;
-
-        /* Read current index */
-        ulLogIdx = HAL_IO_READ32( ulLogMsgAddr );
-
-        strncpy( pcTempBuf, pcBuf, sizeof( pcTempBuf ) );
-        pcTempBuf[ strcspn( pcTempBuf, "\r\n" ) ] = 0;
-
-        strncpy( xLog.pcBuff, pcTempBuf, sizeof( xLog.pcBuff ) );
-
-        /* Copy log into shared memory */
-        if( NULL != pvOSAL_MemCpy( ( void * )( ulMsgBufAddr + ( sizeof( xLog ) * ulLogIdx ) ), &xLog, sizeof( xLog ) ) )
+        /* Load partition table */
+        if( NULL != pvOSAL_MemCpy( &xLogMsg, ( void * )ulLogMsgAddr, sizeof( xLogMsg ) ) )
         {
-            /* Flush updated chunk */
-            HAL_FLUSH_CACHE_DATA( ulMsgBufAddr + ( sizeof( xLog ) * ulLogIdx ), sizeof( xLog ) );
+            uint32_t ulMsgBufAddr = HAL_RPU_SHARED_MEMORY_BASE_ADDR + xLogMsg.ulLogMsgBufferOff;
+            char pcTempBuf[PLL_LOG_ENTRY_SIZE] = { 0 };
+            uint32_t ulLogIdx = 0;
+            PLL_LOG_MSG xLog = { 0 };
 
-            ulLogIdx = ( ulLogIdx + 1 ) % PLL_LOG_MAX_RECS;
+            /* Read current index */
+            ulLogIdx = HAL_IO_READ32( ulLogMsgAddr );
 
-            /* Update new log index into shared memory */
-            HAL_IO_WRITE32( ulLogIdx, ulLogMsgAddr );
+            pcOSAL_StrNCpy( pcTempBuf, pcBuf, sizeof( pcTempBuf ) );
+            pcTempBuf[ strcspn( pcTempBuf, "\r\n" ) ] = 0;
 
-            iStatus = OK;
+            pcOSAL_StrNCpy( xLog.pcBuff, pcTempBuf, sizeof( xLog.pcBuff ) );
+
+            /* Copy log into shared memory */
+            if( NULL != pvOSAL_MemCpy( ( void * )( ulMsgBufAddr + ( sizeof( xLog ) * ulLogIdx ) ), &xLog, sizeof( xLog ) ) )
+            {
+                /* Flush updated chunk */
+                HAL_FLUSH_CACHE_DATA( ulMsgBufAddr + ( sizeof( xLog ) * ulLogIdx ), sizeof( xLog ) );
+
+                ulLogIdx = ( ulLogIdx + 1 ) % PLL_LOG_MAX_RECS;
+
+                /* Update new log index into shared memory */
+                HAL_IO_WRITE32( ulLogIdx, ulLogMsgAddr );
+
+                iStatus = OK;
+            }
+            else
+            {
+                INC_ERROR_COUNTER( PLL_ERRORS_STORE_PT_FAILED )
+            }
         }
         else
         {
-            INC_ERROR_COUNTER( PLL_ERRORS_STORE_PT_FAILED )
+            INC_ERROR_COUNTER( PLL_ERRORS_LOAD_PT_FAILED )
         }
     }
+    /* Logging is disabled - we store logs locally first and send them over when the feature is available */
     else
     {
-        INC_ERROR_COUNTER( PLL_ERRORS_LOAD_PT_FAILED )
+        char pcTempBuf[ PLL_LOG_ENTRY_SIZE ] = { 0 };
+
+        /* Trim new lines */
+        pcOSAL_StrNCpy( pcTempBuf, pcBuf, sizeof( pcTempBuf ) );
+        pcTempBuf[ strcspn( pcTempBuf, "\r\n" ) ] = 0;
+
+        /* Copy buffer into local array */
+        pxThis->iBootLogIndex = ( pxThis->iBootLogIndex + 1 ) % PLL_LOG_MAX_RECS;
+        pcOSAL_StrNCpy( pxThis->pcBootLogs[ pxThis->iBootLogIndex ], pcTempBuf, sizeof( pxThis->pcBootLogs[ pxThis->iBootLogIndex ] ) );
+
+        iStatus = OK;
     }
 
     return iStatus;

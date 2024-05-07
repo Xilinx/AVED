@@ -120,10 +120,10 @@ typedef struct FW_IF_OSPI_PRIVATE_DATA
 /* Local Variables                                                           */
 /*****************************************************************************/
 
-static const char* const pcOspiStateModeStr[ ] = { FW_IF_OSPI_STATE_ENTRY( INIT ),
-                                                   FW_IF_OSPI_STATE_ENTRY( OPENED ),
-                                                   FW_IF_OSPI_STATE_ENTRY( CLOSED ),
-                                                   FW_IF_OSPI_STATE_ENTRY( ERROR ) };
+static const char* const pcOspiStateModeStr[ ] = { FAL_OSPI_STATE_ENTRY( INIT ),
+                                                   FAL_OSPI_STATE_ENTRY( OPENED ),
+                                                   FAL_OSPI_STATE_ENTRY( CLOSED ),
+                                                   FAL_OSPI_STATE_ENTRY( ERROR ) };
 
 static FW_IF_OSPI_PRIVATE_DATA xLocalData =
 {

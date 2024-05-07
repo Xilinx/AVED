@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2024 Advanced Micro Devices, Inc. All rights reserved.
  * SPDX-License-Identifier: MIT
  *
  * This file contains the OSAL (Operating system abstraction layer) debug implementation.
@@ -21,6 +21,9 @@
 /******************************************************************************/
 
 #define OSAL_DBG_NAME       "OSAL_DBG"
+#define MS_IN_SECS          ( 1000 )
+#define SECS_IN_MIN         ( 60 )
+#define MINS_IN_HOUR        ( 60 )
 
 
 /******************************************************************************/
@@ -50,7 +53,10 @@ static void vClearStats( void );
  */
 static void vPrintStatsCustom( void );
 
-
+/**
+ * @brief   Debug function of Osal Uptime function in ms. 
+ */
+static void vGetUptimeMs( void );
 /******************************************************************************/
 /* Public function implementations                                            */
 /******************************************************************************/
@@ -67,7 +73,7 @@ void vOSAL_DebugInit( void )
         {
             pxDAL_NewDebugFunction( "print_all_stats",    pxOsalTop, vPrintStats );
             pxDAL_NewDebugFunction( "clear_all_stats",    pxOsalTop, vClearStats );
-            
+            pxDAL_NewDebugFunction( "get_uptime",         pxOsalTop, vGetUptimeMs );
             /* Allows user to select stat type/verbosity */
             pxDAL_NewDebugFunction( "print_stats_custom", pxOsalTop, vPrintStatsCustom );
         }
@@ -128,4 +134,28 @@ static void vPrintStatsCustom( void )
     }
    
     vOSAL_PrintAllStats( ( OSAL_STATS_VERBOSITY )iStatVerbosity, ( OSAL_STATS_TYPE )iStatType );
+}
+
+/**
+ * @brief   Debug function of Osal Uptime function in ms. 
+ */
+static void vGetUptimeMs( void )
+{
+    uint32_t ulMSecs = 0;
+    uint32_t ulHrs = 0;
+    uint32_t ulMins = 0;
+    uint32_t ulSecs = 0;
+
+    ulMSecs = ulOSAL_GetUptimeMs();
+
+    ulSecs = ulMSecs / MS_IN_SECS;
+    ulMSecs %= MS_IN_SECS;
+
+    ulMins = ulSecs / SECS_IN_MIN;
+    ulSecs %= SECS_IN_MIN;
+
+    ulHrs = ulMins / MINS_IN_HOUR;
+    ulMins %= MINS_IN_HOUR;
+
+    PLL_DAL( OSAL_DBG_NAME, "\tUptime: %02d:%02d:%02d:%03d\r\n", ulHrs, ulMins, ulSecs, ulMSecs );
 }

@@ -22,13 +22,78 @@
 /* defines                                                                   */
 /*****************************************************************************/
 
-#define FW_IF_SMBUS_MAX_DATA    ( 256 )
-
-#define FW_IF_SMBUS_UDID_LEN    ( 16 )
+#define FW_IF_SMBUS_MAX_DATA                    ( 256 )
+#define FW_IF_SMBUS_UDID_LEN                    ( 16 )
+#define FAL_SMBUS_BLOCK_IO_DATA_SIZE_INDEX      ( 0 )
+#define FAL_SMBUS_BLOCK_IO_PAYLOAD_INDEX        ( 1 )
 
 /*****************************************************************************/
 /* enums                                                                     */
 /*****************************************************************************/
+
+/**
+ * @enum FW_IF_SMBUS_COMMAND_PROTOCOLS
+ * @brief List of supported SMBus command protocols.
+ */
+typedef enum FW_IF_SMBUS_COMMAND_PROTOCOLS
+{
+    FW_IF_SMBUS_COMMAND_PROTOCOL_QUICK_COMMAND_LO = 0,
+    FW_IF_SMBUS_COMMAND_PROTOCOL_QUICK_COMMAND_HI,
+    FW_IF_SMBUS_COMMAND_PROTOCOL_SEND_BYTE,
+    FW_IF_SMBUS_COMMAND_PROTOCOL_RECEIVE_BYTE,
+    FW_IF_SMBUS_COMMAND_PROTOCOL_WRITE_BYTE,
+    FW_IF_SMBUS_COMMAND_PROTOCOL_WRITE_WORD,
+    FW_IF_SMBUS_COMMAND_PROTOCOL_READ_BYTE,
+    FW_IF_SMBUS_COMMAND_PROTOCOL_READ_WORD,
+    FW_IF_SMBUS_COMMAND_PROTOCOL_PROCESS_CALL,
+    FW_IF_SMBUS_COMMAND_PROTOCOL_BLOCK_WRITE,
+    FW_IF_SMBUS_COMMAND_PROTOCOL_BLOCK_READ,
+    FW_IF_SMBUS_COMMAND_PROTOCOL_BLOCK_WRITE_BLOCK_READ_PROCESS_CALL,
+    FW_IF_SMBUS_COMMAND_PROTOCOL_HOST_NOTIFY,
+    FW_IF_SMBUS_COMMAND_PROTOCOL_WRITE_32,
+    FW_IF_SMBUS_COMMAND_PROTOCOL_READ_32,
+    FW_IF_SMBUS_COMMAND_PROTOCOL_WRITE_64,
+    FW_IF_SMBUS_COMMAND_PROTOCOL_READ_64,
+    FW_IF_SMBUS_COMMAND_PROTOCOL_PREPARE_TO_ARP,
+    FW_IF_SMBUS_COMMAND_PROTOCOL_RESET_DEVICE,
+    FW_IF_SMBUS_COMMAND_PROTOCOL_GET_UDID,
+    FW_IF_SMBUS_COMMAND_PROTOCOL_ASSIGN_ADDRESS,
+    FW_IF_SMBUS_COMMAND_PROTOCOL_GET_UDID_DIRECTED,
+    FW_IF_SMBUS_COMMAND_PROTOCOL_RESET_DEVICE_DIRECTED,
+    FW_IF_SMBUS_COMMAND_PROTOCOL_NONE, 
+
+    MAX_FW_IF_SMBUS_COMMAND_PROTOCOL
+
+} FW_IF_SMBUS_COMMAND_PROTOCOLS;
+
+/**
+ * @enum FW_IF_SMBUS_ERRORS
+ * @brief Enumeration of SMBUS return values
+ */
+typedef enum FW_IF_SMBUS_ERRORS
+{
+    FW_IF_SMBUS_ERRORS_INVALID_STATE = MAX_FW_IF_ERROR,
+    FW_IF_SMBUS_ERRORS_DRIVER_FAILURE,
+    FW_IF_SMBUS_ERRORS_DRIVER_INVALID_ADDRESS,
+
+    MAX_FW_IF_SMBUS_ERRORS
+
+} FW_IF_SMBUS_ERRORS;
+
+/**
+ * @enum FW_IF_SMBUS_STATE
+ * @brief SMBUS interface states (generic across all SMBUS interfaces)
+ */
+typedef enum FW_IF_SMBUS_STATE
+{
+    FW_IF_SMBUS_STATE_CREATED,
+    FW_IF_SMBUS_STATE_OPENED,
+    FW_IF_SMBUS_STATE_CLOSED,
+    FW_IF_SMBUS_STATE_ERROR,
+
+    MAX_FW_IF_SMBUS_STATE
+
+} FW_IF_SMBUS_STATE;
 
 /**
  * @enum    FW_IF_SMBUS_IOCTRL_OPTION
@@ -85,6 +150,19 @@ typedef enum _FW_IF_SMUBUS_ARP
 
 } FW_IF_SMBUS_ARP;
 
+/**
+ * @enum    FW_IF_SMBUS_PEC
+ * @brief   PEC Capability
+ */
+typedef enum _FW_IF_SMBUS_PEC
+{
+    FW_IF_SMBUS_PEC_ENABLED = 0,
+    FW_IF_SMBUS_PEC_DISABLED,
+
+    MAX_FW_IF_SMBUS_PEC
+
+} FW_IF_SMBUS_PEC;
+
 /*****************************************************************************/
 /* structs                                                                   */
 /*****************************************************************************/
@@ -95,8 +173,9 @@ typedef enum _FW_IF_SMUBUS_ARP
  */
 typedef struct _FW_IF_SMBUS_INIT_CFG
 {
-    uint32_t            baseAddr;
-    uint32_t            baudRate;
+    uint32_t            ulBaseAddr;
+    uint32_t            ulBaudRate;
+    uint8_t             pucCommandProtocols[ MAX_FW_IF_SMBUS_COMMAND_PROTOCOL ];
 
 } FW_IF_SMBUS_INIT_CFG;
 
@@ -119,12 +198,14 @@ typedef enum _FW_IF_SMBUS_PROTOCOL
  */
 typedef struct _FW_IF_SMBUS_CFG
 {
-    uint32_t                port;
-    FW_IF_SMBUS_ROLE        role;
-    FW_IF_SMBUS_ARP         arpCapability;
-    FW_IF_SMBUS_PROTOCOL    protocol;
-
-    uint8_t                 udid[ FW_IF_SMBUS_UDID_LEN ];
+    uint32_t                ulPort;
+    FW_IF_SMBUS_ROLE        xRole;
+    FW_IF_SMBUS_ARP         xArpCapability;
+    FW_IF_SMBUS_PROTOCOL    xProtocol;
+    uint8_t                 pucUdid[ FW_IF_SMBUS_UDID_LEN ];
+    FW_IF_SMBUS_STATE       xState;
+    uint8_t                 ucInstance;
+    FW_IF_SMBUS_PEC         xPecCapability;
 
 } FW_IF_SMBUS_CFG;
 
@@ -140,7 +221,7 @@ typedef struct _FW_IF_SMBUS_CFG
  *
  * @return  See FW_IF_ERRORS
  */
-extern uint32_t FW_IF_smbus_init( FW_IF_SMBUS_INIT_CFG * cfg );
+extern uint32_t ulFW_IF_SMBUS_Init( FW_IF_SMBUS_INIT_CFG *pxCfg );
 
 /**
  * @brief   creates an instance of the smbus interface
@@ -150,6 +231,24 @@ extern uint32_t FW_IF_smbus_init( FW_IF_SMBUS_INIT_CFG * cfg );
  *
  * @return  See FW_IF_ERRORS
  */
-extern uint32_t FW_IF_smbus_create( FW_IF_CFG *fwIf, FW_IF_SMBUS_CFG *smbusCfg );
+extern uint32_t ulFW_IF_SMBUS_Create( FW_IF_CFG *pxFwIf, FW_IF_SMBUS_CFG *pxSmbusCfg );
+
+/**
+ *
+ * @brief    Print all the stats gathered by the interface
+ *
+ * @return   OK                  Stats retrieved from interface successfully
+ *           ERROR               Stats not retrieved successfully
+ */
+extern int iFW_IF_SMBUS_PrintStatistics( void );
+
+/**
+ *
+ * @brief    Clears all the stats gathered by the interface
+ *
+ * @return   OK                  Stats cleared successfully
+ *           ERROR               Stats not cleared successfully
+ */
+extern int iFW_IF_SMBUS_ClearStatistics( void );
 
 #endif

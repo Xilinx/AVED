@@ -152,6 +152,7 @@ long dev_unlocked_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 	case AMI_IOC_WRITE_EEPROM:
 	case AMI_IOC_READ_MODULE:
 	case AMI_IOC_WRITE_MODULE:
+	case AMI_IOC_DEBUG_VERBOSITY:
 		switch (pf_dev->state) {
 		case PF_DEV_STATE_READY:
 		case PF_DEV_STATE_MISSING_INFO:
@@ -238,6 +239,7 @@ long dev_unlocked_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 					pf_dev,
 					buf,
 					data.size,
+					data.boot_device,
 					efd_ctx
 				);
 			else
@@ -245,6 +247,7 @@ long dev_unlocked_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 					pf_dev->amc_ctrl_ctxt,
 					buf,
 					data.size,
+					data.boot_device,
 					data.partition,
 					efd_ctx
 				);
@@ -313,7 +316,7 @@ long dev_unlocked_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 			goto done;
 		}
 
-		ret = copy_partition(pf_dev, data.src, data.dest);
+		ret = copy_partition(pf_dev, data.src_device, data.src_part, data.dest_device, data.dest_part);
 		break;
 	}
 
@@ -471,7 +474,13 @@ long dev_unlocked_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
                 struct ami_ioc_fpt_hdr_value data = { 0 };
                 struct fpt_header hdr = { 0 };
 
-                ret = read_fpt_hdr(pf_dev, &hdr);
+		/* Read data payload from user. */
+		if (copy_from_user(&data, (struct ami_ioc_fpt_hdr_value*)arg, sizeof(data))) {
+			ret = -EFAULT;
+			goto done;
+		}	
+
+                ret = read_fpt_hdr(pf_dev, data.boot_device, &hdr);
                 if (!ret) {
                         data.version = hdr.version;
                         data.hdr_size = hdr.header_size;
@@ -495,6 +504,7 @@ long dev_unlocked_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
                 }
 
                 ret = read_fpt_partition(pf_dev,
+					 data.boot_device,
                                          data.partition,
                                          &partition);
                 if (!ret) {
@@ -671,6 +681,16 @@ long dev_unlocked_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		vfree(buf);
 		break;
 	}
+
+	case AMI_IOC_DEBUG_VERBOSITY:
+		ret = submit_gcq_command(
+			pf_dev->amc_ctrl_ctxt,
+			GCQ_SUBMIT_CMD_DEBUG_VERBOSITY,
+			(uint8_t)arg,
+			NULL,
+			0
+		);
+		break;
 
 	default:
 		PR_ERR("Unknown command, do nothing");

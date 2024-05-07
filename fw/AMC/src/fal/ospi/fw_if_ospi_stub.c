@@ -34,7 +34,7 @@
 #define CHECK_HDL( f )                  ( NULL == f )
 #define CHECK_CFG( f )                  ( NULL == ( f )->cfg )
 
-#define FW_IF_OSPI_STATE_ENTRY( _s )    [ FW_IF_OSPI_STATE_ ## _s ] = #_s
+#define FAL_OSPI_STATE_ENTRY( _s )    [ FW_IF_OSPI_STATE_ ## _s ] = #_s
 
 
 /*****************************************************************************/
@@ -45,10 +45,10 @@ static FW_IF_OSPI_INIT_CFG xLocalCfg = { 0 };
 
 static int iInitialised = FW_IF_FALSE;
 
-static const char* const pcOspiStateModeStr[ ] = { FW_IF_OSPI_STATE_ENTRY( INIT ),
-                                                   FW_IF_OSPI_STATE_ENTRY( OPENED ),
-                                                   FW_IF_OSPI_STATE_ENTRY( CLOSED ),
-                                                   FW_IF_OSPI_STATE_ENTRY( ERROR ) };
+static const char* const pcOspiStateModeStr[ ] = { FAL_OSPI_STATE_ENTRY( INIT ),
+                                                   FAL_OSPI_STATE_ENTRY( OPENED ),
+                                                   FAL_OSPI_STATE_ENTRY( CLOSED ),
+                                                   FAL_OSPI_STATE_ENTRY( ERROR ) };
 
 
 /******************************************************************************/
@@ -161,7 +161,7 @@ uint32_t ulFW_IF_OSPI_Init( FW_IF_OSPI_INIT_CFG *pxInitCfg )
         /*
          * Initilise config data shared between all instances of OSPI.
          */
-        memcpy( &xLocalCfg, pxInitCfg, sizeof( FW_IF_OSPI_INIT_CFG ) );
+        pvOSAL_MemCpy( &xLocalCfg, pxInitCfg, sizeof( FW_IF_OSPI_INIT_CFG ) );
 
         /*
          * Initialise the driver based on the device id supplied in the xparameters.h
@@ -205,7 +205,7 @@ uint32_t ulFW_IF_OSPI_Create( FW_IF_CFG *pxFwIf, FW_IF_OSPI_CFG *pxOspiCfg )
             .lowerFirewall  = OSPI_LOWER_FIREWALL
         };
 
-        memcpy( pxFwIf, &myLocalIf, sizeof( FW_IF_CFG ) );
+        pvOSAL_MemCpy( pxFwIf, &myLocalIf, sizeof( FW_IF_CFG ) );
 
         FW_IF_OSPI_CFG *pxCfg = ( FW_IF_OSPI_CFG* )pxFwIf->cfg;
 

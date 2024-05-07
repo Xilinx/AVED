@@ -1,7 +1,7 @@
+# Operating System Abstraction Layer (OSAL)
+
 Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
 SPDX-License-Identifier: MIT
-
-# Operating System Abstraction Layer (OSAL)
 
 The OSAL allows the AMC to be ported to a different OS without requiring code changes in the AMC or its layers.
 

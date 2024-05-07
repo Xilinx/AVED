@@ -14,7 +14,9 @@
 
 #ifdef __KERNEL__
 #include <asm/io.h>
+#include <linux/delay.h>
 #else
+#include <unistd.h>
 #include <string.h>
 #include <assert.h>
 #endif
@@ -44,6 +46,16 @@
 
 #define CHECK_INVALID_STATE( f )        ( ( FW_IF_GCQ_STATE_OPENED != ( f )->xState ) &&\
                                           ( FW_IF_GCQ_STATE_ATTACHED != ( f )->xState ) )
+
+#define GCQ_ATTACH_MAX_ATTEMPTS         ( 30 )  /* Roughly 30 seconds */
+#define GCQ_ATTACH_RETRY_TIMEOUT_MS     ( 1000 )
+
+/* TODO: Replace the OSAL #define's with an appropriate OSAL implementation */
+#ifdef __KERNEL__
+#define iOSAL_Task_SleepMs( c )              msleep( c )
+#else
+#define iOSAL_Task_SleepMs( c )              do { } while ( 0 )
+#endif
 
 
 /*****************************************************************************/
@@ -325,7 +337,27 @@ static uint32_t prvGCQOpen( void *pvFWIf )
 
                 if( FW_IF_GCQ_MODE_CONSUMER == pxCfg->xMode )
                 {
-                    xStatus = xGCQAttachConsumer( pxProfile->pxGCQInstance );
+                    /*
+                     * Sometimes (very rarely) the consumer is not yet ready when we reach this point.
+                     * This can happen if a hot reset was performed and not enough time was given
+                     * on the host before attempting to perform GCQ setup. To mitigate this
+                     * we need a retry mechanism here.
+                     */
+                    int iAttempts = 0;
+
+                    while( 1 )
+                    {
+                        xStatus = xGCQAttachConsumer( pxProfile->pxGCQInstance );
+                        iAttempts++;
+
+                        if( ( GCQ_ATTACH_MAX_ATTEMPTS <= iAttempts ) || ( GCQ_ERRORS_NONE == xStatus ) )
+                        {
+                            break;
+                        }
+
+                        iOSAL_Task_SleepMs( GCQ_ATTACH_RETRY_TIMEOUT_MS );
+                    }
+
                     if( GCQ_ERRORS_NONE == xStatus )
                     {
                         pxProfile->xState = FW_IF_GCQ_STATE_ATTACHED;

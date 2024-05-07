@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2024 Advanced Micro Devices, Inc. All rights reserved.
  * SPDX-License-Identifier: MIT
  *
  * This file contains the in band telemetry debug implementation
@@ -22,7 +22,7 @@
 /* Defines                                                                    */
 /******************************************************************************/
 
-#define AMC_OUT_OF_BAND_DBG_NAME        "AMC_OUT_OF_BAND_DBG"
+#define AMC_OUT_OF_BAND_DBG_NAME "AMC_OUT_OF_BAND_DBG"
 
 
 /******************************************************************************/
@@ -83,6 +83,11 @@ void vOUT_OF_BAND_TELEMETRY_DebugInit( DAL_HDL pxParentHandle )
     }
 }
 
+
+/******************************************************************************/
+/* Private function implementations                                           */
+/******************************************************************************/
+
 /**
  * @brief   Debug function to print this module's stats
  */
@@ -104,4 +109,3 @@ static void vClearStats( void )
         PLL_DAL( AMC_OUT_OF_BAND_DBG_NAME, "Error clearing statistics\r\n" );
     }
 }
-

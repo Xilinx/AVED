@@ -63,6 +63,30 @@ struct amc_version {
 };
 
 /*****************************************************************************/
+/* Enums                                                                     */
+/*****************************************************************************/
+
+/**
+ * enum ami_amc_debug_level - AMC debug verbosity levels
+ * @AMI_AMC_DEBUG_LEVEL_LOG: used for printing to the log (dmesg)
+ * @AMI_AMC_DEBUG_LEVEL_INFO: used when printing is part of the behaviour
+ * @AMI_AMC_DEBUG_LEVEL_ERROR: used for errors
+ * @AMI_AMC_DEBUG_LEVEL_WARNING: used for warnings
+ * @AMI_AMC_DEBUG_LEVEL_DEBUG: used for debug prints
+ *
+ * Note that these log levels only apply to what AMC puts into dmesg.
+ * Debug levels are "up to and including". The default log level is
+ * `AMI_AMC_DEBUG_LEVEL_LOG`.
+ */
+enum ami_amc_debug_level {
+	AMI_AMC_DEBUG_LEVEL_LOG = 0,
+	AMI_AMC_DEBUG_LEVEL_INFO,
+	AMI_AMC_DEBUG_LEVEL_ERROR,
+	AMI_AMC_DEBUG_LEVEL_WARNING,
+	AMI_AMC_DEBUG_LEVEL_DEBUG,
+};
+
+/*****************************************************************************/
 /* Function Declarations                                                     */
 /*****************************************************************************/
 
@@ -183,6 +207,15 @@ int ami_dev_pci_reload(ami_device **dev, const char *bdf);
  * Return: AMI_STATUS_OK or AMI_STATUS_ERROR
  */
 int ami_dev_hot_reset(ami_device **dev);
+
+/**
+ * ami_dev_set_amc_debug_level() - Set the AMC debug verbosity level.
+ * @dev: Device handle.
+ * @level: The new level to set.
+ *
+ * Return: AMI_STATUS_OK or AMI_STATUS_ERROR
+ */
+int ami_dev_set_amc_debug_level(ami_device *dev, enum ami_amc_debug_level level);
 
 /**
  * ami_dev_read_uuid() - Read the logic uuid sysfs node.

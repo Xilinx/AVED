@@ -13,6 +13,7 @@
 /*****************************************************************************/
 
 #include "fw_if_smbus.h"
+#include "osal.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -66,7 +67,7 @@ static uint32_t ulSmbusOpen( void *pvFwIf )
      * this is where the SMBus device would be created/enabled
      */
 
-    printf( "SMBus FW_IF_open for addr 0x%02X\r\n", pxThisSmbusCfg->port );
+    printf( "SMBus FW_IF_open for addr 0x%02X\r\n", pxThisSmbusCfg->ulPort );
 
     return status;
 }
@@ -90,7 +91,7 @@ static uint32_t ulSmbusClose( void *pvFwIf )
      * this is where the SMBus device would be destroyed/disabled
      */
 
-    printf( "SMBus FW_IF_close for addr 0x%02X\r\n", pxThisSmbusCfg->port );
+    printf( "SMBus FW_IF_close for addr 0x%02X\r\n", pxThisSmbusCfg->ulPort );
 
     return status;
 }
@@ -99,7 +100,7 @@ static uint32_t ulSmbusClose( void *pvFwIf )
 /**
  * @brief   Local implementation of FW_IF_write
  */
-static uint32_t ulSmbusWrite( void *pvFwIf, uint32_t ulDstPort, uint8_t *pucData, uint32_t ulSize, uint32_t ulTimeoutMs )
+static uint32_t ulSmbusWrite( void *pvFwIf, uint64_t ullDstPort, uint8_t *pucData, uint32_t ulSize, uint32_t ulTimeoutMs )
 {
     uint32_t status = FW_IF_ERRORS_NONE;
 
@@ -120,13 +121,13 @@ static uint32_t ulSmbusWrite( void *pvFwIf, uint32_t ulDstPort, uint8_t *pucData
          *  - Target    : load the response data
          */
 
-        printf( "SMBus FW_IF_write (%s) from addr 0x%02X to addr 0x%02X\r\n",
-                ( FW_IF_SMBUS_ROLE_CONTROLLER == pxThisSmbusCfg->role ) ? ( "controller" ):( "target" ),
-                pxThisSmbusCfg->port, ulDstPort );
+        printf( "SMBus FW_IF_write (%s) from addr 0x%02X to addr 0x%02lX\r\n",
+                ( FW_IF_SMBUS_ROLE_CONTROLLER == pxThisSmbusCfg->xRole ) ? ( "controller" ):( "target" ),
+                pxThisSmbusCfg->ulPort, ullDstPort );
     }
     else
     {
-        status == FW_IF_ERRORS_PARAMS;
+        status = FW_IF_ERRORS_PARAMS;
     }
 
     return status;
@@ -135,7 +136,7 @@ static uint32_t ulSmbusWrite( void *pvFwIf, uint32_t ulDstPort, uint8_t *pucData
 /**
  * @brief   Local implementation of FW_IF_read
  */
-static uint32_t ulSmbusRead( void *pvFwIf, uint32_t ulSrcPort, uint8_t *pucData, uint32_t *pulSize, uint32_t ulTimeoutMs )
+static uint32_t ulSmbusRead( void *pvFwIf, uint64_t ullSrcPort, uint8_t *pucData, uint32_t *pulSize, uint32_t ulTimeoutMs )
 {
     uint32_t status = FW_IF_ERRORS_NONE;
 
@@ -156,9 +157,9 @@ static uint32_t ulSmbusRead( void *pvFwIf, uint32_t ulSrcPort, uint8_t *pucData,
          *  - Target    : retrieve any unread received data
          */
 
-        printf( "SMBus FW_IF_read (%s) at addr 0x%02X from addr 0x%02X\r\n",
-                ( FW_IF_SMBUS_ROLE_CONTROLLER == pxThisSmbusCfg->role ) ? ( "controller" ):( "target" ),
-                pxThisSmbusCfg->port, ulSrcPort );
+        printf( "SMBus FW_IF_read (%s) at addr 0x%02X from addr 0x%02lX\r\n",
+                ( FW_IF_SMBUS_ROLE_CONTROLLER == pxThisSmbusCfg->xRole ) ? ( "controller" ):( "target" ),
+                pxThisSmbusCfg->ulPort, ullSrcPort );
     }
     else
     {
@@ -183,7 +184,7 @@ static uint32_t ulSmbusIoctrl( void *pvFwIf, uint32_t ulOption, void *pvValue )
     
     FW_IF_SMBUS_CFG *pxThisSmbusCfg = ( FW_IF_SMBUS_CFG* )pxThisIf->cfg;
     
-    printf( "SMBus FW_IF_ioctrl for addr 0x%02X (option %u)\r\n", pxThisSmbusCfg->port, ulOption );
+    printf( "SMBus FW_IF_ioctrl for addr 0x%02X (option %u)\r\n", pxThisSmbusCfg->ulPort, ulOption );
     
     switch( ulOption )
     {
@@ -196,18 +197,18 @@ static uint32_t ulSmbusIoctrl( void *pvFwIf, uint32_t ulOption, void *pvValue )
             break;
 
         case FW_IF_SMBUS_IOCTRL_SET_CONTROLLER:
-            pxThisSmbusCfg->role = FW_IF_SMBUS_ROLE_CONTROLLER;
-            printf( "SMBus addr 0x%02X - Controller\r\n", pxThisSmbusCfg->port );
+            pxThisSmbusCfg->xRole = FW_IF_SMBUS_ROLE_CONTROLLER;
+            printf( "SMBus addr 0x%02X - Controller\r\n", pxThisSmbusCfg->ulPort );
             break;
 
         case FW_IF_SMBUS_IOCTRL_SET_TARGET:
-            pxThisSmbusCfg->role = FW_IF_SMBUS_ROLE_TARGET;
-            printf( "SMBus addr 0x%02X - Target\r\n", pxThisSmbusCfg->port );
+            pxThisSmbusCfg->xRole = FW_IF_SMBUS_ROLE_TARGET;
+            printf( "SMBus addr 0x%02X - Target\r\n", pxThisSmbusCfg->ulPort );
             break;
         
         default:
             status = FW_IF_ERRORS_UNRECOGNISED_OPTION;
-            printf( "SMBus addr 0x%02X - Unrecognised option\r\n", pxThisSmbusCfg->port );
+            printf( "SMBus addr 0x%02X - Unrecognised option\r\n", pxThisSmbusCfg->ulPort );
             break;
     }
 
@@ -234,7 +235,7 @@ static uint32_t ulSmbusBindCallback( void *pvFwIf, FW_IF_callback *pxNewFunc )
         
         pxThisIf->raiseEvent = pxNewFunc;
     
-        printf( "SMBus FW_IF_bindCallback called for port 0x%02X\r\n", pxThisSmbusCfg->port );
+        printf( "SMBus FW_IF_bindCallback called for port 0x%02X\r\n", pxThisSmbusCfg->ulPort );
     }
     else
     {
@@ -271,12 +272,12 @@ uint32_t ulFW_IF_SMBUS_Init( FW_IF_SMBUS_INIT_CFG *pxCfg )
          * This is where the SMBus driver would be initialised
          */
 
-        memcpy( &myLocalCfg, pxCfg, sizeof( FW_IF_SMBUS_INIT_CFG ) );
+        pvOSAL_MemCpy( &myLocalCfg, pxCfg, sizeof( FW_IF_SMBUS_INIT_CFG ) );
         iInitialised = FW_IF_TRUE;
 
         printf( "ulFW_IF_SMBUS_Init, addr: 0x%08X, baudrate: %uHz\r\n",
-                myLocalCfg.baseAddr,
-                myLocalCfg.baudRate );
+                myLocalCfg.ulBaseAddr,
+                myLocalCfg.ulBaudRate );
 
     }
 
@@ -294,7 +295,7 @@ uint32_t ulFW_IF_SMBUS_Create( FW_IF_CFG *pvFwIf, FW_IF_SMBUS_CFG *pxSmbusCfg )
 
     if( ( NULL != pvFwIf ) && ( NULL != pxSmbusCfg ) )
     {
-        if( ( MAX_FW_IF_SMBUS_ROLE > pxSmbusCfg->role ) && ( NULL != pxSmbusCfg->udid ) )
+        if( ( MAX_FW_IF_SMBUS_ROLE > pxSmbusCfg->xRole ) && ( NULL != pxSmbusCfg->pucUdid ) )
         {
             FW_IF_CFG myLocalIf =
             {
@@ -309,13 +310,13 @@ uint32_t ulFW_IF_SMBUS_Create( FW_IF_CFG *pvFwIf, FW_IF_SMBUS_CFG *pxSmbusCfg )
                 .lowerFirewall  = SMBUS_LOWER_FIREWALL
             };
 
-            memcpy( pvFwIf, &myLocalIf, sizeof( FW_IF_CFG ) );
+            pvOSAL_MemCpy( pvFwIf, &myLocalIf, sizeof( FW_IF_CFG ) );
 
             FW_IF_SMBUS_CFG *pxThisSmbusCfg = ( FW_IF_SMBUS_CFG* )pvFwIf->cfg;
 
             printf( "ulFW_IF_SMBUS_Create for addr 0x%02X (%s)\r\n",
-                    pxThisSmbusCfg->port,
-                    ( FW_IF_SMBUS_ROLE_CONTROLLER == pxThisSmbusCfg->role ) ? ( "Controller" ):( "Target" ) );
+                    pxThisSmbusCfg->ulPort,
+                    ( FW_IF_SMBUS_ROLE_CONTROLLER == pxThisSmbusCfg->xRole ) ? ( "Controller" ):( "Target" ) );
         }
         else
         {
@@ -324,9 +325,36 @@ uint32_t ulFW_IF_SMBUS_Create( FW_IF_CFG *pvFwIf, FW_IF_SMBUS_CFG *pxSmbusCfg )
     }
     else
     {
-        FW_IF_ERRORS_PARAMS;
+        status =  FW_IF_ERRORS_PARAMS;
     }
         
     return status;
 }
 
+/**
+ * @brief   Print all the stats gathered by the interface
+ */
+int iFW_IF_SMBUS_PrintStatistics( void )
+{
+    int iStatus = FW_IF_ERRORS_DRIVER_NOT_INITIALISED;
+
+    /*
+     * This is where stats gathered by the interface get printed
+     */
+
+    return iStatus;
+}
+
+/**
+ *  @brief Clears all the stats gathered by the interface
+ */
+int iFW_IF_SMBUS_ClearStatistics( void )
+{
+    int iStatus = FW_IF_ERRORS_DRIVER_NOT_INITIALISED;
+
+    /*
+     * This is where stats gathered by the interface get cleared
+     */
+
+    return iStatus;
+}

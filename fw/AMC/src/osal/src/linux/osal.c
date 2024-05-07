@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2024 Advanced Micro Devices, Inc. All rights reserved.
  * SPDX-License-Identifier: MIT
  *
  * This file contains the (OSAL) API implementation for Linux.
@@ -12,6 +12,8 @@
 /*****************************************************************************/
 /* Includes                                                                  */
 /*****************************************************************************/
+
+#define _GNU_SOURCE /* Required for the semtimedop function, must be defined before header files */
 
 /* Standard includes */
 #include <stdio.h>
@@ -28,11 +30,15 @@
 #include <errno.h>
 #include <signal.h>
 #include <sys/stat.h>
-#include <assert.h>   
+#include <assert.h> 
+#include <sys/sem.h>
+#include <sys/ipc.h>
+#include <sys/types.h>
 
 /* AMC includes */
 #include "osal.h"
 #include "standard.h"
+
 
 /*****************************************************************************/
 /* Defines                                                                   */
@@ -47,14 +53,16 @@
 #define MINIMUM_TIMEOUT_MS                   ( 1000 )
 #define EXPECTED_NUM_VERSION_COMPONENTS      ( 3 )
 
-#define BINARY_SEM_BUCKET_SIZE               ( 1 )
-#define SEMAPHORE_PERMISSIONS                ( 0644 )
+#define NUMBER_OF_SEMS                       ( 1 )
+#define SEMAPHORE_PERMISSIONS                ( 0666 )
 #define SEM_ERROR                            ( -1 )
 #define TIMER_START_OFFSET                   ( 5 )
 #define PTHREAD_STACK_MIN                    ( 16384 )
+#define SEM_LOCK                             ( -1 )
+#define SEM_UNLOCK                           ( 1 )
 
 #define SECONDS_TO_TICKS_FACTOR              100
-#define MILLISECONDS_TO_MICROSECONS_FACTOR   1000
+#define MILLISECONDS_TO_MICROSECONDS_FACTOR  1000
 #define SECONDS_TO_MILLISECONDS_FACTOR       1000
 #define TICKS_TO_MICROSECONDS_FACTOR         10000
 #define NANOSECONDS_TO_MILLISECONDS_FACTOR   1000000
@@ -65,19 +73,25 @@
 
 #define RETURN_IF_OS_NOT_STARTED             if( TRUE != iOsStarted ) return OSAL_ERRORS_OS_NOT_STARTED
 
+
 /*****************************************************************************/
 /* Local Variables                                                           */
 /*****************************************************************************/
 
-static pthread_mutex_t xPrintfMutexHandle           = PTHREAD_MUTEX_INITIALIZER;
-static pthread_mutex_t xGetCharMutexHandle          = PTHREAD_MUTEX_INITIALIZER;
-static pthread_mutex_t xMemSetMutexHandle           = PTHREAD_MUTEX_INITIALIZER;
-static pthread_mutex_t xMemCpyMutexHandle           = PTHREAD_MUTEX_INITIALIZER;
-static pthread_mutex_t xMemFreeMutexHandle          = PTHREAD_MUTEX_INITIALIZER;
-static pthread_mutex_t xMemAllocMutexHandle         = PTHREAD_MUTEX_INITIALIZER;
-static pthread_mutex_t xCriticalSectionMutexHandle  = PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t xPrintfMutexHandle          = PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t xGetCharMutexHandle         = PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t xMemSetMutexHandle          = PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t xMemCpyMutexHandle          = PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t xMemMoveMutexHandle         = PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t xMemFreeMutexHandle         = PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t xMemAllocMutexHandle        = PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t xCriticalSectionMutexHandle = PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t xStrNCpyMutexHandle         = PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t xMemCmpMutexHandle          = PTHREAD_MUTEX_INITIALIZER;
 
 static int iOsStarted = FALSE;
+static uint32_t ulSemNo = 0;
+
 
 /*****************************************************************************/
 /* Structs                                                                   */
@@ -89,7 +103,9 @@ static int iOsStarted = FALSE;
  */
 typedef struct OSAL_SEM_STRUCT
 {
-    sem_t* pxSem;
+    uint32_t ulSemId;
+    uint32_t ulBucket;
+    struct sembuf xOperation;
     char* pcName;
 
 } OSAL_SEM_STRUCT;
@@ -172,6 +188,7 @@ typedef struct OSAL_TIMER_STRUCT
  */
 static struct timespec OSAL_GLOBAL_START_TIME = { 0 };
 
+
 /*****************************************************************************/
 /* Function implementations                                                  */
 /*****************************************************************************/
@@ -198,6 +215,7 @@ void vTimerCallbackWrapper( union sigval xSv )
     pvCallback( pvHandle );
 }
 
+
 /*****************************************************************************/
 /* Public APIs                                                               */
 /*****************************************************************************/
@@ -219,7 +237,6 @@ int iOSAL_GetOsVersion( char pcOs[ OSAL_OS_NAME_LEN ],
         ( NULL != pucVersionBuild ) )
     {
         strncpy( pcOs, DEFAULT_OS_NAME, OSAL_OS_NAME_LEN );
-
         /* Linux Kernel vesion information is sorted here */
         FILE *pxFp = fopen( "/proc/version", "r" );
         if( pxFp != NULL )
@@ -242,9 +259,9 @@ int iOSAL_GetOsVersion( char pcOs[ OSAL_OS_NAME_LEN ],
             iStatus = OSAL_ERRORS_OS_IMPLEMENTATION;
         }
     }
-
     return iStatus;
 }
+
 
 /*****************************************************************************/
 /* Scheduler APIs                                                            */
@@ -288,7 +305,6 @@ int iOSAL_StartOS( int         iRoundRobinEnabled,
             assert( OK == pthread_attr_setschedpolicy( &xAttr, SCHED_FIFO ) );
             assert( OK == pthread_attr_setschedparam( &xAttr, &xParam ) );
             assert( OK == pthread_attr_setstacksize( &xAttr, (size_t)usStartTaskStackSize ) );
-            
             if( OSAL_ERRORS_NONE == pthread_create( &pxTask->xThread, 
                                         &xAttr,
                                         ( void* )*pvStartTask,
@@ -300,20 +316,21 @@ int iOSAL_StartOS( int         iRoundRobinEnabled,
 
                 *ppvTaskHandle = ( void* )pxTask;
                 pthread_attr_destroy( &xAttr );
-   
+
                 /* Initialising global timer */
                 vOSAL_InitUptime();
 
-                /* mimicing freeRTOS vTaskStartScheduler blocking call - stops main thread from exiting */
-                while( TRUE )
+                /* mimicking freeRTOS vTaskStartScheduler blocking call - stops main thread from exiting */
+                do 
                 {
                     iOSAL_Task_SleepMs( 1000 );
-                }
+                } while( TRUE );
             }
             else
             {
-                /* The task was not created. */ 
+                /* The task was not created. */
                 iStatus = OSAL_ERRORS_OS_IMPLEMENTATION;
+                free( pxTask );
             }
         }
         else
@@ -359,6 +376,27 @@ uint32_t ulOSAL_GetUptimeMs( void )
 
     return ( uint32_t )ulUptime_ms;
 }
+
+/**
+ * @brief   Returns tick count since OS was initialised, from ISR.
+ */
+uint32_t ulOSAL_GetUptimeTicksFromISR( void )
+{
+    RETURN_IF_OS_NOT_STARTED;
+
+    return ulOSAL_GetUptimeTicks();
+}
+
+/**
+ * @brief   Returns ms count since OS was initialised, from ISR.
+ */
+uint32_t ulOSAL_GetUptimeMsFromISR( void )
+{
+    RETURN_IF_OS_NOT_STARTED;
+
+    return ulOSAL_GetUptimeMs();
+}
+
 
 /*****************************************************************************/
 /* Task APIs                                                                 */
@@ -420,6 +458,7 @@ int iOSAL_Task_Create( void**      ppvTaskHandle,
             {
                 /* The task was not created. */ 
                 iStatus = OSAL_ERRORS_OS_IMPLEMENTATION;
+                free( pxTask );
             }
         }
         else
@@ -437,19 +476,25 @@ int iOSAL_Task_Create( void**      ppvTaskHandle,
 int iOSAL_Task_Delete( void** ppvTaskHandle )
 {
     int iStatus = OSAL_ERRORS_INVALID_HANDLE;
-
     RETURN_IF_OS_NOT_STARTED;
 
     if( NULL != ppvTaskHandle )
     {
+        iStatus = OSAL_ERRORS_NONE;
         if( NULL != *ppvTaskHandle )
         {
-            *ppvTaskHandle = NULL;
+            OSAL_TASK_STRUCT* pxTask = *ppvTaskHandle;
+            if( 0 != pthread_cancel( ( pxTask->xThread ) ) )
+            {
+                iStatus = OSAL_ERRORS_OS_IMPLEMENTATION;
+            }
+            else
+            {
+                free( *ppvTaskHandle );
+                *ppvTaskHandle = NULL;
+            }
         }
-
-        iStatus = OSAL_ERRORS_NONE;
     }
-
     return iStatus;
 }
 
@@ -459,7 +504,6 @@ int iOSAL_Task_Delete( void** ppvTaskHandle )
 int iOSAL_Task_Suspend( void* pvTaskHandle )
 {
     int iStatus = OSAL_ERRORS_OS_IMPLEMENTATION;
-
     return iStatus;
 }
 
@@ -469,7 +513,6 @@ int iOSAL_Task_Suspend( void* pvTaskHandle )
 int iOSAL_Task_Resume( void* pvTaskHandle )
 {
     int iStatus = OSAL_ERRORS_OS_IMPLEMENTATION;
-
     return iStatus;
 }
 
@@ -504,12 +547,13 @@ int iOSAL_Task_SleepMs( uint32_t ulSleepMs )
     if( MINIMUM_TIMEOUT_MS <= ulSleepMs )
     {
         /* Convert milliseconds to microseconds */
-        usleep( ulSleepMs * MILLISECONDS_TO_MICROSECONS_FACTOR );
+        usleep( ulSleepMs * MILLISECONDS_TO_MICROSECONDS_FACTOR );
         iStatus = OSAL_ERRORS_NONE;
     }
 
     return iStatus;
 }
+
 
 /*****************************************************************************/
 /* Semaphore APIs                                                            */
@@ -518,57 +562,65 @@ int iOSAL_Task_SleepMs( uint32_t ulSleepMs )
 /**
  * @brief   Creates a binary or counting semaphore, and sets OS Semaphore Handle by which the semaphore can be referenced.
  */
-int iOSAL_Semaphore_Create( void** ppvSemHandle, 
-                            uint32_t ullCount, 
-                            uint32_t ullBucket, 
-                            const char* pcSemName )
+
+
+int iOSAL_Semaphore_Create( void** ppvSemHandle, uint32_t ullCount, 
+                            uint32_t ulBucket, const char* pcSemName )
 {
     int iStatus = OSAL_ERRORS_PARAMS;
 
-    RETURN_IF_OS_NOT_STARTED;
+    uint32_t ulSemFlg = SEMAPHORE_PERMISSIONS | IPC_CREAT;    /* semflg to pass to semget() */
+    uint32_t ulSemId = 0;
+    
+    key_t xKeys = ulSemNo;
+    union xSemUnion  
+    {
+        int iVal;
+        struct semid_ds *xIdStruct;
+        ushort usArray [ NUMBER_OF_SEMS ];
+    } xSemAttr = { 0 };
 
     if( ( NULL != ppvSemHandle  ) &&
         ( NULL == *ppvSemHandle ) &&
         ( NULL != pcSemName ) )
     {
-        sem_t *pxSem = NULL;
-        if( BINARY_SEM_BUCKET_SIZE == ullBucket )
-        {
-            /* Create binary semaphore */
-            pxSem = sem_open( pcSemName, O_CREAT, SEMAPHORE_PERMISSIONS, 0 );
-        }
-        else
-        {
-            /* Create counting semaphore */
-            pxSem = sem_open( pcSemName, O_CREAT, SEMAPHORE_PERMISSIONS, ullCount );
-        }
-    
-        if( pxSem == SEM_FAILED )
+        if( ( semget( xKeys, NUMBER_OF_SEMS, ulSemFlg ) ) == SEM_ERROR )
         {
             iStatus = OSAL_ERRORS_OS_IMPLEMENTATION;
         }
-        else 
+        else
         {
-            OSAL_SEM_STRUCT* pxSemData = ( OSAL_SEM_STRUCT* ) pvOSAL_MemAlloc( sizeof( OSAL_SEM_STRUCT ) );
-            if( NULL != pxSemData )
-            {
-                pxSemData->pxSem = pxSem;
-                pxSemData->pcName = strdup( pcSemName );
-            
-                *ppvSemHandle = pxSemData;
-
-                /* ppvSemHandle has already been null checked*/
-
-                /* Semaphore created successfully */
-                iStatus = OSAL_ERRORS_NONE;
-            }
-            else
+            ulSemId = semget( xKeys, NUMBER_OF_SEMS, ulSemFlg );
+            ulSemNo++;
+            xSemAttr.iVal = ullCount;
+            if( SEM_ERROR == semctl( ulSemId, 0, SETVAL, xSemAttr ) ) 
             {
                 iStatus = OSAL_ERRORS_OS_IMPLEMENTATION;
             }
+            else 
+            {
+                OSAL_SEM_STRUCT* pxSemData = ( OSAL_SEM_STRUCT* ) pvOSAL_MemAlloc( sizeof( OSAL_SEM_STRUCT ) );
+
+                if( NULL != pxSemData )
+                {
+                    pxSemData->ulSemId = ulSemId;
+                    pxSemData->ulBucket = ulBucket;
+                    pxSemData->pcName = strdup( pcSemName );
+                
+                    *ppvSemHandle = pxSemData;
+
+                    /* ppvSemHandle has already been null checked*/
+
+                    /* Semaphore created successfully */
+                    iStatus = OSAL_ERRORS_NONE;
+                }
+                else
+                {
+                    iStatus = OSAL_ERRORS_OS_IMPLEMENTATION;
+                }
+            }
         }
     }
-
     return iStatus;
 }
 
@@ -579,32 +631,27 @@ int iOSAL_Semaphore_Destroy( void** ppvSemHandle )
 {
     int iStatus = OSAL_ERRORS_INVALID_HANDLE;
 
-    RETURN_IF_OS_NOT_STARTED;
-
     if( ( NULL != ppvSemHandle  ) &&
         ( NULL != *ppvSemHandle ) )
     {
         OSAL_SEM_STRUCT* pxSemData = ( OSAL_SEM_STRUCT* )*ppvSemHandle;
 
-        if( ( SEM_ERROR == sem_close( pxSemData->pxSem ) ) || 
-            ( SEM_ERROR == sem_unlink( pxSemData->pcName ) ) )
+        if( SEM_ERROR == semctl( pxSemData->ulSemId, 0, IPC_RMID, 0 ) ) 
         {
             iStatus = OSAL_ERRORS_OS_IMPLEMENTATION;
         }
         else
         {
             iStatus = OSAL_ERRORS_NONE;
-        }
+            free( pxSemData->pcName );
+            free( pxSemData );
 
-        free( pxSemData->pcName );
-        free( pxSemData );
-
-        if( NULL != *ppvSemHandle )
-        {
-            *ppvSemHandle = NULL;
+            if( NULL != *ppvSemHandle )
+            {
+                *ppvSemHandle = NULL;
+            }
         }
     }
-
     return iStatus;
 }
 
@@ -614,27 +661,18 @@ int iOSAL_Semaphore_Destroy( void** ppvSemHandle )
 int iOSAL_Semaphore_Pend( void* pvSemHandle, uint32_t ulTimeoutMs )
 {
     int iStatus = OSAL_ERRORS_INVALID_HANDLE;
-
     RETURN_IF_OS_NOT_STARTED;
 
     if( NULL != pvSemHandle )
     {
         OSAL_SEM_STRUCT* pxSemData = ( OSAL_SEM_STRUCT* )pvSemHandle;
+        pxSemData->xOperation.sem_num = 0;
+        pxSemData->xOperation.sem_op = SEM_LOCK;
+        pxSemData->xOperation.sem_flg = SEM_UNDO;
 
         if( OSAL_TIMEOUT_WAIT_FOREVER == ulTimeoutMs )
         {
-            if( SEM_ERROR == sem_wait( pxSemData->pxSem ) )
-            {
-                iStatus = OSAL_ERRORS_OS_IMPLEMENTATION;
-            }
-            else
-            {
-                iStatus = OSAL_ERRORS_NONE;
-            }
-        }
-        else if( OSAL_TIMEOUT_NO_WAIT == ulTimeoutMs )
-        {
-            if( SEM_ERROR == sem_trywait( pxSemData->pxSem ) )
+            if( SEM_ERROR == semop( pxSemData->ulSemId, &pxSemData->xOperation, NUMBER_OF_SEMS ) )
             {
                 iStatus = OSAL_ERRORS_OS_IMPLEMENTATION;
             }
@@ -659,7 +697,7 @@ int iOSAL_Semaphore_Pend( void* pvSemHandle, uint32_t ulTimeoutMs )
                 xTimeoutTime.tv_sec += ulTimeoutMs / SECONDS_TO_MILLISECONDS_FACTOR;
                 xTimeoutTime.tv_nsec += ( ulTimeoutMs % SECONDS_TO_MILLISECONDS_FACTOR ) * NANOSECONDS_TO_MILLISECONDS_FACTOR;
 
-                if( SEM_ERROR == sem_timedwait( pxSemData->pxSem, &xTimeoutTime ) )
+                if( SEM_ERROR == semtimedop( pxSemData->ulSemId, &pxSemData->xOperation, NUMBER_OF_SEMS, &xTimeoutTime ) )
                 {
                     iStatus = OSAL_ERRORS_OS_IMPLEMENTATION;
                 }
@@ -671,10 +709,9 @@ int iOSAL_Semaphore_Pend( void* pvSemHandle, uint32_t ulTimeoutMs )
             else
             {
                 iStatus = OSAL_ERRORS_OS_IMPLEMENTATION;
-            }          
+            }     
         }
     }
-
     return iStatus;
 }
 
@@ -684,22 +721,31 @@ int iOSAL_Semaphore_Pend( void* pvSemHandle, uint32_t ulTimeoutMs )
 int iOSAL_Semaphore_Post( void* pvSemHandle )
 {
     int iStatus = OSAL_ERRORS_INVALID_HANDLE;
-
     RETURN_IF_OS_NOT_STARTED;
 
     if( NULL != pvSemHandle )
     {
         OSAL_SEM_STRUCT* pxSemData = ( OSAL_SEM_STRUCT* )pvSemHandle;
-        if( SEM_ERROR == sem_post( pxSemData->pxSem ) )
+        pxSemData->xOperation.sem_num = 0;
+        pxSemData->xOperation.sem_op = SEM_UNLOCK;
+        pxSemData->xOperation.sem_flg = SEM_UNDO;
+
+        if( pxSemData->ulBucket >= semctl( pxSemData->ulSemId, 0, GETVAL, 0 ) )
         {
-            iStatus = OSAL_ERRORS_OS_IMPLEMENTATION;
+            if( SEM_ERROR == semop( pxSemData->ulSemId, &pxSemData->xOperation, 1 ) )
+            {
+                iStatus = OSAL_ERRORS_OS_IMPLEMENTATION;
+            }
+            else
+            {
+                iStatus = OSAL_ERRORS_NONE;
+            }
         }
         else
         {
             iStatus = OSAL_ERRORS_NONE;
         }
     }
-    
     return iStatus;
 }
 
@@ -719,6 +765,7 @@ int iOSAL_Semaphore_PostFromISR( void* pvSemHandle )
 
     return iStatus;
 }
+
 
 /*****************************************************************************/
 /* Mutex APIs                                                                */
@@ -879,6 +926,7 @@ int iOSAL_Mutex_Release( void* pvMutexHandle )
     return iStatus;
 }
 
+
 /*****************************************************************************/
 /* Mailbox APIs                                                              */
 /*****************************************************************************/
@@ -925,6 +973,7 @@ int iOSAL_MBox_Create( void **ppvMBoxHandle, uint32_t ulMBoxLength, uint32_t ulI
             else
             {
                 iStatus = OSAL_ERRORS_OS_IMPLEMENTATION;
+                free( pxMailbox );
             }
         }
         else
@@ -1022,11 +1071,6 @@ int iOSAL_MBox_Pend( void *pvMBoxHandle, void *pvMBoxBuffer, uint32_t ulTimeoutM
             {
                 iStatus = OSAL_ERRORS_OS_IMPLEMENTATION;
             }
-
-            if( NULL != pxMailboxItem )
-            {
-                free( pxMailboxItem );
-            }
         }
         else
         {
@@ -1081,11 +1125,13 @@ int iOSAL_MBox_Post( void *pvMBoxHandle, void *pvMBoxItem, uint32_t ulTimeoutMs 
                 else
                 {
                     iStatus = OSAL_ERRORS_OS_IMPLEMENTATION;
+                    free( pxNewMailboxItem );
                 }   
             }
             else
             {
                 iStatus = OSAL_ERRORS_OS_IMPLEMENTATION;
+                free( pxNewMailboxItem );
             }
         }
         else
@@ -1096,6 +1142,7 @@ int iOSAL_MBox_Post( void *pvMBoxHandle, void *pvMBoxItem, uint32_t ulTimeoutMs 
 
     return iStatus;
 }
+
 
 /*****************************************************************************/
 /* Event APIs                                                                */
@@ -1137,6 +1184,7 @@ int iOSAL_EventFlag_Create( void** ppvEventFlagHandle, const char* pcEventFlagNa
             else
             {
                 iStatus = OSAL_ERRORS_OS_IMPLEMENTATION;
+                free( pxEvent );
             }
         }
         else
@@ -1168,13 +1216,12 @@ int iOSAL_EventFlag_Destroy( void** ppvEventFlagHandle )
             ( OK == pthread_mutex_destroy( &pxEvent->xMutex ) ) )
         {
             iStatus = OSAL_ERRORS_NONE;
+            free( pxEvent );
         }
         else
         {
             iStatus = OSAL_ERRORS_OS_IMPLEMENTATION;
         }
-
-        free( pxEvent );
     }
 
     return iStatus;
@@ -1275,6 +1322,7 @@ int iOSAL_EventFlag_Post( void* pvEventFlagHandle, uint32_t ulFlagSet )
 
     return iStatus;
 }
+
 
 /*****************************************************************************/
 /* Timer APIs                                                                */
@@ -1455,6 +1503,7 @@ int iOSAL_Timer_Reset( void* pvTimerHandle, uint32_t ulDurationMs )
     return iStatus;
 }
 
+
 /*****************************************************************************/
 /* Thread safe APIs                                                          */
 /*****************************************************************************/
@@ -1485,7 +1534,7 @@ void* pvOSAL_MemAlloc( uint16_t usSize )
     if( 0 != usSize )
     {
         if( TRUE == iOsStarted ) 
-        { 
+        {
             if( OK == pthread_mutex_lock( &xMemAllocMutexHandle ) )
             {
                 pvMemory = malloc( usSize );
@@ -1538,7 +1587,7 @@ void* pvOSAL_MemSet( void* pvDestination, int iValue, uint16_t usSize )
 
     if( NULL != pvDestination )
     {
-        if(TRUE == iOsStarted )  
+        if( TRUE == iOsStarted )  
         {  
             if( OK == pthread_mutex_lock( &xMemSetMutexHandle ) )
             {
@@ -1582,6 +1631,35 @@ void* pvOSAL_MemCpy( void* pvDestination, const void* pvSource, uint16_t usSize 
     }
 
     return pvSetMemory;
+}
+
+/**
+ * @brief   OSAL wrapper for task/thread safe memory movement.
+ */
+void vOSAL_MemMove( void *pvDestination, void *pvSource, uint16_t usPayload_size )
+{
+    if( ( NULL != pvDestination ) &&
+        ( NULL != pvSource ) )
+    {
+        if( TRUE == iOsStarted )
+        {
+            if( OK == pthread_mutex_lock( &xMemMoveMutexHandle ) )
+            {
+                /* thread safe */
+                memmove( pvDestination,
+                         pvSource,
+                         ( size_t )usPayload_size );
+                assert( OK == pthread_mutex_unlock( &xMemMoveMutexHandle ) );
+            }
+        }
+        else
+        {
+            /* set memory, note: Not thread safe */
+            memmove( pvDestination,
+                     pvSource,
+                     ( size_t )usPayload_size );
+        }
+    }
 }
 
 /**
@@ -1642,6 +1720,73 @@ char cOSAL_GetChar( void )
     return cInput;
 }
 
+/**
+ * @brief   OSAL wrapper for task/thread safe string copy.
+ */
+char* pcOSAL_StrNCpy( char *pcDestination, const char *pcSource, uint16_t usSize )
+{
+    char *pcSetString = NULL;
+
+    if( ( NULL != pcDestination ) && 
+        ( NULL != pcSource ) && 
+        ( 0 < usSize ) )
+    {
+        if( TRUE == iOsStarted )
+        {
+            /* take mutex */
+            if( OSAL_ERRORS_NONE == pthread_mutex_lock( &xStrNCpyMutexHandle ) )
+            {
+                /* mutex taken successfully, copy string */
+                pcSetString = strncpy( pcDestination, pcSource, ( size_t )usSize );
+
+                /* release mutex */
+                assert( OK == pthread_mutex_unlock( &xStrNCpyMutexHandle ) );
+            }
+        }
+        else
+        {
+            /* copy string, note: Not thread safe */
+            pcSetString = strncpy( pcDestination, pcSource, ( size_t )usSize );
+        }
+    }
+
+    return pcSetString;
+}
+
+/**
+ * @brief   OSAL wrapper for task/thread safe memory compare.
+ */
+int iOSAL_MemCmp( const void *pvMemoryOne, const void *pvMemoryTwo, uint16_t usSize )
+{
+    int iStatus = OSAL_ERRORS_PARAMS;
+
+    if( ( NULL != pvMemoryOne ) && 
+        ( NULL != pvMemoryTwo ) &&
+        ( 0 < usSize ) )
+    {
+        if( TRUE == iOsStarted )
+        {
+            /* take mutex */
+            if( OSAL_ERRORS_NONE == pthread_mutex_lock( &xMemCmpMutexHandle ) )
+            {
+                /* mutex taken successfully, compare memory */
+                iStatus = memcmp( pvMemoryOne, pvMemoryTwo, ( size_t )usSize );
+
+                /* release mutex */
+                pthread_mutex_unlock( &xMemCmpMutexHandle );
+            }
+        }
+        else
+        {
+            /* compare memory, note: Not thread safe */
+            iStatus = memcmp( pvMemoryOne, pvMemoryTwo, ( size_t )usSize );
+        }
+    }
+
+    return iStatus;
+}
+
+
 /*****************************************************************************/
 /* Stubs                                                                     */
 /*****************************************************************************/
@@ -1671,6 +1816,7 @@ int iOSAL_Interrupt_Disable( uint8_t ucInterruptID )
 {
     return OSAL_ERRORS_INVALID_HANDLE;
 }
+
 
 /*****************************************************************************/
 /* Debug stats functions                                                     */

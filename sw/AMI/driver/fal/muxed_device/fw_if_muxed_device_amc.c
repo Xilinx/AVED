@@ -56,13 +56,13 @@
 
 #define PRINT_STAT_COUNTER( x )             PLL_INF( FW_IF_QSFP_NAME, "%50s . . . . %d\r\n",          \
                                                      FW_IF_QSFP_STATS_STR[ x ],      \
-                                                     pxThis->ulStatCounters[ x ] )
+                                                     pxThis->pulStatCounters[ x ] )
 #define PRINT_ERROR_COUNTER( x )            PLL_INF( FW_IF_QSFP_NAME, "%50s . . . . %d\r\n",          \
                                                      FW_IF_QSFP_ERRORS_STR[ x ],     \
-                                                     pxThis->ulErrorCounters[ x ] )
+                                                     pxThis->pulErrorCounters[ x ] )
 
-#define INC_STAT_COUNTER( x )               { if( x < FW_IF_QSFP_STATS_MAX )pxThis->ulStatCounters[ x ]++; }
-#define INC_ERROR_COUNTER( x )              { if( x < FW_IF_QSFP_ERRORS_MAX )pxThis->ulErrorCounters[ x ]++; }
+#define INC_STAT_COUNTER( x )               { if( x < FW_IF_QSFP_STATS_MAX )pxThis->pulStatCounters[ x ]++; }
+#define INC_ERROR_COUNTER( x )              { if( x < FW_IF_QSFP_ERRORS_MAX )pxThis->pulErrorCounters[ x ]++; }
 
 
 /******************************************************************************/
@@ -96,8 +96,8 @@ typedef struct FW_IF_QSFP_PRIVATE_DATA
 
     FW_IF_MUXED_DEVICE_INIT_CFG     xLocalCfg;
     int                             iInitialised;
-    uint32_t                        ulStatCounters[ FW_IF_QSFP_STATS_MAX ];
-    uint32_t                        ulErrorCounters[ FW_IF_QSFP_ERRORS_MAX ];
+    uint32_t                        pulStatCounters[ FW_IF_QSFP_STATS_MAX ];
+    uint32_t                        pulErrorCounters[ FW_IF_QSFP_ERRORS_MAX ];
 
     uint32_t                        ulLowerFirewall;
 
@@ -113,8 +113,8 @@ static FW_IF_QSFP_PRIVATE_DATA xLocalData =
     QSFP_UPPER_FIREWALL,    /* ulUpperFirewall */
     { 0 },                  /* xLocalCfg       */
     FW_IF_FALSE,            /* iInitialised    */
-    { 0 },                  /* ulStatCounters  */
-    { 0 },                  /* ulErrorCounters */
+    { 0 },                  /* pulStatCounters  */
+    { 0 },                  /* pulErrorCounters */
     QSFP_LOWER_FIREWALL     /* ulLowerFirewall */
 };
 static FW_IF_QSFP_PRIVATE_DATA *pxThis = &xLocalData;
@@ -162,7 +162,7 @@ static uint32_t ulOpenQsfpDevice( void *pvFwIf );
  * @brief   Read DIMM Device
  *
  * @param   pvFwIf      Pointer to the FW interface for the QSFP
- * @param   ulSrcPort   DIMM Register to read
+ * @param   ullSrcPort  DIMM Register to read
  * @param   pucData     Pointer to the data read
  * @param   pulSize     Size of the data to read
  * @param   ulTimeoutMs Timeout value
@@ -171,13 +171,13 @@ static uint32_t ulOpenQsfpDevice( void *pvFwIf );
  *          FW_IF_ERRORS        Read failed
  *
  */
-static uint32_t ulReadDimmDevice( void *pvFwIf, uint32_t ulSrcPort, uint8_t *pucData, uint32_t *pulSize, uint32_t ulTimeoutMs );
+static uint32_t ulReadDimmDevice( void *pvFwIf, uint64_t ullSrcPort, uint8_t *pucData, uint32_t *pulSize, uint32_t ulTimeoutMs );
 
 /**
  * @brief   Read QSFP Device
  *
  * @param   pvFwIf      Pointer to the FW interface for the QSFP
- * @param   ulSrcPort   QSFP Register to read
+ * @param   ullSrcPort  QSFP Register to read
  * @param   pucData     Pointer to the data read
  * @param   pulSize     Size of the data to read
  * @param   ulTimeoutMs Timeout value
@@ -186,7 +186,7 @@ static uint32_t ulReadDimmDevice( void *pvFwIf, uint32_t ulSrcPort, uint8_t *puc
  *          FW_IF_ERRORS        Read failed
  *
  */
-static uint32_t ulReadQsfpDevice( void *pvFwIf, uint32_t ulSrcPort, uint8_t *pucData, uint32_t *pulSize, uint32_t ulTimeoutMs );
+static uint32_t ulReadQsfpDevice( void *pvFwIf, uint64_t ullSrcPort, uint8_t *pucData, uint32_t *pulSize, uint32_t ulTimeoutMs );
 
 
 /*****************************************************************************/
@@ -210,8 +210,8 @@ static uint32_t ulOpenQsfpDevice( void *pvFwIf )
     uint8_t ucConfigRegValue = 0;
     uint8_t ucInputPortRegValue = 0;
     uint8_t ucOutputPortRegValue = 0;
-    uint8_t pucReadBuf[ FW_IF_QSFP_READ_DEFAULT_SIZE ] = { 0 };
-    uint8_t pucWriteBuff[ FW_IF_QSFP_WRITE_DEFAULT_SIZE ] = { 0 };
+    uint8_t pucReadBuf[ FAL_QSFP_READ_DEFAULT_SIZE ] = { 0 };
+    uint8_t pucWriteBuff[ FAL_QSFP_WRITE_DEFAULT_SIZE ] = { 0 };
 
     /*
     * Setting power for each QSFP is a many step process
@@ -243,10 +243,10 @@ static uint32_t ulOpenQsfpDevice( void *pvFwIf )
     */
 
     /* read current config reg value */
-    pucWriteBuff[ 0 ] = FW_IF_QSFP_IO_EXPANDER_CONFIGURATION_REG;
+    pucWriteBuff[ 0 ] = FAL_QSFP_IO_EXPANDER_CONFIGURATION_REG;
     ulStatus = FW_IF_ERRORS_OPEN; /* set status before each I2C call */
 
-    if( ERROR != iI2c_SendRecv( pxThis->xLocalCfg.ulI2CBusNum,
+    if( ERROR != iI2C_SendRecv( pxThis->xLocalCfg.ulI2CBusNum,
                                 pxCfg->ucPowerIoExpanderAddr,
                                 pucWriteBuff,
                                 1,
@@ -267,10 +267,10 @@ static uint32_t ulOpenQsfpDevice( void *pvFwIf )
         ucConfigRegValue = ( pucReadBuf[ 0 ] ) & ( ~pxCfg->ucPowerIoExpanderRegBit );
 
         /* write new config reg value */
-        pucWriteBuff[ 0 ] = FW_IF_QSFP_IO_EXPANDER_CONFIGURATION_REG;
+        pucWriteBuff[ 0 ] = FAL_QSFP_IO_EXPANDER_CONFIGURATION_REG;
         pucWriteBuff[ 1 ] = ucConfigRegValue;
 
-        if( ERROR != iI2c_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucPowerIoExpanderAddr, pucWriteBuff, 2 ) )
+        if( ERROR != iI2C_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucPowerIoExpanderAddr, pucWriteBuff, 2 ) )
         {
             INC_STAT_COUNTER( FW_IF_QSFP_STATS_I2C_SEND )
             ulStatus = FW_IF_ERRORS_NONE;
@@ -289,10 +289,10 @@ static uint32_t ulOpenQsfpDevice( void *pvFwIf )
         ulStatus = FW_IF_ERRORS_OPEN;
 
         /* read current output port reg value */
-        pucWriteBuff[ 0 ] = FW_IF_QSFP_IO_EXPANDER_OUTPUT_PORT_REG;
+        pucWriteBuff[ 0 ] = FAL_QSFP_IO_EXPANDER_OUTPUT_PORT_REG;
         pucReadBuf[ 0 ] = 0;
 
-        if( ERROR != iI2c_SendRecv( pxThis->xLocalCfg.ulI2CBusNum,
+        if( ERROR != iI2C_SendRecv( pxThis->xLocalCfg.ulI2CBusNum,
                                     pxCfg->ucPowerIoExpanderAddr,
                                     pucWriteBuff,
                                     1,
@@ -315,10 +315,10 @@ static uint32_t ulOpenQsfpDevice( void *pvFwIf )
         ucOutputPortRegValue = ( pucReadBuf[ 0 ] ) | ( pxCfg->ucPowerIoExpanderRegBit );
 
         /* write new output port reg value */
-        pucWriteBuff[ 0 ] = FW_IF_QSFP_IO_EXPANDER_OUTPUT_PORT_REG;
+        pucWriteBuff[ 0 ] = FAL_QSFP_IO_EXPANDER_OUTPUT_PORT_REG;
         pucWriteBuff[ 1 ] = ucOutputPortRegValue;
 
-        if( ERROR != iI2c_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucPowerIoExpanderAddr, pucWriteBuff, 2 ) )
+        if( ERROR != iI2C_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucPowerIoExpanderAddr, pucWriteBuff, 2 ) )
         {
             INC_STAT_COUNTER( FW_IF_QSFP_STATS_I2C_SEND )
             ulStatus = FW_IF_ERRORS_NONE;
@@ -330,7 +330,7 @@ static uint32_t ulOpenQsfpDevice( void *pvFwIf )
     }
 
     /* pause before checking QSFP power logic level */
-    iOSAL_Task_SleepMs( FW_IF_QSFP_PROCESS_TIME_MS );
+    iOSAL_Task_SleepMs( FAL_QSFP_PROCESS_TIME_MS );
 
     /*
     * Step 3: Read Power IO Expander input port register
@@ -341,10 +341,10 @@ static uint32_t ulOpenQsfpDevice( void *pvFwIf )
         ulStatus = FW_IF_ERRORS_OPEN;
 
         /* read current input port reg value */
-        pucWriteBuff[ 0 ] = FW_IF_QSFP_IO_EXPANDER_INPUT_PORT_REG;
+        pucWriteBuff[ 0 ] = FAL_QSFP_IO_EXPANDER_INPUT_PORT_REG;
         pucReadBuf[ 0 ] = 0;
 
-        if( ERROR != iI2c_SendRecv( pxThis->xLocalCfg.ulI2CBusNum,
+        if( ERROR != iI2C_SendRecv( pxThis->xLocalCfg.ulI2CBusNum,
                                     pxCfg->ucPowerIoExpanderAddr,
                                     pucWriteBuff,
                                     1,
@@ -353,7 +353,7 @@ static uint32_t ulOpenQsfpDevice( void *pvFwIf )
         {
             INC_STAT_COUNTER( FW_IF_QSFP_STATS_I2C_SEND_RECV )
             /* check input port reg bits */
-            ucInputPortRegValue = ( pucReadBuf[ 0 ] ) >> FW_IF_QSFP_POWER_IO_EXPANDER_NUM_INPUTS;
+            ucInputPortRegValue = ( pucReadBuf[ 0 ] ) >> FAL_QSFP_POWER_IO_EXPANDER_NUM_INPUTS;
 
             if( 0 != ( ucInputPortRegValue & pxCfg->ucPowerIoExpanderRegBit ) )
             {
@@ -374,10 +374,10 @@ static uint32_t ulOpenQsfpDevice( void *pvFwIf )
     {
         ulStatus = FW_IF_ERRORS_OPEN;
 
-        pucWriteBuff[ 0 ] = FW_IF_QSFP_MUX_IO_EXPANDER_DESELECTED;
+        pucWriteBuff[ 0 ] = FAL_QSFP_MUX_IO_EXPANDER_DESELECTED;
 
         /* Ensure other MUX control register output is set to no IO Expander */
-        if( ERROR != iI2c_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucUnselectedMuxAddr[ FW_IF_MUX_ADDRESS_0 ], pucWriteBuff, 1 ) )
+        if( ERROR != iI2C_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->pucUnselectedMuxAddr[ FW_IF_MUX_ADDRESS_0 ], pucWriteBuff, 1 ) )
         {
             INC_STAT_COUNTER( FW_IF_QSFP_STATS_I2C_SEND )
             ulStatus = FW_IF_ERRORS_NONE;
@@ -392,10 +392,10 @@ static uint32_t ulOpenQsfpDevice( void *pvFwIf )
     {
         ulStatus = FW_IF_ERRORS_OPEN;
 
-        pucWriteBuff[ 0 ] = FW_IF_QSFP_MUX_IO_EXPANDER_DESELECTED;
+        pucWriteBuff[ 0 ] = FAL_QSFP_MUX_IO_EXPANDER_DESELECTED;
 
         /* Ensure other MUX control register output is set to no IO Expander */
-        if( ERROR != iI2c_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucUnselectedMuxAddr[ FW_IF_MUX_ADDRESS_1 ], pucWriteBuff, 1 ) )
+        if( ERROR != iI2C_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->pucUnselectedMuxAddr[ FW_IF_MUX_ADDRESS_1 ], pucWriteBuff, 1 ) )
         {
             INC_STAT_COUNTER( FW_IF_QSFP_STATS_I2C_SEND )
             ulStatus = FW_IF_ERRORS_NONE;
@@ -416,7 +416,7 @@ static uint32_t ulOpenQsfpDevice( void *pvFwIf )
         pucWriteBuff[ 0 ] = pxCfg->ulMuxRegBitIoExpander;
 
         /* set MUX control register output to correct IO expander */
-        if( ERROR != iI2c_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucSelectedMuxAddr, pucWriteBuff, 1 ) )
+        if( ERROR != iI2C_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucSelectedMuxAddr, pucWriteBuff, 1 ) )
         {
             INC_STAT_COUNTER( FW_IF_QSFP_STATS_I2C_SEND )
             ulStatus = OK;
@@ -435,10 +435,10 @@ static uint32_t ulOpenQsfpDevice( void *pvFwIf )
         ulStatus = FW_IF_ERRORS_OPEN;
 
         /* set IO expander outputs high */
-        pucWriteBuff[ 0 ] = FW_IF_QSFP_IO_EXPANDER_OUTPUT_PORT_REG;
-        pucWriteBuff[ 1 ] = FW_IF_QSFP_ALL_OUTPUTS_HIGH ;
+        pucWriteBuff[ 0 ] = FAL_QSFP_IO_EXPANDER_OUTPUT_PORT_REG;
+        pucWriteBuff[ 1 ] = FAL_QSFP_ALL_OUTPUTS_HIGH ;
 
-        if( ERROR != iI2c_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucIoExpanderAddr, pucWriteBuff, 2 ) )
+        if( ERROR != iI2C_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucIoExpanderAddr, pucWriteBuff, 2 ) )
         {
             /* Ready to read from QSFP */
             INC_STAT_COUNTER( FW_IF_QSFP_STATS_I2C_SEND )
@@ -461,10 +461,10 @@ static uint32_t ulOpenQsfpDevice( void *pvFwIf )
         /* On the config register set module select line of the IO expander as an output.
         Config register is input by default */
         /* TODO - We may need to set other lines as outputs also eg. RESET_L, LPMODE */
-        pucWriteBuff[ 0 ] = FW_IF_QSFP_IO_EXPANDER_CONFIGURATION_REG;
-        pucWriteBuff[ 1 ] = FW_IF_QSFP_MODSELL_L_SET_LOW;
+        pucWriteBuff[ 0 ] = FAL_QSFP_IO_EXPANDER_CONFIGURATION_REG;
+        pucWriteBuff[ 1 ] = FAL_QSFP_MODSELL_L_SET_LOW;
 
-        if( ERROR != iI2c_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucIoExpanderAddr, pucWriteBuff, 2 ) )
+        if( ERROR != iI2C_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucIoExpanderAddr, pucWriteBuff, 2 ) )
         {
             INC_STAT_COUNTER( FW_IF_QSFP_STATS_I2C_SEND )
             ulStatus = FW_IF_ERRORS_NONE;
@@ -474,6 +474,17 @@ static uint32_t ulOpenQsfpDevice( void *pvFwIf )
             INC_ERROR_COUNTER( FW_IF_QSFP_ERRORS_I2C_SEND_FAILED )
         }
     }
+
+    /* Delay to ensure QSFP is ready to be accessed */
+    if( FW_IF_ERRORS_NONE == ulStatus )
+    {
+        /* Delay to allow QSFP a setup time after MODSEL is set */
+        if( OSAL_ERRORS_NONE != iOSAL_Task_SleepMs( FAL_QSFP_PROCESS_TIME_MS ) )
+        {
+            ulStatus = FW_IF_ERRORS_OPEN;
+        }
+    }
+
     return ulStatus;
 }
 
@@ -525,8 +536,8 @@ static uint32_t ulQsfpClose( void *pvFwIf )
 
     FW_IF_MUXED_DEVICE_CFG *pxCfg = ( FW_IF_MUXED_DEVICE_CFG* )pxThisIf->cfg;
     uint8_t ucOutputPortRegValue = 0;
-    uint8_t pucReadBuf[ FW_IF_QSFP_READ_DEFAULT_SIZE ] = { 0 };
-    uint8_t pucWriteBuff[ FW_IF_QSFP_WRITE_DEFAULT_SIZE ] = { 0 };
+    uint8_t pucReadBuf[ FAL_QSFP_READ_DEFAULT_SIZE ] = { 0 };
+    uint8_t pucWriteBuff[ FAL_QSFP_WRITE_DEFAULT_SIZE ] = { 0 };
 
     switch( pxCfg->xDevice )
     {
@@ -537,9 +548,9 @@ static uint32_t ulQsfpClose( void *pvFwIf )
             * using output port register.
             */
             ulStatus = FW_IF_ERRORS_CLOSE; /* set status before each I2C call */
-            pucWriteBuff[ 0 ] = FW_IF_QSFP_IO_EXPANDER_OUTPUT_PORT_REG; /* read current output port reg value */
+            pucWriteBuff[ 0 ] = FAL_QSFP_IO_EXPANDER_OUTPUT_PORT_REG; /* read current output port reg value */
 
-            if( ERROR != iI2c_SendRecv( pxThis->xLocalCfg.ulI2CBusNum,
+            if( ERROR != iI2C_SendRecv( pxThis->xLocalCfg.ulI2CBusNum,
                                         pxCfg->ucPowerIoExpanderAddr,
                                         pucWriteBuff,
                                         1,
@@ -561,10 +572,10 @@ static uint32_t ulQsfpClose( void *pvFwIf )
                 ucOutputPortRegValue = ( pucReadBuf[ 0 ] ) & ( ~pxCfg->ucPowerIoExpanderRegBit );
 
                 /* write new output port reg value */
-                pucWriteBuff[ 0 ] = FW_IF_QSFP_IO_EXPANDER_OUTPUT_PORT_REG;
+                pucWriteBuff[ 0 ] = FAL_QSFP_IO_EXPANDER_OUTPUT_PORT_REG;
                 pucWriteBuff[ 1 ] = ucOutputPortRegValue;
 
-                if( ERROR != iI2c_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucPowerIoExpanderAddr, pucWriteBuff, 2 ) )
+                if( ERROR != iI2C_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucPowerIoExpanderAddr, pucWriteBuff, 2 ) )
                 {
                     INC_STAT_COUNTER( FW_IF_QSFP_STATS_I2C_SEND )
                     ulStatus = FW_IF_ERRORS_NONE;
@@ -591,7 +602,7 @@ static uint32_t ulQsfpClose( void *pvFwIf )
 /**
  * @brief   Local implementation of FW_IF_write
  */
-static uint32_t ulQsfpWrite( void *pvFwIf, uint32_t ulDstPort, uint8_t *pucData, uint32_t ulSize, uint32_t ulTimeoutMs )
+static uint32_t ulQsfpWrite( void *pvFwIf, uint64_t ullDstPort, uint8_t *pucData, uint32_t ulSize, uint32_t ulTimeoutMs )
 {
     uint32_t ulStatus = FW_IF_ERRORS_NONE;
 
@@ -602,10 +613,10 @@ static uint32_t ulQsfpWrite( void *pvFwIf, uint32_t ulDstPort, uint8_t *pucData,
     CHECK_DRIVER;
 
     if( ( NULL != pucData ) &&
-        ( FW_IF_QSFP_MAX_DATA >= ulSize ) )
+        ( FAL_QSFP_MAX_DATA >= ulSize ) )
     {
         FW_IF_MUXED_DEVICE_CFG *pxCfg = ( FW_IF_MUXED_DEVICE_CFG* )pxThisIf->cfg;
-        uint8_t pucWriteBuff[ FW_IF_QSFP_WRITE_DEFAULT_SIZE ] = { 0 };
+        uint8_t pucWriteBuff[ FAL_QSFP_WRITE_DEFAULT_SIZE ] = { 0 };
 
         switch( pxCfg->xDevice )
         {
@@ -627,17 +638,17 @@ static uint32_t ulQsfpWrite( void *pvFwIf, uint32_t ulDstPort, uint8_t *pucData,
                             ulStatus = FW_IF_ERRORS_WRITE;
 
                             /* delay before writing qsfp registers  */
-                            iOSAL_Task_SleepTicks( FW_IF_QSFP_PROCESS_TIME_TICKS );
+                            iOSAL_Task_SleepTicks( FAL_QSFP_PROCESS_TIME_TICKS );
 
                             /* write QSFP memory map registers */
-                            uint8_t* pucQsfpWriteBuff = pvOSAL_MemAlloc( ( ulSize+1 ) * sizeof( uint8_t ) );
+                            uint8_t *pucQsfpWriteBuff = pvOSAL_MemAlloc( ( ulSize+1 ) * sizeof( uint8_t ) );
 
                             if( NULL != pucQsfpWriteBuff )
                             {
-                                pucQsfpWriteBuff[ 0 ] = ulDstPort;
+                                pucQsfpWriteBuff[ 0 ] = ullDstPort;
                                 pvOSAL_MemCpy( &pucQsfpWriteBuff[ 1 ], pucData, ulSize );
 
-                                if( ERROR != iI2c_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucDeviceI2cAddr, pucQsfpWriteBuff, ulSize+1 ) )
+                                if( ERROR != iI2C_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucDeviceI2cAddr, pucQsfpWriteBuff, ulSize+1 ) )
                                 {
                                     INC_STAT_COUNTER( FW_IF_QSFP_STATS_I2C_SEND )
                                     ulStatus = FW_IF_ERRORS_NONE;
@@ -657,10 +668,10 @@ static uint32_t ulQsfpWrite( void *pvFwIf, uint32_t ulDstPort, uint8_t *pucData,
                             ulStatus = FW_IF_ERRORS_WRITE;
 
                             /* write IO expander control lines */
-                            pucWriteBuff[ 0 ] = FW_IF_QSFP_IO_EXPANDER_OUTPUT_PORT_REG;
+                            pucWriteBuff[ 0 ] = FAL_QSFP_IO_EXPANDER_OUTPUT_PORT_REG;
                             pucWriteBuff[ 1 ] = *pucData;
 
-                            if( ERROR != iI2c_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucIoExpanderAddr, pucWriteBuff, 2 ) )
+                            if( ERROR != iI2C_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucIoExpanderAddr, pucWriteBuff, 2 ) )
                             {
                                 INC_STAT_COUNTER( FW_IF_QSFP_STATS_I2C_SEND )
                                 ulStatus = FW_IF_ERRORS_NONE;
@@ -698,7 +709,7 @@ static uint32_t ulQsfpWrite( void *pvFwIf, uint32_t ulDstPort, uint8_t *pucData,
                 /* disable the MUX */
                 pucWriteBuff[ 0 ] = 0;
 
-                if( ERROR != iI2c_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucSelectedMuxAddr, pucWriteBuff, 1 ) )
+                if( ERROR != iI2C_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucSelectedMuxAddr, pucWriteBuff, 1 ) )
                 {
                     INC_STAT_COUNTER( FW_IF_QSFP_STATS_I2C_SEND )
                 }
@@ -731,7 +742,7 @@ static uint32_t ulQsfpWrite( void *pvFwIf, uint32_t ulDstPort, uint8_t *pucData,
 /**
  * @brief   Read DIMM Device
  */
-static uint32_t ulReadDimmDevice( void *pvFwIf, uint32_t ulSrcPort, uint8_t *pucData, uint32_t *pulSize, uint32_t ulTimeoutMs )
+static uint32_t ulReadDimmDevice( void *pvFwIf, uint64_t ullSrcPort, uint8_t *pucData, uint32_t *pulSize, uint32_t ulTimeoutMs )
 {
     uint32_t ulStatus = FW_IF_ERRORS_NONE;
 
@@ -743,15 +754,15 @@ static uint32_t ulReadDimmDevice( void *pvFwIf, uint32_t ulSrcPort, uint8_t *puc
 
     if( ( NULL != pucData ) &&
         ( NULL != pulSize ) &&
-        ( FW_IF_QSFP_MAX_DATA >= *pulSize ) )
+        ( FAL_QSFP_MAX_DATA >= *pulSize ) )
     {
         FW_IF_MUXED_DEVICE_CFG *pxCfg = ( FW_IF_MUXED_DEVICE_CFG* )pxThisIf->cfg;
-        uint8_t pucWriteBuff[ FW_IF_QSFP_WRITE_DEFAULT_SIZE ] = { 0 };
+        uint8_t pucWriteBuff[ FAL_QSFP_WRITE_DEFAULT_SIZE ] = { 0 };
 
-        pucWriteBuff[ 0 ] = FW_IF_QSFP_MUX_IO_EXPANDER_DESELECTED;
+        pucWriteBuff[ 0 ] = FAL_QSFP_MUX_IO_EXPANDER_DESELECTED;
 
         /* Ensure 2nd MUX control register output is set to no IO Expander */
-        if( ERROR != iI2c_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucUnselectedMuxAddr[ FW_IF_MUX_ADDRESS_0 ], pucWriteBuff, 1 ) )
+        if( ERROR != iI2C_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->pucUnselectedMuxAddr[ FW_IF_MUX_ADDRESS_0 ], pucWriteBuff, 1 ) )
         {
             INC_STAT_COUNTER( FW_IF_QSFP_STATS_I2C_SEND )
         }
@@ -764,7 +775,7 @@ static uint32_t ulReadDimmDevice( void *pvFwIf, uint32_t ulSrcPort, uint8_t *puc
         /* Ensure 3rd MUX control register output is set to no IO Expander */
         if( FW_IF_ERRORS_NONE == ulStatus )
         {
-            if( ERROR != iI2c_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucUnselectedMuxAddr[ FW_IF_MUX_ADDRESS_1 ], pucWriteBuff, 1 ) )
+            if( ERROR != iI2C_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->pucUnselectedMuxAddr[ FW_IF_MUX_ADDRESS_1 ], pucWriteBuff, 1 ) )
             {
                 INC_STAT_COUNTER( FW_IF_QSFP_STATS_I2C_SEND )
             }
@@ -779,7 +790,7 @@ static uint32_t ulReadDimmDevice( void *pvFwIf, uint32_t ulSrcPort, uint8_t *puc
         if( FW_IF_ERRORS_NONE == ulStatus )
         {
             pucWriteBuff[ 0 ] = pxCfg->ulMuxRegBitIoExpander;
-            if( ERROR != iI2c_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucSelectedMuxAddr, pucWriteBuff, 1 ) )
+            if( ERROR != iI2C_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucSelectedMuxAddr, pucWriteBuff, 1 ) )
             {
                 INC_STAT_COUNTER( FW_IF_QSFP_STATS_I2C_SEND )
             }
@@ -793,8 +804,8 @@ static uint32_t ulReadDimmDevice( void *pvFwIf, uint32_t ulSrcPort, uint8_t *puc
         if( FW_IF_ERRORS_NONE == ulStatus )
         {
             /* read DIMM register */
-            pucWriteBuff[ 0 ] = ulSrcPort;
-            if( ERROR != iI2c_SendRecv( pxThis->xLocalCfg.ulI2CBusNum,
+            pucWriteBuff[ 0 ] = ( uint8_t )ullSrcPort;
+            if( ERROR != iI2C_SendRecv( pxThis->xLocalCfg.ulI2CBusNum,
                                         pxCfg->ucDeviceI2cAddr,
                                         pucWriteBuff,
                                         1,
@@ -816,7 +827,7 @@ static uint32_t ulReadDimmDevice( void *pvFwIf, uint32_t ulSrcPort, uint8_t *puc
 /**
  * @brief   Read QSFP Device
  */
-static uint32_t ulReadQsfpDevice( void *pvFwIf, uint32_t ulSrcPort, uint8_t *pucData, uint32_t *pulSize, uint32_t ulTimeoutMs )
+static uint32_t ulReadQsfpDevice( void *pvFwIf, uint64_t ullSrcPort, uint8_t *pucData, uint32_t *pulSize, uint32_t ulTimeoutMs )
 {
     uint32_t ulStatus = FW_IF_ERRORS_NONE;
 
@@ -828,10 +839,10 @@ static uint32_t ulReadQsfpDevice( void *pvFwIf, uint32_t ulSrcPort, uint8_t *puc
 
     if( ( NULL != pucData ) &&
         ( NULL != pulSize ) &&
-        ( FW_IF_QSFP_MAX_DATA >= *pulSize ) )
+        ( FAL_QSFP_MAX_DATA >= *pulSize ) )
     {
         FW_IF_MUXED_DEVICE_CFG *pxCfg = ( FW_IF_MUXED_DEVICE_CFG* )pxThisIf->cfg;
-        uint8_t pucWriteBuff[ FW_IF_QSFP_WRITE_DEFAULT_SIZE ] = { 0 };
+        uint8_t pucWriteBuff[ FAL_QSFP_WRITE_DEFAULT_SIZE ] = { 0 };
 
         /*
         * Step 1: Check QSFP module is present
@@ -847,9 +858,9 @@ static uint32_t ulReadQsfpDevice( void *pvFwIf, uint32_t ulSrcPort, uint8_t *puc
                 case FW_IF_MUXED_DEVICE_HW_LEVEL_MEMORY_MAP:
                 {
                     /* read QSFP memory map registers */
-                    pucWriteBuff[ 0 ] = ulSrcPort;
+                    pucWriteBuff[ 0 ] = ( uint8_t )ullSrcPort;
 
-                    if( ERROR != iI2c_SendRecv( pxThis->xLocalCfg.ulI2CBusNum,
+                    if( ERROR != iI2C_SendRecv( pxThis->xLocalCfg.ulI2CBusNum,
                                                 pxCfg->ucDeviceI2cAddr,
                                                 pucWriteBuff,
                                                 1,
@@ -870,10 +881,10 @@ static uint32_t ulReadQsfpDevice( void *pvFwIf, uint32_t ulSrcPort, uint8_t *puc
                 case FW_IF_MUXED_DEVICE_HW_LEVEL_IO_EXPANDER:
                 {
                     /* read IO expander control lines */
-                    pucWriteBuff[ 0 ] = FW_IF_QSFP_IO_EXPANDER_INPUT_PORT_REG;
+                    pucWriteBuff[ 0 ] = FAL_QSFP_IO_EXPANDER_INPUT_PORT_REG;
                     *pulSize = 1; /* update read size to 1 byte */
 
-                    if( ERROR != iI2c_SendRecv( pxThis->xLocalCfg.ulI2CBusNum,
+                    if( ERROR != iI2C_SendRecv( pxThis->xLocalCfg.ulI2CBusNum,
                                                 pxCfg->ucIoExpanderAddr,
                                                 pucWriteBuff,
                                                 1,
@@ -920,7 +931,7 @@ static uint32_t ulReadQsfpDevice( void *pvFwIf, uint32_t ulSrcPort, uint8_t *puc
 /**
  * @brief   Local implementation of FW_IF_read
  */
-static uint32_t ulQsfpRead( void *pvFwIf, uint32_t ulSrcPort, uint8_t *pucData, uint32_t *pulSize, uint32_t ulTimeoutMs )
+static uint32_t ulQsfpRead( void *pvFwIf, uint64_t ullSrcPort, uint8_t *pucData, uint32_t *pulSize, uint32_t ulTimeoutMs )
 {
     uint32_t ulStatus = FW_IF_ERRORS_NONE;
 
@@ -932,18 +943,18 @@ static uint32_t ulQsfpRead( void *pvFwIf, uint32_t ulSrcPort, uint8_t *pucData, 
 
     if( ( NULL != pucData ) &&
         ( NULL != pulSize ) &&
-        ( FW_IF_QSFP_MAX_DATA >= *pulSize ) )
+        ( FAL_QSFP_MAX_DATA >= *pulSize ) )
     {
         FW_IF_MUXED_DEVICE_CFG *pxCfg = ( FW_IF_MUXED_DEVICE_CFG* )pxThisIf->cfg;
 
         switch( pxCfg->xDevice )
         {
             case FW_IF_DEVICE_QSFP:
-                ulStatus = ulReadQsfpDevice( pvFwIf, ulSrcPort, pucData, pulSize, ulTimeoutMs );
+                ulStatus = ulReadQsfpDevice( pvFwIf, ullSrcPort, pucData, pulSize, ulTimeoutMs );
                 break;
 
             case FW_IF_DEVICE_DIMM:
-                ulStatus = ulReadDimmDevice( pvFwIf, ulSrcPort, pucData, pulSize, ulTimeoutMs );
+                ulStatus = ulReadDimmDevice( pvFwIf, ullSrcPort, pucData, pulSize, ulTimeoutMs );
                 break;
 
             default:
@@ -1009,7 +1020,7 @@ static uint32_t ulQsfpIoctrl( void *pvFwIf, uint32_t ulOption, void *pvValue )
 /**
  * @brief   Local implementation of FW_IF_bindCallback
  */
-static uint32_t ulQsfpBindCallback( void *pvFwIf, FW_IF_callback *xpNewFunc )
+static uint32_t ulQsfpBindCallback( void *pvFwIf, FW_IF_callback *pxNewFunc )
 {
     uint32_t ulStatus = FW_IF_ERRORS_NONE;
 
@@ -1019,7 +1030,7 @@ static uint32_t ulQsfpBindCallback( void *pvFwIf, FW_IF_callback *xpNewFunc )
     CHECK_FIREWALLS( pxThisIf );
     CHECK_DRIVER;
 
-    if( NULL != xpNewFunc )
+    if( NULL != pxNewFunc )
     {
         FW_IF_MUXED_DEVICE_CFG *pxCfg = ( FW_IF_MUXED_DEVICE_CFG* )pxThisIf->cfg;
 
@@ -1027,7 +1038,7 @@ static uint32_t ulQsfpBindCallback( void *pvFwIf, FW_IF_callback *xpNewFunc )
          * Binds in callback provided to the FW_IF.
          * Callback will be invoked when driver event occurs.
          */
-        pxThisIf->raiseEvent = xpNewFunc;
+        pxThisIf->raiseEvent = pxNewFunc;
         PLL_DBG( FW_IF_QSFP_NAME, "QSFP FW_IF_bindCallback (qsfp address 0x%02X) \r\n",
                ( unsigned int )pxCfg->ucDeviceI2cAddr );
     }
@@ -1050,13 +1061,13 @@ static int iQsfpModuleSelect( FW_IF_MUXED_DEVICE_CFG *pxCfg )
     if( NULL != pxCfg )
     {
         uint8_t ucInputPortRegValue = 0;
-        uint8_t pucReadBuf[ FW_IF_QSFP_READ_DEFAULT_SIZE ] = { 0 };
-        uint8_t pucWriteBuff[ FW_IF_QSFP_WRITE_DEFAULT_SIZE ] = { 0 };
+        uint8_t pucReadBuf[ FAL_QSFP_READ_DEFAULT_SIZE ] = { 0 };
+        uint8_t pucWriteBuff[ FAL_QSFP_WRITE_DEFAULT_SIZE ] = { 0 };
 
-        pucWriteBuff[ 0 ] = FW_IF_QSFP_MUX_IO_EXPANDER_DESELECTED;
+        pucWriteBuff[ 0 ] = FAL_QSFP_MUX_IO_EXPANDER_DESELECTED;
 
         /* Ensure 2nd MUX control register output is set to no IO Expander */
-        if( ERROR != iI2c_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucUnselectedMuxAddr[ FW_IF_MUX_ADDRESS_0 ], pucWriteBuff, 1 ) )
+        if( ERROR != iI2C_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->pucUnselectedMuxAddr[ FW_IF_MUX_ADDRESS_0 ], pucWriteBuff, 1 ) )
         {
             INC_STAT_COUNTER( FW_IF_QSFP_STATS_I2C_SEND )
             iStatus = OK;
@@ -1069,7 +1080,7 @@ static int iQsfpModuleSelect( FW_IF_MUXED_DEVICE_CFG *pxCfg )
         /* Ensure 3rd MUX control register output is set to no IO Expander */
         if( OK == iStatus )
         {
-            if( ERROR != iI2c_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucUnselectedMuxAddr[ FW_IF_MUX_ADDRESS_1 ], pucWriteBuff, 1 ) )
+            if( ERROR != iI2C_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->pucUnselectedMuxAddr[ FW_IF_MUX_ADDRESS_1 ], pucWriteBuff, 1 ) )
             {
                 INC_STAT_COUNTER( FW_IF_QSFP_STATS_I2C_SEND )
                 iStatus = OK;
@@ -1087,7 +1098,7 @@ static int iQsfpModuleSelect( FW_IF_MUXED_DEVICE_CFG *pxCfg )
             pucWriteBuff[ 0 ] = pxCfg->ulMuxRegBitIoExpander | pxCfg->ulMuxRegBit;
 
             /* set MUX control register output to correct IO expander */
-            if( ERROR != iI2c_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucSelectedMuxAddr, pucWriteBuff, 1 ) )
+            if( ERROR != iI2C_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucSelectedMuxAddr, pucWriteBuff, 1 ) )
             {
                 INC_STAT_COUNTER( FW_IF_QSFP_STATS_I2C_SEND )
                 iStatus = OK;
@@ -1103,9 +1114,9 @@ static int iQsfpModuleSelect( FW_IF_MUXED_DEVICE_CFG *pxCfg )
             iStatus = ERROR;
 
             /* Read MODPRES line of IO Expander to determine if QSFP is present */
-            pucWriteBuff[ 0 ] = FW_IF_QSFP_IO_EXPANDER_INPUT_PORT_REG;
+            pucWriteBuff[ 0 ] = FAL_QSFP_IO_EXPANDER_INPUT_PORT_REG;
 
-            if( ERROR != iI2c_SendRecv( pxThis->xLocalCfg.ulI2CBusNum,
+            if( ERROR != iI2C_SendRecv( pxThis->xLocalCfg.ulI2CBusNum,
                                         pxCfg->ucIoExpanderAddr,
                                         pucWriteBuff,
                                         1,
@@ -1127,15 +1138,15 @@ static int iQsfpModuleSelect( FW_IF_MUXED_DEVICE_CFG *pxCfg )
             iStatus = ERROR;
 
             /* Check if QSFP is present */
-            if( 0 == ( ucInputPortRegValue & FW_IF_QSFP_MODPRES_L_BIT_MASK ) )
+            if( 0 == ( ucInputPortRegValue & FAL_QSFP_MODPRES_L_BIT_MASK ) )
             {
                 /* If QSFP module is present check if MODSEL_L is already selected */
-                if( 0 != ( ucInputPortRegValue & FW_IF_QSFP_MODSEL_L_BIT_MASK ) )
+                if( 0 != ( ucInputPortRegValue & FAL_QSFP_MODSEL_L_BIT_MASK ) )
                 {
                     /* MODSEL_L wasn't yet set so set it 0 */
-                    pucWriteBuff[ 0 ] = FW_IF_QSFP_IO_EXPANDER_OUTPUT_PORT_REG;
-                    pucWriteBuff[ 1 ] = ( ucInputPortRegValue & FW_IF_QSFP_MODSELL_L_SET_LOW );
-                    if( ERROR != iI2c_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucIoExpanderAddr, pucWriteBuff, 2 ) )
+                    pucWriteBuff[ 0 ] = FAL_QSFP_IO_EXPANDER_OUTPUT_PORT_REG;
+                    pucWriteBuff[ 1 ] = ( ucInputPortRegValue & FAL_QSFP_MODSELL_L_SET_LOW );
+                    if( ERROR != iI2C_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucIoExpanderAddr, pucWriteBuff, 2 ) )
                     {
                         /* Ready to read from QSFP */
                         INC_STAT_COUNTER( FW_IF_QSFP_STATS_I2C_SEND )
@@ -1147,7 +1158,10 @@ static int iQsfpModuleSelect( FW_IF_MUXED_DEVICE_CFG *pxCfg )
                     }
 
                     /* Delay to allow QSFP a setup time after MODSEL is set */
-                    iOSAL_Task_SleepMs( FW_IF_QSFP_PROCESS_TIME_MS );
+                    if( OSAL_ERRORS_NONE != iOSAL_Task_SleepMs( FAL_QSFP_PROCESS_TIME_MS ) )
+                    {
+                        iStatus = ERROR;
+                    }
                 }
                 else
                 {
@@ -1157,13 +1171,13 @@ static int iQsfpModuleSelect( FW_IF_MUXED_DEVICE_CFG *pxCfg )
             else
             {
                 /* QSFP is not present. Check if MODSEL was already selected and if so unset it */
-                if( 0 == ( ucInputPortRegValue & FW_IF_QSFP_MODSEL_L_BIT_MASK ) )
+                if( 0 == ( ucInputPortRegValue & FAL_QSFP_MODSEL_L_BIT_MASK ) )
                 {
                     /* set MODSEL to 1 */
-                    pucWriteBuff[ 0 ] = FW_IF_QSFP_IO_EXPANDER_OUTPUT_PORT_REG;
-                    pucWriteBuff[ 1 ] = ( ucInputPortRegValue | ~FW_IF_QSFP_MODSELL_L_SET_LOW );
+                    pucWriteBuff[ 0 ] = FAL_QSFP_IO_EXPANDER_OUTPUT_PORT_REG;
+                    pucWriteBuff[ 1 ] = ( ucInputPortRegValue | ~FAL_QSFP_MODSELL_L_SET_LOW );
 
-                    if( ERROR != iI2c_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucIoExpanderAddr, pucWriteBuff, 2 ) )
+                    if( ERROR != iI2C_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucIoExpanderAddr, pucWriteBuff, 2 ) )
                     {
                         INC_STAT_COUNTER( FW_IF_QSFP_STATS_I2C_SEND )
                         /* Leave iStatus as ERROR to stop access to QSFP */
@@ -1189,12 +1203,12 @@ static int iQsfpModuleDeselect( FW_IF_MUXED_DEVICE_CFG *pxCfg )
 
     if( NULL != pxCfg )
     {
-        uint8_t pucWriteBuff[ FW_IF_QSFP_WRITE_DEFAULT_SIZE ] = { 0 };
+        uint8_t pucWriteBuff[ FAL_QSFP_WRITE_DEFAULT_SIZE ] = { 0 };
 
         pucWriteBuff[ 0 ] = pxCfg->ulMuxRegBitIoExpander;
 
         /* set MUX control register output to correct IO expander */
-        if( ERROR != iI2c_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucSelectedMuxAddr, pucWriteBuff, 1 ) )
+        if( ERROR != iI2C_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucSelectedMuxAddr, pucWriteBuff, 1 ) )
         {
             INC_STAT_COUNTER( FW_IF_QSFP_STATS_I2C_SEND )
             iStatus = OK;
@@ -1208,8 +1222,8 @@ static int iQsfpModuleDeselect( FW_IF_MUXED_DEVICE_CFG *pxCfg )
         {
             iStatus = ERROR;
             /* Finally set the MUX control register output to deselect the IO Expander */
-            pucWriteBuff[ 0 ] = FW_IF_QSFP_MUX_IO_EXPANDER_DESELECTED;
-            if( ERROR != iI2c_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucSelectedMuxAddr, pucWriteBuff, 1 ) )
+            pucWriteBuff[ 0 ] = FAL_QSFP_MUX_IO_EXPANDER_DESELECTED;
+            if( ERROR != iI2C_Send( pxThis->xLocalCfg.ulI2CBusNum, pxCfg->ucSelectedMuxAddr, pucWriteBuff, 1 ) )
             {
                 INC_STAT_COUNTER( FW_IF_QSFP_STATS_I2C_SEND )
                 iStatus = OK;
@@ -1231,7 +1245,7 @@ static int iQsfpModuleDeselect( FW_IF_MUXED_DEVICE_CFG *pxCfg )
 /**
  * @brief   initialisation function for QSFP interfaces (generic across all QSFP interfaces)
  */
-uint32_t FW_IF_MUXED_DEVICE_init( FW_IF_MUXED_DEVICE_INIT_CFG* pxInitCfg )
+uint32_t ulFW_IF_MUXED_DEVICE_Init( FW_IF_MUXED_DEVICE_INIT_CFG *pxInitCfg )
 {
     uint32_t ulStatus = FW_IF_ERRORS_NONE;
 
@@ -1248,7 +1262,7 @@ uint32_t FW_IF_MUXED_DEVICE_init( FW_IF_MUXED_DEVICE_INIT_CFG* pxInitCfg )
         /*
          * Initilise config data shared between all QSFPs.
          */
-        memcpy( &pxThis->xLocalCfg, pxInitCfg, sizeof( FW_IF_MUXED_DEVICE_INIT_CFG ) );
+        pvOSAL_MemCpy( &pxThis->xLocalCfg, pxInitCfg, sizeof( FW_IF_MUXED_DEVICE_INIT_CFG ) );
         pxThis->iInitialised = FW_IF_TRUE;
         INC_STAT_COUNTER( FW_IF_QSFP_STATS_INIT_OVERALL_COMPLETE )
     }
@@ -1259,7 +1273,7 @@ uint32_t FW_IF_MUXED_DEVICE_init( FW_IF_MUXED_DEVICE_INIT_CFG* pxInitCfg )
 /**
  * @brief   creates an instance of the QSFP interface
  */
-uint32_t FW_IF_MUXED_DEVICE_create( FW_IF_CFG* pxFwIf, FW_IF_MUXED_DEVICE_CFG* pxQsfpCfg )
+uint32_t ulFW_IF_MUXED_DEVICE_Create( FW_IF_CFG *pxFwIf, FW_IF_MUXED_DEVICE_CFG *pxQsfpCfg )
 {
     uint32_t ulStatus = FW_IF_ERRORS_NONE;
 
@@ -1295,7 +1309,7 @@ uint32_t FW_IF_MUXED_DEVICE_create( FW_IF_CFG* pxFwIf, FW_IF_MUXED_DEVICE_CFG* p
 /**
  * @brief   Print all the stats gathered by the application
  */
-uint32_t FW_IF_MUXED_DEVICE_PrintStatistics( void )
+uint32_t ulFW_IF_MUXED_DEVICE_PrintStatistics( void )
 {
     uint32_t ulStatus = FW_IF_ERRORS_NONE;
 
@@ -1328,14 +1342,14 @@ uint32_t FW_IF_MUXED_DEVICE_PrintStatistics( void )
 /**
  * @brief   Clear all the stats in the application
  */
-uint32_t FW_IF_MUXED_DEVICE_ClearStatistics( void )
+uint32_t ulFW_IF_MUXED_DEVICE_ClearStatistics( void )
 {
     uint32_t ulStatus = FW_IF_ERRORS_NONE;
 
     if( FW_IF_TRUE == pxThis->iInitialised )
     {
-        pvOSAL_MemSet( pxThis->ulStatCounters, 0, sizeof( pxThis->ulStatCounters ) );
-        pvOSAL_MemSet( pxThis->ulErrorCounters, 0, sizeof( pxThis->ulErrorCounters ) );
+        pvOSAL_MemSet( pxThis->pulStatCounters, 0, sizeof( pxThis->pulStatCounters ) );
+        pvOSAL_MemSet( pxThis->pulErrorCounters, 0, sizeof( pxThis->pulErrorCounters ) );
     }
     else
     {

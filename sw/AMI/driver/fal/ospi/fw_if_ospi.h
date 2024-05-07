@@ -107,21 +107,21 @@ typedef struct FW_IF_OSPI_CFG
 /**
  * @brief   initialisation function for OSPI interfaces (generic across all OSPI interfaces)
  *
- * @param   xInitCfg    pointer to the config to initialise the driver with
+ * @param   pxInitCfg   pointer to the config to initialise the driver with
  *
  * @return  See FW_IF_ERRORS
  */
-extern uint32_t ulFW_IF_OSPI_init( FW_IF_OSPI_INIT_CFG * xInitCfg );
+extern uint32_t ulFW_IF_OSPI_Init( FW_IF_OSPI_INIT_CFG *pxInitCfg );
 
 /**
  * @brief   creates an instance of the OSPI interface
  *
- * @param   xFWIf       fw_if handle to the interface instance
- * @param   xOSPICfg    unique data of this instance
+ * @param   pxFWIf      fw_if handle to the interface instance
+ * @param   pxOspiCfg   unique data of this instance
  *
  * @return  See FW_IF_ERRORS
  */
-extern uint32_t ulFW_IF_OSPI_create( FW_IF_CFG *xFWIf, FW_IF_OSPI_CFG *xOspiCfg );
+extern uint32_t ulFW_IF_OSPI_Create( FW_IF_CFG *pxFWIf, FW_IF_OSPI_CFG *pxOspiCfg );
 
 /**
  *

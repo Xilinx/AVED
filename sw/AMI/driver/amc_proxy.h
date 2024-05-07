@@ -140,6 +140,7 @@ struct amc_proxy_sensor_request {
  *
  * @length: the length of the response
  * @address: the address of memory to be populated with response
+ * @boot_device: target boot device
  * @partition: partition number to flash to
  * @last_chunk: 1 to indicate that this is the last chunk
  * @chunk: current chunk number
@@ -150,6 +151,7 @@ struct amc_proxy_sensor_request {
 struct amc_proxy_pdi_download_request {
         uint32_t length;
         uint64_t address;
+        uint32_t boot_device;
         uint32_t partition;
         uint16_t last_chunk;
         uint16_t chunk;
@@ -159,8 +161,10 @@ struct amc_proxy_pdi_download_request {
 /**
  * struct amc_proxy_partition_copy_request: the partition copy request data
  * 
- * @src: source partition
- * @dest: destination partition
+ * @src_device: source device
+ * @src_part: source partition
+ * @dest_device: destination device
+ * @dest_part: destination partition
  * @length: length of PCI memory
  * @address: start offset of PCI memory
  *
@@ -169,8 +173,10 @@ struct amc_proxy_pdi_download_request {
  * partition. This memory is not accessed by AMI.
  */
 struct amc_proxy_partition_copy_request {
-        uint32_t src;
-        uint32_t dest;
+        uint32_t src_device;
+        uint32_t src_part;
+        uint32_t dest_device;
+        uint32_t dest_part;
         uint32_t length;
         uint64_t address;
 };
@@ -414,6 +420,16 @@ int amc_proxy_request_module_read_write(struct amc_proxy_cmd_struct *cmd,
                                         struct amc_proxy_module_rw_request *module_rw);
 
 /**
+ * amc_proxy_request_debug_verbosity() - debug verbosity request
+ *
+ * @cmd: the proxy command structure
+ * @verbosity: the debug verbosity level to set
+ *
+ * Return: The errno return code
+ */
+int amc_proxy_request_debug_verbosity(struct amc_proxy_cmd_struct *cmd, uint8_t verbosity);
+
+/**
  * amc_proxy_get_response_identity() - retrieve the identity response
  *
  * @cmd: the proxy command structure
@@ -495,5 +511,14 @@ int amc_proxy_get_response_eeprom_read_write(struct amc_proxy_cmd_struct *cmd);
  * Return: The errno return code
  */
 int amc_proxy_get_response_module_read_write(struct amc_proxy_cmd_struct *cmd);
+
+/**
+ * amc_proxy_get_response_debug_verbosity() - retrieve debug verbosity response
+ *
+ * @cmd: the proxy command structure
+ *
+ * Return: The errno return code
+ */
+int amc_proxy_get_response_debug_verbosity(struct amc_proxy_cmd_struct *cmd);
 
 #endif /* _AMC_PROXY_H_ */

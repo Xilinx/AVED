@@ -26,6 +26,7 @@
  * @amc_ctrl_ctxt: Pointer to top level AMC data struct.
  * @buf: Bitstream byte buffer.
  * @size: Size of bitstream buffer.
+ * @boot_device: Target boot device.
  * @partition: Partition number to flash.
  * @efd_ctx: eventfd context for reporting progress (optional).
  *
@@ -34,11 +35,11 @@
  * Return: 0 or negative error code.
  */
 static int do_image_download(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *buf, uint32_t size,
-	uint32_t partition, struct eventfd_ctx *efd_ctx)
+	uint8_t boot_device, uint32_t partition, struct eventfd_ctx *efd_ctx)
 {
 	int ret = SUCCESS;
 	uint16_t chunk = 0;
-	uint16_t part = 0;
+	uint8_t  part = 0;
 	uint32_t bytes_written = 0;
 	uint32_t bytes_to_write = 0;
 	bool rewrite_boot_tag = false;
@@ -56,7 +57,7 @@ static int do_image_download(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *bu
 		if (partition > MAX_PARTITION)
 			return -EINVAL;
 
-		part = (uint16_t)partition;
+		part = (uint8_t)partition;
 	}
 
 	AMI_VDBG(
@@ -82,7 +83,7 @@ static int do_image_download(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *bu
 			* the GCQ command. Using `flags` to pass in partition and chunk numbers.
 			*/
 			ret = submit_gcq_command(amc_ctrl_ctxt, GCQ_SUBMIT_CMD_DOWNLOAD_PDI,
-				MK_PDI_FLAGS(part, chunk, (!rewrite_boot_tag && (chunk == (num_chunks - 1)))),
+				MK_PDI_FLAGS(boot_device, part, chunk, (!rewrite_boot_tag && (chunk == (num_chunks - 1)))),
 				&buf[bytes_written], bytes_to_write);
 
 			if (ret) 
@@ -103,7 +104,7 @@ static int do_image_download(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *bu
 			 * tag and write the first chunk last.
 			 */
 			ret = submit_gcq_command(amc_ctrl_ctxt, GCQ_SUBMIT_CMD_DOWNLOAD_PDI,
-				MK_PDI_FLAGS(part, BOOT_TAG_CHUNK, false),
+				MK_PDI_FLAGS(boot_device, part, BOOT_TAG_CHUNK, false),
 				(uint8_t*)&boot_tag, sizeof(uint32_t));
 			
 			/*
@@ -139,7 +140,7 @@ static int do_image_download(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *bu
 		 * to have the full chunk size.
 		 */
 		ret = submit_gcq_command(amc_ctrl_ctxt, GCQ_SUBMIT_CMD_DOWNLOAD_PDI,
-			MK_PDI_FLAGS(partition, BOOT_TAG_CHUNK, true),
+			MK_PDI_FLAGS(boot_device, partition, BOOT_TAG_CHUNK, true),
 			buf, (PDI_CHUNK_SIZE * PDI_CHUNK_MULTIPLIER));
 
 		if (!ret && efd_ctx)
@@ -156,7 +157,7 @@ static int do_image_download(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *bu
  * Download a PDI bitstream.
  */
 int download_pdi(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *buf, uint32_t size,
-	uint32_t partition, struct eventfd_ctx *efd_ctx)
+	uint8_t boot_device, uint32_t partition, struct eventfd_ctx *efd_ctx)
 {
 	if (!amc_ctrl_ctxt || !size || !buf || (partition == FPT_UPDATE_MAGIC))
 		return -EINVAL;
@@ -165,6 +166,7 @@ int download_pdi(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *buf, uint32_t 
 		amc_ctrl_ctxt,
 		buf,
 		size,
+		boot_device,
 		partition,
 		efd_ctx
 	);
@@ -174,7 +176,7 @@ int download_pdi(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *buf, uint32_t 
  * Update device FPT.
  */
 int update_fpt(struct pf_dev_struct *pf_dev, uint8_t *buf, uint32_t size,
-	struct eventfd_ctx *efd_ctx)
+	uint8_t boot_device, struct eventfd_ctx *efd_ctx)
 {
 	int ret = 0;
 
@@ -185,6 +187,7 @@ int update_fpt(struct pf_dev_struct *pf_dev, uint8_t *buf, uint32_t size,
 		pf_dev->amc_ctrl_ctxt,
 		buf,
 		size,
+		boot_device,
 		FPT_UPDATE_MAGIC,
 		efd_ctx
 	);
@@ -233,7 +236,7 @@ int device_boot(struct pf_dev_struct *pf_dev, uint32_t partition)
 /*
  * Copy a device partition.
  */
-int copy_partition(struct pf_dev_struct *pf_dev, uint32_t src, uint32_t dest)
+int copy_partition(struct pf_dev_struct *pf_dev, uint32_t src_device, uint32_t src_part, uint32_t dest_device, uint32_t dest_part)
 {
 	int ret = SUCCESS;
 	struct fpt_partition src_partition = { 0 };
@@ -241,17 +244,17 @@ int copy_partition(struct pf_dev_struct *pf_dev, uint32_t src, uint32_t dest)
 
 	AMI_VDBG(
 		pf_dev->amc_ctrl_ctxt,
-		"Attempting to copy partition %d to %d",
-		src, dest
+		"Attempting to copy from device %d partition %d to device %d partition %d",
+		src_device, src_part, dest_device, dest_part
 	);
 
 	/* Basic sanity check */
-	if ((src > MAX_PARTITION) || (dest > MAX_PARTITION))
+	if ((src_device > MAX_DEVICE) || (src_part > MAX_PARTITION) || (dest_device > MAX_DEVICE) || (dest_part > MAX_PARTITION))
 		return -EINVAL;
 
 	/* Check that the partitions exist. */
-	if (read_fpt_partition(pf_dev, src, &src_partition) ||
-		read_fpt_partition(pf_dev, dest, &dest_partition)) {
+	if (read_fpt_partition(pf_dev, src_device, src_part, &src_partition) ||
+		read_fpt_partition(pf_dev, dest_device, dest_part, &dest_partition)) {
 			AMI_ERR(pf_dev->amc_ctrl_ctxt, "Partition not found");
 			return -EINVAL;
 	}
@@ -267,7 +270,7 @@ int copy_partition(struct pf_dev_struct *pf_dev, uint32_t src, uint32_t dest)
 	 * No data buffer is given and length is set to the size of the source partition.
 	 */
 	ret = submit_gcq_command(pf_dev->amc_ctrl_ctxt, GCQ_SUBMIT_CMD_COPY_PARTITION,
-		MK_PARTITION_FLAGS(src, dest), NULL, src_partition.partition_size);
+		MK_PARTITION_FLAGS(src_device, src_part, dest_device, dest_part), NULL, src_partition.partition_size);
 	
 	if (ret)
 		AMI_ERR(pf_dev->amc_ctrl_ctxt, "Failed to copy partition");

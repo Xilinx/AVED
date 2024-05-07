@@ -107,7 +107,7 @@ typedef struct _FW_IF_MUXED_DEVICE_CFG
     uint8_t                             ucPowerIoExpanderAddr;
     uint8_t                             ucPowerIoExpanderRegBit;
     uint8_t                             ucSelectedMuxAddr;
-    uint8_t                             ucUnselectedMuxAddr[ MAX_FW_IF_MUX_ADDRESS ];
+    uint8_t                             pucUnselectedMuxAddr[ MAX_FW_IF_MUX_ADDRESS ];
     uint32_t                            ulMuxRegBitIoExpander;
     uint32_t                            ulMuxRegBit;
     uint8_t                             ucIoExpanderAddr;
@@ -128,7 +128,7 @@ typedef struct _FW_IF_MUXED_DEVICE_CFG
  *
  * @return  See FW_IF_ERRORS
  */
-extern uint32_t FW_IF_MUXED_DEVICE_init( FW_IF_MUXED_DEVICE_INIT_CFG* pxInitCfg );
+extern uint32_t ulFW_IF_MUXED_DEVICE_Init( FW_IF_MUXED_DEVICE_INIT_CFG *pxInitCfg );
 
 /**
  * @brief   creates an instance of the MUXED_DEVICE interface
@@ -138,7 +138,7 @@ extern uint32_t FW_IF_MUXED_DEVICE_init( FW_IF_MUXED_DEVICE_INIT_CFG* pxInitCfg 
  *
  * @return  See FW_IF_ERRORS
  */
-extern uint32_t FW_IF_MUXED_DEVICE_create( FW_IF_CFG* pxFwIf, FW_IF_MUXED_DEVICE_CFG* pxQsfpCfg );
+extern uint32_t ulFW_IF_MUXED_DEVICE_Create( FW_IF_CFG *pxFwIf, FW_IF_MUXED_DEVICE_CFG *pxQsfpCfg );
 
 /**
  * @brief   Print all the stats gathered by the application
@@ -146,7 +146,7 @@ extern uint32_t FW_IF_MUXED_DEVICE_create( FW_IF_CFG* pxFwIf, FW_IF_MUXED_DEVICE
  * @return  See FW_IF_ERRORS
  *
  */
-extern uint32_t FW_IF_MUXED_DEVICE_PrintStatistics( void );
+extern uint32_t ulFW_IF_MUXED_DEVICE_PrintStatistics( void );
 
 /**
  * @brief   Clear all the stats in the application
@@ -154,6 +154,6 @@ extern uint32_t FW_IF_MUXED_DEVICE_PrintStatistics( void );
  * @return  See FW_IF_ERRORS
  *
  */
-extern uint32_t FW_IF_MUXED_DEVICE_ClearStatistics( void );
+extern uint32_t ulFW_IF_MUXED_DEVICE_ClearStatistics( void );
 
 #endif

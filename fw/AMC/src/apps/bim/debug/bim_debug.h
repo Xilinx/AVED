@@ -12,6 +12,7 @@
 #define _BIM_DEBUG_H_
 
 #include "dal.h"
+#include "evl.h"
 
 
 /******************************************************************************/
@@ -20,12 +21,11 @@
 
 /**
  * @brief   Initialise the BIM debug access
- * 
+ *
  * @param   pxParentHandle optional handle to the parent directory
- * 
+ *
  * @return  N/A
  */
 void vBIM_DebugInit( DAL_HDL pxParentHandle );
 
 #endif
-

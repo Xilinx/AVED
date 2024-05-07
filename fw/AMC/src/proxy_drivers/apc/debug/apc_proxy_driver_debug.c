@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2024 Advanced Micro Devices, Inc. All rights reserved.
  * SPDX-License-Identifier: MIT
  *
  * This file contains the AVED Programming Control (APC) debug implementation
@@ -207,15 +207,20 @@ static void vBindCallbacks( void )
 static void vSetDownloadImage( void )
 {
     int iInstance      = 0;
+    int xBootDevice    = 0;
     int iPartition     = 0;
     int iImageSize     = 0;
     uint32_t ulSrcAddr = 0;
-    int iPacketNum = 0; 
-    int iPacketSize = 0;
+    int iPacketNum     = 0; 
+    int iPacketSize    = 0;
     
     if( OK != iDAL_GetIntInRange( "Enter request instance:", &iInstance, 0, UTIL_MAX_UINT8 ) )
     {
         PLL_DAL( APC_DBG_NAME, "Error retrieving instance\r\n" );
+    }
+    else if( OK != iDAL_GetIntInRange( "Enter boot device:", &xBootDevice, APC_BOOT_DEVICE_PRIMARY, MAX_APC_BOOT_DEVICES ) )
+    {
+        PLL_DAL( APC_DBG_NAME, "Error retrieving boot device\r\n" );
     }
     else if( OK != iDAL_GetInt( "Enter partition num:", &iPartition ) )
     {
@@ -243,7 +248,7 @@ static void vSetDownloadImage( void )
         EVL_SIGNAL xSignal = { 0 };
         xSignal.ucInstance = iInstance;
 
-        if( OK != iAPC_DownloadImage( &xSignal, iPartition, ulSrcAddr, ( uint32_t )iImageSize, 
+        if( OK != iAPC_DownloadImage( &xSignal, ( APC_BOOT_DEVICES )xBootDevice, iPartition, ulSrcAddr, ( uint32_t )iImageSize, 
                                       ( uint16_t )iPacketNum, ( uint16_t )iPacketSize ) )
         {
             PLL_DAL( APC_DBG_NAME, "Error writing %d bytes to partition %d\r\n", iImageSize, iPartition );
@@ -259,21 +264,31 @@ static void vSetDownloadImage( void )
 /**
  * @brief   Debug function to download an image to flash
  */
-static void vSetCopyImage( void )
+static void vSetCopyImage( void )   
 {
-    int iInstance      = 0;
-    int iSrcPartition  = 0;
-    int iDestPartition = 0;
-    int iImageSize     = 0;
-    uint32_t ulSrcAddr = 0;
+    int iInstance       = 0;
+    int xSrcBootDevice  = 0;
+    int iSrcPartition   = 0;
+    int xDestBootDevice = 0;
+    int iDestPartition  = 0;
+    int iImageSize      = 0;
+    uint32_t ulSrcAddr  = 0;
 
     if( OK != iDAL_GetIntInRange( "Enter request instance:", &iInstance, 0, UTIL_MAX_UINT8 ) )
     {
         PLL_DAL( APC_DBG_NAME, "Error retrieving instance\r\n" );
     }
+    else if( OK != iDAL_GetIntInRange( "Enter source boot device:", &xSrcBootDevice, APC_BOOT_DEVICE_PRIMARY, MAX_APC_BOOT_DEVICES ) )
+    {
+        PLL_DAL( APC_DBG_NAME, "Error retrieving source boot device\r\n" );
+    }
     else if( OK != iDAL_GetInt( "Enter source partition num:", &iSrcPartition ) )
     {
         PLL_DAL( APC_DBG_NAME, "Error retrieving source partition number\r\n" );
+    }
+    else if( OK != iDAL_GetIntInRange( "Enter destination boot device:", &xDestBootDevice, APC_BOOT_DEVICE_PRIMARY, MAX_APC_BOOT_DEVICES ) )
+    {
+        PLL_DAL( APC_DBG_NAME, "Error retrieving destination boot device\r\n" );
     }
     else if( OK != iDAL_GetInt( "Enter destination partition num:", &iDestPartition ) )
     {
@@ -292,7 +307,7 @@ static void vSetCopyImage( void )
         EVL_SIGNAL xSignal = { 0 };
         xSignal.ucInstance = iInstance;
 
-        if( OK != iAPC_CopyImage( &xSignal, iSrcPartition, iDestPartition, ulSrcAddr, ( uint32_t )iImageSize ) )
+        if( OK != iAPC_CopyImage( &xSignal, ( APC_BOOT_DEVICES )xSrcBootDevice, iSrcPartition, ( APC_BOOT_DEVICES )xDestBootDevice, iDestPartition, ulSrcAddr, ( uint32_t )iImageSize ) )
         {
             PLL_DAL( APC_DBG_NAME, "Error copying partition %d partition %d\r\n", iSrcPartition, iDestPartition );
         }
@@ -304,7 +319,7 @@ static void vSetCopyImage( void )
     }
 }
 /**
- * @brief   Debug function to select the next boot partition
+ * @brief   Debug function to select the next boot partition (from primary boot device)
  */
 static void vSetNextPartition( void )
 {
@@ -336,11 +351,11 @@ static void vSetNextPartition( void )
 }
 
 /**
- * @brief   Debug function to enable hot reset
+ * @brief   Debug function to enable hot reset (from primary boot device)
  */
 static void vSetEnableHotReset( void )
 {
-    int iInstance  = 0;
+    int iInstance = 0;
     
     if( OK != iDAL_GetIntInRange( "Enter request instance:", &iInstance, 0, UTIL_MAX_UINT8 ) )
     {
@@ -367,22 +382,31 @@ static void vSetEnableHotReset( void )
  */
 static void vGetFptHeader( void )
 {
-    APC_PROXY_DRIVER_FPT_HEADER xFptHeader = { 0 };
+    int xBootDevice = 0;
 
-    if( OK != iAPC_GetFptHeader( &xFptHeader ) )
+    if( OK != iDAL_GetIntInRange( "Enter boot device:", &xBootDevice, APC_BOOT_DEVICE_PRIMARY, MAX_APC_BOOT_DEVICES ) )
     {
-        PLL_DAL( APC_DBG_NAME, "Error retrieving FPT header\r\n" );
+        PLL_DAL( APC_DBG_NAME, "Error retrieving boot device\r\n" );
     }
     else
     {
-        PLL_DAL( APC_DBG_NAME, "======================================================================\r\n" );
-        PLL_DAL( APC_DBG_NAME, "FPT header:\r\n" );
-        PLL_DAL( APC_DBG_NAME, "\tMagic number . . . . . : 0x%08X\r\n", xFptHeader.ulMagicNum );
-        PLL_DAL( APC_DBG_NAME, "\tFPT version. . . . . . : 0x%02X\r\n", xFptHeader.ucFptVersion );
-        PLL_DAL( APC_DBG_NAME, "\tFPT header size. . . . : 0x%02X\r\n", xFptHeader.ucFptHeaderSize );
-        PLL_DAL( APC_DBG_NAME, "\tEntry size . . . . . . : 0x%02X\r\n", xFptHeader.ucEntrySize );
-        PLL_DAL( APC_DBG_NAME, "\tNum entries. . . . . . : 0x%02X\r\n", xFptHeader.ucNumEntries );
-        PLL_DAL( APC_DBG_NAME, "======================================================================\r\n" );    
+        APC_PROXY_DRIVER_FPT_HEADER xFptHeader = { 0 };
+
+        if( OK != iAPC_GetFptHeader( ( APC_BOOT_DEVICES )xBootDevice, &xFptHeader ) )
+        {
+            PLL_DAL( APC_DBG_NAME, "Error retrieving FPT header\r\n" );
+        }
+        else
+        {
+            PLL_DAL( APC_DBG_NAME, "======================================================================\r\n" );
+            PLL_DAL( APC_DBG_NAME, "FPT header:\r\n" );
+            PLL_DAL( APC_DBG_NAME, "\tMagic number . . . . . : 0x%08X\r\n", xFptHeader.ulMagicNum );
+            PLL_DAL( APC_DBG_NAME, "\tFPT version. . . . . . : 0x%02X\r\n", xFptHeader.ucFptVersion );
+            PLL_DAL( APC_DBG_NAME, "\tFPT header size. . . . : 0x%02X\r\n", xFptHeader.ucFptHeaderSize );
+            PLL_DAL( APC_DBG_NAME, "\tEntry size . . . . . . : 0x%02X\r\n", xFptHeader.ucEntrySize );
+            PLL_DAL( APC_DBG_NAME, "\tNum entries. . . . . . : 0x%02X\r\n", xFptHeader.ucNumEntries );
+            PLL_DAL( APC_DBG_NAME, "======================================================================\r\n" );    
+        }
     }
 }
 
@@ -391,9 +415,14 @@ static void vGetFptHeader( void )
  */
 static void vGetFptPartition( void )
 {
+    int xBootDevice = 0;
     int iPartition = 0;
 
-    if( OK != iDAL_GetInt( "Enter partition num:", &iPartition ) )
+    if( OK != iDAL_GetIntInRange( "Enter boot device:", &xBootDevice, APC_BOOT_DEVICE_PRIMARY, MAX_APC_BOOT_DEVICES ) )
+    {
+        PLL_DAL( APC_DBG_NAME, "Error retrieving boot device\r\n" );
+    }
+    else if( OK != iDAL_GetInt( "Enter partition num:", &iPartition ) )
     {
         PLL_DAL( APC_DBG_NAME, "Error retrieving partition number\r\n" );
     }
@@ -401,7 +430,7 @@ static void vGetFptPartition( void )
     {
         APC_PROXY_DRIVER_FPT_PARTITION xFptPartition = { 0 };
 
-        if( OK != iAPC_GetFptPartition( iPartition, &xFptPartition ) )
+        if( OK != iAPC_GetFptPartition( ( APC_BOOT_DEVICES )xBootDevice, iPartition, &xFptPartition ) )
         {
             PLL_DAL( APC_DBG_NAME, "Error retrieving FPT Partition %d\r\n", iPartition );
         }

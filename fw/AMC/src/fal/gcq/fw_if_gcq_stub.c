@@ -293,7 +293,7 @@ uint32_t ulFW_IF_GCQ_Init( FW_IF_GCQ_INIT_CFG *pxInitCfg )
         /*
          * Initilise config data shared between all instances of GCQ.
          */
-        memcpy( &xLocalCfg, pxInitCfg, sizeof( FW_IF_GCQ_INIT_CFG ) );
+        pvOSAL_MemCpy( &xLocalCfg, pxInitCfg, sizeof( FW_IF_GCQ_INIT_CFG ) );
         iInitialised = FW_IF_TRUE;
     }
     else
@@ -334,7 +334,7 @@ uint32_t ulFW_IF_GCQ_Create( FW_IF_CFG *pxFwIf, FW_IF_GCQ_CFG *pxGCQCfg )
                 .lowerFirewall  = GCQ_LOWER_FIREWALL
             };
 
-            memcpy( pxFwIf, &myLocalIf, sizeof( FW_IF_CFG ) );
+            pvOSAL_MemCpy( pxFwIf, &myLocalIf, sizeof( FW_IF_CFG ) );
 
             FW_IF_GCQ_CFG *pxCfg = ( FW_IF_GCQ_CFG* )pxFwIf->cfg;
 

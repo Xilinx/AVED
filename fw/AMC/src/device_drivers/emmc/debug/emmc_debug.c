@@ -480,7 +480,7 @@ static void vEmmcGetReadTestResults( void )
         PLL_DAL( EMMC_DBG_NAME, "Test complete\r\n" );
         if( 1 == iReadResult )
         {
-            PLL_DAL( EMMC_DBG_NAME, "Test failed at block 0x%lx\r\n", ulFailedBlock );
+            PLL_DAL( EMMC_DBG_NAME, "Test failed at block 0x%u\r\n", ulFailedBlock );
         }
         else
         {

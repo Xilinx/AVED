@@ -74,10 +74,8 @@
 
 /* CG TODO: Get this from hw design metadata */
 #define XILINX_ENDPOINT_NAME_HW_DISCOVERY_PF0       "ep_bar_layout_mgmt_00"
-#define XILINX_ENDPOINT_NAME_HW_DISCOVERY_PF1       "ep_bar_layout_user_00"
 #define XILINX_ENDPOINT_NAME_UUID0_ROM              "ep_blp_rom_00"
 #define XILINX_ENDPOINT_NAME_INTERPF_MAILBOX_PF0    "ep_mailbox_mgmt_00"
-#define XILINX_ENDPOINT_NAME_INTERPF_MAILBOX_PF1    "ep_mailbox_user_00"
 #define XILINX_ENDPOINT_NAME_GCQ                    "ep_gcq_mgmt_to_rpu_sq_pi_00"
 #define XILINX_ENDPOINT_NAME_GCQ_PAYLOAD            "ep_gcq_payload_mgmt_00"
 
@@ -105,14 +103,14 @@ enum xil_table_type {
 };
 
 typedef struct {
-	endpoint_info_struct hw_discovery;       /* PF0 and PF1 */
-	endpoint_info_struct uuid0_rom;          /* PF0 only */
-	endpoint_info_struct interpf_mailbox;    /* PF0 and PF1 */
-	endpoint_info_struct gcq;                /* PF0 only */
-	endpoint_info_struct gcq_payload;        /* PF0 only */
+	endpoint_info_struct hw_discovery;       
+	endpoint_info_struct uuid0_rom;          
+	endpoint_info_struct interpf_mailbox;    
+	endpoint_info_struct gcq;                
+	endpoint_info_struct gcq_payload;        
 
-	uint32_t logic_uuid      [XILINX_LOGIC_UUID_SIZE_BYTES/sizeof(uint32_t)];   /* PF0 only */
-	char     logic_uuid_str  [XILINX_LOGIC_UUID_SIZE_BYTES*2+1];                /* PF0 only */
+	uint32_t logic_uuid      [XILINX_LOGIC_UUID_SIZE_BYTES/sizeof(uint32_t)];   
+	char     logic_uuid_str  [XILINX_LOGIC_UUID_SIZE_BYTES*2+1];                
 } endpoints_struct;
 
 int read_logic_uuid(struct pci_dev *dev, endpoints_struct **endpoints);

@@ -55,14 +55,18 @@ typedef struct DAL_MENU_OPTION * DAL_HDL;
 /**
  * @brief   Initialise the DAL and start the debug monitoring menu
  *
- * @param   pcMenuName      Name of this debug session
- * @param   ulTaskPrio      Priority of the DAL task
- * @param   ulStackSize     Stack allocated to the DAL task
+ * @param   pcMenuName        Name of this debug session
+ * @param   ulTaskPrio        Priority of the DAL task
+ * @param   ulStackSize       Stack allocated to the DAL task
+ * @param   pxPrintInitBanner Function to print initialisation banner
  *
  * @return  OK if DAL is initialised and running successfully
  *          ERROR if the DAL is not initialised
  */ 
-int iDAL_Initialise( const char *pcMenuName, uint32_t ulTaskPrio, uint32_t ulStackSize );
+int iDAL_Initialise( const char *pcMenuName,
+                     uint32_t ulTaskPrio,
+                     uint32_t ulStackSize,
+                     DAL_DEBUG_FUNCTION pxPrintInitBanner );
 
 /**
  * @brief   Add a new directory to the top level of the DAL menu structure

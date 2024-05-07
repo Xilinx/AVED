@@ -21,11 +21,12 @@
 /**
  * @brief   Initialise the in band telemetry application debug access
  * 
- * @param   pxParentHandle optional handle to the parent directory
+ * @param   pxParentHandle          optional handle to the parent directory
+ * @param   ullSharedMemBaseAddr    The base address of the shared memory
  * 
  * @return  N/A
  */
-void vIN_BAND_TELEMETRY_DebugInit( DAL_HDL pxParentHandle );
+void vIN_BAND_TELEMETRY_DebugInit( DAL_HDL pxParentHandle, uint64_t ullsharedMemBaseAddr );
 
 #endif
 

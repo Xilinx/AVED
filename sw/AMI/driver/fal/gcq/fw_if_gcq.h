@@ -153,7 +153,7 @@ typedef struct _FW_IF_GCQ_CFG
  *
  * @return  See FW_IF_ERRORS
  ******************************************************************************************/
-extern uint32_t ulFW_IF_GCQ_init( FW_IF_GCQ_INIT_CFG * xInitCfg );
+extern uint32_t ulFW_IF_GCQ_Init( FW_IF_GCQ_INIT_CFG *pxInitCfg );
 
 /*******************************************************************************************
  * @brief   creates an instance of the GCQ interface
@@ -163,7 +163,7 @@ extern uint32_t ulFW_IF_GCQ_init( FW_IF_GCQ_INIT_CFG * xInitCfg );
  *
  * @return  See FW_IF_ERRORS
  ******************************************************************************************/
-extern uint32_t ulFW_IF_GCQ_create( FW_IF_CFG *xFWIf, FW_IF_GCQ_CFG *xGCQCfg );
+extern uint32_t ulFW_IF_GCQ_Create( FW_IF_CFG *pxFwIf, FW_IF_GCQ_CFG *pxGCQCfg );
 
 /**
  *
