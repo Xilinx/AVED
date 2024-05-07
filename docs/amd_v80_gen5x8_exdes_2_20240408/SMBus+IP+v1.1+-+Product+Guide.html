@@ -1,0 +1,3216 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+  <title>SMBus IP v1.1 - Product Guide &mdash; AVED  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/xbtest.css" type="text/css" />
+      <link rel="stylesheet" href="_static/_static/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="https://docs.xilinx.com/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="AVED Management Controller (AMC) - Architecture and Design" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html" />
+    <link rel="prev" title="Hardware Discovery IP v1.0 - Product Guide" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
+<!-- End Google Tag Manager --> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+            <a href="index.html" class="icon icon-home"> AVED
+            <img src="_static/xilinx-header-logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BHierarchy%2BOverview.html">AVED V80 - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BCIPS%2BConfiguration.html">AVED V80 - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BResources.html">AVED V80 - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BMap.html">AVED V80 - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BNoC%2BConfiguration.html">AVED V80 - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BBase%2BLogic.html">AVED V80 - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BClock%2BReset%2BModule.html">AVED V80 - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BSource%2BFile%2BOverview.html">AVED V80 - Source File Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SMBus IP v1.1 - Product Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#applications">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#standards">Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#architecture-overview">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#axi4-lite-interface">AXI4-Lite Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#controller-receive-fifo">Controller Receive FIFO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#controller-descriptor-fifo">Controller Descriptor FIFO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#controller-csr-and-interrupt-control">Controller CSR and Interrupt Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#controller-sequence-control">Controller Sequence Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#target-receive-fifo">Target Receive FIFO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#target-descriptor-fifo">Target Descriptor FIFO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#target-csr-and-interrupt-control">Target CSR and Interrupt Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#target-sequence-control">Target Sequence Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#smbus-phy">SMBus PHY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sequence-descriptors">Sequence Descriptors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#resource-use">Resource Use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interface-descriptions">Interface Descriptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clocking">Clocking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resets">Resets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interrupts">Interrupts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#register-space">Register Space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#customizing-and-generating-the-ip">Customizing and Generating the IP</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#importing-the-ip-repository">Importing the IP Repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#customizing-the-ip">Customizing the IP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#output-generation">Output Generation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#constraining-the-ip">Constraining the IP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#simulation">Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#synthesis-and-implementation">Synthesis and Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#driver">Driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-design">Example Design</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BASDM%2BApplication.html">AVED ASDM Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOutOfBand%2BTelemetry%2BApplication.html">AVED OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Board%2BManagement%2BController%2B%28BMC%29%2BProxy%2BDriver.html">Board Management Controller (BMC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BQDMA.html">AVED QDMA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: black" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">AVED</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>SMBus IP v1.1 - Product Guide</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="smbus-ip-v1-1-product-guide">
+<h1>SMBus IP v1.1 - Product Guide<a class="headerlink" href="#smbus-ip-v1-1-product-guide" title="Permalink to this headline">¶</a></h1>
+<section id="overview">
+<span id="smbusipv1-1productguide-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The SMBus IP provides a mechanism through which a Versal ACAP based system may interact with external devices that are compliant to the <a class="reference external" href="http://smbus.org/specs/SMBus_3_2_20220112.pdf">System Management Bus (SMBus) v3.2 Specification</a>. SMBus is a
+two-wire open-drain interface based on the principles of operation defined by the <a class="reference external" href="https://www.nxp.com/docs/en/user-guide/UM10204.pdf">I2C Bus Specification</a>. It provides a standardized control path that enables devices to pass system and power
+management related messages.</p>
+<p>The SMBus IP is designed to be implemented within the PL region of a Versal ACAP and requires connection to I/O Buffers located within an appropriate HDIO bank, these IOBs must be configured to meet the electrical requirements outlined in the SMBus
+Specification. The IP implements an AXI4-Lite Subordinate memory mapped control interface to enable a processor to interact with other external SMBus devices, the IP supports operation as both a Controller and a multi-device Target to enable multiple
+management protocols to be implemented simultaneously.</p>
+</section>
+<section id="features">
+<span id="smbusipv1-1productguide-features"></span><h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Controller operation</p></li>
+<li><p>Target operation supporting up to 8 devices</p></li>
+<li><p>Support for 100KHz, 400KHz or 1MHz operation</p></li>
+<li><p>Packet Error Correction (PEC) Generation and Checking</p></li>
+<li><p>Loss of Arbitration detection as a Controller-transmitter</p></li>
+<li><p>Loss of Arbitration detection as a Target-transmitter</p></li>
+<li><p>Controller clock synchronization</p></li>
+<li><p>Controller clock stretching</p></li>
+<li><p>Target clock stretching</p></li>
+<li><p>Descriptor based event sequence control</p></li>
+<li><p>Interrupt driven operation</p></li>
+<li><p>SMBCLK low timeout detection</p></li>
+<li><p>SMBDAT low timeout detection</p></li>
+<li><p>SMBCLK/SMBDAT glitch suppression</p></li>
+<li><p>SMBCLK stretching timeout detection (Tlow:TEXT/CEXT)</p></li>
+</ul>
+</section>
+<section id="applications">
+<span id="smbusipv1-1productguide-applications"></span><h2>Applications<a class="headerlink" href="#applications" title="Permalink to this headline">¶</a></h2>
+<p>The diagram below outlines a typical use case for the SMBus IP as deployed within a Versal based PCIe add-in accelerator card. The SMBus IP provides a mechanism for the card management software in conjunction with the SMBus IP Driver running on the
+RPU to communicate with the host server BMC.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/12812bb2d89fc010c431944ba051ffb75bf26bf9.png"><img alt="image1" class="drawio-diagram-image" src="_images/12812bb2d89fc010c431944ba051ffb75bf26bf9.png" style="width: 600px;" /></a></p>
+</section>
+<section id="standards">
+<span id="smbusipv1-1productguide-standards"></span><h2>Standards<a class="headerlink" href="#standards" title="Permalink to this headline">¶</a></h2>
+<p>The SMBus IP when implemented in conjunction with the SMBus IP Driver is compliant to the System Management Bus Specification, version 3.2, January 2022 with the following exceptions:</p>
+<ul class="simple">
+<li><p>The Quick Command bus protocol is not supported by the SMBus IP for Target device operation.</p></li>
+</ul>
+</section>
+<section id="architecture-overview">
+<span id="smbusipv1-1productguide-architectureoverview"></span><h2>Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permalink to this headline">¶</a></h2>
+<p>The block diagram below gives a high level overview of the logical structure of the SMBus IP.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/e1be70102a61b02c414c2691767f4b1572a6751e.png"><img alt="image2" class="drawio-diagram-image" src="_images/e1be70102a61b02c414c2691767f4b1572a6751e.png" style="width: 956px;" /></a></p>
+<section id="axi4-lite-interface">
+<span id="smbusipv1-1productguide-axi4-liteinterface"></span><h3>AXI4-Lite Interface<a class="headerlink" href="#axi4-lite-interface" title="Permalink to this headline">¶</a></h3>
+<p>The SMBus IP implements a 32-bit AXI4-Lite Subordinate interface that provides an external processor with memory mapped access to internal register space. The Descriptor/Receive FIFOs and control/status registers that are present within the IP are
+all accessed via this interface.</p>
+</section>
+<section id="controller-receive-fifo">
+<span id="smbusipv1-1productguide-controllerreceivefifo"></span><h3>Controller Receive FIFO<a class="headerlink" href="#controller-receive-fifo" title="Permalink to this headline">¶</a></h3>
+<p>The Controller Receive FIFO stores bytes that are received by the SMBus IP during Controller Read operations until the processor is ready to read and process theses bytes. The FIFO is arranged as 8-bits x 64 and incorporates a processor programmable
+fill threshold interrupt that may be configured in order to regulate the rate at which the processor is notified about available data.</p>
+</section>
+<section id="controller-descriptor-fifo">
+<span id="smbusipv1-1productguide-controllerdescriptorfifo"></span><h3>Controller Descriptor FIFO<a class="headerlink" href="#controller-descriptor-fifo" title="Permalink to this headline">¶</a></h3>
+<p>The Controller Descriptor FIFO is used to store the sequence descriptors that are written via the processor interface until they can be executed by the Controller Sequence Control function. Each sequence descriptor instructs the IP to execute a
+portion of an SMBus packet and may be combined to form any of the Bus Protocols defined in the SMBus Specification.</p>
+</section>
+<section id="controller-csr-and-interrupt-control">
+<span id="smbusipv1-1productguide-controllercsrandinterruptcontrol"></span><h3>Controller CSR and Interrupt Control<a class="headerlink" href="#controller-csr-and-interrupt-control" title="Permalink to this headline">¶</a></h3>
+<p>The Controller Control and Status Registers (CSR) implements the internal control/status registers associated with the Controller Sequence Control function. Relevant semi-static control registers are configured in this function, whereas dynamic
+control is performed using the sequence descriptors. Interrupt configuration for the interrupt sources generated by the Controller Sequence Control function are also managed within this function.</p>
+</section>
+<section id="controller-sequence-control">
+<span id="smbusipv1-1productguide-controllersequencecontrol"></span><h3>Controller Sequence Control<a class="headerlink" href="#controller-sequence-control" title="Permalink to this headline">¶</a></h3>
+<p>The Controller Sequence Control function operates as an SMBus Controller and works in tandem with the SMBus PHY in order to generate the SMBus packet as directed in the received sequence descriptors. The primary functions performed within the
+Controller Sequence Control function includes:</p>
+<ul class="simple">
+<li><p>Reading the Controller Descriptor FIFO and processing the sequence descriptor</p></li>
+<li><p>Instructing the PHY on when to transmit START/REPEATED-START/STOP conditions on the SMBus</p></li>
+<li><p>Providing the PHY with transmit bytes during the Controller Write sequences</p></li>
+<li><p>Reading the assembled received bytes from the PHY during a Controller Read sequence and writing into the Receive FIFO</p></li>
+<li><p>Performing PEC byte generation and insertion during Controller Write sequences</p></li>
+<li><p>Performing PEC byte integrity checking on received packets during Controller Read sequences</p></li>
+<li><p>Status interrupt generation based on events occurring during Read/Write sequences</p></li>
+</ul>
+</section>
+<section id="target-receive-fifo">
+<span id="smbusipv1-1productguide-targetreceivefifo"></span><h3>Target Receive FIFO<a class="headerlink" href="#target-receive-fifo" title="Permalink to this headline">¶</a></h3>
+<p>The Target Receive FIFO stores bytes that are received by the SMBus IP during Target Write operations until the processor is ready to read and process theses bytes. The FIFO is arranged as 8-bits x 64 and incorporates a processor programmable fill
+threshold interrupt that may be configured in order to regulate the rate at which the processor is notified about available data.</p>
+</section>
+<section id="target-descriptor-fifo">
+<span id="smbusipv1-1productguide-targetdescriptorfifo"></span><h3>Target Descriptor FIFO<a class="headerlink" href="#target-descriptor-fifo" title="Permalink to this headline">¶</a></h3>
+<p>The Target Descriptor FIFO is used to store the sequence descriptors that are written via the processor interface until they can be executed by the Target Sequence Control function. Each sequence descriptor instructs the IP on how to respond during a
+Read or Write initiated by an external Controller.</p>
+</section>
+<section id="target-csr-and-interrupt-control">
+<span id="smbusipv1-1productguide-targetcsrandinterruptcontrol"></span><h3>Target CSR and Interrupt Control<a class="headerlink" href="#target-csr-and-interrupt-control" title="Permalink to this headline">¶</a></h3>
+<p>The Target Control and Status Registers (CSR) implements the internal control/status registers associated with the Target Sequence Control function. Relevant semi-static control registers are configured in this function, whereas dynamic control is
+performed using the sequence descriptors. Interrupt configuration for the interrupt sources generated by the Target Sequence Control function are also managed within this function.</p>
+</section>
+<section id="target-sequence-control">
+<span id="smbusipv1-1productguide-targetsequencecontrol"></span><h3>Target Sequence Control<a class="headerlink" href="#target-sequence-control" title="Permalink to this headline">¶</a></h3>
+<p>The Target Sequence Control function operates as a multi-device SMBus Target that supports operation as up to 8 different devices, each target device address is run time configurable by the processor via the AXI4-Lite interface. The primary functions
+performed within the Target Sequence Control function includes:</p>
+<ul class="simple">
+<li><p>Performing a comparison check on the address received by the PHY following a START condition, against the configured target addresses of interest</p></li>
+<li><p>Reading the Target Descriptor FIFO and processing the sequence descriptor</p></li>
+<li><p>Instructing the PHY whether to ACK or NACK a receive byte during a Target Write sequence based on the descriptor</p></li>
+<li><p>Writing received bytes from the PHY into the Receive FIFO</p></li>
+<li><p>Providing the PHY with transmit bytes during Target Read sequences based on the payload byte contained in the sequence descriptor</p></li>
+<li><p>Performing PEC byte integrity checking on received packets during Target Write sequences</p></li>
+<li><p>Performing PEC byte generation and insertion during Target Read sequences</p></li>
+<li><p>Status interrupt generation based on events occurring during Read/Write sequences</p></li>
+</ul>
+</section>
+<section id="smbus-phy">
+<span id="smbusipv1-1productguide-smbusphy"></span><h3>SMBus PHY<a class="headerlink" href="#smbus-phy" title="Permalink to this headline">¶</a></h3>
+<p>The SMBus PHY provides the physical layer interfacing to the SMBus when connected via Input/Output Buffers in an appropriately configured HDIO bank. The primary functions performed within the SMBus PHY includes:</p>
+<ul class="simple">
+<li><p>SMBCLK/SMBDAT input retiming onto the s_axi_aclk domain and noise suppression for glitches &lt;50ns period</p></li>
+<li><p>SMBCLK/SMBDAT input low timeout and bus idle detection</p></li>
+<li><p>SMBCLK/SMBDAT output/tri-state control</p></li>
+<li><p>SMBCLK output low force</p></li>
+<li><p>Tracking of SMBus state in conjunction with the Target Sequence Control function</p></li>
+<li><p>Performing SMBCLK clock stretching as a Target when awaiting instruction from the Target Sequence Control function</p></li>
+<li><p>Transmission of ACK/NACK as a Target-transmitter in accordance with the SMBus AC Specifications</p></li>
+<li><p>Assembly of receive bytes during Target-receiver operation and forwarding to the Target Sequence Control function for processing</p></li>
+<li><p>Transmission of read data bytes as a Target-transmitter in accordance with the SMBus AC Specifications</p></li>
+<li><p>Loss of arbitration detection during Target-transmitter operation</p></li>
+<li><p>Clock generation and synchronization during Controller operation</p></li>
+<li><p>START/REPEATED-START/STOP condition transmission as a Controller-transmitter</p></li>
+<li><p>Transmission of write data bytes as a Controller-transmitter in accordance with the SMBus AC Specifications</p></li>
+<li><p>Assembly of receive bytes during Controller-receiver operation and forwarding to the Controller Sequence Control function for processing</p></li>
+<li><p>Loss of arbitration detection during Controller-transmitter operation</p></li>
+<li><p>Controller Tlow:TEXT timeout detection and Tlow:CEXT measurement</p></li>
+<li><p>Target Tlow:TEXT measurement</p></li>
+</ul>
+</section>
+<section id="sequence-descriptors">
+<span id="smbusipv1-1productguide-sequencedescriptors"></span><h3>Sequence Descriptors<a class="headerlink" href="#sequence-descriptors" title="Permalink to this headline">¶</a></h3>
+<p>The SMBus IP is primarily controlled using a set of descriptors, these descriptor sets are independent for both the Target and Controller functions, however the high level behavior is similar. A descriptor consists of a 4-bit ID that instructs the IP
+on what action to take on the SMBus, along with a payload byte that must be supplied when operating as a transmitter.</p>
+<p>Descriptors must be written in the order in which they are to be executed via the AXI4-Lite processor interface to either the Target or Controller Descriptor FIFOs. When the SMBus IP is active for either Target or Controller operation, then it will
+read and process each descriptor at the appropriate time during either transmission or reception of a SMBus packet. While the IP waits for descriptors, it will perform smbclk clock stretching in order to back-pressure the SMBus until such time that
+software has determined the next steps and provided the next descriptor.</p>
+<p>For scenarios where data on the SMBus must be processed on a byte by byte basis (e.g. Target ARP), then typically only a single descriptor would be supplied at any one time. The IP would execute the descriptor, notify any required response via
+interrupt, write received data into the Receive FIFO (if applicable) and then begin to clock stretch until software has processed the response and supplied another descriptor.</p>
+<p>In other scenarios the sequence of events is known in advance by software, for this the set of descriptors can be written to the Descriptor FIFOs and the IP will process each descriptor without performing any clock stretching. This approach attempts
+to minimize the amount of software involvement during packet transmission/reception and in turn reduces the amount of clock stretching necessary and the associated risk of exceeding the various clock low extension timeouts outlined in the SMBus
+Specification e.g. tTIMEOUT, tLOW:TEXT, tLOW:CEXT.</p>
+</section>
+</section>
+<section id="resource-use">
+<span id="smbusipv1-1productguide-resourceuse"></span><h2>Resource Use<a class="headerlink" href="#resource-use" title="Permalink to this headline">¶</a></h2>
+<p>The table below contains resource utilization data for several configurations of the SMBus IP core. Each row within the table describes a test case. The columns are divided into test parameters and results. The test parameters include the part
+information and the core-specific configuration parameters. Any configuration parameters that are not listed have their default values; any parameters with a blank value are disabled or set automatically by the IP core.</p>
+<ul class="simple">
+<li><p>Resource figures are taken from the utilization report issued at the end of implementation using the Out-of-Context flow in Vivado Design Suite.</p></li>
+<li><p>The Out-of-Context IP constraints include HD.CLK_SRC properties as required to ensure correct hold timing closure: these properties are enabled using the Tcl command: set_param ips.includeClockLocationConstraints true</p></li>
+<li><p>The frequencies used for clock inputs are stated for each test case.</p></li>
+<li><p>LUT figures do not include LUTs used as pack-thrus, but do include LUTs used as memory.</p></li>
+<li><p>Default Vivado Design Suite 2023.1 settings were used. You may be able to improve on these figures using different settings. Because surrounding circuitry will affect placement and timing, no guarantee can be given that these figures will be
+repeatable in a larger design.</p></li>
+</ul>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Vivado Release</p></td>
+<td><p>Family</p></td>
+<td><p>Device</p></td>
+<td><p>Package</p></td>
+<td><p>Speedgrade</p></td>
+<td><p>Configuration Name</p></td>
+<td><p>NUM_TARGET_DEVICES</p></td>
+<td><p>SMBUS_DEV_CLASS</p></td>
+<td><p>FREQ_HZ_AXI_ACLK</p></td>
+<td><p>Fixed Clocks</p></td>
+<td><p>LUT</p></td>
+<td><p>FF</p></td>
+<td><p>DSP</p></td>
+<td><p>RAMB36</p></td>
+<td><p>RAMB18</p></td>
+</tr>
+<tr class="row-even"><td><p>2023.2</p></td>
+<td><p>versal</p></td>
+<td><p>xcv80</p></td>
+<td><p>lsva4737</p></td>
+<td><p>2MHP</p></td>
+<td><p>config_0</p></td>
+<td><p>8</p></td>
+<td><p>0</p></td>
+<td><p>95000000</p></td>
+<td><p>s_axi_aclk=95</p></td>
+<td><p>1411</p></td>
+<td><p>1668</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>2023.2</p></td>
+<td><p>versal</p></td>
+<td><p>xcv80</p></td>
+<td><p>lsva4737</p></td>
+<td><p>2MHP</p></td>
+<td><p>config_1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>95000000</p></td>
+<td><p>s_axi_aclk=95</p></td>
+<td><p>1360</p></td>
+<td><p>1605</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>2023.2</p></td>
+<td><p>versal</p></td>
+<td><p>xcv80</p></td>
+<td><p>lsva4737</p></td>
+<td><p>2MHP</p></td>
+<td><p>config_2</p></td>
+<td><p>8</p></td>
+<td><p>0</p></td>
+<td><p>500000000</p></td>
+<td><p>s_axi_aclk=500</p></td>
+<td><p>1659</p></td>
+<td><p>1643</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>2023.2</p></td>
+<td><p>versal</p></td>
+<td><p>xcv80</p></td>
+<td><p>lsva4737</p></td>
+<td><p>2MHP</p></td>
+<td><p>config_3</p></td>
+<td><p>8</p></td>
+<td><p>2</p></td>
+<td><p>500000000</p></td>
+<td><p>s_axi_aclk=500</p></td>
+<td><p>1651</p></td>
+<td><p>1645</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="interface-descriptions">
+<span id="smbusipv1-1productguide-interfacedescriptions"></span><h2>Interface Descriptions<a class="headerlink" href="#interface-descriptions" title="Permalink to this headline">¶</a></h2>
+<p>` &lt;/plugins/servlet/confluence/editinword/1118177146/attachments/ipTables.xlsx&gt;`__</p>
+<p><a class="reference external" href="/plugins/servlet/confluence/editinword/1118177146/attachments/ipTables.xlsx">Edit Document</a></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Interface</p></td>
+<td><p>Signal</p></td>
+<td><p>Direction</p></td>
+<td><p>Range</p></td>
+<td><p>Clock</p></td>
+<td><p>Enablement Dependency</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>S_AXI</p></td>
+<td><p>s_axi_araddr</p></td>
+<td><p>Input</p></td>
+<td><p>11:0</p></td>
+<td><p>s_axi_aclk</p></td>
+<td><p>TRUE</p></td>
+<td><p>AXI4-Lite read address</p></td>
+</tr>
+<tr class="row-odd"><td><p>S_AXI</p></td>
+<td><p>s_axi_arready</p></td>
+<td><p>Output</p></td>
+<td><p>scalar</p></td>
+<td><p>s_axi_aclk</p></td>
+<td><p>TRUE</p></td>
+<td><p>AXI4-Lite read address ready</p></td>
+</tr>
+<tr class="row-even"><td><p>S_AXI</p></td>
+<td><p>s_axi_arvalid</p></td>
+<td><p>Input</p></td>
+<td><p>scalar</p></td>
+<td><p>s_axi_aclk</p></td>
+<td><p>TRUE</p></td>
+<td><p>AXI4-Lite read address valid</p></td>
+</tr>
+<tr class="row-odd"><td><p>S_AXI</p></td>
+<td><p>s_axi_awaddr</p></td>
+<td><p>Input</p></td>
+<td><p>11:0</p></td>
+<td><p>s_axi_aclk</p></td>
+<td><p>TRUE</p></td>
+<td><p>AXI4-Lite write address</p></td>
+</tr>
+<tr class="row-even"><td><p>S_AXI</p></td>
+<td><p>s_axi_awready</p></td>
+<td><p>Output</p></td>
+<td><p>scalar</p></td>
+<td><p>s_axi_aclk</p></td>
+<td><p>TRUE</p></td>
+<td><p>AXI4-Lite write address ready</p></td>
+</tr>
+<tr class="row-odd"><td><p>S_AXI</p></td>
+<td><p>s_axi_awvalid</p></td>
+<td><p>Input</p></td>
+<td><p>scalar</p></td>
+<td><p>s_axi_aclk</p></td>
+<td><p>TRUE</p></td>
+<td><p>AXI4-Lite write address valid</p></td>
+</tr>
+<tr class="row-even"><td><p>S_AXI</p></td>
+<td><p>s_axi_bready</p></td>
+<td><p>Input</p></td>
+<td><p>scalar</p></td>
+<td><p>s_axi_aclk</p></td>
+<td><p>TRUE</p></td>
+<td><p>AXI4-Lite write response ready</p></td>
+</tr>
+<tr class="row-odd"><td><p>S_AXI</p></td>
+<td><p>s_axi_bresp</p></td>
+<td><p>Output</p></td>
+<td><p>1:0</p></td>
+<td><p>s_axi_aclk</p></td>
+<td><p>TRUE</p></td>
+<td><p>AXI4-Lite write response</p></td>
+</tr>
+<tr class="row-even"><td><p>S_AXI</p></td>
+<td><p>s_axi_bvalid</p></td>
+<td><p>Output</p></td>
+<td><p>scalar</p></td>
+<td><p>s_axi_aclk</p></td>
+<td><p>TRUE</p></td>
+<td><p>AXI4-Lite write response valid</p></td>
+</tr>
+<tr class="row-odd"><td><p>S_AXI</p></td>
+<td><p>s_axi_rdata</p></td>
+<td><p>Output</p></td>
+<td><p>31:0</p></td>
+<td><p>s_axi_aclk</p></td>
+<td><p>TRUE</p></td>
+<td><p>AXI4-Lite read data</p></td>
+</tr>
+<tr class="row-even"><td><p>S_AXI</p></td>
+<td><p>s_axi_rready</p></td>
+<td><p>Input</p></td>
+<td><p>scalar</p></td>
+<td><p>s_axi_aclk</p></td>
+<td><p>TRUE</p></td>
+<td><p>AXI4-Lite read ready</p></td>
+</tr>
+<tr class="row-odd"><td><p>S_AXI</p></td>
+<td><p>s_axi_rresp</p></td>
+<td><p>Output</p></td>
+<td><p>1:0</p></td>
+<td><p>s_axi_aclk</p></td>
+<td><p>TRUE</p></td>
+<td><p>AXI4-Lite read response</p></td>
+</tr>
+<tr class="row-even"><td><p>S_AXI</p></td>
+<td><p>s_axi_rvalid</p></td>
+<td><p>Output</p></td>
+<td><p>scalar</p></td>
+<td><p>s_axi_aclk</p></td>
+<td><p>TRUE</p></td>
+<td><p>AXI4-Lite read valid</p></td>
+</tr>
+<tr class="row-odd"><td><p>S_AXI</p></td>
+<td><p>s_axi_wdata</p></td>
+<td><p>Input</p></td>
+<td><p>31:0</p></td>
+<td><p>s_axi_aclk</p></td>
+<td><p>TRUE</p></td>
+<td><p>AXI4-Lite write data</p></td>
+</tr>
+<tr class="row-even"><td><p>S_AXI</p></td>
+<td><p>s_axi_wready</p></td>
+<td><p>Output</p></td>
+<td><p>scalar</p></td>
+<td><p>s_axi_aclk</p></td>
+<td><p>TRUE</p></td>
+<td><p>AXI4-Lite write data ready</p></td>
+</tr>
+<tr class="row-odd"><td><p>S_AXI</p></td>
+<td><p>s_axi_wstrb</p></td>
+<td><p>Input</p></td>
+<td><p>3:0</p></td>
+<td><p>s_axi_aclk</p></td>
+<td><p>TRUE</p></td>
+<td><p>AXI4-Lite write strobes</p></td>
+</tr>
+<tr class="row-even"><td><p>S_AXI</p></td>
+<td><p>s_axi_wvalid</p></td>
+<td><p>Input</p></td>
+<td><p>scalar</p></td>
+<td><p>s_axi_aclk</p></td>
+<td><p>TRUE</p></td>
+<td><p>AXI4-Lite write data valid</p></td>
+</tr>
+<tr class="row-odd"><td><p>s_axi_aclk</p></td>
+<td><p>s_axi_aclk</p></td>
+<td><p>Input</p></td>
+<td><p>scalar</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>Clock associated with the s_axi interface</p></td>
+</tr>
+<tr class="row-even"><td><p>s_axi_aresetn</p></td>
+<td><p>s_axi_aresetn</p></td>
+<td><p>Input</p></td>
+<td><p>scalar</p></td>
+<td><p>s_axi_aclk</p></td>
+<td><p>TRUE</p></td>
+<td><p>Active-Low reset associated with the s_axi interface</p></td>
+</tr>
+<tr class="row-odd"><td><p>ip2intc_irpt</p></td>
+<td><p>ip2intc_irpt</p></td>
+<td><p>Output</p></td>
+<td><p>scalar</p></td>
+<td><p>s_axi_aclk</p></td>
+<td><p>TRUE</p></td>
+<td><p>Level High Interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>SMBUS</p></td>
+<td><p>smbclk_i</p></td>
+<td><p>Input</p></td>
+<td><p>scalar</p></td>
+<td><p>Asynchronous</p></td>
+<td><p>TRUE</p></td>
+<td><p>SMBus clock input</p></td>
+</tr>
+<tr class="row-odd"><td><p>SMBUS</p></td>
+<td><p>smbclk_o</p></td>
+<td><p>Output</p></td>
+<td><p>scalar</p></td>
+<td><p>s_axi_aclk</p></td>
+<td><p>TRUE</p></td>
+<td><p>SMBus clock output</p></td>
+</tr>
+<tr class="row-even"><td><p>SMBUS</p></td>
+<td><p>smbclk_t</p></td>
+<td><p>Output</p></td>
+<td><p>scalar</p></td>
+<td><p>s_axi_aclk</p></td>
+<td><p>TRUE</p></td>
+<td><p>SMBus clock output tri-state control</p></td>
+</tr>
+<tr class="row-odd"><td><p>SMBUS</p></td>
+<td><p>smbdat_i</p></td>
+<td><p>Input</p></td>
+<td><p>scalar</p></td>
+<td><p>Asynchronous</p></td>
+<td><p>TRUE</p></td>
+<td><p>SMBus data input</p></td>
+</tr>
+<tr class="row-even"><td><p>SMBUS</p></td>
+<td><p>smbdat_o</p></td>
+<td><p>Output</p></td>
+<td><p>scalar</p></td>
+<td><p>s_axi_aclk</p></td>
+<td><p>TRUE</p></td>
+<td><p>SMBus data output</p></td>
+</tr>
+<tr class="row-odd"><td><p>SMBUS</p></td>
+<td><p>smbdat_t</p></td>
+<td><p>Output</p></td>
+<td><p>scalar</p></td>
+<td><p>s_axi_aclk</p></td>
+<td><p>TRUE</p></td>
+<td><p>SMBus data output tri-state control</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="clocking">
+<span id="smbusipv1-1productguide-clocking"></span><h2>Clocking<a class="headerlink" href="#clocking" title="Permalink to this headline">¶</a></h2>
+<p>The SMBus IP operates on the s_axi_aclk clock domain, the smbclk_i/smbdat_i asynchronous inputs are retimed onto this clock domain internal to the IP.</p>
+<p>The table below outlines the clock frequency ranges supported by the IP.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Clock Domain</p></th>
+<th class="head"><p>Min (MHz)</p></th>
+<th class="head"><p>Max (MHz)</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>s_axi_aclk</p></td>
+<td><p>95</p></td>
+<td><p>500</p></td>
+<td><p>Clock used for S_AXI interface and internal core operation.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="resets">
+<span id="smbusipv1-1productguide-resets"></span><h2>Resets<a class="headerlink" href="#resets" title="Permalink to this headline">¶</a></h2>
+<p>The SMBus IP is reset on assertion of the s_axi_aresetn active low reset input, this input must be synchronous to the s_axi_aclk.</p>
+<p>When this reset is asserted, all internal registers are reset to their default values and the Target/Controller logic is brought back to an idle state. Any active SMBus transactions in progress by the IP are aborted.</p>
+</section>
+<section id="interrupts">
+<span id="smbusipv1-1productguide-interrupts"></span><h2>Interrupts<a class="headerlink" href="#interrupts" title="Permalink to this headline">¶</a></h2>
+<p>The SMBus IP operation is interrupt driven so that control information written via the processor interface is sufficiently responsive in order to comply with the timeout limits specified in the SMBus Specification.</p>
+<p>Refer to IRQ_IER/IRQ_ISR registers detailed in the Register Space section for information on the SMBus IP interrupt sources.</p>
+</section>
+<section id="register-space">
+<span id="smbusipv1-1productguide-registerspace"></span><h2>Register Space<a class="headerlink" href="#register-space" title="Permalink to this headline">¶</a></h2>
+<p>The table below outlines the layout and descriptions for the memory mapped register space within the SMBus IP, these registers are accessible via the AXI4-Lite interface.</p>
+<p>Undocumented bits within registers are reserved and are Read-Only.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Register Address Offset</p></th>
+<th class="head"><p>Register Name</p></th>
+<th class="head"><p>Field Name</p></th>
+<th class="head"><p>Bit Index</p></th>
+<th class="head"><p>Default Value</p></th>
+<th class="head"><p>Attribute</p></th>
+<th class="head"><p>Field Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x000</p></td>
+<td><p>IP_VERSION</p></td>
+<td><p>MAJOR_VERSION</p></td>
+<td><p>31:16</p></td>
+<td><p>1</p></td>
+<td><p>RO</p></td>
+<td><p>IP Major Version</p>
+<blockquote>
+<div><p>Returns the IP major version.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>MINOR_VERSION</p></td>
+<td><p>15:0</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>IP Minor Version</p>
+<blockquote>
+<div><p>Returns the IP minor version.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0x004</p></td>
+<td><p>IP_REVISION</p></td>
+<td><p>CORE_REVISION</p></td>
+<td><p>15:0</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>IP Core Revision</p>
+<blockquote>
+<div><p>Returns the IP core revision.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>0x008</p></td>
+<td><p>IP_MAGIC_NUM</p></td>
+<td><p>MAGIC_NUMBER</p></td>
+<td><p>31:0</p></td>
+<td><p>0x534D_4273</p></td>
+<td><p>RO</p></td>
+<td><p>IP Magic Number</p>
+<blockquote>
+<div><p>Returns a read-only identifier to assist with IP identification.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0x00C</p></td>
+<td><p>BUILD_CONFIG_0</p></td>
+<td><p>FREQ_HZ_AXI_ACLK</p></td>
+<td><p>31:0</p></td>
+<td><p>*</p></td>
+<td><p>RO</p></td>
+<td><p>Input AXI ACLK Frequency</p>
+<blockquote>
+<div><p>Returns the value of the FREQ_HZ_AXI_ACLK parameter set at build time.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>0x010</p></td>
+<td><p>BUILD_CONFIG_1</p></td>
+<td><p>NUM_TARGET_DEVICES</p></td>
+<td><p>7:4</p></td>
+<td><p>*</p></td>
+<td><p>RO</p></td>
+<td><p>Number of Target Devices supported</p>
+<blockquote>
+<div><p>Returns the value of the NUM_TARGET_DEVICES parameter set at build time.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>SMBUS_DEV_CLASS</p></td>
+<td><p>1:0</p></td>
+<td><p>*</p></td>
+<td><p>RO</p></td>
+<td><p>Default SMBus Device Class</p>
+<blockquote>
+<div><p>Returns the value of the SMBUS_DEV_CLASS parameter set at build time.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>0x020</p></td>
+<td><p>IRQ_GIE</p></td>
+<td><p>ENABLE</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>Global Interrupt Enable</p>
+<blockquote>
+<div><p>When set, interrupts enabled in the IRQ_IER register can assert the ip2intc_irpt interrupt output</p>
+<p>0x0 - Disable the Interrupt output</p>
+<p>0x1 - Enable the Interrupt output</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0x024</p></td>
+<td><p>IRQ_IER</p></td>
+<td><p>CTLR_DESC_FIFO_ALMOST_EMPTY</p></td>
+<td><p>15</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an interrupt will be generated when the IRQ_ISR register reports the CTLR_DESC_FIFO_ALMOST_EMPTY field as set.</p>
+<blockquote>
+<div><p>0x0 - CTLR_DESC_FIFO_ALMOST_EMPTY interrupt disabled</p>
+<p>0x1 - CTLR_DESC_FIFO_ALMOST_EMPTY interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>CTLR_RX_FIFO_FILL_THRESHOLD</p></td>
+<td><p>14</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an interrupt will be generated when the IRQ_ISR register reports the CTLR_RX_FIFO_FILL_THRESHOLD field as set.</p>
+<blockquote>
+<div><p>0x0 - CTLR_RX_FIFO_FILL_THRESHOLD interrupt disabled</p>
+<p>0x1 - CTLR_RX_FIFO_FILL_THRESHOLD interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>CTLR_DESC_FIFO_EMPTY</p></td>
+<td><p>13</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an interrupt will be generated when the IRQ_ISR register reports the CTLR_DESC_FIFO_EMPTY field as set.</p>
+<blockquote>
+<div><p>0x0 - CTLR_DESC_FIFO_EMPTY interrupt disabled</p>
+<p>0x1 - CTLR_DESC_FIFO_EMPTY interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>CTLR_DONE</p></td>
+<td><p>12</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an interrupt will be generated when the IRQ_ISR register reports the CTLR_DONE field as set.</p>
+<blockquote>
+<div><p>0x0 - CTLR_DONE interrupt disabled</p>
+<p>0x1 - CTLR_DONE interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>CTLR_PEC_ERROR</p></td>
+<td><p>11</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an interrupt will be generated when the IRQ_ISR register reports the CTLR_PEC_ERROR field as set.</p>
+<blockquote>
+<div><p>0x0 - CTLR_PEC_ERROR interrupt disabled</p>
+<p>0x1 - CTLR_PEC_ERROR interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>CTLR_NACK_ERROR</p></td>
+<td><p>10</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an interrupt will be generated when the IRQ_ISR register reports the CTLR_NACK_ERROR field as set.</p>
+<blockquote>
+<div><p>0x0 - CTLR_NACK_ERROR interrupt disabled</p>
+<p>0x1 - CTLR_NACK_ERROR interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>CTLR_LOA</p></td>
+<td><p>9</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an interrupt will be generated when the IRQ_ISR register reports the PHY_CTLR_LOA field as set.</p>
+<blockquote>
+<div><p>0x0 - CTLR_LOA interrupt disabled</p>
+<p>0x1 - CTLR_LOA interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>TGT_DESC_FIFO_ALMOST_EMPTY</p></td>
+<td><p>8</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an interrupt will be generated when the IRQ_ISR register reports the TGT_DESC_FIFO_ALMOST_EMPTY field as set.</p>
+<blockquote>
+<div><p>0x0 - TGT_DESC_FIFO_ALMOST_EMPTY interrupt disabled</p>
+<p>0x1 - TGT_DESC_FIFO_ALMOST_EMPTY interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>TGT_WRITE</p></td>
+<td><p>7</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an interrupt will be generated when the IRQ_ISR register reports the TGT_WRITE field as set.</p>
+<blockquote>
+<div><p>0x0 - TGT_WRITE interrupt disabled</p>
+<p>0x1 - TGT_WRITE interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>TGT_READ</p></td>
+<td><p>6</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an interrupt will be generated when the IRQ_ISR register reports the TGT_READ field as set.</p>
+<blockquote>
+<div><p>0x0 - TGT_READ interrupt disabled</p>
+<p>0x1 - TGT_READ interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>TGT_RX_FIFO_FILL_THRESHOLD</p></td>
+<td><p>5</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an interrupt will be generated when the IRQ_ISR register reports the TGT_RX_FIFO_FILL_THRESHOLD field as set.</p>
+<blockquote>
+<div><p>0x0 - TGT_RX_FIFO_FILL_THRESHOLD interrupt disabled</p>
+<p>0x1 - TGT_RX_FIFO_FILL_THRESHOLD interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>TGT_DESC_FIFO_EMPTY</p></td>
+<td><p>4</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an interrupt will be generated when the IRQ_ISR register reports the TGT_DESC_FIFO_EMPTY field as set.</p>
+<blockquote>
+<div><p>0x0 - TGT_DESC_FIFO_EMPTY interrupt disabled</p>
+<p>0x1 - TGT_DESC_FIFO_EMPTY interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>TGT_DONE</p></td>
+<td><p>3</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an interrupt will be generated when the IRQ_ISR register reports the TGT_DONE field as set.</p>
+<blockquote>
+<div><p>0x0 - TGT_DONE interrupt disabled</p>
+<p>0x1 - TGT_DONE interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>TGT_PEC_ERROR</p></td>
+<td><p>2</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an interrupt will be generated when the IRQ_ISR register reports the TGT_PEC_ERROR field as set.</p>
+<blockquote>
+<div><p>0x0 - TGT_PEC_ERROR interrupt disabled</p>
+<p>0x1 - TGT_PEC_ERROR interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>TGT_LOA</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an interrupt will be generated when the IRQ_ISR register reports the TGT_LOA field as set.</p>
+<blockquote>
+<div><p>0x0 - TGT_LOA interrupt disabled</p>
+<p>0x1 - TGT_LOA interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>ERROR_IRQ</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an interrupt will be generated when the IRQ_ISR register reports the ERROR_IRQ field as set.</p>
+<blockquote>
+<div><p>0x0 - ERROR_IRQ interrupt disabled</p>
+<p>0x1 - ERROR_IRQ interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0x028</p></td>
+<td><p>IRQ_ISR</p></td>
+<td><p>CTLR_DESC_FIFO_ALMOST_EMPTY</p></td>
+<td><p>15</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Controller has detected only one descriptor in the Descriptor FIFO and a transaction is in progress</p>
+<blockquote>
+<div><p>0x0 - Controller Descriptor FIFO contains more than one descriptor or no transaction in progress</p>
+<p>0x1 - Controller Descriptor FIFO only contains one descriptor and a transaction is in progress</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>CTLR_RX_FIFO_FILL_THRESHOLD</p></td>
+<td><p>14</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Controller Receive FIFO has reached the fill level configured in the CTLR_RX_FIFO_FILL_THRESHOLD register</p>
+<blockquote>
+<div><p>0x0 - Controller Receive FIFO fill level below configured threshold</p>
+<p>0x1 - Controller Receive FIFO has reached the configured fill threshold</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>CTLR_DESC_FIFO_EMPTY</p></td>
+<td><p>13</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Controller has detected the Descriptor FIFO is empty and another descriptor is required</p>
+<blockquote>
+<div><p>0x0 - Controller Descriptor FIFO not empty or descriptor not required</p>
+<p>0x1 - Controller Descriptor FIFO empty and a descriptor is required</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>CTLR_DONE</p></td>
+<td><p>12</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Controller has successfully completed the transaction</p>
+<blockquote>
+<div><p>0x0 - Controller transaction not complete or no transaction in progress</p>
+<p>0x1 - Controller transaction is complete</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>CTLR_PEC_ERROR</p></td>
+<td><p>11</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Controller has detected a PEC error during a Read transaction with PEC enabled</p>
+<blockquote>
+<div><p>0x0 - No PEC error</p>
+<p>0x1 - PEC error detected during Read</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>CTLR_NACK_ERROR</p></td>
+<td><p>10</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Controller has received a NACK response from the Target following transmission of a byte as Controller-transmitter</p>
+<blockquote>
+<div><p>0x0 - No NACK response from Target</p>
+<p>0x1 - Target responded with NACK</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>CTLR_LOA</p></td>
+<td><p>9</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Controller has detected loss of arbitration as a Controller-transmitter</p>
+<blockquote>
+<div><p>0x0 - No loss of arbitration detected</p>
+<p>0x1 - Loss of arbitration detected</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>TGT_DESC_FIFO_ALMOST_EMPTY</p></td>
+<td><p>8</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Target has detected only one descriptor in the Descriptor FIFO and a transaction is in progress</p>
+<blockquote>
+<div><p>0x0 - Target Descriptor FIFO contains more than one descriptor or no transaction in progress</p>
+<p>0x1 - Target Descriptor FIFO only contains one descriptor and a transaction is in progress</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>TGT_WRITE</p></td>
+<td><p>7</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Target has detected a start of write transaction for a Target device enabled in TGT_CONTROL_[7:0]</p>
+<blockquote>
+<div><p>0x0 - No write detected matching an enabled target device</p>
+<p>0x1 - Start of write detected matching an enabled target device, details available in TGT_STATUS</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>TGT_READ</p></td>
+<td><p>6</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Target has detected a start of read transaction for a Target device enabled in TGT_CONTROL_[7:0]</p>
+<blockquote>
+<div><p>0x0 - No read detected matching an enabled target device</p>
+<p>0x1 - Start of read detected matching an enabled target device, details available in TGT_STATUS</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>TGT_RX_FIFO_FILL_THRESHOLD</p></td>
+<td><p>5</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Target Receive FIFO has reached the fill level configured in the TGT_RX_FIFO_FILL_THRESHOLD register</p>
+<blockquote>
+<div><p>0x0 - Target Receive FIFO fill level below configured threshold</p>
+<p>0x1 - Target Receive FIFO has reached the configured fill threshold</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>TGT_DESC_FIFO_EMPTY</p></td>
+<td><p>4</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Target has detected the Descriptor FIFO is empty and another descriptor is required</p>
+<blockquote>
+<div><p>0x0 - Target Descriptor FIFO not empty or descriptor not required</p>
+<p>0x1 - Target Descriptor FIFO empty and a descriptor is required</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>TGT_DONE</p></td>
+<td><p>3</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Target has detected a STOP condition, transaction is complete and no PEC error detected (if write, if applicable)</p>
+<blockquote>
+<div><p>0x0 - Target transaction not done</p>
+<p>0x1 - Target transaction done</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>TGT_PEC_ERROR</p></td>
+<td><p>2</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Target has detected a STOP condition, transaction is complete but PEC error detected (only applicable to Writes)</p>
+<blockquote>
+<div><p>0x0 - Target transaction not done</p>
+<p>0x1 - Target transaction done, but PEC error detected</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>TGT_LOA</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Target has detected loss of arbitration as a Target-transmitter</p>
+<blockquote>
+<div><p>0x0 - No loss of arbitration detected</p>
+<p>0x1 - Loss of arbitration detected</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>ERROR_IRQ</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>An error condition has occurred that is both enabled in the ERR_IRQ_IER register and set in the ERR_IRQ_ISR register.</p>
+<blockquote>
+<div><p>0x0 - No error condition detected</p>
+<p>0x1 - Error condition detected</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0x02C</p></td>
+<td><p>ERR_IRQ_IER</p></td>
+<td><p>PHY_CTLR_CEXT_TIMEOUT</p></td>
+<td><p>19</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an error interrupt will be generated when the ERR_IRQ_ISR register reports the PHY_CTLR_CEXT_TIMEOUT field as set.</p>
+<blockquote>
+<div><p>0x0 - PHY_CTLR_CEXT_TIMEOUT interrupt disabled</p>
+<p>0x1 - PHY_CTLR_CEXT_TIMEOUT interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>PHY_CTLR_TEXT_TIMEOUT</p></td>
+<td><p>18</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an error interrupt will be generated when the ERR_IRQ_ISR register reports the PHY_CTLR_TEXT_TIMEOUT field as set.</p>
+<blockquote>
+<div><p>0x0 - PHY_CTLR_TEXT_TIMEOUT interrupt disabled</p>
+<p>0x1 - PHY_CTLR_TEXT_TIMEOUT interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>CTLR_RX_FIFO_ERROR</p></td>
+<td><p>17</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an error interrupt will be generated when the ERR_IRQ_ISR register reports the CTLR_RX_FIFO_ERROR field as set.</p>
+<blockquote>
+<div><p>0x0 - CTLR_RX_FIFO_ERROR interrupt disabled</p>
+<p>0x1 - CTLR_RX_FIFO_ERROR interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>CTLR_RX_FIFO_OVERFLOW</p></td>
+<td><p>16</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an error interrupt will be generated when the ERR_IRQ_ISR register reports the CTLR_RX_FIFO_OVERFLOW field as set.</p>
+<blockquote>
+<div><p>0x0 -CTLR_RX_FIFO_OVERFLOW interrupt disabled</p>
+<p>0x1 - CTLR_RX_FIFO_OVERFLOW interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>CTLR_RX_FIFO_UNDERFLOW</p></td>
+<td><p>15</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an error interrupt will be generated when the ERR_IRQ_ISR register reports the CTLR_RX_FIFO_UNDERFLOW field as set.</p>
+<blockquote>
+<div><p>0x0 - CTLR_RX_FIFO_UNDERFLOW interrupt disabled</p>
+<p>0x1 - CTLR_RX_FIFO_UNDERFLOW interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>CTLR_DESC_FIFO_ERROR</p></td>
+<td><p>14</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an error interrupt will be generated when the ERR_IRQ_ISR register reports the CTLR_DESC_FIFO_ERROR field as set.</p>
+<blockquote>
+<div><p>0x0 - CTLR_DESC_FIFO_ERROR interrupt disabled</p>
+<p>0x1 - CTLR_DESC_FIFO_ERROR interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>CTLR_DESC_FIFO_OVERFLOW</p></td>
+<td><p>13</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an error interrupt will be generated when the ERR_IRQ_ISR register reports the CTLR_DESC_FIFO_OVERFLOW field as set.</p>
+<blockquote>
+<div><p>0x0 - CTLR_DESC_FIFO_OVERFLOW interrupt disabled</p>
+<p>0x1 - CTLR_DESC_FIFO_OVERFLOW interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>CTLR_DESC_FIFO_UNDERFLOW</p></td>
+<td><p>12</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an error interrupt will be generated when the ERR_IRQ_ISR register reports the CTLR_DESC_FIFO_UNDERFLOW field as set.</p>
+<blockquote>
+<div><p>0x0 - CTLR_DESC_FIFO_UNDERFLOW interrupt disabled</p>
+<p>0x1 - CTLR_DESC_FIFO_UNDERFLOW interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>CTLR_DESC_ERROR</p></td>
+<td><p>11</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an error interrupt will be generated when the ERR_IRQ_ISR register reports the CTLR_DESC_ERROR field as set.</p>
+<blockquote>
+<div><p>0x0 - CTLR_DESC_ERROR interrupt disabled</p>
+<p>0x1 - CTLR_DESC_ERROR interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>PHY_TGT_TEXT_TIMEOUT</p></td>
+<td><p>10</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an error interrupt will be generated when the ERR_IRQ_ISR register reports the PHY_TGT_TEXT_TIMEOUT field as set.</p>
+<blockquote>
+<div><p>0x0 - PHY_TGT_TEXT_TIMEOUT interrupt disabled</p>
+<p>0x1 - PHY_TGT_TEXT_TIMEOUT interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>TGT_RX_FIFO_ERROR</p></td>
+<td><p>9</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an error interrupt will be generated when the ERR_IRQ_ISR register reports the TGT_RX_FIFO_ERROR field as set.</p>
+<blockquote>
+<div><p>0x0 - TGT_RX_FIFO_ERROR interrupt disabled</p>
+<p>0x1 - TGT_RX_FIFO_ERROR interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>TGT_RX_FIFO_OVERFLOW</p></td>
+<td><p>8</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an error interrupt will be generated when the ERR_IRQ_ISR register reports the TGT_RX_FIFO_OVERFLOW field as set.</p>
+<blockquote>
+<div><p>0x0 - TGT_RX_FIFO_OVERFLOW interrupt disabled</p>
+<p>0x1 - TGT_RX_FIFO_OVERFLOW interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>TGT_RX_FIFO_UNDERFLOW</p></td>
+<td><p>7</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an error interrupt will be generated when the ERR_IRQ_ISR register reports the TGT_RX_FIFO_UNDERFLOW field as set.</p>
+<blockquote>
+<div><p>0x0 - TGT_RX_FIFO_UNDERFLOW interrupt disabled</p>
+<p>0x1 - TGT_RX_FIFO_UNDERFLOW interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>TGT_DESC_FIFO_ERROR</p></td>
+<td><p>6</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an error interrupt will be generated when the ERR_IRQ_ISR register reports the TGT_DESC_FIFO_ERROR field as set.</p>
+<blockquote>
+<div><p>0x0 - TGT_DESC_FIFO_ERROR interrupt disabled</p>
+<p>0x1 - TGT_DESC_FIFO_ERROR interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>TGT_DESC_FIFO_OVERFLOW</p></td>
+<td><p>5</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an error interrupt will be generated when the ERR_IRQ_ISR register reports the TGT_DESC_FIFO_OVERFLOW field as set.</p>
+<blockquote>
+<div><p>0x0 - TGT_DESC_FIFO_OVERFLOW interrupt disabled</p>
+<p>0x1 - TGT_DESC_FIFO_OVERFLOW interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>TGT_DESC_FIFO_UNDERFLOW</p></td>
+<td><p>4</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an error interrupt will be generated when the ERR_IRQ_ISR register reports the TGT_DESC_FIFO_UNDERFLOW field as set.</p>
+<blockquote>
+<div><p>0x0 - TGT_DESC_FIFO_UNDERFLOW interrupt disabled</p>
+<p>0x1 - TGT_DESC_FIFO_UNDERFLOW interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>TGT_DESC_ERROR</p></td>
+<td><p>3</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an error interrupt will be generated when the ERR_IRQ_ISR register reports the TGT_DESC_ERROR field as set.</p>
+<blockquote>
+<div><p>0x0 - TGT_DESC_ERROR interrupt disabled</p>
+<p>0x1 - TGT_DESC_ERROR interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>PHY_UNEXPTD_BUS_IDLE</p></td>
+<td><p>2</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an error interrupt will be generated when the ERR_IRQ_ISR register reports the PHY_UNEXPTD_BUS_IDLE field as set.</p>
+<blockquote>
+<div><p>0x0 - PHY_UNEXPTD_BUS_IDLE interrupt disabled</p>
+<p>0x1 - PHY_UNEXPTD_BUS_IDLE interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>PHY_SMBDAT_LOW_TIMEOUT</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an error interrupt will be generated when the ERR_IRQ_ISR register reports the PHY_SMBDAT_LOW_TIMEOUT field as set.</p>
+<blockquote>
+<div><p>0x0 - PHY_SMBDAT_LOW_TIMEOUT interrupt disabled</p>
+<p>0x1 - PHY_SMBDAT_LOW_TIMEOUT interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>PHY_SMBCLK_LOW_TIMEOUT</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>When set, an error interrupt will be generated when the ERR_IRQ_ISR register reports the PHY_SMBCLK_LOW_TIMEOUT field as set.</p>
+<blockquote>
+<div><p>0x0 - PHY_SMBCLK_LOW_TIMEOUT interrupt disabled</p>
+<p>0x1 - PHY_SMBCLK_LOW_TIMEOUT interrupt enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0x030</p></td>
+<td><p>ERR_IRQ_ISR</p></td>
+<td><p>PHY_CTLR_CEXT_TIMEOUT</p></td>
+<td><p>19</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>PHY has detected SMBCLK stretching performed by the Controller function beyond the threshold configured in the PHY_CTLR_CEXT_TIMEOUT register</p>
+<blockquote>
+<div><p>0x0 - Controller function clock stretching has not exceeded threshold</p>
+<p>0x1 - Controller function clock stretching has exceeded the threshold</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>PHY_CTLR_TEXT_TIMEOUT</p></td>
+<td><p>18</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Controller has detected SMBCLK stretching performed by an external Target beyond the threshold configured in the PHY_CTLR_TEXT_TIMEOUT register</p>
+<blockquote>
+<div><p>0x0 - Controller function has not detected Target clock stretching that exceeds the threshold</p>
+<p>0x1 - Controller function has detected Target clock stretching that exceeds the threshold</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>CTLR_RX_FIFO_ERROR</p></td>
+<td><p>17</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Controller has detected that an attempt to read or write to the Receive FIFO while it is in reset has been made.</p>
+<blockquote>
+<div><p>0x0 - No Receive FIFO read/write error detected</p>
+<p>0x1 - Receive FIFO read/write error detected</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>CTLR_RX_FIFO_OVERFLOW</p></td>
+<td><p>16</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Controller has detected the Receive FIFO has overflowed</p>
+<blockquote>
+<div><p>0x0 - No Receive FIFO overflow detected</p>
+<p>0x1 - Receive FIFO overflow detected</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>CTLR_RX_FIFO_UNDERFLOW</p></td>
+<td><p>15</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Controller has detected the Receive FIFO has underflowed</p>
+<blockquote>
+<div><p>0x0 - No Receive FIFO underflow detected</p>
+<p>0x1 - Receive FIFO underflow detected</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>CTLR_DESC_FIFO_ERROR</p></td>
+<td><p>14</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Controller has detected that an attempt to write to the Descriptor FIFO while it is in reset has been made.</p>
+<blockquote>
+<div><p>0x0 - No Descriptor FIFO write error detected</p>
+<p>0x1 - Descriptor FIFO write error detected</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>CTLR_DESC_FIFO_OVERFLOW</p></td>
+<td><p>13</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Controller has detected the Descriptor FIFO has overflowed</p>
+<blockquote>
+<div><p>0x0 - No Descriptor FIFO overflow detected</p>
+<p>0x1 - Descriptor FIFO overflow detected</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>CTLR_DESC_FIFO_UNDERFLOW</p></td>
+<td><p>12</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Controller has detected the Descriptor FIFO has underflowed</p>
+<blockquote>
+<div><p>0x0 - No Descriptor FIFO underflow detected</p>
+<p>0x1 - Descriptor FIFO underflow detected</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>CTLR_DESC_ERROR</p></td>
+<td><p>11</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Controller has received an invalid descriptor ID via the Descriptor FIFO or the first descriptor in the sequence is not a START descriptor.</p>
+<blockquote>
+<div><p>0x0 - No descriptor error detected</p>
+<p>0x1 - Descriptor error detected</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>PHY_TGT_TEXT_TIMEOUT</p></td>
+<td><p>10</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>PHY has detected SMBCLK stretching performed by the Target function beyond the threshold configured in the PHY_TGT_TEXT_TIMEOUT register</p>
+<blockquote>
+<div><p>0x0 - Target function clock stretching has not exceeded threshold</p>
+<p>0x1 - Target function clock stretching has exceeded the threshold</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>TGT_RX_FIFO_ERROR</p></td>
+<td><p>9</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Target has detected that an attempt to read or write to the Receive FIFO while it is in reset has been made.</p>
+<blockquote>
+<div><p>0x0 - No Receive FIFO read/write error detected</p>
+<p>0x1 - Receive FIFO read/write error detected</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>TGT_RX_FIFO_OVERFLOW</p></td>
+<td><p>8</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Target has detected the Receive FIFO has overflowed</p>
+<blockquote>
+<div><p>0x0 - No Receive FIFO overflow detected</p>
+<p>0x1 - Receive FIFO overflow detected</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>TGT_RX_FIFO_UNDERFLOW</p></td>
+<td><p>7</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Target has detected the Receive FIFO has underflowed</p>
+<blockquote>
+<div><p>0x0 - No Receive FIFO underflow detected</p>
+<p>0x1 - Receive FIFO underflow detected</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>TGT_DESC_FIFO_ERROR</p></td>
+<td><p>6</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Target has detected that an attempt to write to the Descriptor FIFO while it is in reset has been made.</p>
+<blockquote>
+<div><p>0x0 - No Descriptor FIFO write error detected</p>
+<p>0x1 - Descriptor FIFO write error detected</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>TGT_DESC_FIFO_OVERFLOW</p></td>
+<td><p>5</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Target has detected the Descriptor FIFO has overflowed</p>
+<blockquote>
+<div><p>0x0 - No Descriptor FIFO overflow detected</p>
+<p>0x1 - Descriptor FIFO overflow detected</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>TGT_DESC_FIFO_UNDERFLOW</p></td>
+<td><p>4</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Target has detected the Descriptor FIFO has underflowed</p>
+<blockquote>
+<div><p>0x0 - No Descriptor FIFO underflow detected</p>
+<p>0x1 - Descriptor FIFO underflow detected</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>TGT_DESC_ERROR</p></td>
+<td><p>3</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Target has received an invalid descriptor via the Descriptor FIFO. This is asserted when either an undefined descriptor ID or unexpected type (e.g. read descriptor during a write) is received.</p>
+<blockquote>
+<div><p>0x0 - No descriptor error detected</p>
+<p>0x1 - Descriptor error detected</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>PHY_UNEXPTD_BUS_IDLE</p></td>
+<td><p>2</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>PHY has detected an unexpected bus idle condition by observing SMBCLK/SMBDAT inputs high beyond the threshold configured in the PHY_IDLE_THRESHOLD register, whilst a transaction is in progress (i.e. no STOP condition)</p>
+<blockquote>
+<div><p>0x0 - No unexpected bus idle detected</p>
+<p>0x1 - Unexpected bus idle condition detected</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>PHY_SMBDAT_LOW_TIMEOUT</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>PHY has detected SMBDAT persistently low following a rising edge on SMBCLK for the timeout value configured in the PHY_TIMEOUT_MAX register</p>
+<blockquote>
+<div><p>0x0 - No SMBDAT low timeout</p>
+<p>0x1 - SMBDAT low timeout detected</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>PHY_SMBCLK_LOW_TIMEOUT</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>PHY has detected SMBCLK persistently low for the timeout value configured in the PHY_TIMEOUT_MIN register</p>
+<blockquote>
+<div><p>0x0 - No SMBCLK low timeout</p>
+<p>0x1 - SMBCLK low timeout detected</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0x034</p></td>
+<td><p>IRQ_ISR_FORCE</p></td>
+<td><p>IRQ_ISR_FORCE</p></td>
+<td><p>15:0</p></td>
+<td><p>0</p></td>
+<td><p>WO</p></td>
+<td><p>Debug IRQ ISR Force</p>
+<blockquote>
+<div><p>Debug - When set, the equivalent bit in the IRQ_ISR register is set to ‘1’ in order to force assertion of the interrupt source.</p>
+<p>0x0 - No forced assertion of the equivalent bit in IRQ_ISR register</p>
+<p>0x1 - Equivalent bit in the IRQ_ISR register is forced to ‘1’</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>0x038</p></td>
+<td><p>ERR_ISR_IRQ_FORCE</p></td>
+<td><p>ERR_ISR_IRQ_FORCE</p></td>
+<td><p>19:0</p></td>
+<td><p>0</p></td>
+<td><p>WO</p></td>
+<td><p>Debug Error IRQ ISR Force</p>
+<blockquote>
+<div><p>Debug - When set, the equivalent bit in the ERR_IRQ_ISR register is set to ‘1’ in order to force assertion of the interrupt source.</p>
+<p>0x0 - No forced assertion of the equivalent bit in ERR_IRQ_ISR register</p>
+<p>0x1 - Equivalent bit in the ERR_IRQ_ISR register is forced to ‘1’</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>0x200</p></td>
+<td><p>PHY_STATUS</p></td>
+<td><p>SMBDAT_LOW_TIMEOUT</p></td>
+<td><p>2</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates when the SMBus PHY has detected a SMBDAT low timeout in accordance with the threshold configured in the PHY_TIMEOUT_MAX register.</p>
+<blockquote>
+<div><p>0x0 - SMBDAT low timeout not detected</p>
+<p>0x1 - SMBDAT low timeout detected</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>SMBCLK_LOW_TIMEOUT</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates when the SMBus PHY has detected a SMBCLK low timeout in accordance with the threshold configured in the PHY_TIMEOUT_MIN register.</p>
+<blockquote>
+<div><p>0x0 - SMBCLK low timeout not detected</p>
+<p>0x1 - SMBCLK low timeout detected</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>BUS_IDLE</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates when the SMBus PHY has detected the Bus Idle condition</p>
+<blockquote>
+<div><p>0x0 - Bus Idle condition not detected</p>
+<p>0x1 - Bus is Idle</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0x204</p></td>
+<td><p>PHY_FILTER_CONTROL</p></td>
+<td><p>ENABLE</p></td>
+<td><p>31</p></td>
+<td><p>1</p></td>
+<td><p>RW</p></td>
+<td><p>Enable the SMBCLK/SMBDAT input glitch filter</p>
+<blockquote>
+<div><p>0x0 - Input glitch filter disabled</p>
+<p>0x1 - Input glitch filter enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>DURATION</p></td>
+<td><p>4:0</p></td>
+<td><p>*</p></td>
+<td><p>RW</p></td>
+<td><p>Input Glitch Filter Duration</p>
+<blockquote>
+<div><p>Configure the duration that the SMBCLK or SMBDAT inputs must be stable for before registering as a change in state.</p>
+<p>This value is calculated as Time = s_axi_aclk period x (DURATION + 1)</p>
+<p>This value must be configured to meet tSPIKE:MAX in accordance with the SMBus Specification.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0x208</p></td>
+<td><p>PHY_BUS_FREE_TIME</p></td>
+<td><p>BUS_FREE_TIME</p></td>
+<td><p>11:0</p></td>
+<td><p>*</p></td>
+<td><p>RW</p></td>
+<td><p>Bus Free Time Control</p>
+<blockquote>
+<div><p>Configure the amount of time to wait following detection of a STOP condition before declaring a bus idle condition.</p>
+<p>This value is calculated as Time = s_axi_aclk period x (BUS_FREE_TIME + 1)</p>
+<p>This value must be configured to meet tBUF:MIN in accordance with the SMBus Specification.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>0x20C</p></td>
+<td><p>PHY_IDLE_THRESHOLD</p></td>
+<td><p>IDLE_THRESHOLD</p></td>
+<td><p>14:0</p></td>
+<td><p>*</p></td>
+<td><p>RW</p></td>
+<td><p>Bus Idle Time Control</p>
+<blockquote>
+<div><p>Configure the amount of time that both SMBCLK and SMBDAT must be high before declaring a bus idle condition.</p>
+<p>This value is calculated as Time = s_axi_aclk period x (IDLE_THRESHOLD + 1)</p>
+<p>This value must be configured to meet tHIGH:MAX in accordance with the SMBus Specification.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0x210</p></td>
+<td><p>PHY_TIMEOUT_PRESCALER</p></td>
+<td><p>TIMEOUT_PRESCALER</p></td>
+<td><p>12:0</p></td>
+<td><p>*</p></td>
+<td><p>RW</p></td>
+<td><p>Timeout Prescaler Configuration</p>
+<blockquote>
+<div><p>Configure the amount of time to wait before incrementing either the PHY_TIMEOUT_MIN or PHY_TIMEOUT_MAX counters.</p>
+<p>This value is calculated as Prescaler_Time = s_axi_aclk period x (TIMEOUT_PRESCALER + 1)</p>
+<p>The Prescaler_Time should be configured for 10us in order to stay within range of the PHY_TIMEOUT_MIN and PHY_TIMEOUT_MAX counters.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>0x214</p></td>
+<td><p>PHY_TIMEOUT_MIN</p></td>
+<td><p>TIMEOUT_ENABLE</p></td>
+<td><p>31</p></td>
+<td><p>1</p></td>
+<td><p>RW</p></td>
+<td><p>Minimum Timeout Detection Enable</p>
+<blockquote>
+<div><p>Enable/disable the SMBCLK low timeout detection and subsequent consequent actions.</p>
+<p>0x0 - SMBCLK low timeout detection disabled</p>
+<p>0x1 - SMBCLK low timeout detection enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>TIMEOUT_MIN</p></td>
+<td><p>11:0</p></td>
+<td><p>*</p></td>
+<td><p>RW</p></td>
+<td><p>Minimum Timeout Configuration</p>
+<blockquote>
+<div><p>Configure the threshold used to detect a SMBCLK low timeout and trigger the PHY_SMBCLK_TIMEOUT interrupt.</p>
+<p>This value must be configured to meet tTIMEOUT:MIN in accordance with the SMBus Specification.</p>
+<p>This value is calculated as Timeout_Min_Time = ((TIMEOUT_MIN + 1) x Prescaler_Time) - Prescaler_Time</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>0x218</p></td>
+<td><p>PHY_TIMEOUT_MAX</p></td>
+<td><p>TIMEOUT_MAX</p></td>
+<td><p>11:0</p></td>
+<td><p>*</p></td>
+<td><p>RW</p></td>
+<td><p>Maximum Timeout Configuration</p>
+<blockquote>
+<div><p>Configure the threshold used to detect a SMBDAT low timeout and trigger the PHY_SMBDAT_TIMEOUT interrupt.</p>
+<p>This value must be configured to meet tTIMEOUT:MAX in accordance with the SMBus Specification.</p>
+<p>This value is calculated as Timeout_Max_Time = ((TIMEOUT_MAX + 1) x Prescaler_Time) - Prescaler_Time</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0x21C</p></td>
+<td><p>PHY_RESET_CONTROL</p></td>
+<td><p>SMBCLK_FORCE_TIMEOUT</p></td>
+<td><p>31</p></td>
+<td><p>0</p></td>
+<td><p>WO</p></td>
+<td><p>SMBCLK Timeout Force Control</p>
+<blockquote>
+<div><p>Override the SMBCLK low detection to force assertion of this timeout and subsequent consequent actions.</p>
+<p>0x0 - No SMBCLK low timeout forced assertion</p>
+<p>0x1 - Force assertion of the SMBCLK low timeout and subsequent consequent actions</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>SMBCLK_FORCE_LOW</p></td>
+<td><p>11:0</p></td>
+<td><p>0</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div></blockquote>
+</td>
+<td><p>RW</p></td>
+<td><p>SMBCLK Output Force Control</p>
+<blockquote>
+<div><p>Override the PHY control of the SMBCLK and force the output low.</p>
+<p>0xCFB = SMBCLK force low</p>
+<p>Any other value = SMBCLK under PHY control</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>0x400</p></td>
+<td><p>PHY_TGT_DATA_SETUP</p></td>
+<td><p>TGT_DATA_SETUP</p></td>
+<td><p>9:0</p></td>
+<td><p>*</p></td>
+<td><p>RW</p></td>
+<td><p>Target PHY Data Setup</p>
+<blockquote>
+<div><p>Configure the data setup time when operating as a Target-transmitter post clock stretching.</p>
+<p>This value must be configured to meet tSU:DAT:Min in accordance with the SMBus Specification and account for tR:Max/tF:Max.</p>
+<p>This value is calculated as Setup Time = s_axi_aclk period x (TGT_DATA_SETUP + 1)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0x404</p></td>
+<td><p>PHY_TGT_TEXT_PRESCALER</p></td>
+<td><p>TGT_TEXT_PRESCALER</p></td>
+<td><p>8:0</p></td>
+<td><p>*</p></td>
+<td><p>RW</p></td>
+<td><p>Target PHY TEXT Timeout Prescaler Configuration</p>
+<blockquote>
+<div><p>Configure the amount of time to measure before incrementing the PHY_TGT_TEXT_TIMEOUT counter when SMBCLK stretching is active within the Target function.</p>
+<p>This value is calculated as Text_Prescaler_Time = s_axi_aclk period x (TGT_TEXT_PRESCALER+ 1)</p>
+<p>The Text_Prescaler_Time should be configured for 1us in order to stay within range of the PHY_TGT_TEXT_TIMEOUT counter.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>0x408</p></td>
+<td><p>PHY_TGT_TEXT_TIMEOUT</p></td>
+<td><p>TGT_TEXT_TIMEOUT</p></td>
+<td><p>14:0</p></td>
+<td><p>*</p></td>
+<td><p>RW</p></td>
+<td><p>Target PHY TEXT Timeout Configuration</p>
+<blockquote>
+<div><p>Configure the threshold used to detect that the Target function has exceeded the cumulative clock stretching threshold and trigger the TGT_TEXT_TIMEOUT interrupt.</p>
+<p>This value must be configured to meet tLOW:TEXT in accordance with the SMBus Specification.</p>
+<p>This value is calculated as Text_Timeout_Time = TGT_TEXT_TIMEOUT x Text_Prescaler_Time</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0x40C</p></td>
+<td><p>PHY_TGT_TEXT_MAX</p></td>
+<td><p>TGT_TEXT_MAX</p></td>
+<td><p>14:0</p></td>
+<td><p>0</p></td>
+<td><p>WC</p></td>
+<td><p>Target PHY TEXT Timeout Max</p>
+<blockquote>
+<div><p>Indicates the maximum amount of cumulative time in Text_Prescaler_Time units that the Target function has spent performing SMBCLK stretching during any single transaction (between an initial START and a STOP).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>0x410</p></td>
+<td><p>PHY_TGT_DBG_STATE</p></td>
+<td><p>DBG_STATE</p></td>
+<td><p>7:0</p></td>
+<td><p>0x1</p></td>
+<td><p>RO</p></td>
+<td><p>Target PHY Debug State</p>
+<blockquote>
+<div><p>Reports the current Target PHY FSM State to assist with debug.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0x414</p></td>
+<td><p>PHY_TGT_DATA_HOLD</p></td>
+<td><p>TGT_DATA_HOLD</p></td>
+<td><p>9:0</p></td>
+<td><p>*</p></td>
+<td><p>RW</p></td>
+<td><p>Target PHY Data Hold</p>
+<blockquote>
+<div><p>Configure the data hold time when operating as a Target-transmitter.</p>
+<p>This value must be configured to meet tHD:DAT:Min in accordance with the SMBus Specification.</p>
+<p>This value is calculated as:</p>
+<p>If PHY_FILTER_CONTROL__ENABLE = 0x1:</p>
+<p>Hold Time = s_axi_aclk period x (TGT_DATA_HOLD + 8 + (PHY_FILTER_CONTROL__DURATION + 1))</p>
+<p>If PHY_FILTER_CONTROL__ENABLE = 0x0:</p>
+<p>Hold Time = s_axi_aclk period x (TGT_DATA_HOLD + 8)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0x600</p></td>
+<td><p>TGT_STATUS</p></td>
+<td><p>ACTIVE</p></td>
+<td><p>8</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates that the Target function has received a transaction that matches an enabled address in TGT_CONTROL_[7:0]</p>
+<blockquote>
+<div><p>0x0 - No active transaction in progress</p>
+<p>0x1 - Active Target transaction in progress</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>ADDRESS</p></td>
+<td><p>7:1</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Target address for the current transaction, only valid when ACTIVE = 0x1</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>RW</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates the current transaction type, only valid when ACTIVE = 0x1</p>
+<blockquote>
+<div><p>0x0 = Write transaction</p>
+<p>0x1 = Read transaction</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>0x604</p></td>
+<td><p>TGT_DESC_FIFO</p></td>
+<td><p>ID</p></td>
+<td><p>11:8</p></td>
+<td><p>0</p></td>
+<td><p>WO</p></td>
+<td><p>Configure the next Target Descriptor ID</p>
+<blockquote>
+<div><p>Writing this register pushes a value into the Target Descriptor FIFO</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>PAYLOAD</p></td>
+<td><p>7:0</p></td>
+<td><p>0</p></td>
+<td><p>WO</p></td>
+<td><p>Configure the next Target Descriptor payload</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x608</p></td>
+<td><p>TGT_DESC_STATUS</p></td>
+<td><p>FILL_LEVEL</p></td>
+<td><p>14:8</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates the current fill level of the Descriptor FIFO</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>FULL</p></td>
+<td><p>5</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates if the Descriptor FIFO is full</p>
+<blockquote>
+<div><p>0x0 - FIFO not full</p>
+<p>0x1 - FIFO full</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>ALMOST_FULL</p></td>
+<td><p>4</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates if the Descriptor FIFO is almost full</p>
+<blockquote>
+<div><p>0x0 - FIFO has space for more than one descriptor</p>
+<p>0x1 - FIFO only has space for one more descriptor</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>ALMOST_EMPTY</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates if the Descriptor FIFO is almost empty</p>
+<blockquote>
+<div><p>0x0 - FIFO contains more than one descriptor</p>
+<p>0x1 - FIFO contains one descriptor or less</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>EMPTY</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates if the Descriptor FIFO is empty</p>
+<blockquote>
+<div><p>0x0 - FIFO not empty</p>
+<p>0x1 - FIFO empty</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0x60C</p></td>
+<td><p>TGT_RX_FIFO</p></td>
+<td><p>RESET</p></td>
+<td><p>31</p></td>
+<td><p>0</p></td>
+<td><p>WO</p></td>
+<td><p>Target Receive FIFO Reset Control</p>
+<blockquote>
+<div><p>When set the Target Receive FIFO is reset to a known state.</p>
+<p>Poll the RESET_BUSY field in the TGT_RX_FIFO_STATUS register to determine when the reset is complete.</p>
+<p>0x0 - FIFO not reset</p>
+<p>0x1 - Reset FIFO</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>PAYLOAD</p></td>
+<td><p>7:0</p></td>
+<td><p>0</p></td>
+<td><p>RC</p></td>
+<td><p>Receive payload byte for the Target function.</p>
+<blockquote>
+<div><p>Reading this register pops a value from the Target Rx FIFO</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0x610</p></td>
+<td><p>TGT_RX_FIFO_STATUS</p></td>
+<td><p>MAX_FILL_LEVEL</p></td>
+<td><p>22:16</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Indicates the maximum recorded fill level of the Target Receive FIFO</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>FILL_LEVEL</p></td>
+<td><p>14:8</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates the current fill level of the Target Receive FIFO</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>RESET_BUSY</p></td>
+<td><p>6</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates if the Target Receive FIFO is currently undergoing a reset and is unavailable for either read or write</p>
+<blockquote>
+<div><p>0x0 - FIFO not in reset</p>
+<p>0x1 - FIFO reset in progress</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>FULL</p></td>
+<td><p>5</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates if the Target Receive FIFO is full</p>
+<blockquote>
+<div><p>0x0 - FIFO not full</p>
+<p>0x1 - FIFO full</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>ALMOST_FULL</p></td>
+<td><p>4</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates if the Target Receive FIFO is almost full</p>
+<blockquote>
+<div><p>0x0 - FIFO has space for two or more bytes</p>
+<p>0x1 - FIFO has space for only one more byte</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>ALMOST_EMPTY</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates if the Receive FIFO is almost empty</p>
+<blockquote>
+<div><p>0x0 - FIFO contains more than one byte</p>
+<p>0x1 - FIFO contains one byte or less</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>EMPTY</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates if the Receive FIFO is empty</p>
+<blockquote>
+<div><p>0x0 - FIFO not empty</p>
+<p>0x1 - FIFO empty</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>0x614</p></td>
+<td><p>TGT_RX_FIFO_FILL_THRESHOLD</p></td>
+<td><p>FILL_THRESHOLD</p></td>
+<td><p>6:0</p></td>
+<td><p>0x1</p></td>
+<td><p>RW</p></td>
+<td><p>Configure the Target Receive FIFO fill threshold that should assert the TGT_RX_FIFO_FILL_THRESHOLD interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>0x618</p></td>
+<td><p>TGT_DBG</p></td>
+<td><p>FORCE_PEC_ERROR</p></td>
+<td><p>31</p></td>
+<td><p>0x0</p></td>
+<td><p>RW</p></td>
+<td><p>Target Debug Force PEC Error</p>
+<blockquote>
+<div><p>Corrupts the PEC byte generation/checking. When set, writes with PEC enabled will always report an error and the PEC byte transmitted during a read will be corrupted.</p>
+<p>0x0 - PEC Error insertion disabled</p>
+<p>0x1 - PEC Error insertion enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>DBG_STATE</p></td>
+<td><p>6:0</p></td>
+<td><p>0x1</p></td>
+<td><p>RO</p></td>
+<td><p>Target Debug State</p>
+<blockquote>
+<div><p>Reports the current Target FSM State to assist with debug</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0x620</p></td>
+<td><p>TGT_CONTROL_0</p></td>
+<td><p>ENABLE</p></td>
+<td><p>31</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>Enable for Target Device 0</p>
+<blockquote>
+<div><p>0x0 - Target Device 0 disabled</p>
+<p>0x1 - Target Device 0 enabled, the IP will automatically ACK a transaction with an address matching ADDRESS 0</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>ADDRESS</p></td>
+<td><p>7:1</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>Address for Target Device 0</p></td>
+</tr>
+<tr class="row-even"><td><p>0x624</p></td>
+<td><p>TGT_CONTROL_1</p></td>
+<td><p>ENABLE</p></td>
+<td><p>31</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>Enable for Target Device 1</p>
+<blockquote>
+<div><p>0x0 - Target Device 1 disabled</p>
+<p>0x1 - Target Device 1 enabled, the IP will automatically ACK a transaction with an address matching ADDRESS 1</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>ADDRESS</p></td>
+<td><p>7:1</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>Address for Target Device 1</p></td>
+</tr>
+<tr class="row-even"><td><p>0x628</p></td>
+<td><p>TGT_CONTROL_2</p></td>
+<td><p>ENABLE</p></td>
+<td><p>31</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>Enable for Target Device 2</p>
+<blockquote>
+<div><p>0x0 - Target Device 2 disabled</p>
+<p>0x1 - Target Device 2 enabled, the IP will automatically ACK a transaction with an address matching ADDRESS 2</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>ADDRESS</p></td>
+<td><p>7:1</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>Address for Target Device 2</p></td>
+</tr>
+<tr class="row-even"><td><p>0x62C</p></td>
+<td><p>TGT_CONTROL_3</p></td>
+<td><p>ENABLE</p></td>
+<td><p>31</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>Enable for Target Device 3</p>
+<blockquote>
+<div><p>0x0 - Target Device 3 disabled</p>
+<p>0x1 - Target Device 3 enabled, the IP will automatically ACK a transaction with an address matching ADDRESS 3</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>ADDRESS</p></td>
+<td><p>7:1</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>Address for Target Device 3</p></td>
+</tr>
+<tr class="row-even"><td><p>0x630</p></td>
+<td><p>TGT_CONTROL_4</p></td>
+<td><p>ENABLE</p></td>
+<td><p>31</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>Enable for Target Device 4</p>
+<blockquote>
+<div><p>0x0 - Target Device 4 disabled</p>
+<p>0x1 - Target Device 4 enabled, the IP will automatically ACK a transaction with an address matching ADDRESS 4</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>ADDRESS</p></td>
+<td><p>7:1</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>Address for Target Device 4</p></td>
+</tr>
+<tr class="row-even"><td><p>0x634</p></td>
+<td><p>TGT_CONTROL_5</p></td>
+<td><p>ENABLE</p></td>
+<td><p>31</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>Enable for Target Device 5</p>
+<blockquote>
+<div><p>0x0 - Target Device 5 disabled</p>
+<p>0x1 - Target Device 5 enabled, the IP will automatically ACK a transaction with an address matching ADDRESS 5</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>ADDRESS</p></td>
+<td><p>7:1</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>Address for Target Device 5</p></td>
+</tr>
+<tr class="row-even"><td><p>0x638</p></td>
+<td><p>TGT_CONTROL_6</p></td>
+<td><p>ENABLE</p></td>
+<td><p>31</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>Enable for Target Device 6</p>
+<blockquote>
+<div><p>0x0 - Target Device 6 disabled</p>
+<p>0x1 - Target Device 6 enabled, the IP will automatically ACK a transaction with an address matching ADDRESS 6</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>ADDRESS</p></td>
+<td><p>7:1</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>Address for Target Device 6</p></td>
+</tr>
+<tr class="row-even"><td><p>0x63C</p></td>
+<td><p>TGT_CONTROL_7</p></td>
+<td><p>ENABLE</p></td>
+<td><p>31</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>Enable for Target Device 7</p>
+<blockquote>
+<div><p>0x0 - Target Device 7 disabled</p>
+<p>0x1 - Target Device 7 enabled, the IP will automatically ACK a transaction with an address matching ADDRESS 7</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>ADDRESS</p></td>
+<td><p>7:1</p></td>
+<td><p>0</p></td>
+<td><p>RW</p></td>
+<td><p>Address for Target Device 7</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>0x800</p></td>
+<td><p>PHY_CTLR_DATA_HOLD</p></td>
+<td><p>CTLR_DATA_HOLD</p></td>
+<td><p>14:0</p></td>
+<td><p>*</p></td>
+<td><p>RW</p></td>
+<td><p>Controller PHY Data Hold</p>
+<blockquote>
+<div><p>Configure the data hold time when operating as a Controller-transmitter.</p>
+<p>This value must be configured to meet tHD:DAT:Min in accordance with the SMBus Specification.</p>
+<p>This value is calculated as:</p>
+<p>If PHY_FILTER_CONTROL__ENABLE = 0x1:</p>
+<p>Hold Time = s_axi_aclk period x (CTLR_DATA_HOLD + 8 + (PHY_FILTER_CONTROL__DURATION + 1))</p>
+<p>If PHY_FILTER_CONTROL__ENABLE = 0x0:</p>
+<p>Hold Time = s_axi_aclk period x (CTLR_DATA_HOLD + 8)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0x804</p></td>
+<td><p>PHY_CTLR_START_HOLD</p></td>
+<td><p>CTLR_START_HOLD</p></td>
+<td><p>14:0</p></td>
+<td><p>*</p></td>
+<td><p>RW</p></td>
+<td><p>Controller PHY Start Hold</p>
+<blockquote>
+<div><p>Configure the START hold time.</p>
+<p>This value must be configured to meet tHD:STA:Min in accordance with the SMBus Specification.</p>
+<p>This value is calculated as:</p>
+<p>If PHY_FILTER_CONTROL__ENABLE = 0x1:</p>
+<p>Hold Time = s_axi_aclk period x (CTLR_START_HOLD + 8 + (PHY_FILTER_CONTROL__DURATION + 1))</p>
+<p>If PHY_FILTER_CONTROL__ENABLE = 0x0:</p>
+<p>Hold Time = s_axi_aclk period x (CTLR_START_HOLD + 8)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>0x808</p></td>
+<td><p>PHY_CTLR_START_SETUP</p></td>
+<td><p>CTLR_START_SETUP</p></td>
+<td><p>14:0</p></td>
+<td><p>*</p></td>
+<td><p>RW</p></td>
+<td><p>Controller PHY Start Setup</p>
+<blockquote>
+<div><p>Configure the START setup time.</p>
+<p>This value must be configured to meet tSU:STA:Min in accordance with the SMBus Specification.</p>
+<p>This value is calculated as:</p>
+<p>If PHY_FILTER_CONTROL__ENABLE = 0x1:</p>
+<p>Setup Time = s_axi_aclk period x (CTLR_START_SETUP + 8 + (PHY_FILTER_CONTROL__DURATION + 1))</p>
+<p>If PHY_FILTER_CONTROL__ENABLE = 0x0:</p>
+<p>Setup Time = s_axi_aclk period x (CTLR_START_SETUP + 8)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0x80C</p></td>
+<td><p>PHY_CTLR_STOP_SETUP</p></td>
+<td><p>CTLR_STOP_SETUP</p></td>
+<td><p>14:0</p></td>
+<td><p>*</p></td>
+<td><p>RW</p></td>
+<td><p>Controller PHY Stop Setup</p>
+<blockquote>
+<div><p>Configure the STOP setup time.</p>
+<p>This value must be configured to meet tSU:STO:Min in accordance with the SMBus Specification.</p>
+<p>This value is calculated as:</p>
+<p>If PHY_FILTER_CONTROL__ENABLE = 0x1:</p>
+<p>Setup Time = s_axi_aclk period x (CTLR_STOP_SETUP + 8 + (PHY_FILTER_CONTROL__DURATION + 1))</p>
+<p>If PHY_FILTER_CONTROL__ENABLE = 0x0:</p>
+<p>Setup Time = s_axi_aclk period x (CTLR_STOP_SETUP + 8)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>0x810</p></td>
+<td><p>PHY_CTLR_CLK_TLOW</p></td>
+<td><p>CTLR_CLK_TLOW</p></td>
+<td><p>14:0</p></td>
+<td><p>*</p></td>
+<td><p>RW</p></td>
+<td><p>Controller PHY Clock Low</p>
+<blockquote>
+<div><p>Configure the SMBCLK low time.</p>
+<p>This value must be configured to meet tLOW:Min in accordance with the SMBus Specification.</p>
+<p>This value is calculated as:</p>
+<p>If PHY_FILTER_CONTROL__ENABLE = 0x1:</p>
+<p>Low Time = s_axi_aclk period x (CTLR_CLK_TLOW + 8 + (PHY_FILTER_CONTROL__DURATION + 1))</p>
+<p>If PHY_FILTER_CONTROL__ENABLE = 0x0:</p>
+<p>Low Time = s_axi_aclk period x (CTLR_CLK_TLOW + 8)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0x814</p></td>
+<td><p>PHY_CTLR_CLK_THIGH</p></td>
+<td><p>CTLR_CLK_THIGH</p></td>
+<td><p>14:0</p></td>
+<td><p>*</p></td>
+<td><p>RW</p></td>
+<td><p>Controller PHY Clock High</p>
+<blockquote>
+<div><p>Configure the SMBCLK high time.</p>
+<p>This value must be configured to meet tHIGH:Min in accordance with the SMBus Specification.</p>
+<p>This value is calculated as:</p>
+<p>If PHY_FILTER_CONTROL__ENABLE = 0x1:</p>
+<p>High Time = s_axi_aclk period x (CTLR_CLK_THIGH + 8 + (PHY_FILTER_CONTROL__DURATION + 1))</p>
+<p>If PHY_FILTER_CONTROL__ENABLE = 0x0:</p>
+<p>High Time = s_axi_aclk period x (CTLR_CLK_THIGH + 8)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>0x818</p></td>
+<td><p>PHY_CTLR_TEXT_PRESCALER</p></td>
+<td><p>CTLR_TEXT_PRESCALER</p></td>
+<td><p>8:0</p></td>
+<td><p>*</p></td>
+<td><p>RW</p></td>
+<td><p>Controller PHY TEXT Timeout Prescaler Configuration</p>
+<blockquote>
+<div><p>Configure the amount of time to measure before incrementing the PHY_CTLR_TEXT_TIMEOUT counter when external SMBCLK stretching is detected by the Controller function.</p>
+<p>This value is calculated as Text_Prescaler_Time = s_axi_aclk period x (CTLR_TEXT_PRESCALER+ 1)</p>
+<p>The Text_Prescaler_Time should be configured for 1us in order to stay within range of the PHY_CTLR_TEXT_TIMEOUT counter.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0x81C</p></td>
+<td><p>PHY_CTLR_TEXT_TIMEOUT</p></td>
+<td><p>CTLR_TEXT_TIMEOUT</p></td>
+<td><p>14:0</p></td>
+<td><p>*</p></td>
+<td><p>RW</p></td>
+<td><p>Controller PHY TEXT Timeout Configuration</p>
+<blockquote>
+<div><p>Configure the threshold used to detect that an external Target device(s) has exceeded the cumulative clock stretching threshold and to trigger the CTLR_TEXT_TIMEOUT interrupt.</p>
+<p>This value must be configured to meet tLOW:TEXT in accordance with the SMBus Specification.</p>
+<p>This value is calculated as Text_Timeout_Time = CTLR_TEXT_TIMEOUT x Text_Prescaler_Time</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>0x820</p></td>
+<td><p>PHY_CTLR_TEXT_MAX</p></td>
+<td><p>CTLR_TEXT_MAX</p></td>
+<td><p>14:0</p></td>
+<td><p>*</p></td>
+<td><p>WC</p></td>
+<td><p>Controller PHY TEXT Timeout Max</p>
+<blockquote>
+<div><p>Indicates the maximum amount of cumulative time in Text_Prescaler_Time units that the Controller function has measured external SMBCLK stretching during any single transaction (between an initial START and a STOP).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0x824</p></td>
+<td><p>PHY_CTLR_CEXT_PRESCALER</p></td>
+<td><p>CTLR_CEXT_PRESCALER</p></td>
+<td><p>8:0</p></td>
+<td><p>*</p></td>
+<td><p>RW</p></td>
+<td><p>Controller PHY CEXT Timeout Prescaler Configuration</p>
+<blockquote>
+<div><p>Configure the amount of time to measure before incrementing the PHY_CTLR_CEXT_TIMEOUT counter when SMBCLK stretching is active within the Controller function.</p>
+<p>This value is calculated as Cext_Prescaler_Time = s_axi_aclk period x (CTLR_CEXT_PRESCALER+ 1)</p>
+<p>The Cext_Prescaler_Time should be configured for 1us in order to stay within range of the PHY_CTLR_CEXT_TIMEOUT counter.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>0x828</p></td>
+<td><p>PHY_CTLR_CEXT_TIMEOUT</p></td>
+<td><p>CTLR_CEXT_TIMEOUT</p></td>
+<td><p>13:0</p></td>
+<td><p>*</p></td>
+<td><p>RW</p></td>
+<td><p>Controller PHY CEXT Timeout Configuration</p>
+<blockquote>
+<div><p>Configure the threshold used to detect that the Controller function has exceeded the cumulative clock stretching threshold and to trigger the CTLR_CEXT_TIMEOUT interrupt.</p>
+<p>This value must be configured to meet tLOW:CEXT in accordance with the SMBus Specification.</p>
+<p>This value is calculated as Cext_Timeout_Time = CTLR_CEXT_TIMEOUT x Cext_Prescaler_Time</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0x82C</p></td>
+<td><p>PHY_CTLR_CEXT_MAX</p></td>
+<td><p>CTLR_CEXT_MAX</p></td>
+<td><p>13:0</p></td>
+<td><p>*</p></td>
+<td><p>WC</p></td>
+<td><p>Controller PHY CEXT Timeout Max</p>
+<blockquote>
+<div><p>Indicates the maximum amount of cumulative time in Cext_Prescaler_Time units that the Controller function has performed SMBCLK stretching during any single byte transfer (START-ACK, ACK-ACK, ACK-STOP).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>0x830</p></td>
+<td><p>PHY_CTLR_DBG_STATE</p></td>
+<td><p>DBG_STATE</p></td>
+<td><p>7:0</p></td>
+<td><p>0x1</p></td>
+<td><p>RO</p></td>
+<td><p>Controller PHY Debug State</p>
+<blockquote>
+<div><p>Reports the current Controller PHY FSM State to assist with debug</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>0xA00</p></td>
+<td><p>CTLR_CONTROL</p></td>
+<td><p>ENABLE</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>WO</p></td>
+<td><p>Controller Enable Control</p>
+<blockquote>
+<div><p>Enable the Controller to begin executing the descriptors in the Descriptor FIFO.</p>
+<p>0x0 - Controller not enabled</p>
+<p>0x1 - Controller enabled to execute the descriptors</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0xA04</p></td>
+<td><p>CTLR_STATUS</p></td>
+<td><p>ENABLE</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Controller Enable Status</p>
+<blockquote>
+<div><p>0x0 - Controller is disabled</p>
+<p>0x1 - Controller is enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>0xA08</p></td>
+<td><p>CTLR_DESC_FIFO</p></td>
+<td><p>RESET</p></td>
+<td><p>31</p></td>
+<td><p>0</p></td>
+<td><p>WO</p></td>
+<td><p>Controller Descriptor FIFO Reset Control</p>
+<blockquote>
+<div><p>When set the Controller Descriptor FIFO is reset to a known state.</p>
+<p>Poll the RESET_BUSY field in the CTLR_DESC_STATUS register to determine when the reset is complete.</p>
+<p>0x0 - FIFO not reset</p>
+<p>0x1 - Reset FIFO</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>ID</p></td>
+<td><p>11:8</p></td>
+<td><p>0</p></td>
+<td><p>WO</p></td>
+<td><p>Configure the next Controller Descriptor ID</p>
+<blockquote>
+<div><p>Writing this register when the RESET field is 0x0 pushes a value into the Controller Descriptor FIFO</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>PAYLOAD</p></td>
+<td><p>7:0</p></td>
+<td><p>0</p></td>
+<td><p>WO</p></td>
+<td><p>Configure the next Controller Descriptor payload</p></td>
+</tr>
+<tr class="row-even"><td><p>0xA0C</p></td>
+<td><p>CTLR_DESC_STATUS</p></td>
+<td><p>FILL_LEVEL</p></td>
+<td><p>14:8</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates the current fill level of the Descriptor FIFO</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>RESET_BUSY</p></td>
+<td><p>6</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates if the Descriptor FIFO is currently undergoing a reset and is unavailable for either read or write</p>
+<blockquote>
+<div><p>0x0 - FIFO not in reset</p>
+<p>0x1 - FIFO reset in progress</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>FULL</p></td>
+<td><p>5</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates if the Descriptor FIFO is full</p>
+<blockquote>
+<div><p>0x0 - FIFO not full</p>
+<p>0x1 - FIFO full</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>ALMOST_FULL</p></td>
+<td><p>4</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates if the Descriptor FIFO is almost full</p>
+<blockquote>
+<div><p>0x0 - FIFO has space for more than one descriptor</p>
+<p>0x1 - FIFO only has space for one more descriptor</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>ALMOST_EMPTY</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates if the Descriptor FIFO is almost empty</p>
+<blockquote>
+<div><p>0x0 - FIFO contains more than one descriptor</p>
+<p>0x1 - FIFO contains one descriptor or less</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>EMPTY</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates if the Descriptor FIFO is empty</p>
+<blockquote>
+<div><p>0x0 - FIFO not empty</p>
+<p>0x1 - FIFO empty</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0xA10</p></td>
+<td><p>CTLR_RX_FIFO</p></td>
+<td><p>RESET</p></td>
+<td><p>31</p></td>
+<td><p>0</p></td>
+<td><p>WO</p></td>
+<td><p>Controller Receive FIFO Reset Control</p>
+<blockquote>
+<div><p>When set the Controller Receive FIFO is reset to a known state.</p>
+<p>Poll the RESET_BUSY field in the CTLR_RX_FIFO_STATUS register to determine when the reset is complete.</p>
+<p>0x0 - FIFO not reset</p>
+<p>0x1 - FIFO reset</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>PAYLOAD</p></td>
+<td><p>7:0</p></td>
+<td><p>0</p></td>
+<td><p>RC</p></td>
+<td><p>Receive payload byte for the Controller function.</p>
+<blockquote>
+<div><p>Reading this register pops a value from the Controller Receive FIFO</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>0xA14</p></td>
+<td><p>CTLR_RX_FIFO_STATUS</p></td>
+<td><p>MAX_FILL_LEVEL</p></td>
+<td><p>22:16</p></td>
+<td><p>0</p></td>
+<td><p>W1C</p></td>
+<td><p>Indicates the maximum recorded fill level of the Controller Receive FIFO</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>FILL_LEVEL</p></td>
+<td><p>14:8</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates the current fill level of the Controller Receive FIFO</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>RESET_BUSY</p></td>
+<td><p>6</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates if the Controller Receive FIFO is currently undergoing a reset and is unavailable for either read or write</p>
+<blockquote>
+<div><p>0x0 - FIFO not in reset</p>
+<p>0x1 - FIFO reset in progress</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>FULL</p></td>
+<td><p>5</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates if the Controller Receive FIFO is full</p>
+<blockquote>
+<div><p>0x0 - FIFO not full</p>
+<p>0x1 - FIFO full</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>ALMOST_FULL</p></td>
+<td><p>4</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates if the Controller Receive FIFO is almost full</p>
+<blockquote>
+<div><p>0x0 - FIFO has space for two or more bytes</p>
+<p>0x1 - FIFO has space for only one more byte</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>ALMOST_EMPTY</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates if the Controller Receive FIFO is almost empty</p>
+<blockquote>
+<div><p>0x0 - FIFO contains more than one byte</p>
+<p>0x1 - FIFO contains one byte or less</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>EMPTY</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>RO</p></td>
+<td><p>Indicates if the Controller Receive FIFO is empty</p>
+<blockquote>
+<div><p>0x0 - FIFO not empty</p>
+<p>0x1 - FIFO empty</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>0xA18</p></td>
+<td><p>CTLR_RX_FIFO_FILL_THRESHOLD</p></td>
+<td><p>FILL_THRESHOLD</p></td>
+<td><p>6:0</p></td>
+<td><p>0x1</p></td>
+<td><p>RW</p></td>
+<td><p>Configure the Controller Receive FIFO fill threshold that should assert the CTLR_RX_FIFO_FILL_THRESHOLD interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>0xA1C</p></td>
+<td><p>CTLR_DBG</p></td>
+<td><p>FORCE_PEC_ERROR</p></td>
+<td><p>31</p></td>
+<td><p>0x0</p></td>
+<td><p>RW</p></td>
+<td><p>Controller Debug Force PEC Error</p>
+<blockquote>
+<div><p>Corrupts the PEC byte generation/checking. When set, reads with PEC enabled will always report an error and the PEC byte transmitted during a write will be corrupted.</p>
+<p>0x0 - PEC Error insertion disabled</p>
+<p>0x1 - PEC Error insertion enabled</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>DBG_STATE</p></td>
+<td><p>8:0</p></td>
+<td><p>0x1</p></td>
+<td><p>RO</p></td>
+<td><p>Controller Debug State</p>
+<blockquote>
+<div><p>Reports the current Controller FSM State to assist with debug</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="customizing-and-generating-the-ip">
+<span id="smbusipv1-1productguide-customizingandgeneratingtheip"></span><h2>Customizing and Generating the IP<a class="headerlink" href="#customizing-and-generating-the-ip" title="Permalink to this headline">¶</a></h2>
+<p>This section includes information about using AMD tools to customize and generate the SMBus IP using Vivado Design Suite.</p>
+<p>If you are customizing and generating the IP in the Vivado IP integrator, see the <em>Vivado Design Suite User Guide: Designing IP Subsystems using IP Integrator</em>(<a class="reference external" href="https://docs.xilinx.com/r/en-US/ug994-vivado-ip-subsystems/Getting-Started-with-Vivado-IP-Integrator">UG994</a>) for detailed information.</p>
+<section id="importing-the-ip-repository">
+<span id="smbusipv1-1productguide-importingtheiprepository"></span><h3>Importing the IP Repository<a class="headerlink" href="#importing-the-ip-repository" title="Permalink to this headline">¶</a></h3>
+<p>The SMBus IP is delivered as a standalone IP repository that can be imported for use within Vivado Design Suite. Refer to the <em>Vivado Design Suite User Guide: Designing with IP</em>(<a class="reference external" href="https://docs.xilinx.com/r/en-US/ug896-vivado-ip/Managing-IP-Repositories">UG896</a>) for detailed information on adding an external IP repository to a project.</p>
+</section>
+<section id="customizing-the-ip">
+<span id="smbusipv1-1productguide-customizingtheip"></span><h3>Customizing the IP<a class="headerlink" href="#customizing-the-ip" title="Permalink to this headline">¶</a></h3>
+<p>You can customize the IP for use in your design by specifying values for the various User Parameters associated with the IP.</p>
+</section>
+<section id="parameters">
+<span id="smbusipv1-1productguide-parameters"></span><h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
+<p>The table below details the User Parameters that may be configured for the SMBus IP along with the associated model parameters and default settings.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Display Name</p></th>
+<th class="head"><p>User Parameter</p></th>
+<th class="head"><p>Model Parameter</p></th>
+<th class="head"><p>Model Parameter Format / Range</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Default SMBus Device Class</p></td>
+<td><p>SMBUS_DEV_CLASS</p></td>
+<td><p>C_SMBUS_DEV_CLASS</p></td>
+<td><p>integer = {0 = 100KHz, 1 = 400KHz, 2 = 1MHz}</p></td>
+<td><p>0</p></td>
+<td><dl>
+<dt>The SMBus IP supports the three device classes specified in the SMBus v3.2 specification, namely the 100KHz Class, 400KHz Class and 1MHz Class. The Device Class user parameter controls the default internal AC timing parameters of the SMBus</dt><dd><p>IP, so that the Controller and Target AC operation complies with the standard.</p>
+<p>When the s_axi_aresetn input is asserted, the SMBus IP internal configuration will be reset to the default device class as selected via this parameter. The device class may be changed at runtime by utilizing features available within the
+SMBus IP Driver, please refer to the Driver documentation for details on changing the device class from this default.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Target Devices</p></td>
+<td><p>NUM_TARGET_DEVICES</p></td>
+<td><p>C_NUM_TARGET_DEVICES</p></td>
+<td><p>integer = {1..8}</p></td>
+<td><p>8</p></td>
+<td><dl class="simple">
+<dt>The SMBus IP Target functionality can support up to eight internal Target devices. These devices can be used to support use cases that require multiple Target addresses to be implemented on the SMBus, with each address associated to a</dt><dd><p>different protocol or functionality.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="row-even"><td><p>S_AXI Clock Frequency (Hz)</p></td>
+<td><p>FREQ_HZ_AXI_ACLK</p></td>
+<td><p>C_FREQ_HZ_AXI_ACLK</p></td>
+<td><p>integer = {95000000..500000000}</p></td>
+<td><p>100000000</p></td>
+<td><p>Configure the input clock frequency of the s_axi_aclk clock in hertz.</p>
+<blockquote>
+<div><p>The SMBus IP operates on the s_axi_aclk clock domain. This clock is used for the S_AXI interface, all internal control logic and to generate the SMBCLK/SMBDAT outputs in addition to oversampling the SMBCLK/SMBDAT inputs. The frequency of
+this clock must be within the supported range and must be specified in order for the SMBus IP to correctly operate its PHY layer in accordance with the SMBus AC timing specifications.</p>
+<p>When used within an IP Integrator context, the clock frequency information is automatically configured within the SMBus IP based upon the frequency of the clock connected to the s_axi_aclk input. If this clock metadata is incorrect or if the
+IP is being configured outside of an IP Integrator context, then this user parameter must be set accordingly.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="output-generation">
+<span id="smbusipv1-1productguide-outputgeneration"></span><h3>Output Generation<a class="headerlink" href="#output-generation" title="Permalink to this headline">¶</a></h3>
+<p>For detailed information on generating IP output products, please refer to the <em>Vivado Design Suite User Guide: Designing with IP</em> (<a class="reference external" href="https://docs.xilinx.com/r/en-US/ug896-vivado-ip/IP-Centric-Design-Flow">UG896</a>).</p>
+</section>
+</section>
+<section id="constraining-the-ip">
+<span id="smbusipv1-1productguide-constrainingtheip"></span><h2>Constraining the IP<a class="headerlink" href="#constraining-the-ip" title="Permalink to this headline">¶</a></h2>
+<p>The SMBUS interface on the IP includes the necessary I/O buffer controls and is intended to be connected to the design top level ports. When the IP implemented within an IP Integrator block design context, then the generated BD wrapper will
+automatically include the required IOB components and connectivity from the SMBus IP.</p>
+<p>The top level IOB connections must be constrained at the design top level depending upon the IO bank type to which the SMBus IP is connected. The following constraint properties must be considered, however the required settings will be dependent upon
+the connectivity of the IOBs in the end application:</p>
+<ul class="simple">
+<li><p>PACKAGE_PIN</p></li>
+<li><p>IOSTANDARD</p></li>
+<li><p>DRIVE</p></li>
+<li><p>SLEW</p></li>
+</ul>
+<p>Refer to the <em>Vivado Design Suite User Guide: Using Constraints</em> (<a class="reference external" href="https://docs.xilinx.com/r/en-US/ug903-vivado-using-constraints/Introduction">UG903</a>) for detailed information on defining physical constraints.</p>
+</section>
+<section id="simulation">
+<span id="smbusipv1-1productguide-simulation"></span><h2>Simulation<a class="headerlink" href="#simulation" title="Permalink to this headline">¶</a></h2>
+<p>For comprehensive information about Vivado simulation components, as well as information about using supported third-party tools, see the Vivado Design Suite User Guide: Logic Simulation(<a class="reference external" href="https://docs.xilinx.com/r/en-US/ug900-vivado-logic-simulation/Overview">UG900</a>).</p>
+</section>
+<section id="synthesis-and-implementation">
+<span id="smbusipv1-1productguide-synthesisandimplementation"></span><h2>Synthesis and Implementation<a class="headerlink" href="#synthesis-and-implementation" title="Permalink to this headline">¶</a></h2>
+<p>For details about synthesis and implementation, see the Vivado Design Suite User Guide: Designing with IP (<a class="reference external" href="https://docs.xilinx.com/r/en-US/ug896-vivado-ip/IP-Centric-Design-Flow">UG896</a>).</p>
+</section>
+<section id="driver">
+<span id="smbusipv1-1productguide-driver"></span><h2>Driver<a class="headerlink" href="#driver" title="Permalink to this headline">¶</a></h2>
+<p>The SMBus IP must be used in conjunction with the SMBus IP Driver in order to implement a SMBus v3.2 compliant solution. Please refer to the SMBus IP Driver Specification for detailed information.</p>
+</section>
+<section id="example-design">
+<span id="smbusipv1-1productguide-exampledesign"></span><h2>Example Design<a class="headerlink" href="#example-design" title="Permalink to this headline">¶</a></h2>
+<p>The SMBus IP does not currently support generation of an IP example design.</p>
+<p>Page Revision: v. 5</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+				  
+				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html" class="btn btn-neutral float-left" title="Hardware Discovery IP v1.0 - Product Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html" class="btn btn-neutral float-right" title="AVED Management Controller (AMC) - Architecture and Design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Advanced Micro Devices Inc.</p>
+  </div>
+
+
+
+										<div class="aem-Grid aem-Grid--16">
+											<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+												<div class="container-fluid sub-footer">
+
+													                    <div class="row">
+                        <div class="col-xs-24">
+                          <p><a target="_blank" href="https://www.amd.com/en/corporate/copyright">Terms and Conditions</a> | <a target="_blank" href="https://www.amd.com/en/corporate/privacy">Privacy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/cookies">Cookie Policy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/trademarks">Trademarks</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf">Statement on Forced Labor</a> | <a target="_blank" href="https://www.amd.com/en/corporate/competition">Fair and Open Competition</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf">UK Tax Strategy</a> | <a target="_blank" href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA">Inclusive Terminology</a> | <a href="#cookiessettings" class="ot-sdk-show-settings">Cookies Settings</a></p>
+                        </div>
+                    </div>
+												</div>
+											</div>
+										</div>
+										
+</br>
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

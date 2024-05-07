@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script charset="UTF-8" data-document-language="true" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script class="optanon-category-C0002" type="text/plain">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+<title>AVED Sensor Control (ASC) Proxy Driver — AVED  documentation</title>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="_static/xbtest.css" rel="stylesheet" type="text/css"/>
+<link href="_static/_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="https://docs.xilinx.com/favicon.ico" rel="shortcut icon"/>
+<!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/js/theme.js"></script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html" rel="next" title="AVED External Device Control (AXC) Proxy Driver"/>
+<link href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html" rel="prev" title="AVED Programming Control (APC) Proxy Driver"/>
+<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager -->
+<noscript><iframe class="optanon-category-C0002" height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager -->
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="index.html"> AVED
+            <img alt="Logo" class="logo" src="_static/xilinx-header-logo.svg"/>
+</a>
+<div role="search">
+<form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" type="text"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+</div>
+</div><div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BHierarchy%2BOverview.html">AVED V80 - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BCIPS%2BConfiguration.html">AVED V80 - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BResources.html">AVED V80 - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BMap.html">AVED V80 - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BNoC%2BConfiguration.html">AVED V80 - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BBase%2BLogic.html">AVED V80 - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BClock%2BReset%2BModule.html">AVED V80 - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BSource%2BFile%2BOverview.html">AVED V80 - Source File Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SMBus%2BIP%2Bv1.1%2B-%2BProduct%2BGuide.html">SMBus IP v1.1 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BASDM%2BApplication.html">AVED ASDM Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOutOfBand%2BTelemetry%2BApplication.html">AVED OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">AVED Sensor Control (ASC) Proxy Driver</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api">API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#defines">Defines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enums">Enums</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#structs">Structs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#proxy-driver-external-apis">Proxy Driver External APIs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#initialise-the-asc">Initialise the ASC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bind-callback">Bind callback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reset-all-of-the-transient-sensor-data">Reset all of the transient sensor data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reset-a-single-sensor-s-transient-data-by-id">Reset a single sensor’s transient data by ID</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reset-a-single-sensor-s-transient-data-by-name">Reset a single sensor’s transient data by name</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-all-of-the-sensor-s-data">Get all of the sensor’s data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-a-single-sensor-s-data-by-id">Get a single sensor’s data by ID</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-a-single-sensor-s-data-by-name">Get a single sensor’s data by name</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set-a-single-sensor-s-threshold-by-id">Set a single sensor’s threshold by ID</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set-single-sensor-operational-state-by-id">Set single sensor operational state by ID.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-single-sensor-operational-state-by-id">Get single sensor operational state by ID.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#display-the-statistic-counters-and-errors">Display the statistic counters and errors.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#clear-the-all-statistics-counters-back-to-zero">Clear the all statistics counters back to zero.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-current-state-of-the-proxy-driver">Get current state of the proxy driver</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sequence-diagrams">Sequence Diagrams</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#asc-proxy-initialization">ASC Proxy Initialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#asc-proxy-task">ASC Proxy Task</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#initialize-driver">Initialize Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#register-for-callback">Register For Callback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sets">Sets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#reset-all-sensor-data">Reset all sensor data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reset-single-sensor-data-by-id">Reset single sensor data (by ID)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reset-single-sensor-data-by-name">Reset single sensor data (by name)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set-single-sensor-threshold-by-id">Set single sensor threshold by ID</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gets">Gets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#get-all-sensor-data">Get all sensor data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-single-sensor-data-by-id">Get single sensor data (by ID)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-single-sensor-data-by-name">Get single sensor data (by name)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Board%2BManagement%2BController%2B%28BMC%29%2BProxy%2BDriver.html">Board Management Controller (BMC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BQDMA.html">AVED QDMA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift"><nav aria-label="Mobile navigation menu" class="wy-nav-top" style="background: black">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="index.html">AVED</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="Page navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a class="icon icon-home" href="index.html"></a> »</li>
+<li>AVED Sensor Control (ASC) Proxy Driver</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<section id="aved-sensor-control-asc-proxy-driver">
+<h1>AVED Sensor Control (ASC) Proxy Driver<a class="headerlink" href="#aved-sensor-control-asc-proxy-driver" title="Permalink to this headline">¶</a></h1>
+<section id="overview">
+<span id="avedsensorcontrol-asc-proxydriver-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The ASC proxy driver allocates memory and copies all provided sensor data from the appropriate profile (see <a class="reference external" href="Profiles+and+CMake+build+process.html">Profiles and CMake build process#Profiles</a>) in the initialization. ASC uses this to read associated
+sensor functions, store current values, current statuses and calculates averages for all provided sensors.</p>
+<p>Internally, it creates a mutex for protection and a task to handle interaction with the associated sensor functions.</p>
+<p>The Task will:</p>
+<ul class="simple">
+<li><p>Call the associated read sensor function and store its value.</p></li>
+<li><p>Signal an event with the EVL core library.</p></li>
+</ul>
+<p>The Proxy API consists of a number of functions to set and get the sensor data that is updated by the proxy task.</p>
+</section>
+<section id="api">
+<span id="avedsensorcontrol-asc-proxydriver-api"></span><h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<section id="defines">
+<span id="avedsensorcontrol-asc-proxydriver-defines"></span><h3>Defines<a class="headerlink" href="#defines" title="Permalink to this headline">¶</a></h3>
+<p><strong>Defines</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#define ASC_SENSOR_NAME_MAX  ( 20 )</span>
+</pre></div>
+</div>
+</section>
+<section id="enums">
+<span id="avedsensorcontrol-asc-proxydriver-enums"></span><h3>Enums<a class="headerlink" href="#enums" title="Permalink to this headline">¶</a></h3>
+<p><strong>ASC_PROXY_DRIVER_EVENTS</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @enum    ASC_PROXY_DRIVER_EVENTS</span>
+<span class="cm"> * @brief   Events raised by this proxy driver</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">ASC_PROXY_DRIVER_EVENTS</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_E_SENSOR_UPDATE_COMPLETE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_E_SENSOR_UNAVAILABLE</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_E_SENSOR_COMMS_FAILURE</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_E_SENSOR_WARNING</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_E_SENSOR_CRITICAL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_E_SENSOR_FATAL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_E_SENSOR_LOWER_WARNING</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_E_SENSOR_LOWER_CRITICAL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_E_SENSOR_LOWER_FATAL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_E_SENSOR_UPPER_WARNING</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_E_SENSOR_UPPER_CRITICAL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_E_SENSOR_UPPER_FATAL</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">MAX_ASC_PROXY_DRIVER_EVENTS</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">ASC_PROXY_DRIVER_EVENTS</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><strong>ASC_PROXY_DRIVER_SENSOR_STATUS</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @enum    ASC_PROXY_DRIVER_SENSOR_STATUS</span>
+<span class="cm"> * @brief   Status of sensor</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">ASC_PROXY_DRIVER_SENSOR_STATUS</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_STATUS_NOT_PRESENT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_STATUS_PRESENT_AND_VALID</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_STATUS_DATA_NOT_AVAILABLE</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_STATUS_NOT_AVAILABLE</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">MAX_ASC_PROXY_DRIVER_SENSOR_STATUS</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">ASC_PROXY_DRIVER_SENSOR_STATUS</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><strong>ASC_PROXY_DRIVER_SENSOR_OPERATIONAL_STATUS</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @enum    ASC_PROXY_DRIVER_SENSOR_OPERATIONAL_STATUS</span>
+<span class="cm"> * @brief   Operational status of sensor</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">ASC_PROXY_DRIVER_SENSOR_OPERATIONAL_STATUS</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_OPERATIONAL_STATUS_ENABLED</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_OPERATIONAL_STATUS_DISABLED</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_OPERATIONAL_STATUS_UNAVAILABLE</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">MAX_ASC_PROXY_DRIVER_SENSOR_OPERATIONAL_STATUS</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">ASC_PROXY_DRIVER_SENSOR_OPERATIONAL_STATUS</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><strong>ASC_PROXY_DRIVER_SENSOR_UNIT_MOD</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @enum   ASC_PROXY_DRIVER_SENSOR_UNIT_MOD</span>
+<span class="cm"> * @brief  Base unit modifiers for sensor readings</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">ASC_PROXY_DRIVER_SENSOR_UNIT_MOD</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_UNIT_MOD_MEGA</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_UNIT_MOD_KILO</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_UNIT_MOD_NONE</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_UNIT_MOD_MILLI</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_UNIT_MOD_MICRO</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">MAX_ASC_PROXY_DRIVER_SENSOR_UNIT_MOD</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">ASC_PROXY_DRIVER_SENSOR_UNIT_MOD</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><strong>ASC_PROXY_DRIVER_SENSOR_TYPE</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @enum    ASC_PROXY_DRIVER_SENSOR_TYPE</span>
+<span class="cm"> * @brief   Type of sensor</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">ASC_PROXY_DRIVER_SENSOR_TYPE</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_TYPE_TEMPERATURE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_TYPE_VOLTAGE</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_TYPE_CURRENT</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_TYPE_POWER</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">MAX_ASC_PROXY_DRIVER_SENSOR_TYPE</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">ASC_PROXY_DRIVER_SENSOR_TYPE</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><strong>ASC_PROXY_DRIVER_SENSOR_BITFIELD</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @enum    ASC_PROXY_DRIVER_SENSOR_BITFIELD</span>
+<span class="cm"> * @brief   Bitfield of sensor types</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">ASC_PROXY_DRIVER_SENSOR_BITFIELD</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_BITFIELD_TEMPERATURE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_BITFIELD_VOLTAGE</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_BITFIELD_CURRENT</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_BITFIELD_POWER</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">),</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">MAX_ASC_PROXY_DRIVER_SENSOR_BITFIELD</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">ASC_PROXY_DRIVER_SENSOR_BITFIELD</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>ASC_PROXY_DRIVER_SENSOR_THRESHOLD_STATUS</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @enum    ASC_PROXY_DRIVER_SENSOR_THRESHOLD_STATUS</span>
+<span class="cm"> * @brief   Bitfield of sensor types</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">ASC_PROXY_DRIVER_SENSOR_THRESHOLD_STATUS</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_THRESHOLD_STATUS_HEALTHY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_THRESHOLD_STATUS_WARNING</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_THRESHOLD_STATUS_CRITICAL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_THRESHOLD_STATUS_FATAL</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">MAX_ASC_PROXY_DRIVER_SENSOR_THRESHOLD_STATUS</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">ASC_PROXY_DRIVER_SENSOR_THRESHOLD_STATUS</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="structs">
+<span id="avedsensorcontrol-asc-proxydriver-structs"></span><h3>Structs<a class="headerlink" href="#structs" title="Permalink to this headline">¶</a></h3>
+<p><strong>ASC_PROXY_DRIVER_SENSOR_READINGS</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @struct  ASC_PROXY_DRIVER_SENSOR_READINGS</span>
+<span class="cm"> * @brief   Sensor data readings</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">ASC_PROXY_DRIVER_SENSOR_READINGS</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w">                          </span><span class="n">ulSensorValue</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w">                    </span><span class="n">ulLowerWarningLimit</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w">                    </span><span class="n">ulLowerCriticalLimit</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w">                    </span><span class="n">ulLowerFatalLimit</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w">                    </span><span class="n">ulUpperWarningLimit</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w">                    </span><span class="n">ulUpperCriticalLimit</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w">                    </span><span class="n">ulUpperFatalLimit</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w">                          </span><span class="n">ulAverageSensorValue</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w">                          </span><span class="n">ulMaxSensorValue</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_STATUS</span><span class="w">    </span><span class="n">xSensorStatus</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_UNIT_MOD</span><span class="w">  </span><span class="n">xSensorUnitModifier</span><span class="p">;</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">ASC_PROXY_DRIVER_SENSOR_READINGS</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><strong>ASC_PROXY_DRIVER_SENSOR_DATA</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @struct  ASC_PROXY_DRIVER_SENSOR_DATA</span>
+<span class="cm"> * @brief   Sensor data</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">ASC_PROXY_DRIVER_SENSOR_DATA</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">pcSensorName</span><span class="p">[</span><span class="w"> </span><span class="n">ASC_SENSOR_NAME_MAX</span><span class="w"> </span><span class="p">];</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ucSensorId</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ucSensorType</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ucTotalPowerSensor</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ucSensorAddress</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ucChannelNumber</span><span class="p">[</span><span class="w"> </span><span class="n">MAX_ASC_PROXY_DRIVER_SENSOR_TYPE</span><span class="w"> </span><span class="p">];</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_ENABLE_SENSOR_FUNC</span><span class="w">  </span><span class="o">*</span><span class="n">pxSensorEnabled</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_READ_SENSOR_FUNC</span><span class="w">    </span><span class="o">*</span><span class="n">ppxReadSensorFunc</span><span class="p">[</span><span class="w"> </span><span class="n">MAX_ASC_PROXY_DRIVER_SENSOR_TYPE</span><span class="w"> </span><span class="p">];</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_READINGS</span><span class="w"> </span><span class="n">pxReadings</span><span class="p">[</span><span class="w"> </span><span class="n">MAX_ASC_PROXY_DRIVER_SENSOR_TYPE</span><span class="w"> </span><span class="p">];</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_SENSOR_THRESHOLD_STATUS</span><span class="w"> </span><span class="n">ulThresholdStatus</span><span class="p">;</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">ASC_PROXY_DRIVER_SENSOR_DATA</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="proxy-driver-external-apis">
+<span id="avedsensorcontrol-asc-proxydriver-proxydriverexternalapis"></span><h3>Proxy Driver External APIs<a class="headerlink" href="#proxy-driver-external-apis" title="Permalink to this headline">¶</a></h3>
+<section id="initialise-the-asc">
+<span id="avedsensorcontrol-asc-proxydriver-initialisetheasc"></span><h4>Initialise the ASC<a class="headerlink" href="#initialise-the-asc" title="Permalink to this headline">¶</a></h4>
+<p><strong>iASC_Initialise</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Main initialisation point for the ASC Proxy Driver</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   ucProxyId      Unique ID for this Proxy driver</span>
+<span class="cm"> * @param   ulTaskPrio     Priority of the Proxy driver task (if RR disabled)</span>
+<span class="cm"> * @param   ulTaskStack    Stack size of the Proxy driver task</span>
+<span class="cm"> * @param   pxSensorData   Array of sensor data</span>
+<span class="cm"> * @param   ucNumSensors   Number of sensors to monitor</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Proxy driver initialised correctly</span>
+<span class="cm"> *          ERROR       Proxy driver not initialised, or was already initialised</span>
+<span class="cm"> *</span>
+<span class="cm"> * @note   Proxy drivers can have 0 or more firmware interfaces</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">iASC_Initialise</span><span class="p">(</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ucProxyId</span><span class="p">,</span><span class="w"></span>
+<span class="w">                     </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">ulTaskPrio</span><span class="p">,</span><span class="w"></span>
+<span class="w">                     </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">ulTaskStack</span><span class="p">,</span><span class="w"></span>
+<span class="w">                     </span><span class="n">ASC_PROXY_DRIVER_SENSOR_DATA</span><span class="w"> </span><span class="o">*</span><span class="n">pxSensorData</span><span class="p">,</span><span class="w"></span>
+<span class="w">                     </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ucNumSensors</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="bind-callback">
+<span id="avedsensorcontrol-asc-proxydriver-bindcallback"></span><h4>Bind callback<a class="headerlink" href="#bind-callback" title="Permalink to this headline">¶</a></h4>
+<p><strong>iASC_BindCallback</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @brief   Bind into this proxy driver</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   pxCallback  Callback to bind into the proxy driver</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Callback successfully bound</span>
+<span class="cm"> *          ERROR       Callback not bound</span>
+<span class="cm"> *</span>
+<span class="cm"> * @notes   None</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">iASC_BindCallback</span><span class="p">(</span><span class="w"> </span><span class="n">AEL_CALLBACK</span><span class="w"> </span><span class="o">*</span><span class="n">pxCallback</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="reset-all-of-the-transient-sensor-data">
+<span id="avedsensorcontrol-asc-proxydriver-resetallofthetransientsensordata"></span><h4>Reset all of the transient sensor data<a class="headerlink" href="#reset-all-of-the-transient-sensor-data" title="Permalink to this headline">¶</a></h4>
+<p><strong>iASC_ResetAllSensorData</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @brief   Reset current, average, max and status values for all sensors</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   None</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Data reset successfully</span>
+<span class="cm"> *          ERROR       Data not reset successfully</span>
+<span class="cm"> *</span>
+<span class="cm"> * @notes   None</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">iASC_ResetAllSensorData</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="reset-a-single-sensor-s-transient-data-by-id">
+<span id="avedsensorcontrol-asc-proxydriver-resetasinglesensor-stransientdatabyid"></span><h4>Reset a single sensor’s transient data by ID<a class="headerlink" href="#reset-a-single-sensor-s-transient-data-by-id" title="Permalink to this headline">¶</a></h4>
+<p><strong>iASC_ResetSingleSensorDatabyId</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @brief   Reset current, average, max and status values for a single sensor by ID</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   ucId        Sensor ID</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Data reset successfully</span>
+<span class="cm"> *          ERROR       Data not reset successfully</span>
+<span class="cm"> *</span>
+<span class="cm"> * @notes   None</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">iASC_ResetSingleSensorDatabyId</span><span class="p">(</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ucId</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="reset-a-single-sensor-s-transient-data-by-name">
+<span id="avedsensorcontrol-asc-proxydriver-resetasinglesensor-stransientdatabyname"></span><h4>Reset a single sensor’s transient data by name<a class="headerlink" href="#reset-a-single-sensor-s-transient-data-by-name" title="Permalink to this headline">¶</a></h4>
+<p><strong>iASC_ResetSingleSensorDatabyName</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @brief   Reset current, average, max and status values for a single sensor by name</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   pcName      Sensor Name</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Data reset successfully</span>
+<span class="cm"> *          ERROR       Data not reset successfully</span>
+<span class="cm"> *</span>
+<span class="cm"> * @notes   None</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">iASC_ResetSingleSensorDatabyName</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">pcName</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="get-all-of-the-sensor-s-data">
+<span id="avedsensorcontrol-asc-proxydriver-getallofthesensor-sdata"></span><h4>Get all of the sensor’s data<a class="headerlink" href="#get-all-of-the-sensor-s-data" title="Permalink to this headline">¶</a></h4>
+<p><strong>iASC_GetAllSensorData</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @brief   Get all sensor data</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   pxData         Pointer to data to get</span>
+<span class="cm"> * @param   pucNumSensors  Pointer to the number of sensors monitored</span>
+<span class="cm"> *                         Orignally passed in as the maximum number of sensors that can be monitored but will then be</span>
+<span class="cm"> *                         updated to the actual number of sensors that are monitored</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK             Data retrieved successfully</span>
+<span class="cm"> *          ERROR          Data not retrieved successfully</span>
+<span class="cm"> *</span>
+<span class="cm"> * @notes   None</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">iASC_GetAllSensorData</span><span class="p">(</span><span class="w"> </span><span class="n">ASC_PROXY_DRIVER_SENSOR_DATA</span><span class="w"> </span><span class="o">*</span><span class="n">pxData</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">pucNumSensors</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="get-a-single-sensor-s-data-by-id">
+<span id="avedsensorcontrol-asc-proxydriver-getasinglesensor-sdatabyid"></span><h4>Get a single sensor’s data by ID<a class="headerlink" href="#get-a-single-sensor-s-data-by-id" title="Permalink to this headline">¶</a></h4>
+<p><strong>iASC_GetSingleSensorDataById</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @brief   Get single sensor data by ID</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   ucId        Sensor ID</span>
+<span class="cm"> * @param   pxData      Pointer to data to get</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Data retrieved successfully</span>
+<span class="cm"> *          ERROR       Data not retrieved successfully</span>
+<span class="cm"> *</span>
+<span class="cm"> * @notes   None</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">iASC_GetSingleSensorDataById</span><span class="p">(</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ucId</span><span class="p">,</span><span class="w"> </span><span class="n">ASC_PROXY_DRIVER_SENSOR_DATA</span><span class="w"> </span><span class="o">*</span><span class="n">pxData</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="get-a-single-sensor-s-data-by-name">
+<span id="avedsensorcontrol-asc-proxydriver-getasinglesensor-sdatabyname"></span><h4>Get a single sensor’s data by name<a class="headerlink" href="#get-a-single-sensor-s-data-by-name" title="Permalink to this headline">¶</a></h4>
+<p><strong>iASC_GetSingleSensorDataByName</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @brief   Get single sensor data by name</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   pcName      Sensor Name</span>
+<span class="cm"> * @param   pxData      Pointer to data to get</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Data retrieved successfully</span>
+<span class="cm"> *          ERROR       Data not retrieved successfully</span>
+<span class="cm"> *</span>
+<span class="cm"> * @notes   None</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">iASC_GetSingleSensorDataByName</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">pcName</span><span class="p">,</span><span class="w"> </span><span class="n">ASC_PROXY_DRIVER_SENSOR_DATA</span><span class="w"> </span><span class="o">*</span><span class="n">pxData</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="set-a-single-sensor-s-threshold-by-id">
+<span id="avedsensorcontrol-asc-proxydriver-setasinglesensor-sthresholdbyid"></span><h4>Set a single sensor’s threshold by ID<a class="headerlink" href="#set-a-single-sensor-s-threshold-by-id" title="Permalink to this headline">¶</a></h4>
+<p><strong>iASC_SetSingleSensorThresholdStatusById</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Sets the threshold status of a single sensor</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   ucId        Sensor ID</span>
+<span class="cm"> * @param   xStatus     New threshold status</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Status set successfully</span>
+<span class="cm"> *          ERROR       Satus not set</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">iASC_SetSingleSensorThresholdStatusById</span><span class="p">(</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ucId</span><span class="p">,</span><span class="w"> </span><span class="n">ASC_PROXY_DRIVER_SENSOR_THRESHOLD_STATUS</span><span class="w"> </span><span class="n">xStatus</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="set-single-sensor-operational-state-by-id">
+<span id="avedsensorcontrol-asc-proxydriver-setsinglesensoroperationalstatebyid"></span><h4>Set single sensor operational state by ID.<a class="headerlink" href="#set-single-sensor-operational-state-by-id" title="Permalink to this headline">¶</a></h4>
+<p><strong>iASC_SetSingleSensorOperationalStateById</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Set single sensor operational state by ID</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   ucId                Sensor ID</span>
+<span class="cm"> * @param   ucSensorType        The sensor type</span>
+<span class="cm"> * @param   ucOperationalState  The operational state to set</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          operational state set successfully</span>
+<span class="cm"> *          ERROR       operational state not set</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">iASC_SetSingleSensorOperationalStateById</span><span class="p">(</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ucId</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                              </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ucSensorType</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                              </span><span class="n">ASC_PROXY_DRIVER_SENSOR_OPERATIONAL_STATUS</span><span class="w"> </span><span class="n">ucOperationalState</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="get-single-sensor-operational-state-by-id">
+<span id="avedsensorcontrol-asc-proxydriver-getsinglesensoroperationalstatebyid"></span><h4>Get single sensor operational state by ID.<a class="headerlink" href="#get-single-sensor-operational-state-by-id" title="Permalink to this headline">¶</a></h4>
+<p><strong>iASC_GetSingleSensorOperationalStateById</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Get single sensor operational state by ID</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   ucId                Sensor ID</span>
+<span class="cm"> * @param   ucSensorType        The sensor type</span>
+<span class="cm"> * @param   pucOperationalState Pointer to the operational state read</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          operational state read successfully</span>
+<span class="cm"> *          ERROR       operational state not read</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">iASC_GetSingleSensorOperationalStateById</span><span class="p">(</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ucId</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                              </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ucSensorType</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                              </span><span class="n">ASC_PROXY_DRIVER_SENSOR_OPERATIONAL_STATUS</span><span class="w"> </span><span class="o">*</span><span class="n">pucOperationalState</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="display-the-statistic-counters-and-errors">
+<span id="avedsensorcontrol-asc-proxydriver-displaythestatisticcountersanderrors"></span><h4>Display the statistic counters and errors.<a class="headerlink" href="#display-the-statistic-counters-and-errors" title="Permalink to this headline">¶</a></h4>
+<p><strong>iASC_PrintStatistics</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Print all of the stats gathered by the application</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Stats retrieved from proxy driver successfully</span>
+<span class="cm"> *          ERROR       Stats not retrieved successfully</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">iASC_PrintStatistics</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="clear-the-all-statistics-counters-back-to-zero">
+<span id="avedsensorcontrol-asc-proxydriver-cleartheallstatisticscountersbacktozero"></span><h4>Clear the all statistics counters back to zero.<a class="headerlink" href="#clear-the-all-statistics-counters-back-to-zero" title="Permalink to this headline">¶</a></h4>
+<p><strong>iASC_ClearStatistics</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Clear all of the stats in the application</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Stats cleared successfully</span>
+<span class="cm"> *          ERROR       Stats not cleared successfully</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">iASC_ClearStatistics</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="get-current-state-of-the-proxy-driver">
+<span id="avedsensorcontrol-asc-proxydriver-getcurrentstateoftheproxydriver"></span><h4>Get current state of the proxy driver<a class="headerlink" href="#get-current-state-of-the-proxy-driver" title="Permalink to this headline">¶</a></h4>
+<p><strong>iASC_GetState</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Gets the current state of the proxy driver</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   pxState         Pointer to the state</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK              If successful</span>
+<span class="cm"> *          ERROR           If not successful</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">iASC_GetState</span><span class="p">(</span><span class="w"> </span><span class="n">MODULE_STATE</span><span class="w"> </span><span class="o">*</span><span class="n">pxState</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="sequence-diagrams">
+<span id="avedsensorcontrol-asc-proxydriver-sequencediagrams"></span><h2>Sequence Diagrams<a class="headerlink" href="#sequence-diagrams" title="Permalink to this headline">¶</a></h2>
+<section id="asc-proxy-initialization">
+<span id="avedsensorcontrol-asc-proxydriver-ascproxyinitialization"></span><h3>ASC Proxy Initialization<a class="headerlink" href="#asc-proxy-initialization" title="Permalink to this headline">¶</a></h3>
+<p>Two ASC API functions are called from the AMC main task (iASC_Initialise and iASC_BindCallback), in order to initialise the proxy.</p>
+<p>iASC_Initialise will call into the FAL to open with the provided handle, create a shared proxy mutex, create the proxy task, allocate memory and copy the provided sensor data.</p>
+<p>iASC_BindCallback will bind the appropriate top-level callback function.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/60edfa733d0a323ea1094acec8c35064c756f16c.png"><img alt="image1" class="drawio-diagram-image" src="_images/60edfa733d0a323ea1094acec8c35064c756f16c.png" style="width: 961px;"/></a></p>
+</section>
+<section id="asc-proxy-task">
+<span id="avedsensorcontrol-asc-proxydriver-ascproxytask"></span><h3>ASC Proxy Task<a class="headerlink" href="#asc-proxy-task" title="Permalink to this headline">¶</a></h3>
+<p>The task within ASC proxy has 2 main responsibilities:</p>
+<ul class="simple">
+<li><p>For each sensor, and for each sensor type (temperature, voltage, current, power, etc), call the associated read sensor function, store its value, calculate average value, and set its status.</p></li>
+<li><p>Signal an event with EVL core library, if a sensor value exceeds thresholds and when sensor updates have completed.</p></li>
+</ul>
+<p><a class="drawio-diagram-image reference internal" href="_images/81fbd3551f2958a2dcd94282479b733b81ae6869.png"><img alt="image2" class="drawio-diagram-image" src="_images/81fbd3551f2958a2dcd94282479b733b81ae6869.png" style="width: 841px;"/></a></p>
+</section>
+</section>
+<section id="examples">
+<span id="avedsensorcontrol-asc-proxydriver-examples"></span><h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<section id="initialize-driver">
+<span id="avedsensorcontrol-asc-proxydriver-initializedriver"></span><h3>Initialize Driver<a class="headerlink" href="#initialize-driver" title="Permalink to this headline">¶</a></h3>
+<p>This function should only be called once. It requires an unique ID for the proxy, used for signaling new events from the proxy, along with a handle to a FW_IF (already created and initialized), FW_IF port number, proxy driver task priority, stack
+size, pointer to sensor data array and total number of sensors to be monitored (should match the number of entries in the sensor array).</p>
+<p><strong>iASC_Initialise Example</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span> <span class="n">OK</span> <span class="o">==</span> <span class="n">iASC_Initialise</span><span class="p">(</span> <span class="n">AMC_EVENT_UNIQUE_ID_ASC</span><span class="p">,</span> <span class="n">AMC_TASK_PRIO_DEFAULT</span><span class="p">,</span> <span class="n">AMC_TASK_DEFAULT_STACK</span><span class="p">,</span> <span class="n">PROFILE_SENSORS_SENSOR_DATA</span><span class="p">,</span> <span class="n">PROFILE_SENSORS_NUM_SENSORS</span> <span class="p">)</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">AMC_PRINTF</span><span class="p">(</span> <span class="s">"ASC Proxy Driver initialised\r\n"</span> <span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">AMC_PRINTF</span><span class="p">(</span> <span class="s">"Error initialising ASC Proxy Driver\r\n"</span> <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="register-for-callback">
+<span id="avedsensorcontrol-asc-proxydriver-registerforcallback"></span><h3>Register For Callback<a class="headerlink" href="#register-for-callback" title="Permalink to this headline">¶</a></h3>
+<p>Define a function based on the function pointer prototype and bind in using the API.</p>
+<p><strong>iASC_BindCallback Example</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Define a callback to handle the events */</span>
+<span class="kd">static</span> <span class="kt">int</span> <span class="nf">iAscCallback</span><span class="p">(</span> <span class="n">EVL_SIGNAL</span> <span class="o">*</span><span class="n">pxSignal</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">iStatus</span> <span class="o">=</span> <span class="n">ERROR</span><span class="p">;</span>
+
+    <span class="k">if</span><span class="p">(</span> <span class="p">(</span> <span class="n">NULL</span> <span class="o">!=</span> <span class="n">pxSignal</span> <span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span> <span class="n">AMC_EVENT_UNIQUE_ID_ASC</span> <span class="o">==</span> <span class="n">pxSignal</span><span class="o">-&gt;</span><span class="n">ucModule</span> <span class="p">)</span> <span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">switch</span><span class="p">(</span> <span class="n">pxSignal</span><span class="o">-&gt;</span><span class="n">ucEventType</span> <span class="p">)</span>
+        <span class="p">{</span>
+        <span class="k">case</span> <span class="n">ASC_PROXY_DRIVER_E_SENSOR_UPDATE_COMPLETE</span><span class="p">:</span>
+        <span class="k">case</span> <span class="n">ASC_PROXY_DRIVER_E_SENSOR_UNAVAILABLE</span><span class="p">:</span>
+        <span class="k">case</span> <span class="n">ASC_PROXY_DRIVER_E_SENSOR_COMMS_FAILURE</span><span class="p">:</span>
+        <span class="k">case</span> <span class="n">ASC_PROXY_DRIVER_E_SENSOR_WARNING</span><span class="p">:</span>
+        <span class="k">case</span> <span class="n">ASC_PROXY_DRIVER_E_SENSOR_CRITICAL</span><span class="p">:</span>
+        <span class="k">case</span> <span class="n">ASC_PROXY_DRIVER_E_SENSOR_FATAL</span><span class="p">:</span>
+        <span class="k">case</span> <span class="n">ASC_PROXY_DRIVER_E_SENSOR_LOWER_WARNING</span><span class="p">:</span>
+        <span class="k">case</span> <span class="n">ASC_PROXY_DRIVER_E_SENSOR_LOWER_CRITICAL</span><span class="p">:</span>
+        <span class="k">case</span> <span class="n">ASC_PROXY_DRIVER_E_SENSOR_LOWER_FATAL</span><span class="p">:</span>
+        <span class="k">case</span> <span class="n">ASC_PROXY_DRIVER_E_SENSOR_UPPER_WARNING</span><span class="p">:</span>
+        <span class="k">case</span> <span class="n">ASC_PROXY_DRIVER_E_SENSOR_UPPER_CRITICAL</span><span class="p">:</span>
+        <span class="k">case</span> <span class="n">ASC_PROXY_DRIVER_E_SENSOR_UPPER_FATAL</span><span class="p">:</span>
+            <span class="cm">/* TODO: handle events */</span>
+            <span class="n">iStatus</span> <span class="o">=</span> <span class="n">OK</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="k">default</span><span class="p">:</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">iStatus</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* Bind into the callback during the application initialisation */</span>
+<span class="k">if</span><span class="p">(</span> <span class="n">OK</span> <span class="o">==</span> <span class="n">iASC_BindCallback</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">iAscCallback</span> <span class="p">)</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">AMC_PRINTF</span><span class="p">(</span> <span class="s">"ASC Proxy Driver initialised and bound\r\n"</span> <span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">AMC_PRINTF</span><span class="p">(</span> <span class="s">"Error binding to ASC Proxy Driver\r\n"</span> <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+<section id="sets">
+<span id="avedsensorcontrol-asc-proxydriver-sets"></span><h3>Sets<a class="headerlink" href="#sets" title="Permalink to this headline">¶</a></h3>
+<section id="reset-all-sensor-data">
+<span id="avedsensorcontrol-asc-proxydriver-resetallsensordata"></span><h4>Reset all sensor data<a class="headerlink" href="#reset-all-sensor-data" title="Permalink to this headline">¶</a></h4>
+<p>Example of re-setting all sensor data. No parameters required, simply call the API.</p>
+<p><strong>iASC_ResetAllSensorData Example</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span> <span class="n">OK</span> <span class="o">!=</span> <span class="n">iASC_ResetAllSensorData</span><span class="p">()</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Error resetting sensors data\r\n"</span> <span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"All sensor data reset\r\n"</span> <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="reset-single-sensor-data-by-id">
+<span id="avedsensorcontrol-asc-proxydriver-resetsinglesensordata-byid"></span><h4>Reset single sensor data (by ID)<a class="headerlink" href="#reset-single-sensor-data-by-id" title="Permalink to this headline">¶</a></h4>
+<p>Example of re-setting single sensor by ID.</p>
+<p><strong>iASC_ResetSingleSensorDataById Example</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">uint8_t</span> <span class="n">iId</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>    <span class="cm">/* set to required ID */</span>
+
+<span class="k">if</span><span class="p">(</span> <span class="n">OK</span> <span class="o">!=</span> <span class="n">iASC_ResetSingleSensorDataById</span><span class="p">(</span> <span class="n">iId</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Error resetting sensor %d data\r\n"</span><span class="p">,</span> <span class="n">iId</span> <span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Sensor %d data reset\r\n"</span><span class="p">,</span> <span class="n">iId</span> <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="reset-single-sensor-data-by-name">
+<span id="avedsensorcontrol-asc-proxydriver-resetsinglesensordata-byname"></span><h4>Reset single sensor data (by name)<a class="headerlink" href="#reset-single-sensor-data-by-name" title="Permalink to this headline">¶</a></h4>
+<p>Example of re-setting single sensor by name.</p>
+<p><strong>iASC_ResetSingleSensorDataByName Example</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="n">pcName</span><span class="o">[</span> <span class="n">ASC_SENSOR_NAME_MAX</span> <span class="o">]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span> <span class="p">};</span>     <span class="cm">/* set to required name */</span>
+
+<span class="k">if</span><span class="p">(</span> <span class="n">OK</span> <span class="o">!=</span> <span class="n">iASC_ResetSingleSensorDataByName</span><span class="p">(</span> <span class="n">pcName</span> <span class="p">)</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Error resetting sensor %s data\r\n"</span><span class="p">,</span> <span class="n">pcName</span> <span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Sensor %s data reset\r\n"</span><span class="p">,</span> <span class="n">pcName</span> <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="set-single-sensor-threshold-by-id">
+<span id="avedsensorcontrol-asc-proxydriver-setsinglesensorthresholdbyid"></span><h4>Set single sensor threshold by ID<a class="headerlink" href="#set-single-sensor-threshold-by-id" title="Permalink to this headline">¶</a></h4>
+<p>Example of setting single sensor threshold by ID.</p>
+<p><strong>iASC_ResetSingleSensorDataById Example</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">uint8_t</span> <span class="n">iId</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>    <span class="cm">/* set to required ID */</span>
+
+<span class="k">if</span><span class="p">(</span> <span class="n">OK</span> <span class="o">!=</span> <span class="n">iASC_SetSingleSensorThresholdStatusById</span><span class="p">(</span> <span class="n">iId</span><span class="p">,</span> <span class="n">ASC_PROXY_DRIVER_SENSOR_THRESHOLD_STATUS_WARNING</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Error resetting sensor %d data\r\n"</span><span class="p">,</span> <span class="n">iId</span> <span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Sensor %d data reset\r\n"</span><span class="p">,</span> <span class="n">iId</span> <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="gets">
+<span id="avedsensorcontrol-asc-proxydriver-gets"></span><h3>Gets<a class="headerlink" href="#gets" title="Permalink to this headline">¶</a></h3>
+<section id="get-all-sensor-data">
+<span id="avedsensorcontrol-asc-proxydriver-getallsensordata"></span><h4>Get all sensor data<a class="headerlink" href="#get-all-sensor-data" title="Permalink to this headline">¶</a></h4>
+<p>Example of reading all sensor data, from max number of sensors required.</p>
+<p><strong>iASC_GetAllSensorData Example</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">iMaxSensors</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span> <span class="cm">/* Set to max num of sensors required */</span>
+<span class="n">ASC_PROXY_DRIVER_SENSOR_DATA</span> <span class="o">*</span><span class="n">pxSensors</span> <span class="o">=</span> <span class="n">pvOSAL_MemAlloc</span><span class="p">(</span> <span class="n">iMaxSensors</span> <span class="o">*</span> <span class="n">sizeof</span><span class="p">(</span> <span class="n">ASC_PROXY_DRIVER_SENSOR_DATA</span> <span class="p">)</span> <span class="p">);</span>
+
+<span class="k">if</span><span class="p">(</span> <span class="n">NULL</span> <span class="o">==</span> <span class="n">pxSensors</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Unable to allocate data for %d sensors\r\n"</span><span class="p">,</span> <span class="n">iMaxSensors</span> <span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">uint8_t</span> <span class="n">uNumSensors</span> <span class="o">=</span> <span class="p">(</span> <span class="n">uint8_t</span> <span class="p">)</span><span class="n">iMaxSensors</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span> <span class="n">OK</span> <span class="o">!=</span> <span class="n">iASC_GetAllSensorData</span><span class="p">(</span> <span class="n">pxSensors</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">uNumSensors</span> <span class="p">)</span> <span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Error retrieving sensor data\r\n"</span> <span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Retrieved %d sensors\r\n"</span><span class="p">,</span> <span class="n">uNumSensors</span> <span class="p">);</span>
+
+        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">uNumSensors</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Sensor %d:\r\n"</span><span class="p">,</span> <span class="n">i</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"****************************************************\r\n"</span> <span class="p">);</span>
+            <span class="n">vPrintSensorData</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">pxSensors</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span> <span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">vOSAL_MemFree</span><span class="p">(</span> <span class="p">(</span> <span class="kt">void</span><span class="o">**</span> <span class="p">)</span><span class="o">&amp;</span><span class="n">pxSensors</span> <span class="p">);</span> <span class="cm">/* free allocated memory */</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="get-single-sensor-data-by-id">
+<span id="avedsensorcontrol-asc-proxydriver-getsinglesensordata-byid"></span><h4>Get single sensor data (by ID)<a class="headerlink" href="#get-single-sensor-data-by-id" title="Permalink to this headline">¶</a></h4>
+<p>Example of reading sensor data by ID. Also included, an example of printing full data from a single sensor.</p>
+<p><strong>iASC_GetSingleSensorDataById Example</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">iId</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>    <span class="cm">/* set to required ID */</span>
+<span class="n">ASC_PROXY_DRIVER_SENSOR_DATA</span> <span class="n">xSensor</span> <span class="o">=</span> <span class="p">{</span> <span class="p">{</span> <span class="mi">0</span> <span class="p">}</span> <span class="p">};</span>
+
+<span class="k">if</span><span class="p">(</span> <span class="n">OK</span> <span class="o">!=</span> <span class="n">iASC_GetSingleSensorDataById</span><span class="p">(</span> <span class="p">(</span> <span class="n">uint8_t</span> <span class="p">)</span><span class="n">iId</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">xSensor</span> <span class="p">)</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Error retrieving sensor %d data\r\n"</span><span class="p">,</span> <span class="n">iId</span> <span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">vPrintSensorData</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">xSensor</span> <span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="cm">/**</span>
+<span class="cm"> * @brief   Display the full data of a single sensor</span>
+<span class="cm"> */</span>
+<span class="kd">static</span> <span class="kt">void</span> <span class="nf">vPrintSensorData</span><span class="p">(</span> <span class="n">ASC_PROXY_DRIVER_SENSOR_DATA</span> <span class="o">*</span><span class="n">pxSensor</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span> <span class="n">NULL</span> <span class="o">!=</span> <span class="n">pxSensor</span> <span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+        <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"====================================================\r\n"</span> <span class="p">);</span>
+        <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Sensor . . . . . . . . . . . . . . %s\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">pcSensorName</span> <span class="p">);</span>
+        <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- ID . . . . . . . . . . . . . . . %d\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">ucSensorId</span> <span class="p">);</span>
+        <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- Type . . . . . . . . . . . . . . 0x%02X\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">ucSensorType</span> <span class="p">);</span>
+        <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- Address. . . . . . . . . . . . . 0x%02X\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">ucSensorAddress</span> <span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">MAX_ASC_PROXY_DRIVER_SENSOR_TYPE</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"----------------------------------------------------\r\n"</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Type: %s\r\n"</span><span class="p">,</span> <span class="n">pcTypeStrings</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- Channel number . . . . . . . . . %d\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">ucChannelNumber</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- Driver callback. . . . . . . . . %s\r\n"</span><span class="p">,</span>
+                          <span class="p">(</span> <span class="n">NULL</span> <span class="o">!=</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">pxReadSensorFunc</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span> <span class="p">)</span> <span class="o">?</span> <span class="p">(</span> <span class="s">"Valid"</span> <span class="p">):(</span> <span class="s">"NULL"</span> <span class="p">)</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- reading: value . . . . . . . . . %d\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">xReadings</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span><span class="p">.</span><span class="na">ulSensorValue</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- reading: lower Warning limit . . %d\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">xReadings</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span><span class="p">.</span><span class="na">ulLowerWarningLimit</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- reading: lower critical limit. . %d\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">xReadings</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span><span class="p">.</span><span class="na">ulLowerCriticalLimit</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- reading: lower fatal limit . . . %d\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">xReadings</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span><span class="p">.</span><span class="na">ulLowerFatalLimit</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- reading: upper Warning limit . . %d\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">xReadings</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span><span class="p">.</span><span class="na">ulUpperWarningLimit</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- reading: upper critical limit. . %d\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">xReadings</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span><span class="p">.</span><span class="na">ulUpperCriticalLimit</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- reading: upper fatal limit . . . %d\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">xReadings</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span><span class="p">.</span><span class="na">ulUpperFatalLimit</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- reading: average sensor value. . %d\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">xReadings</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span><span class="p">.</span><span class="na">ulAverageSensorValue</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- reading: max sensor value. . . . %d\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">xReadings</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span><span class="p">.</span><span class="na">ulMaxSensorValue</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- reading: sensor status . . . . . %s\r\n"</span><span class="p">,</span>
+                            <span class="n">pcStatusStrings</span><span class="o">[</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">xReadings</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span><span class="p">.</span><span class="na">xSensorStatus</span> <span class="o">]</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- reading: sensor unit modifier. . %s\r\n"</span><span class="p">,</span>
+                            <span class="n">pcModStrings</span><span class="o">[</span>  <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">xReadings</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span><span class="p">.</span><span class="na">xSensorUnitModifier</span> <span class="o">]</span> <span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Error - invalid sensor data\r\n"</span> <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="get-single-sensor-data-by-name">
+<span id="avedsensorcontrol-asc-proxydriver-getsinglesensordata-byname"></span><h4>Get single sensor data (by name)<a class="headerlink" href="#get-single-sensor-data-by-name" title="Permalink to this headline">¶</a></h4>
+<p>Example of reading sensor data by name. Also included, an example of printing full data from a single sensor.</p>
+<p><strong>iASC_GetSingleSensorDataByName Example</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="n">pcName</span><span class="o">[</span> <span class="n">ASC_SENSOR_NAME_MAX</span> <span class="o">]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span> <span class="p">};</span> <span class="cm">/* set to required name */</span>
+<span class="n">ASC_PROXY_DRIVER_SENSOR_DATA</span> <span class="n">xSensor</span> <span class="o">=</span> <span class="p">{</span> <span class="p">{</span> <span class="mi">0</span> <span class="p">}</span> <span class="p">};</span>
+
+<span class="k">if</span><span class="p">(</span> <span class="n">OK</span> <span class="o">!=</span> <span class="n">iASC_GetSingleSensorDataByName</span><span class="p">(</span> <span class="n">pcName</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">xSensor</span> <span class="p">)</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Error retrieving sensor %s data\r\n"</span><span class="p">,</span> <span class="n">pcName</span> <span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">vPrintSensorData</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">xSensor</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * @brief   Display the full data of a single sensor</span>
+<span class="cm"> */</span>
+<span class="kd">static</span> <span class="kt">void</span> <span class="nf">vPrintSensorData</span><span class="p">(</span> <span class="n">ASC_PROXY_DRIVER_SENSOR_DATA</span> <span class="o">*</span><span class="n">pxSensor</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span> <span class="n">NULL</span> <span class="o">!=</span> <span class="n">pxSensor</span> <span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+        <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"====================================================\r\n"</span> <span class="p">);</span>
+        <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Sensor . . . . . . . . . . . . . . %s\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">pcSensorName</span> <span class="p">);</span>
+        <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- ID . . . . . . . . . . . . . . . %d\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">ucSensorId</span> <span class="p">);</span>
+        <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- Type . . . . . . . . . . . . . . 0x%02X\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">ucSensorType</span> <span class="p">);</span>
+        <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- Address. . . . . . . . . . . . . 0x%02X\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">ucSensorAddress</span> <span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">MAX_ASC_PROXY_DRIVER_SENSOR_TYPE</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"----------------------------------------------------\r\n"</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Type: %s\r\n"</span><span class="p">,</span> <span class="n">pcTypeStrings</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- Channel number . . . . . . . . . %d\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">ucChannelNumber</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- Driver callback. . . . . . . . . %s\r\n"</span><span class="p">,</span>
+                          <span class="p">(</span> <span class="n">NULL</span> <span class="o">!=</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">pxReadSensorFunc</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span> <span class="p">)</span> <span class="o">?</span> <span class="p">(</span> <span class="s">"Valid"</span> <span class="p">):(</span> <span class="s">"NULL"</span> <span class="p">)</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- reading: value . . . . . . . . . %d\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">xReadings</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span><span class="p">.</span><span class="na">ulSensorValue</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- reading: lower Warning limit . . %d\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">xReadings</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span><span class="p">.</span><span class="na">ulLowerWarningLimit</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- reading: lower critical limit. . %d\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">xReadings</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span><span class="p">.</span><span class="na">ulLowerCriticalLimit</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- reading: lower fatal limit . . . %d\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">xReadings</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span><span class="p">.</span><span class="na">ulLowerFatalLimit</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- reading: upper Warning limit . . %d\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">xReadings</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span><span class="p">.</span><span class="na">ulUpperWarningLimit</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- reading: upper critical limit. . %d\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">xReadings</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span><span class="p">.</span><span class="na">ulUpperCriticalLimit</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- reading: upper fatal limit . . . %d\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">xReadings</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span><span class="p">.</span><span class="na">ulUpperFatalLimit</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- reading: average sensor value. . %d\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">xReadings</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span><span class="p">.</span><span class="na">ulAverageSensorValue</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- reading: max sensor value. . . . %d\r\n"</span><span class="p">,</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">xReadings</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span><span class="p">.</span><span class="na">ulMaxSensorValue</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- reading: sensor status . . . . . %s\r\n"</span><span class="p">,</span>
+                            <span class="n">pcStatusStrings</span><span class="o">[</span> <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">xReadings</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span><span class="p">.</span><span class="na">xSensorStatus</span> <span class="o">]</span> <span class="p">);</span>
+            <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"- reading: sensor unit modifier. . %s\r\n"</span><span class="p">,</span>
+                            <span class="n">pcModStrings</span><span class="o">[</span>  <span class="n">pxSensor</span><span class="o">-&gt;</span><span class="n">xReadings</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span><span class="p">.</span><span class="na">xSensorUnitModifier</span> <span class="o">]</span> <span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">ASC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Error - invalid sensor data\r\n"</span> <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Page Revision: v. 65</p>
+</section>
+</section>
+</section>
+</section>
+</div>
+</div>
+<footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+<a accesskey="p" class="btn btn-neutral float-left" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html" rel="prev" title="AVED Programming Control (APC) Proxy Driver"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+<a accesskey="n" class="btn btn-neutral float-right" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html" rel="next" title="AVED External Device Control (AXC) Proxy Driver">Next <span aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<p>© Copyright 2023, Advanced Micro Devices Inc.</p>
+</div>
+<div class="aem-Grid aem-Grid--16">
+<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+<div class="container-fluid sub-footer">
+<div class="row">
+<div class="col-xs-24">
+<p><a href="https://www.amd.com/en/corporate/copyright" target="_blank">Terms and Conditions</a> | <a href="https://www.amd.com/en/corporate/privacy" target="_blank">Privacy</a> | <a href="https://www.amd.com/en/corporate/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.amd.com/en/corporate/trademarks" target="_blank">Trademarks</a> | <a href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf" target="_blank">Statement on Forced Labor</a> | <a href="https://www.amd.com/en/corporate/competition" target="_blank">Fair and Open Competition</a> | <a href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf" target="_blank">UK Tax Strategy</a> | <a href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA" target="_blank">Inclusive Terminology</a> | <a class="ot-sdk-show-settings" href="#cookiessettings">Cookies Settings</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+</div>
+</div>
+</section>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script charset="UTF-8" data-document-language="true" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script class="optanon-category-C0002" type="text/plain">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+<title>AVED External Device Control (AXC) Proxy Driver — AVED  documentation</title>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="_static/xbtest.css" rel="stylesheet" type="text/css"/>
+<link href="_static/_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="https://docs.xilinx.com/favicon.ico" rel="shortcut icon"/>
+<!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/js/theme.js"></script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="Board%2BManagement%2BController%2B%28BMC%29%2BProxy%2BDriver.html" rel="next" title="Board Management Controller (BMC) Proxy Driver"/>
+<link href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html" rel="prev" title="AVED Sensor Control (ASC) Proxy Driver"/>
+<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager -->
+<noscript><iframe class="optanon-category-C0002" height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager -->
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="index.html"> AVED
+            <img alt="Logo" class="logo" src="_static/xilinx-header-logo.svg"/>
+</a>
+<div role="search">
+<form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" type="text"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+</div>
+</div><div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BHierarchy%2BOverview.html">AVED V80 - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BCIPS%2BConfiguration.html">AVED V80 - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BResources.html">AVED V80 - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BMap.html">AVED V80 - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BNoC%2BConfiguration.html">AVED V80 - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BBase%2BLogic.html">AVED V80 - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BClock%2BReset%2BModule.html">AVED V80 - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BSource%2BFile%2BOverview.html">AVED V80 - Source File Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SMBus%2BIP%2Bv1.1%2B-%2BProduct%2BGuide.html">SMBus IP v1.1 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BASDM%2BApplication.html">AVED ASDM Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOutOfBand%2BTelemetry%2BApplication.html">AVED OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">AVED External Device Control (AXC) Proxy Driver</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#key-pages">Key pages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#key-acronyms">Key Acronyms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qsfp-overview">QSFP overview</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#muxed-device-fal">Muxed Device FAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sequence-diagrams">Sequence Diagrams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Board%2BManagement%2BController%2B%28BMC%29%2BProxy%2BDriver.html">Board Management Controller (BMC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BQDMA.html">AVED QDMA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift"><nav aria-label="Mobile navigation menu" class="wy-nav-top" style="background: black">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="index.html">AVED</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="Page navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a class="icon icon-home" href="index.html"></a> »</li>
+<li>AVED External Device Control (AXC) Proxy Driver</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<section id="aved-external-device-control-axc-proxy-driver">
+<h1>AVED External Device Control (AXC) Proxy Driver<a class="headerlink" href="#aved-external-device-control-axc-proxy-driver" title="Permalink to this headline">¶</a></h1>
+<section id="overview">
+<span id="avedexternaldevicecontrol-axc-proxydriver-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The AXC proxy driver binds into the provided FAL for each new external device added. Internally it also creates a number of resources, including a mutex for protection and a task to check the status and temperature of each device.</p>
+<p>The AXC proxy task will:</p>
+<ul class="simple">
+<li><p>Update the temperature value of each device.</p></li>
+<li><p>Update the status (Present or not present) of each QSFP.</p></li>
+<li><p>Raise an event if the QSFP status has changed (Present to not present, and vice versa).</p></li>
+</ul>
+<p>The Proxy APIs consist of a number of functions to set and get data from the external device memory map registers and IO expanders. Note, unlike other proxy drivers in AMC, these set/get APIs will call directly into the FAL, adding possible delays to
+the calling task. The AXC proxy task will only call into the FAL to update the temperature value of each external device added.</p>
+<section id="key-pages">
+<span id="avedexternaldevicecontrol-axc-proxydriver-keypages"></span><h3>Key pages<a class="headerlink" href="#key-pages" title="Permalink to this headline">¶</a></h3>
+<p>I2C switch (PCA9545A) data sheet: <a class="reference external" href="attachments/1111913901/1118264371.pdf">PCA9545A_45B_45C.pdf</a></p>
+<p>Low-Voltage I/O Expander (TCA6408A) data sheet: <a class="reference external" href="attachments/1111913901/1118264378.pdf">tca6408a.pdf</a></p>
+</section>
+<section id="key-acronyms">
+<span id="avedexternaldevicecontrol-axc-proxydriver-keyacronyms"></span><h3>Key Acronyms<a class="headerlink" href="#key-acronyms" title="Permalink to this headline">¶</a></h3>
+<table class="relative-table wrapped confluenceTable" style="width: 24.6106%;"><colgroup><col style="width: 14.5622%;"/><col style="width: 85.464%;"/></colgroup><tbody><tr><th class="confluenceTh">Acronym</th><th class="confluenceTh">Definition</th></tr><tr><td class="confluenceTd">QSFP</td><td class="confluenceTd">Quad Small Form-Factor Pluggable</td></tr><tr><td class="confluenceTd">SFF</td><td class="confluenceTd">Small Form Factor</td></tr><tr><td class="confluenceTd">QSFP56</td><td class="confluenceTd">QSFP - 200G Transceivers</td></tr><tr><td class="confluenceTd" colspan="1">MIO</td><td class="confluenceTd" colspan="1">Multiplexed I/O</td></tr></tbody></table>
+</section>
+<section id="qsfp-overview">
+<span id="avedexternaldevicecontrol-axc-proxydriver-qsfpoverview"></span><h3>QSFP overview<a class="headerlink" href="#qsfp-overview" title="Permalink to this headline">¶</a></h3>
+<p>QSFP is a compact, hot-pluggable transceiver used for data communications.</p>
+<p>These transceiver modules are generally used to convert data signals to and from laser optic light for ethernet and other communication standards.</p>
+<p>It interfaces networking hardware (such as AMD Versal™ V80) to a fiber optic cable, or passive electrical copper connection.</p>
+<p>Versal V80 supports QSFP. There are 4 QSFP NIC ports/modules on Versal V80 and all, when present, shall be managed by AMC.</p>
+</section>
+</section>
+<section id="muxed-device-fal">
+<span id="avedexternaldevicecontrol-axc-proxydriver-muxeddevicefal"></span><h2>Muxed Device FAL<a class="headerlink" href="#muxed-device-fal" title="Permalink to this headline">¶</a></h2>
+<p>The AXC Proxy Driver will call into the muxed device FAL. This layer will be responsible for abstracting the stages required in accessing the external, muxed devices, into simple read and write calls.</p>
+<p>There are a number of stages in the control path to access a QSFP or other muxed device on V80. The following flow-chart diagrams outline each stage, and the proposed FW_IF API responsible for implementing the stages.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/6552c0b0f92e3e9bfee36090142f707071d5b437.png"><img alt="image1" class="drawio-diagram-image" src="_images/6552c0b0f92e3e9bfee36090142f707071d5b437.png" style="width: 301px;"/></a></p>
+<p><a class="drawio-diagram-image reference internal" href="_images/63b491c2ea4682330ebbbe327dcecb6328343887.png"><img alt="image2" class="drawio-diagram-image" src="_images/63b491c2ea4682330ebbbe327dcecb6328343887.png" style="width: 731px;"/></a></p>
+</section>
+<section id="api">
+<span id="avedexternaldevicecontrol-axc-proxydriver-api"></span><h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<p>QSFP present or not present.</p>
+<p><strong>AXC_PROXY_DRIVER_EVENTS</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @enum    AXC_PROXY_DRIVER_EVENTS</span>
+<span class="cm"> * @brief   Events raised by this proxy driver</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">AXC_PROXY_DRIVER_EVENTS</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">AXC_PROXY_DRIVER_E_QSFP_PRESENT</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mh">0x00</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AXC_PROXY_DRIVER_E_QSFP_NOT_PRESENT</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">MAX_AXC_PROXY_DRIVER_EVENTS</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">AXC_PROXY_DRIVER_EVENTS</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>QSFP IO control options.</p>
+<p><strong>AXC_PROXY_DRIVER_QSFP_IO</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @enum    AXC_PROXY_DRIVER_QSFP_IO</span>
+<span class="cm"> * @brief   IO control lines of a QSFP module</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">AXC_PROXY_DRIVER_QSFP_IO</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">AXC_PROXY_DRIVER_QSFP_IO_MODSEL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AXC_PROXY_DRIVER_QSFP_IO_RESET</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AXC_PROXY_DRIVER_QSFP_IO_LPMODE</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AXC_PROXY_DRIVER_QSFP_IO_MODPRS</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AXC_PROXY_DRIVER_QSFP_IO_INTERRUPT</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">MAX_AXC_PROXY_DRIVER_QSFP_IO</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">AXC_PROXY_DRIVER_QSFP_IO</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This will make use of the OSAL layer to create the proxy mutex and task.</p>
+<p><strong>iAXC_Initialise</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Main initialisation point for the AXC Proxy Driver</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   ucProxyId   Unique ID for this Proxy driver</span>
+<span class="cm"> * @param   ulTaskPrio  Priority of the Proxy driver task (if RR disabled)</span>
+<span class="cm"> * @param   ulTaskStack Stack size of the Proxy driver task</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Proxy driver initialised correctly</span>
+<span class="cm"> *          ERROR       Proxy driver not initialised, or was already initialised</span>
+<span class="cm"> *</span>
+<span class="cm"> * @note    Proxy drivers can have 0 or more firmware interfaces</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iAXC_Initialise</span><span class="p">(</span> <span class="n">uint8_t</span> <span class="n">ucProxyId</span><span class="p">,</span> <span class="n">uint32_t</span> <span class="n">ulTaskPrio</span><span class="p">,</span> <span class="n">uint32_t</span> <span class="n">ulTaskStack</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>This will initialize a new external device within the AXC proxy driver, adding the device to its internally held linked list. AXC proxy will continually check the status and temperature of the newly added device, raising an event if the status of the
+device changes.</p>
+<p><strong>iAXC_AddExternalDevice</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Initialise new External device. AXC proxy will check status and temperature</span>
+<span class="cm"> *          of this device.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   pxExDeviceCfg    Pointer to external device config</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK               Callback successfully bound</span>
+<span class="cm"> *          ERROR            Callback not bound</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iAXC_AddExternalDevice</span><span class="p">(</span> <span class="n">AXC_PROXY_DRIVER_EXTERNAL_DEVICE_CONFIG</span> <span class="o">*</span><span class="n">pxExDeviceCfg</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>This API can be used to bind into a callback to be notified of events generated by the AXC proxy using the EVL library. The current supported events are:</p>
+<ul class="simple">
+<li><p><strong>AXC_PROXY_DRIVER_E_QSFP_PRESENT</strong></p></li>
+<li><p><strong>AXC_PROXY_DRIVER_E_QSFP_NOT_PRESENT</strong></p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><strong>iAXC_BindCallback</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @brief   Bind into this proxy driver</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   pxCallback  Callback to bind into the proxy driver</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Callback successfully bound</span>
+<span class="cm"> *          ERROR       Callback not bound</span>
+<span class="cm"> *</span>
+<span class="cm"> * @notes   None</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iAXC_BindCallback</span><span class="p">(</span> <span class="n">EVL_CALLBACK</span> <span class="o">*</span><span class="n">pxCallback</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>This will write a byte value to desired device memory map. This API will not trigger functionality within the internal task (as with other proxy drivers), instead, the data will be written directly to the device from the calling task.</p>
+<p><strong>iAXC_SetByte</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Write byte value to desired External Device memory map</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   ucExDeviceId    External Device Unique ID</span>
+<span class="cm"> * @param   ulPage          Page to be accessed within QSFP memory map</span>
+<span class="cm"> *                          N/A for DIMM</span>
+<span class="cm"> * @param   ulByteOffset    Byte address/offset within memory map page</span>
+<span class="cm"> * @param   ucValue         Value to be set</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK              Data passed to proxy driver successfully</span>
+<span class="cm"> *          ERROR           Data not passed successfully</span>
+<span class="cm"> *</span>
+<span class="cm"> * @note    Byte offset range 0-127 will write a byte value to the lower page 00h.</span>
+<span class="cm"> *</span>
+<span class="cm"> *          Byte offset range 127-255 will write a byte value to the upper page.</span>
+<span class="cm"> *          Use ulPage to specify which upper-page to be used.</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iAXC_SetByte</span><span class="p">(</span> <span class="n">uint8_t</span> <span class="n">ucExDeviceId</span><span class="p">,</span> <span class="n">uint32_t</span> <span class="n">ulPage</span><span class="p">,</span> <span class="n">uint32_t</span> <span class="n">ulByteOffset</span><span class="p">,</span> <span class="n">uint8_t</span> <span class="n">ucValue</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>This will read a byte value from the desired device memory map. This API will not trigger functionality within the internal task (as with other proxy drivers), instead, the data will be read directly from the device from the calling task.</p>
+<p><strong>iAXC_GetByte</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Read real-time byte value from desired External Device memory map</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   ucExDeviceId    External Device Unique ID</span>
+<span class="cm"> * @param   ulPage          Page to be accessed within QSFP memory map</span>
+<span class="cm"> *                          N/A for DIMM</span>
+<span class="cm"> * @param   ulByteOffset    Byte address/offset within memory map page</span>
+<span class="cm"> * @param   pucValue        Pointer to retrieved value</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK              Data retrieved from proxy driver successfully</span>
+<span class="cm"> *          ERROR           Data not retrieved successfully</span>
+<span class="cm"> *</span>
+<span class="cm"> * @note    Byte offset range 0-127 will read a byte value from the lower page 00h.</span>
+<span class="cm"> *</span>
+<span class="cm"> *          Byte offset range 127-255 will read a byte value from the upper page.</span>
+<span class="cm"> *          Use ulPage to specify which upper-page to be used.</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iAXC_GetByte</span><span class="p">(</span> <span class="n">uint8_t</span> <span class="n">ucExDeviceId</span><span class="p">,</span> <span class="n">uint32_t</span> <span class="n">ulPage</span><span class="p">,</span> <span class="n">uint32_t</span> <span class="n">ulByteOffset</span><span class="p">,</span> <span class="n">uint8_t</span> <span class="o">*</span><span class="n">pucValue</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>This will read an entire memory map page from the desired QSFP. This API will not trigger functionality within the internal task (as with other proxy drivers), instead, the data will be read directly from the QSFP from the calling task.</p>
+<p><strong>iAXC_GetPage</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Read real-time memory map from desired QSFP</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   ucExDeviceId    External Device Unique ID</span>
+<span class="cm"> * @param   ulPage          Page to be retrieved within QSFP memory map</span>
+<span class="cm"> * @param   pxData          Pointer to retrieved data</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK              Data retrieved from proxy driver successfully</span>
+<span class="cm"> *          ERROR           Data not retrieved successfully</span>
+<span class="cm"> *</span>
+<span class="cm"> * @note    This API will return the specified upper page from QSFP memory map</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iAXC_GetPage</span><span class="p">(</span> <span class="n">uint8_t</span> <span class="n">ucExDeviceId</span><span class="p">,</span> <span class="n">uint32_t</span> <span class="n">ulPage</span><span class="p">,</span> <span class="n">AXC_PROXY_DRIVER_PAGE_DATA</span> <span class="o">*</span><span class="n">pxData</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>This will read a desired IO control line from the desired QSFP. This API will not trigger functionality within the internal task (as with other proxy drivers), instead, the data will be read directly from the QSFP from the calling task.</p>
+<p><strong>iAXC_GetSingleIoStatus</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Read single status from QSFP IO Expander</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   ucExDeviceId    External Device Unique ID</span>
+<span class="cm"> * @param   xIoControlLine  IO control line to be read</span>
+<span class="cm"> * @param   pucIoStatus     Pointer to retrieved value</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK              Data retrieved from proxy driver successfully</span>
+<span class="cm"> *          ERROR           Data not retrieved successfully</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iAXC_GetSingleIoStatus</span><span class="p">(</span> <span class="n">uint8_t</span> <span class="n">ucExDeviceId</span><span class="p">,</span> <span class="n">AXC_PROXY_DRIVER_QSFP_IO</span> <span class="n">xIoControlLine</span><span class="p">,</span> <span class="n">uint8_t</span> <span class="o">*</span><span class="n">pucIoStatus</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>This will read all IO control lines from the desired QSFP. This API will not trigger functionality within the internal task (as with other proxy drivers), instead, the data will be read directly from the QSFP from the calling task.</p>
+<p><strong>iAXC_GetAllIoStatuses</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Read all statuses from QSFP IO Expander</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   ucExDeviceId    External Device Unique ID</span>
+<span class="cm"> * @param   pxIoStatuses    Pointer to data to get</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK              Data retrieved from proxy driver successfully</span>
+<span class="cm"> *          ERROR           Data not retrieved successfully</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iAXC_GetAllIoStatuses</span><span class="p">(</span> <span class="n">uint8_t</span> <span class="n">ucExDeviceId</span><span class="p">,</span> <span class="n">AXC_PROXY_DRIVER_QSFP_IO_STATUSES</span> <span class="o">*</span><span class="n">pxIoStatuses</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>This will return temperature value from the desired external device. The reading of temperature values is implemented within the AXC proxy task, for each device that has been added. Calling this function will simply return the most up-to-date
+temperature value for the desired device.</p>
+<p><strong>iAXC_GetTemperature</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Read real-time temperature value from desired External Device memory map</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   ucExDeviceId    External Device Unique ID</span>
+<span class="cm"> * @param   pfTemperature   Pointer to retrieved temperature value</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK              Data retrieved from proxy driver successfully</span>
+<span class="cm"> *          ERROR           Data not retrieved successfully</span>
+<span class="cm"> *</span>
+<span class="cm"> * @note    pfTemperature   will be returned in degrees Celsius</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iAXC_GetTemperature</span><span class="p">(</span> <span class="n">uint8_t</span> <span class="n">ucExDeviceId</span><span class="p">,</span> <span class="kt">float</span> <span class="o">*</span><span class="n">pfTemperature</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>This will get the current state of the proxy driver.</p>
+<p><strong>iAXC_GetState</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Gets the current state of the proxy driver</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   pxState         Pointer to the state</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK              If successful</span>
+<span class="cm"> *          ERROR           If not successful</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iAXC_GetState</span><span class="p">(</span> <span class="n">MODULE_STATE</span> <span class="o">*</span><span class="n">pxState</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>This will print AXC proxy statistic counters and errors, useful for Debug.</p>
+<p><strong>iAXC_PrintStatistics</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Print all the stats gathered by the application</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Stats retrieved from proxy driver successfully</span>
+<span class="cm"> *          ERROR       Stats not retrieved successfully</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iAXC_PrintStatistics</span><span class="p">(</span> <span class="kt">void</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>This will check if the device exists and the page/byte offset of valid.</p>
+<p><strong>iAXC_ValidateRequest</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Check if a device exists and the page/byte offset are valid</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Provided values are valid</span>
+<span class="cm"> *          ERROR       Device does not exist or values are invalid</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iAXC_ValidateRequest</span><span class="p">(</span> <span class="n">uint8_t</span> <span class="n">ucExDeviceId</span><span class="p">,</span> <span class="n">uint32_t</span> <span class="n">ulPage</span><span class="p">,</span> <span class="n">uint32_t</span> <span class="n">ulByteOffset</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>Example output from iAXC_PrintStatistics():</p>
+<p><a class="confluence-embedded-image reference internal" href="_images/1118655171.png"><img alt="image3" class="confluence-embedded-image" src="_images/1118655171.png" style="height: 400px;"/></a></p>
+<p>This will clear all AXC statistic counters back to zero, useful for Debug.</p>
+<p><strong>iAXC_ClearStatistics</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Clear all the stats in the application</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Stats cleared successfully</span>
+<span class="cm"> *          ERROR       Stats not cleared successfully</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iAXC_ClearStatistics</span><span class="p">(</span> <span class="kt">void</span> <span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="sequence-diagrams">
+<span id="avedexternaldevicecontrol-axc-proxydriver-sequencediagrams"></span><h2>Sequence Diagrams<a class="headerlink" href="#sequence-diagrams" title="Permalink to this headline">¶</a></h2>
+<p>Three AXC API functions are called from the AMC main task (iAXC_Initialise, iAXC_BindCallback and iAXC_AddExternalDevice), when all the other proxies are being initialized.</p>
+<p>iAXC_Initialise will create a shared proxy mutex, and the proxy task. iAXC_BindCallback will bind the appropriate top-level callback function.</p>
+<p>iAXC_AddExternalDevice is called five times, each with a unique FAL handle for each external device. Each FAL object will be opened, and memory allocated to hold the handle, unique ID, temperature and status of each device.</p>
+<p>Note: It is the (top-level) applications responsibility to add the required number of External Devices, with unique FAL handles for each device.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/52356a196134d2fc8b7a82bb3b9210aef671506c.png"><img alt="image4" class="drawio-diagram-image" src="_images/52356a196134d2fc8b7a82bb3b9210aef671506c.png" style="width: 961px;"/></a></p>
+<p>The task within AXC proxy has 3 main responsibilities:</p>
+<ul class="simple">
+<li><p>Update the temperature value of each device.</p></li>
+<li><p>Update the status (Present or not present) of each QSFP.</p></li>
+<li><p>Raise an event if the QSFP status has changed (Present to not present, and vice versa).</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><a class="drawio-diagram-image reference internal" href="_images/b7afd65103ffd842a1bf262b0d933316425a0109.png"><img alt="image5" class="drawio-diagram-image" src="_images/b7afd65103ffd842a1bf262b0d933316425a0109.png" style="width: 801px;"/></a></p>
+</section>
+<section id="examples">
+<span id="avedexternaldevicecontrol-axc-proxydriver-examples"></span><h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>This function should only be called once. It requires a unique ID for the proxy, used for signaling new events from the proxy, along with proxy driver task priority and stack size.</p>
+<p><strong>iAQC_Initialise Example</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span> <span class="n">OK</span> <span class="o">==</span> <span class="n">iAXC_Initialise</span><span class="p">(</span> <span class="n">AMC_EVENT_UNIQUE_ID_AXC</span><span class="p">,</span> <span class="n">AMC_TASK_PRIO_DEFAULT</span><span class="p">,</span> <span class="n">AMC_TASK_DEFAULT_STACK</span> <span class="p">)</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">AMC_PRINTF</span><span class="p">(</span> <span class="s">"AXC Proxy Driver initialised\r\n"</span> <span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">AMC_PRINTF</span><span class="p">(</span> <span class="s">"Error initialising AXC Proxy Driver\r\n"</span> <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Define a function based on the function pointer prototype and bind in using the API.</p>
+<p><strong>iAQC_BindCallback Example</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Define a callback to handle the events */</span>
+<span class="kd">static</span> <span class="kt">int</span> <span class="nf">iAxcCallback</span><span class="p">(</span> <span class="n">EVL_SIGNAL</span> <span class="o">*</span><span class="n">pxSignal</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">iStatus</span> <span class="o">=</span> <span class="n">ERROR</span><span class="p">;</span>
+
+    <span class="k">if</span><span class="p">(</span> <span class="p">(</span> <span class="n">NULL</span> <span class="o">!=</span> <span class="n">pxSignal</span> <span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span> <span class="n">AMC_EVENT_UNIQUE_ID_AXC</span> <span class="o">==</span> <span class="n">pxSignal</span><span class="o">-&gt;</span><span class="n">ucModule</span> <span class="p">)</span> <span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">switch</span><span class="p">(</span> <span class="n">pxSignal</span><span class="o">-&gt;</span><span class="n">ucEventType</span> <span class="p">)</span>
+        <span class="p">{</span>
+        <span class="k">case</span> <span class="n">AXC_PROXY_DRIVER_E_QSFP_PRESENT</span><span class="p">:</span>
+        <span class="p">{</span>
+            <span class="cm">/* TODO: handle event */</span>
+            <span class="n">iStatus</span> <span class="o">=</span> <span class="n">OK</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">case</span> <span class="n">AXC_PROXY_DRIVER_E_QSFP_NOT_PRESENT</span><span class="p">:</span>
+        <span class="p">{</span>
+            <span class="cm">/* TODO: handle event */</span>
+            <span class="n">iStatus</span> <span class="o">=</span> <span class="n">OK</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">default</span><span class="p">:</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">iStatus</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* Bind into the callback during the application initialisation */</span>
+<span class="k">if</span><span class="p">(</span> <span class="n">OK</span> <span class="o">==</span> <span class="n">iAXC_BindCallback</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">iAxcCallback</span> <span class="p">)</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">AMC_PRINTF</span><span class="p">(</span> <span class="s">"AXC Proxy Driver initialised and bound\r\n"</span> <span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">AMC_PRINTF</span><span class="p">(</span> <span class="s">"Error binding to AXC Proxy Driver\r\n"</span> <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To add a new external device, pass in a pointer to a device config structure. This should include a handle to a FW_IF (already created and initialized), and a unique ID for the device.</p>
+<p><strong>iAQC_AddQsfpDevice Example</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/* AXC Device configs */</span>
+<span class="n">AXC_PROXY_DRIVER_EXTERNAL_DEVICE_CONFIG</span> <span class="n">xQsfpDevice1</span> <span class="o">=</span> <span class="p">{</span> <span class="o">&amp;</span><span class="n">xQsfpIf1</span><span class="p">,</span> <span class="mi">1</span> <span class="p">};</span>
+<span class="n">AXC_PROXY_DRIVER_EXTERNAL_DEVICE_CONFIG</span> <span class="n">xQsfpDevice2</span> <span class="o">=</span> <span class="p">{</span> <span class="o">&amp;</span><span class="n">xQsfpIf2</span><span class="p">,</span> <span class="mi">2</span> <span class="p">};</span>
+<span class="n">AXC_PROXY_DRIVER_EXTERNAL_DEVICE_CONFIG</span> <span class="n">xQsfpDevice3</span> <span class="o">=</span> <span class="p">{</span> <span class="o">&amp;</span><span class="n">xQsfpIf3</span><span class="p">,</span> <span class="mi">3</span> <span class="p">};</span>
+<span class="n">AXC_PROXY_DRIVER_EXTERNAL_DEVICE_CONFIG</span> <span class="n">xQsfpDevice4</span> <span class="o">=</span> <span class="p">{</span> <span class="o">&amp;</span><span class="n">xQsfpIf4</span><span class="p">,</span> <span class="mi">4</span> <span class="p">};</span>
+<span class="n">AXC_PROXY_DRIVER_EXTERNAL_DEVICE_CONFIG</span> <span class="n">xDimmDevice</span>  <span class="o">=</span> <span class="p">{</span> <span class="o">&amp;</span><span class="n">xDimmIf</span><span class="p">,</span> <span class="mi">5</span> <span class="p">};</span>
+
+<span class="k">if</span><span class="p">(</span> <span class="p">(</span> <span class="n">OK</span> <span class="o">==</span> <span class="n">iAXC_AddExternalDevice</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">xQsfpDevice1</span> <span class="p">)</span> <span class="p">)</span> <span class="o">&amp;&amp;</span>
+    <span class="p">(</span> <span class="n">OK</span> <span class="o">==</span> <span class="n">iAXC_AddExternalDevice</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">xQsfpDevice2</span> <span class="p">)</span> <span class="p">)</span> <span class="o">&amp;&amp;</span>
+    <span class="p">(</span> <span class="n">OK</span> <span class="o">==</span> <span class="n">iAXC_AddExternalDevice</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">xQsfpDevice3</span> <span class="p">)</span> <span class="p">)</span> <span class="o">&amp;&amp;</span>
+    <span class="p">(</span> <span class="n">OK</span> <span class="o">==</span> <span class="n">iAXC_AddExternalDevice</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">xQsfpDevice4</span> <span class="p">)</span> <span class="p">)</span> <span class="o">&amp;&amp;</span>
+    <span class="p">(</span> <span class="n">OK</span> <span class="o">==</span> <span class="n">iAXC_AddExternalDevice</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">xDimmDevice</span> <span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">AMC_PRINTF</span><span class="p">(</span> <span class="s">"AXC Proxy Driver, external devices added\r\n"</span> <span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">AMC_PRINTF</span><span class="p">(</span> <span class="s">"Error adding external devices to AXC Proxy Driver\r\n"</span> <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Example of setting byte 127, within page 00h of QSFP 1, to a value of 1. The parameters can be adjusted to set a different byte value, as required.</p>
+<p><strong>iAQC_SetByte Example</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">uint8_t</span> <span class="n">iQsfpId</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">uint32_t</span> <span class="n">iPageNum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">uint32_t</span> <span class="n">iByteOffset</span> <span class="o">=</span> <span class="mi">127</span><span class="p">;</span>
+<span class="n">uint8_t</span> <span class="n">ucByteValue</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+<span class="k">if</span><span class="p">(</span> <span class="n">OK</span> <span class="o">!=</span> <span class="n">iAXC_SetByte</span><span class="p">(</span> <span class="n">iQsfpId</span><span class="p">,</span> <span class="n">iPageNum</span><span class="p">,</span> <span class="n">iByteOffset</span><span class="p">,</span> <span class="n">ucByteValue</span> <span class="p">)</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">AXC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Error setting memory byte\r\n"</span> <span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">AXC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Memory byte (%d) from page (%d) set successfully \r\n"</span><span class="p">,</span> <span class="n">iByteOffset</span><span class="p">,</span> <span class="n">iPageNum</span> <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Example of reading byte 127, from page 00h of QSFP 1. The parameters can be adjusted to read a different byte value, as required.</p>
+<p><strong>iAQC_GetByte Example</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">uint8_t</span> <span class="n">iQsfpId</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">uint32_t</span> <span class="n">iPageNum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">uint32_t</span> <span class="n">iByteOffset</span> <span class="o">=</span> <span class="mi">127</span><span class="p">;</span>
+<span class="n">uint8_t</span> <span class="n">ucByteValue</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="k">if</span><span class="p">(</span> <span class="n">OK</span> <span class="o">!=</span> <span class="n">iAXC_GetByte</span><span class="p">(</span> <span class="n">iQsfpId</span><span class="p">,</span> <span class="n">iPageNum</span><span class="p">,</span> <span class="n">iByteOffset</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ucByteValue</span> <span class="p">)</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">AXC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Error retrieving memory byte\r\n"</span> <span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">AXC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Retrieved memory byte, value (hex): 0x%02X\r\n"</span><span class="p">,</span> <span class="n">ucByteValue</span> <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Example of reading entire upper page 00h of QSFP 1. The parameters can be adjusted to read a different page, as required.</p>
+<p><strong>iAQC_GetPage Example</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">uint8_t</span> <span class="n">iQsfpId</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">uint32_t</span> <span class="n">iPageNum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">AXC_PROXY_DRIVER_QSFP_PAGE_DATA</span> <span class="n">xTestPage</span> <span class="o">=</span> <span class="p">{</span> <span class="p">{</span> <span class="mi">0</span> <span class="p">}</span> <span class="p">};</span>
+<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="k">if</span><span class="p">(</span> <span class="n">OK</span> <span class="o">!=</span> <span class="n">iAXC_GetPage</span><span class="p">(</span> <span class="n">iQsfpId</span><span class="p">,</span> <span class="n">iPageNum</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">xTestPage</span> <span class="p">)</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">AXC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Error retrieving QSFP memory page\r\n"</span> <span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">AXC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Retrieved QSFP memory page, values: \r\n"</span> <span class="p">);</span>
+
+    <span class="k">for</span><span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">xTestPage</span><span class="p">.</span><span class="na">ulPageDataSize</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">vOSAL_Printf</span><span class="p">(</span> <span class="s">"0x%02X "</span><span class="p">,</span> <span class="n">xTestPage</span><span class="p">.</span><span class="na">pucPageData</span><span class="o">[</span> <span class="n">i</span> <span class="o">]</span> <span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">vOSAL_Printf</span><span class="p">(</span> <span class="s">"\r\n"</span> <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Example of reading MODSEL status of QSFP 1. The parameters can be adjusted to read a different IO status line, as required.</p>
+<p><strong>iAQC_GetSingleIoStatus Example</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">uint8_t</span> <span class="n">iQsfpId</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">AXC_PROXY_DRIVER_QSFP_IO</span> <span class="n">iIoCtrlId</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* MODSEL */</span>
+<span class="n">uint8_t</span> <span class="n">ucIoStatusValue</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="k">if</span><span class="p">(</span> <span class="n">OK</span> <span class="o">!=</span> <span class="n">iAXC_GetSingleIoStatus</span><span class="p">(</span> <span class="n">iQsfpId</span><span class="p">,</span> <span class="n">iIoCtrlId</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ucIoStatusValue</span> <span class="p">)</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">AXC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Error retrieving QSFP IO expander status\r\n"</span> <span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">AXC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Retrieved QSFP IO expander status, value: %d\r\n"</span><span class="p">,</span> <span class="n">ucIoStatusValue</span> <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Example of reading all IO statuses from QSFP 1. The parameters can be adjusted to read from a different QSFP, as required.</p>
+<p><strong>iAQC_GetAllIoStatuses Example</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">uint8_t</span> <span class="n">iQsfpId</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">AXC_PROXY_DRIVER_QSFP_IO_STATUSES</span> <span class="n">xTestStatuses</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span> <span class="p">};</span>
+
+<span class="k">if</span><span class="p">(</span> <span class="n">OK</span> <span class="o">!=</span> <span class="n">iAXC_GetAllIoStatuses</span><span class="p">(</span> <span class="n">iQsfpId</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">xTestStatuses</span> <span class="p">)</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">AXC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Error retrieving QSFP IO expander statuses\r\n"</span> <span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">AXC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Retrieved QSFP IO expander statuses\r\n"</span> <span class="p">);</span>
+    <span class="n">AXC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"MODSEL value: (%d)\r\n"</span><span class="p">,</span> <span class="n">xTestStatuses</span><span class="p">.</span><span class="na">ucModSel</span> <span class="p">);</span>
+    <span class="n">AXC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"RESET  value: (%d)\r\n"</span><span class="p">,</span> <span class="n">xTestStatuses</span><span class="p">.</span><span class="na">ucReset</span> <span class="p">);</span>
+    <span class="n">AXC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"LPMODE value: (%d)\r\n"</span><span class="p">,</span> <span class="n">xTestStatuses</span><span class="p">.</span><span class="na">ucLpMode</span> <span class="p">);</span>
+    <span class="n">AXC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"MODPRS value: (%d)\r\n"</span><span class="p">,</span> <span class="n">xTestStatuses</span><span class="p">.</span><span class="na">ucModPrs</span> <span class="p">);</span>
+    <span class="n">AXC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"INT    value: (%d)\r\n"</span><span class="p">,</span> <span class="n">xTestStatuses</span><span class="p">.</span><span class="na">ucInterrupt</span> <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Example of reading temperature value from QSFP 1. The parameters can be adjusted to read from a different device, as required.</p>
+<p><strong>iAQC_GetTemperature Example</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">uint8_t</span> <span class="n">iQsfpId</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kt">float</span> <span class="n">fTemperatureByte</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="k">if</span><span class="p">(</span> <span class="n">OK</span> <span class="o">!=</span> <span class="n">iAXC_GetTemperature</span><span class="p">(</span> <span class="n">iQsfpId</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">fTemperatureByte</span> <span class="p">)</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">AXC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Error retrieving temperature\r\n"</span> <span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">AXC_DBG_PRINTF</span><span class="p">(</span> <span class="s">"Retrieved temperature value: (%f)\r\n"</span><span class="p">,</span> <span class="n">fTemperatureByte</span> <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Page Revision: v. 41</p>
+<p><strong>ASC_PROXY_DRIVER_EVENTS</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * @enum    ASC_PROXY_DRIVER_EVENTS</span>
+<span class="cm"> * @brief   Events raised by this proxy driver</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">ASC_PROXY_DRIVER_EVENTS</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_E_SENSOR_UPDATE_COMPLETE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_E_SENSOR_UNAVAILABLE</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_E_SENSOR_COMMS_FAILURE</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_E_SENSOR_WARNING</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_E_SENSOR_CRITICAL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_E_SENSOR_FATAL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_E_SENSOR_LOWER_WARNING</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_E_SENSOR_LOWER_CRITICAL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_E_SENSOR_LOWER_FATAL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_E_SENSOR_UPPER_WARNING</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_E_SENSOR_UPPER_CRITICAL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ASC_PROXY_DRIVER_E_SENSOR_UPPER_FATAL</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">MAX_ASC_PROXY_DRIVER_EVENTS</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">ASC_PROXY_DRIVER_EVENTS</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+</div>
+</div>
+<footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+<a accesskey="p" class="btn btn-neutral float-left" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html" rel="prev" title="AVED Sensor Control (ASC) Proxy Driver"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+<a accesskey="n" class="btn btn-neutral float-right" href="Board%2BManagement%2BController%2B%28BMC%29%2BProxy%2BDriver.html" rel="next" title="Board Management Controller (BMC) Proxy Driver">Next <span aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<p>© Copyright 2023, Advanced Micro Devices Inc.</p>
+</div>
+<div class="aem-Grid aem-Grid--16">
+<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+<div class="container-fluid sub-footer">
+<div class="row">
+<div class="col-xs-24">
+<p><a href="https://www.amd.com/en/corporate/copyright" target="_blank">Terms and Conditions</a> | <a href="https://www.amd.com/en/corporate/privacy" target="_blank">Privacy</a> | <a href="https://www.amd.com/en/corporate/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.amd.com/en/corporate/trademarks" target="_blank">Trademarks</a> | <a href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf" target="_blank">Statement on Forced Labor</a> | <a href="https://www.amd.com/en/corporate/competition" target="_blank">Fair and Open Competition</a> | <a href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf" target="_blank">UK Tax Strategy</a> | <a href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA" target="_blank">Inclusive Terminology</a> | <a class="ot-sdk-show-settings" href="#cookiessettings">Cookies Settings</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+</div>
+</div>
+</section>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+</body>
+</html>

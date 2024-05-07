@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+  <title>Display modes &mdash; AVED  documentation</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/xbtest.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/_static/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="https://docs.xilinx.com/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="Understanding xbtest messages" href="understanding-xbtest-messages.html" />
+    <link rel="prev" title="Result" href="result.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
+<!-- End Google Tag Manager --> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+            <a href="../../../../../index.html" class="icon icon-home"> AVED
+            <img src="../../../../../_static/xilinx-header-logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Xbtest Userguide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../usage.html">Usage</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="setup-xbtest.html">Set up xbtest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="use-cases.html">Single vs. multiple card test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="identifying-running-aved.html">Identifying AVED running on card</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-line-options.html">Command line options</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="result.html">Result</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Display modes</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#multi-tests-display">Multi tests display</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#single-test-display">Single test display</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#disable-dynamic-display">Disable dynamic display</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="understanding-xbtest-messages.html">Understanding xbtest messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="result-directory.html">Result directory</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="test-json-file-structure.html">Test JSON file structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../pre-canned-tests.html">Pre-canned tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../test-cases.html">Test cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tasks.html">Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../card-definition.html">Card definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#alveo-data-center-accelerator-card-compatibility">Alveo data center accelerator card compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#what-s-new">What’s new</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%2B-%2BHierarchy%2BOverview.html">AVED V80 - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%2B-%2BCIPS%2BConfiguration.html">AVED V80 - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%2B-%2BMemory%2BResources.html">AVED V80 - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%2B-%2BMemory%2BMap.html">AVED V80 - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%2B-%2BNoC%2BConfiguration.html">AVED V80 - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%2B-%2BBase%2BLogic.html">AVED V80 - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%2B-%2BClock%2BReset%2BModule.html">AVED V80 - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%2B-%2BSource%2BFile%2BOverview.html">AVED V80 - Source File Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../SMBus%2BIP%2Bv1.1%2B-%2BProduct%2BGuide.html">SMBus IP v1.1 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BASDM%2BApplication.html">AVED ASDM Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BOutOfBand%2BTelemetry%2BApplication.html">AVED OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Board%2BManagement%2BController%2B%28BMC%29%2BProxy%2BDriver.html">Board Management Controller (BMC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BQDMA.html">AVED QDMA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: black" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">AVED</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Xbtest Userguide</a> &raquo;</li>
+          <li><a href="../../usage.html">Usage</a> &raquo;</li>
+          <li><a href="result.html">Result</a> &raquo;</li>
+      <li>Display modes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="display-modes">
+<span id="id2"></span><h1>Display modes<a class="headerlink" href="#display-modes" title="Permalink to this headline">¶</a></h1>
+<p>An execution of xbtest will typically contain the following messages:</p>
+<blockquote>
+<div><ul>
+<li><p><strong>Start banner</strong>: Information about the run: start time and versions (for example, xbtest and <a class="reference external" href="https://pages.gitenterprise.xilinx.com/XBB/AVED/amd_v80_gen5x8_exdes_2_20240408/AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a>).</p></li>
+<li><p><strong>Messages from test cases</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Start.</p></li>
+<li><p>Status and results.</p></li>
+<li><p>End.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>End banner</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Information about the run: end time and versions.</p></li>
+<li><p>Summary of all tests run and their results.</p></li>
+<li><p>Global result of xbtest run.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>xbtest supports two display modes, which are described in the following sections:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>dynamic</strong>: Default mode.</p></li>
+<li><p><strong>static</strong>: As per previous version of xbtest.</p></li>
+</ul>
+</div></blockquote>
+<p>The information displayed differs between the use cases:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Multi tests</strong>: Card (power and temperature) and test status for all targeted cards.</p></li>
+<li><p><strong>Single test</strong>: Card (power and temperature) and <a class="reference internal" href="../test-cases/test-cases-overview.html#test-cases-overview"><span class="std std-ref">test cases</span></a> (power, memory, GT MAC) status for targeted card.</p></li>
+</ul>
+</div></blockquote>
+<p>By default, the console dynamically displays xbtest messages.
+Regularly, the entire console is cleared, and its content is refreshed.
+At the end of xbtest execution, the console returns to the initial state, and the last content displayed in the dynamic mode is repeated.</p>
+<section id="multi-tests-display">
+<h2>Multi tests display<a class="headerlink" href="#multi-tests-display" title="Permalink to this headline">¶</a></h2>
+<p>In this use case, the content displayed in the console contains the following:</p>
+<blockquote>
+<div><ul>
+<li><p><strong>Messages displayed before the first test case starts</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Start banner.</p></li>
+<li><p>Card selection.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Test information</strong>: A table presenting the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Card status</strong>: Basic sensor information (power consumption and temperature of the card).</p></li>
+<li><p><strong>Ongoing test information</strong>: Duration and current test running.</p></li>
+<li><p><strong>Test summary</strong>: Results of previous tests.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Message statistics</strong>: Quantity of messages available for each severity, which are in <code class="docutils literal notranslate"><span class="pre">common.log</span></code>.</p></li>
+<li><p><strong>Message history</strong>: 10 last important messages (warning, error, and failure).</p></li>
+</ul>
+</div></blockquote>
+<figure class="align-center" id="multi-dynamic-display-mode">
+<img alt="../../../../../_images/multi-dynamic-display-mode.svg" src="../../../../../_images/multi-dynamic-display-mode.svg" /><figcaption>
+<p><span class="caption-text">Example of information available in dynamic display mode for multi tests</span><a class="headerlink" href="#multi-dynamic-display-mode" title="Permalink to this image">¶</a></p>
+<div class="legend">
+<p>Legend:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Messages displayed before first test case starts.</p></li>
+<li><p>Card status, test status and information about ongoing tests.</p></li>
+<li><p>Messages statistics.</p></li>
+<li><p>Messages history.</p></li>
+<li><p>Elapsed time.</p></li>
+</ol>
+</div></blockquote>
+</div>
+</figcaption>
+</figure>
+</section>
+<section id="single-test-display">
+<h2>Single test display<a class="headerlink" href="#single-test-display" title="Permalink to this headline">¶</a></h2>
+<p>In this use case, the content displayed in the console contains the following:</p>
+<blockquote>
+<div><ul>
+<li><p><strong>Messages displayed before the first test case starts</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Start banner.</p></li>
+<li><p>Card selection.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Test cases information</strong>: A table presenting the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Test cases and messages status</strong>: Results of previous tests, quantity of warning, pass, error, and failure messages.</p></li>
+<li><p><strong>Ongoing test information</strong>: Duration and current test running.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Card status</strong>: Basic sensor information (power consumption and temperature of the card).</p></li>
+<li><p><strong>Message statistics</strong>: Quantity of messages available for each severity, which are in <code class="docutils literal notranslate"><span class="pre">xbtest.log</span></code>.</p></li>
+<li><p><strong>Message history</strong>: 10 last important messages (warning, error, and failure).</p></li>
+</ul>
+</div></blockquote>
+<figure class="align-center" id="single-dynamic-display-mode">
+<img alt="../../../../../_images/single-dynamic-display-mode.svg" src="../../../../../_images/single-dynamic-display-mode.svg" /><figcaption>
+<p><span class="caption-text">Example of information available in dynamic display mode for single test</span><a class="headerlink" href="#single-dynamic-display-mode" title="Permalink to this image">¶</a></p>
+<div class="legend">
+<p>Legend:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Messages displayed before first test case starts.</p></li>
+<li><p>Test cases status and information about ongoing tests.</p></li>
+<li><p>Card status.</p></li>
+<li><p>Messages statistics.</p></li>
+<li><p>Messages history.</p></li>
+<li><p>Elapsed time.</p></li>
+</ol>
+</div></blockquote>
+</div>
+</figcaption>
+</figure>
+</section>
+<section id="disable-dynamic-display">
+<h2>Disable dynamic display<a class="headerlink" href="#disable-dynamic-display" title="Permalink to this headline">¶</a></h2>
+<p>When using command line option <a class="reference internal" href="command-line-options.html#cmdoption-F"><code class="xref std std-option docutils literal notranslate"><span class="pre">-F</span></code></a>, all messages are displayed consecutively, and the console is never cleared.</p>
+<p>The information displayed in this mode is the same as the information available in:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">common_summary.log</span></code> when running multiple tests.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">summary.log</span></code> when running a single test.</p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+				  
+				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="result.html" class="btn btn-neutral float-left" title="Result" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="understanding-xbtest-messages.html" class="btn btn-neutral float-right" title="Understanding xbtest messages" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Advanced Micro Devices Inc.</p>
+  </div>
+
+
+
+										<div class="aem-Grid aem-Grid--16">
+											<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+												<div class="container-fluid sub-footer">
+
+													                    <div class="row">
+                        <div class="col-xs-24">
+                          <p><a target="_blank" href="https://www.amd.com/en/corporate/copyright">Terms and Conditions</a> | <a target="_blank" href="https://www.amd.com/en/corporate/privacy">Privacy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/cookies">Cookie Policy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/trademarks">Trademarks</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf">Statement on Forced Labor</a> | <a target="_blank" href="https://www.amd.com/en/corporate/competition">Fair and Open Competition</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf">UK Tax Strategy</a> | <a target="_blank" href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA">Inclusive Terminology</a> | <a href="#cookiessettings" class="ot-sdk-show-settings">Cookies Settings</a></p>
+                        </div>
+                    </div>
+												</div>
+											</div>
+										</div>
+										
+</br>
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

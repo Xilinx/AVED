@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script charset="UTF-8" data-document-language="true" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script class="optanon-category-C0002" type="text/plain">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+<title>AVED Management Controller (AMC) - Architecture and Design — AVED  documentation</title>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="_static/xbtest.css" rel="stylesheet" type="text/css"/>
+<link href="_static/_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="https://docs.xilinx.com/favicon.ico" rel="shortcut icon"/>
+<!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/js/theme.js"></script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="AVED%2BASDM%2BApplication.html" rel="next" title="AVED ASDM Application"/>
+<link href="SMBus%2BIP%2Bv1.1%2B-%2BProduct%2BGuide.html" rel="prev" title="SMBus IP v1.1 - Product Guide"/>
+<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager -->
+<noscript><iframe class="optanon-category-C0002" height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager -->
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="index.html"> AVED
+            <img alt="Logo" class="logo" src="_static/xilinx-header-logo.svg"/>
+</a>
+<div role="search">
+<form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" type="text"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+</div>
+</div><div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BHierarchy%2BOverview.html">AVED V80 - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BCIPS%2BConfiguration.html">AVED V80 - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BResources.html">AVED V80 - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BMap.html">AVED V80 - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BNoC%2BConfiguration.html">AVED V80 - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BBase%2BLogic.html">AVED V80 - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BClock%2BReset%2BModule.html">AVED V80 - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BSource%2BFile%2BOverview.html">AVED V80 - Source File Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SMBus%2BIP%2Bv1.1%2B-%2BProduct%2BGuide.html">SMBus IP v1.1 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">AVED Management Controller (AMC) - Architecture and Design</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#layered-architecture">Layered Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#firmware-interface-abstraction-layer-fal">Firmware Interface Abstraction Layer (FAL)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#operating-system-abstraction-layer-osal">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#common-definitions-and-core-libraries">Common definitions and Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#core-libs">Core Libs</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#event-library-evl">Event Library (EVL)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#debug-access-library-dal">Debug Access Library (DAL)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#printing-and-logging-library-pll">Printing and Logging Library (PLL)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#common-includes">Common Includes</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#standard-definitions">Standard definitions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#utility-definitions">Utility definitions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#event-id">Event ID</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#device-drivers">Device Drivers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#eeprom">EEPROM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#emmc">EMMC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gcq">GCQ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#smbus">SMBus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#i2c">I2C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ospi">OSPI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sensors">Sensors</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#cat34ts02">cat34ts02</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#ina3221">ina3221</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#isl68221">isl68221</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#sysmon">SysMon</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#profiles">Profiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#proxy-drivers">Proxy Drivers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#inter-proxy-communication">Inter-Proxy communication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#applications">Applications</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#main-application-amc">Main application (AMC)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#in-band-telemetry">In-Band Telemetry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#out-of-band-telemetry">Out-Of-Band Telemetry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#alveo-sensor-data-model-asdm">Alveo Sensor Data Model (ASDM)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#built-in-monitoring-application-bim">Built-In-Monitoring Application (BIM)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tasks">Tasks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#amc-main-task">AMC (main task)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aved-management-interface-ami-proxy-driver">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aved-programming-control-apc-proxy-driver">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aved-external-device-control-axc-proxy-driver">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aved-sensor-control-asc-proxy-driver">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bmc-proxy-driver">BMC Proxy Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scheduling">Scheduling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#event-driven-architecture">Event-driven architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#avedmanagementcontroller-amc-architectureanddesign-overview-1">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-flow">Data flow</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#initialization">Initialization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getting-data">Getting Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setting-data">Setting Data</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#events-and-signals">Events and Signals</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#events">Events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#event-binding">Event binding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#event-raising">Event Raising</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#event-list">Event List</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BASDM%2BApplication.html">AVED ASDM Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOutOfBand%2BTelemetry%2BApplication.html">AVED OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Board%2BManagement%2BController%2B%28BMC%29%2BProxy%2BDriver.html">Board Management Controller (BMC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BQDMA.html">AVED QDMA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift"><nav aria-label="Mobile navigation menu" class="wy-nav-top" style="background: black">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="index.html">AVED</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="Page navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a class="icon icon-home" href="index.html"></a> »</li>
+<li>AVED Management Controller (AMC) - Architecture and Design</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<section id="aved-management-controller-amc-architecture-and-design">
+<h1>AVED Management Controller (AMC) - Architecture and Design<a class="headerlink" href="#aved-management-controller-amc-architecture-and-design" title="Permalink to this headline">¶</a></h1>
+<section id="overview">
+<span id="avedmanagementcontroller-amc-architectureanddesign-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The AVED Management Controller (AMC) provides management and control of the Alveo RPU. Its basic features include, but are not limited to:</p>
+<ul class="simple">
+<li><p>In-Band telemetry (<a class="reference external" href="AVED+InBand+Telemetry+Application.html">AVED InBand Telemetry Application</a>)</p></li>
+<li><p>Out-Of-Band telemetry (<a class="reference external" href="AVED+OutOfBand+Telemetry+Application.html">AVED OutOfBand Telemetry Application</a>)</p></li>
+<li><p>Host (AMI) communication (<a class="reference external" href="AVED+Management+Interface+(AMI)+Proxy+Driver.html">AVED Management Interface (AMI) Proxy Driver</a>)</p></li>
+<li><p>BMC communication (<a class="reference external" href="Board+Management+Controller+(BMC)+Proxy+Driver.html">Board Management Controller (BMC) Proxy Driver</a>)</p></li>
+<li><p>Sensor control (<a class="reference external" href="AVED+Sensor+Control+(ASC)+Proxy+Driver.html">AVED Sensor Control (ASC) Proxy Driver</a>) and data storage (<a class="reference external" href="AVED+ASDM+Application.html">AVED ASDM Application</a>)</p></li>
+<li><p>QSFP control (<a class="reference external" href="AVED+External+Device+Control+(AXC)+Proxy+Driver.html">AVED External Device Control (AXC) Proxy Driver</a>)</p></li>
+<li><p>Download and programming to flash (<a class="reference external" href="AVED+Programming+Control+(APC)+Proxy+Driver.html">AVED Programming Control (APC) Proxy Driver</a>)</p></li>
+</ul>
+<p>In addition, the AMC is fully abstracted from:</p>
+<ul class="simple">
+<li><p>The OS (<a class="reference external" href="Operating+System+Abstraction+Layer+(OSAL).html">Operating System Abstraction Layer (OSAL)</a>)</p></li>
+<li><p>The Firmware Driver (<a class="reference external" href="Firmware+Interface+(FW_IF)+Abstraction+Layer.html">Firmware Interface Abstraction Layer (FAL)</a>)</p></li>
+</ul>
+<p>Event driven architecture is provided by the Event Library (EVL).</p>
+</section>
+<section id="layered-architecture">
+<span id="avedmanagementcontroller-amc-architectureanddesign-layeredarchitecture"></span><h2>Layered Architecture<a class="headerlink" href="#layered-architecture" title="Permalink to this headline">¶</a></h2>
+<p><a class="drawio-diagram-image reference internal" href="_images/820c23cc6ef84bcf8757a4236941973c2b890ab6.png"><img alt="image1" class="drawio-diagram-image" src="_images/820c23cc6ef84bcf8757a4236941973c2b890ab6.png" style="width: 1562px;"/></a></p>
+<section id="firmware-interface-abstraction-layer-fal">
+<span id="avedmanagementcontroller-amc-architectureanddesign-firmwareinterfaceabstractionlayer-fal"></span><h3>Firmware Interface Abstraction Layer (FAL)<a class="headerlink" href="#firmware-interface-abstraction-layer-fal" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="Firmware+Interface+(FW_IF)+Abstraction+Layer.html">Firmware Interface (FW_IF) Abstraction Layer - Data Center Group - Xilinx Enterprise Wiki</a></p>
+<p>The FAL allows the hardware and associated drivers to be swapped out without requiring a change to the higher level data formatting and behavior.</p>
+<p>It also allows Proxy Drivers to be modified to use a different interface with minimal changes.</p>
+</section>
+<section id="operating-system-abstraction-layer-osal">
+<span id="avedmanagementcontroller-amc-architectureanddesign-operatingsystemabstractionlayer-osal"></span><h3>Operating System Abstraction Layer (OSAL)<a class="headerlink" href="#operating-system-abstraction-layer-osal" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="Operating+System+Abstraction+Layer+(OSAL).html">Operating System Abstraction Layer (OSAL) - Data Center Group - Xilinx Enterprise Wiki</a></p>
+<p>The OSAL allows the AMC to be ported to a different OS without requiring code changes in the AMC or its layers.</p>
+<p>A common <strong>osal.h</strong> API is provided with a generic API. FreeRTOS and Linux implementations of this API are released with the AMC - however, a user can provide their own RTOS implementation if they prefer (e.g. osal_FreeRTOS.c can be replaced with a
+user-written osal_UCOS.c).</p>
+</section>
+<section id="common-definitions-and-core-libraries">
+<span id="avedmanagementcontroller-amc-architectureanddesign-commondefinitionsandcorelibraries"></span><h3>Common definitions and Core Libraries<a class="headerlink" href="#common-definitions-and-core-libraries" title="Permalink to this headline">¶</a></h3>
+<section id="core-libs">
+<span id="avedmanagementcontroller-amc-architectureanddesign-corelibs"></span><h4>Core Libs<a class="headerlink" href="#core-libs" title="Permalink to this headline">¶</a></h4>
+<p>Core Libraries are modules that:</p>
+<ol class="arabic simple">
+<li><p>Are <strong>NOT BOUND</strong> to a specific proxy driver or application’s behavior</p></li>
+<li><p>Are <strong>REUSABLE</strong> across any other module</p></li>
+</ol>
+<p>The Core Library layer exists within the <strong>Common</strong> layer, which holds all system-common includes and definitions.</p>
+<section id="event-library-evl">
+<span id="avedmanagementcontroller-amc-architectureanddesign-eventlibrary-evl"></span><h5>Event Library (EVL)<a class="headerlink" href="#event-library-evl" title="Permalink to this headline">¶</a></h5>
+<p>The EVL allows event signaling to ‘higher’ layers. It is predominantly used for proxy drivers to communicate to the application layer whilst maintaining agnosticism and abstraction.</p>
+<p>See <a class="reference external" href="#avedmanagementcontroller-amc-architectureanddesign-ael">Events and Signals</a> for more information.</p>
+</section>
+<section id="debug-access-library-dal">
+<span id="avedmanagementcontroller-amc-architectureanddesign-debugaccesslibrary-dal"></span><h5>Debug Access Library (DAL)<a class="headerlink" href="#debug-access-library-dal" title="Permalink to this headline">¶</a></h5>
+<p>The DAL provides an API to create and maintain a dynamic menu structure that sits above STDIN, providing a debug interface for calling into any API in the AMC.</p>
+<p>Note - the debug interface is provided for development and debugging purposes only; it is not supported nor maintained, and incorrect usage may have unintended consequences to both firmware and hardware.</p>
+</section>
+<section id="printing-and-logging-library-pll">
+<span id="avedmanagementcontroller-amc-architectureanddesign-printingandlogginglibrary-pll"></span><h5>Printing and Logging Library (PLL)<a class="headerlink" href="#printing-and-logging-library-pll" title="Permalink to this headline">¶</a></h5>
+<p>The PLL provides an API to handle all thread-safe printing and logging. This core library sits above STDOUT/STDIN, and allows for multiple output streams (stdout/ PCIe etc), at different logging levels (ALL, DEBUG, INFO, ERROR).</p>
+</section>
+</section>
+<section id="common-includes">
+<span id="avedmanagementcontroller-amc-architectureanddesign-commonincludes"></span><h4>Common Includes<a class="headerlink" href="#common-includes" title="Permalink to this headline">¶</a></h4>
+<section id="standard-definitions">
+<span id="avedmanagementcontroller-amc-architectureanddesign-standarddefinitions"></span><h5>Standard definitions<a class="headerlink" href="#standard-definitions" title="Permalink to this headline">¶</a></h5>
+<p>The <strong>standard.h</strong> header file provides project-wide definitions for regular use - return codes, typedefs, etc.</p>
+</section>
+<section id="utility-definitions">
+<span id="avedmanagementcontroller-amc-architectureanddesign-utilitydefinitions"></span><h5>Utility definitions<a class="headerlink" href="#utility-definitions" title="Permalink to this headline">¶</a></h5>
+<p>The <strong>util.h</strong> header file provides project-wide utility definitions and macros for regular use - printing macros, common calculations, etc.</p>
+</section>
+<section id="event-id">
+<span id="avedmanagementcontroller-amc-architectureanddesign-eventid"></span><h5>Event ID<a class="headerlink" href="#event-id" title="Permalink to this headline">¶</a></h5>
+<p>The <strong>event_id.h</strong> header file contains definitions of unique event ids for each proxy driver within AMC.</p>
+</section>
+</section>
+</section>
+<section id="device-drivers">
+<span id="avedmanagementcontroller-amc-architectureanddesign-devicedrivers"></span><h3>Device Drivers<a class="headerlink" href="#device-drivers" title="Permalink to this headline">¶</a></h3>
+<p>Device drivers provide an API over some BSP-provided drivers and utilities as well as APIs to interact with other hardware devices.</p>
+<section id="eeprom">
+<span id="avedmanagementcontroller-amc-architectureanddesign-eeprom"></span><h4>EEPROM<a class="headerlink" href="#eeprom" title="Permalink to this headline">¶</a></h4>
+<p>The EEPROM driver implements functions to access the manufacturing EEPROM (using the <strong>I2C</strong> driver).</p>
+</section>
+<section id="emmc">
+<span id="avedmanagementcontroller-amc-architectureanddesign-emmc"></span><h4>EMMC<a class="headerlink" href="#emmc" title="Permalink to this headline">¶</a></h4>
+<p>The EMMC driver allows simple reading and writing, of eMMC flash memory.</p>
+</section>
+<section id="gcq">
+<span id="avedmanagementcontroller-amc-architectureanddesign-gcq"></span><h4>GCQ<a class="headerlink" href="#gcq" title="Permalink to this headline">¶</a></h4>
+<p>The GCQ driver provides an interface between the AMC and the AMI.</p>
+</section>
+<section id="smbus">
+<span id="avedmanagementcontroller-amc-architectureanddesign-smbus"></span><h4>SMBus<a class="headerlink" href="#smbus" title="Permalink to this headline">¶</a></h4>
+<p>The SMBus driver is an implementation of SMBus 3.2, and provides an Out-of-band interface to the BMC.</p>
+<p>The SMBus driver source is provided with further documentation, available in <strong>&lt;AVED_directory&gt;/fw/AMC/src/device_drivers/smbus_driver/doc/</strong>.</p>
+</section>
+<section id="i2c">
+<span id="avedmanagementcontroller-amc-architectureanddesign-i2c"></span><h4>I2C<a class="headerlink" href="#i2c" title="Permalink to this headline">¶</a></h4>
+<p>The I2C driver allows simple I2C reading, writing, and write-read combinations (over the Xilinx <strong>Xiic</strong> driver). This allows the sensors, QSFP layer, etc, to perform I2C transactions without having to initialise or maintain an I2C instance.</p>
+</section>
+<section id="ospi">
+<span id="avedmanagementcontroller-amc-architectureanddesign-ospi"></span><h4>OSPI<a class="headerlink" href="#ospi" title="Permalink to this headline">¶</a></h4>
+<p>The OSPI driver allows simple reading and writing, of flash devices (over the Xilinx <strong>OSPIPSV</strong> device driver).</p>
+</section>
+<section id="sensors">
+<span id="avedmanagementcontroller-amc-architectureanddesign-sensors"></span><h4>Sensors<a class="headerlink" href="#sensors" title="Permalink to this headline">¶</a></h4>
+<section id="cat34ts02">
+<span id="avedmanagementcontroller-amc-architectureanddesign-cat34ts02"></span><h5>cat34ts02<a class="headerlink" href="#cat34ts02" title="Permalink to this headline">¶</a></h5>
+<p>The cat34ts02 driver provides temperature reading (using the <strong>I2C</strong> driver) from the cat34ts02 sensor.</p>
+</section>
+<section id="ina3221">
+<span id="avedmanagementcontroller-amc-architectureanddesign-ina3221"></span><h5>ina3221<a class="headerlink" href="#ina3221" title="Permalink to this headline">¶</a></h5>
+<p>The ina3221 driver provides voltage, current and power readings (using the <strong>I2C</strong> driver) from the ina3221 sensor.</p>
+</section>
+<section id="isl68221">
+<span id="avedmanagementcontroller-amc-architectureanddesign-isl68221"></span><h5>isl68221<a class="headerlink" href="#isl68221" title="Permalink to this headline">¶</a></h5>
+<p>The isl68221 driver provides voltage, current and temperature readings (using the <strong>I2C</strong> driver) from the isl68221 sensor.</p>
+</section>
+<section id="sysmon">
+<span id="avedmanagementcontroller-amc-architectureanddesign-sysmon"></span><h5>SysMon<a class="headerlink" href="#sysmon" title="Permalink to this headline">¶</a></h5>
+<p>The SysMon (system monitor) driver allows temperature reading (using the Xilinx <strong>xSysMonPsv</strong> driver) from the FPGA.</p>
+</section>
+</section>
+</section>
+<section id="profiles">
+<span id="avedmanagementcontroller-amc-architectureanddesign-profiles"></span><h3>Profiles<a class="headerlink" href="#profiles" title="Permalink to this headline">¶</a></h3>
+<p>The Profiles hold all profile-specific (board-specific) includes and definitions, allowing AMC to be ported to different target hardware without requiring code changes in the AMC or its layers.</p>
+<p>See <a class="reference external" href="Profiles+and+CMake+build+process.html">Profiles and CMake build process#Profiles</a> for a more detailed description of how profiles are used to port AMC across different platforms.</p>
+</section>
+<section id="proxy-drivers">
+<span id="avedmanagementcontroller-amc-architectureanddesign-proxydrivers"></span><h3>Proxy Drivers<a class="headerlink" href="#proxy-drivers" title="Permalink to this headline">¶</a></h3>
+<p>The Proxy drivers abstract a capability’s <em>behavior</em> away from it’s <em>functionality</em>. In other words, a proxy driver allows the application layer to consider AMC capabilities (e.g. clock control, host communications, sensor handling) as abstract
+concepts, rather than requiring them to understand the inner workings and behavior of these parts of the AMC.</p>
+<section id="inter-proxy-communication">
+<span id="avedmanagementcontroller-amc-architectureanddesign-inter-proxycommunication"></span><h4>Inter-Proxy communication<a class="headerlink" href="#inter-proxy-communication" title="Permalink to this headline">¶</a></h4>
+<p>Proxy drivers do not communicate with other proxy drivers, as this would break their independence from behavioral design.</p>
+<p>In the event where a proxy driver requires a call into another (this should never be more than a simple read/write, or status return) it should done via the EVL.</p>
+<p>E.g.:</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><a class="drawio-diagram-image reference internal" href="_images/7e1a0c319cb210addcc89aef3ac6c3548952b089.png"><img alt="image2" class="drawio-diagram-image" src="_images/7e1a0c319cb210addcc89aef3ac6c3548952b089.png" style="width: 761px;"/></a></p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Note - in many cases, a “Get” API for a proxy will be called within the EVL Record signaled by the proxy driver task itself. In that case, the data mutexing is redundant.</p>
+<p><strong>However</strong>, the purpose of a “Get” API is to expose data to any application call, and so in theory a “Get” function can be called from multiple concurrent tasks at any time.</p>
+<p>E.g.:</p>
+<ol class="arabic simple">
+<li><p>Proxy_A stores data (grabs and releases its mutex) and raises the appropriate event.</p>
+<ol class="arabic simple">
+<li><p>The application’s event_callback A (still within the context of Proxy_A’s task) calls Proxy_A’s “Get” function.</p></li>
+<li><p>Proxy’s A’s “Get” function waits for the mutex, grabs it, copies the data, and releases the mutex.</p></li>
+</ol>
+</li>
+<li><p>At the same time, proxy B raises an event. In this example, the corresponding event callback requires retrieving data from Proxy_A.</p>
+<ol class="arabic simple">
+<li><p>The application’s event_callback B (within the context of Proxy_B’s task) calls Proxy_A’s “Get” function.</p></li>
+<li><p>Proxy’s B’s “Get” function waits for the mutex, grabs it, copies the data, and releases the mutex.</p></li>
+</ol>
+</li>
+</ol>
+</section>
+</section>
+<section id="applications">
+<span id="avedmanagementcontroller-amc-architectureanddesign-applications"></span><h3>Applications<a class="headerlink" href="#applications" title="Permalink to this headline">¶</a></h3>
+<p>The Application layers provides control of the overall AMC, while still allowing a logical separation of different parts of the overall control.</p>
+<section id="main-application-amc">
+<span id="avedmanagementcontroller-amc-architectureanddesign-mainapplication-amc"></span><h4>Main application (AMC)<a class="headerlink" href="#main-application-amc" title="Permalink to this headline">¶</a></h4>
+<p>The main AMC application provides the initialization of all other layers and modules within the system.</p>
+<p>It also is the first event handler for each proxy driver event raised, passing any AMI Host commands to the relevant submodule (excluding telemetry).</p>
+</section>
+<section id="in-band-telemetry">
+<span id="avedmanagementcontroller-amc-architectureanddesign-inband"></span><h4>In-Band Telemetry<a class="headerlink" href="#in-band-telemetry" title="Permalink to this headline">¶</a></h4>
+<p>The In-Band Telemetry application handles the events and communication between the Host and the Sensors.</p>
+<p>The In-Band Telemetry application handles any requests from the In-Band interface (AMI Proxy) that require data or information from other proxy drivers (primarily the ASC).</p>
+<p>This application does not have its own task and operates entirely on events raised by the AMI and ASC proxy drivers.</p>
+</section>
+<section id="out-of-band-telemetry">
+<span id="avedmanagementcontroller-amc-architectureanddesign-outofband"></span><h4>Out-Of-Band Telemetry<a class="headerlink" href="#out-of-band-telemetry" title="Permalink to this headline">¶</a></h4>
+<p>The Out-Of-Band Telemetry application handles the events and communication between the BMC and the Sensors.</p>
+<p>The Out-of-Band Telemetry application handles any requests from the Out-of-Band interface (BMC Proxy) that require data or information from other proxy drivers (primarily the ASC).</p>
+<p>This application does not have its own task, and operates entirely on events raised by the BMC and ASC proxy drivers.</p>
+</section>
+<section id="alveo-sensor-data-model-asdm">
+<span id="avedmanagementcontroller-amc-architectureanddesign-alveosensordatamodel-asdm"></span><h4>Alveo Sensor Data Model (ASDM)<a class="headerlink" href="#alveo-sensor-data-model-asdm" title="Permalink to this headline">¶</a></h4>
+<p>The ASDM app defines the ASDM structure for the specific version of the ASDM used by the AMC.</p>
+<p>AMC is designed to be as separated from the ASDM as much as possible. If the ASDM definition is changed or a new version is required, all that should change is the ASDM application, and any references to it in the <a class="reference external" href="#avedmanagementcontroller-amc-architectureanddesign-inband">In-Band
+Telemetry</a>/<a class="reference external" href="#avedmanagementcontroller-amc-architectureanddesign-outofband">Out-Of-Band Telemetry</a> applications.</p>
+</section>
+<section id="built-in-monitoring-application-bim">
+<span id="avedmanagementcontroller-amc-architectureanddesign-built-in-monitoringapplication-bim"></span><h4>Built-In-Monitoring Application (BIM)<a class="headerlink" href="#built-in-monitoring-application-bim" title="Permalink to this headline">¶</a></h4>
+<p>The Built-In-Monitoring Application (BIM) monitors all events throughout AMC and logs errors accordingly</p>
+</section>
+</section>
+</section>
+<section id="tasks">
+<span id="avedmanagementcontroller-amc-architectureanddesign-tasks"></span><h2>Tasks<a class="headerlink" href="#tasks" title="Permalink to this headline">¶</a></h2>
+<p>With the exception of the AMC Main Task, each task handles RX’ing and TX’ing:</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/dedb7b0bcef3429290b6546f9fe7aeda04147252.png"><img alt="image3" class="drawio-diagram-image" src="_images/dedb7b0bcef3429290b6546f9fe7aeda04147252.png" style="width: 999px;"/></a></p>
+<p>Note: In the above example, <strong>Proxy N</strong> can be the same proxy as <strong>Proxy X</strong>.</p>
+<section id="amc-main-task">
+<span id="avedmanagementcontroller-amc-architectureanddesign-amc-maintask"></span><h3>AMC (main task)<a class="headerlink" href="#amc-main-task" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<ul class="simple">
+<li><p>Initialized from the project’s main entry point.</p></li>
+<li><p>“Top-layer” task that allows communication between other tasks.</p></li>
+</ul>
+<p><strong>Responsibilities</strong></p>
+<ul class="simple">
+<li><p>Initialize other tasks.</p></li>
+<li><p>Create global resources.</p></li>
+<li><p>Bind proxy driver callbacks (and maintain responsibility for those callbacks).</p></li>
+<li><p>Handle proxy driver events (via the afore-mentioned callbacks) and pass data to relevant tasks.</p></li>
+</ul>
+<p><strong>Initialisation</strong></p>
+<p><a class="drawio-diagram-image reference internal" href="_images/7969bf576e3ef0330e1f6ab0421d925e1939a857.png"><img alt="image4" class="drawio-diagram-image" src="_images/7969bf576e3ef0330e1f6ab0421d925e1939a857.png" style="width: 162px;"/></a></p>
+<ol class="arabic simple">
+<li><p>Core Library Initialisation</p>
+<ol class="arabic simple">
+<li><p>PLL</p></li>
+<li><p>EVL</p></li>
+</ol>
+</li>
+<li><p>Device Driver Initialisation</p>
+<ol class="arabic simple">
+<li><p>I2C</p></li>
+<li><p>EEPROM</p></li>
+<li><p>SYS_MON</p></li>
+</ol>
+</li>
+<li><p>FAL Initialisation</p>
+<ul class="simple">
+<li><p>fw_if_XXX_init calls.</p></li>
+<li><p>fw_if_XXX_create calls.</p>
+<ul>
+<li><p>FW_IF_CFG structures held locally in the profile_fal.c source file.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Proxy Driver Initialisation</p>
+<ul class="simple">
+<li><p>XXX_PROXY_DRIVER_Initialise calls.</p>
+<ul>
+<li><p>FW_IF_CFG handle and Proxy ID</p></li>
+</ul>
+</li>
+<li><p>XXX_PROXY_DRIVER_BindCallback calls.</p>
+<ul>
+<li><p>Event-handling callback passed in.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Application Initialisation</p>
+<ol class="arabic simple">
+<li><p>ASDM</p></li>
+<li><p>In Band Telemetry</p></li>
+<li><p>Out of Band Telemetry</p></li>
+<li><p>BIM</p></li>
+</ol>
+</li>
+<li><p>Debug Initialisation</p>
+<ol class="arabic simple">
+<li><p>DAL Layer Initialisation</p></li>
+</ol>
+</li>
+<li><p>Do nothing - keep alive task.</p>
+<ul class="simple">
+<li><p>If available, can flash an LED or kick a watchdog to show signs of life.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="aved-management-interface-ami-proxy-driver">
+<span id="avedmanagementcontroller-amc-architectureanddesign-avedmanagementinterface-ami-proxydriver"></span><h3>AVED Management Interface (AMI) Proxy Driver<a class="headerlink" href="#aved-management-interface-ami-proxy-driver" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<ul class="simple">
+<li><p>Initialized from the AMC task.</p></li>
+<li><p>Handles communication to/from the Host (AMI).</p></li>
+<li><p>The only part of the AMC that needs to know about the GCQ message format and contents.</p></li>
+</ul>
+<p><strong>Responsibilities</strong></p>
+<ul class="simple">
+<li><p>Monitors the FW_IF data for requests from AMI including:</p>
+<ul>
+<li><p>PDI download request</p></li>
+<li><p>PDI copy request</p></li>
+<li><p>Sensor request</p></li>
+<li><p>Identity request</p></li>
+<li><p>Boot Select request</p></li>
+<li><p>Heartbeat request</p></li>
+<li><p>EEPROM read/write request</p></li>
+<li><p>Module read/write request</p></li>
+</ul>
+</li>
+<li><p>Provides “Get” APIs to the AMC application for messages Rx’d from the AMI. These include APIs to:</p>
+<ul>
+<li><p>Get the PDI download request</p></li>
+<li><p>Get the PDI copy request</p></li>
+<li><p>Get the Sensor request</p></li>
+<li><p>Get the Boot Select request</p></li>
+<li><p>Get the eeprom read write request</p></li>
+<li><p>Get the module read write request</p></li>
+<li><p>Print all the stats gathered by the application</p></li>
+<li><p>Clear all the stats in the application</p></li>
+</ul>
+</li>
+<li><p>Provides “Set” APIs to the AMC application for messages to Tx to the AMI. These include APIs to:</p>
+<ul>
+<li><p>Set the response after the PDI download has completed</p></li>
+<li><p>Set the response after the PDI copy has completed</p></li>
+<li><p>Set the response after the sensor request has completed</p></li>
+<li><p>Set the identity request response</p></li>
+<li><p>Set the response after the Boot select has completed</p></li>
+<li><p>Set the response after the EEPROM read/write has completed</p></li>
+<li><p>Set the response after the module read/write has completed</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="aved-programming-control-apc-proxy-driver">
+<span id="avedmanagementcontroller-amc-architectureanddesign-avedprogrammingcontrol-apc-proxydriver"></span><h3>AVED Programming Control (APC) Proxy Driver<a class="headerlink" href="#aved-programming-control-apc-proxy-driver" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<ul class="simple">
+<li><p>Initialized from the AMC task.</p></li>
+<li><p>Handles flash-programming related commands.</p></li>
+<li><p>Provides a single interface to the flash memory for the application.</p></li>
+</ul>
+<p><strong>Responsibilities</strong></p>
+<ul class="simple">
+<li><p>Provides “Get” APIs to the AMC application for retrieving information on the flash memory. These include APIs to:</p>
+<ul>
+<li><p>Get the Flash Partition Table (FPT) Header</p></li>
+<li><p>Get a Flash Partition Table (FPT) Partition</p></li>
+<li><p>Print all the stats gathered by the proxy driver</p></li>
+<li><p>Clear all the stats in the proxy driver</p></li>
+</ul>
+</li>
+<li><p>Provides “Set” APIs to the AMC application for writing/committing to flash memory. These include APIs to:</p>
+<ul>
+<li><p>Download an image to a location in non volatile memory</p></li>
+<li><p>Download an image with an FPT to a location in NV memory</p></li>
+<li><p>Copy an image from one partition to another</p></li>
+<li><p>Select which partition to boot from</p></li>
+<li><p>Enable the hot reset capability</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="aved-external-device-control-axc-proxy-driver">
+<span id="avedmanagementcontroller-amc-architectureanddesign-avedexternaldevicecontrol-axc-proxydriver"></span><h3>AVED External Device Control (AXC) Proxy Driver<a class="headerlink" href="#aved-external-device-control-axc-proxy-driver" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<ul class="simple">
+<li><p>Initialized from the AMC task.</p></li>
+<li><p>Handles external device related commands.</p></li>
+<li><p>Provides a single interface to any external device control for the application.</p></li>
+<li><p>Provides a simple callback for other tasks (e.g. the ASC) to read sensor data.</p></li>
+</ul>
+<p><strong>Responsibilities</strong></p>
+<ul class="simple">
+<li><p>Provide “Get” API to the AMC application for retrieving information on the QSFP and other external devices. These include APIs to:</p>
+<ul>
+<li><p>Read real-time byte value from desired external device memory map</p></li>
+<li><p>Read real-time memory map from desired QSFP</p></li>
+<li><p>Read single status from QSFP IO Expander</p></li>
+<li><p>Read all statuses from QSFP IO Expander</p></li>
+<li><p>Read real-time temperature value from desired external device memory map</p></li>
+<li><p>Print all the stats gathered by the application</p></li>
+<li><p>Clear all the stats in the application</p></li>
+<li><p>Check if a device exists and the page/byte offset are valid</p></li>
+</ul>
+</li>
+<li><p>Provide “Set” API to the AMC application for managing and controlling the QSFP devices. These include APIs to:</p>
+<ul>
+<li><p>Write byte value to desired external device memory map</p></li>
+</ul>
+</li>
+<li><p>Provide simple “Get” function typedef to be used as a callback by an sensor-reading applications or processes.</p></li>
+</ul>
+</section>
+<section id="aved-sensor-control-asc-proxy-driver">
+<span id="avedmanagementcontroller-amc-architectureanddesign-avedsensorcontrol-asc-proxydriver"></span><h3>AVED Sensor Control (ASC) Proxy Driver<a class="headerlink" href="#aved-sensor-control-asc-proxy-driver" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<ul class="simple">
+<li><p>Initialized from the AMC task.</p></li>
+<li><p>Handles sensor related commands (including ASDM).</p></li>
+<li><p>Provides a single interface to any sensor control for the application.</p></li>
+</ul>
+<p><strong>Responsibilities</strong></p>
+<ul class="simple">
+<li><p>Provide “Get” API to the AMC application for retrieving information on the sensors (including ASDM data). These include APIs to:</p>
+<ul>
+<li><p>Get all sensor data</p></li>
+<li><p>Get single sensor data by ID</p></li>
+<li><p>Get single sensor data by name</p></li>
+<li><p>Print all of the stats gathered by the application</p></li>
+<li><p>Clear all of the stats in the application</p></li>
+</ul>
+</li>
+<li><p>Provide “Set” API to the AMC application for managing and controlling the sensors. These include APIs to:</p>
+<ul>
+<li><p>Reset current, average, max and status values for all sensors</p></li>
+<li><p>Reset current, average, max and status values for a single sensor by ID</p></li>
+<li><p>Reset current, average, max and status values for a single sensor by name</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="bmc-proxy-driver">
+<span id="avedmanagementcontroller-amc-architectureanddesign-bmcproxydriver"></span><h3>BMC Proxy Driver<a class="headerlink" href="#bmc-proxy-driver" title="Permalink to this headline">¶</a></h3>
+<p><strong>TODO</strong></p>
+<p><strong>Description</strong></p>
+<ul class="simple">
+<li><p>Initialized from the AMC task.</p></li>
+<li><p>Handles BMC interfactions.</p></li>
+<li><p>Provides a single interface to the BMC for the application.</p></li>
+</ul>
+<p><strong>Responsibilities</strong></p>
+<ul class="simple">
+<li><p>Provide “Get” API to the AMC application for retrieving information from the BMC.</p></li>
+<li><p>Provide “Set” API to the AMC application for sending information to the BMC.</p></li>
+</ul>
+</section>
+<section id="scheduling">
+<span id="avedmanagementcontroller-amc-architectureanddesign-scheduling"></span><h3>Scheduling<a class="headerlink" href="#scheduling" title="Permalink to this headline">¶</a></h3>
+<p>The AMC shall use Round-Robin scheduling.</p>
+</section>
+</section>
+<section id="event-driven-architecture">
+<span id="avedmanagementcontroller-amc-architectureanddesign-event-drivenarchitecture"></span><h2>Event-driven architecture<a class="headerlink" href="#event-driven-architecture" title="Permalink to this headline">¶</a></h2>
+<section id="avedmanagementcontroller-amc-architectureanddesign-overview-1">
+<span id="id1"></span><h3>Overview<a class="headerlink" href="#avedmanagementcontroller-amc-architectureanddesign-overview-1" title="Permalink to this headline">¶</a></h3>
+<p>Proxy Drivers provide specified behavior and control for a particular aspect of the system. They allow the applications (e.g. AMC) to view a subsystem (e.g. sensor control, host communications, etc.) as an API reduced to <strong>Sets</strong> and <strong>Gets</strong>, and to
+react to the proxy driver based upon real-time <strong>events</strong>.</p>
+<p>This functionality is provided by the <strong>Event Library</strong> (EVL). This library provides a common API for any module wishing to provide callback binding and event raising to another module.</p>
+</section>
+<section id="data-flow">
+<span id="avedmanagementcontroller-amc-architectureanddesign-dataflow"></span><h3>Data flow<a class="headerlink" href="#data-flow" title="Permalink to this headline">¶</a></h3>
+<section id="initialization">
+<span id="avedmanagementcontroller-amc-architectureanddesign-initialization"></span><h4>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li><p>Application initializes local data.</p></li>
+<li><p>Proxy Driver stores proxy ID and callback function pointer from the application.</p></li>
+<li><p>Proxy Driver initializes/creates firmware interfaces and drivers (where applicable).</p></li>
+<li><p>Proxy driver creates task.</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><a class="drawio-diagram-image reference internal" href="_images/2b9616ac37c7f67efd1e17b70b2d9fbdc956e297.png"><img alt="image5" class="drawio-diagram-image" src="_images/2b9616ac37c7f67efd1e17b70b2d9fbdc956e297.png" style="width: 1081px;"/></a></p>
+</section>
+<section id="getting-data">
+<span id="avedmanagementcontroller-amc-architectureanddesign-gettingdata"></span><h4>Getting Data<a class="headerlink" href="#getting-data" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li><p>Proxy driver (1) task receives data from a firmware interface or driver, etc.</p></li>
+<li><p>Proxy driver (1) task stores data in thread-safe (mutex-protected) local data struct.</p></li>
+<li><p>Proxy driver (1) task raises event via the callback function pointer.</p></li>
+<li><p>Application callback function (in the task context) calls proxy driver (1) API “Get” function to retrieve data.</p></li>
+<li><p>Another Proxy driver (2) raises an event that requires retrieving the same data.</p></li>
+<li><p>Application callback function (in the task context) calls proxy driver (1) API “Get” function to retrieve data.</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><a class="drawio-diagram-image reference internal" href="_images/8ed923747b31faf1e464a1b8fb9d4cfc9f54e25e.png"><img alt="image6" class="drawio-diagram-image" src="_images/8ed923747b31faf1e464a1b8fb9d4cfc9f54e25e.png" style="width: 1361px;"/></a></p>
+<p>The proxy driver’s “Get” API functions provide a public exposure of its data.</p>
+<p>As it is possible for multiple tasks to raise events requesting the same data, the “Get” API functions must mutex the retrieved data.</p>
+<p>E.g.:</p>
+<p><strong>Example data getting</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">iASC_GetSingleSensorDataById</span><span class="p">(</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ucId</span><span class="p">,</span><span class="w"> </span><span class="n">ASC_PROXY_DRIVER_SENSOR_DATA</span><span class="w"> </span><span class="o">*</span><span class="n">pxData</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">iStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ERROR</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">pxData</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">OSAL_ERRORS_NONE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">iOSAL_Mutex_Take</span><span class="p">(</span><span class="w"> </span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">pvOsalMutexHdl</span><span class="p">,</span><span class="w"> </span><span class="n">OSAL_TIMEOUT_WAIT_FOREVER</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">ucNumSensors</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">pxSensorData</span><span class="p">[</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">].</span><span class="n">ucSensorId</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ucId</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">pvOSAL_MemCpy</span><span class="p">(</span><span class="w"> </span><span class="n">pxData</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">pxSensorData</span><span class="p">[</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="w"> </span><span class="n">ASC_PROXY_DRIVER_SENSOR_DATA</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">                    </span><span class="n">iStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OK</span><span class="p">;</span><span class="w"></span>
+<span class="w">                    </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+
+
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">OSAL_ERRORS_NONE</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">iOSAL_Mutex_Release</span><span class="p">(</span><span class="w"> </span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">pvOsalMutexHdl</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"ASC_PROXY_ERRORS_MUTEX_RELEASE_FAILED</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="n">iStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ERROR</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">iStatus</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="setting-data">
+<span id="avedmanagementcontroller-amc-architectureanddesign-settingdata"></span><h4>Setting Data<a class="headerlink" href="#setting-data" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li><p>Application passes data to the proxy driver.</p></li>
+<li><p>Proxy driver stores data for the proxy task driver task, either by:</p>
+<ol class="arabic simple">
+<li><p>Posting data in a mailbox which the task will pend on, OR</p></li>
+<li><p>Storing the data to the local data structure (within a mutex guard).</p></li>
+</ol>
+</li>
+<li><p>Proxy driver task writes data to a firmware interface or driver, etc.</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><a class="drawio-diagram-image reference internal" href="_images/ca239232ab8871c1ab3e47ea83d6fc116ab5b0a2.png"><img alt="image7" class="drawio-diagram-image" src="_images/ca239232ab8871c1ab3e47ea83d6fc116ab5b0a2.png" style="width: 1101px;"/></a></p>
+<ul class="simple">
+<li><p>Option A (mailbox posting) is best used when the data must be acted upon in as real-time as possible (e.g. writing out to a driver).</p></li>
+<li><p>Option B (mutexed storing) is best used when the data will be picked up in the next loop iteration or a subsequent action (e.g. an algorithm input).</p></li>
+</ul>
+<p>Note - the “Setting” mutex should be a separate mutex from the “Getting mutex”.</p>
+<p>The proxy driver’s “Set” API functions allow public setting of its data.</p>
+<p>Option A e.g.:</p>
+<p><strong>Example data setting (A)</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/* structure used post message to the proxy task */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">AMI_MBOX_MSG</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_MSG_TYPES</span><span class="w"> </span><span class="n">eMsgType</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ucRxDataIndex</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_PROXY_RESULT</span><span class="w"> </span><span class="n">xResult</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">union</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">AMI_PROXY_IDENTITY_RESPONSE</span><span class="w"> </span><span class="n">xIdentity</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">AMI_PROXY_HEARTBEAT_RESPONSE</span><span class="w"> </span><span class="n">xHeartbeat</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">};</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">AMI_MBOX_MSG</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">iAMI_SetBootSelectCompleteResponse</span><span class="p">(</span><span class="w"> </span><span class="n">EVL_SIGNAL</span><span class="w"> </span><span class="o">*</span><span class="n">pxSignal</span><span class="p">,</span><span class="w"> </span><span class="n">AMI_PROXY_RESULT</span><span class="w"> </span><span class="n">xResult</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">iStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ERROR</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">pxSignal</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">AMI_MBOX_MSG</span><span class="w"> </span><span class="n">xMsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span><span class="w"></span>
+<span class="w">        </span><span class="n">xMsg</span><span class="p">.</span><span class="n">ucRxDataIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pxSignal</span><span class="o">-&gt;</span><span class="n">ucInstance</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">xMsg</span><span class="p">.</span><span class="n">eMsgType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AMI_MSG_TYPE_BOOT_SELECT_COMPLETE</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">xMsg</span><span class="p">.</span><span class="n">xResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xResult</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">OSAL_ERRORS_NONE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">iOSAL_MBox_Post</span><span class="p">(</span><span class="w"> </span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">pvOsalMBoxHdl</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                                 </span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="p">)</span><span class="o">&amp;</span><span class="n">xMsg</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                                 </span><span class="n">OSAL_TIMEOUT_NO_WAIT</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">iStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OK</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">else</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"AMI_PROXY_ERRORS_MAILBOX_POST_FAILED</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">iStatus</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Option B e.g.:</p>
+<p><strong>Example data setting (B)</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">iASC_SetSingleSensorThresholdStatusById</span><span class="p">(</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ucId</span><span class="p">,</span><span class="w"> </span><span class="n">ASC_PROXY_DRIVER_SENSOR_THRESHOLD_STATUS</span><span class="w"> </span><span class="n">xStatus</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">iStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ERROR</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">OSAL_ERRORS_NONE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">iOSAL_Mutex_Take</span><span class="p">(</span><span class="w"> </span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">pvOsalMutexHdl</span><span class="p">,</span><span class="w"> </span><span class="n">OSAL_TIMEOUT_WAIT_FOREVER</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">ucNumSensors</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">           </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">pxSensorData</span><span class="p">[</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">].</span><span class="n">ucSensorId</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ucId</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">           </span><span class="p">{</span><span class="w"></span>
+<span class="w">               </span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">pxSensorData</span><span class="p">[</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">].</span><span class="n">ulThresholdStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xStatus</span><span class="p">;</span><span class="w"></span>
+<span class="w">               </span><span class="n">iStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OK</span><span class="p">;</span><span class="w"></span>
+<span class="w">               </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">         </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="cm">/* No sensor match found */</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">ERROR</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">iStatus</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"ASC_PROXY_ERRORS_SET_SENSOR_THRESHOLD_BY_ID</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">OSAL_ERRORS_NONE</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">iOSAL_Mutex_Release</span><span class="p">(</span><span class="w"> </span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">pvOsalMutexHdl</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"ASC_PROXY_ERRORS_MUTEX_RELEASE_FAILED</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">iStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ERROR</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">iStatus</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="events-and-signals">
+<span id="avedmanagementcontroller-amc-architectureanddesign-ael"></span><h3>Events and Signals<a class="headerlink" href="#events-and-signals" title="Permalink to this headline">¶</a></h3>
+<section id="events">
+<span id="avedmanagementcontroller-amc-architectureanddesign-events"></span><h4>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h4>
+<p>Each proxy driver defines a list of events (i.e. as an <strong>enum</strong>) that are publicly available to the application layer above.</p>
+<p>An example list for the AMI Proxy Driver might be:</p>
+<p><strong>AMI Proxy Driver events</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">AMI_PROXY_DRIVER_EVENTS</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_PROXY_DRIVER_E_SENSOR_READ_REQUEST</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_PROXY_DRIVER_E_SENSOR_RESET_REQUEST</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_PROXY_DRIVER_E_CLOCK_SHUTDOWN_REQUEST</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="cm">/* etc... */</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">AMI_PROXY_DRIVER_E_RX_MSG_FAILURE</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_PROXY_DRIVER_E_TX_MSG_FAILURE</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">MAX_AMI_PROXY_DRIVER_EVENT</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">AMI_PROXY_DRIVER_EVENTS</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p><em>(This is only an example and is not indicative of what’s in the code)</em></p>
+<p>Each proxy driver holds an <strong>EVL</strong> (Event Library) record. The record holds a pool of function pointers, defined as:</p>
+<p><strong>eventCallback</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">EVL_SIGNAL</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w">         </span><span class="n">ucModule</span><span class="p">;</span><span class="w">           </span><span class="cm">/* Unique ID of the module raising the event   */</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w">         </span><span class="n">ucEventType</span><span class="p">;</span><span class="w">        </span><span class="cm">/* Unique ID of the event raised by the module */</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w">         </span><span class="n">ucInstance</span><span class="p">;</span><span class="w">         </span><span class="cm">/* Specific instance of the event raised       */</span><span class="w"></span>
+<span class="w">                                        </span><span class="cm">/* - for optional tracking                     */</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w">         </span><span class="n">ucAdditionalData</span><span class="p">;</span><span class="w">   </span><span class="cm">/* Additional data if required.                */</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">EVL_SIGNAL</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">EVL_CALLBACK</span><span class="w"> </span><span class="p">)(</span><span class="w"> </span><span class="n">EVL_SIGNAL</span><span class="w"> </span><span class="o">*</span><span class="n">pxSignal</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="event-binding">
+<span id="avedmanagementcontroller-amc-architectureanddesign-eventbinding"></span><h4>Event binding<a class="headerlink" href="#event-binding" title="Permalink to this headline">¶</a></h4>
+<p>Each proxy driver also holds a local <strong>uint8_t</strong> variable to store their “Proxy ID” (a single byte unique to that that proxy driver).</p>
+<p>During initialization, the proxy driver takes in a <strong>unit8_t</strong> variable that the proxy driver stores as their proxy ID.</p>
+<p>E.g.:</p>
+<p><strong>Example initialisation</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">iAMI_Initialise</span><span class="p">(</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ucProxyId</span><span class="p">,</span><span class="w"> </span><span class="n">FW_IF_CFG</span><span class="w"> </span><span class="o">*</span><span class="n">pxFwIf</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">ulFwIfPort</span><span class="p">,</span><span class="w"></span>
+<span class="w">                     </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">ulTaskPrio</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">ulTaskStack</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">iStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ERROR</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">pxFwIf</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="cm">/* Store parameters locally */</span><span class="w"></span>
+<span class="w">        </span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">ucMyId</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">ucProxyId</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">pxFwIf</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">pxFwIf</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">ulFwIfPort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ulFwIfPort</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="cm">/* initalise evl record*/</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">OK</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">iEVL_CreateRecord</span><span class="p">(</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">pxEvlRecord</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="n">AMI_NAME</span><span class="p">,</span><span class="w"> </span><span class="s">"Error initialising EVL_RECORD</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">else</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">FW_IF_ERRORS_NONE</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">pxFwIf</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">(</span><span class="w"> </span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">pxFwIf</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="n">AMI_NAME</span><span class="p">,</span><span class="w"> </span><span class="s">"Error opening FW_IF</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="k">else</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="cm">/* Initialise OSAL items */</span><span class="w"></span>
+<span class="w">                </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">OSAL_ERRORS_NONE</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">iOSAL_Mutex_Create</span><span class="p">(</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">pvOsalMutexHdl</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                                                </span><span class="s">"ami_proxy mutex"</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="n">AMI_NAME</span><span class="p">,</span><span class="w"> </span><span class="s">"Error initialising mutex</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">                </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">OSAL_ERRORS_NONE</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">iOSAL_MBox_Create</span><span class="p">(</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">pvOsalMBoxHdl</span><span class="p">,</span><span class="w"> </span><span class="n">AMI_MBOX_SIZE</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                                    </span><span class="k">sizeof</span><span class="p">(</span><span class="w"> </span><span class="n">AMI_MBOX_MSG</span><span class="w"> </span><span class="p">),</span><span class="w"> </span><span class="s">"ami_proxy mbox"</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="n">AMI_NAME</span><span class="p">,</span><span class="w"> </span><span class="s">"Error initialising mbox</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">                </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">OSAL_ERRORS_NONE</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">iOSAL_Task_Create</span><span class="p">(</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">pvOsalTaskHdl</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                                                </span><span class="n">vProxyDriverTask</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                                                </span><span class="n">ulTaskStack</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                                                </span><span class="nb">NULL</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                                                </span><span class="n">ulTaskPrio</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                                                </span><span class="s">"ami_proxy task"</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="n">AMI_NAME</span><span class="p">,</span><span class="w"> </span><span class="s">"Error initialising task</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">                </span><span class="k">else</span><span class="w"></span>
+<span class="w">                </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">iInitialised</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TRUE</span><span class="p">;</span><span class="w"></span>
+<span class="w">                    </span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">xState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MODULE_STATE_OK</span><span class="p">;</span><span class="w"></span>
+<span class="w">                    </span><span class="n">iStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OK</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">INC_ERROR_COUNTER</span><span class="p">(</span><span class="w"> </span><span class="n">AMI_PROXY_VALIDATION_FAILED</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">iStatus</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>The proxy also provides an API to take in a function pointer (up to <strong>EVL_MAX_BINDINGS</strong> amount), defined by the application layer, that the proxy driver’s EVL record stores.</p>
+<p>E.g.:</p>
+<p><strong>Example binding</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">iAMI_BindCallback</span><span class="p">(</span><span class="w"> </span><span class="n">EVL_CALLBACK</span><span class="w"> </span><span class="o">*</span><span class="n">pxCallback</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">iStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ERROR</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">pxCallback</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"></span>
+<span class="w">        </span><span class="p">(</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">pxEvlRecord</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">iStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iEVL_BindCallback</span><span class="p">(</span><span class="w"> </span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">pxEvlRecord</span><span class="p">,</span><span class="w"> </span><span class="n">pxCallback</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">ERROR</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">iStatus</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"AMI_PROXY_BIND_CB_FAILED</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">iStatus</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>The application maintains a list (e.g. <strong>enum</strong>) of the different Proxy IDs. E.g.:</p>
+<p><strong>Example Proxy Initialisation</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">AMC_EVENT_UNIQUE_IDS</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMC_EVENT_UNIQUE_ID_AXC</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMC_EVENT_UNIQUE_ID_APC</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMC_EVENT_UNIQUE_ID_ASC</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMC_EVENT_UNIQUE_ID_AMI</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMC_EVENT_UNIQUE_ID_BMC</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">MAX_AMC_EVENT_UNIQUE_ID</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">AMC_EVENT_UNIQUE_IDS</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">vInitialiseLayer_ProxyDrivers</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">OK</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">iAMI_Initialise</span><span class="p">(</span><span class="w"> </span><span class="n">AMC_EVENT_UNIQUE_ID_AMI</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">xGcqIf</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">AMC_TASK_PRIO_DEFAULT</span><span class="p">,</span><span class="w"> </span><span class="n">AMC_TASK_DEFAULT_STACK</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">OK</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">iAMI_BindCallback</span><span class="p">(</span><span class="w"> </span><span class="o">&amp;</span><span class="n">iAmiCallback</span><span class="w"> </span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">"Error binding AMI callback"</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"Error initialising AMI Proxy Driver</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="cm">/* etc... */</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>The application defines a local callback that handles the events for the proxy driver. E.g.:</p>
+<p><strong>Example event handling</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">iMyAmiCallback</span><span class="p">(</span><span class="w"> </span><span class="n">EVL_SIGNAL</span><span class="w"> </span><span class="o">*</span><span class="n">pxSignal</span><span class="w">  </span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w">     </span><span class="kt">int</span><span class="w"> </span><span class="n">iStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ERROR</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">pxSignal</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">AMC_EVENT_UNIQUE_ID_AMI</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pxSignal</span><span class="o">-&gt;</span><span class="n">ucModule</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">switch</span><span class="p">(</span><span class="w"> </span><span class="n">pxSignal</span><span class="o">-&gt;</span><span class="n">ucEventType</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nl">AMI_PROXY_DRIVER_E_GET_IDENTITY</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"Event Get Identity (0x%02X)</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">pxSignal</span><span class="o">-&gt;</span><span class="n">ucEventType</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">AMI_PROXY_RESULT</span><span class="w"> </span><span class="n">xResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AMI_PROXY_RESULT_SUCCESS</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">GCQ_VERSION_TYPE</span><span class="w"> </span><span class="n">xGcqVersion</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="mi">0</span><span class="w"></span>
+<span class="w">            </span><span class="p">};</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">OK</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">iGCQGetVersion</span><span class="p">(</span><span class="w"> </span><span class="o">&amp;</span><span class="n">xGcqVersion</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">PLL_DBG</span><span class="p">(</span><span class="w"> </span><span class="n">AMC_NAME</span><span class="p">,</span><span class="w"> </span><span class="s">"Error getting GCQ version</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="n">xResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AMI_PROXY_RESULT_FAILURE</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">AMI_PROXY_IDENTITY_RESPONSE</span><span class="w"> </span><span class="n">xIdentityResponse</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="n">ucVerMajor</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="p">)</span><span class="n">GIT_TAG_VER_MAJOR</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="n">ucVerMinor</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="p">)</span><span class="n">GIT_TAG_VER_MINOR</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="n">ucVerPatch</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="p">)</span><span class="n">GIT_TAG_VER_PATCH</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="n">ucLocalChanges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="p">)(</span><span class="w"> </span><span class="n">GIT_STATUS</span><span class="w"> </span><span class="p">)</span><span class="o">?</span><span class="p">(</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">)</span><span class="o">:</span><span class="p">(</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">),</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="n">usDevCommits</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">uint16_t</span><span class="w"> </span><span class="p">)</span><span class="n">GIT_TAG_VER_DEV_COMMITS</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="n">ucLinkVerMajor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xGcqVersion</span><span class="p">.</span><span class="n">ucVerMajor</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="n">ucLinkVerMinor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xGcqVersion</span><span class="p">.</span><span class="n">ucVerMinor</span><span class="w"></span>
+<span class="w">            </span><span class="p">};</span><span class="w"></span>
+<span class="w">            </span><span class="n">iStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iAMI_SetIdentityResponse</span><span class="p">(</span><span class="w"> </span><span class="n">pxSignal</span><span class="p">,</span><span class="w"> </span><span class="n">xResult</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">xIdentityResponse</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+
+<span class="w">            </span><span class="cm">/* AMI is ready - enable hot reset */</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">OK</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">iAPC_EnableHotReset</span><span class="p">(</span><span class="w"> </span><span class="n">pxSignal</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"Hot reset enabled</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">OK</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">iPLL_SendBootRecords</span><span class="p">()</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"Boot logs sent OK</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="n">iStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OK</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="k">else</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">"ERROR sending boot logs</span><span class="se">\r\n</span><span class="s">"</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">default</span><span class="o">:</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">iStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OK</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">iStatus</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="event-raising">
+<span id="avedmanagementcontroller-amc-architectureanddesign-eventraising"></span><h4>Event Raising<a class="headerlink" href="#event-raising" title="Permalink to this headline">¶</a></h4>
+<p>The proxy driver raises the events via the EVL. It can also store the unique instance of this event raised for further use (if necessary). E.g.:</p>
+<p><strong>Example event calling</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">EVL_SIGNAL</span><span class="w"> </span><span class="n">xNewSignal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">ucMyId</span><span class="p">,</span><span class="w"> </span><span class="n">AMI_PROXY_DRIVER_E_PDI_DOWNLOAD_START</span><span class="p">,</span><span class="w"> </span><span class="n">ucIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span><span class="w"></span>
+<span class="n">iEVL_RaiseEvent</span><span class="p">(</span><span class="w"> </span><span class="n">pxThis</span><span class="o">-&gt;</span><span class="n">pxEvlRecord</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">xNewSignal</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Note: Not every event has to be associated with data or with a “Get” function. An event may simply be an update that something has occurred, or it may be a single command/request that doesn’t require any further clarity.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Upon an event being raised, the EVL assigns that specific instance a unique value which can be stored by the caller. This instance event is passed through to the application callback, where it can be passed on to any Proxy Driver public API
+functions. This allows Proxy Drivers to check if an incoming API call is in response to a specific event raised.</p>
+<p>It is the responsibility of the Proxy Driver to maintain its own record of event instances, to whatever depth it deems necessary.</p>
+</section>
+</section>
+<section id="event-list">
+<span id="avedmanagementcontroller-amc-architectureanddesign-eventlist"></span><h3>Event List<a class="headerlink" href="#event-list" title="Permalink to this headline">¶</a></h3>
+<p>AXC Proxy Driver</p>
+<table class="wrapped relative-table confluenceTable" style="width: 52.4048%;"><colgroup><col style="width: 25.7001%;"/><col style="width: 6.33779%;"/><col style="width: 5.03571%;"/><col style="width: 53.7455%;"/><col style="width: 9.20583%;"/></colgroup><tbody><tr><th class="confluenceTh">Event Name</th><th class="confluenceTh">Module ID</th><th class="confluenceTh">Event ID</th><th class="confluenceTh">Description</th><th class="confluenceTh">Applications handling</th></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%">AXC_PROXY_DRIVER_E_QSFP_PRESENT</td><td class="confluenceTd" rowspan="2" style="text-align: center;"><p><br/></p><p>0x01</p></td><td class="confluenceTd">0x00</td><td class="confluenceTd">QSFP module (added to AXC proxy) is present, temperature will be polled by the proxy</td><td class="confluenceTd">AMC Main, BIM</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%">AXC_PROXY_DRIVER_E_QSFP_NOT_PRESENT</td><td class="confluenceTd">0x01</td><td class="confluenceTd">QSFP module (added to AXC proxy) is not present, temperature cannot be polled by the proxy</td><td class="confluenceTd">AMC Main, BIM</td></tr></tbody></table>
+<p>APC Proxy Driver</p>
+<table class="wrapped relative-table confluenceTable" style="width: 55.1213%;"><colgroup><col style="width: 26.5123%;"/><col style="width: 8.66318%;"/><col style="width: 6.79612%;"/><col style="width: 44.2868%;"/><col style="width: 13.7416%;"/></colgroup><tbody><tr><th class="confluenceTh">Event Name</th><th class="confluenceTh">Module ID</th><th class="confluenceTh">Event ID</th><th class="confluenceTh">Description</th><th class="confluenceTh">Applications handling</th></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%">APC_PROXY_DRIVER_E_DOWNLOAD_STARTED</td><td class="confluenceTd" rowspan="11" style="text-align: center;"><p><br/></p><p><br/></p><p><br/></p><p><br/></p><p><br/></p><p>0x02</p><p><br/></p><p><br/></p><p><br/></p></td><td class="confluenceTd">0x00</td><td class="confluenceTd">Image download to flash, started</td><td class="confluenceTd">AMC Main, BIM</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%">APC_PROXY_DRIVER_E_DOWNLOAD_COMPLETE</td><td class="confluenceTd">0x01</td><td class="confluenceTd">Image download to flash, complete</td><td class="confluenceTd">AMC Main, BIM</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%"><p>APC_PROXY_DRIVER_E_DOWNLOAD_BUSY</p></td><td class="confluenceTd">0x02</td><td class="confluenceTd">APC busy downloading image to flash (Mutex taken)</td><td class="confluenceTd">AMC Main, BIM</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%"><p title="">APC_PROXY_DRIVER_E_DOWNLOAD_FAILED</p></td><td class="confluenceTd">0x03</td><td class="confluenceTd">Image download to flash, failed</td><td class="confluenceTd">AMC Main, BIM</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%"><p title="">APC_PROXY_DRIVER_E_FPT_UPDATE</p></td><td class="confluenceTd">0x04</td><td class="confluenceTd">Update FPT </td><td class="confluenceTd">ASDM</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%"><p title="">APC_PROXY_DRIVER_E_COPY_STARTED</p></td><td class="confluenceTd">0x05</td><td class="confluenceTd">Image copy to flash, started</td><td class="confluenceTd">AMC Main, BIM</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%"><p title="">APC_PROXY_DRIVER_E_COPY_COMPLETE</p></td><td class="confluenceTd">0x06</td><td class="confluenceTd">Image copy to flash, complete</td><td class="confluenceTd">AMC Main, BIM</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%"><p title="">APC_PROXY_DRIVER_E_COPY_BUSY</p></td><td class="confluenceTd">0x07</td><td class="confluenceTd">APC busy copying image to flash (Mutex taken)</td><td class="confluenceTd">AMC Main, BIM</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%"><p title="">APC_PROXY_DRIVER_E_COPY_FAILED</p></td><td class="confluenceTd">0x08</td><td class="confluenceTd">Image copy to flash, failed</td><td class="confluenceTd">AMC Main, BIM</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%"><p title="">APC_PROXY_DRIVER_E_PARTITION_SELECTED</p></td><td class="confluenceTd">0x09</td><td class="confluenceTd"><span style="color: rgb(77,82,107);"> </span><span style="color: rgb(77,82,107);">FPT partition selected</span></td><td class="confluenceTd">AMC Main, BIM</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%"><p title="">APC_PROXY_DRIVER_E_PARTITION_SELECTION_FAILED</p></td><td class="confluenceTd">0x0A</td><td class="confluenceTd"><span style="color: rgb(77,82,107);"> </span><span style="color: rgb(77,82,107);">FPT partition selection failed</span></td><td class="confluenceTd">AMC Main, BIM</td></tr></tbody></table>
+<p>ASC Proxy Driver</p>
+<table class="wrapped relative-table confluenceTable" style="width: 57.4539%;"><colgroup><col style="width: 36.8677%;"/><col style="width: 8.75486%;"/><col style="width: 7.393%;"/><col style="width: 30.9339%;"/><col style="width: 16.0506%;"/></colgroup><tbody><tr><th class="confluenceTh">Event Name</th><th class="confluenceTh">Module ID</th><th class="confluenceTh">Event ID</th><th class="confluenceTh">Description</th><th class="confluenceTh">Applications handling</th></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%">ASC_PROXY_DRIVER_E_SENSOR_UPDATE_COMPLETE</td><td class="confluenceTd" rowspan="12" style="text-align: center;"><p><br/></p><p><br/></p><p><br/></p><p><br/></p><p><br/></p><p><br/></p><p>0x03</p></td><td class="confluenceTd">0x00</td><td class="confluenceTd">Sensor reading complete with no issues</td><td class="confluenceTd">ASDM, BIM</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%">ASC_PROXY_DRIVER_E_SENSOR_UNAVAILABLE</td><td class="confluenceTd">0x01</td><td class="confluenceTd">Sensor is reporting as unavailable</td><td class="confluenceTd">ASDM, BIM</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%">ASC_PROXY_DRIVER_E_SENSOR_COMMS_FAILURE</td><td class="confluenceTd">0x02</td><td class="confluenceTd">Communication failure when reading sensor</td><td class="confluenceTd">ASDM, BIM</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" colspan="1" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%">ASC_PROXY_DRIVER_E_SENSOR_WARNING</td><td class="confluenceTd" colspan="1">0x03</td><td class="confluenceTd" colspan="1">Sensor is reporting a warning</td><td class="confluenceTd" colspan="1">ASDM, BIM</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" colspan="1" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%">ASC_PROXY_DRIVER_E_SENSOR_CRITICAL</td><td class="confluenceTd" colspan="1">0x04</td><td class="confluenceTd" colspan="1">Sensor is reporting a critical warning</td><td class="confluenceTd" colspan="1">ASDM, BIM</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" colspan="1" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%">ASC_PROXY_DRIVER_E_SENSOR_FATAL</td><td class="confluenceTd" colspan="1">0x05</td><td class="confluenceTd" colspan="1">Sensor is reporting a fatal warning</td><td class="confluenceTd" colspan="1">ASDM, BIM</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" colspan="1" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%">ASC_PROXY_DRIVER_E_SENSOR_LOWER_WARNING</td><td class="confluenceTd" colspan="1">0x06</td><td class="confluenceTd" colspan="1">Sensor reading is low</td><td class="confluenceTd" colspan="1">ASDM, BIM</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" colspan="1" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%">ASC_PROXY_DRIVER_E_SENSOR_LOWER_CRITICAL</td><td class="confluenceTd" colspan="1">0x07</td><td class="confluenceTd" colspan="1">Sensor reading is critically low</td><td class="confluenceTd" colspan="1">ASDM, BIM</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" colspan="1" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%">ASC_PROXY_DRIVER_E_SENSOR_LOWER_FATAL</td><td class="confluenceTd" colspan="1">0x08</td><td class="confluenceTd" colspan="1">Sensor reading is fatally low</td><td class="confluenceTd" colspan="1">ASDM, BIM</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" colspan="1" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%">ASC_PROXY_DRIVER_E_SENSOR_UPPER_WARNING</td><td class="confluenceTd" colspan="1">0x09</td><td class="confluenceTd" colspan="1">Sensor reading is high</td><td class="confluenceTd" colspan="1">ASDM, BIM</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" colspan="1" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%">ASC_PROXY_DRIVER_E_SENSOR_UPPER_CRITICAL</td><td class="confluenceTd" colspan="1">0x0A</td><td class="confluenceTd" colspan="1">Sensor reading is critically high</td><td class="confluenceTd" colspan="1">ASDM, BIM</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" colspan="1" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%">ASC_PROXY_DRIVER_E_SENSOR_UPPER_FATAL</td><td class="confluenceTd" colspan="1">0x0B</td><td class="confluenceTd" colspan="1">Sensor reading is fatally high</td><td class="confluenceTd" colspan="1">ASDM, BIM</td></tr></tbody></table>
+<p>AMI Proxy Driver</p>
+<table class="wrapped confluenceTable"><colgroup><col/><col/><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Event Name</th><th class="confluenceTh">Module ID</th><th class="confluenceTh">Event ID</th><th class="confluenceTh">Description</th><th class="confluenceTh">Applications handling</th></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%">AMI_PROXY_DRIVER_E_PDI_DOWNLOAD_START</td><td class="confluenceTd" rowspan="9" style="text-align: center;"><p><br/></p><p><br/></p><p><br/></p><p><br/></p><p>0x04</p><p><br/></p><p><br/></p><p><br/></p></td><td class="confluenceTd">0x00</td><td class="confluenceTd">Host wants to start a PDI Download</td><td class="confluenceTd">BIM, In-Band Telemetry</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%">AMI_PROXY_DRIVER_E_PDI_COPY_START</td><td class="confluenceTd">0x01</td><td class="confluenceTd">Host wants to start a PDI Copy</td><td class="confluenceTd">BIM, In-Band Telemetry</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%">AMI_PROXY_DRIVER_E_SENSOR_READ</td><td class="confluenceTd">0x02</td><td class="confluenceTd">Host wants to read sensor data</td><td class="confluenceTd">BIM, In-Band Telemetry</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%">AMI_PROXY_DRIVER_E_GET_IDENTITY</td><td class="confluenceTd">0x03</td><td class="confluenceTd">Host wants the AMC version information</td><td class="confluenceTd">AMC Main, BIM, In-Band Telemetry</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%">AMI_PROXY_DRIVER_E_BOOT_SELECT</td><td class="confluenceTd">0x04</td><td class="confluenceTd">Host sends boot select request</td><td class="confluenceTd">BIM, In-Band Telemetry</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%">AMI_PROXY_DRIVER_E_HEARTBEAT</td><td class="confluenceTd">0x05</td><td class="confluenceTd">Host wants the current heartbeat counter</td><td class="confluenceTd">BIM, In-Band Telemetry</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%">AMI_PROXY_DRIVER_E_EEPROM_READ_WRITE</td><td class="confluenceTd">0x06</td><td class="confluenceTd">Host sends eeprom read write request</td><td class="confluenceTd">BIM, In-Band Telemetry</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%">AMI_PROXY_DRIVER_E_MODULE_READ_WRITE</td><td class="confluenceTd">0x07</td><td class="confluenceTd">Host sends module read write request</td><td class="confluenceTd">In-band Telemetry</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%"><p title=""><span style="color: rgb(0,51,102);">AMI_PROXY_DRIVER_E_DEBUG_VERBOSITY</span></p></td><td class="confluenceTd">0x08</td><td class="confluenceTd">Host sends debug verbosity info request</td><td class="confluenceTd">In-band Telemetry</td></tr></tbody></table>
+<p>BMC Proxy Driver</p>
+<table class="wrapped confluenceTable"><colgroup><col/><col/><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Event Name</th><th class="confluenceTh">Module ID</th><th class="confluenceTh">Event ID</th><th class="confluenceTh">Description</th><th class="confluenceTh">Applications handling</th></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%"><span style="color: rgb(36,41,47);">BMC_PROXY_DRIVER_E_MSG_ARRIVAL </span></td><td class="confluenceTd" rowspan="6" style="text-align: center;"><p><br/></p><p><br/></p><p><br/></p><p>0x05</p><p><br/></p><p><br/></p></td><td class="confluenceTd">0x00</td><td class="confluenceTd">Host sends message</td><td class="confluenceTd">BIM, Out-of-Band Telemetry</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%"><span style="color: rgb(36,41,47);">BMC_PROXY_DRIVER_E_GET_PDR</span></td><td class="confluenceTd">0x01</td><td class="confluenceTd">Return sensor PDR</td><td class="confluenceTd">BIM, Out-of-Band Telemetry</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%"><span style="color: rgb(36,41,47);">BMC_PROXY_DRIVER_E_GET_PDR_REPOSITORY_INFO</span></td><td class="confluenceTd">0x02</td><td class="confluenceTd">Return PDR repository information</td><td class="confluenceTd">BIM, Out-of-Band Telemetry</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%"><span style="color: rgb(36,41,47);">BMC_PROXY_DRIVER_E_GET_SENSOR_INFO</span></td><td class="confluenceTd">0x03</td><td class="confluenceTd">Get sensor information</td><td class="confluenceTd">BIM, Out-of-Band Telemetry</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%"><span style="color: rgb(36,41,47);">BMC_PROXY_DRIVER_E_ENABLE_SENSOR</span></td><td class="confluenceTd">0x04</td><td class="confluenceTd">Enable sensor information</td><td class="confluenceTd">BIM, Out-of-Band Telemetry</td></tr><tr><td class="highlight-#79f2c0 confluenceTd" data-highlight-colour="#79f2c0" title="Background color : Medium green 45%"><span style="color: rgb(36,41,47);">BMC_PROXY_DRIVER_E_INVALID_REQUEST_RECVD</span></td><td class="confluenceTd">0x05</td><td class="confluenceTd">Invalid request received</td><td class="confluenceTd">BIM, Out-of-Band Telemetry</td></tr></tbody></table>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Page Revision: v. 143</p>
+</section>
+</section>
+</section>
+</div>
+</div>
+<footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+<a accesskey="p" class="btn btn-neutral float-left" href="SMBus%2BIP%2Bv1.1%2B-%2BProduct%2BGuide.html" rel="prev" title="SMBus IP v1.1 - Product Guide"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+<a accesskey="n" class="btn btn-neutral float-right" href="AVED%2BASDM%2BApplication.html" rel="next" title="AVED ASDM Application">Next <span aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<p>© Copyright 2023, Advanced Micro Devices Inc.</p>
+</div>
+<div class="aem-Grid aem-Grid--16">
+<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+<div class="container-fluid sub-footer">
+<div class="row">
+<div class="col-xs-24">
+<p><a href="https://www.amd.com/en/corporate/copyright" target="_blank">Terms and Conditions</a> | <a href="https://www.amd.com/en/corporate/privacy" target="_blank">Privacy</a> | <a href="https://www.amd.com/en/corporate/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.amd.com/en/corporate/trademarks" target="_blank">Trademarks</a> | <a href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf" target="_blank">Statement on Forced Labor</a> | <a href="https://www.amd.com/en/corporate/competition" target="_blank">Fair and Open Competition</a> | <a href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf" target="_blank">UK Tax Strategy</a> | <a href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA" target="_blank">Inclusive Terminology</a> | <a class="ot-sdk-show-settings" href="#cookiessettings">Cookies Settings</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+</div>
+</div>
+</section>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+</body>
+</html>

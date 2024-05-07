@@ -1,0 +1,25 @@
+<mxfile host="confluence.xilinx.com" modified="2024-02-23T23:56:40.637Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="oGSKiiLcdLu_mgqZ1630" version="21.4.0" type="atlas">
+  <diagram id="wXYFY_kk6NwpBeVsQ3Ge" name="Page-1">
+    <mxGraphModel dx="1834" dy="769" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="LeSVxS0tp1Z8v-44U_2B-1" value="&lt;b&gt;AVED Management Controller&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-120" width="480" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LeSVxS0tp1Z8v-44U_2B-2" value="&lt;b&gt;Application Runtime Services&lt;br&gt;&lt;/b&gt;&lt;br&gt;(PCIe Management Interface, FPGA Clock Control)" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="240" y="40" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="LeSVxS0tp1Z8v-44U_2B-3" value="&lt;b&gt;Device Programming&lt;br&gt;&lt;br&gt;&lt;/b&gt;(Configuration memory device programming)" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="120" y="40" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="LeSVxS0tp1Z8v-44U_2B-4" value="&lt;b&gt;In-band Telemetry&lt;br&gt;&lt;/b&gt;&lt;br&gt;(Card management, Sysmon and Card Sensor Readback, QSFP control)" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-120" y="40" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="LeSVxS0tp1Z8v-44U_2B-5" value="&lt;b&gt;Out-of-band Telemetry&lt;br&gt;&lt;/b&gt;&lt;br&gt;(SMBUS, &lt;br&gt;&lt;div&gt;OpenBMC)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry y="40" width="120" height="120" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

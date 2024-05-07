@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script charset="UTF-8" data-document-language="true" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script class="optanon-category-C0002" type="text/plain">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+<title>AVED Debug Techniques — AVED  documentation</title>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="_static/xbtest.css" rel="stylesheet" type="text/css"/>
+<link href="_static/_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="https://docs.xilinx.com/favicon.ico" rel="shortcut icon"/>
+<!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/js/theme.js"></script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="AVED%2BJTAG%2BBoot%2BRecovery.html" rel="next" title="AVED JTAG Boot Recovery"/>
+<link href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html" rel="prev" title="AVED Updating Design PDI in Flash"/>
+<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager -->
+<noscript><iframe class="optanon-category-C0002" height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager -->
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="index.html"> AVED
+            <img alt="Logo" class="logo" src="_static/xilinx-header-logo.svg"/>
+</a>
+<div role="search">
+<form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" type="text"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+</div>
+</div><div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">AVED Debug Techniques</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#debug-methods"><em>Debug Methods</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#programming"><strong>Programming</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#card-status"><strong>Card status</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xbtest-logs-and-csv-files"><strong>xbtest logs and CSV files</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#server-logs-and-sensors"><strong>Server logs and sensors</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dmesg"><strong>dmesg</strong></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#changing-message-verbosity">Changing message verbosity</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#resets-and-reboots"><strong>Resets and reboots</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#revert-to-provided-exdes"><strong>Revert to provided exdes</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sysfs"><strong>sysfs</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-read-write"><strong>Hardware read/write</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#swap-cards-or-servers"><strong>Swap cards or servers</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#issue-reporting"><em>Issue Reporting</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#required"><strong>Required</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#if-applicable"><strong>If applicable</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BHierarchy%2BOverview.html">AVED V80 - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BCIPS%2BConfiguration.html">AVED V80 - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BResources.html">AVED V80 - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BMap.html">AVED V80 - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BNoC%2BConfiguration.html">AVED V80 - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BBase%2BLogic.html">AVED V80 - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BClock%2BReset%2BModule.html">AVED V80 - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BSource%2BFile%2BOverview.html">AVED V80 - Source File Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SMBus%2BIP%2Bv1.1%2B-%2BProduct%2BGuide.html">SMBus IP v1.1 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BASDM%2BApplication.html">AVED ASDM Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOutOfBand%2BTelemetry%2BApplication.html">AVED OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Board%2BManagement%2BController%2B%28BMC%29%2BProxy%2BDriver.html">Board Management Controller (BMC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BQDMA.html">AVED QDMA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift"><nav aria-label="Mobile navigation menu" class="wy-nav-top" style="background: black">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="index.html">AVED</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="Page navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a class="icon icon-home" href="index.html"></a> »</li>
+<li>AVED Debug Techniques</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<section id="aved-debug-techniques">
+<h1>AVED Debug Techniques<a class="headerlink" href="#aved-debug-techniques" title="Permalink to this headline">¶</a></h1>
+<section id="debug-methods">
+<span id="aveddebugtechniques-debugmethods"></span><h2><em>Debug Methods</em><a class="headerlink" href="#debug-methods" title="Permalink to this headline">¶</a></h2>
+<p>The debug techniques are listed here in approximate increasing order of complexity and effort.</p>
+<section id="programming">
+<span id="aveddebugtechniques-programming"></span><h3><strong>Programming</strong><a class="headerlink" href="#programming" title="Permalink to this headline">¶</a></h3>
+<p>If an issue occurs during a cfgmem_fpt/cfgmem_program (<a class="reference external" href="AVED+Management+Interface+userguide+(ami_tool).html">AVED Management Interface userguide (ami_tool)#overview</a>) please go straight to <a class="reference external" href="AVED+Updating+FPT+Image+in+Flash.html">AVED Updating FPT Image in
+Flash</a> to recover the card.</p>
+</section>
+<section id="card-status">
+<span id="aveddebugtechniques-cardstatus"></span><h3><strong>Card status</strong><a class="headerlink" href="#card-status" title="Permalink to this headline">¶</a></h3>
+<p>Once an error has occurred, it can be useful to check the card status and health to see what is still working and what is not. Some useful checks are:</p>
+<p>For AMI specific commands see - <a class="reference external" href="AVED+Management+Interface+userguide+(ami_tool).html">AVED Management Interface userguide (ami_tool)</a>.</p>
+<ul>
+<li><p><strong>lspci device check</strong></p>
+<ul>
+<li><p>Issue ‘sudo lspci -vvs &lt;BDF&gt;’</p></li>
+<li><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="m">21</span>:00.0 Processing accelerators: Xilinx Corporation Device 50b4
+        Subsystem: Xilinx Corporation Device 000e
+        Physical Slot: <span class="m">2</span>-1
+        Control: I/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx-
+        Status: Cap+ 66MHz- UDF- FastB2B- ParErr- <span class="nv">DEVSEL</span><span class="o">=</span>fast &gt;TAbort- &lt;TAbort- &lt;MAbort- &gt;SERR- &lt;PERR- INTx-
+        Latency: <span class="m">0</span>
+        NUMA node: <span class="m">2</span>
+        Region <span class="m">0</span>: Memory at <span class="m">10400000000</span> <span class="o">(</span><span class="m">64</span>-bit, prefetchable<span class="o">)</span> <span class="o">[</span><span class="nv">size</span><span class="o">=</span>256M<span class="o">]</span>
+        Capabilities: <span class="o">[</span><span class="m">40</span><span class="o">]</span> Power Management version <span class="m">3</span>
+                Flags: PMEClk- DSI- D1+ D2- <span class="nv">AuxCurrent</span><span class="o">=</span>0mA PME<span class="o">(</span>D0+,D1+,D2-,D3hot+,D3cold+<span class="o">)</span>
+                Status: D0 NoSoftRst+ PME-Enable- <span class="nv">DSel</span><span class="o">=</span><span class="m">0</span> <span class="nv">DScale</span><span class="o">=</span><span class="m">0</span> PME-
+        Capabilities: <span class="o">[</span><span class="m">70</span><span class="o">]</span> Express <span class="o">(</span>v2<span class="o">)</span> Endpoint, MSI <span class="m">00</span>
+                DevCap: MaxPayload <span class="m">512</span> bytes, PhantFunc <span class="m">0</span>, Latency L0s &lt;64ns, L1 &lt;1us
+                        ExtTag+ AttnBtn- AttnInd- PwrInd- RBE+ FLReset- SlotPowerLimit <span class="m">75</span>.000W
+                DevCtl: CorrErr- NonFatalErr+ FatalErr+ UnsupReq+
+                        RlxdOrd+ ExtTag+ PhantFunc- AuxPwr- NoSnoop+
+                        MaxPayload <span class="m">512</span> bytes, MaxReadReq <span class="m">512</span> bytes
+                DevSta: CorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr- TransPend-
+                LnkCap: Port <span class="c1">#0, Speed 32GT/s, Width x8, ASPM not supported</span>
+                        ClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+
+                LnkCtl: ASPM Disabled<span class="p">;</span> RCB <span class="m">64</span> bytes, Disabled- CommClk-
+                        ExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-
+                LnkSta: Speed 16GT/s <span class="o">(</span>downgraded<span class="o">)</span>, Width x8 <span class="o">(</span>ok<span class="o">)</span>
+                        TrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-
+                DevCap2: Completion Timeout: Range BC, TimeoutDis+ NROPrPrP- LTR+
+                         10BitTagComp+ 10BitTagReq+ OBFF Not Supported, ExtFmt- EETLPPrefix-
+                         EmergencyPowerReduction Not Supported, EmergencyPowerReductionInit-
+                         FRS- TPHComp- ExtTPHComp-
+                         AtomicOpsCap: 32bit+ 64bit+ 128bitCAS+
+                DevCtl2: Completion Timeout: 65ms to 210ms, TimeoutDis- LTR- OBFF Disabled,
+                         AtomicOpsCtl: ReqEn-
+                LnkCap2: Supported Link Speeds: <span class="m">2</span>.5-32GT/s, Crosslink- Retimer+ 2Retimers+ DRS-
+                LnkCtl2: Target Link Speed: 32GT/s, EnterCompliance- SpeedDis-
+                         Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-
+                         Compliance De-emphasis: -6dB
+                LnkSta2: Current De-emphasis Level: -3.5dB, EqualizationComplete+ EqualizationPhase1+
+                         EqualizationPhase2+ EqualizationPhase3+ LinkEqualizationRequest-
+                         Retimer- 2Retimers- CrosslinkRes: unsupported
+        Capabilities: <span class="o">[</span><span class="m">100</span> v1<span class="o">]</span> Advanced Error Reporting
+                UESta:  DLP- SDES- TLP- FCP- CmpltTO- CmpltAbrt- UnxCmplt- RxOF- MalfTLP- ECRC- UnsupReq- ACSViol-
+                UEMsk:  DLP- SDES- TLP- FCP- CmpltTO- CmpltAbrt- UnxCmplt+ RxOF- MalfTLP- ECRC- UnsupReq- ACSViol-
+                UESvrt: DLP+ SDES+ TLP+ FCP+ CmpltTO+ CmpltAbrt+ UnxCmplt- RxOF+ MalfTLP+ ECRC- UnsupReq- ACSViol-
+                CESta:  RxErr- BadTLP- BadDLLP- Rollover- Timeout- AdvNonFatalErr-
+                CEMsk:  RxErr+ BadTLP+ BadDLLP+ Rollover+ Timeout+ AdvNonFatalErr+
+                AERCap: First Error Pointer: <span class="m">00</span>, ECRCGenCap- ECRCGenEn- ECRCChkCap- ECRCChkEn-
+                        MultHdrRecCap- MultHdrRecEn- TLPPfxPres- HdrLogCap-
+                HeaderLog: <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00000000</span>
+        Capabilities: <span class="o">[</span><span class="m">188</span> v1<span class="o">]</span> Alternative Routing-ID Interpretation <span class="o">(</span>ARI<span class="o">)</span>
+                ARICap: MFVC- ACS-, Next Function: <span class="m">1</span>
+                ARICtl: MFVC- ACS-, Function Group: <span class="m">0</span>
+        Capabilities: <span class="o">[</span>1c0 v1<span class="o">]</span> Secondary PCI Express
+                LnkCtl3: LnkEquIntrruptEn- PerformEqu-
+                LaneErrStat: <span class="m">0</span>
+        Capabilities: <span class="o">[</span>3a0 v1<span class="o">]</span> Data Link Feature &lt;?&gt;
+        Capabilities: <span class="o">[</span>3b0 v1<span class="o">]</span> Physical Layer <span class="m">16</span>.0 GT/s &lt;?&gt;
+        Capabilities: <span class="o">[</span><span class="m">400</span> v1<span class="o">]</span> Lane Margining at the Receiver &lt;?&gt;
+        Capabilities: <span class="o">[</span><span class="m">460</span> v1<span class="o">]</span> Extended Capability ID 0x2a
+        Capabilities: <span class="o">[</span><span class="m">600</span> v1<span class="o">]</span> Vendor Specific Information: <span class="nv">ID</span><span class="o">=</span><span class="m">0020</span> <span class="nv">Rev</span><span class="o">=</span><span class="m">0</span> <span class="nv">Len</span><span class="o">=</span><span class="m">010</span> &lt;?&gt;
+        Kernel driver <span class="k">in</span> use: ami
+        Kernel modules: ami
+</pre></div>
+</div>
+</li>
+<li><p>Check the PF has expected</p>
+<ul class="simple">
+<li><p>device ID</p></li>
+<li><p>number of BARs</p></li>
+<li><p>BAR sizes</p></li>
+<li><p>link speed and width in LnkCap</p></li>
+<li><p>link speed and width in LnkSta</p></li>
+<li><p>Vendor Specific capability present</p></li>
+<li><p>kernel driver in use</p>
+<ul>
+<li><p>PF0 AMI</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>ami_tool link check</strong></p>
+<ul class="simple">
+<li><p>Issue ‘ami_tool pcieinfo -d &lt;BDF&gt;’</p></li>
+<li><p>For each expected PF, check the following entries for consistency with lspci link status</p>
+<ul>
+<li><p>PCIe Link</p></li>
+<li><p>NUMA NODE</p></li>
+<li><p>CPU Affinity</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>ami_tool overview check</strong></p>
+<ul class="simple">
+<li><p>Issue ‘ami_tool overview’</p></li>
+<li><p>check the AMI version is as expected</p>
+<ul>
+<li><p>AMI version should match AMI driver version</p></li>
+<li><p>AMI major version should match AMC major version</p></li>
+</ul>
+</li>
+<li><p>For each BDF check</p>
+<ul>
+<li><p>‘Devices State’ is READY</p>
+<ul>
+<li><p>if the device state is not READY, please cold reboot the system</p></li>
+</ul>
+</li>
+<li><p>Expected design name and UUID</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>ami_tool mfg_info check</strong></p>
+<ul class="simple">
+<li><p>Issue ‘ami_tool mfg_info -d &lt;BDF&gt;’</p></li>
+<li><p>Check</p>
+<ul>
+<li><p>eeprom version</p></li>
+<li><p>product name</p></li>
+<li><p>board revision</p></li>
+<li><p>serial no</p></li>
+<li><p>mac address</p></li>
+<li><p>mfg date</p></li>
+<li><p>uuid</p></li>
+<li><p>board part number</p></li>
+<li><p>mfg part number</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>xbtest verify check</strong></p>
+<ul class="simple">
+<li><p>issue ‘xbtest -c verify -d &lt;BDF&gt; -F’</p></li>
+<li><p>When completed, for each BDF check</p>
+<ul>
+<li><p>“RESULT: ALL TESTS PASSED” present</p></li>
+<li><p>“ERROR” not present</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>sensor check</strong></p>
+<ul class="simple">
+<li><p>Issue “ami_tool sensors -d &lt;BDF&gt; -f json -o &lt;FILE&gt;’</p></li>
+<li><p>Check produced json format is correct</p></li>
+<li><p>For each expected sensor</p>
+<ul>
+<li><p>Check entry is present in json</p></li>
+<li><p>Check for expected value</p></li>
+<li><p>See <a class="reference external" href="Sensors+and+Hardware+Monitoring.html">Sensors and Hardware Monitoring</a> for thresholds</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="xbtest-logs-and-csv-files">
+<span id="aveddebugtechniques-xbtestlogsandcsvfiles"></span><h3><strong>xbtest logs and CSV files</strong><a class="headerlink" href="#xbtest-logs-and-csv-files" title="Permalink to this headline">¶</a></h3>
+<p>For errors that occurred while xbtest was running, check the xbest logs for context and error reporting.</p>
+<p>xbtest writes sensor data into several CSV files. These can be analyzed as text or imported into Microsoft Excel to analyze the data graphically.</p>
+<p>xbtest can be useful to test the card capabilities and to push it to its limits. This is more often helpful for exposing or reproducing an issue, rather than triaging or debugging an issue. However, xbtest does provide an easy method for continuously
+reading card sensors such as power and temperature, which can be useful in some debug situations.</p>
+<p>For xbtest documentation, see AVED Deployment / <a class="reference external" href="xbtest/user-guide/source/index.html">xbtest Userguide</a>.</p>
+</section>
+<section id="server-logs-and-sensors">
+<span id="aveddebugtechniques-serverlogsandsensors"></span><h3><strong>Server logs and sensors</strong><a class="headerlink" href="#server-logs-and-sensors" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><strong>BMC (Baseboard Management Controller)</strong></p>
+<ul>
+<li><p>This provides remote configuration and power control for the Dell servers that V80 cards have been verified against.</p></li>
+<li><p>There is an BMC for each server. It stores logs of server activity. These can help to diagnose physical server issues (e.g. someone pulled out a power cord, or shut down the wrong server). Use the log timestamps to correlate this with other
+logs.</p></li>
+<li><p>The BMC stores server sensor readings such as temperature. This historical data can be viewed in logs and charts and can help to diagnose issues with power or temperature. For example, if card sensors are not working properly or are not being
+reported correctly then xbtest would not report the correct temperature, but the BMC would.</p></li>
+</ul>
+</li>
+<li><p><strong>Crash logs</strong></p>
+<ul>
+<li><p>To help with debug, when a server crash occurs, the server loads a crash kernel, which freezes the state of the server and writes this state and the current messages into a crash directory.</p></li>
+<li><p>This is stored in /var/crash/ where a new directory is created for each server crash, named with a timestamp.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="dmesg">
+<span id="aveddebugtechniques-dmesg"></span><h3><strong>dmesg</strong><a class="headerlink" href="#dmesg" title="Permalink to this headline">¶</a></h3>
+<p>dmesg is an OS tool for reporting messages from the kernel, including from drivers such as AMI. Useful commands are:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span>dmesg | less          # show full dmesg output, piped to a pager
+dmesg -wT             # show live dmesg output, auto-updates when new messages are sent. -T gives wall clock timestamps (default is seconds since server reboot)
+</pre></div>
+</div>
+<p>Consult OS documentation for full usage details.</p>
+<p>dmesg is particularly useful for information about PCIe® connections at server boot and for AMI debug information.</p>
+<p>For AMI messages:</p>
+<ul class="simple">
+<li><p>messages are preceded by <strong>ami:</strong> and usually include the card BDF.</p></li>
+<li><p>heartbeat message for AMI/AMC comms will appear if there’s a failure or breakdown in comms.</p>
+<ul>
+<li><p>No response - “Failed to get the heartbeat msg!” and “AMC Heartbeat expired event received”</p></li>
+<li><p>Fatal failure (communications have been shut down) - “Heartbeat fail count above threshold! Raising fatal event…” and “AMC Heartbeat fatal event received, stopping GCQ…”</p></li>
+<li><p>Incorrect Response - “Heartbeat validation failed!” and “AMC Heartbeat validation event received”</p></li>
+</ul>
+</li>
+</ul>
+<p>dmesg content is also written into log files at /var/log/ - the exact directory and file names here differ between RedHat/CentOS and Ubuntu (e.g. on RedHat/CentOS the full dmesg content is written to file <code class="docutils literal notranslate"><span class="pre">messages</span></code> , on Ubuntu this file is named
+<code class="docutils literal notranslate"><span class="pre">kern.log</span></code> ). Use sudo to read these log files.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>The AMI driver also populates dmesg with log messages received from AMC; these are always additionally prefixed with the string “AMC OUTPUT:”. By default, the only AMC messages printed in dmesg are those with the level “LOG”.</p>
+<section id="changing-message-verbosity">
+<span id="aveddebugtechniques-changingmessageverbosity"></span><h4>Changing message verbosity<a class="headerlink" href="#changing-message-verbosity" title="Permalink to this headline">¶</a></h4>
+<p>The verbosity of the AMI messages can be changed by changing the value in <strong>/sys/bus/pci/drivers/ami/ami_debug_enabled</strong> (ensure the file has write-permissions).</p>
+<ul class="simple">
+<li><p>If the value is 1, additional debug messages are added to dmesg.</p></li>
+<li><p>If the value is 0, only errors and important information messages are added to dmesg.</p></li>
+</ul>
+<p>The verbosity of the AMC messages can be updated with the <strong>debug_verbosity</strong> command; for example, to enable AMC debug messages you can run the command <strong>ami_tool debug_verbosity -d &lt;bdf&gt; -l debug</strong> - this will cause all AMC debug messages to appear
+in dmesg.</p>
+</section>
+</section>
+<section id="resets-and-reboots">
+<span id="aveddebugtechniques-resetsandreboots"></span><h3><strong>Resets and reboots</strong><a class="headerlink" href="#resets-and-reboots" title="Permalink to this headline">¶</a></h3>
+<p>Performing a reset after an issue has occurred can help to understand the impact and scope of the issue. For example, if the issue is cleared by a hot reset, the issue is not wide-ranging, but if a full power cycle is required, the issue is more
+significant.</p>
+<p>Several types of reset are possible for aved design:</p>
+<ul class="simple">
+<li><p>power cycle : shut down server using BMC, power cycle system, boot up server using BMC</p></li>
+<li><p>server cold reboot : shut down server using BMC, boot up server using BMC</p></li>
+<li><p>server warm reboot reboot server using BMC</p></li>
+<li><p>Host PCI reset (removes the PCI device from the host and forces a bus rescan; this does not remove power from the device): <strong>ami_tool reload -t pci -d &lt;bdf&gt;</strong></p></li>
+<li><p>PCIe hot reset (aka in-band reset - reset the FPGA but does not reprogram it from flash) : <strong>ami_tool reload -t sbr -d &lt;bdf&gt;</strong></p></li>
+<li><p>AMI driver reload (put driver into clean state without reprogramming): <strong>ami_tool reload -t driver -d &lt;bdf&gt;</strong></p></li>
+</ul>
+</section>
+<section id="revert-to-provided-exdes">
+<span id="aveddebugtechniques-reverttoprovidedexdes"></span><h3><strong>Revert to provided exdes</strong><a class="headerlink" href="#revert-to-provided-exdes" title="Permalink to this headline">¶</a></h3>
+<p>For issues seen in custom designs, if applicable, it may be useful to revert back to the released AVED image to confirm they are/are not seen also.</p>
+</section>
+<section id="sysfs">
+<span id="aveddebugtechniques-sysfs"></span><h3><strong>sysfs</strong><a class="headerlink" href="#sysfs" title="Permalink to this headline">¶</a></h3>
+<p>sysfs is a Linux pseudo file system that provides information about hardware devices in the server system. sysfs is mounted at /sys/ and can be accessed like any other Linux file system (cd, ls, cat, etc.).</p>
+<p>/sys/bus/pci/devices/ shows the PCIe connected devices. Each directory here shows a mapping from the BDF to the associated device within sysfs. Each directory contains many files and subdirectories that show device information available to the OS.</p>
+<p>Some examples include:</p>
+<ul class="simple">
+<li><p>amc_version : version number for alveo management controller (amc)</p></li>
+<li><p>logic_uuid: Build UUID</p></li>
+</ul>
+</section>
+<section id="hardware-read-write">
+<span id="aveddebugtechniques-hardwareread-write"></span><h3><strong>Hardware read/write</strong><a class="headerlink" href="#hardware-read-write" title="Permalink to this headline">¶</a></h3>
+<p>Use <strong>ami_tool bar_rd</strong> <em>and</em> <strong>bar_wr</strong> to read or write from memory-mapped registers or memories within the platform</p>
+<p><strong>bar_rd</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>% ami_tool bar_rd -d &lt;BDF&gt; -b <span class="m">2</span> -a 0x0000ffff -l <span class="m">4</span>
+0000ffff DEAD BEEF DEAD BEEF DEAD BEEF DEAD BEEF
+INFO: <span class="m">4</span> words <span class="nb">read</span> successfully
+
+% ami_tool bar_rd -d &lt;BDF&gt; -b <span class="m">2</span> -a 0x0000ffff -l <span class="m">256</span> -o outfile.bin
+INFO: <span class="m">256</span> words <span class="nb">read</span> successfully
+</pre></div>
+</div>
+<p><strong>bar_wr</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>% ami_tool bar_wr -d &lt;BDF&gt; -b <span class="m">2</span> -a 0x0000ffff -i 0xACDCACDC
+INFO: <span class="m">1</span> words written successfully
+
+% ami_tool bar_wr -d &lt;BDF&gt; -b <span class="m">2</span> -a 0x0000ffff -I infile.bin
+INFO: <span class="m">512</span> words written successfully
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><strong>Swap card slots</strong></p>
+<p>If an issue occurs on one card but not on another, try swapping the cards over or move the card into an empty slot in the server and see where the issue occurs.</p>
+<p>This can help to isolate an issue to a faulty card, faulty slot, or incorrect slot configuration.</p>
+<p>There may be other factors involved. For example if the test only fails intermittently, or there may be some server race or load condition required to create the conditions that triggers the issue.</p>
+</section>
+<section id="swap-cards-or-servers">
+<span id="aveddebugtechniques-swapcardsorservers"></span><h3><strong>Swap cards or servers</strong><a class="headerlink" href="#swap-cards-or-servers" title="Permalink to this headline">¶</a></h3>
+<p>Try running the test on a different card and/or in a different server, and see where the issue occurs.</p>
+<p>This can help to isolate an issue to a faulty card or faulty server.</p>
+<p>There may be other factors involved. For example, if the test only fails intermittently, or there may be some server race or load condition required to create the conditions that triggers the issue.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</section>
+<section id="issue-reporting">
+<span id="aveddebugtechniques-issuereporting"></span><h2><em>Issue Reporting</em><a class="headerlink" href="#issue-reporting" title="Permalink to this headline">¶</a></h2>
+<p>When reporting an issue against the AVED solution, provide the following information to aid with triage.</p>
+<section id="required">
+<span id="aveddebugtechniques-required"></span><h3><strong>Required</strong><a class="headerlink" href="#required" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Details of issue and any debug attempted.</p>
+<ul>
+<li><p>OS and Kernel versions of the host server.</p></li>
+<li><p>Consistent or intermittent issue?</p></li>
+<li><p>Single or multi card?</p></li>
+<li><p>Recoverable via reset/reboot?</p></li>
+<li><p>steps to reproduce</p></li>
+</ul>
+</li>
+<li><p>logs</p>
+<ul>
+<li><p>ami_tool overview</p></li>
+<li><p>ami_tool pcieinfo -d &lt;bdf&gt;</p></li>
+<li><p>ami_tool mfg_info -d &lt;bdf&gt;</p></li>
+<li><p>ami_tool sensors -d &lt;bdf&gt;</p></li>
+<li><p>ami_tool cfgmem_info -d &lt;bdf&gt; -t &lt;type&gt;</p></li>
+<li><p>lspci -vvs &lt;bdf&gt;</p></li>
+<li><p>dmesg</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="if-applicable">
+<span id="aveddebugtechniques-ifapplicable"></span><h3><strong>If applicable</strong><a class="headerlink" href="#if-applicable" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>xbtest logs:</p>
+<ul>
+<li><p>Provide the <em>full set</em> of log files: zip the folder “BDF_&lt;date&gt;_&lt;time&gt;” of the falling run.</p></li>
+<li><p>By default, xbtest stores log files under the folder “xbtest_logs”. With this folder each run is stored within its own folder titled BDF_&lt;date&gt;_&lt;time&gt;.</p>
+<ul>
+<li><p>If you store your file differently (-l option), provide the folder accordingly.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>server logs</p></li>
+</ul>
+<p>Page Revision: v. 35</p>
+</section>
+</section>
+</section>
+</div>
+</div>
+<footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+<a accesskey="p" class="btn btn-neutral float-left" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html" rel="prev" title="AVED Updating Design PDI in Flash"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+<a accesskey="n" class="btn btn-neutral float-right" href="AVED%2BJTAG%2BBoot%2BRecovery.html" rel="next" title="AVED JTAG Boot Recovery">Next <span aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<p>© Copyright 2023, Advanced Micro Devices Inc.</p>
+</div>
+<div class="aem-Grid aem-Grid--16">
+<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+<div class="container-fluid sub-footer">
+<div class="row">
+<div class="col-xs-24">
+<p><a href="https://www.amd.com/en/corporate/copyright" target="_blank">Terms and Conditions</a> | <a href="https://www.amd.com/en/corporate/privacy" target="_blank">Privacy</a> | <a href="https://www.amd.com/en/corporate/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.amd.com/en/corporate/trademarks" target="_blank">Trademarks</a> | <a href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf" target="_blank">Statement on Forced Labor</a> | <a href="https://www.amd.com/en/corporate/competition" target="_blank">Fair and Open Competition</a> | <a href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf" target="_blank">UK Tax Strategy</a> | <a href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA" target="_blank">Inclusive Terminology</a> | <a class="ot-sdk-show-settings" href="#cookiessettings">Cookies Settings</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+</div>
+</div>
+</section>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+</body>
+</html>

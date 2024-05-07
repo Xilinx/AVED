@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script charset="UTF-8" data-document-language="true" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script class="optanon-category-C0002" type="text/plain">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+<title>How-to install and run a pre-built AVED design on an ALVEO card — AVED  documentation</title>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="_static/xbtest.css" rel="stylesheet" type="text/css"/>
+<link href="_static/_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="https://docs.xilinx.com/favicon.ico" rel="shortcut icon"/>
+<!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/js/theme.js"></script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html" rel="next" title="How-to Rebuild an AVED Design for Yourself"/>
+<link href="AVED%2BOverview.html" rel="prev" title="AVED Overview"/>
+<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager -->
+<noscript><iframe class="optanon-category-C0002" height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager -->
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="index.html"> AVED
+            <img alt="Logo" class="logo" src="_static/xilinx-header-logo.svg"/>
+</a>
+<div role="search">
+<form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" type="text"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+</div>
+</div><div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How-to install and run a pre-built AVED design on an ALVEO card</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#before-you-begin">Before You Begin</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#preparing-for-aved-installation">Preparing for AVED Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#aved-installation">AVED Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-aved">Testing AVED</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ami-tool-overview">ami_tool Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ami-tool-mfg-info">ami_tool mfg_info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ami-tool-sensors">ami_tool sensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xbtest-d-bdf-c-verify">xbtest -d &lt;BDF&gt; -c verify</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xbtest-d-bdf-c-memory">xbtest -d &lt;BDF&gt; -c memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BHierarchy%2BOverview.html">AVED V80 - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BCIPS%2BConfiguration.html">AVED V80 - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BResources.html">AVED V80 - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BMap.html">AVED V80 - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BNoC%2BConfiguration.html">AVED V80 - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BBase%2BLogic.html">AVED V80 - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BClock%2BReset%2BModule.html">AVED V80 - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BSource%2BFile%2BOverview.html">AVED V80 - Source File Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SMBus%2BIP%2Bv1.1%2B-%2BProduct%2BGuide.html">SMBus IP v1.1 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BASDM%2BApplication.html">AVED ASDM Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOutOfBand%2BTelemetry%2BApplication.html">AVED OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Board%2BManagement%2BController%2B%28BMC%29%2BProxy%2BDriver.html">Board Management Controller (BMC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BQDMA.html">AVED QDMA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift"><nav aria-label="Mobile navigation menu" class="wy-nav-top" style="background: black">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="index.html">AVED</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="Page navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a class="icon icon-home" href="index.html"></a> »</li>
+<li>How-to install and run a pre-built AVED design on an ALVEO card</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<section id="how-to-install-and-run-a-pre-built-aved-design-on-an-alveo-card">
+<h1>How-to install and run a pre-built AVED design on an ALVEO card<a class="headerlink" href="#how-to-install-and-run-a-pre-built-aved-design-on-an-alveo-card" title="Permalink to this headline">¶</a></h1>
+<p>This is a getting started guide for the Alveo™ Versal™ Example Design (AVED) to be used with the provided pre-built AVED package file. This guide offers instruction in installing the package on your server and running key commands to test and
+evaluate the design example. The pre-built example image includes the AVED base design with the xbtest IP integrated into it. This provides a turnkey card capable of running through the canned tests in the xbtest suite. For the AVED source files,
+only the AVED base design is included - the xbtest IP is not included and instead would be replaced with a user application.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<section id="before-you-begin">
+<span id="howtoinstallandrunaprebuiltaveddesignonanalveocard-beforeyoubegin"></span><h2>Before You Begin<a class="headerlink" href="#before-you-begin" title="Permalink to this headline">¶</a></h2>
+<section id="dependencies">
+<span id="howtoinstallandrunaprebuiltaveddesignonanalveocard-dependencies"></span><h3>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h3>
+<p>The Example Design has been tested with the operating systems in the table below. AVED may work with other versions of these operating systems, but they have not been tested. All supported operating systems are tested with general access versions
+(GA). <a class="reference external" href="https://wiki.ubuntu.com/Kernel/LTSEnablementStack">Ubuntu Hardware Enablement</a> (HWE) is not supported. By default, HWE is disabled by Ubuntu Server versions and enabled by Desktop versions.</p>
+<table class="wrapped confluenceTable"><colgroup><col/><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh" scope="col">Operating System</th><th class="confluenceTh" scope="col">Architecture</th><th class="confluenceTh" scope="col">Supported Versions</th><th class="confluenceTh" scope="col">Kernel Version</th></tr><tr><td class="confluenceTd">Ubuntu</td><td class="confluenceTd">x86_64</td><td class="confluenceTd">22.04</td><td class="confluenceTd"><p>5.4.0</p><p>5.15.0</p></td></tr><tr><td class="confluenceTd">RHEL</td><td class="confluenceTd">x86_64</td><td class="confluenceTd">8.3</td><td class="confluenceTd">4.18.0</td></tr></tbody></table>
+<p><em>Note</em>: root/sudo permissions are required.</p>
+<p>Tools</p>
+<ul class="simple">
+<li><p>Vivado™ 2023.2</p></li>
+</ul>
+</section>
+<section id="preparing-for-aved-installation">
+<span id="howtoinstallandrunaprebuiltaveddesignonanalveocard-preparingforavedinstallation"></span><h3>Preparing for AVED Installation<a class="headerlink" href="#preparing-for-aved-installation" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Confirm the server is running a supported OS. Follow the instructions provided in the <em>Alveo V80 Data Center Accelerator Cards Installation Guide</em> (UG1617) to physically install the card in your server.</p></li>
+<li><p>Get the latest AVED installation package for your Alveo card.</p>
+<ol class="arabic simple">
+<li><p>Refer to the <a class="reference external" href="AVED+Release+Information.html">AVED release table</a> to find the latest example design version. The <em>AVED Git Release Tag</em> will direct you to the tagged source code in GitHub. The <em>AVED Deployment Archive</em> is a zipped AVED
+installation package; it is pre-built from the tagged source code using the Vivado™ tools version noted in the table.</p></li>
+<li><p>Download the latest AVED Deployment archive to the server that contains your Alveo card.</p></li>
+<li><p>Unzip the archive, and find the aved_install.sh script, which will be used in the AVED installation. Review the <a class="reference external" href="AVED+Deployment+Archive.html">AVED Deployment Archive</a> for details on the extracted files and directory structure.</p></li>
+</ol>
+</li>
+<li><p>Unlike prior Alveo platforms, AVED does not use the Xilinx RunTime Library (XRT). Instead, AVED includes the AVED Management Interface (AMI) as part of the example design. Before AVED installation, ensure that XRT has been removed. It’s not
+possible to have AMI and XRT running on the same host at the same time.</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span># --- Ubuntu -----------------------------
+# Check if XRT is installed
+$ apt list | grep xrt
+
+# Remove XRT if present
+$ sudo apt remove xrt
+
+# --- RHEL -------------------------------
+# Check if XRT is installed
+$ yum list | grep xrt
+
+# Remove XRT if present
+$ sudo yum remove xrt
+</pre></div>
+</div>
+</section>
+</section>
+<section id="aved-installation">
+<span id="howtoinstallandrunaprebuiltaveddesignonanalveocard-avedinstallationanchoravedinstallation"></span><h2>AVED Installation<a class="headerlink" href="#aved-installation" title="Permalink to this headline">¶</a></h2>
+<p>Installing AVED is a two-step process. First, you will install the pre-built AVED package onto the host. Second, you will program AVED into flash on your Alveo card.</p>
+<p>To install the package onto the host, navigate to the directory with the aved_install.sh script, and execute this script.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">$</span> <span class="n">sudo</span> <span class="p">.</span><span class="o">/</span><span class="n">aved_install</span><span class="p">.</span><span class="na">sh</span>
+</pre></div>
+</div>
+<p>If successfully installed, the console will display “AVED Installation Complete.” For further information, see <a class="reference external" href="AVED+Installing+the+Deployment+package+onto+the+Host+Server.html">Installing AVED Deployment package onto the Host Server</a> for
+detailed instructions with a complete example output.</p>
+<p>To program AVED onto your Alveo card for the first time, update the Flash Partition Table (FPT) image in flash using Vivado HW Manager and JTAG. Refer to <a class="reference external" href="AVED+Updating+FPT+Image+in+Flash.html">AVED Updating FPT Image in Flash</a> for step-by-step
+instructions. If successful, Vivado HW Manager will report this with a pop-up message: “Flash programming completed successfully.” Cold boot the server to boot AVED from flash.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+<section id="testing-aved">
+<span id="howtoinstallandrunaprebuiltaveddesignonanalveocard-testingaved"></span><h2>Testing AVED<a class="headerlink" href="#testing-aved" title="Permalink to this headline">¶</a></h2>
+<p>Two sets of tools are provided to test the AVED design running in hardware: a suite of AMI commands (<code class="docutils literal notranslate"><span class="pre">ami_tool</span> <span class="pre">&lt;command&gt;</span></code>) and xbtest testcases (<code class="docutils literal notranslate"><span class="pre">xbtest</span> <span class="pre">-d</span> <span class="pre">&lt;Bus:Device.Function(BDF)&gt;</span> <span class="pre">-c</span> <span class="pre">&lt;testcase&gt;</span></code>). A subset of these tools are illustrated below.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<section id="ami-tool-overview">
+<span id="howtoinstallandrunaprebuiltaveddesignonanalveocard-ami-tooloverview"></span><h3>ami_tool Overview<a class="headerlink" href="#ami-tool-overview" title="Permalink to this headline">¶</a></h3>
+<p>The overview command shows basic information including the AMI version, the BDF, the device name, the currently programmed design’s UUID, and the device state. Take note of the BDF of your card (<strong>21:00.0</strong> in the example below), which will be used
+in subsequent commands.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">$</span> <span class="n">ami_tool</span> <span class="n">overview</span>
+
+<span class="n">AMI</span>
+<span class="o">-------------------------------------------------------------</span>
+<span class="n">Version</span>          <span class="o">|</span> <span class="mf">2.2.0</span>  <span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">Branch</span>
+<span class="n">Hash</span>             <span class="o">|</span> <span class="mi">0</span><span class="n">bab29e568f64a25f17425c0ffd1c0e89609b6d1</span>
+<span class="n">Hash</span> <span class="n">Date</span>        <span class="o">|</span> <span class="mi">20240307</span>
+<span class="n">Driver</span> <span class="n">Version</span>   <span class="o">|</span> <span class="mf">2.2.0</span>  <span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">BDF</span>       <span class="o">|</span> <span class="n">Device</span>          <span class="o">|</span> <span class="n">UUID</span>                               <span class="o">|</span> <span class="n">AMC</span>          <span class="o">|</span> <span class="n">State</span>
+<span class="o">-----------------------------------------------------------------------------------------</span>
+<span class="mi">21</span><span class="p">:</span><span class="mf">00.0</span>   <span class="o">|</span> <span class="n">ALVEO</span> <span class="n">V80</span> <span class="n">PQ</span>   <span class="o">|</span> <span class="mi">25506205</span><span class="n">d5ed38b930db62470bc7cce3</span>   <span class="o">|</span> <span class="mf">2.2.3</span>  <span class="p">(</span><span class="mi">0</span><span class="p">)</span>   <span class="o">|</span> <span class="n">READY</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">If the device state is NOT_READY, cold reboot the system.</div>
+<div class="line">Confirm the AMI driver version matches the AMC version on the device before continuing (compatibility is indicated by having the same Major &amp; Minor version numbers in the AMI/AMC Major.Minor.Patch version number format). If they do not match, AMI
+behavior is undefined.</div>
+</div>
+</section>
+<section id="ami-tool-mfg-info">
+<span id="howtoinstallandrunaprebuiltaveddesignonanalveocard-ami-toolmfg-info"></span><h3>ami_tool mfg_info<a class="headerlink" href="#ami-tool-mfg-info" title="Permalink to this headline">¶</a></h3>
+<p>The mfg_info command displays the card manufacturing information stored on an EEPROM. The values will vary from card to card.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">$</span> <span class="n">ami_tool</span> <span class="n">mfg_info</span> <span class="o">-</span><span class="n">d</span> <span class="o">&lt;</span><span class="n">BDF</span><span class="o">&gt;</span>
+
+<span class="n">Manufacturing</span> <span class="n">Information</span>
+<span class="o">--------------------------------------------------------------------</span>
+<span class="n">Eeprom</span> <span class="n">Version</span>              <span class="o">|</span> <span class="mf">4.0</span>
+<span class="n">Product</span> <span class="n">Name</span>                <span class="o">|</span> <span class="n">ALVEO</span> <span class="n">V80</span> <span class="n">PQ</span>
+<span class="n">Board</span> <span class="n">Revision</span>              <span class="o">|</span> <span class="mi">1</span>
+<span class="n">Serial</span> <span class="n">Number</span>               <span class="o">|</span> <span class="n">XFL1GHU4KQUW</span>
+<span class="n">Mac</span> <span class="n">Address</span> <span class="mi">1</span>               <span class="o">|</span> <span class="mo">00</span><span class="p">:</span><span class="mi">0</span><span class="n">a</span><span class="p">:</span><span class="mi">35</span><span class="p">:</span><span class="mi">18</span><span class="p">:</span><span class="mi">6</span><span class="n">a</span><span class="p">:</span><span class="mi">70</span>
+<span class="n">Mac</span> <span class="n">Address</span> <span class="n">N</span>               <span class="o">|</span> <span class="mo">00</span><span class="p">:</span><span class="mi">0</span><span class="n">a</span><span class="p">:</span><span class="mi">35</span><span class="p">:</span><span class="mi">18</span><span class="p">:</span><span class="mi">6</span><span class="n">a</span><span class="p">:</span><span class="mf">7f</span>
+<span class="n">Manufacturing</span> <span class="n">Date</span>          <span class="o">|</span> <span class="n">Sat</span> <span class="n">May</span>  <span class="mi">4</span> <span class="mi">23</span><span class="p">:</span><span class="mi">53</span><span class="p">:</span><span class="mo">00</span> <span class="mi">2024</span>
+<span class="n">UUID</span>                        <span class="o">|</span> <span class="mo">05</span><span class="n">a178af</span><span class="o">-</span><span class="mf">1d</span><span class="mi">5</span><span class="n">b</span><span class="o">-</span><span class="n">dd8c</span><span class="o">-</span><span class="mi">8</span><span class="n">a44</span><span class="o">-</span><span class="n">f8dde589a218</span>
+<span class="n">Board</span> <span class="n">Part</span> <span class="n">Num</span>              <span class="o">|</span> <span class="n">A</span><span class="o">-</span><span class="n">V80</span><span class="o">-</span><span class="n">P64G</span><span class="o">-</span><span class="n">PQ</span><span class="o">-</span><span class="n">G</span>
+<span class="n">Mfg</span> <span class="n">Part</span> <span class="n">Num</span>                <span class="o">|</span> <span class="mo">043</span><span class="o">-</span><span class="mo">05113</span><span class="o">-</span><span class="mo">01</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+<section id="ami-tool-sensors">
+<span id="howtoinstallandrunaprebuiltaveddesignonanalveocard-ami-toolsensors"></span><h3>ami_tool sensors<a class="headerlink" href="#ami-tool-sensors" title="Permalink to this headline">¶</a></h3>
+<p>The sensors command displays the available sensors and their values. The values may vary. For removable sensors (such as QSFP devices), the Status may appear as “invalid”; this indicates that no device is inserted. The <strong>*</strong> displayed after a
+sensor status indicates that the value retrieved was from a cached store - i.e., the value had been previously updated within the refresh timeframe (1 second).</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">$</span> <span class="n">ami_tool</span> <span class="n">sensors</span> <span class="o">-</span><span class="n">d</span> <span class="o">&lt;</span><span class="n">BDF</span><span class="o">&gt;</span>
+
+<span class="n">Name</span>            <span class="o">|</span>      <span class="n">Value</span> <span class="o">|</span> <span class="n">Status</span>
+<span class="o">----------------------------------------</span>
+<span class="mi">1</span><span class="n">V2_GTXAVTT</span>     <span class="o">|</span>   <span class="mf">33.000</span> <span class="n">C</span> <span class="o">|</span> <span class="n">valid</span>
+                <span class="o">|</span>    <span class="mf">8.000</span> <span class="n">A</span> <span class="o">|</span> <span class="n">valid</span>
+                <span class="o">|</span>    <span class="mf">1.199</span> <span class="n">V</span> <span class="o">|</span> <span class="n">valid</span>
+<span class="o">----------------------------------------</span>
+<span class="mi">0</span><span class="n">V88_VCC_CPM5</span>   <span class="o">|</span>   <span class="mf">30.000</span> <span class="n">C</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+                <span class="o">|</span>    <span class="mf">3.000</span> <span class="n">A</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+                <span class="o">|</span>    <span class="mf">0.880</span> <span class="n">V</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+<span class="o">----------------------------------------</span>
+<span class="n">PCB</span>             <span class="o">|</span>   <span class="mf">31.000</span> <span class="n">C</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+<span class="o">----------------------------------------</span>
+<span class="n">Device</span>          <span class="o">|</span>   <span class="mf">38.000</span> <span class="n">C</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+<span class="o">----------------------------------------</span>
+<span class="n">VCCINT</span>          <span class="o">|</span>   <span class="mf">36.000</span> <span class="n">C</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+                <span class="o">|</span>   <span class="mf">31.000</span> <span class="n">A</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+                <span class="o">|</span>    <span class="mf">0.800</span> <span class="n">V</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+<span class="o">----------------------------------------</span>
+<span class="n">Module_0</span>        <span class="o">|</span>    <span class="mf">0.000</span> <span class="n">C</span> <span class="o">|</span> <span class="n">invalid</span>
+<span class="o">----------------------------------------</span>
+<span class="n">Module_1</span>        <span class="o">|</span>    <span class="mf">0.000</span> <span class="n">C</span> <span class="o">|</span> <span class="n">invalid</span>
+<span class="o">----------------------------------------</span>
+<span class="n">Module_2</span>        <span class="o">|</span>    <span class="mf">0.000</span> <span class="n">C</span> <span class="o">|</span> <span class="n">invalid</span>
+<span class="o">----------------------------------------</span>
+<span class="n">Module_3</span>        <span class="o">|</span>    <span class="mf">0.000</span> <span class="n">C</span> <span class="o">|</span> <span class="n">invalid</span>
+<span class="o">----------------------------------------</span>
+<span class="n">DIMM</span>            <span class="o">|</span>   <span class="mf">29.000</span> <span class="n">C</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+<span class="o">----------------------------------------</span>
+<span class="mi">1</span><span class="n">V2_VCC_HBM</span>     <span class="o">|</span>   <span class="mf">36.000</span> <span class="n">C</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+                <span class="o">|</span>    <span class="mf">4.000</span> <span class="n">A</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+                <span class="o">|</span>    <span class="mf">1.200</span> <span class="n">V</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+<span class="o">----------------------------------------</span>
+<span class="n">Total_Power</span>     <span class="o">|</span>   <span class="mf">61.615</span> <span class="n">W</span> <span class="o">|</span> <span class="n">valid</span>
+<span class="o">----------------------------------------</span>
+<span class="mi">12</span><span class="n">V_AUX1</span>        <span class="o">|</span>    <span class="mf">1.040</span> <span class="n">A</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+                <span class="o">|</span>   <span class="mf">12.200</span> <span class="n">V</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+<span class="o">----------------------------------------</span>
+<span class="mi">12</span><span class="n">V_AUX2</span>        <span class="o">|</span>    <span class="mf">1.420</span> <span class="n">A</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+                <span class="o">|</span>   <span class="mf">12.200</span> <span class="n">V</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+<span class="o">----------------------------------------</span>
+<span class="mi">1</span><span class="n">V2_VCCO_DIMM</span>   <span class="o">|</span>    <span class="mf">1.040</span> <span class="n">A</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+                <span class="o">|</span>    <span class="mf">1.208</span> <span class="n">V</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+<span class="o">----------------------------------------</span>
+<span class="mi">3</span><span class="n">V3_PEX</span>         <span class="o">|</span>    <span class="mf">1.579</span> <span class="n">A</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+                <span class="o">|</span>    <span class="mf">3.312</span> <span class="n">V</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+<span class="o">----------------------------------------</span>
+<span class="mi">12</span><span class="n">V_PEX</span>         <span class="o">|</span>    <span class="mf">2.179</span> <span class="n">A</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+                <span class="o">|</span>   <span class="mf">12.184</span> <span class="n">V</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+<span class="o">----------------------------------------</span>
+<span class="mi">3</span><span class="n">V3_QSFP</span>        <span class="o">|</span>    <span class="mf">0.020</span> <span class="n">A</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+                <span class="o">|</span>    <span class="mf">3.304</span> <span class="n">V</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+<span class="o">----------------------------------------</span>
+<span class="mi">1</span><span class="n">V5_VCCAUX</span>      <span class="o">|</span>    <span class="mf">1.497</span> <span class="n">V</span> <span class="o">|</span> <span class="n">valid</span><span class="o">*</span>
+</pre></div>
+</div>
+</section>
+<section id="xbtest-d-bdf-c-verify">
+<span id="howtoinstallandrunaprebuiltaveddesignonanalveocard-xbtest-d-bdf-cverify"></span><h3>xbtest -d &lt;BDF&gt; -c verify<a class="headerlink" href="#xbtest-d-bdf-c-verify" title="Permalink to this headline">¶</a></h3>
+<p>Verify successful AVED installation by running the xbtest <code class="docutils literal notranslate"><span class="pre">verify</span></code> test, which checks basic communication between the host and xbtest IP’s scratch registers. In the following example, the BDF is 21:00.0; this may differ on your system.</p>
+<p>Successful completion of this test is indicated by 0 Errors, 0 Failures, and the message “RESULT: ALL TESTS PASSED”. The Critical Warning <code class="docutils literal notranslate"><span class="pre">ITF_138</span></code> “PCIe link speed (4) configuration running on the card does not match expected (5) according to
+device information” is an indication that the PCIe link speed is limited by the host capability, but is not a failure.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span>$ xbtest -d 21:00.0 -c verify
+
+INFO      :: GEN_016 :: GENERAL      :: Scanning installed xbtest HW designs...
+STATUS    :: MGT_002 :: TIMER        :: Start 1s tick function
+INFO      :: GEN_016 :: GENERAL      :: 21:00.0 :: Getting card configuration
+INFO      :: GEN_064 :: GENERAL      :: 21:00.0 :: Starting test 1 of 1. Executing: xbtest -d 21:00.0 -j /opt/amd/aved/amd_v80_gen5x8_23.2_exdes_2_xbtest_stress/xbtest/test/verify.json -l verify -i /opt/amd/aved/amd_v80_gen5x8_23.2_exdes_2_xbtest_stress/design.pdi -e /opt/amd/aved/amd_v80_gen5x8_23.2_exdes_2_xbtest_stress/xbtest/metadata/xbtest_pfm_def.json
+INFO      :: GEN_039 :: GENERAL      :: #####################################################################################################
+INFO      :: GEN_039 :: GENERAL      :: xbtest version: 7.0.0
+INFO      :: GEN_016 :: GENERAL      ::          - SW Build    : 5009311 on Tue Apr 09 10:03:28 2024
+INFO      :: GEN_016 :: GENERAL      ::          - Process ID  : 9586
+INFO      :: GEN_016 :: GENERAL      :: #####################################################################################################
+INFO      :: GEN_016 :: GENERAL      :: System:
+INFO      :: GEN_016 :: GENERAL      ::          - Name          : Linux
+INFO      :: GEN_016 :: GENERAL      ::          - Release       : 5.15.0-97-generic
+INFO      :: GEN_016 :: GENERAL      ::          - Version       : #107-Ubuntu SMP Wed Feb 7 13:26:48 UTC 2024
+INFO      :: GEN_016 :: GENERAL      ::          - Machine       : x86_64
+INFO      :: GEN_039 :: GENERAL      ::          - Running with AMI driver 2.2.0
+INFO      :: GEN_016 :: GENERAL      :: #####################################################################################################
+INFO      :: GEN_039 :: GENERAL      :: Start of xbtest session at: Thu Apr 11 21:48:41 2024 BST
+INFO      :: GEN_039 :: GENERAL      :: #####################################################################################################
+INFO      :: ITF_008 :: XBT_SW_CFG   :: Using card: ALVEO V80 PQ (21:00.0)
+Starting dynamic display mode...
+
+Repeating last content of dynamic display mode:
+  INFO      :: GEN_039 :: GENERAL      :: #####################################################################################################
+  INFO      :: GEN_039 :: GENERAL      :: xbtest version: 7.0.0
+  INFO      :: GEN_039 :: GENERAL      ::        - Running with AMI driver 2.2.0
+  INFO      :: GEN_039 :: GENERAL      :: Start of xbtest session at: Thu Apr 11 21:48:41 2024 BST
+  INFO      :: GEN_039 :: GENERAL      :: #####################################################################################################
+  INFO      :: ITF_008 :: XBT_SW_CFG   :: Using card: ALVEO V80 PQ (21:00.0)
+  CRIT WARN :: ITF_138 :: DEVICE       :: PCIe link speed (4) configuration running on the card does not match expected (5) according to device information
+  WARNING   :: VER_012 :: VERIFY       :: Verify xbtest HW IP has not access to the DNA
+
+  +------------------+ +-----------------------------------------------------------+ +---------------------------------------------------------------------+
+  |                  | |                          STATUS                           | |                            ONGOING TEST                             |
+  |     TESTCASE     | |-----------------------------------------------------------| |---------------------------------------------------------------------|
+  |                  | | Pending | Completed | Passed | Failed | Errors | Warnings | | Remaining time (s) | Parameters                                     |
+  |------------------| |-----------------------------------------------------------| |---------------------------------------------------------------------|
+  | verify           | |       0 |         3 |      3 |      0 |      0 |        1 | |                n/a | n/a                                            |
+  +------------------+ +-----------------------------------------------------------+ +---------------------------------------------------------------------+
+
+  Card status: Power: 61.5 W; Temperature: 37 C; Qty of measurements: 1
+
+  Messages stats: 1 Warnings, 1 Critical Warnings, 27 Passes, 0 Errors, 0 Failures encountered
+
+  Total elapsed: 6 s
+
+INFO      :: GEN_040 :: GENERAL      :: ############################################## SUMMARY ##############################################
+INFO      :: GEN_040 :: GENERAL      :: End of xbtest session at: Thu Apr 11 21:48:45 2024 BST
+INFO      :: GEN_040 :: GENERAL      :: 1 Warnings, 1 Critical Warnings, 26 Passes, 0 Errors, 0 Failures encountered
+INFO      :: GEN_040 :: GENERAL      :: #####################################################################################################
+PASS      :: GEN_024 :: GENERAL      :: RESULT: ALL TESTS PASSED
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+<section id="xbtest-d-bdf-c-memory">
+<span id="howtoinstallandrunaprebuiltaveddesignonanalveocard-xbtest-d-bdf-cmemory"></span><h3>xbtest -d &lt;BDF&gt; -c memory<a class="headerlink" href="#xbtest-d-bdf-c-memory" title="Permalink to this headline">¶</a></h3>
+<p>Verify the DDR and HBM memory performance by running the xbtest memory test, which checks communication between the xbtest IP and available memories. Read and write bandwidth and latency measurements are logged to .csv files for detailed review. In
+the following example, the BDF is 21:00.0. This may differ on your system.</p>
+<p>Successful completion of this test is indicated by 0 Errors, 0 Failures, and the message “RESULT: ALL TESTS PASSED”. The Critical Warning <code class="docutils literal notranslate"><span class="pre">ITF_138</span></code> “PCIe link speed (4) configuration running on the card does not match expected (5) according to
+device information” is an indication that the PCIe link speed is limited by the host capability, but is not a failure.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span>$ xbtest -d 21:00.0 -c memory      INFO      :: GEN_016 :: GENERAL      :: Scanning installed xbtest HW designs...
+STATUS    :: MGT_002 :: TIMER        :: Start 1s tick function
+INFO      :: GEN_016 :: GENERAL      :: 21:00.0 :: Getting card configuration
+INFO      :: GEN_064 :: GENERAL      :: 21:00.0 :: Starting test 1 of 1. Executing: xbtest -d 21:00.0 -j /opt/amd/aved/amd_v80_gen5x8_23.2_exdes_2_xbtest_stress/xbtest/test/memory.json -l memory -i /opt/amd/aved/amd_v80_gen5x8_23.2_exdes_2_xbtest_stress/design.pdi -e /opt/amd/aved/amd_v80_gen5x8_23.2_exdes_2_xbtest_stress/xbtest/metadata/xbtest_pfm_def.json
+INFO      :: GEN_039 :: GENERAL      :: #####################################################################################################
+INFO      :: GEN_039 :: GENERAL      :: xbtest version: 7.0.0
+INFO      :: GEN_016 :: GENERAL      ::          - SW Build    : 5009311 on Tue Apr 09 10:03:28 2024
+INFO      :: GEN_016 :: GENERAL      ::          - Process ID  : 9607
+INFO      :: GEN_016 :: GENERAL      :: #####################################################################################################
+INFO      :: GEN_016 :: GENERAL      :: System:
+INFO      :: GEN_016 :: GENERAL      ::          - Name          : Linux
+INFO      :: GEN_016 :: GENERAL      ::          - Release       : 5.15.0-97-generic
+INFO      :: GEN_016 :: GENERAL      ::          - Version       : #107-Ubuntu SMP Wed Feb 7 13:26:48 UTC 2024
+INFO      :: GEN_016 :: GENERAL      ::          - Machine       : x86_64
+INFO      :: GEN_039 :: GENERAL      ::          - Running with AMI driver 2.2.0
+INFO      :: GEN_016 :: GENERAL      :: #####################################################################################################
+INFO      :: GEN_039 :: GENERAL      :: Start of xbtest session at: Thu Apr 11 21:53:12 2024 BST
+INFO      :: GEN_039 :: GENERAL      :: #####################################################################################################
+INFO      :: ITF_008 :: XBT_SW_CFG   :: Using card: ALVEO V80 PQ (21:00.0)
+Starting dynamic display mode...
+
+
+Repeating last content of dynamic display mode:
+  INFO      :: GEN_039 :: GENERAL      :: #####################################################################################################
+  INFO      :: GEN_039 :: GENERAL      :: xbtest version: 7.0.0
+  INFO      :: GEN_039 :: GENERAL      ::        - Running with AMI driver 2.2.0
+  INFO      :: GEN_039 :: GENERAL      :: Start of xbtest session at: Thu Apr 11 21:53:12 2024 BST
+  INFO      :: GEN_039 :: GENERAL      :: #####################################################################################################
+  INFO      :: ITF_008 :: XBT_SW_CFG   :: Using card: ALVEO V80 PQ (21:00.0)
+  CRIT WARN :: ITF_138 :: DEVICE       :: PCIe link speed (4) configuration running on the card does not match expected (5) according to device information
+  WARNING   :: VER_012 :: VERIFY       :: Verify xbtest HW IP has not access to the DNA
+
+  +------------------+ +-----------------------------------------------------------+ +---------------------------------------------------------------------+
+  |                  | |                          STATUS                           | |                            ONGOING TEST                             |
+  |     TESTCASE     | |-----------------------------------------------------------| |---------------------------------------------------------------------|
+  |                  | | Pending | Completed | Passed | Failed | Errors | Warnings | | Remaining time (s) | Parameters                                     |
+  |------------------| |-----------------------------------------------------------| |---------------------------------------------------------------------|
+  | memory                                                                                                                                                 |
+  |              DDR | |       0 |         4 |      4 |      0 |      0 |        0 | |                n/a | n/a                                            |
+  |              HBM | |       0 |         4 |      4 |      0 |      0 |        0 | |                n/a | n/a                                            |
+  |------------------| |-----------------------------------------------------------| |---------------------------------------------------------------------|
+  | verify           | |       0 |         3 |      3 |      0 |      0 |        1 | |                n/a | n/a                                            |
+  +------------------+ +-----------------------------------------------------------+ +---------------------------------------------------------------------+
+
+  Card status: Power: 61.8 W; Temperature: 41 C; Qty of measurements: 102
+
+  Messages stats: 1 Warnings, 1 Critical Warnings, 67 Passes, 0 Errors, 0 Failures encountered
+
+  Total elapsed: 107 s
+
+
+INFO      :: GEN_040 :: GENERAL      :: ############################################## SUMMARY ##############################################
+INFO      :: GEN_040 :: GENERAL      :: End of xbtest session at: Thu Apr 11 21:54:57 2024 BST
+PASS      :: GEN_022 :: GENERAL      :: memory DDR test passed
+PASS      :: GEN_022 :: GENERAL      :: memory HBM test passed
+INFO      :: GEN_040 :: GENERAL      :: 1 Warnings, 1 Critical Warnings, 66 Passes, 0 Errors, 0 Failures encountered
+INFO      :: GEN_040 :: GENERAL      :: #####################################################################################################
+PASS      :: GEN_024 :: GENERAL      :: RESULT: ALL TESTS PASSED
+</pre></div>
+</div>
+</section>
+<section id="troubleshooting">
+<span id="howtoinstallandrunaprebuiltaveddesignonanalveocard-troubleshooting"></span><h3>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h3>
+<p>For debugging information, see <a class="reference external" href="AVED+Debug+Techniques.html">AVED Debug Techniques</a>.</p>
+</section>
+</section>
+<section id="next-steps">
+<span id="howtoinstallandrunaprebuiltaveddesignonanalveocard-nextsteps"></span><h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<p>This getting started guide covered AVED installation and basic hardware testing commands. If you would like to explore the full set of hardware test commands available, see:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="AVED+Management+Interface+userguide+(ami_tool).html">AVED Management Interface userguide</a></p></li>
+<li><p><a class="reference external" href="xbtest/user-guide/source/index.html">xbtest User Guide / Usage / command line options</a></p></li>
+</ul>
+<p>Notably, some interesting commands to try are:</p>
+<ul class="simple">
+<li><p>the AMI cfgmem_program command, which updates the PDI in flash over the PCIe interface. See <a class="reference external" href="AVED+Updating+Design+PDI+in+Flash.html">AVED Updating Design PDI in Flash</a></p></li>
+<li><p>additional pre-canned xbtest tests are available to test other features on the card. Please refer to <a class="reference external" href="xbtest/user-guide/source/index.html">xbtest User Guide / Pre-canned tests section</a>. The available pre-canned tests are: gtm_prbs, gtyp_prbs, memory, mmio,
+power, stress, and verify.</p></li>
+</ul>
+<p>For a quick look at how to build AVED, refer to the getting started guide: <a class="reference external" href="How-to+Rebuild+an+AVED+Design+for+Yourself.html">How-to Rebuild an AVED Design for Yourself</a>.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Page Revision: v. 45</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</section>
+</div>
+</div>
+<footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+<a accesskey="p" class="btn btn-neutral float-left" href="AVED%2BOverview.html" rel="prev" title="AVED Overview"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+<a accesskey="n" class="btn btn-neutral float-right" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html" rel="next" title="How-to Rebuild an AVED Design for Yourself">Next <span aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<p>© Copyright 2023, Advanced Micro Devices Inc.</p>
+</div>
+<div class="aem-Grid aem-Grid--16">
+<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+<div class="container-fluid sub-footer">
+<div class="row">
+<div class="col-xs-24">
+<p><a href="https://www.amd.com/en/corporate/copyright" target="_blank">Terms and Conditions</a> | <a href="https://www.amd.com/en/corporate/privacy" target="_blank">Privacy</a> | <a href="https://www.amd.com/en/corporate/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.amd.com/en/corporate/trademarks" target="_blank">Trademarks</a> | <a href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf" target="_blank">Statement on Forced Labor</a> | <a href="https://www.amd.com/en/corporate/competition" target="_blank">Fair and Open Competition</a> | <a href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf" target="_blank">UK Tax Strategy</a> | <a href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA" target="_blank">Inclusive Terminology</a> | <a class="ot-sdk-show-settings" href="#cookiessettings">Cookies Settings</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+</div>
+</div>
+</section>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+</body>
+</html>

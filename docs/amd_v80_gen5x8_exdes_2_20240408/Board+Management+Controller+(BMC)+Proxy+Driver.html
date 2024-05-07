@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script charset="UTF-8" data-document-language="true" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script class="optanon-category-C0002" type="text/plain">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+<title>Board Management Controller (BMC) Proxy Driver — AVED  documentation</title>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="_static/xbtest.css" rel="stylesheet" type="text/css"/>
+<link href="_static/_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="https://docs.xilinx.com/favicon.ico" rel="shortcut icon"/>
+<!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/js/theme.js"></script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html" rel="next" title="Firmware Interface (FW_IF) Abstraction Layer"/>
+<link href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html" rel="prev" title="AVED External Device Control (AXC) Proxy Driver"/>
+<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager -->
+<noscript><iframe class="optanon-category-C0002" height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager -->
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="index.html"> AVED
+            <img alt="Logo" class="logo" src="_static/xilinx-header-logo.svg"/>
+</a>
+<div role="search">
+<form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" type="text"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+</div>
+</div><div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BHierarchy%2BOverview.html">AVED V80 - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BCIPS%2BConfiguration.html">AVED V80 - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BResources.html">AVED V80 - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BMap.html">AVED V80 - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BNoC%2BConfiguration.html">AVED V80 - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BBase%2BLogic.html">AVED V80 - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BClock%2BReset%2BModule.html">AVED V80 - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BSource%2BFile%2BOverview.html">AVED V80 - Source File Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SMBus%2BIP%2Bv1.1%2B-%2BProduct%2BGuide.html">SMBus IP v1.1 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BASDM%2BApplication.html">AVED ASDM Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOutOfBand%2BTelemetry%2BApplication.html">AVED OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Board Management Controller (BMC) Proxy Driver</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#note">Note:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#supported-commands">Supported commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#supported-pdrs">Supported PDRs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#internal-apis">Internal APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bmc-proxy-handling-requests">BMC Proxy Handling Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bmc-proxy-handling-responses">BMC Proxy Handling Responses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#common-pdr-header">Common PDR header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#numeric-sensor-pdr">Numeric sensor PDR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sensor-name-pdr">Sensor name PDR</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BQDMA.html">AVED QDMA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift"><nav aria-label="Mobile navigation menu" class="wy-nav-top" style="background: black">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="index.html">AVED</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="Page navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a class="icon icon-home" href="index.html"></a> »</li>
+<li>Board Management Controller (BMC) Proxy Driver</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<section id="board-management-controller-bmc-proxy-driver">
+<h1>Board Management Controller (BMC) Proxy Driver<a class="headerlink" href="#board-management-controller-bmc-proxy-driver" title="Permalink to this headline">¶</a></h1>
+<section id="overview">
+<span id="boardmanagementcontroller-bmc-proxydriver-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>MCTP - Management Component Transport Protocol</p>
+<p>PLDM - Platform Level Data Model</p>
+<p>The BMC proxy allows for communication and sensor management between the BMC and AMC through MCTP/PLDM protocols. The BMC proxy is polling indefinitely and listening for incoming messages through a FAL <strong>read</strong> call. If a message is received, an
+internal flag is set that will start the processing of the message. The proxy calls into the MCTP code to determine whether the message is an MCTP, PLDM Type 0 or PLDM Type 2 form which will determine the exact command. The PLDM code will then form a
+response to the initial request, which gets sent back to the BMC via a firmware interface <strong>write</strong> by the BMC proxy driver.</p>
+<section id="note">
+<span id="boardmanagementcontroller-bmc-proxydriver-note"></span><h3>Note:<a class="headerlink" href="#note" title="Permalink to this headline">¶</a></h3>
+<p>The MCTP/PLDM code provided is intended to be used and an example to prove the basic functionality of a BMC stack. AMC only supports Type 0 and Type 2 DMTF messages (limited to sensor reading - i.e. no effecters).</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/df4ccf7553b843eab9a45e4fed037ff05ca6a8ca.png"><img alt="image1" class="drawio-diagram-image" src="_images/df4ccf7553b843eab9a45e4fed037ff05ca6a8ca.png" style="width: 1150px;"/></a></p>
+</section>
+</section>
+<section id="supported-commands">
+<span id="boardmanagementcontroller-bmc-proxydriver-supportedcommands"></span><h2>Supported commands<a class="headerlink" href="#supported-commands" title="Permalink to this headline">¶</a></h2>
+<p>M - Mandatory</p>
+<p>O - Optional</p>
+<p>C - Conditional</p>
+<table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh" scope="col">Command Name</th><th class="confluenceTh" scope="col">Command Code</th><th class="confluenceTh" scope="col">DMTF Spec<br><br/>M/O/C</br></th></tr><tr><td class="confluenceTd">Set Endpoint ID    </td><td class="confluenceTd">0x01</td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd">Get Endpoint ID    </td><td class="confluenceTd">0x02</td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd">Get Endpoint UUID    </td><td class="confluenceTd">0x03</td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd">Get MCTP Version Support    </td><td class="confluenceTd"><p>0x04</p></td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd">Get Message Type support    </td><td class="confluenceTd">0x05</td><td class="confluenceTd">M</td></tr></tbody></table>
+<table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Command Name</th><th class="confluenceTh">Command Code</th><th class="confluenceTh">DMTF Spec<br/><br/>M/O/C</th></tr><tr><td class="confluenceTd">SetTID </td><td class="confluenceTd">0x01</td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd">GetTID</td><td class="confluenceTd">0x02</td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd">GetPLDMVersion</td><td class="confluenceTd">0x03</td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd">GetPLDMTypes</td><td class="confluenceTd"><p>0x04</p></td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd">GetPLDMCommands    </td><td class="confluenceTd">0x05</td><td class="confluenceTd">M</td></tr></tbody></table>
+<table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Command Name</th><th class="confluenceTh">Command Code</th><th class="confluenceTh">DMTF Spec<br/><br/>M/O/C</th></tr><tr><td class="confluenceTd">SetTID </td><td class="confluenceTd">0x01</td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd">GetTID</td><td class="confluenceTd">0x02</td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd"><span style="color: rgb(23,43,77);">SetNumericSensorEnable</span></td><td class="confluenceTd"><span style="color: rgb(23,43,77);">0x10</span></td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd"><span style="color: rgb(23,43,77);">GetSensorReading</span></td><td class="confluenceTd"><p><span style="color: rgb(23,43,77);">0x11</span></p></td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd"><span style="color: rgb(23,43,77);">GetPDRRepositoryInfo</span></td><td class="confluenceTd"><span style="color: rgb(23,43,77);">0x50</span></td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd"><span style="color: rgb(23,43,77);">GetPDR</span></td><td class="confluenceTd"><span style="color: rgb(23,43,77);">0x51</span></td><td class="confluenceTd">M</td></tr></tbody></table>
+</section>
+<section id="supported-pdrs">
+<span id="boardmanagementcontroller-bmc-proxydriver-supportedpdrs"></span><h2>Supported PDRs<a class="headerlink" href="#supported-pdrs" title="Permalink to this headline">¶</a></h2>
+<table class="relative-table wrapped confluenceTable" style="width: 14.7787%;"><colgroup><col style="width: 20.668%;"/><col style="width: 79.332%;"/></colgroup><tbody><tr><th class="confluenceTh" scope="col">PDR Type Number</th><th class="confluenceTh" scope="col">PDR Type Name</th></tr><tr><td class="confluenceTd">1</td><td class="confluenceTd">Terminus Locator PDR</td></tr><tr><td class="confluenceTd">2</td><td class="confluenceTd">Numeric Sensor PDR</td></tr><tr><td class="confluenceTd">6</td><td class="confluenceTd">Sensor Auxiliary Names PDR </td></tr></tbody></table>
+</section>
+<section id="internal-apis">
+<span id="boardmanagementcontroller-bmc-proxydriver-internalapis"></span><h2>Internal APIs<a class="headerlink" href="#internal-apis" title="Permalink to this headline">¶</a></h2>
+<p>BMC accepted events.</p>
+<p><strong>BMC_PROXY_DRIVER_EVENTS</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @enum    BMC_PROXY_DRIVER_EVENTS</span>
+<span class="cm"> * @brief   Events raised by this proxy driver</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">BMC_PROXY_DRIVER_EVENTS</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">BMC_PROXY_DRIVER_E_MSG_ARRIVAL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">BMC_PROXY_DRIVER_E_GET_PDR</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">BMC_PROXY_DRIVER_E_GET_PDR_REPOSITORY_INFO</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">BMC_PROXY_DRIVER_E_GET_SENSOR_INFO</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">BMC_PROXY_DRIVER_E_ENABLE_SENSOR</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">BMC_PROXY_DRIVER_E_INVALID_REQUEST_RECVD</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">MAX_BMC_PROXY_DRIVER_EVENTS</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">BMC_PROXY_DRIVER_EVENTS</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Response result IDs.</p>
+<p><strong>BMC_PROXY_RESULT</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @enum    BMC_PROXY_RESPONSE_RESULT</span>
+<span class="cm"> * @brief   The response result</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">BMC_PROXY_RESULT</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">BMC_PROXY_RESULT_SUCCESS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">BMC_PROXY_RESULT_FAILURE</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">MAX_BMC_PROXY_RESULT</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">BMC_PROXY_RESULT</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Response IDs.</p>
+<p><strong>BMC_SENSOR_RESPONSE</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @enum    BMC_SENSOR_RESPONSE</span>
+<span class="cm"> * @brief   The response</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">BMC_SENSOR_RESPONSE</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">BMC_RESPONSE_OK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">BMC_RESPONSE_ERROR</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">MAX_BMC_SENSOR_RESPONSE</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">BMC_SENSOR_RESPONSE</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Enable sensor response IDs.</p>
+<p><strong>BMC_SET_NUMERIC_SENSOR_ENABLE_RESPONSE</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @enum    BMC_SET_NUMERIC_SENSOR_ENABLE_RESPONSE</span>
+<span class="cm"> * @brief   The response</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">BMC_SET_NUMERIC_SENSOR_ENABLE_RESPONSE</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">BMC_SENSOR_ENABLE_RESP_OK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">BMC_SENSOR_ENABLE_RESP_INVALID_SENSOR_ID</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">BMC_SENSOR_ENABLE_RESP_INVALID_SENSOR_OPERATIONAL_STATE</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">BMC_SENSOR_ENABLE_RESP_EVENT_GENERATION_NOT_SUPPORTED</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">BMC_SENSOR_ENABLE_RESP_NONE</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">MAX_BMC_SENSOR_ENABLE_RESP</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">BMC_SET_NUMERIC_SENSOR_ENABLE_RESPONSE</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Get sensor response IDs.</p>
+<p><strong>BMC_GET_SENSOR_RESPONSE</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @enum    BMC_GET_SENSOR_RESPONSE</span>
+<span class="cm"> * @brief   The response</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">BMC_GET_SENSOR_RESPONSE</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">BMC_GET_SENSOR_RESP_OK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">BMC_GET_SENSOR_RESP_INVALID_SENSOR_ID</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">BMC_GET_SENSOR_RESP_INVALID_SENSOR_OPERATIONAL_STATE</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">BMC_GET_SENSOR_RESP_REARM_UNAVAILABLE_IN_PRESENT_STATE</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">BMC_GET_SENSOR_RESP_NONE</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">MAX_BMC_GET_SENSOR_RESP</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">BMC_GET_SENSOR_RESPONSE</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The initialize function takes in 15 parameters:</p>
+<ul class="simple">
+<li><p>The unique ID of the proxy driver</p></li>
+<li><p>Pointer to the firmware interface the proxy uses</p></li>
+<li><p>The port of the firmware interface</p></li>
+<li><p>The priority of the task</p></li>
+<li><p>Pointer to the list of temperature sensor PDRs</p></li>
+<li><p>Pointer to the list of voltage sensor PDRs</p></li>
+<li><p>Pointer to the list of current sensor PDRs</p></li>
+<li><p>Pointer to the list of power sensor PDRs</p></li>
+<li><p>Pointer to the list of names sensor PDRs</p></li>
+<li><p>Total number of PDRs in the respective lists</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><strong>iBMC_Initialise</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Main initialisation point for the BMC Proxy Driver</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   ucProxyId   Unique ID for this Proxy driver</span>
+<span class="cm"> * @param   pxFwIf      Handle to the Firmware Interface to use</span>
+<span class="cm"> * @param   ulFwIfPort  Port to use on the Firmware Interface</span>
+<span class="cm"> * @param   ulTaskPrio  Priority of the Proxy driver task (if RR disabled)</span>
+<span class="cm"> * @param   ulTaskStack Stack size of the Proxy driver task</span>
+<span class="cm"> * @param   pxPdrTemperatureSensors Pointer to Temperature PDR</span>
+<span class="cm"> * @param   iTotalPdrTemperature Size of Temperature PDR</span>
+<span class="cm"> * @param   pxPdrVoltageSensors Pointer to Voltage PDR</span>
+<span class="cm"> * @param   iTotalPdrVoltage Size of Voltage PDR</span>
+<span class="cm"> * @param   pxPdrCurrentSensors Pointer to Current PDR</span>
+<span class="cm"> * @param   iTotalPdrCurrent Size of Current PDR</span>
+<span class="cm"> * @param   pxPdrPowerSensors Pointer to Power PDR</span>
+<span class="cm"> * @param   iTotalPdrPower Size of Power PDR</span>
+<span class="cm"> * @param   pxPdrSensorNames Pointer to Sensor Names PDR</span>
+<span class="cm"> * @param   iTotalPdrName Size of Sensor Names PDR</span>
+<span class="cm"> * @param   pucUuid Pointer to UUID</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Proxy driver initialised correctly</span>
+<span class="cm"> *          ERROR       Proxy driver not initialised, or was already initialised</span>
+<span class="cm"> *</span>
+<span class="cm"> * @note    Proxy drivers can have 0 or more firmware interfaces</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iBMC_Initialise</span><span class="p">(</span> <span class="n">uint8_t</span> <span class="n">ucProxyId</span><span class="p">,</span>
+                     <span class="n">FW_IF_CFG</span> <span class="o">*</span><span class="n">pxFwIf</span><span class="p">,</span>
+                     <span class="n">uint32_t</span> <span class="n">ulFwIfPort</span><span class="p">,</span>
+                     <span class="n">uint32_t</span> <span class="n">ulTaskPrio</span><span class="p">,</span>
+                     <span class="n">uint32_t</span> <span class="n">ulTaskStack</span><span class="p">,</span>
+                     <span class="n">PLDM_NUMERIC_SENSOR_PDR</span> <span class="o">*</span><span class="n">pxPdrTemperatureSensors</span><span class="p">,</span>
+                     <span class="kt">int</span> <span class="n">iTotalPdrTemperature</span><span class="p">,</span>
+                     <span class="n">PLDM_NUMERIC_SENSOR_PDR</span> <span class="o">*</span><span class="n">pxPdrVoltageSensors</span><span class="p">,</span>
+                     <span class="kt">int</span> <span class="n">iTotalPdrVoltage</span><span class="p">,</span>
+                     <span class="n">PLDM_NUMERIC_SENSOR_PDR</span> <span class="o">*</span><span class="n">pxPdrCurrentSensors</span><span class="p">,</span>
+                     <span class="kt">int</span> <span class="n">iTotalPdrCurrent</span><span class="p">,</span>
+                     <span class="n">PLDM_NUMERIC_SENSOR_PDR</span> <span class="o">*</span><span class="n">pxPdrPowerSensors</span><span class="p">,</span>
+                     <span class="kt">int</span> <span class="n">iTotalPdrPower</span><span class="p">,</span>
+                     <span class="n">PLDM_NUMERIC_SENSOR_NAME_PDR</span> <span class="o">*</span><span class="n">pxPdrSensorNames</span><span class="p">,</span>
+                     <span class="kt">int</span> <span class="n">iTotalPdrName</span><span class="p">,</span>
+                     <span class="n">uint8_t</span> <span class="o">*</span><span class="n">pucUuid</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>Applications can bind into the callback to listen to incoming events and handle them accordingly.</p>
+<p>Current list of supported events:</p>
+<ul class="simple">
+<li><p>BMC_PROXY_DRIVER_E_SMBUS_MSG_ARRIVAL</p></li>
+<li><p>BMC_PROXY_DRIVER_E_GET_PDR</p></li>
+<li><p>BMC_PROXY_DRIVER_E_GET_PDR_REPOSITORY_INFO</p></li>
+<li><p>BMC_PROXY_DRIVER_E_GET_SENSOR_INFO</p></li>
+<li><p>BMC_PROXY_DRIVER_E_ENABLE_SENSOR</p></li>
+<li><p>BMC_PROXY_DRIVER_E_INVALID_REQUEST_RECVD</p></li>
+</ul>
+<p><strong>iBMC_BindCallback</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Bind into this proxy driver</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   pxCallback  Callback to bind into the proxy driver</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Callback successfully bound</span>
+<span class="cm"> *          ERROR       Callback not bound</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iBMC_BindCallback</span><span class="p">(</span> <span class="n">EVL_CALLBACK</span> <span class="o">*</span><span class="n">pxCallback</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>Function used to respond to the BMC_PROXY_DRIVER_E_GET_SENSOR_INFO event.</p>
+<p><strong>iBMC_SendResponseForGetSensor</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Response to a Sensor Info request</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   pxSignal        Current event occurence (used for tracking)</span>
+<span class="cm"> * @param   usSensorId      Sensor Id</span>
+<span class="cm"> * @param   ssSensorInfo    Sensor Value</span>
+<span class="cm"> * @param   ucSensorState   Sensor Operational State</span>
+<span class="cm"> * @param   xSensorResponse The response to the sensor query, OK, Invalid ID etc</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Command was successful</span>
+<span class="cm"> *          ERROR       Command failed</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iBMC_SendResponseForGetSensor</span><span class="p">(</span> <span class="n">EVL_SIGNAL</span> <span class="o">*</span><span class="n">pxSignal</span><span class="p">,</span>
+                                   <span class="n">uint16_t</span> <span class="n">usSensorId</span><span class="p">,</span>
+                                   <span class="n">int16_t</span> <span class="n">ssSensorInfo</span><span class="p">,</span>
+                                   <span class="n">uint8_t</span> <span class="n">ucSensorState</span><span class="p">,</span>
+                                   <span class="n">BMC_GET_SENSOR_RESPONSE</span> <span class="n">xSensorResponse</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>Responds back to a request from the proxy to enable a sensor.</p>
+<p><strong>iBMC_SetResponse</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm">* @brief Response to an enable sensor request</span>
+<span class="cm">*</span>
+<span class="cm">* @param pxSignal Current event occurence (used for tracking)</span>
+<span class="cm">* @param xBmcResponse Enable sensor response</span>
+<span class="cm">*</span>
+<span class="cm">* @return OK Command was successful</span>
+<span class="cm">* ERROR Command failed</span>
+<span class="cm">*/</span>
+<span class="kt">int</span> <span class="nf">iBMC_SetResponse</span><span class="p">(</span> <span class="n">EVL_SIGNAL</span> <span class="o">*</span><span class="n">pxSignal</span><span class="p">,</span> <span class="n">uint16_t</span> <span class="n">usSensorId</span><span class="p">,</span> <span class="n">BMC_SENSOR_RESPONSE</span> <span class="n">xBmcResponse</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>Returns the board UUID</p>
+<p><strong>iBMC_GetUuid</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Get the UUID</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   pucUuid   pointer to UUID location</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK or ERROR</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iBMC_GetUuid</span><span class="p">(</span> <span class="n">uint8_t</span> <span class="o">*</span> <span class="n">pucUuid</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>If a BMC_PROXY_DRIVER_E_GET_SENSOR_INFO event is received, the application can call iBMC_GetSensorIdRequest to get more information about the request like the sensor ID and operational state.</p>
+<p><strong>iBMC_GetSensorIdRequest</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Function called after certain events are raised to get the sensor id</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   pxSignal            pointer to signal raised</span>
+<span class="cm"> * @param   pusSensorId         pointer sensor id</span>
+<span class="cm"> * @param   pucOperationalState pointer to the new state (if required)</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK or ERROR</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iBMC_GetSensorIdRequest</span><span class="p">(</span> <span class="n">EVL_SIGNAL</span> <span class="o">*</span><span class="n">pxSignal</span><span class="p">,</span> <span class="n">int16_t</span> <span class="o">*</span><span class="n">pssSensorId</span><span class="p">,</span> <span class="n">uint8_t</span> <span class="o">*</span><span class="n">pucOperationalState</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>Performs a FAL write with the supplied buffer and size.</p>
+<p><strong>iBMC_ResponseDataWrite</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Start a Data Write</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   pucData     Pointer to the data</span>
+<span class="cm"> * @param   usDatasize  Size of data received</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK or ERROR</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iBMC_ResponseDataWrite</span><span class="p">(</span> <span class="n">uint8_t</span> <span class="o">*</span><span class="n">pucData</span><span class="p">,</span> <span class="n">uint16_t</span> <span class="n">usDataSize</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>Prints the statistics associated with the proxy.</p>
+<p><strong>iBMC_PrintStatistics</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Print all the stats gathered by the application</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Stats retrieved from proxy driver successfully</span>
+<span class="cm"> *          ERROR       Stats not retrieved successfully</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iBMC_PrintStatistics</span><span class="p">(</span> <span class="kt">void</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>Clears the statistics associated with the proxy.</p>
+<p><strong>iBMC_ClearStatistics</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Clear all the stats in the application</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Stats cleared successfully</span>
+<span class="cm"> *          ERROR       Stats not cleared successfully</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iBMC_ClearStatistics</span><span class="p">(</span> <span class="kt">void</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>Gets the current health state of the proxy.</p>
+<p><strong>iBMC_GetState</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm">* @brief Gets the current state of the proxy driver</span>
+<span class="cm">*</span>
+<span class="cm">* @param pxState Pointer to the state</span>
+<span class="cm">*</span>
+<span class="cm">* @return OK If successful</span>
+<span class="cm">* ERROR If not successful</span>
+<span class="cm">*/</span>
+<span class="kt">int</span> <span class="nf">iBMC_GetState</span><span class="p">(</span> <span class="n">MODULE_STATE</span> <span class="o">*</span><span class="n">pxState</span> <span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="bmc-proxy-handling-requests">
+<span id="boardmanagementcontroller-bmc-proxydriver-bmcproxyhandlingrequests"></span><h2>BMC Proxy Handling Requests<a class="headerlink" href="#bmc-proxy-handling-requests" title="Permalink to this headline">¶</a></h2>
+<p>The request API’s allows an application to get a copy of the internal proxy request data received via the FAL.</p>
+<ul class="simple">
+<li><p>iBMC_GetSensorIdRequest</p></li>
+</ul>
+<p>The requests data is stored within the BMC proxy when the event is generated and the callback has been invoked to notify any registered users.</p>
+<p>When the request from the application is made a protected copy of the data is made and returned that will allow the user to perform the relevant action.</p>
+<p>A global mutex is held until a MCTP message is processed and response created. Any BMC request calls that change private data are within the flow of that message making them protected.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/f02973d5cffe3997cf58b924cb3cfe5383912169.png"><img alt="image2" class="drawio-diagram-image" src="_images/f02973d5cffe3997cf58b924cb3cfe5383912169.png" style="width: 544px;"/></a></p>
+</section>
+<section id="bmc-proxy-handling-responses">
+<span id="boardmanagementcontroller-bmc-proxydriver-bmcproxyhandlingresponses"></span><h2>BMC Proxy Handling Responses<a class="headerlink" href="#bmc-proxy-handling-responses" title="Permalink to this headline">¶</a></h2>
+<p>The response API’s are used by the application to respond back to the request with data/result code once the relevant action has been performed.</p>
+<ul class="simple">
+<li><p>iBMC_SetResponse</p></li>
+<li><p>iBMC_GetSensorInfoResponse</p></li>
+</ul>
+<p>Within each response a the relevant flag is set, signaling to the proxy that the event has been handled and the requested data is available.</p>
+<p>A global mutex is held until a MCTP message is processed and response created. Any BMC response calls that change private data are within the flow of that message making them protected.</p>
+</section>
+<section id="examples">
+<span id="boardmanagementcontroller-bmc-proxydriver-examples"></span><h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>The initialize function needs a unique id for the proxy, a handle to a FW_IF (already created and initialized), and a task priority/size passed in, as well as the PDR sensor lists and total values.</p>
+<p><strong>iBMC_Initialise Example</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span> <span class="n">OK</span> <span class="o">==</span> <span class="n">iBMC_Initialise</span><span class="p">(</span> <span class="n">AMC_EVENT_UNIQUE_ID_BMC</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">xSMBusIf</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">AMC_TASK_PRIO_DEFAULT</span><span class="p">,</span> <span class="n">AMC_TASK_DEFAULT_STACK</span><span class="p">,</span>
+                               <span class="n">pxPdrTemperatureSensors</span><span class="p">,</span> <span class="n">TOTAL_PDR_TEMPERATURE</span><span class="p">,</span>
+                               <span class="n">pxPdrVoltageSensors</span><span class="p">,</span>     <span class="n">TOTAL_PDR_VOLTAGE</span><span class="p">,</span>
+                               <span class="n">pxPdrCurrentSensors</span><span class="p">,</span>     <span class="n">TOTAL_PDR_CURRENT</span><span class="p">,</span>
+                               <span class="n">pxPdrPowerSensors</span><span class="p">,</span>       <span class="n">TOTAL_PDR_POWER</span><span class="p">,</span>
+                               <span class="n">pxPdrSensorNames</span><span class="p">,</span>        <span class="n">TOTAL_PDR_NUMERIC_ASCI_SENSORS</span> <span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Define a function based on the function pointer prototype and bind in using the API.</p>
+<p><strong>iBMC_Initialise Example</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   BMC Proxy Driver EVL callback</span>
+<span class="cm"> */</span>
+<span class="kd">static</span> <span class="kt">int</span> <span class="nf">iBmcCallback</span><span class="p">(</span> <span class="n">EVL_SIGNAL</span> <span class="o">*</span><span class="n">pxSignal</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">iStatus</span> <span class="o">=</span> <span class="n">ERROR</span><span class="p">;</span>
+
+    <span class="k">if</span><span class="p">(</span> <span class="p">(</span> <span class="n">NULL</span> <span class="o">!=</span> <span class="n">pxSignal</span> <span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span> <span class="n">AMC_EVENT_UNIQUE_ID_BMC</span> <span class="o">==</span> <span class="n">pxSignal</span><span class="o">-&gt;</span><span class="n">ucModule</span> <span class="p">)</span> <span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">switch</span><span class="p">(</span> <span class="n">pxSignal</span><span class="o">-&gt;</span><span class="n">ucEventType</span> <span class="p">)</span>
+        <span class="p">{</span>
+        <span class="k">default</span><span class="p">:</span>
+        <span class="p">{</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">iStatus</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Example of calling the response (iBMC_GetSensorInfoResponse) from within the callback to send the result back to the proxy.</p>
+<p><strong>BMC_PRIVATE_DATA</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   RMI Handler EVL callback</span>
+<span class="cm"> */</span>
+<span class="kd">static</span> <span class="kt">int</span> <span class="nf">iBmcProxyCallback</span><span class="p">(</span> <span class="n">EVL_SIGNAL</span> <span class="o">*</span><span class="n">pxSignal</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">iStatus</span> <span class="o">=</span> <span class="n">ERROR</span><span class="p">;</span>
+
+    <span class="k">if</span><span class="p">(</span> <span class="p">(</span> <span class="n">NULL</span> <span class="o">!=</span> <span class="n">pxSignal</span> <span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span> <span class="n">AMC_EVENT_UNIQUE_ID_BMC</span> <span class="o">==</span> <span class="n">pxSignal</span><span class="o">-&gt;</span><span class="n">ucModule</span> <span class="p">)</span> <span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span> <span class="n">MAX_BMC_PROXY_DRIVER_EVENTS</span> <span class="o">&gt;=</span> <span class="n">pxSignal</span><span class="o">-&gt;</span><span class="n">ucEventType</span> <span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">switch</span><span class="p">(</span> <span class="n">pxSignal</span><span class="o">-&gt;</span><span class="n">ucEventType</span> <span class="p">)</span>
+            <span class="p">{</span>
+
+            <span class="k">case</span> <span class="n">BMC_PROXY_DRIVER_E_GET_PDR</span><span class="p">:</span>
+            <span class="p">{</span>
+                <span class="n">INC_STAT_COUNTER</span><span class="p">(</span> <span class="n">OUT_OF_BAND_STATS_BMC_PDR_REQUEST</span> <span class="p">)</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="k">case</span> <span class="n">BMC_PROXY_DRIVER_E_GET_PDR_REPOSITORY_INFO</span><span class="p">:</span>
+            <span class="p">{</span>
+                <span class="n">INC_STAT_COUNTER</span><span class="p">(</span> <span class="n">OUT_OF_BAND_STATS_BMC_PDR_INFO_REQUEST</span> <span class="p">)</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="k">case</span> <span class="n">BMC_PROXY_DRIVER_E_GET_SENSOR_INFO</span><span class="p">:</span>
+            <span class="p">{</span>
+                <span class="n">INC_STAT_COUNTER</span><span class="p">(</span> <span class="n">OUT_OF_BAND_STATS_BMC_SENSOR_INFO_REQUEST</span> <span class="p">)</span>
+
+                <span class="cm">/* TODO: Get info on requested sensor */</span>
+
+                <span class="cm">/* TODO: Set the result code based on the collection */</span>
+
+                <span class="n">iBMC_GetSensorInfoResponse</span><span class="p">(</span> <span class="n">pxSignal</span><span class="p">,</span>
+                                            <span class="n">sSensorId</span><span class="p">,</span>
+                                            <span class="n">sSensorDataResponse</span><span class="p">,</span>
+                                            <span class="n">ucSensorOperationalState</span><span class="p">,</span>
+                                            <span class="n">xSensorResponse</span> <span class="p">);</span>
+
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">default</span><span class="p">:</span>
+            <span class="p">{</span>
+                <span class="n">INC_STAT_COUNTER</span><span class="p">(</span> <span class="n">OUT_OF_BAND_STATS_BMC_UNSUPPORTED_REQUEST</span> <span class="p">)</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="p">}</span>
+
+            <span class="n">iStatus</span> <span class="o">=</span> <span class="n">OK</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">iStatus</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Example of requesting the data associated with an event (iBMC_GetSensorIdRequest) from within the callback and to send the result back to the proxy.</p>
+<p><strong>BMC_PRIVATE_DATA</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   RMI Handler EVL callback</span>
+<span class="cm"> */</span>
+<span class="kd">static</span> <span class="kt">int</span> <span class="nf">iBmcProxyCallback</span><span class="p">(</span> <span class="n">EVL_SIGNAL</span> <span class="o">*</span><span class="n">pxSignal</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">iStatus</span> <span class="o">=</span> <span class="n">ERROR</span><span class="p">;</span>
+
+    <span class="k">if</span><span class="p">(</span> <span class="p">(</span> <span class="n">NULL</span> <span class="o">!=</span> <span class="n">pxSignal</span> <span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span> <span class="n">AMC_EVENT_UNIQUE_ID_BMC</span> <span class="o">==</span> <span class="n">pxSignal</span><span class="o">-&gt;</span><span class="n">ucModule</span> <span class="p">)</span> <span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span> <span class="n">MAX_BMC_PROXY_DRIVER_EVENTS</span> <span class="o">&gt;=</span> <span class="n">pxSignal</span><span class="o">-&gt;</span><span class="n">ucEventType</span> <span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">switch</span><span class="p">(</span> <span class="n">pxSignal</span><span class="o">-&gt;</span><span class="n">ucEventType</span> <span class="p">)</span>
+            <span class="p">{</span>
+
+            <span class="k">case</span> <span class="n">BMC_PROXY_DRIVER_E_GET_PDR</span><span class="p">:</span>
+            <span class="p">{</span>
+                <span class="n">INC_STAT_COUNTER</span><span class="p">(</span> <span class="n">OUT_OF_BAND_STATS_BMC_PDR_REQUEST</span> <span class="p">)</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="k">case</span> <span class="n">BMC_PROXY_DRIVER_E_GET_PDR_REPOSITORY_INFO</span><span class="p">:</span>
+            <span class="p">{</span>
+                <span class="n">INC_STAT_COUNTER</span><span class="p">(</span> <span class="n">OUT_OF_BAND_STATS_BMC_PDR_INFO_REQUEST</span> <span class="p">)</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="k">case</span> <span class="n">BMC_PROXY_DRIVER_E_GET_SENSOR_INFO</span><span class="p">:</span>
+            <span class="p">{</span>
+                <span class="n">INC_STAT_COUNTER</span><span class="p">(</span> <span class="n">OUT_OF_BAND_STATS_BMC_SENSOR_INFO_REQUEST</span> <span class="p">)</span>
+
+                <span class="cm">/* call into BMC Proxy to get required sensor id */</span>
+                <span class="n">iBMC_GetSensorIdRequest</span><span class="p">(</span> <span class="n">pxSignal</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sSensorId</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ucSensorOperationalState</span> <span class="p">)</span>
+
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">default</span><span class="p">:</span>
+            <span class="p">{</span>
+                <span class="n">INC_STAT_COUNTER</span><span class="p">(</span> <span class="n">OUT_OF_BAND_STATS_BMC_UNSUPPORTED_REQUEST</span> <span class="p">)</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="p">}</span>
+
+            <span class="n">iStatus</span> <span class="o">=</span> <span class="n">OK</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">iStatus</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="common-pdr-header">
+<span id="boardmanagementcontroller-bmc-proxydriver-commonpdrheader"></span><h2>Common PDR header<a class="headerlink" href="#common-pdr-header" title="Permalink to this headline">¶</a></h2>
+<p>Structure to store the MCTP/PLDM common header, used in the response buffer.</p>
+<table class="relative-table wrapped confluenceTable" style="width: 45.1076%;"><colgroup><col style="width: 5.40527%;"/><col style="width: 14.324%;"/><col style="width: 80.2708%;"/></colgroup><tbody><tr><th class="confluenceTh" scope="col">Type</th><th class="confluenceTh" scope="col">Name</th><th class="confluenceTh" scope="col">Description</th></tr><tr><td class="confluenceTd">uint32</td><td class="confluenceTd">recordHandle</td><td class="confluenceTd">An opaque number that is used for accessing individual PDRs within a PDR Repository.</td></tr><tr><td class="confluenceTd">uint8</td><td class="confluenceTd">PDRHeaderVersion</td><td class="confluenceTd">This field is provided in case a future version of this specification requires a modification to the format of the PDR Header.</td></tr><tr><td class="confluenceTd">uint8</td><td class="confluenceTd">PDRType</td><td class="confluenceTd">The type of the PDR.</td></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">recordChangeNumber</td><td class="confluenceTd">Mechanism for preventing the use of invalid PDR data if a record's data gets updated while the record was in the process of being read out.</td></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">dataLength</td><td class="confluenceTd">The total number of PDR data bytes following this field. </td></tr></tbody></table>
+</section>
+<section id="numeric-sensor-pdr">
+<span id="boardmanagementcontroller-bmc-proxydriver-numericsensorpdr"></span><h2>Numeric sensor PDR<a class="headerlink" href="#numeric-sensor-pdr" title="Permalink to this headline">¶</a></h2>
+<p>Structure that represents a single numeric sensor PDR.</p>
+<table class="relative-table wrapped confluenceTable" style="width: 54.7706%;"><colgroup><col style="width: 3.85769%;"/><col style="width: 16.321%;"/><col style="width: 79.8213%;"/></colgroup><tbody><tr><th class="confluenceTh" scope="col">Type</th><th class="confluenceTh" scope="col">Name</th><th class="confluenceTh" scope="col">Description</th></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">PLDMTerminusHandle</td><td class="confluenceTd">A handle that identifies PDRs that belong to a particular PLDM terminus. </td></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">sensorID</td><td class="confluenceTd">ID of the sensor relative to the given PLDM Terminus ID. </td></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">entityType</td><td class="confluenceTd">The Type value for the entity that is associated with this sensor.</td></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">entityInstanceNumber</td><td class="confluenceTd">The Instance Number for the entity that is associated with this sensor. See 9.1 for more information. </td></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">containerID</td><td class="confluenceTd">The containerID for the containing entity that instantiates the entity that is measured by this sensor.</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">sensorInit</td><td class="confluenceTd">Indicates whether the sensor requires initialization by the initializationAgent.</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">sensorAuxiliaryNamesPDR</td><td class="confluenceTd"><p>true =  sensor has a Sensor Auxiliary Names PDR</p><p>false = sensor does not have an associated Sensor Auxiliary Names PDR </p></td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">baseUnit</td><td class="confluenceTd">The base unit of the reading returned by this sensor.</td></tr><tr><td class="confluenceTd">int8_t</td><td class="confluenceTd">unitModifier</td><td class="confluenceTd">A power-of-10 multiplier for the baseUnit.</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">rateUnit</td><td class="confluenceTd">value: { None, Per MicroSecond, Per MilliSecond, Per Second, Per Minute, Per Hour, Per Day, Per Week, Per Month, Per Year } </td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">baseOEMUnitHandle</td><td class="confluenceTd">This value is used to locate the corresponding PLDM OEM Unit PDR that defines the OEMUnit when the OEMUnit value is used for the baseUnit. </td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">auxUnit</td><td class="confluenceTd">The base unit of the reading returned by this sensor.</td></tr><tr><td class="confluenceTd">int8_t</td><td class="confluenceTd">auxUnitModifier</td><td class="confluenceTd">A power-of-10 multiplier for the auxUnit.</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">auxrateUnit</td><td class="confluenceTd">value: { None, Per MicroSecond, Per MilliSecond, Per Second, Per Minute, Per Hour, Per Day, Per Week, Per Month, Per Year }</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">rel</td><td class="confluenceTd">The relationship between the base unit and the auxiliary unit.</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">auxOEMUnitHandle</td><td class="confluenceTd">This value is used to locate the PLDM OEM Unit PDR that defines the OEMUnit if the OEMUnit value is used for the auxUnit. </td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">isLinear</td><td class="confluenceTd">Indicates whether a sensor is linear or dynamic in its range. For example, this value can be used by a MAP to populate the IsLinear attribute of CIM_NumericSensor. </td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">sensorDataSize</td><td class="confluenceTd">The bit width and format of reading and threshold values that the sensor returns value: { uint8, sint8, uint16, sint16, uint32, sint32 } </td></tr><tr><td class="confluenceTd">float</td><td class="confluenceTd">resolution</td><td class="confluenceTd">The resolution of the sensor in Units</td></tr><tr><td class="confluenceTd">float</td><td class="confluenceTd">offset</td><td class="confluenceTd">A constant value that is added in as part of the conversion process of converting a raw sensor reading to Units</td></tr><tr><td class="confluenceTd">uint16_t</td><td class="confluenceTd">accuracy</td><td class="confluenceTd">Given as a +/- percentage in 1/100ths of a % from 0.00 to 100.00. For example, the integer value 510 corresponds to ± 5.10%</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">plusTolerance</td><td class="confluenceTd">Tolerance is given in +/- counts of the reading value.</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">minusTolerance</td><td class="confluenceTd">Tolerance is given in +/- counts of the reading value.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">hysteresis</td><td class="confluenceTd">The amount of hysteresis associated with the sensor thresholds, given in raw sensor counts.</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">supportedThresholds</td><td class="confluenceTd">For PLDM: bit field where bit position represents whether a given threshold is supported</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">thresholdAndHysteresisVolatility</td><td class="confluenceTd">Identifies under which conditions any threshold or hysteresis settings that were set through the SetSensorThresholds or SetSensorHysteresis command may be lost.</td></tr><tr><td class="confluenceTd">float</td><td class="confluenceTd">stateTransitionInterval </td><td class="confluenceTd">How long the sensor device takes to do an enabledState change (worst case)</td></tr><tr><td class="confluenceTd">float</td><td class="confluenceTd">updateInterval</td><td class="confluenceTd">Polling or update interval in seconds expressed using a floating point number (generally corresponds to the CIM PollingInterval property) </td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">maxReadable</td><td class="confluenceTd">The maximum value that the sensor may return. The size of this field is given by the sensorDataSize field in this PDR.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">minReadable</td><td class="confluenceTd">The minimum value that the sensor may return. The size of this field is given by the sensorDataSize field in this PDR. </td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">rangeFieldFormat</td><td class="confluenceTd">Indicates the format used for the following nominalValue, normalMax, normalMin, criticalHigh, criticalLow, fatalHigh, and fatalLow fields.</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">rangeFieldSupport</td><td class="confluenceTd">Indicates which of the fields that identify the operating ranges of the parameter monitored by the sensor are supported. (This bitfield indicates whether the following nominalValue, normalMax, and so on, fields contain valid range values.)  </td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">nominalValue</td><td class="confluenceTd">This value presents the nominal value for the parameter that is monitored by the sensor. The size of this field is given by the rangeFieldFormat field in this PDR. This value is given directly in the specified units without the use of any conversion formula. </td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">normalMax</td><td class="confluenceTd">The upper limit of the normal operating range for the parameter that is monitored by the numeric sensor.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">normalMin</td><td class="confluenceTd">The lower limit of the normal operating range for the parameter that is monitored by the numeric sensor.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">warningHigh</td><td class="confluenceTd">A warning condition that occurs when the monitored value is greater than the value reported by warningHigh.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">warningLow</td><td class="confluenceTd">A warning condition that occurs when the monitored value is less than or equal to the value reported by warningLow.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">criticalHigh</td><td class="confluenceTd">A critical condition that occurs when the monitored value is greater than or equal to the value reported by criticalHigh.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">criticalLow</td><td class="confluenceTd">A critical condition that occurs when the monitored value is less than the value reported by criticalLow.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">fatalHigh</td><td class="confluenceTd">A fatal condition that occurs when the monitored value is greater than the value reported by fatalHigh.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">fatalLow</td><td class="confluenceTd">A fatal condition that occurs when the monitored value is less than the value reported by fatalLow.</td></tr></tbody></table>
+</section>
+<section id="sensor-name-pdr">
+<span id="boardmanagementcontroller-bmc-proxydriver-sensornamepdr"></span><h2>Sensor name PDR<a class="headerlink" href="#sensor-name-pdr" title="Permalink to this headline">¶</a></h2>
+<p>Structure that stores the sensor names PDR.</p>
+<table class="relative-table wrapped confluenceTable" style="width: 41.2505%;"><colgroup><col style="width: 5.91091%;"/><col style="width: 15.4669%;"/><col style="width: 78.6222%;"/></colgroup><tbody><tr><th class="confluenceTh" scope="col">Type</th><th class="confluenceTh" scope="col">Name</th><th class="confluenceTh" scope="col">Description</th></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">PLDMTerminusHandle</td><td class="confluenceTd">ID of the sensor relative to the given PLDM terminus </td></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">sensorID</td><td class="confluenceTd">ID of the sensor relative to the given PLDM terminus </td></tr><tr><td class="confluenceTd">uint8</td><td class="confluenceTd">sensorCount </td><td class="confluenceTd">For each sensor x in sensorCount, there can be 1..nameStringCount[x] strings, where each set of strings corresponds to a sensor in a composite sensor.</td></tr><tr><td class="confluenceTd">uint8</td><td class="confluenceTd">nameStringCount</td><td class="confluenceTd">Number of following pairs [0..N] of nameLanguageTag + sensorName fields for sensor[1]</td></tr><tr><td class="confluenceTd">uint8</td><td class="confluenceTd">nameLanguageTag</td><td class="confluenceTd">A null-terminated ISO646 ASCII string that holds a language tag.</td></tr><tr><td class="confluenceTd">uint8</td><td class="confluenceTd">sensorName</td><td class="confluenceTd">A null-terminated unicode string for the auxiliary name of the sensor</td></tr></tbody></table>
+<p>Page Revision: v. 34</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</section>
+</div>
+</div>
+<footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+<a accesskey="p" class="btn btn-neutral float-left" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html" rel="prev" title="AVED External Device Control (AXC) Proxy Driver"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+<a accesskey="n" class="btn btn-neutral float-right" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html" rel="next" title="Firmware Interface (FW_IF) Abstraction Layer">Next <span aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<p>© Copyright 2023, Advanced Micro Devices Inc.</p>
+</div>
+<div class="aem-Grid aem-Grid--16">
+<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+<div class="container-fluid sub-footer">
+<div class="row">
+<div class="col-xs-24">
+<p><a href="https://www.amd.com/en/corporate/copyright" target="_blank">Terms and Conditions</a> | <a href="https://www.amd.com/en/corporate/privacy" target="_blank">Privacy</a> | <a href="https://www.amd.com/en/corporate/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.amd.com/en/corporate/trademarks" target="_blank">Trademarks</a> | <a href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf" target="_blank">Statement on Forced Labor</a> | <a href="https://www.amd.com/en/corporate/competition" target="_blank">Fair and Open Competition</a> | <a href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf" target="_blank">UK Tax Strategy</a> | <a href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA" target="_blank">Inclusive Terminology</a> | <a class="ot-sdk-show-settings" href="#cookiessettings">Cookies Settings</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+</div>
+</div>
+</section>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+</body>
+</html>
