@@ -1,7 +1,7 @@
 # Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 
-cmake_minimum_required(VERSION 3.3)
+cmake_minimum_required(VERSION 3.5.0)
 
 project( amc )
 
@@ -36,7 +36,7 @@ else()
         set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
         set(CMAKE_BUILD_TYPE Debug)
         set(THREADS_PREFER_PTHREAD_FLAG ON)
-        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror -Wall -Wno-missing-braces")
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror -Wall -Wno-missing-braces -fcommon")
 
         find_package(Threads REQUIRED)
         set(OSAL_PATH "src/osal/src/linux/osal.c")

@@ -22,7 +22,7 @@
 set -Eeuo pipefail
 
 # Init
-DESIGN="amd_v80_gen5x8_23.2_exdes_2"
+DESIGN="amd_v80_gen5x8_24.1"
 HW_DIR=$(realpath ./)
 FW_DIR=$(realpath ./../../fw/AMC)
 XSA=${XSA:-$(realpath ${HW_DIR})/build/${DESIGN}.xsa}

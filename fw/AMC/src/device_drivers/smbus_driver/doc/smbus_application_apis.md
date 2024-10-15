@@ -1,7 +1,9 @@
 # SMBus Application APIs
+
+Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+SPDX-License-Identifier: MIT
+
 ## Defines
-
-
 
 ```sh
 #define SMBUS_DATA_SIZE_MIN                     ( 0 )

@@ -429,8 +429,6 @@ void vPLL_Output( PLL_OUTPUT_LEVEL xOutputLevel, const char *pcFormat, ... )
             /* Check logging level */
             if( pxThis->xLoggingLevel >= xOutputLevel )
             {
-                /* TODO: Add string formatting once health thread application is ready -
-                    see: https://confluence.xilinx.com/display/DCG/AMC+Debug+logging */
                 if( OK == iLogCollect( pcBuffer ) )
                 {
                     INC_STAT_COUNTER( PLL_STATS_LOG_COLLECT_SUCCESS )

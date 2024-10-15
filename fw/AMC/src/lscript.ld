@@ -1,6 +1,6 @@
 /**
  * SPDX-License-Identifier: MIT
- * Copyright (C) 2023 Xilinx, Inc. All rights reserved.
+ * Copyright (C) 2023 Advanced Micro Devices, Inc. All rights reserved.
  */
 
 _STACK_SIZE = DEFINED(_STACK_SIZE) ? _STACK_SIZE : 0xA00000;

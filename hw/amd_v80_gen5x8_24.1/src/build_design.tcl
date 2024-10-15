@@ -20,7 +20,7 @@
 ############################################################
 
 set src_dir        [file dirname [file normalize [info script]]]
-set design_name     "amd_v80_gen5x8_23.2_exdes_2"
+set design_name     "amd_v80_gen5x8_24.1"
 set bd_name         "top"
 
 proc do_aved_build {} { 

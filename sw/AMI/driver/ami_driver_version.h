@@ -5,9 +5,9 @@
 #ifndef _AMI_DRIVER_VERSION_H_
 #define _AMI_DRIVER_VERSION_H_
 
-#define GIT_TAG                   "2.2.0"
+#define GIT_TAG                   "2.3.0"
 #define GIT_TAG_VER_MAJOR         (2)
-#define GIT_TAG_VER_MINOR         (2)
+#define GIT_TAG_VER_MINOR         (3)
 #define GIT_TAG_VER_PATCH         (0)
 #define GIT_TAG_VER_DEV_COMMITS   (0)
 

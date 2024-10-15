@@ -20,7 +20,7 @@
 # DEALINGS IN THE SOFTWARE.
 ############################################################
 
-DEST_DIR="/opt/amd/aved/amd_v80_gen5x8_23.2_exdes_2"
+DEST_DIR="/opt/amd/aved/amd_v80_gen5x8_24.1"
 
 
 if [ $(grep '^NAME' /etc/os-release | grep -c "Ubuntu") -eq 1 ]; then
