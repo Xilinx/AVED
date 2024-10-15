@@ -1,0 +1,10 @@
+all:
+{
+    image {
+      { type=bootimage, file=./build/prj.runs/impl_1/top_wrapper.pdi  }
+    }
+    image {
+        id = 0x1c000000, name=rpu_subsystem, delay_handoff
+        { core=r5-0, file=./build/amc.elf  }
+    }
+}

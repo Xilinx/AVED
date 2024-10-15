@@ -351,11 +351,11 @@ int iI2C_Init( I2C_CFG_TYPE *pxI2cCfg, uint16_t usBusIdleWaitMs )
                 ulNewRegisterValue = ulRegisterValue & ~( pxI2cCfg[ i ].ulHwResetMask );
 
                 /* Set the output bit of the register low */
-                HAL_IO_WRITE32_NO_FLUSH( pxI2cCfg[ i ].ulHwResetAddress, ulNewRegisterValue );
+                HAL_IO_WRITE32_NO_FLUSH( ulNewRegisterValue,  pxI2cCfg[ i ].ulHwResetAddress );
                 iOSAL_Task_SleepMs( I2C_RESET_TIMEOUT_MS );
 
                 /* Set the output bit of the register high again */
-                HAL_IO_WRITE32_NO_FLUSH( pxI2cCfg[ i ].ulHwResetAddress, ulRegisterValue );
+                HAL_IO_WRITE32_NO_FLUSH( ulRegisterValue, pxI2cCfg[ i ].ulHwResetAddress );
                 iOSAL_Task_SleepMs( I2C_RESET_TIMEOUT_MS );
             }
 

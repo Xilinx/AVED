@@ -172,7 +172,7 @@ echo "$(date)"
 
 if [ $NO_WORKSPACE -eq 0 ]; then
     echo "Setting up workspace"
-    ./scripts/setupWorkspace.sh
+    #./scripts/setupWorkspace.sh
 fi
 
 if [ $DRIVER_ONLY -eq 1 ]; then

@@ -57,7 +57,9 @@
 #define SEMAPHORE_PERMISSIONS                ( 0666 )
 #define SEM_ERROR                            ( -1 )
 #define TIMER_START_OFFSET                   ( 5 )
+#ifndef PTHREAD_STACK_MIN
 #define PTHREAD_STACK_MIN                    ( 16384 )
+#endif
 #define SEM_LOCK                             ( -1 )
 #define SEM_UNLOCK                           ( 1 )
 
@@ -571,6 +573,7 @@ int iOSAL_Semaphore_Create( void** ppvSemHandle, uint32_t ullCount,
 
     uint32_t ulSemFlg = SEMAPHORE_PERMISSIONS | IPC_CREAT;    /* semflg to pass to semget() */
     uint32_t ulSemId = 0;
+    int iTmpId = 0;
     
     key_t xKeys = ulSemNo;
     union xSemUnion  
@@ -584,13 +587,15 @@ int iOSAL_Semaphore_Create( void** ppvSemHandle, uint32_t ullCount,
         ( NULL == *ppvSemHandle ) &&
         ( NULL != pcSemName ) )
     {
-        if( ( semget( xKeys, NUMBER_OF_SEMS, ulSemFlg ) ) == SEM_ERROR )
+        iTmpId = semget( xKeys, NUMBER_OF_SEMS, ulSemFlg );
+
+        if( SEM_ERROR == iTmpId )
         {
             iStatus = OSAL_ERRORS_OS_IMPLEMENTATION;
         }
         else
         {
-            ulSemId = semget( xKeys, NUMBER_OF_SEMS, ulSemFlg );
+            ulSemId = ( uint32_t )iTmpId;
             ulSemNo++;
             xSemAttr.iVal = ullCount;
             if( SEM_ERROR == semctl( ulSemId, 0, SETVAL, xSemAttr ) ) 

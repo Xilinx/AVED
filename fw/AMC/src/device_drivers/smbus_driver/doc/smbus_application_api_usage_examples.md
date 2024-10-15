@@ -1,5 +1,8 @@
 # SMBus Application API Usage Examples
 
+Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+SPDX-License-Identifier: MIT
+
 ## Introduction
 The SMBus driver allows application software to send and receive SMBus commands using the SMBus FPGA IP block.
 This can be done using the supplied API functions listed in the smbus.h file.
