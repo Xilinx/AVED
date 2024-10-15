@@ -1,0 +1,99 @@
+<mxfile host="confluence.xilinx.com" modified="2024-02-15T09:56:44.752Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="vkI0PL9D7Ho2Ft9GIvCV" version="21.4.0" type="atlas">
+  <diagram id="bmha8GIgulutu0Q89Or6" name="Page-1">
+    <mxGraphModel dx="2074" dy="1163" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="PoMiZKTbbcVvFtllHWU2-1" value="AMC&#xa;Application" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="181" y="120" width="97" height="570" as="geometry" />
+        </mxCell>
+        <mxCell id="PoMiZKTbbcVvFtllHWU2-2" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;strokeWidth=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="PoMiZKTbbcVvFtllHWU2-1" vertex="1">
+          <mxGeometry x="44" y="80" width="10" height="450" as="geometry" />
+        </mxCell>
+        <mxCell id="PoMiZKTbbcVvFtllHWU2-3" value="ASC Proxy" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="544" y="120" width="100" height="580" as="geometry" />
+        </mxCell>
+        <mxCell id="PoMiZKTbbcVvFtllHWU2-4" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="PoMiZKTbbcVvFtllHWU2-3" vertex="1">
+          <mxGeometry x="45" y="170" width="10" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="PoMiZKTbbcVvFtllHWU2-5" value="Get all sensor data from ASC&#xa;Proxy" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;exitX=0.6;exitY=0.26;exitDx=0;exitDy=0;exitPerimeter=0;entryX=-0.1;entryY=0.267;entryDx=0;entryDy=0;entryPerimeter=0;" parent="PoMiZKTbbcVvFtllHWU2-3" edge="1" target="PoMiZKTbbcVvFtllHWU2-4">
+          <mxGeometry y="5" relative="1" as="geometry">
+            <mxPoint x="-125" y="194.4000000000001" as="sourcePoint" />
+            <mxPoint x="40" y="194" as="targetPoint" />
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PoMiZKTbbcVvFtllHWU2-6" value="Get FPT header &amp; FPT partition info from APC Proxy" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;entryX=0.447;entryY=0.576;entryDx=0;entryDy=0;entryPerimeter=0;" parent="PoMiZKTbbcVvFtllHWU2-3" target="PoMiZKTbbcVvFtllHWU2-7" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-134" y="330" as="sourcePoint" />
+            <mxPoint x="211" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PoMiZKTbbcVvFtllHWU2-7" value="APC Proxy" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="730" y="120" width="100" height="570" as="geometry" />
+        </mxCell>
+        <mxCell id="PoMiZKTbbcVvFtllHWU2-8" value="EEPROM&#xa;Driver" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="911" y="120" width="110" height="570" as="geometry" />
+        </mxCell>
+        <mxCell id="PoMiZKTbbcVvFtllHWU2-9" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;strokeWidth=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="PoMiZKTbbcVvFtllHWU2-8" vertex="1">
+          <mxGeometry x="50" y="400" width="10" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PoMiZKTbbcVvFtllHWU2-10" value="ASDM&lt;br&gt;Internal&lt;br&gt;Store" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="1" vertex="1">
+          <mxGeometry x="300" y="420" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PoMiZKTbbcVvFtllHWU2-11" value="&lt;span style=&quot;font-size: 12px; text-align: center; background-color: rgb(248, 249, 250);&quot;&gt;Dynamically allocate&lt;br&gt;SDR&#39;s for POWER/&lt;br&gt;TEMP/CURRENT &amp;amp; &lt;br&gt;OLTAGE&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;entryX=1;entryY=0;fontSize=13;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="418" y="341" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="448" y="341" />
+            </Array>
+            <mxPoint x="423" y="361" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PoMiZKTbbcVvFtllHWU2-12" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;strokeWidth=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="775" y="431" width="10" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PoMiZKTbbcVvFtllHWU2-13" value="Directly call into EEPROM driver to get the supported board info fields" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="417" y="540" as="sourcePoint" />
+            <mxPoint x="960" y="540" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PoMiZKTbbcVvFtllHWU2-14" value="&lt;span style=&quot;font-size: 12px; text-align: center; background-color: rgb(248, 249, 250);&quot;&gt;Dynamically allocate&lt;br&gt;SDR for FPT&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;entryX=1;entryY=0;fontSize=13;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="417" y="481" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="447" y="481" />
+            </Array>
+            <mxPoint x="422" y="501" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PoMiZKTbbcVvFtllHWU2-15" value="&lt;span style=&quot;font-size: 12px; text-align: center; background-color: rgb(248, 249, 250);&quot;&gt;Dynamically allocate&lt;br&gt;SDR for board info&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;entryX=1;entryY=0;fontSize=13;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="418" y="578" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="448" y="578" />
+            </Array>
+            <mxPoint x="423" y="598" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PoMiZKTbbcVvFtllHWU2-16" value="ASDM&#xa;Subsystem" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="362" y="120" width="100" height="580" as="geometry" />
+        </mxCell>
+        <mxCell id="PoMiZKTbbcVvFtllHWU2-17" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;strokeWidth=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="PoMiZKTbbcVvFtllHWU2-16" vertex="1">
+          <mxGeometry x="45" y="150" width="10" height="370" as="geometry" />
+        </mxCell>
+        <mxCell id="PoMiZKTbbcVvFtllHWU2-18" value="Initialize ASDM Library" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;exitX=0.6;exitY=0.26;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.1;entryY=0.119;entryDx=0;entryDy=0;entryPerimeter=0;" parent="PoMiZKTbbcVvFtllHWU2-16" edge="1">
+          <mxGeometry y="5" relative="1" as="geometry">
+            <mxPoint x="-126" y="194.4000000000001" as="sourcePoint" />
+            <mxPoint x="45" y="194.02999999999997" as="targetPoint" />
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PoMiZKTbbcVvFtllHWU2-19" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;" parent="PoMiZKTbbcVvFtllHWU2-16" vertex="1">
+          <mxGeometry x="8" y="250" width="20" height="200" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

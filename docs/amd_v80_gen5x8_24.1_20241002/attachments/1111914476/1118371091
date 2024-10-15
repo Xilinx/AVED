@@ -1,0 +1,45 @@
+<mxfile host="confluence.xilinx.com" modified="2024-02-15T11:06:08.385Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="rX6iB0aG3fu-oHGq9YnI" version="21.4.0" type="atlas">
+  <diagram id="ORv81KxEaJuzzLpMQy77" name="Page-1">
+    <mxGraphModel dx="2074" dy="1163" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="v12XkSWz_YVbsi6awdPr-1" value="Application" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="123" y="80" width="100" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="v12XkSWz_YVbsi6awdPr-2" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;strokeWidth=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="v12XkSWz_YVbsi6awdPr-1" vertex="1">
+          <mxGeometry x="45" y="80" width="10" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="v12XkSWz_YVbsi6awdPr-3" value="BMC Proxy" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="351" y="80" width="100" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="v12XkSWz_YVbsi6awdPr-4" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;strokeWidth=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="v12XkSWz_YVbsi6awdPr-3" vertex="1">
+          <mxGeometry x="45" y="80" width="10" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="v12XkSWz_YVbsi6awdPr-5" value="Internal flag is set and response&amp;nbsp;&lt;br&gt;data is stored&amp;nbsp;" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;entryX=1.339;entryY=0.973;entryDx=0;entryDy=0;entryPerimeter=0;" parent="v12XkSWz_YVbsi6awdPr-3" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="55" y="199" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="130" y="199" />
+              <mxPoint x="130" y="239" />
+              <mxPoint x="58" y="239" />
+            </Array>
+            <mxPoint x="58.38999999999987" y="238.20000000000005" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v12XkSWz_YVbsi6awdPr-6" value="iBMC_SetResponse()" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;entryX=0.1;entryY=0.1;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="178" y="189" as="sourcePoint" />
+            <mxPoint x="394" y="189" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v12XkSWz_YVbsi6awdPr-10" value="OK or ERROR" style="verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;exitX=0;exitY=0.95;shadow=0;strokeWidth=1;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="179" y="320" as="targetPoint" />
+            <mxPoint x="392" y="321.9999999999998" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

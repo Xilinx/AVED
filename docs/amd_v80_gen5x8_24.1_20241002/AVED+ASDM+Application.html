@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script charset="UTF-8" data-document-language="true" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script class="optanon-category-C0002" type="text/plain">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+<title>AVED ASDM Application — AVED  documentation</title>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="_static/xbtest.css" rel="stylesheet" type="text/css"/>
+<link href="_static/_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="https://docs.xilinx.com/favicon.ico" rel="shortcut icon"/>
+<!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/js/theme.js"></script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="AVED%2BInBand%2BTelemetry%2BApplication.html" rel="next" title="AVED InBand Telemetry Application"/>
+<link href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html" rel="prev" title="AVED Management Controller (AMC) - Architecture and Design"/>
+<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager -->
+<noscript><iframe class="optanon-category-C0002" height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager -->
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="index.html"> AVED
+            <img alt="Logo" class="logo" src="_static/xilinx-header-logo.svg"/>
+</a>
+<div role="search">
+<form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" type="text"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+</div>
+</div><div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BHierarchy%2BOverview.html">AVED V80 - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BCIPS%2BConfiguration.html">AVED V80 - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BResources.html">AVED V80 - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BMap.html">AVED V80 - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BNoC%2BConfiguration.html">AVED V80 - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BBase%2BLogic.html">AVED V80 - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BClock%2BReset%2BModule.html">AVED V80 - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BSource%2BFile%2BOverview.html">AVED V80 - Source File Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SMBus%2BIP%2Bv1.1%2B-%2BProduct%2BGuide.html">SMBus IP v1.1 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">AVED ASDM Application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#public-apis">Public APIs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iasdm-initialise-function">iASDM_Initialise Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#print-internal-asdm-data">Print internal ASDM data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#print-statistics">Print Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clear-statistics">Clear Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#populate-response">Populate Response</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#internal-design">Internal Design</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#enums">Enums</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#structures">Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iasccallback-function">iAscCallback Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iupdateasdmvalues-function">iUpdateAsdmValues Function</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOutOfBand%2BTelemetry%2BApplication.html">AVED OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Board%2BManagement%2BController%2B%28BMC%29%2BProxy%2BDriver.html">Board Management Controller (BMC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BQDMA.html">AVED QDMA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift"><nav aria-label="Mobile navigation menu" class="wy-nav-top" style="background: black">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="index.html">AVED</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="Page navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a class="icon icon-home" href="index.html"></a> »</li>
+<li>AVED ASDM Application</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<section id="aved-asdm-application">
+<h1>AVED ASDM Application<a class="headerlink" href="#aved-asdm-application" title="Permalink to this headline">¶</a></h1>
+<section id="overview">
+<span id="avedasdmapplication-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The Alveo Sensor Data Model (ASDM) is a data reporting format designed for storing and processing in-band and out-of-band sensor communication within Alveo devices, specifically targeting Versal Discovery Platforms. ASDM enables the monitoring and
+management of Alveo cards in data center environments by collecting and processing data from various sensors, such as temperature, power rails, voltages, and currents. This sensor data is used by server applications to control and manage Alveo cards
+via in-band or out-of-band communication methods, with out-of-band communication using server management protocols such as DMTF (PLDM/MTCP). In the ASDM format, sensor data is stored in the form of Sensor Descriptor Repository (SDR).</p>
+<p>An SDR is a structured data model intended to store, organize, and represent sensor information in a scalable and adaptable manner. The SDR consists of three main components: Header, Sensor Record, and EoR (End of Record). The Header includes
+metadata about the repository, such as the repository type, version number, total number of records, and the total number of bytes. Sensor Records contain specific details about individual sensors, including sensor ID, name, value, unit, modifier,
+threshold support, threshold limits, and sensor status. The EoR marks the end of the repository, allowing applications to recognize the completion of the data.</p>
+<p>The ASDM application stores this data internally, and makes it available through the in-band application.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/1118979391.png"><img alt="image1" class="drawio-diagram-image" src="_images/1118979391.png" style="width: 841px;"/></a></p>
+</section>
+<section id="public-apis">
+<span id="avedasdmapplication-publicapis"></span><h2>Public APIs<a class="headerlink" href="#public-apis" title="Permalink to this headline">¶</a></h2>
+<section id="iasdm-initialise-function">
+<span id="avedasdmapplication-iasdm-initialisefunction"></span><h3>iASDM_Initialise Function<a class="headerlink" href="#iasdm-initialise-function" title="Permalink to this headline">¶</a></h3>
+<p>This function dynamically creates and populates the pxAsdmSdrInfo which is stored within the global context.</p>
+<p>The ASDM (Alveo Sensor Data Model) consists of:</p>
+<ul class="simple">
+<li><p>Header</p></li>
+<li><p>Number of SDR’s</p></li>
+<li><p>End of Record</p></li>
+</ul>
+<p>The initialize function takes in 1 parameter ( ucNumSensors ) which is uses to populate the internal ASDM structures.</p>
+<p><strong>iASDM_Initialise</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Initialise the ASDM application layer</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   ucNumSensors          Number of sensors in the profile</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Successfully initilaised the layer</span>
+<span class="cm"> *          ERROR       Failed to initialise</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iASDM_Initialise</span><span class="p">(</span> <span class="n">uint8_t</span> <span class="n">ucNumSensors</span> <span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="print-internal-asdm-data">
+<span id="avedasdmapplication-printinternalasdmdata"></span><h3>Print internal ASDM data<a class="headerlink" href="#print-internal-asdm-data" title="Permalink to this headline">¶</a></h3>
+<p>API function to print out the internal ASDM repo data.</p>
+<p><strong>iASDM_PrintAsdmRepoData</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Print out the internal ASDM repo data</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   iRepoIndex         The repo index</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Stats retrieved from proxy driver successfully</span>
+<span class="cm"> *          ERROR       Stats not retrieved successfully</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iASDM_PrintAsdmRepoData</span><span class="p">(</span> <span class="kt">int</span> <span class="n">iRepoIndex</span> <span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="print-statistics">
+<span id="avedasdmapplication-printstatistics"></span><h3>Print Statistics<a class="headerlink" href="#print-statistics" title="Permalink to this headline">¶</a></h3>
+<p>Debug function used to display the statistic counters and errors.</p>
+<p><strong>iASDM_PrintStatistics</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Print all the stats gathered by the application</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Stats retrieved from the application successfully</span>
+<span class="cm"> *          ERROR       Stats not retrieved successfully</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iASDM_PrintStatistics</span><span class="p">(</span> <span class="kt">void</span> <span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="clear-statistics">
+<span id="avedasdmapplication-clearstatistics"></span><h3>Clear Statistics<a class="headerlink" href="#clear-statistics" title="Permalink to this headline">¶</a></h3>
+<p>Debug function used to clear the all statistics counters back to zero.</p>
+<p><strong>iASDM_ClearStatistics</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Clear all the stats in the application</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Stats cleared successfully</span>
+<span class="cm"> *          ERROR       Stats not cleared successfully</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iASDM_ClearStatistics</span><span class="p">(</span> <span class="kt">void</span> <span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="populate-response">
+<span id="avedasdmapplication-populateresponse"></span><h3>Populate Response<a class="headerlink" href="#populate-response" title="Permalink to this headline">¶</a></h3>
+<p>API function to return the buffer populated with the associated response.</p>
+<p><strong>iASDM_PopulateResponse</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Returns the buffer populated with associated response</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   xApiType          The associated API type</span>
+<span class="cm"> * @param   xAsdmRepo         The repo type</span>
+<span class="cm"> * @param   ucSensorId        The sensor ID, if applicable</span>
+<span class="cm"> * @param   pucRespBuff       The buffer to be populated with the response</span>
+<span class="cm"> * @param   pusRespSizeBytes  Max buffer size passed in, number of bytes populated returned</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK          Successfully populated the response</span>
+<span class="cm"> *          ERROR       Failed to populate the response</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">iASDM_PopulateResponse</span><span class="p">(</span> <span class="n">ASDM_API_ID_TYPE</span> <span class="n">xApiType</span><span class="p">,</span>
+                            <span class="n">ASDM_REPOSITORY_TYPE</span> <span class="n">xAsdmRepo</span><span class="p">,</span>
+                            <span class="n">uint8_t</span> <span class="n">ucSensorId</span><span class="p">,</span>
+                            <span class="n">uint8_t</span> <span class="o">*</span><span class="n">pucRespBuff</span><span class="p">,</span>
+                            <span class="n">uint16_t</span> <span class="o">*</span><span class="n">pusRespSizeBytes</span> <span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="internal-design">
+<span id="avedasdmapplication-internaldesign"></span><h2>Internal Design<a class="headerlink" href="#internal-design" title="Permalink to this headline">¶</a></h2>
+<p>The ASDM subsystem will be accessed from three possible different threads. It will provide access to:</p>
+<ul class="simple">
+<li><p>Handle the sensor data updates data from the ASC.</p></li>
+<li><p>Handle the API data requests coming from the AMI proxy (including sensor data, FPTs, and Manufacturing information).</p></li>
+<li><p>Handle the API requests coming from the BMC proxy.</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><a class="drawio-diagram-image reference internal" href="_images/1118979387.png"><img alt="image2" class="drawio-diagram-image" src="_images/1118979387.png" style="width: 772px;"/></a></p>
+<section id="enums">
+<span id="avedasdmapplication-enums"></span><h3>Enums<a class="headerlink" href="#enums" title="Permalink to this headline">¶</a></h3>
+<p>The list of repo types supported within the in band application.</p>
+<p><strong>ASDM_API_ID_TYPE</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @enum    ASDM_API_ID_TYPE</span>
+<span class="cm"> * @brief   is a unique number that represents API ID type</span>
+<span class="cm"> */</span>
+<span class="n">typedef</span> <span class="kd">enum</span> <span class="n">ASDM_API_ID_TYPE</span>
+<span class="p">{</span>
+    <span class="n">ASDM_API_ID_TYPE_GET_SDR_SIZE</span>           <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">ASDM_API_ID_TYPE_GET_SDR</span>                <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">ASDM_API_ID_TYPE_GET_SINGLE_SENSOR_DATA</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="n">ASDM_API_ID_TYPE_GET_ALL_SENSOR_DATA</span>    <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="n">ASDM_API_ID_TYPE_GET_SDR_V2</span>             <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="n">ASDM_API_ID_TYPE_GET_ALL_SENSOR_DATA_V2</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span>
+    <span class="n">ASDM_API_ID_TYPE_CONFIG_WRITES</span>          <span class="o">=</span> <span class="mi">7</span><span class="p">,</span> <span class="cm">/* Not sensor related, should be rejected by ASDM */</span>
+    <span class="n">ASDM_API_ID_TYPE_SEND_EVENTS</span>            <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="cm">/* Not sensor related, should be rejected by ASDM */</span>
+
+    <span class="n">ASDM_API_ID_TYPE_MAX</span>
+
+<span class="p">}</span> <span class="n">ASDM_API_ID_TYPE</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Accepted repository type IDs.</p>
+<p><strong>ASDM_REPOSITORY_TYPE</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @enum    ASDM_REPOSITORY_TYPE</span>
+<span class="cm"> * @brief   is a unique number that represents each repo type</span>
+<span class="cm"> */</span>
+<span class="n">typedef</span> <span class="kd">enum</span> <span class="n">ASDM_REPOSITORY_TYPE</span>
+<span class="p">{</span>
+    <span class="n">ASDM_REPOSITORY_TYPE_BOARD_INFO</span>  <span class="o">=</span> <span class="mh">0xC0</span><span class="p">,</span>
+    <span class="n">ASDM_REPOSITORY_TYPE_TEMP</span>        <span class="o">=</span> <span class="mh">0xC1</span><span class="p">,</span>
+    <span class="n">ASDM_REPOSITORY_TYPE_VOLTAGE</span>     <span class="o">=</span> <span class="mh">0xC2</span><span class="p">,</span>
+    <span class="n">ASDM_REPOSITORY_TYPE_CURRENT</span>     <span class="o">=</span> <span class="mh">0xC3</span><span class="p">,</span>
+    <span class="n">ASDM_REPOSITORY_TYPE_POWER</span>       <span class="o">=</span> <span class="mh">0xC4</span><span class="p">,</span>
+    <span class="n">ASDM_REPOSITORY_TYPE_TOTAL_POWER</span> <span class="o">=</span> <span class="mh">0xC6</span><span class="p">,</span>
+    <span class="n">ASDM_REPOSITORY_TYPE_FPT</span>         <span class="o">=</span> <span class="mh">0xF0</span><span class="p">,</span>
+
+    <span class="n">ASDM_REPOSITORY_TYPE_MAX</span>
+
+<span class="p">}</span> <span class="n">ASDM_REPOSITORY_TYPE</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Request completion code IDs.</p>
+<p><strong>ASDM_SDR_COMPLETION_CODE</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @enum    ASDM_SDR_COMPLETION_CODE</span>
+<span class="cm"> * @brief   the request completion code</span>
+<span class="cm"> */</span>
+<span class="n">typedef</span> <span class="kd">enum</span> <span class="n">ASDM_SDR_COMPLETION_CODE</span>
+<span class="p">{</span>
+    <span class="n">ASDM_SDR_COMPLETION_CODE_NOT_AVAILABLE</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">,</span>
+    <span class="n">ASDM_SDR_COMPLETION_CODE_OPERATION_SUCCESS</span><span class="p">,</span>
+    <span class="n">ASDM_SDR_COMPLETION_CODE_OPERATION_FAILED</span><span class="p">,</span>
+
+    <span class="n">ASDM_SDR_COMPLETION_CODE_MAX</span>
+
+<span class="p">}</span> <span class="n">ASDM_SDR_COMPLETION_CODE</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Repository type ID.</p>
+<p><strong>AMC_ASDM_SUPPORTED_REPO</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @enum    AMC_ASDM_SUPPORTED_REPO</span>
+<span class="cm"> * @brief   the repo type</span>
+<span class="cm"> */</span>
+<span class="n">typedef</span> <span class="kd">enum</span> <span class="n">AMC_ASDM_SUPPORTED_REPO</span>
+<span class="p">{</span>
+    <span class="n">AMC_ASDM_SUPPORTED_REPO_TEMP</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">AMC_ASDM_SUPPORTED_REPO_VOLTAGE</span><span class="p">,</span>
+    <span class="n">AMC_ASDM_SUPPORTED_REPO_CURRENT</span><span class="p">,</span>
+    <span class="n">AMC_ASDM_SUPPORTED_REPO_POWER</span><span class="p">,</span>
+    <span class="n">AMC_ASDM_SUPPORTED_REPO_TOTAL_POWER</span><span class="p">,</span>
+    <span class="n">AMC_ASDM_SUPPORTED_REPO_FPT</span><span class="p">,</span>
+    <span class="n">AMC_ASDM_SUPPORTED_REPO_BOARD_INFO</span><span class="p">,</span>
+
+    <span class="n">AMC_ASDM_SUPPORTED_REPO_MAX</span>
+
+<span class="p">}</span> <span class="n">AMC_ASDM_SUPPORTED_REPO</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="structures">
+<span id="avedasdmapplication-structures"></span><h3>Structures<a class="headerlink" href="#structures" title="Permalink to this headline">¶</a></h3>
+<p>Common header used for sensor SDR messages, contains information about the sensor repository being sent across to AMI.</p>
+<p>The Header is 5 bytes long and is formatted as follows:</p>
+<ol class="arabic simple">
+<li><p>Repository Type</p></li>
+<li><p>Repository Version Number</p></li>
+<li><p>Total Number of Records</p></li>
+<li><p>Total Number of Bytes (in multiples of 8)</p></li>
+</ol>
+<p><strong>ASDM_SENSOR_HEADER</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @struct  ASDM_SENSOR_HEADER</span>
+<span class="cm"> * @brief   the SDR/SDS header format</span>
+<span class="cm"> *</span>
+<span class="cm"> * @note    Packed to 5 bytes to maintain layout for parsing in AMI</span>
+<span class="cm"> */</span>
+<span class="n">typedef</span> <span class="n">struct</span> <span class="nf">__attribute__</span><span class="p">((</span><span class="n">__packed__</span><span class="p">))</span> <span class="n">ASDM_SENSOR_HEADER</span>
+<span class="p">{</span>
+    <span class="n">uint8_t</span>     <span class="n">ucRepoType</span><span class="p">;</span>           <span class="cm">/* is a unique number that represents the SDR */</span>
+    <span class="n">uint8_t</span>     <span class="n">ucRepoVersionNum</span><span class="p">;</span>     <span class="cm">/* is used to differentiate multiple versions of SDRs */</span>
+    <span class="n">uint8_t</span>     <span class="n">ucTotalNumRecords</span><span class="p">;</span>    <span class="cm">/* total number of sensor records within each SDR type */</span>
+    <span class="n">uint16_t</span>    <span class="n">usTotalNumBytes</span><span class="p">;</span>      <span class="cm">/* is represented in multiple of 8s (i.e.) a record of 80 bytes</span>
+<span class="cm">                                         long will be represented as 10 */</span>
+<span class="p">}</span> <span class="n">ASDM_SENSOR_HEADER</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Individual sensor record, contains sensor information as defines in the ASDM spec.</p>
+<p><strong>ASDM_SDR_RECORD</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @struct ASDM_SDR_RECORD</span>
+<span class="cm"> * @brief  a single SDR sensor record</span>
+<span class="cm"> */</span>
+<span class="n">typedef</span> <span class="n">struct</span> <span class="n">ASDM_SDR_RECORD</span>
+<span class="p">{</span>
+    <span class="n">uint8_t</span>             <span class="n">ucId</span><span class="p">;</span>           <span class="cm">/* uniquely identifies each sensor record within the SDR */</span>
+    <span class="n">ASDM_RECORD_FIELD</span>   <span class="n">xSensorName</span><span class="p">;</span>
+    <span class="n">ASDM_RECORD_FIELD</span>   <span class="n">xSensorValue</span><span class="p">;</span>
+    <span class="n">ASDM_RECORD_FIELD</span>   <span class="n">xSensorBaseUnit</span><span class="p">;</span>
+    <span class="kt">char</span>                <span class="n">cUnitModifier</span><span class="p">;</span>
+    <span class="n">uint8_t</span>             <span class="n">ucThresholdSupportedBitMask</span><span class="p">;</span>
+    <span class="n">uint32_t</span>            <span class="n">ulLowerFatalLimit</span><span class="p">;</span>
+    <span class="n">uint32_t</span>            <span class="n">ulLowerCritLimit</span><span class="p">;</span>
+    <span class="n">uint32_t</span>            <span class="n">ulLowerWarnLimit</span><span class="p">;</span>
+    <span class="n">uint32_t</span>            <span class="n">ulUpperWarnLimit</span><span class="p">;</span>
+    <span class="n">uint32_t</span>            <span class="n">ulUpperCritLimit</span><span class="p">;</span>
+    <span class="n">uint32_t</span>            <span class="n">ulUpperFatalLimit</span><span class="p">;</span>
+    <span class="n">uint8_t</span>             <span class="n">ucSensorStatus</span><span class="p">;</span>
+    <span class="n">uint32_t</span>            <span class="n">ulMaxValue</span><span class="p">;</span>
+    <span class="n">uint32_t</span>            <span class="n">ulAverageValue</span><span class="p">;</span>
+
+<span class="p">}</span> <span class="n">ASDM_SDR_RECORD</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Individual board info record. Holds board information from the EEPROM.</p>
+<p><strong>ASDM_BOARD_INFO_RECORD</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @struct ASDM_BOARD_INFO_RECORD</span>
+<span class="cm"> * @brief  the board info record</span>
+<span class="cm"> */</span>
+<span class="n">typedef</span> <span class="n">struct</span> <span class="n">ASDM_BOARD_INFO_RECORD</span>
+<span class="p">{</span>
+    <span class="n">ASDM_RECORD_FIELD</span> <span class="n">xEepromVersion</span><span class="p">;</span>       <span class="cm">/* ASCII */</span>
+    <span class="n">ASDM_RECORD_FIELD</span> <span class="n">xProductName</span><span class="p">;</span>         <span class="cm">/* ASCII */</span>
+    <span class="n">ASDM_RECORD_FIELD</span> <span class="n">xBoardRev</span><span class="p">;</span>            <span class="cm">/* ASCII */</span>
+    <span class="n">ASDM_RECORD_FIELD</span> <span class="n">xBoardSerial</span><span class="p">;</span>         <span class="cm">/* ASCII */</span>
+    <span class="n">ASDM_RECORD_FIELD</span> <span class="n">xMacAddressCount</span><span class="p">;</span>     <span class="cm">/* Literal/Binary */</span>
+    <span class="n">ASDM_RECORD_FIELD</span> <span class="n">xFirstMacAddress</span><span class="p">;</span>     <span class="cm">/* Literal/Binary */</span>
+    <span class="n">ASDM_RECORD_FIELD</span> <span class="n">xActiveState</span><span class="p">;</span>         <span class="cm">/* ASCII */</span>
+    <span class="n">ASDM_RECORD_FIELD</span> <span class="n">xConfigMode</span><span class="p">;</span>          <span class="cm">/* Literal/Binary */</span>
+    <span class="n">ASDM_RECORD_FIELD</span> <span class="n">xManufacturingDate</span><span class="p">;</span>   <span class="cm">/* Literal/Binary */</span>
+    <span class="n">ASDM_RECORD_FIELD</span> <span class="n">xPartNumber</span><span class="p">;</span>          <span class="cm">/* ASCII */</span>
+    <span class="n">ASDM_RECORD_FIELD</span> <span class="n">xUuid</span><span class="p">;</span>                <span class="cm">/* Literal/Binary */</span>
+    <span class="n">ASDM_RECORD_FIELD</span> <span class="n">xPcieId</span><span class="p">;</span>              <span class="cm">/* Literal/Binary */</span>
+    <span class="n">ASDM_RECORD_FIELD</span> <span class="n">xMaxPowerMode</span><span class="p">;</span>        <span class="cm">/* Literal/Binary */</span>
+    <span class="n">ASDM_RECORD_FIELD</span> <span class="n">xMemorySize</span><span class="p">;</span>          <span class="cm">/* ASCII */</span>
+    <span class="n">ASDM_RECORD_FIELD</span> <span class="n">xOemId</span><span class="p">;</span>               <span class="cm">/* Literal/Binary */</span>
+    <span class="n">ASDM_RECORD_FIELD</span> <span class="n">xCapability</span><span class="p">;</span>          <span class="cm">/* Literal/Binary */</span>
+    <span class="n">ASDM_RECORD_FIELD</span> <span class="n">xMfgPartNumber</span><span class="p">;</span>       <span class="cm">/* ASCII */</span>
+
+<span class="p">}</span> <span class="n">ASDM_BOARD_INFO_RECORD</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Individual FPT record.</p>
+<p><strong>ASDM_FPT_RECORD</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @struct ASDM_FPT_RECORD</span>
+<span class="cm"> * @brief  the fpt header and records</span>
+<span class="cm"> */</span>
+<span class="n">typedef</span> <span class="n">struct</span> <span class="n">ASDM_FPT_RECORD</span>
+<span class="p">{</span>
+    <span class="n">ASDM_FPT_HEADER</span> <span class="n">xFptHdrPrimary</span><span class="p">;</span>
+    <span class="n">ASDM_FPT_ENTRY</span>  <span class="o">*</span><span class="n">pxFptEntryPrimary</span><span class="p">;</span>
+    <span class="n">ASDM_FPT_HEADER</span> <span class="n">xFptHdrSecondary</span><span class="p">;</span>
+    <span class="n">ASDM_FPT_ENTRY</span>  <span class="o">*</span><span class="n">pxFptEntrySecondary</span><span class="p">;</span>
+
+<span class="p">}</span> <span class="n">ASDM_FPT_RECORD</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Complete SDR structure, contains the header, record (sensor, board info, fpt), and an EOR (end of record) byte sequence.</p>
+<p><strong>ASDM_SDR</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @struct ASDM_SDR</span>
+<span class="cm"> * @brief  represents a single SDR instance</span>
+<span class="cm"> */</span>
+<span class="n">typedef</span> <span class="n">struct</span> <span class="n">ASDM_SDR</span>
+<span class="p">{</span>
+    <span class="n">ASDM_SENSOR_HEADER</span> <span class="n">xHdr</span><span class="p">;</span>
+    <span class="n">union</span>
+    <span class="p">{</span>
+        <span class="n">ASDM_SDR_RECORD</span> <span class="o">*</span><span class="n">pxSensorRecord</span><span class="p">;</span>
+        <span class="n">ASDM_FPT_RECORD</span> <span class="n">xFptRecord</span><span class="p">;</span>
+        <span class="n">ASDM_BOARD_INFO_RECORD</span> <span class="o">*</span><span class="n">pxBoardInfo</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="n">uint8_t</span> <span class="n">pucAsdmEor</span><span class="o">[</span> <span class="n">ASDM_EOR_BYTES</span> <span class="o">]</span><span class="p">;</span>
+
+<span class="p">}</span> <span class="n">ASDM_SDR</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+<div class="line">Used to internally store a list of sensors id’s per repo type and associated index into the pxAscData.</div>
+</div>
+<p><strong>ASDM_SENSOR_LIST</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @struct  ASDM_SENSOR_LIST</span>
+<span class="cm"> * @brief   List of sensors IDs stored per repo type</span>
+<span class="cm"> */</span>
+<span class="n">typedef</span> <span class="n">struct</span> <span class="n">ASDM_SENSOR_LIST</span>
+<span class="p">{</span>
+    <span class="n">uint8_t</span> <span class="n">ucNumFound</span><span class="p">;</span>
+    <span class="n">uint8_t</span> <span class="o">*</span><span class="n">pucSensorIndex</span><span class="p">;</span>
+    <span class="n">uint8_t</span> <span class="o">*</span><span class="n">pucSensorId</span><span class="p">;</span>
+
+<span class="p">}</span> <span class="n">ASDM_SENSOR_LIST</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="iasccallback-function">
+<span id="avedasdmapplication-iasccallbackfunction"></span><h3>iAscCallback Function<a class="headerlink" href="#iasccallback-function" title="Permalink to this headline">¶</a></h3>
+<p>This function is bound into the callback from the ASC Proxy to listen for the ‘ASC_PROXY_DRIVER_E_SENSOR_UPDATE_COMPLETE’ event.</p>
+<p>Once received it calls back into the ASC to get the latest sensor values and uses this to update the internal ASDM calling iUpdateAsdmValues( ).</p>
+</section>
+<section id="iupdateasdmvalues-function">
+<span id="avedasdmapplication-iupdateasdmvaluesfunction"></span><h3>iUpdateAsdmValues Function<a class="headerlink" href="#iupdateasdmvalues-function" title="Permalink to this headline">¶</a></h3>
+<p>The function is called from within the ASC callback whenever a sensor update complete event is received.</p>
+<p>Within mutex protection it loops around the internal sensor list and updates the sensor value to the latest based on the data received from the ASC proxy.</p>
+<p><strong>iUpdateAsdmValues</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief   Update the global ASDM table sensor values</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  OK or ERROR</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+<span class="kd">static</span> <span class="kt">int</span> <span class="nf">iUpdateAsdmValues</span><span class="p">(</span> <span class="kt">void</span> <span class="p">);</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Page Revision: v. 16</p>
+</section>
+</section>
+</section>
+</div>
+</div>
+<footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+<a accesskey="p" class="btn btn-neutral float-left" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html" rel="prev" title="AVED Management Controller (AMC) - Architecture and Design"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+<a accesskey="n" class="btn btn-neutral float-right" href="AVED%2BInBand%2BTelemetry%2BApplication.html" rel="next" title="AVED InBand Telemetry Application">Next <span aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<p>© Copyright 2023, Advanced Micro Devices Inc.</p>
+</div>
+<div class="aem-Grid aem-Grid--16">
+<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+<div class="container-fluid sub-footer">
+<div class="row">
+<div class="col-xs-24">
+<p><a href="https://www.amd.com/en/corporate/copyright" target="_blank">Terms and Conditions</a> | <a href="https://www.amd.com/en/corporate/privacy" target="_blank">Privacy</a> | <a href="https://www.amd.com/en/corporate/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.amd.com/en/corporate/trademarks" target="_blank">Trademarks</a> | <a href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf" target="_blank">Statement on Forced Labor</a> | <a href="https://www.amd.com/en/corporate/competition" target="_blank">Fair and Open Competition</a> | <a href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf" target="_blank">UK Tax Strategy</a> | <a href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA" target="_blank">Inclusive Terminology</a> | <a class="ot-sdk-show-settings" href="#cookiessettings">Cookies Settings</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+</div>
+</div>
+</section>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+</body>
+</html>
