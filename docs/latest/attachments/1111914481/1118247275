@@ -1,0 +1,79 @@
+<mxfile host="confluence.xilinx.com" modified="2024-02-09T18:03:13.623Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0" etag="svhIDfbLuLts4a6po2V_" version="21.4.0" type="atlas">
+  <diagram id="Q9lMBWF-Hxlty_PIOtxX" name="Page-1">
+    <mxGraphModel dx="1850" dy="961" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="mIi5mpuikjNKQQ7ZKFYq-1" value="In-Band&lt;br&gt;Telemetry" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="-383" y="80" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mIi5mpuikjNKQQ7ZKFYq-2" value="Out-of-Band&lt;br&gt;Telemetry" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="221" y="80" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mIi5mpuikjNKQQ7ZKFYq-3" value="BMC Proxy" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="221" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mIi5mpuikjNKQQ7ZKFYq-4" value="AMI Proxy&lt;br&gt;Driver" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="-383" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mIi5mpuikjNKQQ7ZKFYq-5" value="ASDM Subsystem" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+          <mxGeometry x="-80" y="80" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mIi5mpuikjNKQQ7ZKFYq-6" value="ASDM/SDR&lt;br&gt;Database" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+          <mxGeometry x="-60" y="-120" width="80" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="mIi5mpuikjNKQQ7ZKFYq-7" value="ASC Proxy&lt;br&gt;Driver" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="-80" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mIi5mpuikjNKQQ7ZKFYq-8" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" source="mIi5mpuikjNKQQ7ZKFYq-5" target="mIi5mpuikjNKQQ7ZKFYq-6" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="210" y="180" as="sourcePoint" />
+            <mxPoint x="310" y="80" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mIi5mpuikjNKQQ7ZKFYq-9" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" source="mIi5mpuikjNKQQ7ZKFYq-3" target="mIi5mpuikjNKQQ7ZKFYq-2" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="231" y="180" as="sourcePoint" />
+            <mxPoint x="331" y="80" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mIi5mpuikjNKQQ7ZKFYq-10" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" source="mIi5mpuikjNKQQ7ZKFYq-7" target="mIi5mpuikjNKQQ7ZKFYq-5" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="-200" y="70" as="sourcePoint" />
+            <mxPoint x="-100" y="-30" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mIi5mpuikjNKQQ7ZKFYq-11" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" source="mIi5mpuikjNKQQ7ZKFYq-4" target="mIi5mpuikjNKQQ7ZKFYq-1" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="-593" y="220" as="sourcePoint" />
+            <mxPoint x="-493" y="120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mIi5mpuikjNKQQ7ZKFYq-12" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" source="mIi5mpuikjNKQQ7ZKFYq-1" target="mIi5mpuikjNKQQ7ZKFYq-5" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="-280" y="50" as="sourcePoint" />
+            <mxPoint x="-180" y="-50" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mIi5mpuikjNKQQ7ZKFYq-13" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" source="mIi5mpuikjNKQQ7ZKFYq-5" target="mIi5mpuikjNKQQ7ZKFYq-2" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="130" y="40" as="sourcePoint" />
+            <mxPoint x="230" y="-60" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mIi5mpuikjNKQQ7ZKFYq-14" value="ASC proxy task collects sensor data and periodically invokes bound in callback to notify of new updated value, max value, average value and state." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-100" y="310" width="160" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="mIi5mpuikjNKQQ7ZKFYq-15" value="ASDM/SDR data stored in internal context and protected as multiple sources attempting to access" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-10" y="10" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="mIi5mpuikjNKQQ7ZKFYq-16" value="AMI proxy sensor requests to get: SDR size, single SDR, single sensor data &amp;amp; all sensor data. (inc extra support for FPT and other info)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-410" y="310" width="160" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="mIi5mpuikjNKQQ7ZKFYq-17" value="Set sensor state, request sensor values, request PDR" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="201" y="310" width="160" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

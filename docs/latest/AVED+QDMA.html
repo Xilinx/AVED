@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script charset="UTF-8" data-document-language="true" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script class="optanon-category-C0002" type="text/plain">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+<title>AVED QDMA — AVED  documentation</title>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="_static/xbtest.css" rel="stylesheet" type="text/css"/>
+<link href="_static/_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="https://docs.xilinx.com/favicon.ico" rel="shortcut icon"/>
+<!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/js/theme.js"></script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="AVED%2B-%2BList%2Bof%2BAbbreviations.html" rel="next" title="AVED - List of Abbreviations"/>
+<link href="AMI%2B-%2BHot%2BReset.html" rel="prev" title="AMI - Hot Reset"/>
+<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager -->
+<noscript><iframe class="optanon-category-C0002" height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager -->
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="index.html"> AVED
+            <img alt="Logo" class="logo" src="_static/xilinx-header-logo.svg"/>
+</a>
+<div role="search">
+<form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" type="text"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+</div>
+</div><div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BHierarchy%2BOverview.html">AVED V80 - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BCIPS%2BConfiguration.html">AVED V80 - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BResources.html">AVED V80 - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BMap.html">AVED V80 - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BNoC%2BConfiguration.html">AVED V80 - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BBase%2BLogic.html">AVED V80 - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BClock%2BReset%2BModule.html">AVED V80 - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BSource%2BFile%2BOverview.html">AVED V80 - Source File Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SMBus%2BIP%2Bv1.1%2B-%2BProduct%2BGuide.html">SMBus IP v1.1 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BASDM%2BApplication.html">AVED ASDM Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOutOfBand%2BTelemetry%2BApplication.html">AVED OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Board%2BManagement%2BController%2B%28BMC%29%2BProxy%2BDriver.html">Board Management Controller (BMC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">AVED QDMA</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#xilinx-qdma">Xilinx QDMA</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installing">Installing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-perf">DMA Perf</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift"><nav aria-label="Mobile navigation menu" class="wy-nav-top" style="background: black">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="index.html">AVED</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="Page navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a class="icon icon-home" href="index.html"></a> »</li>
+<li>AVED QDMA</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<section id="aved-qdma">
+<h1>AVED QDMA<a class="headerlink" href="#aved-qdma" title="Permalink to this headline">¶</a></h1>
+<section id="xilinx-qdma">
+<span id="avedqdma-xilinxqdma"></span><h2>Xilinx QDMA<a class="headerlink" href="#xilinx-qdma" title="Permalink to this headline">¶</a></h2>
+<p>The Xilinx PCI Express Multi Queue DMA (QDMA) IP provides high-performance direct memory access (DMA) via PCI Express.</p>
+<p>Both the linux kernel driver and the DPDK driver can be run on a PCI Express root port host PC to interact with the QDMA endpoint IP via PCI Express.</p>
+<p>For the detailed documentation, following links should be followed:</p>
+<ul class="simple">
+<li><p>Documentation: <a class="reference external" href="https://xilinx.github.io/dma_ip_drivers/master/QDMA/linux-kernel/html/index.html">QDMA Linux Driver</a></p></li>
+<li><p>Github: <a class="reference external" href="https://github.com/Xilinx/dma_ip_drivers">https://github.com/Xilinx/dma_ip_drivers</a></p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<section id="installing">
+<span id="avedqdma-installing"></span><h3>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">¶</a></h3>
+<p>Before building add the PCIe identifier into table at end of PF section at src/pci_ids.h .</p>
+<p>The identifier can be found by issuing the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>lspci -vd 10ee:
+<span class="m">21</span>:00.0 Processing accelerators: Xilinx Corporation Device 50b4
+        Subsystem: Xilinx Corporation Device 000e
+        Physical Slot: <span class="m">2</span>-1
+        Flags: bus master, fast devsel, latency <span class="m">0</span>, NUMA node <span class="m">2</span>, IOMMU group <span class="m">27</span>
+        Memory at 2bf70000000 <span class="o">(</span><span class="m">64</span>-bit, prefetchable<span class="o">)</span> <span class="o">[</span><span class="nv">size</span><span class="o">=</span>256M<span class="o">]</span>
+        Capabilities: &lt;access denied&gt;
+        Kernel driver <span class="k">in</span> use: ami
+        Kernel modules: ami
+
+<span class="m">21</span>:00.1 Processing accelerators: Xilinx Corporation Device 50b5
+        Subsystem: Xilinx Corporation Device 000e
+        Physical Slot: <span class="m">2</span>-1
+        Flags: bus master, fast devsel, latency <span class="m">0</span>, NUMA node <span class="m">2</span>, IOMMU group <span class="m">27</span>
+        Memory at 2bf80000000 <span class="o">(</span><span class="m">64</span>-bit, prefetchable<span class="o">)</span> <span class="o">[</span><span class="nv">size</span><span class="o">=</span>512K<span class="o">]</span>
+        Capabilities: &lt;access denied&gt;
+        Kernel driver <span class="k">in</span> use: qdma-pf
+        Kernel modules: qdma_pf, ami, qdma_vf
+
+<span class="c1"># At the same line with 21:00.1, you can see the PCIe identifier as 50b5</span>
+<span class="c1"># 50b5 should be added to end of src/pci_ids.h in following form</span>
+<span class="o">{</span> PCI_DEVICE<span class="o">(</span>0x10ee, 0x50b5<span class="o">)</span>, <span class="o">}</span>,        /** V80 */
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>The QDMA driver can then be built:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span># Build the QDMA driver
+[xilinx@] cd dma_ip_drivers/QDMA/linux-kernel &amp;&amp; make
+
+# Install the QDMA driver
+[xilinx@] make install-mods
+
+# After install-mods, check if module is probed
+[xilinx@] lspci -vd 10ee:
+21:00.0 Processing accelerators: Xilinx Corporation Device 50b4
+        Subsystem: Xilinx Corporation Device 000e
+        Physical Slot: 2-1
+        Flags: bus master, fast devsel, latency 0, NUMA node 2, IOMMU group 27
+        Memory at 2bf70000000 (64-bit, prefetchable) [size=256M]
+        Capabilities: &lt;access denied&gt;
+        Kernel driver in use: ami
+        Kernel modules: ami
+
+21:00.1 Processing accelerators: Xilinx Corporation Device 50b5
+        Subsystem: Xilinx Corporation Device 000e
+        Physical Slot: 2-1
+        Flags: bus master, fast devsel, latency 0, NUMA node 2, IOMMU group 27
+        Memory at 2bf80000000 (64-bit, prefetchable) [size=512K]
+        Capabilities: &lt;access denied&gt;
+        Kernel driver in use: qdma-pf
+        Kernel modules: qdma_pf, ami, qdma_vf
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+<section id="examples">
+<span id="avedqdma-examples"></span><h3>Examples:<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<p>Note: All examples have been run with sudo privilege</p>
+<p><strong>List Available Devices</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span>[xilinx@] dma-ctl dev list
+
+qdma01000       0000:01:00.0    max QP: 0, -~-
+qdma01001       0000:01:00.1    max QP: 0, -~-
+qdma01002       0000:01:00.2    max QP: 0, -~-
+qdma01003       0000:01:00.3    max QP: 0, -~-
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">**</span><span class="n">Set</span> <span class="n">Qmax</span><span class="o">**</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>xilinx@<span class="o">]</span> dma-ctl dev list
+
+qdma01000       <span class="m">0000</span>:01:00.0    max QP: <span class="m">0</span>, -~-
+qdma01001       <span class="m">0000</span>:01:00.1    max QP: <span class="m">0</span>, -~-
+qdma01002       <span class="m">0000</span>:01:00.2    max QP: <span class="m">0</span>, -~-
+qdma01003       <span class="m">0000</span>:01:00.3    max QP: <span class="m">0</span>, -~-
+
+
+qdmavf01004     <span class="m">0000</span>:01:00.4    max QP: <span class="m">0</span>, -~-
+
+
+<span class="o">[</span>xilinx@<span class="o">]</span> <span class="nb">echo</span> <span class="m">100</span> &gt; /sys/bus/pci/devices/0000<span class="se">\:</span><span class="m">01</span><span class="se">\:</span><span class="m">00</span>.0/qdma/qmax
+<span class="o">[</span>xilinx@<span class="o">]</span> <span class="nb">echo</span> <span class="m">100</span> &gt; /sys/bus/pci/devices/0000<span class="se">\:</span><span class="m">01</span><span class="se">\:</span><span class="m">00</span>.1/qdma/qmax
+<span class="o">[</span>xilinx@<span class="o">]</span> <span class="nb">echo</span> <span class="m">100</span> &gt; /sys/bus/pci/devices/0000<span class="se">\:</span><span class="m">01</span><span class="se">\:</span><span class="m">00</span>.2/qdma/qmax
+<span class="o">[</span>xilinx@<span class="o">]</span> <span class="nb">echo</span> <span class="m">100</span> &gt; /sys/bus/pci/devices/0000<span class="se">\:</span><span class="m">01</span><span class="se">\:</span><span class="m">00</span>.3/qdma/qmax
+<span class="o">[</span>xilinx@<span class="o">]</span> <span class="nb">echo</span> <span class="m">100</span> &gt; /sys/bus/pci/devices/0000<span class="se">\:</span><span class="m">01</span><span class="se">\:</span><span class="m">00</span>.4/qdma/qmax
+<span class="o">[</span>xilinx@<span class="o">]</span> dma-ctl dev list
+
+qdma01000       <span class="m">0000</span>:01:00.0    max QP: <span class="m">100</span>, <span class="m">0</span>~99
+qdma01001       <span class="m">0000</span>:01:00.1    max QP: <span class="m">100</span>, <span class="m">100</span>~199
+qdma01002       <span class="m">0000</span>:01:00.2    max QP: <span class="m">100</span>, <span class="m">200</span>~299
+qdma01003       <span class="m">0000</span>:01:00.3    max QP: <span class="m">100</span>, <span class="m">300</span>~399
+
+
+qdmavf01004     <span class="m">0000</span>:01:00.4    max QP: <span class="m">100</span>, <span class="m">400</span>~499
+</pre></div>
+</div>
+<p><strong>Queue Management</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Queue stats</span>
+<span class="o">[</span>xilinx@<span class="o">]</span> dma-ctl qdma01000 stat
+
+qdma01000:statistics
+Total MM H2C packets <span class="nv">processed</span> <span class="o">=</span> <span class="m">0</span>
+Total MM C2H packets <span class="nv">processed</span> <span class="o">=</span> <span class="m">0</span>
+Total ST H2C packets <span class="nv">processed</span> <span class="o">=</span> <span class="m">0</span>
+Total ST C2H packets <span class="nv">processed</span> <span class="o">=</span> <span class="m">0</span>
+Min Ping Pong <span class="nv">Latency</span> <span class="o">=</span> <span class="m">0</span>
+Max Ping Pong <span class="nv">Latency</span> <span class="o">=</span> <span class="m">0</span>
+Avg Ping Pong <span class="nv">Latency</span> <span class="o">=</span> <span class="m">0</span>
+
+<span class="c1"># Add a queue</span>
+<span class="o">[</span>xilinx@<span class="o">]</span> dma-ctl qdma01000 q add idx <span class="m">4</span> mode mm dir h2c
+
+qdma01000-MM-4 H2C added.
+Added <span class="m">1</span> Queues.
+
+<span class="c1"># Start a queue</span>
+<span class="o">[</span>xilinx@<span class="o">]</span> dma-ctl qdma01000 q start idx <span class="m">4</span> dir h2c
+dma-ctl: Info: Default ring size <span class="nb">set</span> to <span class="m">2048</span>
+
+<span class="m">1</span> Queues started, idx <span class="m">4</span> ~ <span class="m">4</span>.
+</pre></div>
+</div>
+<p><strong>Read/Write Operations</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write to DMA</span>
+<span class="o">[</span>xilinx@<span class="o">]</span> dma-to-device <span class="o">[</span>OPTIONS<span class="o">]</span>
+-d <span class="o">(</span>--device<span class="o">)</span> device path from /dev. Device name is formed as qdmabbddf-&lt;mode&gt;-&lt;queue_number&gt;. Ex: /dev/qdma01000-MM-0
+-a <span class="o">(</span>--address<span class="o">)</span> the start address on the AXI bus
+-s <span class="o">(</span>--size<span class="o">)</span> size of a single transfer <span class="k">in</span> bytes, default <span class="m">32</span> bytes
+-o <span class="o">(</span>--offset<span class="o">)</span> page offset of transfer
+-c <span class="o">(</span>--count<span class="o">)</span> number of transfers, default <span class="m">1</span>
+-f <span class="o">(</span>--data input file<span class="o">)</span> filename to <span class="nb">read</span> the data from.
+-w <span class="o">(</span>--data output file<span class="o">)</span> filename to write the data of the transfers
+-h <span class="o">(</span>--help<span class="o">)</span> print usage <span class="nb">help</span> and <span class="nb">exit</span>
+-v <span class="o">(</span>--verbose<span class="o">)</span> verbose output
+
+<span class="c1"># Example Write</span>
+<span class="o">[</span>xilinx@<span class="o">]</span> dma-to-device -d /dev/qdma06000-MM-0 -s <span class="m">64</span>
+<span class="nv">size</span><span class="o">=</span><span class="m">64</span> Average <span class="nv">BW</span> <span class="o">=</span> <span class="m">375</span>.194937 KB/sec
+
+<span class="c1"># Read from DMA</span>
+<span class="o">[</span>xilinx@<span class="o">]</span> dma-from-device <span class="o">[</span>OPTIONS<span class="o">]</span>
+-d <span class="o">(</span>--device<span class="o">)</span> device path from /dev. Device name is formed as qdmabbddf-&lt;mode&gt;-&lt;queue_number&gt;. Ex: /dev/qdma01000-MM-0
+-a <span class="o">(</span>--address<span class="o">)</span> the start address on the AXI bus
+-s <span class="o">(</span>--size<span class="o">)</span> size of a single transfer <span class="k">in</span> bytes, default <span class="m">32</span> bytes.
+-o <span class="o">(</span>--offset<span class="o">)</span> page offset of transfer
+-c <span class="o">(</span>--count<span class="o">)</span> number of transfers, default is <span class="m">1</span>.
+-f <span class="o">(</span>--file<span class="o">)</span> file to write the data of the transfers
+-h <span class="o">(</span>--help<span class="o">)</span> print usage <span class="nb">help</span> and <span class="nb">exit</span>
+-v <span class="o">(</span>--verbose<span class="o">)</span> verbose output
+
+<span class="c1"># Example Read</span>
+<span class="o">[</span>xilinx@<span class="o">]</span> dma-from-device -d /dev/qdma01000-MM-1 -s <span class="m">64</span>
+<span class="nv">size</span><span class="o">=</span><span class="m">64</span> Average <span class="nv">BW</span> <span class="o">=</span> <span class="m">328</span>.311188 KB/sec
+
+<span class="c1"># Compare Example</span>
+<span class="c1"># Create 128kb file filled with random values</span>
+dd <span class="k">if</span><span class="o">=</span>/dev/urandom <span class="nv">bs</span><span class="o">=</span><span class="m">1024</span> <span class="nv">count</span><span class="o">=</span><span class="m">128</span> <span class="nv">of</span><span class="o">=</span>file_128kb <span class="nv">conv</span><span class="o">=</span>notrunc
+
+<span class="c1"># Example write to address 0</span>
+<span class="o">[</span>xilinx@<span class="o">]</span> dma-to-device -d /dev/qdma06000-MM-0 -a <span class="m">0</span> -s <span class="m">131072</span> -f file_128kb
+
+<span class="c1"># Example read from address 0</span>
+<span class="o">[</span>xilinx@<span class="o">]</span> dma-from-device -d /dev/qdma06000-MM-0 -a <span class="m">0</span> -s <span class="m">131072</span> -f output_128kb
+
+<span class="c1"># Compare the files</span>
+<span class="o">[</span>xilinx@<span class="o">]</span> cmp ./file_128kb ./output_128kb
+<span class="c1"># If there is nothing showed up, it means files are the same</span>
+</pre></div>
+</div>
+</section>
+<section id="dma-perf">
+<span id="avedqdma-dmaperf"></span><h3>DMA Perf<a class="headerlink" href="#dma-perf" title="Permalink to this headline">¶</a></h3>
+<p>Standard IO tools such as <code class="docutils literal notranslate"><span class="pre">fio</span></code> can be used for performing IO operations using the char device interface.</p>
+<p>However, most of the tools are limited to sending / receiving 1 packet at a time and wait for the processing of the packet to complete, so they are not able to keep the driver/ HW busy enough for performance measurement. Although fio also supports
+asynchronous interfaces, it does not continuously submit IO requests while polling for the completion in parallel.</p>
+<p>To overcome this limitation, Xilinx developed dma-perf tool. It leverages the asynchronous functionality provided by libaio library. Using libaio, an application can submit IO request to the driver and the driver returns the control to the caller
+immediately (i.e., non-blocking). The completion notification is sent separately, so the application can then poll for the completion and free the buffer upon receiving the completion.</p>
+<p><strong>DMA Performance Tools</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>usage: dma-perf <span class="o">[</span>OPTIONS<span class="o">]</span>
+   -c <span class="o">(</span>--config<span class="o">)</span> config file that has configuration <span class="k">for</span> IO
+
+<span class="o">[</span>xilinx@<span class="o">]</span> dma-perf -c perf_config.txt
+qdma65000-MM-0 H2C added.
+Added <span class="m">1</span> Queues.
+Queues started, idx <span class="m">0</span> ~ <span class="m">0</span>.
+qdma65000-MM-0 C2H added.
+Added <span class="m">1</span> Queues.
+Queues started, idx <span class="m">0</span> ~ <span class="m">0</span>.
+dmautils<span class="o">(</span><span class="m">16</span><span class="o">)</span> threads
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">8</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1495488</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1495488</span> <span class="nv">dir</span><span class="o">=</span>H2C, <span class="nv">intime</span><span class="o">=</span><span class="m">0</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">0</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">13</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1482752</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1482752</span> <span class="nv">dir</span><span class="o">=</span>C2H, <span class="nv">intime</span><span class="o">=</span><span class="m">0</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">0</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">14</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1494720</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1494720</span> <span class="nv">dir</span><span class="o">=</span>H2C, <span class="nv">intime</span><span class="o">=</span><span class="m">0</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">0</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">8</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1495488</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1495488</span> <span class="nv">dir</span><span class="o">=</span>H2C, <span class="nv">intime</span><span class="o">=</span><span class="m">0</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">0</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">14</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1494720</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1494720</span> <span class="nv">dir</span><span class="o">=</span>H2C, <span class="nv">intime</span><span class="o">=</span><span class="m">0</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">0</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">6</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1495488</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1495488</span> <span class="nv">dir</span><span class="o">=</span>H2C, <span class="nv">intime</span><span class="o">=</span><span class="m">1495360</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">1</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">5</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1485568</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1485568</span> <span class="nv">dir</span><span class="o">=</span>C2H, <span class="nv">intime</span><span class="o">=</span><span class="m">1485440</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">1</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">11</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1454208</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1454208</span> <span class="nv">dir</span><span class="o">=</span>C2H, <span class="nv">intime</span><span class="o">=</span><span class="m">1454080</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">1</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">13</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1482944</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1482944</span> <span class="nv">dir</span><span class="o">=</span>C2H, <span class="nv">intime</span><span class="o">=</span><span class="m">1482752</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">1</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">0</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1495168</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1495168</span> <span class="nv">dir</span><span class="o">=</span>H2C, <span class="nv">intime</span><span class="o">=</span><span class="m">1494976</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">2</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">10</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1495104</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1495104</span> <span class="nv">dir</span><span class="o">=</span>H2C, <span class="nv">intime</span><span class="o">=</span><span class="m">1494912</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">2</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">12</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1494592</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1494592</span> <span class="nv">dir</span><span class="o">=</span>H2C, <span class="nv">intime</span><span class="o">=</span><span class="m">1494400</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">2</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">9</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1486784</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1486784</span> <span class="nv">dir</span><span class="o">=</span>C2H, <span class="nv">intime</span><span class="o">=</span><span class="m">1486592</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">2</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">15</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1485248</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1485248</span> <span class="nv">dir</span><span class="o">=</span>C2H, <span class="nv">intime</span><span class="o">=</span><span class="m">1485056</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">2</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">1</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1486656</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1486656</span> <span class="nv">dir</span><span class="o">=</span>C2H, <span class="nv">intime</span><span class="o">=</span><span class="m">1486592</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">1</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">4</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1495872</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1495872</span> <span class="nv">dir</span><span class="o">=</span>H2C, <span class="nv">intime</span><span class="o">=</span><span class="m">1495744</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">1</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">3</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1486336</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1486336</span> <span class="nv">dir</span><span class="o">=</span>C2H, <span class="nv">intime</span><span class="o">=</span><span class="m">1486208</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">2</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">7</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1486400</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1486400</span> <span class="nv">dir</span><span class="o">=</span>C2H, <span class="nv">intime</span><span class="o">=</span><span class="m">1486208</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">2</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">2</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1495744</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1495744</span> <span class="nv">dir</span><span class="o">=</span>H2C, <span class="nv">intime</span><span class="o">=</span><span class="m">1495616</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">2</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">10</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1495296</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1495104</span> <span class="nv">dir</span><span class="o">=</span>H2C, <span class="nv">intime</span><span class="o">=</span><span class="m">1494912</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">10000</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">11</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1454464</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1454336</span> <span class="nv">dir</span><span class="o">=</span>C2H, <span class="nv">intime</span><span class="o">=</span><span class="m">1454080</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">10000</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">5</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1485632</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1485504</span> <span class="nv">dir</span><span class="o">=</span>C2H, <span class="nv">intime</span><span class="o">=</span><span class="m">1485440</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">10000</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">0</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1495616</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1495424</span> <span class="nv">dir</span><span class="o">=</span>H2C, <span class="nv">intime</span><span class="o">=</span><span class="m">1494976</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">10000</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">12</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1494912</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1494720</span> <span class="nv">dir</span><span class="o">=</span>H2C, <span class="nv">intime</span><span class="o">=</span><span class="m">1494400</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">10000</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">6</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1495616</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1495488</span> <span class="nv">dir</span><span class="o">=</span>H2C, <span class="nv">intime</span><span class="o">=</span><span class="m">1495360</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">10000</span>,
+Stopped Queues <span class="m">0</span> -&gt; <span class="m">0</span>.
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">9</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1486912</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1486720</span> <span class="nv">dir</span><span class="o">=</span>C2H, <span class="nv">intime</span><span class="o">=</span><span class="m">1486592</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">10000</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">15</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1485952</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1485760</span> <span class="nv">dir</span><span class="o">=</span>C2H, <span class="nv">intime</span><span class="o">=</span><span class="m">1485056</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">10000</span>,
+Exit Check: <span class="nv">tid</span> <span class="o">=</span><span class="m">13</span>, <span class="nv">req_sbmitted</span><span class="o">=</span><span class="m">1483456</span> <span class="nv">req_completed</span><span class="o">=</span><span class="m">1483264</span> <span class="nv">dir</span><span class="o">=</span>C2H, <span class="nv">intime</span><span class="o">=</span><span class="m">1482752</span> <span class="nv">loop_count</span><span class="o">=</span><span class="m">10000</span>,
+Stopped Queues <span class="m">0</span> -&gt; <span class="m">0</span>.
+Deleted Queues <span class="m">0</span> -&gt; <span class="m">0</span>.
+Deleted Queues <span class="m">0</span> -&gt; <span class="m">0</span>.
+WRITE: total <span class="nv">pps</span> <span class="o">=</span> <span class="m">3987072</span> <span class="nv">BW</span> <span class="o">=</span> <span class="m">255</span>.172608 MB/sec
+READ: total <span class="nv">pps</span> <span class="o">=</span> <span class="m">3950976</span> <span class="nv">BW</span> <span class="o">=</span> <span class="m">252</span>.862464 MB/sec
+</pre></div>
+</div>
+<p>dma-perf tool takes a configuration file as input. The configuration file format is as below.</p>
+<p><strong>Example Config File</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">name</span><span class="o">=</span>mm_1_1
+<span class="nv">mode</span><span class="o">=</span>mm <span class="c1">#mode</span>
+<span class="nv">dir</span><span class="o">=</span>bi <span class="c1">#dir</span>
+<span class="nv">pf_range</span><span class="o">=</span><span class="m">0</span>:0 <span class="c1">#no spaces</span>
+<span class="nv">q_range</span><span class="o">=</span><span class="m">0</span>:0 <span class="c1">#no spaces</span>
+<span class="nv">wb_acc</span><span class="o">=</span><span class="m">5</span>
+<span class="nv">tmr_idx</span><span class="o">=</span><span class="m">9</span>
+<span class="nv">cntr_idx</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">trig_mode</span><span class="o">=</span>usr_cnt
+<span class="nv">rngidx</span><span class="o">=</span><span class="m">9</span>
+<span class="nv">ram_width</span><span class="o">=</span><span class="m">15</span> <span class="c1">#31 bits - 2^31 = 2GB</span>
+<span class="nv">runtime</span><span class="o">=</span><span class="m">30</span> <span class="c1">#secs</span>
+<span class="nv">num_threads</span><span class="o">=</span><span class="m">8</span>
+<span class="nv">bidir_en</span><span class="o">=</span><span class="m">1</span>
+<span class="nv">num_pkt</span><span class="o">=</span><span class="m">64</span>
+<span class="nv">pkt_sz</span><span class="o">=</span><span class="m">64</span>
+<span class="nv">offset_q_en</span><span class="o">=</span><span class="m">1</span>
+<span class="nv">h2c_q_start_offset</span><span class="o">=</span>0x100
+<span class="nv">h2c_q_offset_intvl</span><span class="o">=</span><span class="m">10</span>
+<span class="nv">c2h_q_start_offset</span><span class="o">=</span>0x200
+<span class="nv">c2h_q_offset_intvl</span><span class="o">=</span><span class="m">20</span>
+<span class="nv">pci_bus</span><span class="o">=</span><span class="m">06</span>
+<span class="nv">pci_device</span><span class="o">=</span><span class="m">00</span>
+</pre></div>
+</div>
+<p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p>name : name of the configuration</p></li>
+<li><p>mode : mode of the queue, streaming(st) or memory mapped(mm). Mode defaults to mm.</p></li>
+<li><p>dir : Direction of the queue, host-to-card(h2c), card-to-host (c2h) or both (bi).</p></li>
+<li><p>pf_range : Range of the PFs from 0-3 on which the performance metrics are to be collected.</p></li>
+<li><p>q_range : Range of the Queues from 0-2047 on which the performance metrics are to be collected.</p></li>
+<li><p>flags : queue flags</p></li>
+<li><p>wb_acc : write back accumulation index from CSR register ( 0 - 15 )</p></li>
+<li><p>tmr_idx : timer index from CSR register ( 0 - 15 )</p></li>
+<li><p>cntr_idx : Counter index from CSR register ( 0 - 15 )</p></li>
+<li><p>trig_mode : trigger mode (every, usr_cnt, usr, usr_tmr, dis)</p></li>
+<li><p>rngidx : Ring index from CSR register ( 0 - 15 )</p></li>
+<li><p>runtime : Duration of the performance runs, time in seconds.</p></li>
+<li><p>num_threads : number of threads to be used in dma-perf application to pump the traffic to queues</p></li>
+<li><p>bidir_en : Enable or Disable the bi-direction mode ( 0: Disable, 1: Enable )</p></li>
+<li><p>num_pkt : number of packets</p></li>
+<li><p>pkt_sz : Packet size</p></li>
+<li><p>mm_chnl : MM Channel ( 0 - 1 ) for Versal devices</p></li>
+<li><p>keyhole_en : Enable the Keyhole feature</p></li>
+<li><p>offset : Offset to be written to for MM Performance Use cases</p></li>
+<li><p>aperture_sz : Size of aperture when using the keyhole feature</p></li>
+<li><p>offset_q_en : Offset queue enable (0-1) to enable H2C/C2H queues offsets.</p></li>
+<li><p>h2c_q_start_offset : Start address of H2C queue.</p></li>
+<li><p>h2c_q_offset_intvl : Fixed interval for subsequent H2C queues offsets.</p></li>
+<li><p>c2h_q_start_offset : Start address of C2H queue.</p></li>
+<li><p>c2h_q_offset_intvl : Fixed interval for subsequent C2H queues offsets.</p></li>
+<li><p>pci_bus : pci bus id.</p></li>
+<li><p>pci_device : pci device id.</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</section>
+</section>
+</div>
+</div>
+<footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+<a accesskey="p" class="btn btn-neutral float-left" href="AMI%2B-%2BHot%2BReset.html" rel="prev" title="AMI - Hot Reset"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+<a accesskey="n" class="btn btn-neutral float-right" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html" rel="next" title="AVED - List of Abbreviations">Next <span aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<p>© Copyright 2023, Advanced Micro Devices Inc.</p>
+</div>
+<div class="aem-Grid aem-Grid--16">
+<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+<div class="container-fluid sub-footer">
+<div class="row">
+<div class="col-xs-24">
+<p><a href="https://www.amd.com/en/corporate/copyright" target="_blank">Terms and Conditions</a> | <a href="https://www.amd.com/en/corporate/privacy" target="_blank">Privacy</a> | <a href="https://www.amd.com/en/corporate/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.amd.com/en/corporate/trademarks" target="_blank">Trademarks</a> | <a href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf" target="_blank">Statement on Forced Labor</a> | <a href="https://www.amd.com/en/corporate/competition" target="_blank">Fair and Open Competition</a> | <a href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf" target="_blank">UK Tax Strategy</a> | <a href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA" target="_blank">Inclusive Terminology</a> | <a class="ot-sdk-show-settings" href="#cookiessettings">Cookies Settings</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+</div>
+</div>
+</section>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+</body>
+</html>

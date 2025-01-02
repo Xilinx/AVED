@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+  <title>Overview &mdash; AVED  documentation</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/xbtest.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/_static/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="https://docs.xilinx.com/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="prev" title="Introduction" href="../../introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
+<!-- End Google Tag Manager --> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+            <a href="../../../../../index.html" class="icon icon-home"> AVED
+            <img src="../../../../../_static/xilinx-header-logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Xbtest Userguide</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../introduction.html">Introduction</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#architecture-overview">Architecture overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hardware-ip-overview">Hardware IP overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aved-deployment-archives-overview">AVED deployment archives overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#application-software-overview">Application software overview</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://www.xilinx.com/products/acceleration-solutions/xbtest.html">Download</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pre-canned-tests.html">Pre-canned tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../test-cases.html">Test cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tasks.html">Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../card-definition.html">Card definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#alveo-data-center-accelerator-card-compatibility">Alveo data center accelerator card compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#what-s-new">What’s new</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%2B-%2BHierarchy%2BOverview.html">AVED V80 - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%2B-%2BCIPS%2BConfiguration.html">AVED V80 - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%2B-%2BMemory%2BResources.html">AVED V80 - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%2B-%2BMemory%2BMap.html">AVED V80 - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%2B-%2BNoC%2BConfiguration.html">AVED V80 - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%2B-%2BBase%2BLogic.html">AVED V80 - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%2B-%2BClock%2BReset%2BModule.html">AVED V80 - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%2B-%2BSource%2BFile%2BOverview.html">AVED V80 - Source File Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../SMBus%2BIP%2Bv1.1%2B-%2BProduct%2BGuide.html">SMBus IP v1.1 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BASDM%2BApplication.html">AVED ASDM Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BOutOfBand%2BTelemetry%2BApplication.html">AVED OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Board%2BManagement%2BController%2B%28BMC%29%2BProxy%2BDriver.html">Board Management Controller (BMC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BQDMA.html">AVED QDMA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: black" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">AVED</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Xbtest Userguide</a> &raquo;</li>
+          <li><a href="../../introduction.html">Introduction</a> &raquo;</li>
+      <li>Overview</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<section id="architecture-overview">
+<h2>Architecture overview<a class="headerlink" href="#architecture-overview" title="Permalink to this headline">¶</a></h2>
+<p>The solution comprises:</p>
+<blockquote>
+<div><ul>
+<li><p><a class="reference internal" href="#application-software"><span class="std std-ref">xbtest application software (xbtSW)</span></a>: Runs on the host.</p></li>
+<li><p><a class="reference internal" href="#hardware-overview"><span class="std std-ref">xbtest hardware IP (xbtIP)</span></a>: Loaded to the card as part of <a class="reference external" href="https://pages.gitenterprise.xilinx.com/XBB/AVED/develop/index.html">Alveo Versal Example Design (AVED)</a> or as of a <a class="reference external" href="https://www.xilinx.com/products/design-tools/vitis/vitis-platform.html">Vitis™ Platform</a> .</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Different <a class="reference internal" href="#hardware-overview"><span class="std std-ref">xbtIP</span></a> types: verify, power, memory, and/or GT (GT MAC, GTYP PRBS, GTM PRBS).</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>The following block diagrams show how <a class="reference internal" href="#hardware-overview"><span class="std std-ref">xbtIP</span></a> could be integrated to a Versal or a VUP device.
+The presence and the quantity of <a class="reference internal" href="#hardware-overview"><span class="std std-ref">xbtIP</span></a> (power, memory and GT) depends on card and <a class="reference external" href="https://pages.gitenterprise.xilinx.com/XBB/AVED/develop/index.html">Alveo Versal Example Design (AVED)</a> / <a class="reference external" href="https://www.xilinx.com/products/design-tools/vitis/vitis-platform.html">Vitis™ Platform</a> capabilities (refer to the respective documentation).</p>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Alveo card block diagram</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Versal</p></th>
+<th class="head"><p>Virtex Ultrascale Plus (VUP)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><figure class="align-center" id="alveo-card-block-diagram-versal">
+<img alt="../../../../../_images/alveo-card-block-diagram-versal.svg" src="../../../../../_images/alveo-card-block-diagram-versal.svg" /><figcaption>
+<p><span class="caption-text">Versal Alveo card block diagram</span><a class="headerlink" href="#alveo-card-block-diagram-versal" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</td>
+<td><figure class="align-center" id="alveo-card-block-diagram-vup">
+<img alt="../../../../../_images/alveo-card-block-diagram-vup.svg" src="../../../../../_images/alveo-card-block-diagram-vup.svg" /><figcaption>
+<p><span class="caption-text">VUP Alveo card block diagram</span><a class="headerlink" href="#alveo-card-block-diagram-vup" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="#application-software"><span class="std std-ref">xbtSW</span></a> and <a class="reference internal" href="#hardware-overview"><span class="std std-ref">xbtIP</span></a> are used in conjunction to test on-board memories (for example DDR, HBM) and GTs while the card is consuming a programmable amount of power.</p>
+<p>Multiple Alveo cards can be tested simultaneously and independently.</p>
+</section>
+<section id="hardware-ip-overview">
+<span id="hardware-overview"></span><h2>Hardware IP overview<a class="headerlink" href="#hardware-ip-overview" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="#hardware-overview"><span class="std std-ref">xbtest hardware IP (xbtIP)</span></a> includes the following types which test different areas of the card hardware:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Power</strong>: Throttles the clock of flip-flops, DSPs, block RAMs, UltraRAMs and AIEs present in the logic of the <a class="reference external" href="https://pages.gitenterprise.xilinx.com/XBB/AVED/develop/index.html">Alveo Versal Example Design (AVED)</a>, to control their power consumption.</p></li>
+<li><p><strong>Memory</strong>: Measures the read and write bandwidths &amp; latencies while performing a data integrity check on the data transmitted and received.</p></li>
+<li><p><strong>GTYp PRBS</strong>, <strong>GTM PRBS</strong>, <strong>GT MAC</strong>: Checks GT transceivers of the <a class="reference external" href="https://www.xilinx.com/products/boards-and-kits/alveo.html">Alveo™</a> card at 10, 25, 56 Gigabit Ethernet and 32Gb/s lane rates.</p></li>
+</ul>
+</div></blockquote>
+<p>Any <a class="reference external" href="https://pages.gitenterprise.xilinx.com/XBB/AVED/develop/index.html">Alveo Versal Example Design (AVED)</a> also contains the <strong>Verify</strong> <a class="reference internal" href="#hardware-overview"><span class="std std-ref">xbtIP</span></a> which includes the following hardware safety mechanisms:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Watchdog</strong>: Stops <a class="reference internal" href="#hardware-overview"><span class="std std-ref">xbtIP</span></a> IPs after a programmable delay (default 15 seconds) in the case of the <a class="reference internal" href="#application-software"><span class="std std-ref">xbtest application software (xbtSW)</span></a> failing to perform the watchdog reset.</p></li>
+<li><p><strong>Status register</strong>:</p>
+<ul>
+<li><p>Detects and prevents multiple instances of <a class="reference internal" href="#application-software"><span class="std std-ref">xbtSW</span></a> trying to control/access the same Alveo card.</p></li>
+<li><p>Detects if <a class="reference internal" href="#hardware-overview"><span class="std std-ref">xbtIP</span></a> clocks have been throttled down (if the card supports this safety feature).
+<a class="reference internal" href="#hardware-overview"><span class="std std-ref">xbtIP</span></a> clocks could have been slowed down automatically to prevent over-powering the card.
+Slower clock will affect test results.</p></li>
+</ul>
+</li>
+<li><p><strong>DNA</strong> : Reports the FPGA DNA value (when accessible).</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Watchdog status and clock throttling detection are monitored on a regular basis during test execution.</p>
+</div>
+<p><a class="reference external" href="https://pages.gitenterprise.xilinx.com/XBB/AVED/develop/index.html">Alveo Versal Example Design (AVED)</a> is packaged in <a class="reference internal" href="#aved-deployment-archives"><span class="std std-ref">AVED deployment archive</span></a>.</p>
+</section>
+<section id="aved-deployment-archives-overview">
+<span id="aved-deployment-archives"></span><h2>AVED deployment archives overview<a class="headerlink" href="#aved-deployment-archives-overview" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="#application-software"><span class="std std-ref">xbtest application software (xbtSW)</span></a> supports heterogeneous <a class="reference external" href="https://www.xilinx.com/products/boards-and-kits/alveo.html">Alveo™</a> card installation by the addition of <a class="reference internal" href="#aved-deployment-archives"><span class="std std-ref">AVED deployment archives</span></a>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The <a class="reference internal" href="#aved-deployment-archives"><span class="std std-ref">AVED deployment archive</span></a> files should not be edited or modified.
+See <a class="reference internal" href="installation.html#install-xbtest"><span class="std std-ref">Install xbtest</span></a> section.</p>
+</div>
+<p id="card-definition-json-file"><span id="xbtest-metadata-json-files"></span><span id="pre-canned-test-json-files"></span>The <a class="reference internal" href="#aved-deployment-archives"><span class="std std-ref">AVED deployment archives</span></a> includes xbtest specific files:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="#card-definition-json-file"><span class="std std-ref">Card definition JSON file</span></a>: Specifies the cards specific characteristics and limits of xbtest.
+See <a class="reference internal" href="../card-definition/card-definition.html#ug-card-definition"><span class="std std-ref">Card definition</span></a>.</p></li>
+<li><p><a class="reference internal" href="#xbtest-metadata-json-files"><span class="std std-ref">xbtest metadata JSON files</span></a>: Describes <a class="reference internal" href="#hardware-overview"><span class="std std-ref">xbtest hardware IP (xbtIP)</span></a> included in design.
+See <a class="reference internal" href="../card-definition/card-definition.html#ug-card-definition"><span class="std std-ref">Card definition</span></a>.</p></li>
+<li><p><a class="reference internal" href="#pre-canned-test-json-files"><span class="std std-ref">Pre-canned test JSON files</span></a>: Set of pre-canned tests which use one or more of the available test cases according to <a class="reference external" href="https://pages.gitenterprise.xilinx.com/XBB/AVED/develop/index.html">Alveo Versal Example Design (AVED)</a> capabilities.
+See <a class="reference internal" href="../pre-canned-tests/pre-canned-tests-description.html#pre-canned-tests-description"><span class="std std-ref">Pre-canned tests description</span></a>.</p></li>
+</ul>
+</div></blockquote>
+<p>These files are automatically selected by <a class="reference internal" href="#application-software"><span class="std std-ref">xbtSW</span></a>.</p>
+</section>
+<section id="application-software-overview">
+<span id="application-software"></span><h2>Application software overview<a class="headerlink" href="#application-software-overview" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="#application-software"><span class="std std-ref">xbtest application software (xbtSW)</span></a> automatically detects the number and type of <a class="reference internal" href="#hardware-overview"><span class="std std-ref">xbtest hardware IP (xbtIP)</span></a> present in <a class="reference external" href="https://pages.gitenterprise.xilinx.com/XBB/AVED/develop/index.html">Alveo Versal Example Design (AVED)</a> (power, memory, or GT MAC).</p>
+<figure class="align-center" id="software-model">
+<img alt="../../../../../_images/software-model.svg" src="../../../../../_images/software-model.svg" /><figcaption>
+<p><span class="caption-text">Software model</span><a class="headerlink" href="#software-model" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p><a class="reference internal" href="#application-software"><span class="std std-ref">xbtSW</span></a> is composed of two different layers:</p>
+<blockquote>
+<div><ul>
+<li><p><strong>Multi-card / multi-test dispatch</strong>: In charge of dispatching specified tests:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>It selects, configures, and launches the test based on selected <a class="reference external" href="https://pages.gitenterprise.xilinx.com/XBB/AVED/develop/index.html">Alveo Versal Example Design (AVED)</a>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Test run</strong>: In charge of performing the tests:</p>
+<blockquote>
+<div><ul>
+<li><p>Each of the <a class="reference internal" href="../test-cases/test-cases-overview.html#test-cases-overview"><span class="std std-ref">test cases</span></a> (power, memory and GT) run independently.</p></li>
+<li><p><a class="reference internal" href="../test-cases/mmio-test-case-description.html#mmio-test-case-description"><span class="std std-ref">MMIO</span></a>, and <a class="reference internal" href="../test-cases/dma-test-case-description.html#dma-test-case-description"><span class="std std-ref">DMA</span></a> test cases run prior to all test cases.</p></li>
+<li><p>It uses two JSON configuration files:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="../usage/test-json-file-structure.html#test-json-file-structure"><span class="std std-ref">Test JSON file</span></a>: User can provide his own test JSON file or use one of the <a class="reference internal" href="#pre-canned-test-json-files"><span class="std std-ref">Pre-canned test JSON files</span></a>.</p></li>
+<li><p><a class="reference internal" href="#card-definition-json-file"><span class="std std-ref">Card definition JSON file</span></a> and <a class="reference internal" href="#xbtest-metadata-json-files"><span class="std std-ref">xbtest metadata</span></a>: Selected automatically.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>The following steps are performed to launch a test:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Checks the provided <a class="reference internal" href="../usage/command-line-options.html#command-line-options"><span class="std std-ref">Command line options</span></a> for validity and unsupported combinations.</p></li>
+<li><p>Checks integrity of all <a class="reference internal" href="#aved-deployment-archives"><span class="std std-ref">AVED deployment archives</span></a> currently installed.</p></li>
+<li><p>Selects from the targeted card provided with command line option <a class="reference internal" href="../usage/command-line-options.html#cmdoption-d"><code class="xref std std-option docutils literal notranslate"><span class="pre">-d</span></code></a>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Compatible <a class="reference internal" href="#aved-deployment-archives"><span class="std std-ref">AVED deployment archive</span></a> (based on UUID).</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Runs test on the targeted card with:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Provided pre-canned test (<a class="reference internal" href="../usage/command-line-options.html#cmdoption-c"><code class="xref std std-option docutils literal notranslate"><span class="pre">-c</span></code></a>) or test JSON file (<a class="reference internal" href="../usage/command-line-options.html#cmdoption-j"><code class="xref std std-option docutils literal notranslate"><span class="pre">-j</span></code></a>).</p></li>
+<li><p><a class="reference internal" href="#card-definition-json-file"><span class="std std-ref">Card definition JSON file</span></a> and <a class="reference internal" href="#xbtest-metadata-json-files"><span class="std std-ref">xbtest metadata</span></a> selected in previous step.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+<p>While running the test, <a class="reference internal" href="#application-software"><span class="std std-ref">xbtSW</span></a> also manages the watchdog present in the different <a class="reference internal" href="#hardware-overview"><span class="std std-ref">xbtest hardware IP (xbtIP)</span></a> and checks that the Alveo card is not in use by another instance of the application.</p>
+<p>Various sensors are monitored by default but others can be easily added (see <a class="reference internal" href="../tasks/device-management-task-description.html#device-management-task-description"><span class="std std-ref">Device management task description</span></a>).</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+				  
+				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Advanced Micro Devices Inc.</p>
+  </div>
+
+
+
+										<div class="aem-Grid aem-Grid--16">
+											<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+												<div class="container-fluid sub-footer">
+
+													                    <div class="row">
+                        <div class="col-xs-24">
+                          <p><a target="_blank" href="https://www.amd.com/en/corporate/copyright">Terms and Conditions</a> | <a target="_blank" href="https://www.amd.com/en/corporate/privacy">Privacy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/cookies">Cookie Policy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/trademarks">Trademarks</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf">Statement on Forced Labor</a> | <a target="_blank" href="https://www.amd.com/en/corporate/competition">Fair and Open Competition</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf">UK Tax Strategy</a> | <a target="_blank" href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA">Inclusive Terminology</a> | <a href="#cookiessettings" class="ot-sdk-show-settings">Cookies Settings</a></p>
+                        </div>
+                    </div>
+												</div>
+											</div>
+										</div>
+										
+</br>
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

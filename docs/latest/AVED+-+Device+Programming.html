@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script charset="UTF-8" data-document-language="true" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script class="optanon-category-C0002" type="text/plain">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+<title>AVED - Device Programming — AVED  documentation</title>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="_static/xbtest.css" rel="stylesheet" type="text/css"/>
+<link href="_static/_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="https://docs.xilinx.com/favicon.ico" rel="shortcut icon"/>
+<!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/js/theme.js"></script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html" rel="next" title="AVED - Host to Card Communication"/>
+<link href="AVED%2B-%2BBoard%2BManagement%2BSolution.html" rel="prev" title="AVED - Board Management Solution"/>
+<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager -->
+<noscript><iframe class="optanon-category-C0002" height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager -->
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="index.html"> AVED
+            <img alt="Logo" class="logo" src="_static/xilinx-header-logo.svg"/>
+</a>
+<div role="search">
+<form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" type="text"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+</div>
+</div><div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">AVED - Device Programming</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#alveo-v80-configuration-storage">Alveo V80 Configuration Storage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-storage-programming">Configuration Storage Programming</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#flash-partition-tables">Flash Partition Tables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#aved-fpt-header">AVED FPT Header</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aved-fpt-entry">AVED FPT Entry</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#initializing-the-v80-ospi-with-fpt-content">Initializing the V80 OSPI with FPT content</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#amc-management-of-fpt-partitions">AMC Management of FPT partitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#selection-of-programming-images-at-runtime">Selection of Programming Images at Runtime</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cold-boot-power-on-reset">Cold Boot / Power-on-Reset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#runtime-and-multiboot">Runtime and Multiboot</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BHierarchy%2BOverview.html">AVED V80 - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BCIPS%2BConfiguration.html">AVED V80 - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BResources.html">AVED V80 - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BMap.html">AVED V80 - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BNoC%2BConfiguration.html">AVED V80 - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BBase%2BLogic.html">AVED V80 - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BClock%2BReset%2BModule.html">AVED V80 - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BSource%2BFile%2BOverview.html">AVED V80 - Source File Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SMBus%2BIP%2Bv1.1%2B-%2BProduct%2BGuide.html">SMBus IP v1.1 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BASDM%2BApplication.html">AVED ASDM Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOutOfBand%2BTelemetry%2BApplication.html">AVED OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Board%2BManagement%2BController%2B%28BMC%29%2BProxy%2BDriver.html">Board Management Controller (BMC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BQDMA.html">AVED QDMA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift"><nav aria-label="Mobile navigation menu" class="wy-nav-top" style="background: black">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="index.html">AVED</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="Page navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a class="icon icon-home" href="index.html"></a> »</li>
+<li>AVED - Device Programming</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<section id="aved-device-programming">
+<h1>AVED - Device Programming<a class="headerlink" href="#aved-device-programming" title="Permalink to this headline">¶</a></h1>
+<section id="overview">
+<span id="aveddeviceprogramming-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This page describes how AVED V80 boots from the AMD Alveo™ V80 card’s configuration storage devices and how the AVED Management Controller (AMC) and its companion AVED Management Interface (AMI) utility allow programming images to be transferred into
+the V80 card’s configuration storage device. Because AVED uses the regular AMD Vivado™ design flow and generates full programming PDIs, the amount of programming and management infrastructure is greatly simplified compared to a full DFx flow, but
+still allows selecting and reprogramming which image is used to boot the card.</p>
+<section id="alveo-v80-configuration-storage">
+<span id="aveddeviceprogramming-alveov80configurationstorage"></span><h3>Alveo V80 Configuration Storage<a class="headerlink" href="#alveo-v80-configuration-storage" title="Permalink to this headline">¶</a></h3>
+<p>The primary configuration storage device of the Alveo V80 card is a 2Gb OSPI memory and the card’s boot mode selection pins are set to boot the card with programming images from this memory.</p>
+<p><a class="confluence-embedded-image reference internal" href="_images/1118656923.png"><img alt="image1" class="confluence-embedded-image" src="_images/1118656923.png" style="height: 250px;"/></a></p>
+<ul class="simple">
+<li><p>Using Vivado hardware manager during application development allows JTAG download of programming images to the FPGA or the OSPI configuration storage.</p></li>
+<li><p>In deployment, the AMC allows new programming images to be written into the configuration storage device.</p></li>
+</ul>
+</section>
+</section>
+<section id="configuration-storage-programming">
+<span id="aveddeviceprogramming-configurationstorageprogramming"></span><h2>Configuration Storage Programming<a class="headerlink" href="#configuration-storage-programming" title="Permalink to this headline">¶</a></h2>
+<p>The AMC firmware component of AVED V80 is expected to be the standard way to load new programming images onto the Alveo V80 card. The firmware running on the R5 processors of the V80’s processing subsystem receives copies of new programming
+information for the V80’s configuration storage device. A data transfer from the PCIe® host to a DDR buffer subsequently writes the programming image into the non-volatile configuration storage device.</p>
+<p>As noted in the section above, it is also possible to download new images to the card via JTAG, but this approach requires physical access to the card and a suitable JTAG programming cable connected to the card. These may be reasonable assumptions in
+the early stages of a new application design based on AVED but it is likely that the PCIe based device programming feature will be the more common and readily available programming path for AVED designs targeting the V80 card.</p>
+<p>Application developers familiar with other Alveo cards may be familiar with the ‘A-B update’ scheme that allowed storage of an active and a backup programming image in the configuration storage memory. AVED supports a similar partitioning scheme for
+the configuration storage memory so that multiple programming images can be stored in the memory. The AMC firmware and its companion AMI utility program allow the new programming images to be written into specific partitions of the configuration
+storage memory. To keep track of how many partitions are available within the configuration storage memory, AMC firmware uses a flash partition table. This is a small data structure written into the first page of the OSPI configuration storage
+device.</p>
+<p>An explanation of the flash partition table data structure and an outline of the AMC process for updating the configuration storage are provided in the subsections below.</p>
+<section id="flash-partition-tables">
+<span id="aveddeviceprogramming-flashpartitiontables"></span><h3>Flash Partition Tables<a class="headerlink" href="#flash-partition-tables" title="Permalink to this headline">¶</a></h3>
+<p>The first page of memory on the AVED OSPI is expected to contain the AVED Flash Partition Table (FPT). The purpose of the AVED FPT is to specify how the OSPIs raw memory is to be divided up into distinct partitions, with each partition intended to
+contain a different AVED-based application PDI. There are two types of content within the AVED FPT. The first is a fpt_header, which exists at the start of every FPT and specifies some basic characteristics of the FPT. This second is one or more
+fpt_entry declarations that gives the specification of a partition within the remaining pages of the OSPI memory.</p>
+<section id="aved-fpt-header">
+<span id="aveddeviceprogramming-avedfptheader"></span><h4>AVED FPT Header<a class="headerlink" href="#aved-fpt-header" title="Permalink to this headline">¶</a></h4>
+<p>The diagram below shows the memory layout of an AVED fpt_header:</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/1118656899.png"><img alt="image2" class="drawio-diagram-image" src="_images/1118656899.png" style="width: 201px;"/></a></p>
+<ul class="simple">
+<li><p>The first word of the AVED FPT header is a magic word used by the AMC firmware to confirm that the data that follows is indeed an AVED FPT header.</p>
+<ul>
+<li><p>The magic word used by AVED FPT headers is 0x92F7A516.</p></li>
+<li><p>This value is intentionally different from the FPT magic word used in earlier Alveo products to distinguish AVED FPTs from non-AVED Alveo designs and software stacks.</p></li>
+</ul>
+</li>
+<li><p>The next word in the AVED FPT header contains four single-byte fields:</p>
+<ul>
+<li><p>The version field allows future versions of the AVED FPT header to be identified in the event that an end user wishes to extend or update the AVED FPT.</p></li>
+<li><p>The header size field indicates the number of bytes reserved for AVED FPT header content.</p></li>
+<li><p>The entry size field indicates the byte size of each subsequent AVED fpt_entry.</p></li>
+<li><p>The num entries field indicates how many AVED fpt_entry instances follow the fpt_header.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="aved-fpt-entry">
+<span id="aveddeviceprogramming-avedfptentry"></span><h4>AVED FPT Entry<a class="headerlink" href="#aved-fpt-entry" title="Permalink to this headline">¶</a></h4>
+<p>The diagram below shows the content of an AVED fpt_entry:</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/1118656895.png"><img alt="image3" class="drawio-diagram-image" src="_images/1118656895.png" style="width: 161px;"/></a></p>
+<ul class="simple">
+<li><p>Type indicates the type of content in the partition of the configuration storage device memory declared by this entry.</p>
+<ul>
+<li><p>In the AVED baseline implementation of FPT, only a single type (PDI) is supported for PDI content within each partition.</p></li>
+</ul>
+</li>
+<li><p>Base address indicates the address offset of the beginning of the partition in the configuration storage device memory.</p></li>
+</ul>
+<p>Note: The AMD Versal™ PLM requires each PDI to be aligned to 32KB boundaries within the OSPI address space.</p>
+<ul class="simple">
+<li><p>Partition size indicates the size (in bytes) of the OSPI memory reserved for the given partition.</p>
+<ul>
+<li><p>The partition should be sized large enough for the PDI content to be placed within it.</p></li>
+</ul>
+</li>
+</ul>
+<p>Multiple instances of the AVED fpt_entry can be declared following the fpt_header declaration. In the baseline AVED implementation, two partitions are declared so that the partition with the higher base address offset can serve as a backup PDI boot
+image in case the PDI content of the first partition fails to load correctly during development. This resilient boot behavior is provided by default thanks to <a class="reference external" href="https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Fallback-Boot-and-MultiBoot">Versal’s standard fallback boot
+capability</a>.</p>
+</section>
+</section>
+<section id="initializing-the-v80-ospi-with-fpt-content">
+<span id="aveddeviceprogramming-initializingthev80ospiwithfptcontent"></span><h3>Initializing the V80 OSPI with FPT content<a class="headerlink" href="#initializing-the-v80-ospi-with-fpt-content" title="Permalink to this headline">¶</a></h3>
+<p>During the AVED <a class="reference external" href="AVED+Build+Scripts.html">build process</a>, the fpt step processes a JSON file containing a textual representation of the intended AVED FPT content and outputs a binary image of the AVED FPT. The textbox below shows an example of the
+JSON file used in the reference design to declare the fpt_header instance and two fpt_entry instances.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s">"fpt_header(0)"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">"magic_word"</span>        <span class="p">:</span> <span class="s">"0x92F7A516"</span><span class="p">,</span>
+        <span class="s">"fpt_version"</span>       <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s">"fpt_header_size"</span>   <span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
+        <span class="s">"fpt_entry_size"</span>    <span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
+        <span class="s">"num_entries"</span>       <span class="p">:</span> <span class="mi">2</span>
+    <span class="p">},</span>
+    <span class="s">"fpt_entry(0, 0)"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">"type"</span>              <span class="p">:</span> <span class="s">"PDI"</span><span class="p">,</span>
+        <span class="s">"base_addr"</span>         <span class="p">:</span> <span class="s">"0x00008000"</span><span class="p">,</span>
+        <span class="s">"partition_size"</span>    <span class="p">:</span> <span class="s">"0x07E00000"</span>
+    <span class="p">},</span>
+    <span class="s">"fpt_entry(0, 1)"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">"type"</span>              <span class="p">:</span> <span class="s">"PDI"</span><span class="p">,</span>
+        <span class="s">"base_addr"</span>         <span class="p">:</span> <span class="s">"0x07E08000"</span><span class="p">,</span>
+        <span class="s">"partition_size"</span>    <span class="p">:</span> <span class="s">"0x07E00000"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The AVED build flow prepends the AVED FPT binary image to the OSPI binary programming image so that it can be flashed onto the Alveo V80 card using Vivado hardware manager. This initialization step only needs to happen once, provided the FPT
+partitions do not change. If changes are required for a given application, the FPT JSON file can be edited and new FPT binary content will be generated by the AVED build flow. This results in a new FPT Setup PDI that can be programmed onto the card
+OSPI via Vivado hardware manager (see <a class="reference external" href="AVED+Updating+FPT+Image+in+Flash.html">AVED Updating FPT Image in Flash</a>); note that in this circumstance, the v80_initialization.pdi provided with the pre-built deployment package can be used with the new
+FPT Setup PDI to program the card OSPI. The initialization PDI does not need to be regenerated.</p>
+</section>
+<section id="amc-management-of-fpt-partitions">
+<span id="aveddeviceprogramming-amcmanagementoffptpartitions"></span><h3>AMC Management of FPT partitions<a class="headerlink" href="#amc-management-of-fpt-partitions" title="Permalink to this headline">¶</a></h3>
+<p>Once the Alveo V80’s OSPI memory is initialized with AVED FPT content, the AVED AMC firmware will allow the content of each declared FPT partition to be loaded with images. The AMC firmware implements a message passing interface with the PCIe host.
+PDI data from the PCIe host is transferred into a region of DDR memory mapped into the PCIe BAR space accessible to PCIe PF0 (‘management’). When the AMC host driver completes the transfer of this information into the shared DDR memory buffer, it
+sends a message (APC_MSG_TYPE_DOWNLOAD_PDI) via the mailbox IP in the AVED base design reserved for communication between the PCIe host and the AMC firmware operating on the RPU. On receipt of this message, the AMC firmware writes the PDI content
+from the DDR shared memory buffer into the OSPI configuration memory partition. The exact partition updated will be part of the message passed to the AMC firmware and typically originates from the commandline arguments to the <a class="reference external" href="AVED+Management+Interface+userguide+(ami_tool).html">AMI
+utility</a> used to initiate the process on the host operating system. Specifying different partition numbers (each partition number corresponding to the index order of the fpt_entry declarations
+earlier) allows the AMI utility to target different partitions within the OSPI for writing with new content.</p>
+</section>
+<section id="selection-of-programming-images-at-runtime">
+<span id="aveddeviceprogramming-selectionofprogrammingimagesatruntime"></span><h3>Selection of Programming Images at Runtime<a class="headerlink" href="#selection-of-programming-images-at-runtime" title="Permalink to this headline">¶</a></h3>
+<section id="cold-boot-power-on-reset">
+<span id="aveddeviceprogramming-coldboot-power-on-reset"></span><h4>Cold Boot / Power-on-Reset<a class="headerlink" href="#cold-boot-power-on-reset" title="Permalink to this headline">¶</a></h4>
+<p>AVED’s FPT based partitioning of the OSPI leverages the standard Versal boot process. This means that when the Alveo V80 card starts from a cold-boot or POR, Versal’s PMC searches the default boot device for a programming image and begins to load.
+The AVED FPT content present at the start of the OSPI memory does not have the signature of a valid PDI file so it is ignored and rapidly skipped by the default boot process. The PMC boot process will find PDI content in the first OSPI partition
+(typically at first 32KB offset in OSPI memory) and load the AVED based design from that partition first.</p>
+</section>
+<section id="runtime-and-multiboot">
+<span id="aveddeviceprogramming-runtimeandmultiboot"></span><h4>Runtime and Multiboot<a class="headerlink" href="#runtime-and-multiboot" title="Permalink to this headline">¶</a></h4>
+<p>Once the initial AVED based design is loaded and operational, it is possible to again use the standard Versal PMC boot process to reload the FPGA configuration from the PDI content in a different OSPI partition. This mechanism is built on Versal’s
+standard multiboot procedure, which sets the next boot offset in OSPI memory in the PMC_MULTIBOOT register and then triggers a system reset in the PLM to reload the FPGA configuration from the OSPI new boot offset. This mechanism is encapsulated in
+the AMC’s utility interface commands, which allows the selection of the next boot partition as one of the arguments to the device_boot subcommand.</p>
+<p>Page Revision: v. 18</p>
+</section>
+</section>
+</section>
+</section>
+</div>
+</div>
+<footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+<a accesskey="p" class="btn btn-neutral float-left" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html" rel="prev" title="AVED - Board Management Solution"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+<a accesskey="n" class="btn btn-neutral float-right" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html" rel="next" title="AVED - Host to Card Communication">Next <span aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<p>© Copyright 2023, Advanced Micro Devices Inc.</p>
+</div>
+<div class="aem-Grid aem-Grid--16">
+<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+<div class="container-fluid sub-footer">
+<div class="row">
+<div class="col-xs-24">
+<p><a href="https://www.amd.com/en/corporate/copyright" target="_blank">Terms and Conditions</a> | <a href="https://www.amd.com/en/corporate/privacy" target="_blank">Privacy</a> | <a href="https://www.amd.com/en/corporate/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.amd.com/en/corporate/trademarks" target="_blank">Trademarks</a> | <a href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf" target="_blank">Statement on Forced Labor</a> | <a href="https://www.amd.com/en/corporate/competition" target="_blank">Fair and Open Competition</a> | <a href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf" target="_blank">UK Tax Strategy</a> | <a href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA" target="_blank">Inclusive Terminology</a> | <a class="ot-sdk-show-settings" href="#cookiessettings">Cookies Settings</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+</div>
+</div>
+</section>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+</body>
+</html>

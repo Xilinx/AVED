@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+  <title>Hardware Discovery IP v1.0 - Product Guide &mdash; AVED  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/xbtest.css" type="text/css" />
+      <link rel="stylesheet" href="_static/_static/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="https://docs.xilinx.com/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="SMBus IP v1.1 - Product Guide" href="SMBus%2BIP%2Bv1.1%2B-%2BProduct%2BGuide.html" />
+    <link rel="prev" title="Generic Command Queue IP v2.0 - Product Guide" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
+<!-- End Google Tag Manager --> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+            <a href="index.html" class="icon icon-home"> AVED
+            <img src="_static/xilinx-header-logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BHierarchy%2BOverview.html">AVED V80 - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BCIPS%2BConfiguration.html">AVED V80 - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BResources.html">AVED V80 - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BMap.html">AVED V80 - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BNoC%2BConfiguration.html">AVED V80 - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BBase%2BLogic.html">AVED V80 - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BClock%2BReset%2BModule.html">AVED V80 - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BSource%2BFile%2BOverview.html">AVED V80 - Source File Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Hardware Discovery IP v1.0 - Product Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#applications">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#architecture-overview">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resource-use">Resource Use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interface-descriptions">Interface Descriptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clocking">Clocking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resets">Resets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interrupts">Interrupts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#register-space">Register Space</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#address-map-for-bar-layout-tables">Address Map for BAR Layout Tables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#detailed-description">Detailed Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pcie-vsec">PCIe VSEC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#command-and-data-transfers">Command and Data Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#endpoint-names">Endpoint Names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#endpoint-injection">Endpoint Injection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#table-formats">Table Formats</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#vsec-tables">VSEC Tables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#management-bar-layout-table">Management BAR Layout Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-bar-layout-table">User BAR Layout Table</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#customizing-and-generating-the-ip">Customizing and Generating the IP</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#importing-the-ip-repository">Importing the IP Repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#customizing-the-ip">Customizing the IP</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#component-name">Component Name</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#output-generation">Output Generation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#simulation">Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#synthesis-and-implementation">Synthesis and Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#driver">Driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-design">Example Design</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="SMBus%2BIP%2Bv1.1%2B-%2BProduct%2BGuide.html">SMBus IP v1.1 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BASDM%2BApplication.html">AVED ASDM Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOutOfBand%2BTelemetry%2BApplication.html">AVED OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Board%2BManagement%2BController%2B%28BMC%29%2BProxy%2BDriver.html">Board Management Controller (BMC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BQDMA.html">AVED QDMA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: black" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">AVED</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Hardware Discovery IP v1.0 - Product Guide</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="hardware-discovery-ip-v1-0-product-guide">
+<h1>Hardware Discovery IP v1.0 - Product Guide<a class="headerlink" href="#hardware-discovery-ip-v1-0-product-guide" title="Permalink to this headline">¶</a></h1>
+<section id="overview">
+<span id="hardwarediscoveryipv1-0productguide-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>IP name: hw_discovery_v1_0</p>
+<p>The AMD Versal™ Hardware Discovery IP constructs PCIe® BAR layout tables that enumerate all the PCIe endpoints found on each physical function (PF) in the system, along with information needed for accessing each endpoint. The IP also supports a
+vendor specific extended capability (VSEC) interface that connects to PCIe block of Versal devices to indicate the memory-mapped location of each of the BAR layout tables. During run-time, host software can interrogate the BAR layout tables via the
+control network for each PCIe PF to determine all the hardware endpoints that need to be accessed and their locations. The Hardware Discovery IP has the following main functions:</p>
+<ul class="simple">
+<li><p>Implements AMD-Xilinx Additional List of Features (ALF) VSEC for each physical function. This function provides the PCIe-BAR location of the BAR Layout Table.</p></li>
+<li><p>BAR Layout Table. Contains information to identify endpoints, e.g. UUID ROM, GCQ.</p></li>
+</ul>
+<p>If the Hardware Discovery IP is removed from the AVED design, then the PCIe Extended Config interface that is present on CIPS CPM must also be disabled, otherwise there is nothing to respond to PCIe config reads/writes in that portion of the extended
+address space.</p>
+</section>
+<section id="features">
+<span id="hardwarediscoveryipv1-0productguide-features"></span><h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<p>The Versal Hardware Discovery IP has the following main features:</p>
+<ul class="simple">
+<li><p>Supports up to 4 physical functions, as illustrated in the block diagram below.</p></li>
+<li><p>Supports up to 14 PCIe endpoints in the Bar Layout Table for each physical function.</p></li>
+<li><p>Supports daisy-chaining additional VSEC modules by indicating their next capability address.</p></li>
+</ul>
+</section>
+<section id="applications">
+<span id="hardwarediscoveryipv1-0productguide-applications"></span><h2>Applications<a class="headerlink" href="#applications" title="Permalink to this headline">¶</a></h2>
+<p>The Hardware Discovery IP provides an AXI4-Lite slave control interface for each enabled PF. The IP also has an ALF VSEC slave interface that connects to the Versal PCIe block.</p>
+<p><img alt="image1" class="confluence-embedded-image" src="_images/1118754961.png" /></p>
+</section>
+<section id="architecture-overview">
+<span id="hardwarediscoveryipv1-0productguide-architectureoverview"></span><h2>Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permalink to this headline">¶</a></h2>
+<p>The following diagram shows the overall structure of the Hardware Discovery IP.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p><img alt="image2" class="confluence-embedded-image" src="_images/1118385450.png" /></p>
+</section>
+<section id="resource-use">
+<span id="hardwarediscoveryipv1-0productguide-resourceuse"></span><h2>Resource Use<a class="headerlink" href="#resource-use" title="Permalink to this headline">¶</a></h2>
+<p>The table below contains resource utilization data for several configurations of the Hardware Discovery IP core. Any configuration parameters that are not listed have their default values; any parameters with a blank value are disabled or set
+automatically by the IP core.</p>
+<ul class="simple">
+<li><p>Resource figures are taken from the utilization report issued at the end of implementation using the Out-of-Context flow in the AMD Vivado™ Design Suite.</p></li>
+<li><p>Default Vivado Design Suite 2023.2 settings were used. You may be able to improve on these figures using different settings. Because surrounding circuitry will affect placement and timing, no guarantee can be given that these figures will be
+repeatable in a larger design.</p></li>
+</ul>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Vivado Release</p></td>
+<td><p>Family</p></td>
+<td><p>Device</p></td>
+<td><p>Package</p></td>
+<td><p>Speedgrade</p></td>
+<td><p>Configuration Name</p></td>
+<td><p>C_MANUAL</p></td>
+<td><p>C_NUM_PFS</p></td>
+<td><p>C_CAP_BASE_ADDR</p></td>
+<td><p>C_NEXT_CAP_ADDR</p></td>
+<td><p>C_PFx_NUM_SLOTS_BAR_LAYOUT_TABLE</p></td>
+<td><p>Fixed Clocks (MHz)</p></td>
+<td><p>LUT</p></td>
+<td><p>FF</p></td>
+<td><p>DSP</p></td>
+<td><p>36k BRAMs</p></td>
+<td><p>18k BRAMs</p></td>
+</tr>
+<tr class="row-even"><td><p>2023.2</p></td>
+<td><p>versal</p></td>
+<td><p>xcv80</p></td>
+<td><p>lsva4737</p></td>
+<td><p>2MHP</p></td>
+<td><p>hwd_max_filled_nca_conf_1</p></td>
+<td><p>1</p></td>
+<td><p>4</p></td>
+<td><p>0x480</p></td>
+<td><p>0x600</p></td>
+<td><p>14</p></td>
+<td><p>aclk_ctrl=250</p>
+<blockquote>
+<div><p>aclk_pcie=250</p>
+</div></blockquote>
+</td>
+<td><p>250</p></td>
+<td><p>473</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>2023.2</p></td>
+<td><p>versal</p></td>
+<td><p>xcv80</p></td>
+<td><p>lsva4737</p></td>
+<td><p>2MHP</p></td>
+<td><p>hwd_max_filled_nonca_conf_1</p></td>
+<td><p>1</p></td>
+<td><p>4</p></td>
+<td><p>0x480</p></td>
+<td><p>0x000</p></td>
+<td><p>14</p></td>
+<td><p>aclk_ctrl=250</p>
+<blockquote>
+<div><p>aclk_pcie=250</p>
+</div></blockquote>
+</td>
+<td><p>231</p></td>
+<td><p>381</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="interface-descriptions">
+<span id="hardwarediscoveryipv1-0productguide-interfacedescriptions"></span><h2>Interface Descriptions<a class="headerlink" href="#interface-descriptions" title="Permalink to this headline">¶</a></h2>
+<p>The table below gives an overview of the external interfaces and ports super-set present on the boundary of the Versal Hardware Discovery IP.</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Mode/Direction</p></th>
+<th class="head"><p>Range</p></th>
+<th class="head"><p>Clock Domain</p></th>
+<th class="head"><p>Enablement Dependency</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PCIe Configuration</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>s_pcie4_cfg_ext</p></td>
+<td><p>pcie3_cfg_ext</p></td>
+<td><p>Slave</p></td>
+<td></td>
+<td><p>aclk_pcie</p></td>
+<td><p>true</p></td>
+<td><p>PCIe Configuration Extend Interface - Refer to the <a class="reference external" href="https://www.xilinx.com/support/documentation/ip_documentation/pcie4_uscale_plus/v1_3/pg213-pcie4-ultrascale-plus.pdf">PCIe Product Guide</a> (PG213) for more information.</p></td>
+</tr>
+<tr class="row-even"><td><p>m_pcie4_cfg_ext</p></td>
+<td><p>pcie3_cfg_ext</p></td>
+<td><p>Master</p></td>
+<td></td>
+<td><p>aclk_pcie</p></td>
+<td><p>Automatically enabled if <strong>C_NEXT_CAP_ADDR &gt;= (C_CAP_BASE_ADDR + 0x010)</strong></p></td>
+<td><p>PCIe Configuration Extend Interface - Refer to the <a class="reference external" href="https://www.xilinx.com/support/documentation/ip_documentation/pcie4_uscale_plus/v1_3/pg213-pcie4-ultrascale-plus.pdf">PCIe Product Guide</a> (PG213) for more information.</p></td>
+</tr>
+<tr class="row-odd"><td><p>AXI-Lite Control</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>s_axi_ctrl_pf0</p></td>
+<td><p>aximm_rtl (AXI4LITE)</p></td>
+<td><p>Slave</p></td>
+<td></td>
+<td><p>aclk_ctrl</p></td>
+<td><p><strong>NUM_PFS</strong> &gt;= 1</p></td>
+<td><p>AXI4-Lite Slave Control Interface</p></td>
+</tr>
+<tr class="row-odd"><td><p>s_axi_ctrl_pf1</p></td>
+<td><p>aximm_rtl (AXI4LITE)</p></td>
+<td><p>Slave</p></td>
+<td></td>
+<td><p>aclk_ctrl</p></td>
+<td><p><strong>NUM_PFS</strong> &gt;= 2</p></td>
+<td><p>AXI4-Lite Slave Control Interface</p></td>
+</tr>
+<tr class="row-even"><td><p>s_axi_ctrl_pf2</p></td>
+<td><p>aximm_rtl (AXI4LITE)</p></td>
+<td><p>Slave</p></td>
+<td></td>
+<td><p>aclk_ctrl</p></td>
+<td><p><strong>NUM_PFS</strong> &gt;= 3</p></td>
+<td><p>AXI4-Lite Slave Control Interface</p></td>
+</tr>
+<tr class="row-odd"><td><p>s_axi_ctrl_pf3</p></td>
+<td><p>aximm_rtl (AXI4LITE)</p></td>
+<td><p>Slave</p></td>
+<td></td>
+<td><p>aclk_ctrl</p></td>
+<td><p><strong>NUM_PFS</strong> = 4</p></td>
+<td><p>AXI4-Lite Slave Control Interface</p></td>
+</tr>
+<tr class="row-even"><td><p>Clocks</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>aclk_pcie</p></td>
+<td><p>clk</p></td>
+<td><p>Input</p></td>
+<td><p>scalar</p></td>
+<td></td>
+<td><p>true</p></td>
+<td><p>250MHz PCIe User Clock</p></td>
+</tr>
+<tr class="row-even"><td><p>aclk_ctrl</p></td>
+<td><p>clk</p></td>
+<td><p>Input</p></td>
+<td><p>scalar</p></td>
+<td></td>
+<td><p>true</p></td>
+<td><p>Control Clock</p></td>
+</tr>
+<tr class="row-odd"><td><p>Resets</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>aresetn_pcie</p></td>
+<td><p>rst</p></td>
+<td><p>Input</p></td>
+<td><p>scalar</p></td>
+<td><p>aclk_pcie</p></td>
+<td><p>true</p></td>
+<td><p>Active-Low Reset associated with aclk_pcie</p></td>
+</tr>
+<tr class="row-odd"><td><p>aresetn_ctrl</p></td>
+<td><p>rst</p></td>
+<td><p>Input</p></td>
+<td><p>scalar</p></td>
+<td><p>aclk_ctrl</p></td>
+<td><p>true</p></td>
+<td><p>Active-Low Reset associated with aclk_ctrl</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="clocking">
+<span id="hardwarediscoveryipv1-0productguide-clocking"></span><h2>Clocking<a class="headerlink" href="#clocking" title="Permalink to this headline">¶</a></h2>
+<p>The Versal Hardware Discovery IP operates on two clock domains:</p>
+<ul class="simple">
+<li><p><strong>aclk_ctrl</strong> - Control clock</p>
+<ul>
+<li><p>IP connected to the s_axi_ctrl_pfx are clocked on this domain.</p></li>
+</ul>
+</li>
+<li><p><strong>aclk_pcie</strong> - 250MHz PCIe clock which clocks:</p>
+<ul>
+<li><p>PCIe Configuration Extend Interface</p></li>
+<li><p>By default, IP connected to the PCIe Configuration Extend Interface is clocked on this domain.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="resets">
+<span id="hardwarediscoveryipv1-0productguide-resets"></span><h2>Resets<a class="headerlink" href="#resets" title="Permalink to this headline">¶</a></h2>
+<p>There are two reset sources for the Versal Hardware Discovery IP:</p>
+<ul class="simple">
+<li><p><strong>aresetn_ctrl</strong> - The control reset, synchronous to aclk_ctrl, active low polarity</p>
+<ul>
+<li><p>resets all logic associated with aclk_ctrl</p></li>
+</ul>
+</li>
+<li><p><strong>aresetn_pcie</strong> - The PCIe reset, synchronous to aclk_pcie, active low polarity</p>
+<ul>
+<li><p>resets all logic associated with aclk_pcie</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="interrupts">
+<span id="hardwarediscoveryipv1-0productguide-interrupts"></span><h2>Interrupts<a class="headerlink" href="#interrupts" title="Permalink to this headline">¶</a></h2>
+<p>N/A</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="register-space">
+<span id="hardwarediscoveryipv1-0productguide-registerspace"></span><h2>Register Space<a class="headerlink" href="#register-space" title="Permalink to this headline">¶</a></h2>
+<section id="address-map-for-bar-layout-tables">
+<span id="hardwarediscoveryipv1-0productguide-addressmapforbarlayouttables"></span><h3>Address Map for BAR Layout Tables<a class="headerlink" href="#address-map-for-bar-layout-tables" title="Permalink to this headline">¶</a></h3>
+<p>The following address map applies to each enabled PF (0&lt;=<em>p</em>&lt;C_NUM_PFS). Registers are accessed via the s_axi_ctrl_pf<em>p</em> interface.</p>
+<p>Within each PF, there is a set of registers for each slot (0&lt;=n&lt;C_PF<em>p</em>_NUM_SLOTS_BAR_LAYOUT_TABLE)</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Register</p></td>
+<td><p>Offset</p></td>
+<td><p>Access</p></td>
+<td><p>Fields</p></td>
+</tr>
+<tr class="row-even"><td><p>Header word 0</p></td>
+<td><p>0x0</p></td>
+<td><p>RO</p></td>
+<td><p>Bits [19:0]: Format ID = 0x1 (constant)</p>
+<blockquote>
+<div><p>Bits[27:20]: Format Revision = 0x0 (constant)</p>
+<p>Bits[28]: Last Cap = 0x1 (constant)</p>
+<p>Bits[31:29]: Rsvd = 0x0 (constant)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Header word 1</p></td>
+<td><p>0x4</p></td>
+<td><p>RO</p></td>
+<td><p>Bits [31:0]: Length = 0x30 (constant)</p></td>
+</tr>
+<tr class="row-even"><td><p>Header word 2</p></td>
+<td><p>0x8</p></td>
+<td><p>RO</p></td>
+<td><p>Bits [7:0]: Entry Size = 0x10 (constant)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Slot <em>n</em> word 0</p></td>
+<td><p>0x10 + <em>n</em>*0x10</p></td>
+<td><p>RO</p></td>
+<td><p>Bits [7:0]: Type</p>
+<blockquote>
+<div><p>Bits [12:8]: Type Rev = 0x0 (constant)</p>
+<p>Bits [15:13]: BAR</p>
+<p>Bits [31:16]: Offset[15:0]</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>Slot <em>n</em> word 1</p></td>
+<td><p>0x14 + <em>n</em>*0x10</p></td>
+<td><p>RO</p></td>
+<td><p>Bits [31:0]: Offset[47:16]</p></td>
+</tr>
+<tr class="row-odd"><td><p>Slot <em>n</em> word 2</p></td>
+<td><p>0x18 + <em>n</em>*0x10</p></td>
+<td><p>RO</p></td>
+<td><p>Bits [7:0]: Version Type</p>
+<blockquote>
+<div><p>Bits [15:8: Minor Version</p>
+<p>Bits [23:16]: Major Version</p>
+<p>Bits [27:24]: Rsvd0</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="detailed-description">
+<span id="hardwarediscoveryipv1-0productguide-detaileddescription"></span><h2>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h2>
+<p>The sections below provide an overview of the connectivity and configuration of the Versal Hardware Discovery IP.</p>
+<section id="pcie-vsec">
+<span id="hardwarediscoveryipv1-0productguide-pcievsec"></span><h3>PCIe VSEC<a class="headerlink" href="#pcie-vsec" title="Permalink to this headline">¶</a></h3>
+<p>Versal Hardware Discovery IP includes a PCIe vendor specific extended capability (VSEC) structure within the extended configuration space of the PCIE IP. This VSEC implements the Xilinx Additional List of Features structure that includes a pointer to
+the head of a memory-mapped BAR Layout Table outlining available peripherals and their address offsets.</p>
+<p>The Xilinx ALF VSEC exists externally to the PCIE IP and is implemented using Hardware Discovery IP, and optionally other fabric-based IP, that connects using the PCIE pcie4_cfg_ext interface.</p>
+<p>The structure of the Management ALF VSEC is outlined in the diagram below.</p>
+<p>Note: The BAR Layout Table start address pointer within the ALF VSEC is 16-byte granular.</p>
+</section>
+<section id="command-and-data-transfers">
+<span id="hardwarediscoveryipv1-0productguide-commandanddatatransfers"></span><h3>Command and Data Transfers<a class="headerlink" href="#command-and-data-transfers" title="Permalink to this headline">¶</a></h3>
+<p>VSECs local to this IP are accessed when s_pcie4_cfg_ext_register_number points to a location within the range C_CAP_BASE_ADDR/4 to C_CAP_BASE_ADDR/4+3. In that case, read responses driven on s_pcie4_cfg_ext_read_data* are generated by the local
+VSEC tables.</p>
+<p>VSECs residing in a device connected to the m_pcie4_cfg_ext interface are accessed when s_pcie4_cfg_ext_register_number points to a location &gt;= C_NEXT_CAP_ADDR, provided C_NEXT_CAP_ADDR is non-zero. In that case, read responses from the connected
+device (m_pcie4_cfg_ext_read_data*) are propagated from the m_pcie4 to s_pcie4 interface. Furthermore, it is required that the connected downstream device respond to all read requests.</p>
+<p>When s_pcie4_cfg_ext_register_number points to a location outside of the 16-byte range starting at C_CAP_BASE_ADDR, and either C_NEXT_CAP_ADDR==0 or s_pcie4_cfg_ext_register_number points to a location below C_NEXT_CAP_ADDR, then this IP completes
+read requests with s_pcie4_cfg_ext_read_data driven to all-zeroes (the m_pcie4 interface is ignored).</p>
+<p>Whenever the IP is configured with C_NEXT_CAP_ADDR != 0, all in-bound information received on s_pcie4_cfg_ext is propagated to m_pcie4_cfg_ext, even though read responses on m_pcie4_cfg_ext only get propagated back when the command’s
+s_pcie4_cfg_ext_register_number points to a location &gt;= C_NEXT_CAP_ADDR. When C_NEXT_CAP_ADDR == 0. No information is transmitted to the m_pcie4_cfg_ext interface.</p>
+</section>
+<section id="endpoint-names">
+<span id="hardwarediscoveryipv1-0productguide-endpointnames"></span><h3>Endpoint Names<a class="headerlink" href="#endpoint-names" title="Permalink to this headline">¶</a></h3>
+<p>For each PF, the user parameter C_PFx_ENDPOINT_NAMES defines a list of endpoints to be supported by the IP when configured for automatic metadata propagation (C_MANUAL=0). For each of the corresponding endpoints entered into the BAR Layout Table, the
+sub-fields of C_PFx_ENDPOINT_NAMES defines the ENTRY_TYPE and ENTRY_RSVD0 values to populate each entry in the table. During metadata propagation, which occurs when the Vivado IP-Integrator Block Design is validated, discovered endpoints listed in
+the C_PFx_ENDPOINT_NAMES parameters are captured in the BAR Layout tables. Any non-listed endpoints returned from the system are ignored. If any of the listed endpoint are not found during propagation, the Hardware Discovery IP issues an error. If no
+endpoints are discovered for any enabled PF, the Hardware Discovery IP issues an error. These parameters must be set manually for each enabled PF.</p>
+<p>The C_PF0_ENDPOINT_NAMES parameter is a string formatted as a TCL dictionary of the following structure:</p>
+<p><em>endpoint_name</em> {type 0x<em>nn</em> reserve <em>0x</em>} <em>…</em></p>
+<p>There are two techniques commonly used to construct dictionary values in TCL:</p>
+<p><strong>Option 1:</strong> Set entire property string:</p>
+<div class="line-block">
+<div class="line"><strong>Generic</strong>:</div>
+<div class="line">set_property -dict [ list CONFIG.<em>parameter_name</em> {<em>key1</em> {<em>key2</em> … {<em>keyn value</em> …}}} ] [get_bd_cells ip_instancename]</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Example</strong>:</div>
+<div class="line">set_property -dict [ list CONFIG.C_PF0_ENDPOINT_NAMES {ep_blp_rom_00 {type 0x50 reserve 0x0} ep_mailbox_mgmt_00 {type 0x53 reserve 0x3}} ] [get_bd_cells hw_discovery_0]</div>
+</div>
+<p><strong>Option 2:</strong> Property dictionary read-modify-write:</p>
+<div class="line-block">
+<div class="line"><strong>Generic</strong>:</div>
+<div class="line">set <em>variablename</em> [get_property CONFIG.<em>parameter_name</em> [get_bd_cells <em>ip_instancename</em>]</div>
+<div class="line">dict set <em>variablename key1 key2</em> … <em>keyn valuen</em></div>
+<div class="line">dict set <em>variablename key1 key2</em> … <em>keym valuem</em></div>
+<div class="line">…</div>
+<div class="line">set_property CONFIG.<em>parameter_name</em> $<em>variablename</em> [get_bd_cells <em>ip_instancename</em>]</div>
+</div>
+<p><strong>Example</strong>:</p>
+<div class="line-block">
+<div class="line">set mydict [get_property CONFIG.C_PF0_ENDPOINT_NAMES [get_bd_cells hw_discovery_0]]</div>
+<div class="line">dict set mydict ep_mailbox_mgmt_00 type 0x53</div>
+<div class="line">dict set mydict ep_mailbox_mgmt_00 reserve 0x3</div>
+<div class="line">set_property CONFIG.C_PF0_ENDPOINT_NAMES $mydict [get_bd_cells hw_discovery_0]</div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="endpoint-injection">
+<span id="hardwarediscoveryipv1-0productguide-endpointinjection"></span><h3>Endpoint Injection<a class="headerlink" href="#endpoint-injection" title="Permalink to this headline">¶</a></h3>
+<p>The endpoint injection string (C_INJECT_ENDPOINTS) is an advanced parameter that can be used for stand-alone IP test or for system debug when API results are missing or unexpected. An endpoint injection string can optionally be specified to override
+the endpoint metadata values normally returned by system API calls. The parameter C_INJECT_ENDPOINTS is a string formatted as a tcl dictionary comprising 3 top-level keys:</p>
+<ul class="simple">
+<li><p><strong>pcie_mapping_info</strong>: value string normally returned by the vitis::get_pcie_mapping_info API call.</p></li>
+<li><p><strong>endpoints_for_pcie_bar</strong>: value string normally returned by the vitis::get_endpoints_for_pcie_bar API call.</p></li>
+<li><p><strong>pcie_mapping_for</strong>: value string normally returned by the vitis::get_pcie_mapping_for API call.</p></li>
+</ul>
+<p>The following BNF formal syntax defines the required format of the value of the C_INJECT_ENDPOINTS parameter. As braces (<strong>{}</strong>) are part of tcl syntax, they are to be interpreted literally. Optional repetition is instead indicated using ellipses
+(<strong>…</strong>).</p>
+<p><em>C_INJECT_ENDPOINTS_value</em> ::= <strong>pcie_mapping_info {</strong> <em>pf_list</em> <strong>} endpoints_for_pcie_bar {</strong> <em>endpoint_collection_dictionary</em> <strong>} pcie_mapping_for {</strong> <em>interfaces_dictionary</em> <strong>}</strong></p>
+<p><em>pf_list</em> ::= <strong>{</strong> <em>pf_dictionary</em> <strong>}</strong>…</p>
+<p><em>pf_dictionary</em> ::= <strong>physical_function</strong> <em>pf_number</em> <strong>bar</strong> <em>bar_number</em></p>
+<p><em>endpoint_collection_dictionary</em> ::= <em>pf_pair</em>…</p>
+<p><em>pf_pair</em> ::= <em>pf_number</em> <strong>{</strong> <em>bar_pair</em>… <strong>}</strong></p>
+<p><em>bar_pair</em> ::= <em>bar_number</em> <strong>{</strong> <em>endpoint_list</em> <strong>}</strong></p>
+<p><em>endpoint_list</em> := <strong>{</strong> <em>endpoint_dictionary</em> <strong>}</strong>…</p>
+<p><em>endpoint_dictionary</em> ::= <strong>intf</strong> <em>bd_interface_pin</em> <strong>offset</strong> <em>address</em> <strong>xrt_endpoint_name</strong> <em>endpoint_name</em> <strong>reg_abs</strong> <strong>{</strong> <em>vlnv</em> <strong>}</strong></p>
+<p><em>bd_interface_pin</em> ::= <strong>/</strong><em>bd_cell_instance_name</em><strong>/</strong><em>interface_pin_name</em></p>
+<p><em>address</em> ::= <strong>0x</strong><em>hex_value</em></p>
+<p><em>vlnv</em> ::= <em>vendor_url</em><strong>:</strong><em>library</em><strong>:</strong><em>ip_name</em><strong>:</strong><em>major_version</em><strong>.</strong><em>minor_version</em></p>
+<p><em>interfaces_dictionary</em> ::= <em>interface_pair</em>…</p>
+<p><em>interface_pair</em> ::= <em>bd_interface_pin</em> <strong>{</strong> <em>pf_list</em> <strong>}</strong></p>
+<p>In addition to all endpoints intended to populate the bar layout tables, the endpoints corresponding to the enabled s_axi_ctrl_pf* interfaces of the hw_discovery IP instance are also to be listed under <strong>endpoints_for_pcie_bar</strong>. For every
+<em>endpoint_dictionary</em> listed under <strong>endpoints_for_pcie_bar</strong>, its physical_function and bar values must also be listed under <strong>pcie_mapping_for</strong>, along with its corresponding <em>bd_interface_pin</em>, and under <strong>pcie_mapping_info</strong>.</p>
+<p>The unrolled (informal) syntax of the C_INJECT_ENDPOINTS value is as follows. Square-brackets (<strong>[]</strong>) denote optionally-repeated elements. Line-end escape characters [<strong>\</strong>] are not normally used to define the string value, but are shown below for
+clarity.</p>
+<p><strong>pcie_mapping_info { { physical_function</strong> <em>pf_number1</em> <strong>bar</strong> <em>bar_number1</em> <strong>}</strong> [<strong>{ physical_function</strong> <em>pf_number2</em> <strong>bar</strong> <em>bar_number2</em> <strong>}</strong>]… <strong>} \</strong></p>
+<p><strong>endpoints_for_pcie_bar {</strong> <em>pf_number1</em> <strong>{</strong> <em>bar_number1</em> <strong>{ { intf</strong> <em>bd_interface_pin1</em> <strong>offset</strong> <em>address1</em> <strong>xrt_endpoint_name</strong> <em>endpoint_name1</em> <strong>reg_abs {</strong> <em>vlnv1</em> <strong>} }</strong> [<strong>{ intf</strong> <em>bd_interface_pin2</em> <strong>offset</strong> <em>address2</em>
+<strong>xrt_endpoint_name</strong> <em>endpoint_name2</em> <strong>reg_abs</strong> <strong>{</strong> <em>vlnv2</em> <strong>} }</strong>]<strong>… } } \</strong></p>
+<p><strong>[</strong><em>pf_number2</em> <strong>{</strong> <em>bar_number2</em> <strong>{ { intf</strong> <em>bd_interface_pin3</em> <strong>offset</strong> <em>address3</em> <strong>xrt_endpoint_name</strong> <em>endpoint_name3</em> <strong>reg_abs</strong> <strong>{</strong> <em>vlnv3</em> <strong>} }</strong> [<strong>{ intf</strong> <em>bd_interface_pin4</em> <strong>offset</strong> <em>address4</em> <strong>xrt_endpoint_name</strong>
+<em>endpoint_name4</em> <strong>reg_abs</strong> <strong>{</strong> <em>vlnv4</em> <strong>} }</strong>]<strong>… } }</strong>]… <strong>}</strong> <strong>\</strong></p>
+<p><strong>pcie_mapping_for {</strong> <em>bd_interface_pin1</em> <strong>{ { physical_function</strong> <em>pf_number1</em> <strong>bar</strong> <em>bar_number1</em> <strong>}</strong> [<strong>{ physical_function</strong> <em>pf_number2</em> <strong>bar</strong> <em>bar_number2</em> <strong>}</strong>]<strong>… }</strong> [<em>bd_interface_pin2</em> <strong>{ { physical_function</strong>
+<em>pf_number3</em> <strong>bar</strong> <em>bar_number3</em> <strong>}</strong> [<strong>{ physical_function</strong> <em>pf_number4</em> <strong>bar</strong> <em>bar_number4</em> <strong>}</strong>]<strong>… }</strong>]<strong>… }</strong></p>
+<p>Here is an example of a properly formatted C_INJECT_ENDPOINTS string (line-end escapes shown for clarity):</p>
+<p>pcie_mapping_info { { physical_function 0 bar 2 } { physical_function 1 bar 3 } } \</p>
+<p>endpoints_for_pcie_bar { 0 { 2 { { intf /hw_discovery_0/s_axi_ctrl_pf0 offset 0xF0DD0000 xrt_endpoint_name hwd_00 reg_abs { <a class="reference external" href="http://xilinx.com/">xilinx.com</a>:ip:hw_discovery:1.0 } } \</p>
+<p>{intf /mailbox_mgmt_00_0/s_axi offset 0x123456789A xrt_endpoint_name ep_mailbox_mgmt_00 reg_abs { <a class="reference external" href="http://xilinx.com/">xilinx.com</a>:ip:mailbox_mgmt:8.9 } } \</p>
+<p>{intf /rpu_sq_pi_0/s_axi offset 0x23456789AB xrt_endpoint_name ep_xgq_mgmt_to_rpu_sq_pi_00 reg_abs { <a class="reference external" href="http://xilinx.com/">xilinx.com</a>:ip:rpu_sq_pi:8.9 } } } } \</p>
+<p>1 { 3 { { intf /hw_discovery_0/s_axi_ctrl_pf1 offset 0xF1DD0000 xrt_endpoint_name hwd_00 reg_abs { <a class="reference external" href="http://xilinx.com/">xilinx.com</a>:ip:hw_discovery:1.0 } } \</p>
+<p>{intf /mailbox_user_0/s_axi offset 0xFEDCBA9876 xrt_endpoint_name ep_mailbox_user_00 reg_abs { <a class="reference external" href="http://xilinx.com/">xilinx.com</a>:ip:mailbox_user:8.9 } } } } } \</p>
+<p>pcie_mapping_for { /hw_discovery_0/s_axi_ctrl_pf0 { { physical_function 0 bar 2 } } /hw_discovery_0/s_axi_ctrl_pf1 { { physical_function 1 bar 3 } } }</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>NOTE: If there are any format or object-name errors in C_INJECT_ENDPOINTS or any C_PFx_ENDPOINT_NAMES parameter values, the most common symptom is the error “ERROR: [BD 41-1273] Error running pre_propagate TCL procedure: missing value to go with
+key.”</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="table-formats">
+<span id="hardwarediscoveryipv1-0productguide-tableformats"></span><h3>Table Formats<a class="headerlink" href="#table-formats" title="Permalink to this headline">¶</a></h3>
+<section id="vsec-tables">
+<span id="hardwarediscoveryipv1-0productguide-vsectables"></span><h4>VSEC Tables<a class="headerlink" href="#vsec-tables" title="Permalink to this headline">¶</a></h4>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p><a class="confluence-embedded-image reference internal" href="_images/1118385369.png"><img alt="image3" class="confluence-embedded-image" src="_images/1118385369.png" style="height: 202px;" /></a></p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>The structure of the User ALF VSEC is outlined in the diagram below.</p>
+<p><strong>Note:</strong> The BAR Layout Table start address pointer within the ALF VSEC is 16-byte granular.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p><a class="confluence-embedded-image reference internal" href="_images/1118385373.png"><img alt="image4" class="confluence-embedded-image" src="_images/1118385373.png" style="height: 202px;" /></a></p>
+</section>
+<section id="management-bar-layout-table">
+<span id="hardwarediscoveryipv1-0productguide-managementbarlayouttable"></span><h4>Management BAR Layout Table<a class="headerlink" href="#management-bar-layout-table" title="Permalink to this headline">¶</a></h4>
+<p>The structure of the Management BAR Layout Table is outlined in the diagram below. The ordering of entries within the BAR Layout Table are illustrative only and may not match the hardware implementation, software should traverse the table and compare
+the Type ID for the entry of interest.</p>
+<p>Note: The endpoint address offsets within the BAR Layout Table are byte granular.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p><a class="confluence-embedded-image reference internal" href="_images/1118385399.png"><img alt="image5" class="confluence-embedded-image" src="_images/1118385399.png" style="width: 1000px;" /></a></p>
+</section>
+<section id="user-bar-layout-table">
+<span id="hardwarediscoveryipv1-0productguide-userbarlayouttable"></span><h4>User BAR Layout Table<a class="headerlink" href="#user-bar-layout-table" title="Permalink to this headline">¶</a></h4>
+<p>The structure of the User BAR Layout Table is outlined in the diagram below. The ordering of entries within the BAR Layout Table are illustrative only and may not match the hardware implementation, software should traverse the table and compare the
+Type ID for the entry of interest.</p>
+<p>Note: The endpoint address offsets within the BAR Layout Table are byte granular.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p><a class="confluence-embedded-image reference internal" href="_images/1118385364.png"><img alt="image6" class="confluence-embedded-image" src="_images/1118385364.png" style="width: 1000px;" /></a></p>
+</section>
+</section>
+</section>
+<section id="customizing-and-generating-the-ip">
+<span id="hardwarediscoveryipv1-0productguide-customizingandgeneratingtheip"></span><h2>Customizing and Generating the IP<a class="headerlink" href="#customizing-and-generating-the-ip" title="Permalink to this headline">¶</a></h2>
+<p>This section includes information about using AMD tools to customize and generate the Hardware Discovery IP using the AMD Vivado™ Design Suite.</p>
+<p>If you are customizing and generating the IP in the Vivado IP integrator, see the <em>Vivado Design Suite User Guide: Designing IP Subsystems using IP Integrator</em>(<a class="reference external" href="https://docs.xilinx.com/r/en-US/ug994-vivado-ip-subsystems/Getting-Started-with-Vivado-IP-Integrator">UG994</a>) for detailed information.</p>
+<section id="importing-the-ip-repository">
+<span id="hardwarediscoveryipv1-0productguide-importingtheiprepository"></span><h3>Importing the IP Repository<a class="headerlink" href="#importing-the-ip-repository" title="Permalink to this headline">¶</a></h3>
+<p>The Hardware Discovery IP is delivered as a standalone IP repository that can be imported for use within Vivado Design Suite. Refer to the <em>Vivado Design Suite User Guide: Designing with IP</em>(<a class="reference external" href="https://docs.xilinx.com/r/en-US/ug896-vivado-ip/Managing-IP-Repositories">UG896</a>) for detailed information on adding an external IP repository to a project.</p>
+</section>
+<section id="customizing-the-ip">
+<span id="hardwarediscoveryipv1-0productguide-customizingtheip"></span><h3>Customizing the IP<a class="headerlink" href="#customizing-the-ip" title="Permalink to this headline">¶</a></h3>
+<p>You can customize the IP for use in your design by specifying values for the various user parameters associated with the IP using the following steps:</p>
+<ol class="arabic simple">
+<li><p>Select the IP from the IP catalog.</p></li>
+<li><p>Double-click the selected IP or select the Customize IP command from the toolbar or right-click menu.</p></li>
+</ol>
+<section id="component-name">
+<span id="hardwarediscoveryipv1-0productguide-componentname"></span><h4>Component Name<a class="headerlink" href="#component-name" title="Permalink to this headline">¶</a></h4>
+<p>The Component name is used as the name of the top-level wrapper file for the core. The underlying netlist still retains its original name. Names must begin with a letter and must be composed from the following characters: a through z, 0 through 9,
+and “_”. The default is hw_discovery_0.</p>
+</section>
+</section>
+<section id="output-generation">
+<span id="hardwarediscoveryipv1-0productguide-outputgeneration"></span><h3>Output Generation<a class="headerlink" href="#output-generation" title="Permalink to this headline">¶</a></h3>
+<p>For detailed information on generating IP output products, please refer to the <em>Vivado Design Suite User Guide: Designing with IP</em> (<a class="reference external" href="https://docs.xilinx.com/r/en-US/ug896-vivado-ip/IP-Centric-Design-Flow">UG896</a>).</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+<section id="parameters">
+<span id="hardwarediscoveryipv1-0productguide-parameters"></span><h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p>` &lt;/plugins/servlet/confluence/editinword/1111914092/attachments/ipTables.xlsx&gt;`__</p>
+<p><a class="reference external" href="/plugins/servlet/confluence/editinword/1111914092/attachments/ipTables.xlsx">Edit Document</a></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>User Parameter</p></td>
+<td><p>Model Parameter</p></td>
+<td><p>Model Param Format / Range</p></td>
+<td><p>Default</p></td>
+<td><p>Populated</p></td>
+<td><p>Display Name</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>C_MANUAL</p></td>
+<td><p>n/a</p></td>
+<td><p>integer = {0,1}</p></td>
+<td><p>1</p></td>
+<td><p>Explicit</p></td>
+<td><p>Manually Configure</p></td>
+<td><p>0 = Populate all endpoint data (indicated as Populated=Auto) automatically, either from system API calls or from endpoint injection parameter (C_INJECT_ENDPOINTS); 1 = Set all endpoint data manually.</p></td>
+</tr>
+<tr class="row-odd"><td><p>C_NUM_PFS</p></td>
+<td><p>C_NUM_PFS</p></td>
+<td><p>integer = {1..4}</p></td>
+<td><p>1</p></td>
+<td><p>Explicit</p></td>
+<td><p>Number of PFs</p></td>
+<td><p>Configure number of Physical Functions.</p></td>
+</tr>
+<tr class="row-even"><td><p>C_CAP_BASE_ADDR</p></td>
+<td><p>C_CAP_BASE_ADDR</p></td>
+<td><p>bitString(12)</p></td>
+<td><p>0x000</p></td>
+<td><p>Explicit</p></td>
+<td><p>PCIe Extended Capability Base Address</p></td>
+<td><p>Base address to access VSECs VSECs local to this IP are accessed when s_pcie4_cfg_ext_register_number points to a location within the range C_CAP_BASE_ADDR/4 to C_CAP_BASE_ADDR/4+3.</p></td>
+</tr>
+<tr class="row-odd"><td><p>C_NEXT_CAP_ADDR</p></td>
+<td><p>C_NEXT_CAP_ADDR</p></td>
+<td><p>bitString(12)</p></td>
+<td><p>0x000</p></td>
+<td><p>Explicit</p></td>
+<td><p>Next Capability Pointer</p></td>
+<td><dl class="simple">
+<dt>Next capability offset. Set to 0x000 if this is the last capability. For next capability valid values would be from (C_CAP_BASE_ADDR + 0x010) to 0xFFF VSECs residing in a device connected to the m_pcie4_cfg_ext interface are accessed when</dt><dd><p>s_pcie4_cfg_ext_register_number points to a location &gt;= C_NEXT_CAP_ADDR, provided C_NEXT_CAP_ADDR is non-zero.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="row-even"><td><p>C_INJECT_ENDPOINTS</p></td>
+<td><p>n/a</p></td>
+<td><p>String (tcl dictionary, see below)</p></td>
+<td><p>(null)</p></td>
+<td><p>Explicit</p></td>
+<td><p>Inject Endpoint Info for Test</p></td>
+<td><dl class="simple">
+<dt>When non-null, and when C_MANUAL=0, override endpoint metadata propagation with complete sets of values normally returned by system API calls. Useful for stand-alone IP test and system debug when API results are missing or unexpected. When</dt><dd><p>null (default), normal propagation occurs.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Parameters Per PF Instance (C_NUM_PFS), where 0&lt;=x&lt;=3</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>C_PFx_NUM_SLOTS_BAR_LAYOUT_TABLE</p></td>
+<td><p>C_PF0_NUM_SLOTS_BAR_LAYOUT_TABLE</p></td>
+<td><p>integer = {1..14}</p></td>
+<td><p>1</p></td>
+<td><p>Auto</p></td>
+<td><p>Number of Bar Layout Table Entries for PFx</p></td>
+<td><dl class="simple">
+<dt>Configure number of bars in the PFx bar layout table. When C_MANUAL=0, this value is automatically set to the number of expected endpoints (as listed in C_PFx_ENDPOINT_NAMES) actually discovered while scanning the system metadata (or</dt><dd><p>specified in C_INJECT_ENDPOINTS).</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="row-odd"><td><p>C_PFx_BAR_INDEX</p></td>
+<td><p>C_PFx_BAR_INDEX</p></td>
+<td><p>integer = {0..6}</p></td>
+<td><p>0</p></td>
+<td><p>Auto</p></td>
+<td><p>PFx BAR Index</p></td>
+<td><p>PFx BAR Index</p></td>
+</tr>
+<tr class="row-even"><td><p>C_PFx_LOW_OFFSET</p></td>
+<td><p>C_PFx_LOW_OFFSET</p></td>
+<td><p>bitString(28)</p></td>
+<td><p>0x0000_000</p></td>
+<td><p>Auto</p></td>
+<td><p>PFx BAR Layout Table Low Address Offset</p></td>
+<td><p>PFx BAR layout table offset - lower bits (31:4)</p></td>
+</tr>
+<tr class="row-odd"><td><p>C_PFx_HIGH_OFFSET</p></td>
+<td><p>C_PFx_HIGH_OFFSET</p></td>
+<td><p>bitString(32)</p></td>
+<td><p>0x0000_0000</p></td>
+<td><p>Auto</p></td>
+<td><p>PFx BAR Layout Table High Address Offset</p></td>
+<td><p>PFx BAR layout table offset - higher bits (64:32)</p></td>
+</tr>
+<tr class="row-even"><td><p>C_PFx_ENDPOINT_NAMES</p></td>
+<td><p>n/a</p></td>
+<td><p>String (tcl dictionary, see below)</p></td>
+<td><p>(null)</p></td>
+<td><p>Explicit</p></td>
+<td><p>PFx List of Endpoint Names</p></td>
+<td><dl class="simple">
+<dt>TCL dictionary enumerating expected endpoint names, with associated type and reserve values, for populating fields of BAR Layout Table. This value is used only when C_MANUAL=0. Any discovered endpoints that are not listed in</dt><dd><p>C_PFx_ENDPOINT_NAMES are ignored and no table entry created.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Parameters Per BAR Layout Entry (C_PFx_NUM_SLOTS_BAR_LAYOUT_TABLE), where 0&lt;=n&lt;=13</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>C_PFx_ENTRY_TYPE_n</p></td>
+<td><p>C_PFx_ENTRY_TYPE_n</p></td>
+<td><p>bitString(8)</p></td>
+<td><p>0x00</p></td>
+<td><p>Auto</p></td>
+<td><p>PFx Table Entry n Type</p></td>
+<td><p>The Type field identifies what entry type can be found at the offset specified. Below is an example of the endpoint types used on PF0 in the Alveo Versal Example Design: 0x50 UUID0 ROM 0x54 GCQ 0x55 AXI NoC IP remapper 0x56-5F Reserved</p></td>
+</tr>
+<tr class="row-odd"><td><p>C_PFx_ENTRY_BAR_n</p></td>
+<td><p>C_PFx_ENTRY_BAR_n</p></td>
+<td><p>integer = {0..6}</p></td>
+<td><p>0</p></td>
+<td><p>Auto</p></td>
+<td><p>PFx Table Entry n BAR</p></td>
+<td><p>BAR number where the endpoint is located.</p></td>
+</tr>
+<tr class="row-even"><td><p>C_PFx_ENTRY_ADDR_n</p></td>
+<td><p>C_PFx_ENTRY_ADDR_n</p></td>
+<td><p>bitString(48)</p></td>
+<td><p>0x0000_0000_0000</p></td>
+<td><p>Auto</p></td>
+<td><p>PFx Table Entry n Address</p></td>
+<td><p>Endpoint address offset from the PCIe BAR identified in the BAR field.</p></td>
+</tr>
+<tr class="row-odd"><td><p>C_PFx_ENTRY_MAJOR_VERSION_n</p></td>
+<td><p>C_PFx_ENTRY_MAJOR_VERSION_n</p></td>
+<td><p>integer = {0..255}</p></td>
+<td><p>0</p></td>
+<td><p>Auto</p></td>
+<td><p>PFx Table Entry n Major Version</p></td>
+<td><p>Major version of the endpoint.</p></td>
+</tr>
+<tr class="row-even"><td><p>C_PFx_ENTRY_MINOR_VERSION_n</p></td>
+<td><p>C_PFx_ENTRY_MINOR_VERSION_n</p></td>
+<td><p>integer = {0..255}</p></td>
+<td><p>0</p></td>
+<td><p>Auto</p></td>
+<td><p>PFx Table Entry n Minor Version</p></td>
+<td><p>Minor version of the endpoint.</p></td>
+</tr>
+<tr class="row-odd"><td><p>C_PFx_ENTRY_VERSION_TYPE_n</p></td>
+<td><p>C_PFx_ENTRY_VERSION_TYPE_n</p></td>
+<td><p>bitString(8)</p></td>
+<td><p>0x00</p></td>
+<td><p>Auto</p></td>
+<td><p>PFx Table Entry n Version Type</p></td>
+<td><p>Indicates how the Major/Minor version fields should be interpreted. Currently defined values are: 0x0 - IP Catalog Version 0x1 - Register Abstraction Version</p></td>
+</tr>
+<tr class="row-even"><td><p>C_PFx_ENTRY_RSVD0_n</p></td>
+<td><p>C_PFx_ENTRY_RSVD0_n</p></td>
+<td><p>bitString(4)</p></td>
+<td><p>0x0</p></td>
+<td><p>Auto</p></td>
+<td><p>PFx Table Entry n Reserved Field 0</p></td>
+<td><p>Reserved - Note: Some entry types define additional fields in these bits, see sections below.</p></td>
+</tr>
+<tr class="row-odd"><td><p>AXI interface configuration per PF Instance (C_NUM_PFS)</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>C_PFx_S_AXI_ADDR_WIDTH</p></td>
+<td><p>C_PFx_S_AXI_ADDR_WIDTH</p></td>
+<td><p>integer={1..64}</p></td>
+<td><p>32</p></td>
+<td><p>Explicit</p></td>
+<td><p>PFx AXI Interface Address Width</p></td>
+<td><p>Width of {s,m}_axi_{r,w}addr</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="simulation">
+<span id="hardwarediscoveryipv1-0productguide-simulation"></span><h2>Simulation<a class="headerlink" href="#simulation" title="Permalink to this headline">¶</a></h2>
+<p>For comprehensive information about Vivado simulation components, as well as information about using supported third-party tools, see the Vivado Design Suite User Guide: Logic Simulation(<a class="reference external" href="https://docs.xilinx.com/r/en-US/ug900-vivado-logic-simulation/Overview">UG900</a>).</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="synthesis-and-implementation">
+<span id="hardwarediscoveryipv1-0productguide-synthesisandimplementation"></span><h2>Synthesis and Implementation<a class="headerlink" href="#synthesis-and-implementation" title="Permalink to this headline">¶</a></h2>
+<p>For details about synthesis and implementation, see the Vivado Design Suite User Guide: Designing with IP (<a class="reference external" href="https://docs.xilinx.com/r/en-US/ug896-vivado-ip/IP-Centric-Design-Flow">UG896</a>).</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="driver">
+<span id="hardwarediscoveryipv1-0productguide-driver"></span><h2>Driver<a class="headerlink" href="#driver" title="Permalink to this headline">¶</a></h2>
+<p>Please refer to <a class="reference external" href="AMI+Architecture.html">AMI Architecture</a> for details on the software driver and interactions with the Hardware Discovery IP.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="example-design">
+<span id="hardwarediscoveryipv1-0productguide-exampledesign"></span><h2>Example Design<a class="headerlink" href="#example-design" title="Permalink to this headline">¶</a></h2>
+<p>The hw_discovery IP supports example-design generation. The exdes is generated as an IPI BD with the DUT configured to match the original instance configuration. The exdes also connects AXI VIPs to all enabled s_axi_ctrl_pf* ports. An accompanying
+testbench drives the VIPs to interrogate all populated slots of all BAR layout tables and match the read values against the original config.</p>
+<p>The original IP can be configured:</p>
+<ul class="simple">
+<li><p>in a Vivado IPI BD (stand-alone): the default instance name is “hw_discovery_0”.</p></li>
+<li><p>in a platform, where the BD script (partition.tcl) defines the instance name.</p></li>
+</ul>
+<p>If the IP is configured for automatic metadata propagation (C_MANUAL=0), then C_INJECT_ENDPOINTS and all enabled C_PFn_ENDPOINT_NAMES parameters must be specified. That is because the DUT in the exdes is simulated stand-alone; there is no
+system-level metadata to be propagated.</p>
+<p>IMPORTANT: If the IP is configured for automatic, then the instance name of the DUT in the generated example design must match that of the original instance from which it was generated. That is because the interface names in C_INJECT_ENDPOINTS
+contain the instance name. Generating the exdes in an empty target location generally avoids any mismatch.</p>
+<p>If the IP is generated in a platform and endpoint metadata was automatically propagated from the system, you can avoid concocting a C_INJECT_ENDPOINTS string by just switching the IP to manual (C_MANUAL=1) before generating the example design.</p>
+<p>When generating the exdes in Vivado, just select the hw_discovery instance and run open_example_project. Once the exdes project opens, it is ready to run behavioral simulation (launch_simulation; run all).</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Page Revision: v. 31</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+				  
+				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html" class="btn btn-neutral float-left" title="Generic Command Queue IP v2.0 - Product Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="SMBus%2BIP%2Bv1.1%2B-%2BProduct%2BGuide.html" class="btn btn-neutral float-right" title="SMBus IP v1.1 - Product Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Advanced Micro Devices Inc.</p>
+  </div>
+
+
+
+										<div class="aem-Grid aem-Grid--16">
+											<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+												<div class="container-fluid sub-footer">
+
+													                    <div class="row">
+                        <div class="col-xs-24">
+                          <p><a target="_blank" href="https://www.amd.com/en/corporate/copyright">Terms and Conditions</a> | <a target="_blank" href="https://www.amd.com/en/corporate/privacy">Privacy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/cookies">Cookie Policy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/trademarks">Trademarks</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf">Statement on Forced Labor</a> | <a target="_blank" href="https://www.amd.com/en/corporate/competition">Fair and Open Competition</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf">UK Tax Strategy</a> | <a target="_blank" href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA">Inclusive Terminology</a> | <a href="#cookiessettings" class="ot-sdk-show-settings">Cookies Settings</a></p>
+                        </div>
+                    </div>
+												</div>
+											</div>
+										</div>
+										
+</br>
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

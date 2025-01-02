@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script charset="UTF-8" data-document-language="true" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script class="optanon-category-C0002" type="text/plain">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+<title>How-to Rebuild an AVED Design for Yourself — AVED  documentation</title>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="_static/xbtest.css" rel="stylesheet" type="text/css"/>
+<link href="_static/_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="https://docs.xilinx.com/favicon.ico" rel="shortcut icon"/>
+<!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/js/theme.js"></script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="AVED%2B-%2BBoard%2BManagement%2BSolution.html" rel="next" title="AVED - Board Management Solution"/>
+<link href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html" rel="prev" title="How-to install and run a pre-built AVED design on an ALVEO card"/>
+<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager -->
+<noscript><iframe class="optanon-category-C0002" height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager -->
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="index.html"> AVED
+            <img alt="Logo" class="logo" src="_static/xilinx-header-logo.svg"/>
+</a>
+<div role="search">
+<form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" type="text"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+</div>
+</div><div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How-to Rebuild an AVED Design for Yourself</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#before-you-begin">Before You Begin</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#build-dependencies">Build Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-test-dependencies">Hardware Test Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-python-from-python-org">Install Python from python.org</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#download-the-source-code">Download the Source Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-smbus-ip">Get SMBus IP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#build-the-design">Build the Design</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hardware">Hardware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#software">Software</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#review-the-generated-output">Review the Generated Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#programming-and-testing-the-design">Programming and Testing the Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BHierarchy%2BOverview.html">AVED V80 - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BCIPS%2BConfiguration.html">AVED V80 - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BResources.html">AVED V80 - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BMap.html">AVED V80 - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BNoC%2BConfiguration.html">AVED V80 - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BBase%2BLogic.html">AVED V80 - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BClock%2BReset%2BModule.html">AVED V80 - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BSource%2BFile%2BOverview.html">AVED V80 - Source File Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SMBus%2BIP%2Bv1.1%2B-%2BProduct%2BGuide.html">SMBus IP v1.1 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BASDM%2BApplication.html">AVED ASDM Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOutOfBand%2BTelemetry%2BApplication.html">AVED OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Board%2BManagement%2BController%2B%28BMC%29%2BProxy%2BDriver.html">Board Management Controller (BMC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BQDMA.html">AVED QDMA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift"><nav aria-label="Mobile navigation menu" class="wy-nav-top" style="background: black">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="index.html">AVED</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="Page navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a class="icon icon-home" href="index.html"></a> »</li>
+<li>How-to Rebuild an AVED Design for Yourself</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<section id="how-to-rebuild-an-aved-design-for-yourself">
+<h1>How-to Rebuild an AVED Design for Yourself<a class="headerlink" href="#how-to-rebuild-an-aved-design-for-yourself" title="Permalink to this headline">¶</a></h1>
+<p>This is a getting-started guide for the AMD Alveo Versal™ Example Design (AVED) to be used with the provided AVED source code on GitHub. The source code comprises a hardware design, firmware library, and a host operating system driver and utility
+application. This guide details downloading the appropriate source code for your card and rebuilding the complete design. After running through these steps, you will have created a PDI that can be installed on your system.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<section id="before-you-begin">
+<span id="howtorebuildanaveddesignforyourself-beforeyoubegin"></span><h2>Before You Begin<a class="headerlink" href="#before-you-begin" title="Permalink to this headline">¶</a></h2>
+<section id="build-dependencies">
+<span id="howtorebuildanaveddesignforyourself-builddependencies"></span><h3>Build Dependencies<a class="headerlink" href="#build-dependencies" title="Permalink to this headline">¶</a></h3>
+<p>IP</p>
+<ul class="simple">
+<li><p>Download SMBus IP from <a class="reference external" href="https://www.xilinx.com/member/v80.html">https://www.xilinx.com/member/v80.html</a></p></li>
+</ul>
+<p>Tools</p>
+<ul class="simple">
+<li><p>Use the AMD Vivado™ version associated with the AVED release</p></li>
+<li><p>Python 3.6.8 or later.</p></li>
+<li><p>Cmake 3.5.0 or later.</p></li>
+</ul>
+<p>System Memory Requirements</p>
+<ul class="simple">
+<li><p>64GB</p></li>
+</ul>
+</section>
+<section id="hardware-test-dependencies">
+<span id="howtorebuildanaveddesignforyourself-hardwaretestdependencies"></span><h3>Hardware Test Dependencies<a class="headerlink" href="#hardware-test-dependencies" title="Permalink to this headline">¶</a></h3>
+<p>The Example Design has been tested with the operating systems in the following table. AVED may work with other versions of these operating systems, but they have not been tested. All supported operating systems are tested with general access versions
+(GA). <a class="reference external" href="https://wiki.ubuntu.com/Kernel/LTSEnablementStack">Ubuntu Hardware Enablement</a> (HWE) is not supported. By default, HWE is disabled by Ubuntu Server versions and enabled by desktop versions.</p>
+<table class="wrapped confluenceTable"><colgroup><col/><col/><col/><col/></colgroup><thead><tr><th class="confluenceTh" style="text-align: left;"><p>Operating System</p></th><th class="confluenceTh" style="text-align: left;"><p>Architecture</p></th><th class="confluenceTh" style="text-align: left;"><p>Supported Versions</p></th><th class="confluenceTh" style="text-align: left;"><p>Kernel-Version</p></th></tr></thead><tbody><tr><td class="confluenceTd" style="text-align: left;">Ubuntu</td><td class="confluenceTd" style="text-align: left;">x86_64</td><td class="confluenceTd" style="text-align: left;">22.04</td><td class="confluenceTd" style="text-align: left;">5.4.0<br/>5.15.0</td></tr><tr><td class="confluenceTd" style="text-align: left;">RHEL</td><td class="confluenceTd" style="text-align: left;">x86_64</td><td class="confluenceTd" style="text-align: left;">8.3</td><td class="confluenceTd" style="text-align: left;">4.18.0</td></tr></tbody></table>
+<p><em>Note</em>: root/sudo permissions are required.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+<section id="install-python-from-python-org">
+<span id="howtorebuildanaveddesignforyourself-installpythonfrompython-org"></span><h3>Install Python from python.org<a class="headerlink" href="#install-python-from-python-org" title="Permalink to this headline">¶</a></h3>
+<p>To install Python, navigate to: <a class="reference external" href="https://www.python.org/downloads/">https://www.python.org/downloads/</a>. Locate and install the latest Python 3.6.8 or newer for your operating system.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</section>
+<section id="download-the-source-code">
+<span id="howtorebuildanaveddesignforyourself-downloadthesourcecode"></span><h2>Download the Source Code<a class="headerlink" href="#download-the-source-code" title="Permalink to this headline">¶</a></h2>
+<p>Get the latest AVED installation package for your Alveo card.</p>
+<ol class="arabic simple">
+<li><p>Refer to the <a class="reference external" href="AVED+Release+Information.html">AVED release table</a> to find the latest example design version. The <em>AVED Git Release Tag</em> will direct you to the tagged source code in GitHub. The <em>AVED Deployment Archive</em> is a zipped
+AVED installation package; it is pre-built from the tagged source code using the Vivado tool version noted in the table.</p></li>
+<li><p>Clone the latest tagged AVED source code repository that applies to your Alveo card. Confirm that you cloned the repository to a development server with sufficient system memory to build AVED, either locally on the server or remotely through LSF.</p></li>
+<li><p>Make a note of the listed Vivado tool version used to build this source code, as AVED has been verified to build with this tool version. You will use the same Vivado version to build AVED.</p></li>
+</ol>
+<p>In this example, we will clone the AVED repo with the tag “amd_v80_gen5x8_24.1_20240926” (which has been verified with Vivado 2024.1) and we will build the AVED design for the V80 card. The high-level directory structure will look similar to the
+following:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span>AVED
+├── deploy
+│   └── scripts
+├── fw
+│   └── AMC
+├── hw
+│   ├── amd_v80_gen5x8_24.1
+│   └── hw_version.json
+└── sw
+    └── AMI
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+<section id="get-smbus-ip">
+<span id="howtorebuildanaveddesignforyourself-getsmbusip"></span><h2>Get SMBus IP<a class="headerlink" href="#get-smbus-ip" title="Permalink to this headline">¶</a></h2>
+<p>Download SMBus IP from <a class="reference external" href="https://www.xilinx.com/member/v80.html">https://www.xilinx.com/member/v80.html</a>. Copy the IP into the AVED hardware design as noted by an asterisk in the directory tree below. This step is required before building the design.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span>AVED
+└── hw
+    └── amd_v80_gen5x8_24.1
+        └── src
+            └── iprepo
+                ├── cmd_queue_v2_0
+                ├── hw_discovery_v1_0
+                ├── shell_utils_uuid_rom_v2_0
+                └── smbus_v1_1*
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+<section id="build-the-design">
+<span id="howtorebuildanaveddesignforyourself-buildthedesign"></span><h2>Build the Design<a class="headerlink" href="#build-the-design" title="Permalink to this headline">¶</a></h2>
+<section id="hardware">
+<span id="howtorebuildanaveddesignforyourself-hardware"></span><h3>Hardware<a class="headerlink" href="#hardware" title="Permalink to this headline">¶</a></h3>
+<p>The following steps will guide you through setting up your Vivado environment and building an AVED V80 PDI from the cloned source code.</p>
+<ol class="arabic">
+<li><p>Set up the desired version of Vivado in your environment by sourcing the <code class="docutils literal notranslate"><span class="pre">settings64.(c)sh</span></code> script from your Vivado install directory.</p>
+<ul>
+<li><div class="highlight-java notranslate"><div class="highlight"><pre><span></span># for csh
+$ source settings64.csh
+
+# for bash
+$ source settings64.sh
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>Navigate to the hardware directory for the V80 board. Run the <code class="docutils literal notranslate"><span class="pre">build_all.sh</span></code> script to build the AVED hardware and AMC firmware.</p></li>
+</ol>
+<ul class="simple">
+<li><ul>
+<li><p>For more information on the build script, refer to <a class="reference external" href="AVED+Build+Scripts.html">AVED Build Scripts</a>.</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span># To build V80 hardware and firmware
+$ cd &lt;aved&gt;/hw/amd_v80_gen5x8_24.1
+$ ./build_all.sh
+</pre></div>
+</div>
+<ul class="simple">
+<li><ul>
+<li><p>To confirm that the build completed successfully, review the generated output and verify that the required output files from each build step are present as indicated in the next section.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="software">
+<span id="howtorebuildanaveddesignforyourself-software"></span><h3>Software<a class="headerlink" href="#software" title="Permalink to this headline">¶</a></h3>
+<p>The following steps will guide you through building the AMI software from the cloned source code.</p>
+<ol class="arabic simple">
+<li><p>On your development server, navigate to the AMI directory in &lt;AVED cloned repo&gt;/sw/AMI/.</p></li>
+<li><p>Run scripts/gen_package.py, which will build the software and package it. After successfully building, the software package will be in &lt;AVED&gt;/sw/AMI/output/&lt;timestamp&gt;. Copy this to your deployment server.</p></li>
+<li><p>On your deployment server, install the AMI package..</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span># development server
+$ cd &lt;AVED&gt;/sw/AMI
+$ python3 scripts/gen_package.py
+
+# deployment server
+$ sudo apt install &lt;path/to/ami_xxx.deb&gt;
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</section>
+<section id="review-the-generated-output">
+<span id="howtorebuildanaveddesignforyourself-reviewthegeneratedoutput"></span><h2>Review the Generated Output<a class="headerlink" href="#review-the-generated-output" title="Permalink to this headline">¶</a></h2>
+<p>By default, the <code class="docutils literal notranslate"><span class="pre">build_all.sh</span></code> script creates a build directory within the AVED hardware design directory (e.g. &lt;AVED&gt;/hw/amd_v80_gen5x8_24.1/build/). This output directory is where the hardware build takes place. After the script successfully
+completes, review your output directory to confirm it looks like the following.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span>&lt;AVED&gt;/hw/amd_v80_gen5x8_24.1/
+├── amd_v80_gen5x8_24.1.pdi*
+├── build/
+│   ├── amc.elf*
+│   ├── amd_v80_gen5x8_24.1_nofpt.pdi*
+│   ├── amd_v80_gen5x8_24.1.xsa*
+│   ├── bd_gen/
+│   ├── fpt.bin
+│   ├── prj.cache/
+│   ├── prj.gen/
+│   ├── prj.hw/
+│   ├── prj.ip_user_files
+│   ├── prj.runs/
+│   ├── prj.srcs/
+│   ├── prj.xpr
+│   └── vivado.log
+├── build_all.sh
+├── fpt/
+├── scripts/
+└── src/
+
+Important Note: Generated files followed by a '*' are required files created by each step in the build flow, which can be used as an indication that the build has completed successfully. Verify that these files exist after building the design.
+</pre></div>
+</div>
+<p>The build directory contains the Vivado project. You should open this project (with the following command) to explore the Vivado Block Design for this build.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">$</span> <span class="n">vivado</span> <span class="o">&lt;</span><span class="n">AVED</span><span class="o">&gt;/</span><span class="n">hw</span><span class="o">/</span><span class="n">amd_v80_gen5x8_24</span><span class="mf">.1</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">prj</span><span class="p">.</span><span class="na">xpr</span> <span class="o">&amp;</span>
+</pre></div>
+</div>
+<p>After the Vivado IDE launches with the specified project, find IP INTEGRATOR in the Flow Navigator pane, and click on “Open Block Design”.</p>
+<p><a class="confluence-embedded-image reference internal" href="_images/1118349556.png"><img alt="image1" class="confluence-embedded-image" src="_images/1118349556.png" style="width: 1200px;"/></a></p>
+<p>Cross reference this Vivado design with the AVED Hardware Design documentation to get a better understanding of the the AVED design.</p>
+<p>Next, we will explore using the generated design PDI, <em>&lt;aved&gt;/hw/amd_v80_gen5x8_24.1/build/</em>amd_v80_gen5x8_24.1_nofpt.pdi, to gain familiarity with the process of updating the flash using the AMI cfgmem commands.</p>
+</section>
+<section id="programming-and-testing-the-design">
+<span id="howtorebuildanaveddesignforyourself-programmingandtestingthedesign"></span><h2>Programming and Testing the Design<a class="headerlink" href="#programming-and-testing-the-design" title="Permalink to this headline">¶</a></h2>
+<p>In this section, you will use the AMI cfgmem_program command to program your new design PDI to flash. As a prerequisite, review <a class="reference external" href="AVED+-+Device+Programming.html">AVED - Device Programming</a> and complete the steps on <a class="reference external" href="How-to+install+and+run+a+pre-built+AVED+design+on+an+ALVEO+card.html">How-to install and run a
+pre-built AVED design on an ALVEO card</a> to verify your deployment server and Alveo card are properly set up, and note the card BDF which you will use to program the PDI.</p>
+<p>To program the PDI to flash, your deployment server will need access to the new design PDI. You will use the AMI cfgmem_program command, specifying the card BDF, path to the design PDI, and which flash partition to program. In this example, the BDF
+is c1:00.0 and the PDI will be programmed to flash partition 0. Successful programming is indicated by the message “<code class="docutils literal notranslate"><span class="pre">OK.</span> <span class="pre">Image</span> <span class="pre">has</span> <span class="pre">been</span> <span class="pre">programmed</span> <span class="pre">successfully.</span></code>” A hot reset is automatically performed to boot the updated design in partition 0. The
+incoming UUID may be reported as “N/A” if no UUID metadata is provided with the PDI. This is normal behavior and does not affect the programming.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span># usage: sudo ami_tool cfgmem_program -d &lt;bdf&gt; -t &lt;type&gt; -i &lt;pdi path&gt; -p &lt;flash partition number&gt;
+
+$ sudo ami_tool cfgmem_program -d c1:00.0 -t primary -i /home/builds/latest/amd_v80_gen5x8_24.1_nofpt.pdi -p 0
+
+----------------------------------------------
+Device | 21:00.0
+----------------------------------------------
+Current Configuration
+----------------------------------------------
+UUID   | 4b85bf2b90fbe3b9ed912f24e2c3ede6
+----------------------------------------------
+Incoming Configuration
+----------------------------------------------
+UUID      | 51074aa2b75b033b2ec36570094bff92
+Path      | /home/builds/latest/amd_v80_gen5x8_24.1_nofpt.pdi
+Partition | 0
+----------------------------------------------
+Are you sure you wish to proceed? [Y/n]: Y
+
+Updating base flash image...
+[####################################################################################################] 100% |
+Image programming complete.
+Will do a hot reset to boot into partition 0. This may take a minute...
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+<section id="next-steps">
+<span id="howtorebuildanaveddesignforyourself-nextsteps"></span><h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<p>This getting started guide outlined the steps to download the AVED source code, build the AVED V80, and program the PDI using AMI. If you would like to explore other available hardware test commands, see:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="AVED+Management+Interface+userguide+(ami_tool).html">AVED Management Interface userguide</a></p></li>
+</ul>
+<p>For a deeper dive into the AVED hardware architecture, read the <a class="reference external" href="Hardware+Design+-+V80.html">Hardware Design</a> chapter and refer to <a class="reference external" href="AVED+V80+-+Source+File+Overview.html">AVED V80 - Source File Overview</a>.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>Page Revision: v. 60</p>
+</section>
+</section>
+</div>
+</div>
+<footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+<a accesskey="p" class="btn btn-neutral float-left" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html" rel="prev" title="How-to install and run a pre-built AVED design on an ALVEO card"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+<a accesskey="n" class="btn btn-neutral float-right" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html" rel="next" title="AVED - Board Management Solution">Next <span aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<p>© Copyright 2023, Advanced Micro Devices Inc.</p>
+</div>
+<div class="aem-Grid aem-Grid--16">
+<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+<div class="container-fluid sub-footer">
+<div class="row">
+<div class="col-xs-24">
+<p><a href="https://www.amd.com/en/corporate/copyright" target="_blank">Terms and Conditions</a> | <a href="https://www.amd.com/en/corporate/privacy" target="_blank">Privacy</a> | <a href="https://www.amd.com/en/corporate/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.amd.com/en/corporate/trademarks" target="_blank">Trademarks</a> | <a href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf" target="_blank">Statement on Forced Labor</a> | <a href="https://www.amd.com/en/corporate/competition" target="_blank">Fair and Open Competition</a> | <a href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf" target="_blank">UK Tax Strategy</a> | <a href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA" target="_blank">Inclusive Terminology</a> | <a class="ot-sdk-show-settings" href="#cookiessettings">Cookies Settings</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+</div>
+</div>
+</section>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+</body>
+</html>

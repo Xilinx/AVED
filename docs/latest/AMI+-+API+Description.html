@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script charset="UTF-8" data-document-language="true" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script class="optanon-category-C0002" type="text/plain">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+<title>AMI - API Description — AVED  documentation</title>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="_static/xbtest.css" rel="stylesheet" type="text/css"/>
+<link href="_static/_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="https://docs.xilinx.com/favicon.ico" rel="shortcut icon"/>
+<!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/js/theme.js"></script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="AMI%2B-%2BHot%2BReset.html" rel="next" title="AMI - Hot Reset"/>
+<link href="AMI%2B-%2BKernel%2BDriver%2BInteraction.html" rel="prev" title="AMI - Kernel Driver Interaction"/>
+<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager -->
+<noscript><iframe class="optanon-category-C0002" height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager -->
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="index.html"> AVED
+            <img alt="Logo" class="logo" src="_static/xilinx-header-logo.svg"/>
+</a>
+<div role="search">
+<form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" type="text"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+</div>
+</div><div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BHierarchy%2BOverview.html">AVED V80 - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BCIPS%2BConfiguration.html">AVED V80 - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BResources.html">AVED V80 - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BMap.html">AVED V80 - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BNoC%2BConfiguration.html">AVED V80 - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BBase%2BLogic.html">AVED V80 - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BClock%2BReset%2BModule.html">AVED V80 - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BSource%2BFile%2BOverview.html">AVED V80 - Source File Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SMBus%2BIP%2Bv1.1%2B-%2BProduct%2BGuide.html">SMBus IP v1.1 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BASDM%2BApplication.html">AVED ASDM Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOutOfBand%2BTelemetry%2BApplication.html">AVED OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Board%2BManagement%2BController%2B%28BMC%29%2BProxy%2BDriver.html">Board Management Controller (BMC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="AMI%2BArchitecture.html">AMI Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Card%2BDetection%2C%2BSelection%2C%2Band%2BGeneral%2BOverview.html">Card Detection, Selection, and General Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors%2Band%2BHardware%2BMonitoring.html">Sensors and Hardware Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="User%2BInterface.html">User Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AMI%2B-%2BKernel%2BDriver%2BInteraction.html">AMI - Kernel Driver Interaction</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">AMI - API Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#public-api-return-codes">Public API Return Codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ami-device-functions">AMI Device Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#versioning-functions">Versioning Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#utility-functions">Utility Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#event-handling">Event Handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#program-functions">Program Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manufacturer-info-functions">Manufacturer Info Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#memory-access-functions">Memory Access Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#eeprom-read-write-functions">EEPROM Read/Write Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-read-write-functions">Module Read/Write Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sensor-functions">Sensor Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AMI%2B-%2BHot%2BReset.html">AMI - Hot Reset</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BQDMA.html">AVED QDMA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift"><nav aria-label="Mobile navigation menu" class="wy-nav-top" style="background: black">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="index.html">AVED</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="Page navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a class="icon icon-home" href="index.html"></a> »</li>
+<li><a href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a> »</li>
+<li>AMI - API Description</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<section id="ami-api-description">
+<h1>AMI - API Description<a class="headerlink" href="#ami-api-description" title="Permalink to this headline">¶</a></h1>
+<p>The following is a brief overview of the AMI API.</p>
+<section id="public-api-return-codes">
+<span id="amiapidescription-publicapireturncodes"></span><h2>Public API Return Codes<a class="headerlink" href="#public-api-return-codes" title="Permalink to this headline">¶</a></h2>
+<table class="relative-table wrapped confluenceTable" style="width: 41.7308%;"><colgroup><col style="width: 44.0458%;"/><col style="width: 55.9741%;"/></colgroup><tbody><tr><th class="confluenceTh"><span style="color: rgb(0,51,102);">Code</span></th><th class="confluenceTh"><span style="color: rgb(0,51,102);">Description</span></th></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">AMI_STATUS_OK</span></p></td><td class="confluenceTd"><span style="color: rgb(0,51,102);">Success</span></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">AMI_STATUS_ERROR</span></p></td><td class="confluenceTd"><span style="color: rgb(0,51,102);">Failure</span></td></tr></tbody></table>
+</section>
+<section id="ami-device-functions">
+<span id="amiapidescription-amidevicefunctions"></span><h2>AMI Device Functions<a class="headerlink" href="#ami-device-functions" title="Permalink to this headline">¶</a></h2>
+<p>The ami_device struct is defined as an opaque declaration (not exposed via API) and is used to represent a single PCI device instance.</p>
+<p>It is used in various API’s to identify which device the operation should be performed with.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Opaque declaration of `struct ami_device`. */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">ami_device</span><span class="w"> </span><span class="n">ami_device</span><span class="p">;</span><span class="w"></span>
+
+<span class="cm">/**</span>
+<span class="cm">* struct amc_version - structure to hold AMC version information</span>
+<span class="cm">* @major: Major software version</span>
+<span class="cm">* @minor: Minor software version</span>
+<span class="cm">* @patch: Patch number (if applicable)</span>
+<span class="cm">* @local_changes: 0 for no changes, 1 for changes</span>
+<span class="cm">* @dev_commits: Number of development commits since the version was released</span>
+<span class="cm">*/</span><span class="w"></span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">amc_version</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w">   </span><span class="n">major</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w">   </span><span class="n">minor</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w">   </span><span class="n">patch</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w">   </span><span class="n">local_changes</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w">  </span><span class="n">dev_commits</span><span class="p">;</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="cm">/**</span>
+<span class="cm"> * enum ami_amc_debug_level - AMC debug verbosity levels</span>
+<span class="cm"> * @AMI_AMC_DEBUG_LEVEL_LOG: used for printing to the log (dmesg)</span>
+<span class="cm"> * @AMI_AMC_DEBUG_LEVEL_INFO: used when printing is part of the behaviour</span>
+<span class="cm"> * @AMI_AMC_DEBUG_LEVEL_ERROR: used for errors</span>
+<span class="cm"> * @AMI_AMC_DEBUG_LEVEL_WARNING: used for warnings</span>
+<span class="cm"> * @AMI_AMC_DEBUG_LEVEL_DEBUG: used for debug prints</span>
+<span class="cm"> *</span>
+<span class="cm"> * Note that these log levels only apply to what AMC puts into dmesg.</span>
+<span class="cm"> * Debug levels are "up to and including". The default log level is</span>
+<span class="cm"> * `AMI_AMC_DEBUG_LEVEL_LOG`.</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">enum</span><span class="w"> </span><span class="nc">ami_amc_debug_level</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_AMC_DEBUG_LEVEL_LOG</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_AMC_DEBUG_LEVEL_INFO</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_AMC_DEBUG_LEVEL_ERROR</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_AMC_DEBUG_LEVEL_WARNING</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_AMC_DEBUG_LEVEL_DEBUG</span><span class="p">,</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<table class="wrapped fixed-width confluenceTable" style="width: 922.0px;"><colgroup class=""><col class="" style="width: 543.0px;"/><col class="" style="width: 378.0px;"/></colgroup><tbody class=""><tr class=""><th class="confluenceTh"><span style="color: rgb(0,51,102);">Function</span></th><th class="confluenceTh"><span style="color: rgb(0,51,102);">Description</span></th></tr><tr class=""><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_dev_find_next</strong>(ami_device **dev, int b, int d, int f, ami_device *prev);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Find the next device that matches the specified criteria</span></p></td></tr><tr class=""><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_dev_find</strong>(const char *bdf, ami_device **dev);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Wrapper around `ami_dev_find_next`</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_dev_bringup</strong>(const char *bdf, ami_device **dev);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Find a device and perform additional setup logic on it</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">void <strong>ami_dev_delete</strong>(ami_device **dev);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Free the memory held by a device struct</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_dev_request_access</strong>(ami_device *dev);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Request elevated device permissions</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_dev_pci_reload</strong>(ami_device **dev, const char *bdf);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Remove a device from the PCI tree and rescan the bus</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_dev_hot_reset</strong>(ami_device **dev);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Trigger a PCI hot reset for this device</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_dev_set_amc_debug_level</strong>(ami_device *dev, enum ami_amc_debug_level level);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Set the AMC debug level.</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_dev_read_uuid</strong>(ami_device *dev, char buf[AMI_LOGIC_UUID_SIZE]);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Read the logic uuid sysfs node</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_dev_get_num_devices</strong>(uint16_t *num);<br/></span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the number of devices attached to the driver</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_dev_get_pci_link_speed</strong>(ami_device *dev, uint8_t *current, uint8_t *max);<br/></span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the PCI link speed.</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_dev_get_pci_link_width</strong>(ami_device *dev, uint8_t *current, uint8_t *max);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the PCI link width</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_dev_get_pci_vendor</strong>(ami_device *dev, uint16_t *vendor);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the PCI vendor ID</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_dev_get_pci_device</strong>(ami_device *dev, uint16_t *device);<br/></span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the PCI device ID</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_dev_get_pci_numa_node</strong>(ami_device *dev, uint8_t *node);<br/></span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the PCI device NUMA node.</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_dev_get_pci_cpulist</strong>(ami_device *dev, char buf[AMI_PCI_CPULIST_SIZE]);<br/></span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the PCI CPU affinity</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_dev_get_state</strong>(ami_device *dev, char buf[AMI_DEV_STATE_SIZE]);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the device state</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_dev_get_name</strong>(ami_device *dev, char buf[AMI_DEV_NAME_SIZE]);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the device name</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_dev_get_amc_version</strong>(ami_device *dev, struct amc_version *amc_version);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get AMC version info if available</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_dev_get_pci_port</strong>(ami_device *dev, char buf[AMI_DEV_PCI_PORT_SIZE]);<br/></span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the BDF of the PCI port for the given device</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_dev_get_pci_bdf</strong>(ami_device *dev, uint16_t *bdf);<br/></span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get PCI BDF for this device</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_dev_get_cdev_num</strong>(ami_device *dev, int *num);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the character device number for this device</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_dev_get_hwmon_num</strong>(ami_device *dev, int *num);<br/></span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the HWMON number for this device</span></p></td></tr></tbody></table>
+</section>
+<section id="versioning-functions">
+<span id="amiapidescription-versioningfunctions"></span><h2>Versioning Functions<a class="headerlink" href="#versioning-functions" title="Permalink to this headline">¶</a></h2>
+<p>The versioning API’s for the API &amp; driver, the AMC version is available via the Device API if available.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm">* struct ami_version - structure to hold AMI version information</span>
+<span class="cm">* @major: Major software version</span>
+<span class="cm">* @minor: Minor software version</span>
+<span class="cm">* @patch: Patch number (if applicable)</span>
+<span class="cm">* @dev_commits: Number of development commits since the version was released</span>
+<span class="cm">* @status: 0 if unmodified, 1 if there are unversioned modifications</span>
+<span class="cm">*/</span><span class="w"></span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">ami_version</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">major</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">minor</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">patch</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">dev_commits</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">status</span><span class="p">;</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<table class="relative-table wrapped confluenceTable" style="width: 51.07%;"><colgroup><col style="width: 54.2006%;"/><col style="width: 45.7586%;"/></colgroup><tbody><tr><th class="confluenceTh" scope="col"><span style="color: rgb(0,51,102);">Function</span></th><th class="confluenceTh" scope="col"><span style="color: rgb(0,51,102);">Description</span></th></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_get_driver_version</strong>(struct ami_version *ami_version);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get AMI Driver version info</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_get_api_version</strong>(struct ami_version *ami_version);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get AMI API version info</span></p></td></tr></tbody></table>
+</section>
+<section id="utility-functions">
+<span id="amiapidescription-utilityfunctions"></span><h2>Utility Functions<a class="headerlink" href="#utility-functions" title="Permalink to this headline">¶</a></h2>
+<p>The general utility functions to return the last error and convert BDF string into a u16.</p>
+<table class="wrapped fixed-width confluenceTable" style="width: 616.0px;"><colgroup class=""><col class="" style="width: 279.0px;"/><col class="" style="width: 336.0px;"/></colgroup><tbody class=""><tr class=""><th class="confluenceTh"><span style="color: rgb(0,51,102);">Function</span></th><th class="confluenceTh"><span style="color: rgb(0,51,102);">Description</span></th></tr><tr class=""><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">const char *<strong>ami_get_last_error</strong>(void);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get a human readable string of the last error code</span></p></td></tr><tr class=""><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">uint16_t <strong>ami_parse_bdf</strong>(const char *bdf);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Parse a BDF string into a uint16 representation</span></p></td></tr></tbody></table>
+</section>
+<section id="event-handling">
+<span id="amiapidescription-eventhandling"></span><h2>Event Handling<a class="headerlink" href="#event-handling" title="Permalink to this headline">¶</a></h2>
+<p>Some API functions can accept an event handler which will receive AMI driver events.</p>
+<p>This can be useful, for example, for tracking the progress of long running commands such as PDI programming.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * enum ami_event_status - list of driver event status codes</span>
+<span class="cm"> * @AMI_EVENT_STATUS_OK: poll was ok and valid data was read back</span>
+<span class="cm"> * @AMI_EVENT_STATUS_READ_ERROR: poll was ok but the read failed</span>
+<span class="cm"> * @AMI_EVENT_STATUS_TIMEOUT: poll timed out (no event)</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">enum</span><span class="w"> </span><span class="nc">ami_event_status</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_EVENT_STATUS_OK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_EVENT_STATUS_READ_ERROR</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_EVENT_STATUS_TIMEOUT</span><span class="p">,</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<table class="fixed-width confluenceTable" style="width: 45.4462%;"><colgroup class=""><col class="" style="width: 60.6864%;"/><col class="" style="width: 39.3136%;"/></colgroup><tbody class=""><tr class=""><th class="confluenceTh"><span style="color: rgb(0,51,102);">Function Prototype<br/></span></th><th class="confluenceTh"><span style="color: rgb(0,51,102);">Description</span></th></tr><tr class=""><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">typedef void (*<strong>ami_event_handler</strong>)(enum ami_event_status status, uint64_t ctr, void *data)</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Receive a single driver event - will run in a separate thread<br/></span></p></td></tr></tbody></table>
+</section>
+<section id="program-functions">
+<span id="amiapidescription-programfunctions"></span><h2>Program Functions<a class="headerlink" href="#program-functions" title="Permalink to this headline">¶</a></h2>
+<p>These functions allow programming of a PDI image to a particular partition, copying one partition to another and setting the boot partition.</p>
+<p>There is also functionality within this API to return the FPT header and each FPT entry.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * struct ami_fpt_header - The FPT header.</span>
+<span class="cm"> * @version: FPT version.</span>
+<span class="cm"> * @hdr_size: The size of the header in bytes.</span>
+<span class="cm"> * @entry_size: The entry size in bytes.</span>
+<span class="cm"> * @num_entries: The number of partitions.</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">ami_fpt_header</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">version</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">hdr_size</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">entry_size</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">num_entries</span><span class="p">;</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="cm">/**</span>
+<span class="cm"> * enum ami_fpt_type - Different FPT partition types.</span>
+<span class="cm"> * @AMI_FPT_TYPE_FPT: File partition table.</span>
+<span class="cm"> * @AMI_FPT_TYPE_RECOVERY_FPT: Recovery file partition table.</span>
+<span class="cm"> * @AMI_FPT_TYPE_EXTENSION_FPT: Extension file partition table.</span>
+<span class="cm"> * @AMI_FPT_TYPE_PDI_BOOT: PDI boot.</span>
+<span class="cm"> * @AMI_FPT_TYPE_PDI_BOOT_BACKUP: PDI boot backup.</span>
+<span class="cm"> * @AMI_FPT_TYPE_PDI_XSABIN_META: XSABIN metadata.</span>
+<span class="cm"> * @AMI_FPT_TYPE_PDI_GOLDEN: PDI golden image.</span>
+<span class="cm"> * @AMI_FPT_TYPE_PDI_SYS_DTB: SYS DTB.</span>
+<span class="cm"> * @AMI_FPT_TYPE_PDI_META: PDI metadata.</span>
+<span class="cm"> * @AMI_FPT_TYPE_PDI_META_BACKUP: PDI metadata backup.</span>
+<span class="cm"> * @AMI_FPT_TYPE_SC_FW: SC FW.</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">enum</span><span class="w"> </span><span class="nc">ami_fpt_type</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_FPT_TYPE_FPT</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="mh">0xFFFF</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_FPT_TYPE_RECOVERY_FPT</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mh">0xFFFE</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_FPT_TYPE_EXTENSION_FPT</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mh">0xFFFD</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_FPT_TYPE_PDI_BOOT</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0E00</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_FPT_TYPE_PDI_BOOT_BACKUP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0E01</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_FPT_TYPE_PDI_XSABIN_META</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0E02</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_FPT_TYPE_PDI_GOLDEN</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0E03</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_FPT_TYPE_PDI_SYS_DTB</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0E04</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_FPT_TYPE_PDI_META</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0E05</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_FPT_TYPE_PDI_META_BACKUP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0E06</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_FPT_TYPE_SC_FW</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0C00</span><span class="p">,</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="cm">/**</span>
+<span class="cm"> * struct ami_fpt_partition - The individual partition information.</span>
+<span class="cm"> * @type: Partition type.</span>
+<span class="cm"> * @base_addr: Partition base address.</span>
+<span class="cm"> * @size: Partition size.</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">ami_fpt_partition</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">enum</span><span class="w"> </span><span class="nc">ami_fpt_type</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">base_addr</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="cm">/**</span>
+<span class="cm"> * struct ami_pdi_progress - Data struct for PDI download progress handlers</span>
+<span class="cm"> * @bytes_to_write: Total number of bytes to write as part of the procedure</span>
+<span class="cm"> * @bytes_written: Number of bytes written so far - this must be updated by</span>
+<span class="cm"> *     the progress handler (initially set to 0)</span>
+<span class="cm"> * @reserved: Generic field which can be used by the handler implementation</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">ami_pdi_progress</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">bytes_to_write</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">bytes_written</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">reserved</span><span class="p">;</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="cm">/**</span>
+<span class="cm"> * enum ami_boot_devices - list of available boot devices</span>
+<span class="cm"> * @AMI_BOOT_DEVICES_PRIMARY: primary boot device</span>
+<span class="cm"> * @AMI_BOOT_DEVICES_SECONDARY: secondary boot device</span>
+<span class="cm"> * @AMI_BOOT_DEVICES_MAX: max boot device</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">enum</span><span class="w"> </span><span class="nc">ami_boot_devices</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_BOOT_DEVICES_PRIMARY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_BOOT_DEVICES_SECONDARY</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">AMI_BOOT_DEVICES_MAX</span><span class="p">,</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<table class="wrapped fixed-width confluenceTable" style="width: 977.0px;"><colgroup class=""><col class="" style="width: 641.0px;"/><col class="" style="width: 335.0px;"/></colgroup><tbody class=""><tr class=""><th class="confluenceTh"><span style="color: rgb(0,51,102);">Function</span></th><th class="confluenceTh"><span style="color: rgb(0,51,102);">Description</span></th></tr><tr class=""><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_prog_download_pdi</strong>(ami_device *dev, const char *path, uint8_t boot_device, uint32_t partition, ami_event_handler progress_handler);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Program a PDI bitstream onto a device</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_prog_update_fpt</strong>(ami_device *dev, const char *path, uint8_t boot_device, ami_event_handler progress_handler);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Program a PDI bitstream containing an FPT</span></p></td></tr><tr class=""><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_prog_device_boot</strong>(struct ami_device **dev, uint32_t partition);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Set the device boot partition</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_prog_copy_partition</strong>(ami_device *dev, uint32_t src_device, uint32_t src_part, uint32_t dest_device, uint32_t dest_part, ami_event_handler progress_handler);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Copy one device partition to another</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_prog_get_fpt_header</strong>(ami_device *dev, uint8_t boot_device, struct ami_fpt_header *header);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the FPT header information</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_prog_get_fpt_partition</strong>(ami_device *dev, uint32_t num, struct ami_fpt_partition *partition);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get FPT partition information</span></p></td></tr></tbody></table>
+</section>
+<section id="manufacturer-info-functions">
+<span id="amiapidescription-manufacturerinfofunctions"></span><h2>Manufacturer Info Functions<a class="headerlink" href="#manufacturer-info-functions" title="Permalink to this headline">¶</a></h2>
+<p>The manufacturing info is returned as below, note only certain fields are applicable depending on EEPROM version programmed on the AMC.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * enum ami_mfg_field - List of device EEPROM fields.</span>
+<span class="cm"> * @AMI_MFG_FIELD_MIN: Min enum value to allow iteration.</span>
+<span class="cm"> * @AMI_MFG_EEPROM_VERSION: The EEPROM version.</span>
+<span class="cm"> * @AMI_MFG_PRODUCT_NAME: the product name.</span>
+<span class="cm"> * @AMI_MFG_BOARD_REV: the board revision.</span>
+<span class="cm"> * @AMI_MFG_BOARD_SERIAL: the board serial number.</span>
+<span class="cm"> * @AMI_MFG_MEMORY_SIZE:  Coveys the max memory (in GB).</span>
+<span class="cm"> * @AMI_MFG_PART_NUM: Board part number.</span>
+<span class="cm"> * @AMI_MFG_M_PART_NUM: Manufacturer part number.</span>
+<span class="cm"> * @AMI_MFG_MAC_ADDR_C: Number of MAC IDs.</span>
+<span class="cm"> * @AMI_MFG_MAC_ADDR: Primary MAC ID.</span>
+<span class="cm"> * @AMI_MFG_MAC_ADDR_N:  Number of MAC IDs.</span>
+<span class="cm"> * @AMI_MFG_ACTIVE_STATE: Active/Passive.</span>
+<span class="cm"> * @AMI_MFG_CONFIG_MODE: 07: Master SPI x4 (QSPIx4), 08: OSPI.</span>
+<span class="cm"> * @AMI_MFG_M_DATE: Manufacturing Date.</span>
+<span class="cm"> * @AMI_MFG_UUID: Used to uniquely ID the product.</span>
+<span class="cm"> * @AMI_MFG_PCIE_ID: Vendor ID, Device ID, SubVendor ID, SubDevice ID.</span>
+<span class="cm"> * @AMI_MFG_POWER_MODE: Max power mode.</span>
+<span class="cm"> * @AMI_MFG_OEM_ID: OEM ID.</span>
+<span class="cm"> * @AMI_MFG_CAPABILITY: Capability word.</span>
+<span class="cm"> * @AMI_MFG_FIELD_MAX: Max enum value to allow iteration.</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">enum</span><span class="w"> </span><span class="nc">ami_mfg_field</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_MFG_FIELD_MIN</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">AMI_MFG_EEPROM_VERSION</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_MFG_PRODUCT_NAME</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_MFG_BOARD_REV</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_MFG_BOARD_SERIAL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_MFG_MEMORY_SIZE</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_MFG_PART_NUM</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_MFG_M_PART_NUM</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_MFG_MAC_ADDR_C</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_MFG_MAC_ADDR</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_MFG_MAC_ADDR_N</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_MFG_ACTIVE_STATE</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_MFG_CONFIG_MODE</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_MFG_M_DATE</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_MFG_UUID</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_MFG_PCIE_ID</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_MFG_POWER_MODE</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_MFG_OEM_ID</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_MFG_CAPABILITY</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">AMI_MFG_FIELD_MAX</span><span class="p">,</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<table class="wrapped fixed-width confluenceTable" style="width: 807.0px;"><colgroup class=""><col class="" style="width: 470.0px;"/><col class="" style="width: 336.0px;"/></colgroup><tbody class=""><tr class=""><th class="confluenceTh"><span style="color: rgb(0,51,102);">Function</span></th><th class="confluenceTh"><span style="color: rgb(0,51,102);">Description</span></th></tr><tr class=""><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_mfg_get_info</strong>(ami_device *dev, enum ami_mfg_field field, char buf[AMI_MFG_INFO_MAX_STR]);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get manufacturing board information</span></p></td></tr></tbody></table>
+</section>
+<section id="memory-access-functions">
+<span id="amiapidescription-memoryaccessfunctions"></span><h2>Memory Access Functions<a class="headerlink" href="#memory-access-functions" title="Permalink to this headline">¶</a></h2>
+<p>These functions allow reading/writing to a particular PCI bar, one of multiple u32 values at a time.</p>
+<table class="wrapped fixed-width confluenceTable" style="width: 1001.0px;"><colgroup class=""><col class="" style="width: 665.0px;"/><col class="" style="width: 335.0px;"/></colgroup><tbody class=""><tr class=""><th class="confluenceTh"><span style="color: rgb(0,51,102);">Function</span></th><th class="confluenceTh"><span style="color: rgb(0,51,102);">Description</span></th></tr><tr class=""><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_mem_bar_read</strong>(ami_device *dev, uint8_t idx, uint64_t offset, uint32_t *val);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Read a PCI bar register</span></p></td></tr><tr class=""><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_mem_bar_write</strong>(ami_device *dev, uint8_t idx, uint64_t offset, uint32_t val);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Write to a PCI bar register</span></p></td></tr><tr class=""><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_mem_bar_read_range</strong>(ami_device *dev, uint8_t idx, uint64_t offset, uint32_t num, uint32_t *val);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Read block of data from a PCI bar register</span></p></td></tr><tr class=""><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_mem_bar_write_range</strong>(ami_device *dev, uint8_t idx, uint64_t offset, uint32_t num, uint32_t *val);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Write block of data to a PCI bar register</span></p></td></tr></tbody></table>
+</section>
+<section id="eeprom-read-write-functions">
+<span id="amiapidescription-eepromread-writefunctions"></span><h2>EEPROM Read/Write Functions<a class="headerlink" href="#eeprom-read-write-functions" title="Permalink to this headline">¶</a></h2>
+<p>These functions allow reading/writing one or more bytes to the EEPROM on the AMC.</p>
+<p>Note: On future versions of the AMC the first 128 bytes will be read only.</p>
+<table class="wrapped fixed-width confluenceTable" style="width: 854.0px;"><colgroup class=""><col class="" style="width: 518.0px;"/><col class="" style="width: 335.0px;"/></colgroup><tbody class=""><tr class=""><th class="confluenceTh"><span style="color: rgb(0,51,102);">Function</span></th><th class="confluenceTh"><span style="color: rgb(0,51,102);">Description</span></th></tr><tr class=""><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_eeprom_read</strong>(ami_device *dev, uint8_t offset, uint8_t num, uint8_t *val);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Read one or more bytes of data from the EEPROM</span></p></td></tr><tr class=""><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_eeprom_write</strong>(ami_device *dev, uint8_t offset, uint8_t num, uint8_t *val);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Write one or more bytes of data to the EEPROM</span></p></td></tr></tbody></table>
+</section>
+<section id="module-read-write-functions">
+<span id="amiapidescription-moduleread-writefunctions"></span><h2>Module Read/Write Functions<a class="headerlink" href="#module-read-write-functions" title="Permalink to this headline">¶</a></h2>
+<p>These functions allow reading/writing one or more bytes to/from QSFP modules.</p>
+<table class="fixed-width wrapped confluenceTable"><colgroup class=""><col class="" style="width: 518.0px;"/><col class="" style="width: 335.0px;"/></colgroup><tbody class=""><tr class=""><th class="confluenceTh"><span style="color: rgb(0,51,102);">Function</span></th><th class="confluenceTh"><span style="color: rgb(0,51,102);">Description</span></th></tr><tr class=""><td class="confluenceTd"><p>int <strong>ami_module_read</strong>(ami_device *dev, uint8_t device_id, uint8_t page, uint8_t offset, uint8_t num, uint8_t *val);</p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Read one or more bytes of data from a QSFP module</span></p></td></tr><tr class=""><td class="confluenceTd"><p>int <strong>ami_module_write</strong>(ami_device *dev, uint8_t device_id, uint8_t page, uint8_t offset, uint8_t num, uint8_t *val);</p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Write one or more bytes of data to a QSFP module</span></p></td></tr></tbody></table>
+</section>
+<section id="sensor-functions">
+<span id="amiapidescription-sensorfunctions"></span><h2>Sensor Functions<a class="headerlink" href="#sensor-functions" title="Permalink to this headline">¶</a></h2>
+<p>The sensor functions are defined below and allow:</p>
+<ul class="simple">
+<li><p>Initial discovery</p></li>
+<li><p>Set or get the sensor refresh rate.</p></li>
+<li><p>Accessors to get information of type/number of sensors on each device.</p></li>
+<li><p>Accessors to get status, value, average value, max value and unit byte modifier per sensor name.</p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * enum ami_sensor_type - list of AMI sensor types</span>
+<span class="cm"> * @AMI_SENSOR_TYPE_TEMP: temperature sensor</span>
+<span class="cm"> * @AMI_SENSOR_TYPE_CURRENT: current sensor</span>
+<span class="cm"> * @AMI_SENSOR_TYPE_VOLTAGE: voltage sensor</span>
+<span class="cm"> * @AMI_SENSOR_TYPE_POWER: power sensor</span>
+<span class="cm"> * @AMI_SENSOR_TYPE_INVALID: invalid sensor type</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">enum</span><span class="w"> </span><span class="nc">ami_sensor_type</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_SENSOR_TYPE_TEMP</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_SENSOR_TYPE_CURRENT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_SENSOR_TYPE_VOLTAGE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_SENSOR_TYPE_POWER</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">),</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">AMI_SENSOR_TYPE_INVALID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="cm">/**</span>
+<span class="cm"> * enum ami_sensor_status - list of sensor status codes</span>
+<span class="cm"> * @AMI_SENSOR_STATUS_INVALID: Generic invalid code to be used as a placeholder.</span>
+<span class="cm"> * @AMI_SENSOR_STATUS_NOT_PRESENT: Sensor not present.</span>
+<span class="cm"> * @AMI_SENSOR_STATUS_OK: Sensor present and valid.</span>
+<span class="cm"> * @AMI_SENSOR_STATUS_NO_DATA: Data not available.</span>
+<span class="cm"> * @AMI_SENSOR_STATUS_OK_CACHED: Value is OK but not fresh.</span>
+<span class="cm"> * @AMI_SENSOR_STATUS_NA: Not applicable or default value.</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">enum</span><span class="w"> </span><span class="nc">ami_sensor_status</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_SENSOR_STATUS_INVALID</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">AMI_SENSOR_STATUS_NOT_PRESENT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x00</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_SENSOR_STATUS_OK</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="mh">0x01</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_SENSOR_STATUS_NO_DATA</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mh">0x02</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_SENSOR_STATUS_OK_CACHED</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mh">0x03</span><span class="p">,</span><span class="w">  </span><span class="cm">/* Not from ASDM */</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/* 0x04 - 0x7E Reserved */</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_SENSOR_STATUS_NA</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="mh">0x7F</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/* 0x80 - 0xFF Reserved */</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="cm">/**</span>
+<span class="cm"> * enum ami_sensor_unit_mod - base unit modifiers for sensor readings</span>
+<span class="cm"> * @AMI_SENSOR_UNIT_MOD_MEGA: 10^6 modifier</span>
+<span class="cm"> * @AMI_SENSOR_UNIT_MOD_KILO: 10^3 modifier</span>
+<span class="cm"> * @AMI_SENSOR_UNIT_MOD_NONE: 10^0 modifier (none)</span>
+<span class="cm"> * @AMI_SENSOR_UNIT_MOD_MILLI: 10^-3 modifier</span>
+<span class="cm"> * @AMI_SENSOR_UNIT_MOD_MICRO: 10^-6 modifier</span>
+<span class="cm"> *</span>
+<span class="cm"> * Note that no enum is defined for the type of unit used as this can be</span>
+<span class="cm"> * inferred from the getter function being called. For reference, the units used</span>
+<span class="cm"> * are as follows:</span>
+<span class="cm"> *</span>
+<span class="cm"> * Temp - Degrees Celsius</span>
+<span class="cm"> * Power - Watts</span>
+<span class="cm"> * Voltage - Volts</span>
+<span class="cm"> * Current - Amperes</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">enum</span><span class="w"> </span><span class="nc">ami_sensor_unit_mod</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_SENSOR_UNIT_MOD_MEGA</span><span class="w">  </span><span class="o">=</span><span class="w">  </span><span class="mi">6</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_SENSOR_UNIT_MOD_KILO</span><span class="w">  </span><span class="o">=</span><span class="w">  </span><span class="mi">3</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_SENSOR_UNIT_MOD_NONE</span><span class="w">  </span><span class="o">=</span><span class="w">  </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_SENSOR_UNIT_MOD_MILLI</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-3</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_SENSOR_UNIT_MOD_MICRO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-6</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="cm">/**</span>
+<span class="cm"> * enum ami_sensor_limit - list of supported sensor limits/thresholds</span>
+<span class="cm"> * @AMI_SENSOR_LIMIT_WARN: Warning threshold</span>
+<span class="cm"> * @AMI_SENSOR_LIMIT_CRIT: Critical threshold</span>
+<span class="cm"> * @AMI_SENSOR_LIMIT_FATAL: Fatal threshold</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">enum</span><span class="w"> </span><span class="nc">ami_sensor_limit</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_SENSOR_LIMIT_WARN</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_SENSOR_LIMIT_CRIT</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">AMI_SENSOR_LIMIT_FATAL</span><span class="p">,</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="cm">/* Opaque declaration of sensor private data. */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">ami_sensor_internal</span><span class="w"> </span><span class="n">ami_sensor_internal</span><span class="p">;</span><span class="w"></span>
+
+<span class="cm">/**</span>
+<span class="cm"> * struct ami_sensor() - Represents a top-level sensor struct.</span>
+<span class="cm"> * @name: Sensor name.</span>
+<span class="cm"> * @next: Pointer to next sensor.</span>
+<span class="cm"> * @sensor_data: Private sensor data. Not to be used by user.</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">ami_sensor</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">char</span><span class="w">                 </span><span class="n">name</span><span class="p">[</span><span class="n">AMI_SENSOR_MAX_STR</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">ami_sensor</span><span class="w">   </span><span class="o">*</span><span class="n">next</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">ami_sensor_internal</span><span class="w"> </span><span class="o">*</span><span class="n">sensor_data</span><span class="p">;</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<table class="wrapped fixed-width confluenceTable" style="width: 1152.0px;"><colgroup class=""><col class="" style="width: 829.0px;"/><col class="" style="width: 322.0px;"/></colgroup><tbody class=""><tr class=""><th class="confluenceTh"><span style="color: rgb(0,51,102);">Function</span></th><th class="confluenceTh"><span style="color: rgb(0,51,102);">Description</span></th></tr><tr class=""><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_discover</strong>(ami_device *dev);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Find all sensors supported by a specific device</span></p></td></tr><tr class=""><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_set_refresh</strong>(ami_device *dev, uint16_t val);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Set the sensor update interval</span></p></td></tr><tr class=""><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_refresh</strong>(ami_device *dev, uint16_t *val);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the current sensor update interval</span></p></td></tr><tr class=""><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_type</strong>(ami_device *dev, const char *sensor_name, uint32_t *type);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get a bitmask describing the sensor types</span></p></td></tr><tr class=""><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_sensors</strong>(ami_device *dev, struct ami_sensor **sensors, int *num);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the list of sensors belonging to a device</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_num_total</strong>(ami_device *dev, int *num);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the total number of sensors for a device</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_temp_status</strong>(ami_device *dev, const char *sensor_name, enum ami_sensor_status *val);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the status string of a temperature sensor</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_voltage_status</strong>(ami_device *dev, const char *sensor_name, enum ami_sensor_status *val);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the status string of a voltage sensor</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_current_status</strong>(ami_device *dev, const char *sensor_name, enum ami_sensor_status *val);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the status string of a current sensor</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_power_status</strong>(ami_device *dev, const char *sensor_name, enum ami_sensor_status *val);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the status string of a power sensor</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_temp_value</strong>(ami_device *dev, const char *sensor_name, long *val, enum ami_sensor_status *sensor_status);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the value of a temperature sensor</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_voltage_value</strong>(ami_device *dev, const char *sensor_name, long *val, enum ami_sensor_status *sensor_status);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the value of a voltage sensor</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_current_value</strong>(ami_device *dev, const char *sensor_name, long *val, enum ami_sensor_status *sensor_status);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the value of a current sensor</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_power_value</strong>(ami_device *dev, const char *sensor_name, long *val, enum ami_sensor_status *sensor_status);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the value of a power sensor</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_temp_uptime_max</strong>(ami_device *dev, const char *sensor_name, long *val);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);"> Get the max value of a temperature sensor</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_voltage_uptime_max</strong>(ami_device *dev, const char *sensor_name, long *val);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the max value of a voltage sensor</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_current_uptime_max</strong>(ami_device *dev, const char *sensor_name, long *val);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the max value of a current sensor</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_power_uptime_max</strong>(ami_device *dev, const char *sensor_name, long *val);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the max value of a power sensor</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_temp_uptime_average</strong>(ami_device *dev, const char *sensor_name, long *val);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the average value of a temperature sensor</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_voltage_uptime_average</strong>(ami_device *dev, const char *sensor_name, long *val);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the average value of a voltage sensor</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_current_uptime_average</strong>(ami_device *dev, const char *sensor_name, long *val);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the average value of a current sensor</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_power_uptime_average</strong>(ami_device *dev, const char *sensor_name, long *val);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the average value of a power sensor</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_temp_unit_mod</strong>(ami_device *dev, const char *sensor_name, enum ami_sensor_unit_mod *mod);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the unit modifier of a temperature sensor</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_voltage_unit_mod</strong>(ami_device *dev, const char *sensor_name, enum ami_sensor_unit_mod *mod);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the unit modifier of a voltage sensor</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_current_unit_mod</strong>(ami_device *dev, const char *sensor_name, enum ami_sensor_unit_mod *mod);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the unit modifier of a current sensor</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_power_unit_mod</strong>(ami_device *dev, const char *sensor_name, enum ami_sensor_unit_mod *mod);</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the unit modifier of a power sensor.</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_temp_limit</strong>(ami_device *dev, const char *sensor_name, enum ami_sensor_limit limit_type, long *val)</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the limits of a temperature sensor.</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_voltage_limit</strong>(ami_device *dev, const char *sensor_name, enum ami_sensor_limit limit_type, long *val)</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the limits of a voltage sensor.</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_current_limit</strong>(ami_device *dev, const char *sensor_name, enum ami_sensor_limit limit_type, long *val)</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the limits of a current sensor.</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">int <strong>ami_sensor_get_power_limit</strong>(ami_device *dev, const char *sensor_name, enum ami_sensor_limit limit_type, long *val)</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,51,102);">Get the limits of a power sensor.</span></p></td></tr></tbody></table>
+<p>Page Revision: v. 24</p>
+</section>
+</section>
+</div>
+</div>
+<footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+<a accesskey="p" class="btn btn-neutral float-left" href="AMI%2B-%2BKernel%2BDriver%2BInteraction.html" rel="prev" title="AMI - Kernel Driver Interaction"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+<a accesskey="n" class="btn btn-neutral float-right" href="AMI%2B-%2BHot%2BReset.html" rel="next" title="AMI - Hot Reset">Next <span aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<p>© Copyright 2023, Advanced Micro Devices Inc.</p>
+</div>
+<div class="aem-Grid aem-Grid--16">
+<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+<div class="container-fluid sub-footer">
+<div class="row">
+<div class="col-xs-24">
+<p><a href="https://www.amd.com/en/corporate/copyright" target="_blank">Terms and Conditions</a> | <a href="https://www.amd.com/en/corporate/privacy" target="_blank">Privacy</a> | <a href="https://www.amd.com/en/corporate/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.amd.com/en/corporate/trademarks" target="_blank">Trademarks</a> | <a href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf" target="_blank">Statement on Forced Labor</a> | <a href="https://www.amd.com/en/corporate/competition" target="_blank">Fair and Open Competition</a> | <a href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf" target="_blank">UK Tax Strategy</a> | <a href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA" target="_blank">Inclusive Terminology</a> | <a class="ot-sdk-show-settings" href="#cookiessettings">Cookies Settings</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+</div>
+</div>
+</section>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+</body>
+</html>
