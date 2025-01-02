@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+  <title>Command line options &mdash; AVED  documentation</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/xbtest.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/_static/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="https://docs.xilinx.com/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="Result" href="result.html" />
+    <link rel="prev" title="Identifying AVED running on card" href="identifying-running-aved.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
+<!-- End Google Tag Manager --> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+            <a href="../../../../../index.html" class="icon icon-home"> AVED
+            <img src="../../../../../_static/xilinx-header-logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Xbtest Userguide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../usage.html">Usage</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="setup-xbtest.html">Set up xbtest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="use-cases.html">Single vs. multiple card test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="identifying-running-aved.html">Identifying AVED running on card</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Command line options</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#definition">Definition</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#v-display-version">-v: Display version</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#h-display-help">-h: Display help</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#d-select-card">-d: Select card</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#g-display-guide">-g: Display guide</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#j-select-test-json">-j: Select test JSON</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#c-select-pre-canned-test">-c: Select pre-canned test</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#l-select-logging-directory">-l: Select logging directory</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#l-disable-logging-directory">-L: Disable logging directory</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#m-display-message-information">-m: Display message information</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#f-disable-dynamic-display">-F: Disable dynamic display</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#f-force-an-operation">-f: Force an operation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#b-select-verbosity">-b: Select verbosity</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#t-select-timestamp">-t: Select timestamp</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#d-select-card-configuration-json-multi-cards-test">-D: Select card configuration JSON (multi cards test)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#i-e-select-pdi-and-card-definition-json">-i &amp; -e: Select PDI and card definition JSON</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#single-card-examples">Single card examples</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#single-test-on-a-single-card">Single test on a single card</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#multiple-tests-on-a-single-card">Multiple tests on a single card</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#multi-card-support">Multi card support</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#same-tests-on-multiple-cards">Same tests on multiple cards</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#different-tests-on-multiple-cards">Different tests on multiple cards</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#complex-multi-cards-test">Complex multi cards test</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#card-configuration-json-definition">Card configuration JSON definition</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="result.html">Result</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test-json-file-structure.html">Test JSON file structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../pre-canned-tests.html">Pre-canned tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../test-cases.html">Test cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tasks.html">Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../card-definition.html">Card definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#alveo-data-center-accelerator-card-compatibility">Alveo data center accelerator card compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#what-s-new">What’s new</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%2B-%2BHierarchy%2BOverview.html">AVED V80 - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%2B-%2BCIPS%2BConfiguration.html">AVED V80 - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%2B-%2BMemory%2BResources.html">AVED V80 - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%2B-%2BMemory%2BMap.html">AVED V80 - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%2B-%2BNoC%2BConfiguration.html">AVED V80 - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%2B-%2BBase%2BLogic.html">AVED V80 - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%2B-%2BClock%2BReset%2BModule.html">AVED V80 - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BV80%2B-%2BSource%2BFile%2BOverview.html">AVED V80 - Source File Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../SMBus%2BIP%2Bv1.1%2B-%2BProduct%2BGuide.html">SMBus IP v1.1 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BASDM%2BApplication.html">AVED ASDM Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BOutOfBand%2BTelemetry%2BApplication.html">AVED OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Board%2BManagement%2BController%2B%28BMC%29%2BProxy%2BDriver.html">Board Management Controller (BMC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BQDMA.html">AVED QDMA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: black" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">AVED</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Xbtest Userguide</a> &raquo;</li>
+          <li><a href="../../usage.html">Usage</a> &raquo;</li>
+      <li>Command line options</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="command-line-options">
+<span id="id2"></span><h1>Command line options<a class="headerlink" href="#command-line-options" title="Permalink to this headline">¶</a></h1>
+<section id="definition">
+<h2>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">¶</a></h2>
+<p>xbtest supports the following command line options described in next sections:</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#v-display-version" id="id19">-v: Display version</a></p></li>
+<li><p><a class="reference internal" href="#h-display-help" id="id20">-h: Display help</a></p></li>
+<li><p><a class="reference internal" href="#d-select-card" id="id21">-d: Select card</a></p></li>
+<li><p><a class="reference internal" href="#g-display-guide" id="id22">-g: Display guide</a></p></li>
+<li><p><a class="reference internal" href="#j-select-test-json" id="id23">-j: Select test JSON</a></p></li>
+<li><p><a class="reference internal" href="#c-select-pre-canned-test" id="id24">-c: Select pre-canned test</a></p></li>
+<li><p><a class="reference internal" href="#l-select-logging-directory" id="id25">-l: Select logging directory</a></p></li>
+<li><p><a class="reference internal" href="#l-disable-logging-directory" id="id26">-L: Disable logging directory</a></p></li>
+<li><p><a class="reference internal" href="#m-display-message-information" id="id27">-m: Display message information</a></p></li>
+<li><p><a class="reference internal" href="#f-disable-dynamic-display" id="id28">-F: Disable dynamic display</a></p></li>
+<li><p><a class="reference internal" href="#f-force-an-operation" id="id29">-f: Force an operation</a></p></li>
+<li><p><a class="reference internal" href="#b-select-verbosity" id="id30">-b: Select verbosity</a></p></li>
+<li><p><a class="reference internal" href="#t-select-timestamp" id="id31">-t: Select timestamp</a></p></li>
+<li><p><a class="reference internal" href="#d-select-card-configuration-json-multi-cards-test" id="id32">-D: Select card configuration JSON (multi cards test)</a></p></li>
+<li><p><a class="reference internal" href="#i-e-select-pdi-and-card-definition-json" id="id33">-i &amp; -e: Select PDI and card definition JSON</a></p></li>
+</ul>
+</div>
+<section id="v-display-version">
+<h3><a class="toc-backref" href="#id19">-v: Display version</a><a class="headerlink" href="#v-display-version" title="Permalink to this headline">¶</a></h3>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-v">
+<span class="sig-name descname"><span class="pre">-v</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-v" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display xbtest version <a class="footnote-reference brackets" href="#id11" id="id3">1</a>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ xbtest -v
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="h-display-help">
+<h3><a class="toc-backref" href="#id20">-h: Display help</a><a class="headerlink" href="#h-display-help" title="Permalink to this headline">¶</a></h3>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-h">
+<span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display help message and command line options available <a class="footnote-reference brackets" href="#id11" id="id4">1</a>.
+There are two help levels:</p>
+<blockquote>
+<div><ul>
+<li><p>Command line options and the list of all installed <a class="reference internal" href="../introduction/overview.html#aved-deployment-archives"><span class="std std-ref">AVED deployment archives</span></a> supported by xbtest with their respective pre-canned tests.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ xbtest -h
+</pre></div>
+</div>
+</li>
+<li><p>Command line options for the selected card (<a class="reference internal" href="#cmdoption-d"><code class="xref std std-option docutils literal notranslate"><span class="pre">-d</span></code></a>).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ xbtest -d &lt;BDF&gt; -h
+</pre></div>
+</div>
+</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+</section>
+<section id="d-select-card">
+<h3><a class="toc-backref" href="#id21">-d: Select card</a><a class="headerlink" href="#d-select-card" title="Permalink to this headline">¶</a></h3>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-d">
+<span class="sig-name descname"><span class="pre">-d</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;BDF&gt;</span></span><a class="headerlink" href="#cmdoption-d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select the Alveo card identified by its <code class="docutils literal notranslate"><span class="pre">&lt;BDF&gt;</span></code>.</p>
+<p>The command line:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Must start with an option <a class="reference internal" href="#cmdoption-d"><code class="xref std std-option docutils literal notranslate"><span class="pre">-d</span></code></a>. Other options following will be applied for the same group of cards.</p></li>
+<li><p>Cannot finish with an option <a class="reference internal" href="#cmdoption-d"><code class="xref std std-option docutils literal notranslate"><span class="pre">-d</span></code></a>.</p></li>
+</ul>
+</div></blockquote>
+<p>Maximum number of times option <a class="reference internal" href="#cmdoption-d"><code class="xref std std-option docutils literal notranslate"><span class="pre">-d</span></code></a> is present in command line is 100.</p>
+<p>See <a class="reference internal" href="identifying-running-aved.html#identifying-running-aved"><span class="std std-ref">Identifying AVED running on card</span></a> to find the <code class="docutils literal notranslate"><span class="pre">&lt;BDF&gt;</span></code> of the card installed in your system.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ xbtest -d &lt;BDF&gt; -j path/to/my_tests.json
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="g-display-guide">
+<h3><a class="toc-backref" href="#id22">-g: Display guide</a><a class="headerlink" href="#g-display-guide" title="Permalink to this headline">¶</a></h3>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-g">
+<span class="sig-name descname"><span class="pre">-g</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;test</span> <span class="pre">case/task&gt;</span></span><a class="headerlink" href="#cmdoption-g" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a guide for the given <code class="docutils literal notranslate"><span class="pre">&lt;test</span> <span class="pre">case/task&gt;</span></code> <a class="footnote-reference brackets" href="#id11" id="id5">1</a>.</p>
+<p>This guide includes JSON members description, test sequence definition with examples and basic test JSON file examples.</p>
+<p>To obtain the list of test cases available, use command line option <a class="reference internal" href="#cmdoption-h"><code class="xref std std-option docutils literal notranslate"><span class="pre">-h</span></code></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This option must be used with command line option <a class="reference internal" href="#cmdoption-d"><code class="xref std std-option docutils literal notranslate"><span class="pre">-d</span></code></a>.</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ xbtest -d &lt;BDF&gt; -g &lt;<span class="nb">test</span> <span class="k">case</span>/task&gt;
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="j-select-test-json">
+<h3><a class="toc-backref" href="#id23">-j: Select test JSON</a><a class="headerlink" href="#j-select-test-json" title="Permalink to this headline">¶</a></h3>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-j">
+<span class="sig-name descname"><span class="pre">-j</span></span><span class="sig-prename descclassname"> <span class="pre">path/to/my_tests.json</span></span><a class="headerlink" href="#cmdoption-j" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select test JSON file <code class="docutils literal notranslate"><span class="pre">path/to/my_tests.json</span></code> defining the test cases to run <a class="footnote-reference brackets" href="#id12" id="id6">2</a>.</p>
+<p>See <a class="reference internal" href="test-json-file-structure.html#test-json-file-structure"><span class="std std-ref">Test JSON file structure</span></a> for more information on the definition of the test JSON file content.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ xbtest -d &lt;BDF&gt; -j path/to/my_tests.json
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="c-select-pre-canned-test">
+<h3><a class="toc-backref" href="#id24">-c: Select pre-canned test</a><a class="headerlink" href="#c-select-pre-canned-test" title="Permalink to this headline">¶</a></h3>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-c">
+<span class="sig-name descname"><span class="pre">-c</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;pre-canned</span> <span class="pre">test&gt;</span></span><a class="headerlink" href="#cmdoption-c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select a pre-canned test <code class="docutils literal notranslate"><span class="pre">&lt;pre-canned</span> <span class="pre">test&gt;</span></code> to run <a class="footnote-reference brackets" href="#id12" id="id7">2</a>.</p>
+<p>To obtain the list of pre-canned tests available and their location in the installation directory use command line option <a class="reference internal" href="#cmdoption-h"><code class="xref std std-option docutils literal notranslate"><span class="pre">-h</span></code></a>.</p>
+<p>See <a class="reference internal" href="../pre-canned-tests/pre-canned-tests-description.html#pre-canned-tests-description"><span class="std std-ref">Pre-canned tests description</span></a> for more information on the quantity and content of these card specific tests.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ xbtest -d &lt;BDF&gt; -c &lt;pre-canned test&gt;
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="l-select-logging-directory">
+<h3><a class="toc-backref" href="#id25">-l: Select logging directory</a><a class="headerlink" href="#l-select-logging-directory" title="Permalink to this headline">¶</a></h3>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-l">
+<span class="sig-name descname"><span class="pre">-l</span></span><span class="sig-prename descclassname"> <span class="pre">path/to/log_dir</span></span><a class="headerlink" href="#cmdoption-l" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define the name of a directory <code class="docutils literal notranslate"><span class="pre">path/to/log_dir</span></code> in which all log files will be stored, for example output files of any test case will be stored <a class="footnote-reference brackets" href="#id13" id="id8">3</a>.</p>
+<p>When not specified, logging directory is still generated with a default name.</p>
+<p>If the provided directory already exists, then the command line option <a class="reference internal" href="#cmdoption-0"><code class="xref std std-option docutils literal notranslate"><span class="pre">-f</span></code></a> must be provided to override the directory: all contents of the directory will be removed.</p>
+<p>See <a class="reference internal" href="result-directory.html#result-directory"><span class="std std-ref">Result directory</span></a> section for more information on the different directories and files generated by xbtest.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ xbtest -l path/to/log_dir -d &lt;BDF&gt; -j path/to/my_tests.json
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="l-disable-logging-directory">
+<h3><a class="toc-backref" href="#id26">-L: Disable logging directory</a><a class="headerlink" href="#l-disable-logging-directory" title="Permalink to this headline">¶</a></h3>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-L">
+<span class="sig-name descname"><span class="pre">-L</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-L" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disable logging directory generation in which all output files of any test case will be stored <a class="footnote-reference brackets" href="#id13" id="id9">3</a>.</p>
+<p>No message displayed during the execution will be stored.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ xbtest -L -d &lt;BDF&gt; -j path/to/my_tests.json
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="m-display-message-information">
+<h3><a class="toc-backref" href="#id27">-m: Display message information</a><a class="headerlink" href="#m-display-message-information" title="Permalink to this headline">¶</a></h3>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-m">
+<span class="sig-name descname"><span class="pre">-m</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;message</span> <span class="pre">ID&gt;</span></span><a class="headerlink" href="#cmdoption-m" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display message information for the given <code class="docutils literal notranslate"><span class="pre">&lt;message</span> <span class="pre">ID&gt;</span></code>: severity, details or resolution (when applicable) <a class="footnote-reference brackets" href="#id11" id="id10">1</a>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ xbtest -d &lt;BDF&gt; -m &lt;message ID&gt;
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="f-disable-dynamic-display">
+<h3><a class="toc-backref" href="#id28">-F: Disable dynamic display</a><a class="headerlink" href="#f-disable-dynamic-display" title="Permalink to this headline">¶</a></h3>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-F">
+<span id="cmdoption-f"></span><span class="sig-name descname"><span class="pre">-F</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-F" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disable the dynamic display mode.</p>
+<p>When not provided, xbtest defaults to the dynamic display mode.</p>
+<p>See <a class="reference internal" href="display-modes.html#display-modes"><span class="std std-ref">Display modes</span></a> section for more information on the messages displayed by xbtest in the console.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ xbtest -F -d &lt;BDF&gt; -j path/to/my_tests.json
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="f-force-an-operation">
+<h3><a class="toc-backref" href="#id29">-f: Force an operation</a><a class="headerlink" href="#f-force-an-operation" title="Permalink to this headline">¶</a></h3>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-0">
+<span class="sig-name descname"><span class="pre">-f</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-0" title="Permalink to this definition">¶</a></dt>
+<dd><p>When possible, force an operation.</p>
+<p>This can be used to override an already existing logging directory provided with option <a class="reference internal" href="#cmdoption-l"><code class="xref std std-option docutils literal notranslate"><span class="pre">-l</span></code></a>: all contents of the directory will be removed.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ xbtest -f -l &lt;PathTo/LogDirToOverride&gt; -d &lt;BDF&gt; -j path/to/my_tests.json
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="b-select-verbosity">
+<h3><a class="toc-backref" href="#id30">-b: Select verbosity</a><a class="headerlink" href="#b-select-verbosity" title="Permalink to this headline">¶</a></h3>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-b">
+<span class="sig-name descname"><span class="pre">-b</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;verbosity</span> <span class="pre">level&gt;</span></span><a class="headerlink" href="#cmdoption-b" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select the verbosity level <code class="docutils literal notranslate"><span class="pre">&lt;verbosity</span> <span class="pre">level&gt;</span></code>;</p>
+<p>Range: [-4, 0];
+Default: 0.</p>
+<p>Setting a negative verbosity level enables display of extra messages with <code class="docutils literal notranslate"><span class="pre">DEBUG</span></code> severity (see <a class="reference internal" href="understanding-xbtest-messages.html#understanding-xbtest-messages"><span class="std std-ref">Understanding xbtest messages</span></a>).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ xbtest -b &lt;verbosity level&gt; -d &lt;BDF&gt; -j path/to/my_tests.json
+</pre></div>
+</div>
+<p>The following table describes the different severity levels that can be enabled:</p>
+<table class="docutils align-default" id="id16">
+<caption><span class="caption-text">Extra verbosity level</span><a class="headerlink" href="#id16" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 95%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Level</p></th>
+<th class="head"><p>Details</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>No debug information is reported by default.</p></td>
+</tr>
+<tr class="row-odd"><td><p>-1</p></td>
+<td><p>This level allows to reports debug information for test cases and tasks (intermediate results/measurements/test steps).
+The handiest one to debug a tricky situation and have more information about the ongoing test.</p></td>
+</tr>
+<tr class="row-even"><td><p>-2</p></td>
+<td><p>Use this level for more information regarding the host application setup phase.</p></td>
+</tr>
+<tr class="row-odd"><td><p>-3</p></td>
+<td><p>Reports debug information for <a class="reference internal" href="../introduction/overview.html#hardware-overview"><span class="std std-ref">xbtIP</span></a> access related calls.
+This may be used for example if the board/SW hangs.</p></td>
+</tr>
+<tr class="row-even"><td><p>-4</p></td>
+<td><p>This level activates the debug messages of the host application parsers (e.g. JSON files, command line).</p></td>
+</tr>
+</tbody>
+</table>
+<p>These <code class="docutils literal notranslate"><span class="pre">DEBUG</span></code> messages are not supported by command line option <a class="reference internal" href="#cmdoption-m"><code class="xref std std-option docutils literal notranslate"><span class="pre">-m</span></code></a>.</p>
+<p>There are no details, nor resolution available.
+There are no rules about their content or even their accuracy (the best way to understand them is to have access to the SW source code to follow their generation).</p>
+</dd></dl>
+
+</section>
+<section id="t-select-timestamp">
+<h3><a class="toc-backref" href="#id31">-t: Select timestamp</a><a class="headerlink" href="#t-select-timestamp" title="Permalink to this headline">¶</a></h3>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-t">
+<span class="sig-name descname"><span class="pre">-t</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;timestamp&gt;</span></span><a class="headerlink" href="#cmdoption-t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select the timestamp mode <code class="docutils literal notranslate"><span class="pre">&lt;timestamp&gt;</span></code>;</p>
+<p>Possible values: <code class="docutils literal notranslate"><span class="pre">none</span></code>, <code class="docutils literal notranslate"><span class="pre">absolute</span></code> and <code class="docutils literal notranslate"><span class="pre">differential</span></code>.</p>
+<p>Defaults to none when not specified.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ xbtest -t &lt;timestamp&gt; -d &lt;BDF&gt; -j path/to/my_tests.json
+</pre></div>
+</div>
+<p>The following table described the supported timestamp modes.</p>
+<table class="docutils align-default" id="id17">
+<caption><span class="caption-text">Timestamp modes</span><a class="headerlink" href="#id17" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 59%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Mode</p></th>
+<th class="head"><p>Details</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">none</span></code></p></td>
+<td><p>By default, no timestamp is used in the log messages.</p></td>
+<td><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>STATUS :: CMN_032 :: POWER :: Start Test <span class="m">1</span>: <span class="o">[</span><span class="m">300</span>, <span class="m">49</span><span class="o">]</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">absolute</span></code></p></td>
+<td><p>The absolute elapsed wall-clock time since some arbitrary, fixed point in the past (typically since reboot of the server).
+This is handy to link <code class="docutils literal notranslate"><span class="pre">dmesg</span></code> file with <code class="docutils literal notranslate"><span class="pre">xbtest.log</span></code> file as it uses the same format (second with 6 decimal digits precision).</p></td>
+<td><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="m">263445</span>.141868<span class="o">]</span> STATUS :: CMN_032 :: POWER :: Start Test <span class="m">1</span>: <span class="o">[</span><span class="m">300</span>, <span class="m">49</span><span class="o">]</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">differential</span></code></p></td>
+<td><p>Elapsed time since the previous message displayed.</p></td>
+<td><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>+0.000076<span class="o">]</span> STATUS :: CMN_032 :: POWER :: Start Test <span class="m">1</span>: <span class="o">[</span><span class="m">300</span>, <span class="m">49</span><span class="o">]</span>
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This will slow down the software as each message requests a timestamp to the OS (clock monotonic).
+The slow down shouldn’t be noticeable if only 1 xbtest instance is running or if the processors are not heavily loaded.
+With multi-cards or CPU stress test running, the behaviour of xbtest cannot be guaranteed.</p>
+</div>
+</dd></dl>
+
+</section>
+<section id="d-select-card-configuration-json-multi-cards-test">
+<h3><a class="toc-backref" href="#id32">-D: Select card configuration JSON (multi cards test)</a><a class="headerlink" href="#d-select-card-configuration-json-multi-cards-test" title="Permalink to this headline">¶</a></h3>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-D">
+<span class="sig-name descname"><span class="pre">-D</span></span><span class="sig-prename descclassname"> <span class="pre">path/to/card_cfg.json</span></span><a class="headerlink" href="#cmdoption-D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provide a card configuration JSON file <code class="docutils literal notranslate"><span class="pre">path/to/card_cfg.json</span></code>.</p>
+<p>This file can be used, instead of the command line, to select cards, test JSON files and pre-canned tests.</p>
+<p>This option can be provided only once and cannot be combined with the -d, -c, -j options.</p>
+<p>See <a class="reference internal" href="#card-configuration-json-file"><span class="std std-ref">Complex multi cards test</span></a> section for more information on the parameters supported in this file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ xbtest -D path/to/card_cfg.json
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="i-e-select-pdi-and-card-definition-json">
+<h3><a class="toc-backref" href="#id33">-i &amp; -e: Select PDI and card definition JSON</a><a class="headerlink" href="#i-e-select-pdi-and-card-definition-json" title="Permalink to this headline">¶</a></h3>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-i">
+<span class="sig-name descname"><span class="pre">-i</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;pdi&gt;</span></span><a class="headerlink" href="#cmdoption-i" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select the PDI <code class="docutils literal notranslate"><span class="pre">&lt;pdi&gt;</span></code>. This is used to find the <a class="reference internal" href="../introduction/overview.html#xbtest-metadata-json-files"><span class="std std-ref">xbtest metadata JSON files</span></a>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-e">
+<span class="sig-name descname"><span class="pre">-e</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;card</span> <span class="pre">definition&gt;</span></span><a class="headerlink" href="#cmdoption-e" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select the <a class="reference internal" href="../introduction/overview.html#card-definition-json-file"><span class="std std-ref">Card definition JSON file</span></a> <code class="docutils literal notranslate"><span class="pre">&lt;card</span> <span class="pre">definition&gt;</span></code>.</p>
+</dd></dl>
+
+<p>These options <a class="reference internal" href="#cmdoption-i"><code class="xref std std-option docutils literal notranslate"><span class="pre">-i</span></code></a> and <a class="reference internal" href="#cmdoption-e"><code class="xref std std-option docutils literal notranslate"><span class="pre">-e</span></code></a> are used internally by <a class="reference internal" href="../introduction/overview.html#application-software"><span class="std std-ref">xbtest application software (xbtSW)</span></a> while dispatching the test run.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<dl class="footnote brackets">
+<dt class="label" id="id11"><span class="brackets">1</span><span class="fn-backref">(<a href="#id3">1</a>,<a href="#id4">2</a>,<a href="#id5">3</a>,<a href="#id10">4</a>)</span></dt>
+<dd><p>Prevents any test being launched.</p>
+</dd>
+<dt class="label" id="id12"><span class="brackets">2</span><span class="fn-backref">(<a href="#id6">1</a>,<a href="#id7">2</a>)</span></dt>
+<dd><p>The maximum number of tests (number of times options <a class="reference internal" href="#cmdoption-c"><code class="xref std std-option docutils literal notranslate"><span class="pre">-c</span></code></a> and <a class="reference internal" href="#cmdoption-j"><code class="xref std std-option docutils literal notranslate"><span class="pre">-j</span></code></a> are present in command line) for each card configuration is 999.</p>
+</dd>
+<dt class="label" id="id13"><span class="brackets">3</span><span class="fn-backref">(<a href="#id8">1</a>,<a href="#id9">2</a>)</span></dt>
+<dd><p><a class="reference internal" href="#cmdoption-l"><code class="xref std std-option docutils literal notranslate"><span class="pre">-l</span></code></a> and <a class="reference internal" href="#cmdoption-L"><code class="xref std std-option docutils literal notranslate"><span class="pre">-L</span></code></a> cannot be combined.</p>
+</dd>
+</dl>
+</div>
+</section>
+</section>
+<section id="single-card-examples">
+<span id="id14"></span><h2>Single card examples<a class="headerlink" href="#single-card-examples" title="Permalink to this headline">¶</a></h2>
+<section id="single-test-on-a-single-card">
+<span id="single-card-single-test-examples"></span><h3>Single test on a single card<a class="headerlink" href="#single-test-on-a-single-card" title="Permalink to this headline">¶</a></h3>
+<p>The following example shows how to run only one test, Test JSON files (<a class="reference internal" href="#cmdoption-j"><code class="xref std std-option docutils literal notranslate"><span class="pre">-j</span></code></a>) or pre-canned test (<a class="reference internal" href="#cmdoption-c"><code class="xref std std-option docutils literal notranslate"><span class="pre">-c</span></code></a>), on a single card.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ xbtest -d <span class="m">0000</span>:5e:00.1 -j path/to/my_tests.json
+$ xbtest -d <span class="m">0000</span>:5e:00.1 -c verify
+</pre></div>
+</div>
+<p>In the below example, the verbosity has been increase to include more debug messages and by disabling the dynamic console, all messages are printed in the console.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ xbtest -d <span class="m">0000</span>:5e:00.1 -j path/to/my_tests.json -F -b -1
+</pre></div>
+</div>
+</section>
+<section id="multiple-tests-on-a-single-card">
+<span id="single-card-multiple-test-examples"></span><h3>Multiple tests on a single card<a class="headerlink" href="#multiple-tests-on-a-single-card" title="Permalink to this headline">¶</a></h3>
+<p>Test JSON files (<a class="reference internal" href="#cmdoption-j"><code class="xref std std-option docutils literal notranslate"><span class="pre">-j</span></code></a>) and pre-canned test (<a class="reference internal" href="#cmdoption-c"><code class="xref std std-option docutils literal notranslate"><span class="pre">-c</span></code></a>) options can be mixed.</p>
+<p>Each test provided is run one after the other for the specified BDF.</p>
+<p>An error in one test on one card does not stop any other tests.</p>
+<p>For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ xbtest -d <span class="m">0000</span>:5e:00.1 -c verify -c stress -j path/to/my_tests.json
+</pre></div>
+</div>
+</section>
+</section>
+<section id="multi-card-support">
+<span id="id15"></span><h2>Multi card support<a class="headerlink" href="#multi-card-support" title="Permalink to this headline">¶</a></h2>
+<p>xbtest supports natively the dispatch of test across various cards. You don’t need to open various terminals.</p>
+<p>This can be done via the command line or a card configuration json</p>
+<blockquote>
+<div><ul>
+<li><p>Command line: for quick and easy multiple card tests.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Multiple tests on a single card.</p></li>
+<li><p>Same tests over multiple cards.</p></li>
+<li><p>Multiple tests over multiple cards.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Card configuration json file: for complex test sequence and card selection with support for individual option per test and card.</p></li>
+</ul>
+</div></blockquote>
+<section id="same-tests-on-multiple-cards">
+<h3>Same tests on multiple cards<a class="headerlink" href="#same-tests-on-multiple-cards" title="Permalink to this headline">¶</a></h3>
+<p>Different cards can be targeted simultaneously.</p>
+<p>Each test provided is run one after the other for all selected cards.</p>
+<p>For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ xbtest -d <span class="m">0000</span>:5e:00.1 -d <span class="m">0000</span>:d9:00.1 -d <span class="m">0000</span>:86:00.1 -c dma -j path/to/my_tests.json -c memory -j path/to/another_test.json -b -1
+</pre></div>
+</div>
+<p>In this example, the card configurations for all cards (0000:5e:00.1 &amp; 0000:d9:00.1 &amp; 0000:86:00.1) are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Test 1: pre-canned <code class="docutils literal notranslate"><span class="pre">dma</span></code></p></li>
+<li><p>Test 2: <code class="docutils literal notranslate"><span class="pre">path/to/my_tests.json</span></code></p></li>
+<li><p>Test 3: pre-canned <code class="docutils literal notranslate"><span class="pre">memory</span></code></p></li>
+<li><p>Test 4: <code class="docutils literal notranslate"><span class="pre">path/to/another_test.json</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-b</span> <span class="pre">-1</span></code> for all tests</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="different-tests-on-multiple-cards">
+<h3>Different tests on multiple cards<a class="headerlink" href="#different-tests-on-multiple-cards" title="Permalink to this headline">¶</a></h3>
+<p>The tests run can differs between each card.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ xbtest -d <span class="m">0000</span>:5e:00.1 -d <span class="m">0000</span>:d9:00.1 -c dma -j path/to/my_tests.json -c memory -b -1 <span class="se">\</span>
+         -d <span class="m">0000</span>:86:00.1                 -j path/to/my_card_specific_test.json
+</pre></div>
+</div>
+<p>In this example, the card configurations are:</p>
+<blockquote>
+<div><ul>
+<li><p>0000:5e:00.1 &amp; 0000:d9:00.1:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Test 1: pre-canned <code class="docutils literal notranslate"><span class="pre">dma</span></code></p></li>
+<li><p>Test 2: <code class="docutils literal notranslate"><span class="pre">path/to/my_tests.json</span></code></p></li>
+<li><p>Test 3: pre-canned <code class="docutils literal notranslate"><span class="pre">memory</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-b</span> <span class="pre">-1</span></code> is used for all tests</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>0000:86:00.1:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Test 1: <code class="docutils literal notranslate"><span class="pre">path/to/my_card_specific_test.json</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</section>
+<section id="complex-multi-cards-test">
+<span id="card-configuration-json-file"></span><h3>Complex multi cards test<a class="headerlink" href="#complex-multi-cards-test" title="Permalink to this headline">¶</a></h3>
+<p>For complex test sequence, the card configuration JSON file will offer more flexibility and configuration.</p>
+<p>The card configuration JSON file is used to define:</p>
+<blockquote>
+<div><ul>
+<li><p>List of BDF.</p></li>
+<li><p>List of tests:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Test JSON file or pre-canned test.</p></li>
+<li><p>Possibly add other options for each test individually.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Possibly overwrite tests definition per BDF.</p></li>
+<li><p>Comments supported at any level of the JSON file.</p></li>
+</ul>
+</div></blockquote>
+<p>The card configuration JSON file is selected using command line option <a class="reference internal" href="#cmdoption-D"><code class="xref std std-option docutils literal notranslate"><span class="pre">-D</span></code></a>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ xbtest -D card_config.json
+</pre></div>
+</div>
+<section id="card-configuration-json-definition">
+<h4>Card configuration JSON definition<a class="headerlink" href="#card-configuration-json-definition" title="Permalink to this headline">¶</a></h4>
+<p>The following table defines the parameters supported in the card configuration JSON file:</p>
+<table class="docutils align-default" id="id18">
+<caption><span class="caption-text">Card configuration JSON file parameter definition</span><a class="headerlink" href="#id18" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 5%" />
+<col style="width: 6%" />
+<col style="width: 4%" />
+<col style="width: 10%" />
+<col style="width: 7%" />
+<col style="width: 10%" />
+<col style="width: 7%" />
+<col style="width: 44%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" colspan="4"><p>Node name</p></th>
+<th class="head" rowspan="2"><p>Node type</p></th>
+<th class="head" rowspan="2"><p>Example</p></th>
+<th class="head" rowspan="2"><p>Command line equivalent</p></th>
+<th class="head" rowspan="2"><p>Mandatory / Optional</p></th>
+<th class="head" rowspan="2"><p>Default</p></th>
+<th class="head" rowspan="2"><p>Description</p></th>
+</tr>
+<tr class="row-even"><th class="head"><p>Level 0</p></th>
+<th class="head"><p>Level 1</p></th>
+<th class="head"><p>Level 2</p></th>
+<th class="head"><p>Level 3</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td rowspan="6"><p>global_config</p></td>
+<td><p>args</p></td>
+<td></td>
+<td></td>
+<td><p>string</p></td>
+<td><p>“-b -1”</p></td>
+<td><p>-b -1</p></td>
+<td><p>Optional</p></td>
+<td></td>
+<td><p>Specify the other command line options to be passed to xbtest SW for all cards.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>These options and options defined in command line must be different.</p></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>cards</p></td>
+<td></td>
+<td></td>
+<td><p>List&lt;string&gt;</p></td>
+<td><p>[“0000:86:00.1”,
+“0000:5e:00.1”]</p></td>
+<td><p>-d 0000:86:00.1
+-d 0000:5e:00.1</p></td>
+<td><p>Mandatory</p></td>
+<td></td>
+<td><p>List of card BDFs.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Maximum number of cards in this list is 100.</p></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td rowspan="4"><p>tests</p></td>
+<td></td>
+<td></td>
+<td><p>List&lt;object&gt;</p></td>
+<td></td>
+<td></td>
+<td><p>Mandatory</p></td>
+<td></td>
+<td><p>List of objects. Each object defines a test.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Tests are run in the same order as specified in the list.</p></li>
+<li><p>Maximum number of tests in this list is 999.</p></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>args</p></td>
+<td></td>
+<td><p>string</p></td>
+<td><p>“-b -1”</p></td>
+<td><p>-b -1</p></td>
+<td><p>Optional</p></td>
+<td><p>global_config.args</p></td>
+<td><p>Overwrites <code class="docutils literal notranslate"><span class="pre">global_config.args</span></code> for this test, for all cards.</p></td>
+</tr>
+<tr class="row-odd"><td><p>test_json</p></td>
+<td></td>
+<td><p>string</p></td>
+<td><p>“path/to/my_tests.json”</p></td>
+<td><p>-j path/to/my_tests.json</p></td>
+<td><p>Mandatory</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>when <code class="docutils literal notranslate"><span class="pre">pre_canned</span></code> not defined</p></li>
+</ul>
+</div></blockquote>
+</td>
+<td></td>
+<td><p>Test JSON file.</p></td>
+</tr>
+<tr class="row-even"><td><p>pre_canned</p></td>
+<td></td>
+<td><p>string</p></td>
+<td><p>“stress”</p></td>
+<td><p>-c stress</p></td>
+<td><p>Optional</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>when <code class="docutils literal notranslate"><span class="pre">test_json</span></code> not defined</p></li>
+</ul>
+</div></blockquote>
+</td>
+<td></td>
+<td><p>Pre-canned test.</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="6"><p>card_config</p></td>
+<td rowspan="6"><p><code class="docutils literal notranslate"><span class="pre">&lt;BDF&gt;</span></code></p></td>
+<td></td>
+<td></td>
+<td><p>object</p></td>
+<td></td>
+<td></td>
+<td><p>Optional</p></td>
+<td></td>
+<td><p>Overwrite for card identified by <code class="docutils literal notranslate"><span class="pre">&lt;BDF&gt;</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Valid <code class="docutils literal notranslate"><span class="pre">&lt;BDF&gt;</span></code> nodes are values provided in <code class="docutils literal notranslate"><span class="pre">global_config.cards</span></code> list.</p></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>args</p></td>
+<td></td>
+<td><p>string</p></td>
+<td><p>“-b -1”</p></td>
+<td><p>-b -1</p></td>
+<td><p>Optional</p></td>
+<td><p>global_config.args</p></td>
+<td><p>Overwrites <code class="docutils literal notranslate"><span class="pre">global_config.args</span></code> for all tests for card identified by <code class="docutils literal notranslate"><span class="pre">&lt;BDF&gt;</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="4"><p>tests</p></td>
+<td></td>
+<td><p>List&lt;object&gt;</p></td>
+<td></td>
+<td></td>
+<td><p>Mandatory</p></td>
+<td><p>gloabal_config.tests</p></td>
+<td><p>Overwrites <code class="docutils literal notranslate"><span class="pre">global_config.tests</span></code> for card identified by <code class="docutils literal notranslate"><span class="pre">&lt;BDF&gt;</span></code>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Number of tests in <code class="docutils literal notranslate"><span class="pre">card_config.&lt;BDF&gt;.tests</span></code> does not necessarily equal number of tests in <code class="docutils literal notranslate"><span class="pre">global_config.tests</span></code> and can be different for each card.</p></li>
+<li><p>Maximum number of tests in this list is 999.</p></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>args</p></td>
+<td><p>string</p></td>
+<td><p>“-b -1”</p></td>
+<td><p>-b -1</p></td>
+<td><p>Optional</p></td>
+<td><p>card_config.&lt;BDF&gt;.args</p></td>
+<td><p>Overwrites <code class="docutils literal notranslate"><span class="pre">card_config.&lt;BDF&gt;.args</span></code> for this test.</p></td>
+</tr>
+<tr class="row-odd"><td><p>test_json</p></td>
+<td><p>string</p></td>
+<td><p>“path/to/my_tests.json”</p></td>
+<td><p>-j path/to/my_tests.json</p></td>
+<td><p>Mandatory</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>when <code class="docutils literal notranslate"><span class="pre">pre_canned</span></code> not defined</p></li>
+</ul>
+</div></blockquote>
+</td>
+<td></td>
+<td><p>Test JSON file for card identified by <code class="docutils literal notranslate"><span class="pre">&lt;BDF&gt;</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>pre_canned</p></td>
+<td><p>string</p></td>
+<td><p>“stress”</p></td>
+<td><p>-c stress</p></td>
+<td><p>Optional</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>when <code class="docutils literal notranslate"><span class="pre">test_json</span></code> not defined</p></li>
+</ul>
+</div></blockquote>
+</td>
+<td></td>
+<td><p>Pre-canned test for card identified by <code class="docutils literal notranslate"><span class="pre">&lt;BDF&gt;</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Here are some examples:</p>
+<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;First define all tests and all targeted cards&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;global_config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;args&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-b -1&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;cards&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;0000:86:00.1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0000:5e:00.1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0000:d9:00.1&quot;</span><span class="p">],</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;tests&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w">   </span><span class="nt">&quot;pre_canned&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;verify&quot;</span><span class="w">                                  </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w">   </span><span class="nt">&quot;test_json&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;path/to/my_tests.json&quot;</span><span class="p">,</span><span class="w">  </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-b -2&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Then override tests for some cards if needed&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;card_config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;0000:5e:00.1&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;tests&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                </span><span class="p">{</span><span class="w">   </span><span class="nt">&quot;pre_canned&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;power&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-b 0&quot;</span><span class="w">     </span><span class="p">},</span><span class="w"></span>
+<span class="w">                </span><span class="p">{</span><span class="w">   </span><span class="nt">&quot;test_json&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;path/to/another_test.json&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">]</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+				  
+				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="identifying-running-aved.html" class="btn btn-neutral float-left" title="Identifying AVED running on card" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="result.html" class="btn btn-neutral float-right" title="Result" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Advanced Micro Devices Inc.</p>
+  </div>
+
+
+
+										<div class="aem-Grid aem-Grid--16">
+											<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+												<div class="container-fluid sub-footer">
+
+													                    <div class="row">
+                        <div class="col-xs-24">
+                          <p><a target="_blank" href="https://www.amd.com/en/corporate/copyright">Terms and Conditions</a> | <a target="_blank" href="https://www.amd.com/en/corporate/privacy">Privacy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/cookies">Cookie Policy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/trademarks">Trademarks</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf">Statement on Forced Labor</a> | <a target="_blank" href="https://www.amd.com/en/corporate/competition">Fair and Open Competition</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf">UK Tax Strategy</a> | <a target="_blank" href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA">Inclusive Terminology</a> | <a href="#cookiessettings" class="ot-sdk-show-settings">Cookies Settings</a></p>
+                        </div>
+                    </div>
+												</div>
+											</div>
+										</div>
+										
+</br>
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

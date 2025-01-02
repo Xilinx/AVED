@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script charset="UTF-8" data-document-language="true" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script class="optanon-category-C0002" type="text/plain">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+<title>Generic Command Queue IP v2.0 - Product Guide — AVED  documentation</title>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="_static/xbtest.css" rel="stylesheet" type="text/css"/>
+<link href="_static/_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="https://docs.xilinx.com/favicon.ico" rel="shortcut icon"/>
+<!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/js/theme.js"></script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html" rel="next" title="Hardware Discovery IP v1.0 - Product Guide"/>
+<link href="AVED%2BV80%2B-%2BSource%2BFile%2BOverview.html" rel="prev" title="AVED V80 - Source File Overview"/>
+<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager -->
+<noscript><iframe class="optanon-category-C0002" height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager -->
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="index.html"> AVED
+            <img alt="Logo" class="logo" src="_static/xilinx-header-logo.svg"/>
+</a>
+<div role="search">
+<form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" type="text"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+</div>
+</div><div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BHierarchy%2BOverview.html">AVED V80 - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BCIPS%2BConfiguration.html">AVED V80 - CIPS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BResources.html">AVED V80 - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BMap.html">AVED V80 - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BNoC%2BConfiguration.html">AVED V80 - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BBase%2BLogic.html">AVED V80 - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BClock%2BReset%2BModule.html">AVED V80 - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BSource%2BFile%2BOverview.html">AVED V80 - Source File Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Generic Command Queue IP v2.0 - Product Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#applications">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#standards">Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#architecture-overview">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resource-use">Resource Use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interface-descriptions">Interface Descriptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clocking">Clocking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resets">Resets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interrupts">Interrupts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#register-space">Register Space</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#producer-axi-register-space">Producer AXI Register Space</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#consumer-axi-register-space">Consumer AXI Register Space</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#customizing-and-generating-the-ip">Customizing and Generating the IP</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#importing-the-ip-repository">Importing the IP Repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#customizing-the-ip">Customizing the IP</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#component-name">Component Name</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#output-generation">Output Generation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#simulation">Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#synthesis-and-implementation">Synthesis and Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#driver">Driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-design">Example Design</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SMBus%2BIP%2Bv1.1%2B-%2BProduct%2BGuide.html">SMBus IP v1.1 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BASDM%2BApplication.html">AVED ASDM Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOutOfBand%2BTelemetry%2BApplication.html">AVED OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Board%2BManagement%2BController%2B%28BMC%29%2BProxy%2BDriver.html">Board Management Controller (BMC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BQDMA.html">AVED QDMA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift"><nav aria-label="Mobile navigation menu" class="wy-nav-top" style="background: black">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="index.html">AVED</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="Page navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a class="icon icon-home" href="index.html"></a> »</li>
+<li>Generic Command Queue IP v2.0 - Product Guide</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<section id="generic-command-queue-ip-v2-0-product-guide">
+<h1>Generic Command Queue IP v2.0 - Product Guide<a class="headerlink" href="#generic-command-queue-ip-v2-0-product-guide" title="Permalink to this headline">¶</a></h1>
+<section id="overview">
+<span id="genericcommandqueueipv2-0productguide-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Generic command queue (GCQ) IP is used for communication queues between endpoints for XRT related consumers and producers such as PCIe® host, APU, RPU, and Microblaze.</p>
+<p>IP implement queue that contains single doorbell register for tail pointer and interrupt output that is configurable to generate interrupt on write to tail pointer or manually setting the interrupt register.</p>
+<p>Current version of IP implements two queues as shown in the block diagram below.</p>
+<ol class="arabic simple">
+<li><p>Submission queue</p></li>
+</ol>
+<ul class="simple">
+<li><p>Used to send command to peer.</p></li>
+<li><p>Generates submission queue interrupt (irq_sq) based on the SQ register settings.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Completion queue</p></li>
+</ol>
+<ul class="simple">
+<li><p>Used to receive command from peer.</p></li>
+<li><p>Generates completion queue interrupt (irq_cq) based on the CQ register settings.</p></li>
+</ul>
+<p><a class="drawio-diagram-image reference internal" href="_images/1118756418.png"><img alt="image1" class="drawio-diagram-image" src="_images/1118756418.png" style="width: 1133px;"/></a></p>
+<p>The sequence to execute commands:</p>
+<ol class="arabic simple">
+<li><p>Producer puts commands into submission queue entries with unique command ID for each command.</p></li>
+<li><p>Producer writes the tail pointer to submission queue doorbell register (triggering an interrupt to consumer in interrupt mode).</p></li>
+<li><p>Consumer reads submission queue entries and consumes the commands.</p></li>
+<li><p>Upon completion, consumer writes each completion to completion queue entries with completed command ID.</p></li>
+<li><p>Consumer writes the tail pointer to completion queue doorbell register (triggering an interrupt to producer in interrupt mode).</p></li>
+<li><p>Producer reads the completion queue entries and then updates the submission queue head pointer so that those entries can be reused.</p></li>
+</ol>
+</section>
+<section id="features">
+<span id="genericcommandqueueipv2-0productguide-features"></span><h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>A command queue IP that receives commands from the producer and writes into register space for the consumer to read and vice versa.</p></li>
+<li><p>Handshakes through commands and addresses for asynchronous I/O using a ring buffer.</p></li>
+<li><p>Implements AXI4-Subordinate as an interface for both producer and consumer.</p></li>
+<li><p>Interrupt output enable/disable capabilities.</p></li>
+<li><p>Interrupts can be fired directly by setting a bit within the register space or it can be triggered via writing to the interrupt register tail pointer.</p></li>
+<li><p>AXI4 busses and other internal logic all run on one master clock.</p></li>
+</ul>
+</section>
+<section id="applications">
+<span id="genericcommandqueueipv2-0productguide-applications"></span><h2>Applications<a class="headerlink" href="#applications" title="Permalink to this headline">¶</a></h2>
+<p>The diagram below outlines a typical use case for the Generic Command Queue IP as deployed within AMD Versal™ devices. The Generic Command Queue IP communicates with other IPs by implementing an AXI4-Subordinate. The register space of the GCQ IP v2.0
+allows IPs connected to it through the AXI interface produce CQ and SQ interrupts out of GCQ IP itself. Command queue process is from 1 to 2 shown in the diagram below. This flow is explained in the Architecture Overview section.</p>
+<p>Below is an example usage of a GCQ IP v2.0 in Versal device.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/1118756412.png"><img alt="image2" class="drawio-diagram-image" src="_images/1118756412.png" style="width: 433px;"/></a></p>
+</section>
+<section id="standards">
+<span id="genericcommandqueueipv2-0productguide-standards"></span><h2>Standards<a class="headerlink" href="#standards" title="Permalink to this headline">¶</a></h2>
+<p>Generic Command Queue IP is compliant to the AMBA AXI and ACE Protocol Specification Version E.</p>
+</section>
+<section id="architecture-overview">
+<span id="genericcommandqueueipv2-0productguide-architectureoverview"></span><h2>Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permalink to this headline">¶</a></h2>
+<p>The block diagram below gives a high level overview of the logical structure of the Generic Command Queue IP. The IP implements a logic that does not have a dependency on a parameter, therefore below diagram is valid for any instantiation of the IP.</p>
+<p>The flow of command process is from the producer to the consumer. The producer writes commands to the tail on the <strong>Submission Queue</strong> through S00_AXI. Then, it writes to the tail pointer register in the submission queue indicating the tail for the
+consumer, this triggers an interrupt (<strong>irq_sq</strong>). The consumer reads the tail pointer on the submission queue and starts to consume from head to tail in the submission queue, which results in the clearing of the submission queue interrupt (irq_sq).
+The head pointer is stored within software local memory, so this information is not directly related to the IP, but the software. Reading the command and processing that command, the consumer writes to the tail pointer register in the <strong>Completion
+Queue</strong> along with the commands it consumed to the completion queue tail, which also triggers an interrupt (<strong>irq_cq</strong>). The producer reads the completion queue tail pointer to read the queue from head till the tail, which clears the completion queue
+interrupt (irq_cq).</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/1118756407.png"><img alt="image3" class="drawio-diagram-image" src="_images/1118756407.png" style="width: 611px;"/></a></p>
+</section>
+<section id="resource-use">
+<span id="genericcommandqueueipv2-0productguide-resourceuse"></span><h2>Resource Use<a class="headerlink" href="#resource-use" title="Permalink to this headline">¶</a></h2>
+<p>The table below contains resource utilization data for several configurations of the Generic Command Queue IP core. Any configuration parameters that are not listed have their default values. Any parameters with a blank value are disabled or set
+automatically by the IP core.</p>
+<ul class="simple">
+<li><p>Resource figures are taken from the utilization report issued at the end of implementation using the Out-of-Context flow in the AMD Vivado Design Suite™.</p></li>
+<li><p>Default Vivado Design Suite 2023.2 settings were used. You may be able to improve on these figures using different settings. Because surrounding circuitry will affect placement and timing, no guarantee can be given that these figures will be
+repeatable in a larger design.</p></li>
+</ul>
+<table class="wrapped confluenceTable"><colgroup class=""><col class=""/><col class=""/><col class=""/><col class=""/><col class=""/><col class=""/><col class=""/><col class=""/><col class=""/><col class=""/><col class=""/><col class=""/></colgroup><tbody class=""><tr class=""><th class="highlight-grey confluenceTh" data-highlight-colour="grey">Vivado Release</th><th class="highlight-grey confluenceTh" data-highlight-colour="grey">Family</th><th class="highlight-grey confluenceTh" data-highlight-colour="grey">Device</th><th class="highlight-grey confluenceTh" data-highlight-colour="grey">Package</th><th class="highlight-grey confluenceTh" data-highlight-colour="grey">Speedgrade</th><th class="highlight-grey confluenceTh" data-highlight-colour="grey">Configuration Name</th><th class="highlight-grey confluenceTh" data-highlight-colour="grey">Fixed Clocks</th><th class="highlight-grey confluenceTh" data-highlight-colour="grey">LUT</th><th class="highlight-grey confluenceTh" data-highlight-colour="grey">FF</th><th class="highlight-grey confluenceTh" data-highlight-colour="grey">DSP</th><th class="highlight-grey confluenceTh" data-highlight-colour="grey">36k BRAMs</th><th class="highlight-grey confluenceTh" data-highlight-colour="grey">18k BRAMs</th></tr><tr class=""><td class="confluenceTd">2023.2</td><td class="confluenceTd">versal</td><td class="confluenceTd"><span><span class="ui-provider bpw bpx it bpy bpz bqa bqb bqc bqd bqe bqf bqg bqh bqi bqj bqk bql bqm bqn bqo bqp bqq bqr bqs bqt bqu bqv bqw bqx bqy bqz bra brb brc brd">xcv80<br/></span></span></td><td class="confluenceTd"><span><span class="ui-provider bpw bpx it bpy bpz bqa bqb bqc bqd bqe bqf bqg bqh bqi bqj bqk bql bqm bqn bqo bqp bqq bqr bqs bqt bqu bqv bqw bqx bqy bqz bra brb brc brd">lsva4737</span></span></td><td class="confluenceTd">2MHP</td><td class="confluenceTd">ip_char</td><td class="confluenceTd">aclk=300</td><td class="confluenceTd">464</td><td class="confluenceTd">304</td><td class="confluenceTd">0</td><td class="confluenceTd">0</td><td class="confluenceTd">0</td></tr></tbody></table>
+</section>
+<section id="interface-descriptions">
+<span id="genericcommandqueueipv2-0productguide-interfacedescriptions"></span><h2>Interface Descriptions<a class="headerlink" href="#interface-descriptions" title="Permalink to this headline">¶</a></h2>
+<p>The table below gives an overview of the external interfaces and ports super-set present on the boundary of the GCQ IP v2.0.</p>
+<table class="wrapped confluenceTable"><colgroup><col/><col/><col/><col/><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Interface</th><th class="confluenceTh">Signal</th><th class="confluenceTh">Direction</th><th class="confluenceTh">Range</th><th class="confluenceTh">Clock</th><th class="confluenceTh">Enablement Dependency</th><th class="confluenceTh">Description</th></tr><tr><td class="confluenceTd" rowspan="17">S00_AXI</td><td class="confluenceTd">s00_axi_awaddr</td><td class="confluenceTd">Input</td><td class="confluenceTd">11:0</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd"><span style="color: rgb(23,43,77);">Producer AXI4-Lite write address</span></td></tr><tr><td class="confluenceTd">s00_axi_awvalid</td><td class="confluenceTd">Input</td><td class="confluenceTd">scalar</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd">Producer <span style="color: rgb(23,43,77);">AXI4-Lite write address valid</span></td></tr><tr><td class="confluenceTd">s00_axi_awready</td><td class="confluenceTd">Output</td><td class="confluenceTd">scalar</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd">Producer <span style="color: rgb(23,43,77);">AXI4-Lite write address ready</span></td></tr><tr><td class="confluenceTd">s00_axi_wdata</td><td class="confluenceTd">Input</td><td class="confluenceTd">31:0</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd">Producer <span style="color: rgb(23,43,77);">AXI4-Lite write data</span></td></tr><tr><td class="confluenceTd">s00_axi_wstrb</td><td class="confluenceTd">Input</td><td class="confluenceTd">3:0</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd">Producer <span style="color: rgb(23,43,77);">AXI4-Lite write strobes</span></td></tr><tr><td class="confluenceTd">s00_axi_wvalid</td><td class="confluenceTd">Input</td><td class="confluenceTd">scalar</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd">Producer <span style="color: rgb(23,43,77);">AXI4-Lite write data valid</span></td></tr><tr><td class="confluenceTd">s00_axi_wready</td><td class="confluenceTd">Output</td><td class="confluenceTd">scalar</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd">Producer <span style="color: rgb(23,43,77);">AXI4-Lite write data ready</span></td></tr><tr><td class="confluenceTd">s00_axi_bresp</td><td class="confluenceTd">Output</td><td class="confluenceTd">1:0</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd">Producer <span style="color: rgb(23,43,77);">AXI4-Lite write response</span></td></tr><tr><td class="confluenceTd">s00_axi_bvalid</td><td class="confluenceTd">Output</td><td class="confluenceTd">scalar</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd" style="text-align: left;">Producer AXI4-Lite write response valid</td></tr><tr><td class="confluenceTd">s00_axi_bready</td><td class="confluenceTd">Input</td><td class="confluenceTd">scalar</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd">Producer <span style="color: rgb(23,43,77);">AXI4-Lite write response ready</span></td></tr><tr><td class="confluenceTd">s00_axi_araddr</td><td class="confluenceTd">Input</td><td class="confluenceTd">11:0</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd">Producer <span style="color: rgb(23,43,77);">AXI4-Lite read address</span></td></tr><tr><td class="confluenceTd">s00_axi_arvalid</td><td class="confluenceTd">Input</td><td class="confluenceTd">scalar</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd">Producer <span style="color: rgb(23,43,77);">AXI4-Lite read address valid</span></td></tr><tr><td class="confluenceTd">s00_axi_arready</td><td class="confluenceTd">Output</td><td class="confluenceTd">scalar</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd">Producer <span style="color: rgb(23,43,77);">AXI4-Lite read address ready</span></td></tr><tr><td class="confluenceTd">s00_axi_rdata</td><td class="confluenceTd">Output</td><td class="confluenceTd">31:0</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd">Producer <span style="color: rgb(23,43,77);">AXI4-Lite read data</span></td></tr><tr><td class="confluenceTd">s00_axi_rresp</td><td class="confluenceTd">Output</td><td class="confluenceTd">1:0</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd">Producer <span style="color: rgb(23,43,77);">AXI4-Lite read response</span></td></tr><tr><td class="confluenceTd">s00_axi_rvalid</td><td class="confluenceTd">Output</td><td class="confluenceTd">scalar</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd">Producer <span style="color: rgb(23,43,77);">AXI4-Lite read valid</span></td></tr><tr><td class="confluenceTd">s00_axi_rready</td><td class="confluenceTd">Input</td><td class="confluenceTd">scalar</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd">Producer <span style="color: rgb(23,43,77);">AXI4-Lite read ready</span></td></tr><tr><td class="confluenceTd" rowspan="17">S01_AXI<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td><td class="confluenceTd">s01_axi_awaddr</td><td class="confluenceTd">Input</td><td class="confluenceTd">11:0</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd"><span style="color: rgb(23,43,77);">Consumer AXI4-Lite write address</span></td></tr><tr><td class="confluenceTd">s01_axi_awvalid</td><td class="confluenceTd">Input</td><td class="confluenceTd">scalar</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd"><span style="color: rgb(23,43,77);">Consumer AXI4-Lite write address valid</span></td></tr><tr><td class="confluenceTd">s01_axi_awready</td><td class="confluenceTd">Output</td><td class="confluenceTd">scalar</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd"><span style="color: rgb(23,43,77);">Consumer AXI4-Lite write address ready</span></td></tr><tr><td class="confluenceTd">s01_axi_wdata</td><td class="confluenceTd">Input</td><td class="confluenceTd">31:0</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd"><span style="color: rgb(23,43,77);">Consumer AXI4-Lite write data</span></td></tr><tr><td class="confluenceTd">s01_axi_wstrb</td><td class="confluenceTd">Input</td><td class="confluenceTd">3:0</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd"><span style="color: rgb(23,43,77);">Consumer AXI4-Lite write strobes</span></td></tr><tr><td class="confluenceTd">s01_axi_wvalid</td><td class="confluenceTd">Input</td><td class="confluenceTd">scalar</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd"><span style="color: rgb(23,43,77);">Consumer AXI4-Lite write data valid</span></td></tr><tr><td class="confluenceTd">s01_axi_wready</td><td class="confluenceTd">Output</td><td class="confluenceTd">scalar</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd"><span style="color: rgb(23,43,77);">Consumer AXI4-Lite write data ready</span></td></tr><tr><td class="confluenceTd">s01_axi_bresp</td><td class="confluenceTd">Output</td><td class="confluenceTd">1:0</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd"><span style="color: rgb(23,43,77);">Consumer AXI4-Lite write response</span></td></tr><tr><td class="confluenceTd">s01_axi_bvalid</td><td class="confluenceTd">Output</td><td class="confluenceTd">scalar</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd"><span style="color: rgb(23,43,77);">Consumer </span>AXI4-Lite write response valid</td></tr><tr><td class="confluenceTd">s01_axi_bready</td><td class="confluenceTd">Input</td><td class="confluenceTd">scalar</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd"><span style="color: rgb(23,43,77);">Consumer AXI4-Lite write response ready</span></td></tr><tr><td class="confluenceTd">s01_axi_araddr</td><td class="confluenceTd">Input</td><td class="confluenceTd">11:0</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd"><span style="color: rgb(23,43,77);">Consumer AXI4-Lite read address</span></td></tr><tr><td class="confluenceTd">s01_axi_arvalid</td><td class="confluenceTd">Input</td><td class="confluenceTd">scalar</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd"><span style="color: rgb(23,43,77);">Consumer AXI4-Lite read address valid</span></td></tr><tr><td class="confluenceTd">s01_axi_arready</td><td class="confluenceTd">Output</td><td class="confluenceTd">scalar</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd"><span style="color: rgb(23,43,77);">Consumer AXI4-Lite read address ready</span></td></tr><tr><td class="confluenceTd">s01_axi_rdata</td><td class="confluenceTd">Output</td><td class="confluenceTd">31:0</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd"><span style="color: rgb(23,43,77);">Consumer AXI4-Lite read data</span></td></tr><tr><td class="confluenceTd">s01_axi_rresp</td><td class="confluenceTd">Output</td><td class="confluenceTd">1:0</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd"><span style="color: rgb(23,43,77);">Consumer AXI4-Lite read response</span></td></tr><tr><td class="confluenceTd">s01_axi_rvalid</td><td class="confluenceTd">Output</td><td class="confluenceTd">scalar</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd"><span style="color: rgb(23,43,77);">Consumer AXI4-Lite read valid</span></td></tr><tr><td class="confluenceTd">s01_axi_rready</td><td class="confluenceTd">Input</td><td class="confluenceTd">scalar</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd"><span style="color: rgb(23,43,77);">Consumer AXI4-Lite read ready</span></td></tr><tr><td class="confluenceTd">aclk</td><td class="confluenceTd">aclk</td><td class="confluenceTd">Input</td><td class="confluenceTd">scalar</td><td class="confluenceTd"><br/></td><td class="confluenceTd">true</td><td class="confluenceTd" style="text-align: left;">Clock associated with the S00_AXI/S01_AXI interfaces </td></tr><tr><td class="confluenceTd">aresetn</td><td class="confluenceTd">aresetn</td><td class="confluenceTd">Input</td><td class="confluenceTd">scalar</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd">Active-Low reset associated with the S00_AXI/S01_AXI interfaces </td></tr><tr><td class="confluenceTd">irq_sq</td><td class="confluenceTd">irq_sq</td><td class="confluenceTd">Output</td><td class="confluenceTd">scalar</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd">Rising Edge interrupt output for submission queue</td></tr><tr><td class="confluenceTd">irq_cq</td><td class="confluenceTd">irq_cq</td><td class="confluenceTd">Output</td><td class="confluenceTd">scalar</td><td class="confluenceTd">aclk</td><td class="confluenceTd">true</td><td class="confluenceTd">Rising Edge interrupt output for completion queue</td></tr></tbody></table>
+</section>
+<section id="clocking">
+<span id="genericcommandqueueipv2-0productguide-clocking"></span><h2>Clocking<a class="headerlink" href="#clocking" title="Permalink to this headline">¶</a></h2>
+<p>Generic Command Queue IP operates on a single clock domain ‘aclk’ and the AXI interface used in the IP is also running on the same clock domain.</p>
+<p>The table below outlines the clock frequency ranges supported by the IP.</p>
+<table class="wrapped confluenceTable"><colgroup><col/><col/><col/><col/></colgroup><thead><tr><th class="confluenceTh" style="text-align: left;"><p>Clock Domain</p></th><th class="confluenceTh" colspan="1">Min (MHz)</th><th class="confluenceTh" style="text-align: left;"><p>Max (MHz)</p></th><th class="confluenceTh" style="text-align: left;"><p>Description</p></th></tr></thead><tbody><tr><td class="confluenceTd" style="text-align: left;">aclk</td><td class="confluenceTd" colspan="1">0</td><td class="confluenceTd" style="text-align: left;">300</td><td class="confluenceTd" style="text-align: left;">Clock used for S00_AXI and S01_AXI interface and internal core operation.</td></tr></tbody></table>
+</section>
+<section id="resets">
+<span id="genericcommandqueueipv2-0productguide-resets"></span><h2>Resets<a class="headerlink" href="#resets" title="Permalink to this headline">¶</a></h2>
+<p>Generic Command Queue IP is reset on assertion of the ‘aresetn’ active low reset input associated with the only master clock ‘aclk’ and is resetting AXI4 buses.</p>
+</section>
+<section id="interrupts">
+<span id="genericcommandqueueipv2-0productguide-interrupts"></span><h2>Interrupts<a class="headerlink" href="#interrupts" title="Permalink to this headline">¶</a></h2>
+<p>Interrupts irq_sq and irq_cq will be triggered upon register settings.</p>
+</section>
+<section id="register-space">
+<span id="genericcommandqueueipv2-0productguide-registerspace"></span><h2>Register Space<a class="headerlink" href="#register-space" title="Permalink to this headline">¶</a></h2>
+<section id="producer-axi-register-space">
+<span id="genericcommandqueueipv2-0productguide-produceraxiregisterspace"></span><h3>Producer AXI Register Space<a class="headerlink" href="#producer-axi-register-space" title="Permalink to this headline">¶</a></h3>
+<p>The table below outlines the layout and descriptions for the memory mapped register space within the GCQ IP v2.0, these registers are accessible via the Producer AXI interface i.e., <strong>S00_AXI</strong> interface.</p>
+<table class="relative-table wrapped confluenceTable" style="width: 100.0%;"><colgroup><col style="width: 7.25375%;"/><col style="width: 20.4818%;"/><col style="width: 15.5746%;"/><col style="width: 5.61831%;"/><col style="width: 6.75678%;"/><col style="width: 6.697%;"/><col style="width: 16.242%;"/></colgroup><tbody><tr><th class="confluenceTh">Register Address Offset</th><th class="confluenceTh">Register Name</th><th class="confluenceTh">Field Name</th><th class="confluenceTh">Bit Index</th><th class="confluenceTh">Default Value</th><th class="confluenceTh">Attribute</th><th class="confluenceTh">Field Description</th></tr><tr><td class="confluenceTd">0x000</td><td class="confluenceTd">SQ_TAIL_POINTER</td><td class="confluenceTd">TAIL_POINTER_OFFSET</td><td class="confluenceTd">31:0</td><td class="confluenceTd">0x0</td><td class="confluenceTd">RW</td><td class="confluenceTd"><p>Submission Queue Tail Pointer Offset</p><p>Configure the Tail Pointer offset for the Submission Queue.</p><p>If the INTERRUPT_TYPE field in SQ_RESET_INTERRUPT_CTRL register is 0x0, then a write to this register triggers the submission queue interrupt.</p><p>Once triggered, the submission queue interrupt can only be cleared by reading the the SQ_TAIL_POINTER register on the S01_AXI interface.</p></td></tr><tr><td class="confluenceTd" rowspan="2">0x004</td><td class="confluenceTd" rowspan="2">SQ_INTERRUPT_REG</td><td class="confluenceTd">INTERRUPT</td><td class="confluenceTd">0</td><td class="confluenceTd">0x0</td><td class="confluenceTd">WO</td><td class="confluenceTd"><p>Submission Queue Interrupt</p><p>When set - and while the INTERRUPT_TYPE field is 0x1, INTERRUPT_ENABLE field is 0x1, and RESET field is 0x0 in SQ_RESET_INTERRUPT_CTRL register  - triggers an interrupt on the submission queue.</p><p>Once triggered, the submission queue interrupt can only be cleared by reading the INTERRUPT_STATUS field of the SQ_INTERRUPT_STATUS register.</p><p>0x0 - Do not trigger an interrupt on the submission queue</p><p>0x1 - Trigger an interrupt on the submission queue</p></td></tr><tr><td class="confluenceTd" colspan="1">INTERRUPT_STATUS</td><td class="confluenceTd" colspan="1">1</td><td class="confluenceTd" colspan="1">0x0</td><td class="confluenceTd" colspan="1">RO</td><td class="confluenceTd" colspan="1"><p>Submission Queue Interrupt Status</p><p>Reports the current status of the Submission Queue interrupt.</p><p>0x0 - Submission Queue interrupt de-asserted</p><p>0x1 - Submission Queue interrupt asserted</p></td></tr><tr><td class="confluenceTd">0x008</td><td class="confluenceTd">SQ_QUEUE_MEM_ADDR_LOW</td><td class="confluenceTd">MEM_ADDR_LOW</td><td class="confluenceTd">31:0</td><td class="confluenceTd">0x0</td><td class="confluenceTd">RW</td><td class="confluenceTd"><p>Submission Queue Memory Address Low</p><p>Represents bits 31:0 of the submission queue device memory address.</p></td></tr><tr><td class="confluenceTd">0x00C</td><td class="confluenceTd">SQ_RESET_INTERRUPT_CTRL</td><td class="confluenceTd">INTERRUPT_ENABLE</td><td class="confluenceTd">0</td><td class="confluenceTd">0x0</td><td class="confluenceTd">RW</td><td class="confluenceTd"><p>Submission Queue Interrupt Enable</p><p>When set, enables the submission queue interrupt output.</p><p>0x0 - Disable submission queue interrupt</p><p>0x1 - Enable submission queue interrupt</p></td></tr><tr><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="confluenceTd">INTERRUPT_TYPE</td><td class="confluenceTd">1</td><td class="confluenceTd">0x0</td><td class="confluenceTd">RW</td><td class="confluenceTd"><p>Submission Queue Interrupt Type</p><p>Determines the interrupt type in use for the submission queue.</p><p>0x0 - Interrupt for the submission queue is triggered on a write operation to the SQ_TAIL_POINTER register</p><p>0x1 - Interrupt for the submission queue is triggered by setting the INTERRUPT field of the SQ_INTERRUPT_REG register to 0x1</p></td></tr><tr><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="confluenceTd">RESET</td><td class="confluenceTd">31</td><td class="confluenceTd">0x0</td><td class="confluenceTd">WO</td><td class="confluenceTd"><p>Reset</p><p>Performs a soft reset of all submission queue and completion queue registers.</p><p>0x0 - Do not reset all submission/completion queue registers</p><p>0x1 - Reset all submission/completion queue registers</p><p>This field is self-clearing once set.</p></td></tr><tr><td class="confluenceTd">0x010</td><td class="confluenceTd">SQ_QUEUE_MEM_ADDR_HIGH</td><td class="confluenceTd">MEM_ADDR_HIGH</td><td class="confluenceTd">31:0</td><td class="confluenceTd">0x0</td><td class="confluenceTd">RW</td><td class="confluenceTd"><p>Submission Queue Memory Address High</p><p>Represents bits 63:32 of the submission queue device memory address.</p></td></tr><tr><td class="confluenceTd">0x100</td><td class="confluenceTd">CQ_TAIL_POINTER</td><td class="confluenceTd">TAIL_POINTER_OFFSET</td><td class="confluenceTd">31:0</td><td class="confluenceTd">0x0</td><td class="confluenceTd">RO</td><td class="confluenceTd"><p>Completion Queue Tail Pointer Offset</p><p>Returns the tail pointer offset for the completion queue.</p><p>If the INTERRUPT_TYPE field in CQ_RESET_INTERRUPT_CTRL is 0x0, then reading this register clears the completion queue interrupt if asserted.</p></td></tr><tr><td class="confluenceTd">0x104</td><td class="confluenceTd">CQ_INTERRUPT_STATUS</td><td class="confluenceTd">INTERRUPT_STATUS</td><td class="confluenceTd">0</td><td class="confluenceTd">0x0</td><td class="confluenceTd">RO</td><td class="confluenceTd"><p>Completion Queue Interrupt Status</p><p>Returns the current state of the interrupt for the completion queue.</p><p>If the INTERRUPT_TYPE field in CQ_RESET_INTERRUPT_CTRL is 0x1, then reading this register clears the completion queue interrupt if asserted.</p></td></tr><tr><td class="confluenceTd">0x108</td><td class="confluenceTd">CQ_QUEUE_MEM_ADDR_LOW</td><td class="confluenceTd">MEM_ADDR_LOW</td><td class="confluenceTd">31:0</td><td class="confluenceTd">0x0</td><td class="confluenceTd">RO</td><td class="confluenceTd"><p>Completion Queue Memory Address Low</p><p>Returns bits 31:0 of the completion queue device memory address.</p></td></tr><tr><td class="confluenceTd">0x10C</td><td class="confluenceTd">CQ_RESET_INTERRUPT_CTRL</td><td class="confluenceTd">INTERRUPT_ENABLE</td><td class="confluenceTd">0</td><td class="confluenceTd">0x0</td><td class="confluenceTd">RO</td><td class="confluenceTd"><p>Completion Queue Interrupt Enable</p><p>Returns the enable state for completion queue interrupt.</p><p>0x0 - Completion Queue interrupt output disabled</p><p>0x1 - Completion Queue interrupt output enabled</p></td></tr><tr><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="confluenceTd">INTERRUPT_TYPE</td><td class="confluenceTd">1</td><td class="confluenceTd">0x0</td><td class="confluenceTd">RO</td><td class="confluenceTd"><p>Completion Queue Interrupt Type</p><p>Returns the interrupt type for the completion queue.</p><p>0x0 - Interrupt for the completion queue is triggered on a write operation to the CQ_TAIL_POINTER register</p><p>0x1 - Interrupt for the completion queue is triggered by setting the INTERRUPT field of the CQ_INTERRUPT_REG register to 0x1</p></td></tr><tr><td class="confluenceTd">0x110</td><td class="confluenceTd">CQ_QUEUE_MEM_ADDR_HIGH</td><td class="confluenceTd">MEM_ADDR_HIGH</td><td class="confluenceTd">31:0</td><td class="confluenceTd">0x0</td><td class="confluenceTd">RO</td><td class="confluenceTd"><p>Completion Queue Memory Address High</p><p>Returns bits 63:32 of the completion queue device memory address.</p></td></tr></tbody></table>
+</section>
+<section id="consumer-axi-register-space">
+<span id="genericcommandqueueipv2-0productguide-consumeraxiregisterspace"></span><h3>Consumer AXI Register Space<a class="headerlink" href="#consumer-axi-register-space" title="Permalink to this headline">¶</a></h3>
+<p>The table below outlines the layout and descriptions for the memory mapped register space within the GCQ IP v2.0, these registers are accessible via the Consumer AXI interface i.e., <strong>S01_AXI</strong> interface.</p>
+<table class="relative-table wrapped confluenceTable" style="width: 100.0%;"><colgroup><col style="width: 7.27784%;"/><col style="width: 20.5496%;"/><col style="width: 15.6263%;"/><col style="width: 5.63615%;"/><col style="width: 6.77819%;"/><col style="width: 6.77909%;"/><col style="width: 15.9145%;"/></colgroup><tbody><tr><th class="confluenceTh">Register Address Offset</th><th class="confluenceTh">Register Name</th><th class="confluenceTh">Field Name</th><th class="confluenceTh">Bit Index</th><th class="confluenceTh">Default Value</th><th class="confluenceTh">Attribute</th><th class="confluenceTh">Field Description</th></tr><tr><td class="confluenceTd">0x000</td><td class="confluenceTd">CQ_TAIL_POINTER</td><td class="confluenceTd">TAIL_POINTER_OFFSET</td><td class="confluenceTd">31:0</td><td class="confluenceTd">0x0</td><td class="confluenceTd">RW</td><td class="confluenceTd"><p>Completion Queue Tail Pointer Offset</p><p>Configure the Tail Pointer offset for the Completion Queue.</p><p>If the INTERRUPT_TYPE field in CQ_RESET_INTERRUPT_CTRL register is 0x0, then a write to this register triggers the completion queue interrupt.</p><p>Once triggered, the completion queue interrupt can only be cleared by reading the the CQ_TAIL_POINTER register on the S00_AXI interface.</p></td></tr><tr><td class="confluenceTd">0x004</td><td class="confluenceTd">CQ_INTERRUPT_REG</td><td class="confluenceTd">INTERRUPT</td><td class="confluenceTd">0</td><td class="confluenceTd">0x0</td><td class="confluenceTd">WO</td><td class="confluenceTd"><p>Completion Queue Interrupt</p><p>When set - and while the INTERRUPT_TYPE field is 0x1, INTERRUPT_ENABLE field is 0x1, and RESET field is 0x0 in SQ_RESET_INTERRUPT_CTRL register  - triggers an interrupt on the completion queue.</p><p>Once triggered, the completion queue interrupt can only be cleared by reading the INTERRUPT_STATUS field of the CQ_INTERRUPT_STATUS register.</p><p>0x0 - Do not trigger an interrupt on the completion queue</p><p>0x1 - Trigger an interrupt on the completion queue</p></td></tr><tr><td class="confluenceTd" colspan="1"><br/></td><td class="confluenceTd" colspan="1"><br/></td><td class="confluenceTd" colspan="1">INTERRUPT_STATUS</td><td class="confluenceTd" colspan="1">1</td><td class="confluenceTd" colspan="1">0x0</td><td class="confluenceTd" colspan="1">RO</td><td class="confluenceTd" colspan="1"><p>Completion Queue Interrupt Status</p><p>Reports the current status of the Completion Queue interrupt.</p><p>0x0 - Completion Queue interrupt de-asserted</p><p>0x1 - Completion Queue interrupt asserted</p></td></tr><tr><td class="confluenceTd">0x008</td><td class="confluenceTd">CQ_QUEUE_MEM_ADDR_LOW</td><td class="confluenceTd">MEM_ADDR_LOW</td><td class="confluenceTd">31:0</td><td class="confluenceTd">0x0</td><td class="confluenceTd">RW</td><td class="confluenceTd"><p>Completion Queue Memory Address Low</p><p>Represents bits 31:0 of the completion queue device memory address.</p></td></tr><tr><td class="confluenceTd">0x00C</td><td class="confluenceTd">CQ_RESET_INTERRUPT_CTRL</td><td class="confluenceTd">INTERRUPT_ENABLE</td><td class="confluenceTd">0</td><td class="confluenceTd">0x0</td><td class="confluenceTd">RW</td><td class="confluenceTd"><p>Completion Queue Interrupt Enable</p><p>When set, enables the completion queue interrupt output.</p><p>0x0 - Disable completion queue interrupt</p><p>0x1 - Enable completion queue interrupt</p></td></tr><tr><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="confluenceTd">INTERRUPT_TYPE</td><td class="confluenceTd">1</td><td class="confluenceTd">0x0</td><td class="confluenceTd">RW</td><td class="confluenceTd"><p>Completion Queue Interrupt Type</p><p>Determines the interrupt type in use for the completion queue.</p><p>0x0 - Interrupt for the completion queue is triggered on a write operation to the CQ_TAIL_POINTER register</p><p>0x1 - Interrupts for the completion queue are triggered by setting the INTERRUPT field of the CQ_INTERRUPT_REG register to 0x1</p></td></tr><tr><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="confluenceTd">RESET</td><td class="confluenceTd">31</td><td class="confluenceTd">0x0</td><td class="confluenceTd">WO</td><td class="confluenceTd"><p>Reset</p><p>Performs a soft reset of all submission queue and completion queue registers.</p><p>0x0 - Do not reset all submission/completion queue registers</p><p>0x1 - Reset all submission/completion queue registers</p><p>This field is self-clearing once set.</p></td></tr><tr><td class="confluenceTd">0x010</td><td class="confluenceTd">CQ_QUEUE_MEM_ADDR_HIGH</td><td class="confluenceTd">MEM_ADDR_HIGH</td><td class="confluenceTd">31:0</td><td class="confluenceTd">0x0</td><td class="confluenceTd">RW</td><td class="confluenceTd"><p>Completion Queue Memory Address High</p><p>Represents bits 63:32 of the completion queue device memory address.</p></td></tr><tr><td class="confluenceTd">0x100</td><td class="confluenceTd">SQ_TAIL_POINTER</td><td class="confluenceTd">TAIL_POINTER_OFFSET</td><td class="confluenceTd">31:0</td><td class="confluenceTd">0x0</td><td class="confluenceTd">RO</td><td class="confluenceTd"><p>Submission Queue Tail Pointer Offset</p><p>Returns the tail pointer offset for the submission queue.</p><p>If the INTERRUPT_TYPE field in SQ_RESET_INTERRUPT_CTRL is 0x0, then reading this register clears the submission queue interrupt if asserted.</p></td></tr><tr><td class="confluenceTd">0x104</td><td class="confluenceTd">SQ_INTERRUPT_STATUS</td><td class="confluenceTd">INTERRUPT_STATUS</td><td class="confluenceTd">0</td><td class="confluenceTd">0x0</td><td class="confluenceTd">RO</td><td class="confluenceTd"><p>Submission Queue Interrupt Status</p><p>Returns the current state of the interrupt for the submission queue.</p><p>If the INTERRUPT_TYPE field in SQ_RESET_INTERRUPT_CTRL is 0x1, then reading this register clears the submission queue interrupt if asserted.</p></td></tr><tr><td class="confluenceTd">0x108</td><td class="confluenceTd">SQ_QUEUE_MEM_ADDR_LOW</td><td class="confluenceTd">MEM_ADDR_LOW</td><td class="confluenceTd">31:0</td><td class="confluenceTd">0x0</td><td class="confluenceTd">RO</td><td class="confluenceTd"><p>Submission Queue Memory Address Low</p><p>Returns bits 31:0 of the submission queue device memory address.</p></td></tr><tr><td class="confluenceTd">0x10C</td><td class="confluenceTd">SQ_RESET_INTERRUPT_CTRL</td><td class="confluenceTd">INTERRUPT_ENABLE</td><td class="confluenceTd">0</td><td class="confluenceTd">0x0</td><td class="confluenceTd">RO</td><td class="confluenceTd"><p>Submission Queue Interrupt Enable</p><p>Returns the enable state for submission queue interrupt.</p><p>0x0 - Submission Queue interrupt output disabled</p><p>0x1 - Submission Queue interrupt output enabled</p></td></tr><tr><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="confluenceTd">INTERRUPT_TYPE</td><td class="confluenceTd">1</td><td class="confluenceTd">0x0</td><td class="confluenceTd">RO</td><td class="confluenceTd"><p>Submission Queue Interrupt Type</p><p>Returns the interrupt type for the submission queue.</p><p>0x0 - Interrupt for the submission queue is triggered on a write operation to the SQ_TAIL_POINTER register</p><p>0x1 - Interrupt for the submission queue is triggered by setting the INTERRUPT field of the SQ_INTERRUPT_REG register to 0x1</p></td></tr><tr><td class="confluenceTd">0x110</td><td class="confluenceTd">SQ_QUEUE_MEM_ADDR_HIGH</td><td class="confluenceTd">MEM_ADDR_HIGH</td><td class="confluenceTd">31:0</td><td class="confluenceTd">0x0</td><td class="confluenceTd">RO</td><td class="confluenceTd"><p>Submission Queue Memory Address High</p><p>Returns bits 63:32 of the submission queue device memory address.</p></td></tr></tbody></table>
+</section>
+</section>
+<section id="customizing-and-generating-the-ip">
+<span id="genericcommandqueueipv2-0productguide-customizingandgeneratingtheip"></span><h2>Customizing and Generating the IP<a class="headerlink" href="#customizing-and-generating-the-ip" title="Permalink to this headline">¶</a></h2>
+<p>This section includes information about using AMD tools to customize and generate the GCQ IP v2.0 using the Vivado Design Suite.</p>
+<p>If you are customizing and generating the IP in the Vivado IP integrator, see the <em>Vivado Design Suite User Guide: Designing IP Subsystems using IP Integrator</em>(<a class="reference external" href="https://docs.amd.com/r/en-US/ug994-vivado-ip-subsystems/Getting-Started-with-Vivado-IP-Integrator">UG994</a>) for detailed information.</p>
+<section id="importing-the-ip-repository">
+<span id="genericcommandqueueipv2-0productguide-importingtheiprepository"></span><h3>Importing the IP Repository<a class="headerlink" href="#importing-the-ip-repository" title="Permalink to this headline">¶</a></h3>
+<p>The GCQ IP v2.0 is delivered as a standalone IP repository that can be imported for use within Vivado Design Suite. Refer to the <em>Vivado Design Suite User Guide: Designing with IP</em>(<a class="reference external" href="https://docs.amd.com/r/en-US/ug896-vivado-ip/Managing-IP-Repositories">UG896</a>) for detailed information on adding an external IP repository to a project.</p>
+</section>
+<section id="customizing-the-ip">
+<span id="genericcommandqueueipv2-0productguide-customizingtheip"></span><h3>Customizing the IP<a class="headerlink" href="#customizing-the-ip" title="Permalink to this headline">¶</a></h3>
+<p>You can customize the IP for use in your design by specifying values for the various user parameters associated with the IP using the following steps:</p>
+<ol class="arabic simple">
+<li><p>Select the IP from the IP catalog.</p></li>
+<li><p>Double-click the selected IP or select the Customize IP command from the toolbar or right-click menu.</p></li>
+</ol>
+<section id="component-name">
+<span id="genericcommandqueueipv2-0productguide-componentname"></span><h4>Component Name<a class="headerlink" href="#component-name" title="Permalink to this headline">¶</a></h4>
+<p>The Component name is used as the name of the top-level wrapper file for the core. The underlying netlist still retains its original name. Names must begin with a letter and must be composed from the following characters: a through z, 0 through 9,
+and “_”. The default is cmd_queue_0.</p>
+</section>
+</section>
+<section id="parameters">
+<span id="genericcommandqueueipv2-0productguide-parameters"></span><h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
+<p>The GCQ IP v2.0 does not have any user parameters. Therefore, there cannot be any pre-synthesis customizations to the IP.</p>
+</section>
+<section id="output-generation">
+<span id="genericcommandqueueipv2-0productguide-outputgeneration"></span><h3>Output Generation<a class="headerlink" href="#output-generation" title="Permalink to this headline">¶</a></h3>
+<p>For detailed information on generating IP output products, please refer to the <em>Vivado Design Suite User Guide: Designing with IP</em> (<a class="reference external" href="https://docs.amd.com/r/en-US/ug896-vivado-ip/IP-Centric-Design-Flow">UG896</a>).</p>
+</section>
+</section>
+<section id="simulation">
+<span id="genericcommandqueueipv2-0productguide-simulation"></span><h2>Simulation<a class="headerlink" href="#simulation" title="Permalink to this headline">¶</a></h2>
+<p>For comprehensive information about Vivado simulation components, as well as information about using supported third-party tools, see the Vivado Design Suite User Guide: Logic Simulation(<a class="reference external" href="https://docs.amd.com/r/en-US/ug900-vivado-logic-simulation/Overview">UG900</a>).</p>
+</section>
+<section id="synthesis-and-implementation">
+<span id="genericcommandqueueipv2-0productguide-synthesisandimplementation"></span><h2>Synthesis and Implementation<a class="headerlink" href="#synthesis-and-implementation" title="Permalink to this headline">¶</a></h2>
+<p>For details about synthesis and implementation, see the Vivado Design Suite User Guide: Designing with IP (<a class="reference external" href="https://docs.amd.com/r/en-US/ug896-vivado-ip/IP-Centric-Design-Flow">UG896</a>).</p>
+</section>
+<section id="driver">
+<span id="genericcommandqueueipv2-0productguide-driver"></span><h2>Driver<a class="headerlink" href="#driver" title="Permalink to this headline">¶</a></h2>
+<p>Please refer to <a class="reference external" href="AMI+Architecture.html">AMI Architecture</a> for details on the software driver and interactions with the Generic Command Queue IP.</p>
+</section>
+<section id="example-design">
+<span id="genericcommandqueueipv2-0productguide-exampledesign"></span><h2>Example Design<a class="headerlink" href="#example-design" title="Permalink to this headline">¶</a></h2>
+<p>The GCQ IP v2.0 does not currently support generation of an IP example design.</p>
+<p>Page Revision: v. 14</p>
+</section>
+</section>
+</div>
+</div>
+<footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+<a accesskey="p" class="btn btn-neutral float-left" href="AVED%2BV80%2B-%2BSource%2BFile%2BOverview.html" rel="prev" title="AVED V80 - Source File Overview"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+<a accesskey="n" class="btn btn-neutral float-right" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html" rel="next" title="Hardware Discovery IP v1.0 - Product Guide">Next <span aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<p>© Copyright 2023, Advanced Micro Devices Inc.</p>
+</div>
+<div class="aem-Grid aem-Grid--16">
+<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+<div class="container-fluid sub-footer">
+<div class="row">
+<div class="col-xs-24">
+<p><a href="https://www.amd.com/en/corporate/copyright" target="_blank">Terms and Conditions</a> | <a href="https://www.amd.com/en/corporate/privacy" target="_blank">Privacy</a> | <a href="https://www.amd.com/en/corporate/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.amd.com/en/corporate/trademarks" target="_blank">Trademarks</a> | <a href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf" target="_blank">Statement on Forced Labor</a> | <a href="https://www.amd.com/en/corporate/competition" target="_blank">Fair and Open Competition</a> | <a href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf" target="_blank">UK Tax Strategy</a> | <a href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA" target="_blank">Inclusive Terminology</a> | <a class="ot-sdk-show-settings" href="#cookiessettings">Cookies Settings</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+</div>
+</div>
+</section>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+</body>
+</html>

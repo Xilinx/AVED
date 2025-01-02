@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script charset="UTF-8" data-document-language="true" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script class="optanon-category-C0002" type="text/plain">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+<title>AVED V80 - CIPS Configuration — AVED  documentation</title>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="_static/xbtest.css" rel="stylesheet" type="text/css"/>
+<link href="_static/_static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="https://docs.xilinx.com/favicon.ico" rel="shortcut icon"/>
+<!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/js/theme.js"></script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="AVED%2BV80%2B-%2BMemory%2BResources.html" rel="next" title="AVED V80 - Memory Resources"/>
+<link href="AVED%2BV80%2B-%2BHierarchy%2BOverview.html" rel="prev" title="AVED V80 - Hierarchy Overview"/>
+<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager -->
+<noscript><iframe class="optanon-category-C0002" height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager -->
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="index.html"> AVED
+            <img alt="Logo" class="logo" src="_static/xilinx-header-logo.svg"/>
+</a>
+<div role="search">
+<form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" type="text"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+</div>
+</div><div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<p class="caption" role="heading"><span class="caption-text">AVED v80 Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOverview.html">AVED Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">How-to install and run a pre-built AVED design on an ALVEO card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html">How-to Rebuild an AVED Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BBoard%2BManagement%2BSolution.html">AVED - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BDevice%2BProgramming.html">AVED - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BHost%2Bto%2BCard%2BCommunication.html">AVED - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AVED Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDeployment%2BArchive.html">AVED Deployment Archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDeployment%2Bpackage%2Bonto%2Bthe%2BHost%2BServer.html">AVED Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInstalling%2Bthe%2BDesign%2Bonto%2Bthe%2BCard.html">AVED Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BFPT%2BImage%2Bin%2BFlash.html">AVED Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BUpdating%2BDesign%2BPDI%2Bin%2BFlash.html">AVED Updating Design PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BDebug%2BTechniques.html">AVED Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BJTAG%2BBoot%2BRecovery.html">AVED JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2Buserguide%2B%28ami_tool%29.html">AVED Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/user-guide/source/index.html">Xbtest Userguide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BBuild%2BScripts.html">AVED Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Source%2BConfiguration%2BControl.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - V80</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BHierarchy%2BOverview.html">AVED V80 - Hierarchy Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">AVED V80 - CIPS Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#cips">CIPS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ccix-pcie-module-cpm5">CCIX PCIe Module (CPM5)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cpm5-gui-configuration">CPM5 GUI Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cpm5-basic-configuration">CPM5 Basic Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cpm5-pcie-controller-1-configuration">CPM5 PCIE Controller 1 Configuration</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#basic">Basic</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#capabilities">Capabilities</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pf-ids">PF IDs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pcie-bars">PCIE: BARs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pcie-dma">PCIe: DMA</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#advanced-options">Advanced Options</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#enable-interface-options">Enable Interface Options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cpm5-tcl-configuration">CPM5 TCL Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ps-pmc">PS PMC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#platform-management-controller-pmc">Platform Management Controller (PMC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ps-pmc-gui-configuration">PS PMC GUI Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#boot-mode">Boot Mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#peripherals">Peripherals</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#pcie-reset">PCIe Reset</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#uart0-uart1">UART0 / UART1</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#spi0">SPI0</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#lpd-i2c0-lpd-i2c1">LPD_I2C0 / LPD_I2C1</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#ttc0-ttc1-ttc2-ttc3">TTC0 / TTC1 / TTC2 / TTC3</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#io">IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#debug">Debug</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#pl-bscan">PL BSCAN</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cross-trigger">Cross Trigger</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#ps-parallel-trace">PS Parallel Trace</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#hsdp">HSDP</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#clocking">Clocking</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#input-clocks">Input Clocks</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#output-clocks">Output Clocks</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#sysmon">Sysmon</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#slr0">SLR0</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#slr1">SLR1</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#slr2">SLR2</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#device-security">Device Security</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#avedv80cipsconfiguration-slr0-2">SLR0</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#avedv80cipsconfiguration-slr1-2">SLR1</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#avedv80cipsconfiguration-slr2-2">SLR2</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#tamper">Tamper</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#avedv80cipsconfiguration-slr0-3">SLR0</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#avedv80cipsconfiguration-slr1-3">SLR1</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#avedv80cipsconfiguration-slr2-3">SLR2</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#ps-pl-interfaces">PS PL Interfaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#noc">NoC</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#avedv80cipsconfiguration-slr0-4">SLR0</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#avedv80cipsconfiguration-slr1-4">SLR1</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#avedv80cipsconfiguration-slr2-4">SLR2</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#interrupts">Interrupts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#power">Power</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BResources.html">AVED V80 - Memory Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BMemory%2BMap.html">AVED V80 - Memory Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BNoC%2BConfiguration.html">AVED V80 - NoC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BBase%2BLogic.html">AVED V80 - Base Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BClock%2BReset%2BModule.html">AVED V80 - Clock Reset Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BV80%2B-%2BSource%2BFile%2BOverview.html">AVED V80 - Source File Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Generic%2BCommand%2BQueue%2BIP%2Bv2.0%2B-%2BProduct%2BGuide.html">Generic Command Queue IP v2.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hardware%2BDiscovery%2BIP%2Bv1.0%2B-%2BProduct%2BGuide.html">Hardware Discovery IP v1.0 - Product Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SMBus%2BIP%2Bv1.1%2B-%2BProduct%2BGuide.html">SMBus IP v1.1 - Product Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AVED</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BController%2B%28AMC%29%2B-%2BArchitecture%2Band%2BDesign.html">AVED Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BASDM%2BApplication.html">AVED ASDM Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BInBand%2BTelemetry%2BApplication.html">AVED InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BOutOfBand%2BTelemetry%2BApplication.html">AVED OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29%2BProxy%2BDriver.html">AVED Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BProgramming%2BControl%2B%28APC%29%2BProxy%2BDriver.html">AVED Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BSensor%2BControl%2B%28ASC%29%2BProxy%2BDriver.html">AVED Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BExternal%2BDevice%2BControl%2B%28AXC%29%2BProxy%2BDriver.html">AVED External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Board%2BManagement%2BController%2B%28BMC%29%2BProxy%2BDriver.html">Board Management Controller (BMC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware%2BInterface%2B%28FW_IF%29%2BAbstraction%2BLayer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operating%2BSystem%2BAbstraction%2BLayer%2B%28OSAL%29.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Profiles%2Band%2BCMake%2Bbuild%2Bprocess.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BManagement%2BInterface%2B%28AMI%29.html">AVED Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BQDMA.html">AVED QDMA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2B-%2BList%2Bof%2BAbbreviations.html">AVED - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AVED%2BRelease%2BInformation.html">AVED Release Information</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift"><nav aria-label="Mobile navigation menu" class="wy-nav-top" style="background: black">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="index.html">AVED</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="Page navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a class="icon icon-home" href="index.html"></a> »</li>
+<li>AVED V80 - CIPS Configuration</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<section id="aved-v80-cips-configuration">
+<h1>AVED V80 - CIPS Configuration<a class="headerlink" href="#aved-v80-cips-configuration" title="Permalink to this headline">¶</a></h1>
+<section id="cips">
+<span id="avedv80cipsconfiguration-cips"></span><h2>CIPS<a class="headerlink" href="#cips" title="Permalink to this headline">¶</a></h2>
+<p>The processing system (PS), platform management controller (PMC), and CCIX PCIe module (CPM) modules are grouped together and configured using the control, interface, and processing system (CIPS) IP core. The PS contains the APUs, RPUs, and
+peripherals (I2C, UART, SPI, etc.). It shares the DDRMC with the PL via the NoC. The PMC is responsible for boot and configuration management, power management, reliability and safety functions, dynamic function eXchange (DFX), life cycle management
+and I/O peripherals. The CPM provides the primary interfaces for designs, such as AVED, following the server system methodology. It has hardened connections to the NoC which is used to access the DDR and other hardened IP. The CIPS configuration is
+described below. All settings differing from the default settings are indicated in the GUI captures below.</p>
+<p>A description of the CIPS configuration options can be found in <a class="reference external" href="https://docs.xilinx.com/r/en-US/pg352-cips">https://docs.xilinx.com/r/en-US/pg352-cips</a>.</p>
+</section>
+<section id="ccix-pcie-module-cpm5">
+<span id="avedv80cipsconfiguration-ccixpciemodule-cpm5"></span><h2>CCIX PCIe Module (CPM5)<a class="headerlink" href="#ccix-pcie-module-cpm5" title="Permalink to this headline">¶</a></h2>
+<section id="cpm5-gui-configuration">
+<span id="avedv80cipsconfiguration-cpm5guiconfiguration"></span><h3>CPM5 GUI Configuration<a class="headerlink" href="#cpm5-gui-configuration" title="Permalink to this headline">¶</a></h3>
+<p>A description of the CPM configuration options can be found here:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg347-cpm-dma-bridge">https://docs.xilinx.com/r/en-US/pg347-cpm-dma-bridge</a></p></li>
+<li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg347-cpm-dma-bridge/CPM5-GUI-Customization">https://docs.xilinx.com/r/en-US/pg347-cpm-dma-bridge/CPM5-GUI-Customization</a></p></li>
+</ul>
+<section id="cpm5-basic-configuration">
+<span id="avedv80cipsconfiguration-cpm5basicconfiguration"></span><h4>CPM5 Basic Configuration<a class="headerlink" href="#cpm5-basic-configuration" title="Permalink to this headline">¶</a></h4>
+<div class="line-block">
+<div class="line">In the CPM5 Basic Configuration window, there are two PCIe Controllers to choose from. When selecting a PCIe controller, AVED follows the same guidance listed here: <a class="reference external" href="https://docs.xilinx.com/r/en-US/pg347-cpm-dma-bridge/General-Guidance-for-CPM5">https://docs.xilinx.com/r/en-US/pg347-cpm-dma-bridge/General-Guidance-for-CPM5</a>.
+In addition to this, AVED is only using 8 lanes, and to be in PCI SIG compliance, the bottom 8 lanes must be used. As a result, PCIe® controller 1 must be used.</div>
+<div class="line">AVED V80 is a Gen 5x8 design supporting 32GT/s raw bandwidth.</div>
+</div>
+<p><img alt="image1" class="confluence-embedded-image" src="_images/1118271162.png"/></p>
+</section>
+<section id="cpm5-pcie-controller-1-configuration">
+<span id="avedv80cipsconfiguration-cpm5pciecontroller1configuration"></span><h4>CPM5 PCIE Controller 1 Configuration<a class="headerlink" href="#cpm5-pcie-controller-1-configuration" title="Permalink to this headline">¶</a></h4>
+<section id="basic">
+<span id="avedv80cipsconfiguration-basic"></span><h5>Basic<a class="headerlink" href="#basic" title="Permalink to this headline">¶</a></h5>
+<p><strong>Configuration Mode: Advanced</strong></p>
+<p>AVED uses PCIe extended configuration space. There are multiple settings that need to be enabled to allow for this functionality. First, the mode must be changed to advanced. This enables the MSI-X cap, advanced options, and interface options GUI
+tabs. Then, in the advanced options tab, the configuration space must be changed to ‘Extended Large’. This will allow the PCIe extended configuration space to be extended from its default configuration. Finally, in the Interfaces tab, enable
+‘Extended Config Interface’. This interface connects to the HW discovery IP, which provides vendor specific extended configuration information.</p>
+<p><strong>Functional Mode: QDMA</strong></p>
+<p>Used for high bandwidth DDR accesses.</p>
+<p><img alt="image2" class="confluence-embedded-image" src="_images/1118271163.png"/></p>
+</section>
+<section id="capabilities">
+<span id="avedv80cipsconfiguration-capabilities"></span><h5>Capabilities<a class="headerlink" href="#capabilities" title="Permalink to this headline">¶</a></h5>
+<p><strong>Total Physical Functions: 2</strong></p>
+<p>Two Physical Functions (PF) are used in the AVED design. PF0 allows the card to be managed by the PCIe host. PF1 allows DMA transfers with the PCIe Host. Additional PFs can be enabled as required by user applications.</p>
+<p>AVED PCIe uses the synchronous clock from the PCIe edge connector.</p>
+<p><img alt="image3" class="confluence-embedded-image" src="_images/1118271337.png"/></p>
+</section>
+<section id="pf-ids">
+<span id="avedv80cipsconfiguration-pfids"></span><h5>PF IDs<a class="headerlink" href="#pf-ids" title="Permalink to this headline">¶</a></h5>
+<p>These values must match the settings for the AVED card as indicated in the table below. The greyed out settings are not used by AVED.</p>
+<p><a class="drawio-diagram-image reference internal" href="_images/1118839246.png"><img alt="image4" class="drawio-diagram-image" src="_images/1118839246.png" style="width: 1086px;"/></a></p>
+<p><strong>PF - ID Initial Values: Change values to those below to match AMD specific settings</strong></p>
+<ul class="simple">
+<li><p>Device ID PF 0</p></li>
+<li><ul>
+<li><p>V80: 50b4/50b5</p></li>
+</ul>
+</li>
+<li><p>Subsystem ID PF 0: 000e</p></li>
+</ul>
+<p><strong>Class Code: Change values to those below</strong></p>
+<ul class="simple">
+<li><p>Base Class Value PF 0: 12 : Processing Accelerator – vendor-specific interface</p></li>
+<li><p>Subclass Value PF 0: 00 : Processing Accelerator – vendor-specific interface</p></li>
+</ul>
+<p><img alt="image5" class="confluence-embedded-image" src="_images/1118271364.png"/></p>
+</section>
+<section id="pcie-bars">
+<span id="avedv80cipsconfiguration-pciebars"></span><h5>PCIE: BARs<a class="headerlink" href="#pcie-bars" title="Permalink to this headline">¶</a></h5>
+<p>The configuration for the PF0 AXI Bridge Master and PF1 DMA is shown below. These options enable the Master AXI interface within the CIPS IP and is used to interface with AXI peripherals, and also allows for PCIe Host DMA transfers to the memory
+devices.</p>
+<p>CPM5 can support up to six 32-bit BARs or three 64-bit BARs per PF. AVED only requires two physical functions. PF0 uses a single 64-bit BAR mapping to a 256MB address space (BAR0). As a result, PCIe BAR0 is mapped to the first 256MB of the PL memory
+space: 0x201_0000_0000 - 0x201_0FFF_FFFF (256MB). For additional information on address mapping in AMD Versal™ devices, refer to the following link: <a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map</a>. Since the address space
+for PCIe and AXI is different, address translation is required.</p>
+<p>PF1 is configured to use the DMA.</p>
+<p>PF0</p>
+<p><img alt="image6" class="confluence-embedded-image" src="_images/1118352122.png"/></p>
+<p>PF1</p>
+<p><a class="confluence-embedded-image reference internal" href="_images/1118352120.png"><img alt="image7" class="confluence-embedded-image" src="_images/1118352120.png" style="width: 1151px;"/></a></p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+<section id="pcie-dma">
+<span id="avedv80cipsconfiguration-pcie-dma"></span><h5>PCIe: DMA<a class="headerlink" href="#pcie-dma" title="Permalink to this headline">¶</a></h5>
+<p>This functionality is not used by AVED.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+<div class="line"><a class="confluence-embedded-image reference internal" href="_images/1118270341.png"><img alt="image8" class="confluence-embedded-image" src="_images/1118270341.png" style="width: 931px;"/></a></div>
+</div>
+<p>MSI-X Cap</p>
+<p>MSI-X capabilities for PF1 were enabled to be used in conjunction with the DMA.</p>
+<p><a class="confluence-embedded-image reference internal" href="_images/1118270264.png"><img alt="image9" class="confluence-embedded-image" src="_images/1118270264.png" style="height: 163px;"/></a></p>
+</section>
+<section id="advanced-options">
+<span id="avedv80cipsconfiguration-advancedoptions"></span><h5>Advanced Options<a class="headerlink" href="#advanced-options" title="Permalink to this headline">¶</a></h5>
+<p>AVED uses vendor specific extended capabilities (VSEC) with the large extended configuration space. The extended capabilities contain the entries for the HW Discovery IP, UUID, gcq_m2r, and AXI remapping (<a class="reference external" href="AVED+V80+-+Base+Logic.html">AVED V80 - Base
+Logic</a>). To minimize design complexity, AVED does not enable virtualization capabilities, so ARI and ACS are disabled.</p>
+<p><strong>Verify Alternate Routing ID (ARI) Capability:</strong> <strong>Unselectable</strong></p>
+<p><strong>Disable Access Control Services (ACS) Capability: De-Selected</strong></p>
+<p><strong>Verify Advanced Error Reporting (AER) Capability: Selected</strong></p>
+<p><strong>PCI Express Extended Configuration Space Enabled: Extended Large</strong></p>
+<div class="line-block">
+<div class="line"><br/></div>
+<div class="line"><img alt="image10" class="confluence-embedded-image" src="_images/1118270257.png"/></div>
+</div>
+</section>
+<section id="enable-interface-options">
+<span id="avedv80cipsconfiguration-enableinterfaceoptions"></span><h5>Enable Interface Options<a class="headerlink" href="#enable-interface-options" title="Permalink to this headline">¶</a></h5>
+<p>The Extend Config Interface option enables the interface to allow PCIe to transfer configuration information with the user application. In AVED, this port, pcie1_cfg_ext, is connected to the Hardware Discovery IP.</p>
+<p><strong>Extended Config Interface: Select</strong></p>
+<p><img alt="image11" class="confluence-embedded-image" src="_images/1118352132.png"/></p>
+</section>
+</section>
+</section>
+<section id="cpm5-tcl-configuration">
+<span id="avedv80cipsconfiguration-cpm5tclconfiguration"></span><h3>CPM5 TCL Configuration<a class="headerlink" href="#cpm5-tcl-configuration" title="Permalink to this headline">¶</a></h3>
+<p>The above configuration can be enabled using the TCL configuration settings below.</p>
+<p>CONFIG.CPM_CONFIG { \</p>
+<div class="line-block">
+<div class="line">CPM_PCIE0_MODES {None} \</div>
+<div class="line">CPM_PCIE1_ACS_CAP_ON {0} \</div>
+<div class="line">CPM_PCIE1_ARI_CAP_ENABLED {0} \</div>
+<div class="line">CPM_PCIE1_CFG_EXT_IF {1} \</div>
+<div class="line">CPM_PCIE1_CFG_VEND_ID {10ee} \</div>
+<div class="line">CPM_PCIE1_COPY_PF0_QDMA_ENABLED {0} \</div>
+<div class="line">CPM_PCIE1_EXT_PCIE_CFG_SPACE_ENABLED {Extended_Large} \</div>
+<div class="line">CPM_PCIE1_FUNCTIONAL_MODE {QDMA} \</div>
+<div class="line">CPM_PCIE1_MAX_LINK_SPEED {32.0_GT/s} \</div>
+<div class="line">CPM_PCIE1_MODES {DMA} \</div>
+<div class="line">CPM_PCIE1_MODE_SELECTION {Advanced} \</div>
+<div class="line">CPM_PCIE1_MSI_X_OPTIONS {MSI-X_Internal} \</div>
+<div class="line">CPM_PCIE1_PF0_AXIBAR2PCIE_BASEADDR_0 {0x0000008000000000} \</div>
+<div class="line">CPM_PCIE1_PF0_AXIBAR2PCIE_BASEADDR_1 {0x0000008040000000} \</div>
+<div class="line">CPM_PCIE1_PF0_AXIBAR2PCIE_BASEADDR_2 {0x0000008080000000} \</div>
+<div class="line">CPM_PCIE1_PF0_AXIBAR2PCIE_BASEADDR_3 {0x00000080C0000000} \</div>
+<div class="line">CPM_PCIE1_PF0_AXIBAR2PCIE_BASEADDR_4 {0x0000008100000000} \</div>
+<div class="line">CPM_PCIE1_PF0_AXIBAR2PCIE_BASEADDR_5 {0x0000008140000000} \</div>
+<div class="line">CPM_PCIE1_PF0_AXIBAR2PCIE_HIGHADDR_0 {0x000000803FFFFFFFF} \</div>
+<div class="line">CPM_PCIE1_PF0_AXIBAR2PCIE_HIGHADDR_1 {0x000000807FFFFFFFF} \</div>
+<div class="line">CPM_PCIE1_PF0_AXIBAR2PCIE_HIGHADDR_2 {0x00000080BFFFFFFFF} \</div>
+<div class="line">CPM_PCIE1_PF0_AXIBAR2PCIE_HIGHADDR_3 {0x00000080FFFFFFFFF} \</div>
+<div class="line">CPM_PCIE1_PF0_AXIBAR2PCIE_HIGHADDR_4 {0x000000813FFFFFFFF} \</div>
+<div class="line">CPM_PCIE1_PF0_AXIBAR2PCIE_HIGHADDR_5 {0x000000817FFFFFFFF} \</div>
+<div class="line">CPM_PCIE1_PF0_BAR0_QDMA_64BIT {1} \</div>
+<div class="line">CPM_PCIE1_PF0_BAR0_QDMA_ENABLED {1} \</div>
+<div class="line">CPM_PCIE1_PF0_BAR0_QDMA_PREFETCHABLE {1} \</div>
+<div class="line">CPM_PCIE1_PF0_BAR0_QDMA_SCALE {Megabytes} \</div>
+<div class="line">CPM_PCIE1_PF0_BAR0_QDMA_SIZE {256} \</div>
+<div class="line">CPM_PCIE1_PF0_BAR0_QDMA_TYPE {AXI_Bridge_Master} \</div>
+<div class="line">CPM_PCIE1_PF0_BAR2_QDMA_64BIT {0} \</div>
+<div class="line">CPM_PCIE1_PF0_BAR2_QDMA_ENABLED {0} \</div>
+<div class="line">CPM_PCIE1_PF0_BAR2_QDMA_PREFETCHABLE {0} \</div>
+<div class="line">CPM_PCIE1_PF0_BAR2_QDMA_SCALE {Kilobytes} \</div>
+<div class="line">CPM_PCIE1_PF0_BAR2_QDMA_SIZE {4} \</div>
+<div class="line">CPM_PCIE1_PF0_BAR2_QDMA_TYPE {AXI_Bridge_Master} \</div>
+<div class="line">CPM_PCIE1_PF0_BASE_CLASS_VALUE {12} \</div>
+<div class="line">CPM_PCIE1_PF0_CFG_DEV_ID {50b4} \</div>
+<div class="line">CPM_PCIE1_PF0_CFG_SUBSYS_ID {000e} \</div>
+<div class="line">CPM_PCIE1_PF0_DEV_CAP_FUNCTION_LEVEL_RESET_CAPABLE {0} \</div>
+<div class="line">CPM_PCIE1_PF0_MSIX_CAP_TABLE_OFFSET {40} \</div>
+<div class="line">CPM_PCIE1_PF0_MSIX_CAP_TABLE_SIZE {1} \</div>
+<div class="line">CPM_PCIE1_PF0_MSIX_ENABLED {0} \</div>
+<div class="line">CPM_PCIE1_PF0_PCIEBAR2AXIBAR_QDMA_0 {0x0000020100000000} \</div>
+<div class="line">CPM_PCIE1_PF0_SUB_CLASS_VALUE {00} \</div>
+<div class="line">CPM_PCIE1_PF1_BAR0_QDMA_64BIT {1} \</div>
+<div class="line">CPM_PCIE1_PF1_BAR0_QDMA_ENABLED {0} \</div>
+<div class="line">CPM_PCIE1_PF1_BAR0_QDMA_PREFETCHABLE {1} \</div>
+<div class="line">CPM_PCIE1_PF1_BAR0_QDMA_SCALE {Kilobytes} \</div>
+<div class="line">CPM_PCIE1_PF1_BAR0_QDMA_SIZE {4} \</div>
+<div class="line">CPM_PCIE1_PF1_BAR0_QDMA_TYPE {DMA} \</div>
+<div class="line">CPM_PCIE1_PF1_BAR2_QDMA_64BIT {0} \</div>
+<div class="line">CPM_PCIE1_PF1_BAR2_QDMA_ENABLED {0} \</div>
+<div class="line">CPM_PCIE1_PF1_BAR2_QDMA_PREFETCHABLE {0} \</div>
+<div class="line">CPM_PCIE1_PF1_BAR2_QDMA_SCALE {Kilobytes} \</div>
+<div class="line">CPM_PCIE1_PF1_BAR2_QDMA_SIZE {4} \</div>
+<div class="line">CPM_PCIE1_PF1_BAR2_QDMA_TYPE {AXI_Bridge_Master} \</div>
+<div class="line">CPM_PCIE1_PF1_BASE_CLASS_VALUE {12} \</div>
+<div class="line">CPM_PCIE1_PF1_CFG_DEV_ID {50b5} \</div>
+<div class="line">CPM_PCIE1_PF1_CFG_SUBSYS_ID {000e} \</div>
+<div class="line">CPM_PCIE1_PF1_CFG_SUBSYS_VEND_ID {10EE} \</div>
+<div class="line">CPM_PCIE1_PF1_MSIX_CAP_TABLE_OFFSET {50000} \</div>
+<div class="line">CPM_PCIE1_PF1_MSIX_CAP_TABLE_SIZE {8} \</div>
+<div class="line">CPM_PCIE1_PF1_MSIX_ENABLED {1} \</div>
+<div class="line">CPM_PCIE1_PF1_PCIEBAR2AXIBAR_QDMA_2 {0x0000020200000000} \</div>
+<div class="line">CPM_PCIE1_PF1_SUB_CLASS_VALUE {00} \</div>
+<div class="line">CPM_PCIE1_PL_LINK_CAP_MAX_LINK_WIDTH {X8} \</div>
+<div class="line">CPM_PCIE1_TL_PF_ENABLE_REG {2} \</div>
+<div class="line">} \</div>
+</div>
+</section>
+</section>
+<section id="ps-pmc">
+<span id="avedv80cipsconfiguration-pspmc"></span><h2>PS PMC<a class="headerlink" href="#ps-pmc" title="Permalink to this headline">¶</a></h2>
+<p>There are numerous processor subsystem (PS) and platform management controller (PMC) settings. These settings (indicated below) align to the AVED design requirements. A description of the CIPS configuration options can be found in
+<a class="reference external" href="https://docs.xilinx.com/r/en-US/pg352-cips">https://docs.xilinx.com/r/en-US/pg352-cips</a>. Information on the PS/PMC can be found here: <a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Processing-System-Architecture">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Processing-System-Architecture</a>.</p>
+<p>Processing Subsystem (RPU and APU)</p>
+<p>The PS includes two Arm® Cortex®-R5F RPU processors and two Arm Cortex-A72 APU processors. These provide programmers with real-time and application operating environments.</p>
+<section id="platform-management-controller-pmc">
+<span id="avedv80cipsconfiguration-platformmanagementcontroller-pmc"></span><h3>Platform Management Controller (PMC)<a class="headerlink" href="#platform-management-controller-pmc" title="Permalink to this headline">¶</a></h3>
+<p>When the system starts up, it is controlled by the PMC.</p>
+</section>
+<section id="ps-pmc-gui-configuration">
+<span id="avedv80cipsconfiguration-pspmcguiconfiguration"></span><h3>PS PMC GUI Configuration<a class="headerlink" href="#ps-pmc-gui-configuration" title="Permalink to this headline">¶</a></h3>
+<p>There are numerous PS/PMC configuration settings. The settings below were made per the AVED design requirements.</p>
+<section id="boot-mode">
+<span id="avedv80cipsconfiguration-bootmode"></span><h4>Boot Mode<a class="headerlink" href="#boot-mode" title="Permalink to this headline">¶</a></h4>
+<p>The Versal device is connected to 2Gb (256MB) OSPI for configuration and 64GB eMMC for storage. Both devices are 8-bits. These connections need to be enabled in PS PMC.</p>
+<p>Note: eMMC1 cannot be used for boot since the pins are shared with OSPI.</p>
+<p><strong>OSPI: Primary Boot</strong></p>
+<p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Primary-Boot-Interfaces-Table">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Primary-Boot-Interfaces-Table</a></p>
+<p><strong>Mode:</strong> Single device interface (not Stacked)</p>
+<p><strong>Frequency:</strong> A requested frequency of 200MHz was requested (Max frequency is 200MHz).</p>
+<p><strong>SDO/EMMC0: Used for storage or secondary boot</strong></p>
+<p><a class="reference external" href="https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Secondary-Boot-Process-and-Device-Choices">https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Secondary-Boot-Process-and-Device-Choices</a></p>
+<p><strong>Slot Type:</strong> eMMC</p>
+<p><strong>Data Transfer Width:</strong> 8Bit</p>
+<p><img alt="image12" class="confluence-embedded-image" src="_images/1118269411.png"/></p>
+<p><img alt="image13" class="confluence-embedded-image" src="_images/1118269388.png"/></p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+<section id="peripherals">
+<span id="avedv80cipsconfiguration-peripherals"></span><h4>Peripherals<a class="headerlink" href="#peripherals" title="Permalink to this headline">¶</a></h4>
+<p>Enable the peripherals as indicated below. These connections are dependent upon the Versal device connections to the board and are described below. The pin locations for the peripheral are not set in the ‘Peripheral’ tab. Instead, they are set in the
+‘IO’ tab</p>
+<section id="pcie-reset">
+<span id="avedv80cipsconfiguration-pciereset"></span><h5>PCIe Reset<a class="headerlink" href="#pcie-reset" title="Permalink to this headline">¶</a></h5>
+<p>PCIe reset from the host is connected to the PMC MIO pins through a buffer. There is a reset for each PCIe controller to support bifurcation. Enable the PCIe reset, then to set the actual pin, switch to the IO tab.</p>
+<ul class="simple">
+<li><p>IO → PS-Domain → PCIe Reset → CPM PCIE Controller 0 (End Point) → PMC_MIO_24</p></li>
+<li><p>IO → PS-Domain → PCIe Reset → CPM PCIE Controller 1 (End Point) → PMC_MIO_25</p></li>
+</ul>
+<p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/PCIe-Resets-on-MIO-Pins">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/PCIe-Resets-on-MIO-Pins</a></p>
+<div class="line-block">
+<div class="line"><br/></div>
+<div class="line"><img alt="image14" class="confluence-embedded-image" src="_images/1118269565.png"/></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+<section id="uart0-uart1">
+<span id="avedv80cipsconfiguration-uart0-uart1"></span><h5>UART0 / UART1<a class="headerlink" href="#uart0-uart1" title="Permalink to this headline">¶</a></h5>
+<p>AVED connects to two UARTs on the PS MIO (LPD) for debug purposes.</p>
+<ul class="simple">
+<li><p>IO → PS-Domain → UART0 → PS_MIO_8 and PS_MIO_9</p></li>
+<li><p>IO → PS-Domain → UART1 → PS_MIO_20 and PS_MIO_21</p></li>
+</ul>
+<p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/UART-I/O-Signals">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/UART-I/O-Signals</a></p>
+<p><strong>UART0</strong></p>
+<p><img alt="image15" class="confluence-embedded-image" src="_images/1118269479.png"/></p>
+<p><strong>UART1</strong></p>
+<p><a class="confluence-embedded-image reference internal" href="_images/1118269481.png"><img alt="image16" class="confluence-embedded-image" src="_images/1118269481.png" style="height: 250px;"/></a></p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+<section id="spi0">
+<span id="avedv80cipsconfiguration-spi0"></span><h5>SPI0<a class="headerlink" href="#spi0" title="Permalink to this headline">¶</a></h5>
+<p>The Versal device connects to SPI0 in the PS MIO (LPD). This is used for logging flash.</p>
+<ul class="simple">
+<li><p>IO → PS-Domain → SPI0 → PS_MIO_12 through PS_MIO_17</p></li>
+<li><p>IO → PS-Domain → SPI0 → SS0 → PS_MIO_15</p></li>
+</ul>
+<p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/SPI-Controller-I/O-Signals">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/SPI-Controller-I/O-Signals</a></p>
+<p><strong>SPI0</strong></p>
+<p><img alt="image17" class="confluence-embedded-image" src="_images/1118269484.png"/></p>
+</section>
+<section id="lpd-i2c0-lpd-i2c1">
+<span id="avedv80cipsconfiguration-lpd-i2c0-lpd-i2c1"></span><h5>LPD_I2C0 / LPD_I2C1<a class="headerlink" href="#lpd-i2c0-lpd-i2c1" title="Permalink to this headline">¶</a></h5>
+<p>The Versal device connects to both I2C controllers in the LPD. I2C0 is the main I2C bus used for management of the board power, clocks, temperatures, etc. I2C1 is used for the management of the QSFPs (V80 only).</p>
+<ul class="simple">
+<li><p>IO → PS-Domain → I2C0 → PS_MIO_2 and PS_MIO_3</p></li>
+<li><p>IO → PS-Domain → I2C1 → PS_MIO_0 and PS_MIO_1</p></li>
+</ul>
+<p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/LPD-I2C-Interface-Signals">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/LPD-I2C-Interface-Signals</a></p>
+<p><strong>LPD_I2C0</strong></p>
+<p><img alt="image18" class="confluence-embedded-image" src="_images/1118269445.png"/></p>
+<p><strong>LPD_I2C1</strong></p>
+<p><img alt="image19" class="confluence-embedded-image" src="_images/1118269446.png"/></p>
+</section>
+<section id="ttc0-ttc1-ttc2-ttc3">
+<span id="avedv80cipsconfiguration-ttc0-ttc1-ttc2-ttc3"></span><h5>TTC0 / TTC1 / TTC2 / TTC3<a class="headerlink" href="#ttc0-ttc1-ttc2-ttc3" title="Permalink to this headline">¶</a></h5>
+<p>The triple timer counters (TTCs) can generate periodic interrupts or can be used to count the widths of signal pulses from an MIO pin or from the PL. In AVED, the TTCs are used by SW to generate periodic interrupts for runtime purposes. The TTCs
+cannot be used to monitor any HW functionality through the PMC MIO or PS MIO pins because there are not any spare MIO pins.</p>
+<p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Triple-Timer-Counters">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Triple-Timer-Counters</a></p>
+<p><strong>TTC0</strong></p>
+<p><img alt="image20" class="confluence-embedded-image" src="_images/1118269474.png"/></p>
+<p><strong>TTC1</strong></p>
+<p><img alt="image21" class="confluence-embedded-image" src="_images/1118269475.png"/></p>
+<p><strong>TTC2</strong></p>
+<p><img alt="image22" class="confluence-embedded-image" src="_images/1118269456.png"/></p>
+<p><strong>TTC3</strong></p>
+<p><img alt="image23" class="confluence-embedded-image" src="_images/1118269457.png"/></p>
+</section>
+</section>
+<section id="io">
+<span id="avedv80cipsconfiguration-io"></span><h4>IO<a class="headerlink" href="#io" title="Permalink to this headline">¶</a></h4>
+<p>PMC peripheral pins can have more than one MIO pin assignment option. More information on the different selections can be found here: <a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/PMC-MIO-Pin-Table">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/PMC-MIO-Pin-Table</a>. All the MIO pins (PMC, MIO, and PS MIO)
+are connected per the AVED design requirements. While PMC Bank 1 pins 45:47 appear to be unused in the capture below, there are signals connected to these pins for future growth.</p>
+<p>When setting these pins in the GUI, first set the I/O pins in the Peripheral ‘I/O’ column. Be careful to select appropriately between PMC_MIO and PS_MIO. Then set the rest of the I/O in PMC Bank 0, PMC Bank 1, and PS Bank 2 columns.</p>
+<p>The GPIO direction for each bank is set per the description below. They are also included as TCL in <a class="reference external" href="#avedv80cipsconfiguration-pspmctclsettings">PS PMC TCL Settings</a>.</p>
+<ul class="simple">
+<li><p>PMC Bank 0:
+All the GPIO 0* signals are outputs except MIO_11, which is an input.</p></li>
+<li><p>PMC Bank 1:
+All the GPIO 1* signals are outputs except MIO_33, MIO_37, MIO_41, MIO_48, MIO_49, MIO_50, which are inputs.</p></li>
+<li><p>PS Bank 2:
+All the GPIO 2* signals are outputs except MIO_5, MIO_10, MIO_11, MIO_14, and MIO_25, which are inputs.</p></li>
+</ul>
+<p><img alt="image24" class="confluence-embedded-image" src="_images/1118269070.png"/></p>
+</section>
+<section id="debug">
+<span id="avedv80cipsconfiguration-debug"></span><h4>Debug<a class="headerlink" href="#debug" title="Permalink to this headline">¶</a></h4>
+<p>None of the debug settings are used. Leave all settings at Default.</p>
+<section id="pl-bscan">
+<span id="avedv80cipsconfiguration-plbscan"></span><h5>PL BSCAN<a class="headerlink" href="#pl-bscan" title="Permalink to this headline">¶</a></h5>
+<p><img alt="image25" class="confluence-embedded-image" src="_images/1118269068.png"/></p>
+</section>
+<section id="cross-trigger">
+<span id="avedv80cipsconfiguration-crosstrigger"></span><h5>Cross Trigger<a class="headerlink" href="#cross-trigger" title="Permalink to this headline">¶</a></h5>
+<p><img alt="image26" class="confluence-embedded-image" src="_images/1118269069.png"/></p>
+</section>
+<section id="ps-parallel-trace">
+<span id="avedv80cipsconfiguration-psparalleltrace"></span><h5>PS Parallel Trace<a class="headerlink" href="#ps-parallel-trace" title="Permalink to this headline">¶</a></h5>
+<p><img alt="image27" class="confluence-embedded-image" src="_images/1118269067.png"/></p>
+</section>
+<section id="hsdp">
+<span id="avedv80cipsconfiguration-hsdp"></span><h5>HSDP<a class="headerlink" href="#hsdp" title="Permalink to this headline">¶</a></h5>
+<p><img alt="image28" class="confluence-embedded-image" src="_images/1118269076.png"/></p>
+</section>
+</section>
+<section id="clocking">
+<span id="avedv80cipsconfiguration-clocking"></span><h4>Clocking<a class="headerlink" href="#clocking" title="Permalink to this headline">¶</a></h4>
+<section id="input-clocks">
+<span id="avedv80cipsconfiguration-inputclocks"></span><h5>Input Clocks<a class="headerlink" href="#input-clocks" title="Permalink to this headline">¶</a></h5>
+<p>Change the input REF_CLK to match the board oscillator clock frequency (from 33.333MHz to 33.333333MHz).</p>
+<p>REF_CLK: 33.333333</p>
+<p><img alt="image29" class="confluence-embedded-image" src="_images/1118269063.png"/></p>
+</section>
+<section id="output-clocks">
+<span id="avedv80cipsconfiguration-outputclocks"></span><h5>Output Clocks<a class="headerlink" href="#output-clocks" title="Permalink to this headline">¶</a></h5>
+<p id="avedv80cipsconfiguration-slr0">SLR0</p>
+<p>The Processor memory clocks (HSM0 and HSM1) are not used in AVED because it is a design requirement to use external 200MHz LVDS clocks for HBM and DDR MCs.</p>
+<p>Enable the PL CLK 0, PL CLK 1, and PL CLK 2 and set the frequencies to 100MHz, 33.3333333MHz, and 250MHz (respectively). This creates the CIPs pl0_ref_clk, pl1_ref_clk, and pl2_ref_clk outputs from CIPS in the BD. PL CLK 0 (100MHz) is used for
+numerous AXI interfaces. PL CLK 1 is a free running clock used to generate other system clocks. PL CLK 2 is set to run at 250MHz. This is the frequency of the PCIe extended configuration interface.</p>
+<p>Change the CPM_TOPSW clock to 1000MHz so the CPM runs at maximum frequency.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+<div class="line"><img alt="image30" class="confluence-embedded-image" src="_images/1118269112.png"/></div>
+</div>
+<p><img alt="image31" class="confluence-embedded-image" src="_images/1118269109.png"/></p>
+<p><img alt="image32" class="confluence-embedded-image" src="_images/1118269110.png"/></p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p id="avedv80cipsconfiguration-slr1">SLR1</p>
+<p>There are not any options for SLR1 - this tab does not exist.</p>
+<p id="avedv80cipsconfiguration-slr2">SLR2</p>
+<p>Leave at the default setting. The Processor memory clocks (HSM0 and HSM1) are not used in AVED because it is a design requirement to use external 200MHz LVDS clocks for HBM and DDR MCs.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+<div class="line"><img alt="image33" class="confluence-embedded-image" src="_images/1118269118.png"/></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p>XilSEM Library</p>
+<p>Leave all settings at Default. XilSEM is not used in AVED.</p>
+<p><img alt="image34" class="confluence-embedded-image" src="_images/1118269102.png"/></p>
+</section>
+</section>
+<section id="sysmon">
+<span id="avedv80cipsconfiguration-sysmon"></span><h4>Sysmon<a class="headerlink" href="#sysmon" title="Permalink to this headline">¶</a></h4>
+<section id="slr0">
+<span id="avedv80cipsconfiguration-slr0-1"></span><h5>SLR0<a class="headerlink" href="#slr0" title="Permalink to this headline">¶</a></h5>
+<p><strong>Basic Configuration</strong></p>
+<p>Change the voltage averaging samples to 8.</p>
+<p><a class="confluence-embedded-image reference internal" href="_images/1118269125.png"><img alt="image35" class="confluence-embedded-image" src="_images/1118269125.png" style="height: 250px;"/></a></p>
+<p><strong>On Chip Supply</strong></p>
+<p>These are optional voltages that can be monitored by AMC for future use. The ADC and thresholds would need to be adjusted appropriately.</p>
+<p>Additional information on the nomenclature can be found here: <a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Power-Pins">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Power-Pins</a></p>
+<ul class="simple">
+<li><p>VCC_PMC: PMC power domain</p></li>
+<li><p>VCC_PSFP: PS full-power domain (FPD)</p></li>
+<li><p>VCC_PSLP: PS low-power domain (LPD)</p></li>
+<li><p>VCC_RAM: Block RAM, UltraRAM, and PL clocking network</p></li>
+<li><p>VCCSOC: NoC, NPI, and DDRMC SoC power domain (SPD)</p></li>
+<li><p>VCCINT: Internal logic (programmable logic, integrated hardware</p></li>
+<li><p>VCCAUX: Auxiliary circuits</p></li>
+<li><p>VCC_AUXPMC: Auxiliary for the PMC</p></li>
+<li><p>VCCAUX_SMON: Analog for the ADC and other analog circuits in the system monitor</p></li>
+</ul>
+<p>Monitor Configuration, PMC MIO, and PS MIO Banks</p>
+<ul class="simple">
+<li><p>VCCO_500: PMC MIO bank 0 with dedicated analog signals DIO_A</p></li>
+<li><p>VCCO_501: PMC MIO bank 1</p></li>
+<li><p>VCCO_502: LPD MIO bank PS (PS_MIO)</p></li>
+<li><p>VCCO_503: PMC dedicated I/O (DIO) bank - Config Bank Mode Pins and JTAG</p></li>
+</ul>
+<p>Monitor DDR Banks Voltage</p>
+<ul class="simple">
+<li><p>VCCO_700: CH0 DDR</p></li>
+<li><p>VCCO_701: CH0 DDR</p></li>
+<li><p>VCCO_702: CH0 DDR</p></li>
+</ul>
+<p>Monitor GTYP Bank Voltages</p>
+<ul class="simple">
+<li><p>GTYP_AVTT_104: Gigabit transceiver; analog transmit driver</p></li>
+<li><p>GTYP_AVTT_105: Gigabit transceiver; analog transmit driver</p></li>
+<li><p>GTYP_AVCC_104: Gigabit transceiver; analog internal circuits</p></li>
+<li><p>GTYP_AVCC_105: Gigabit transceiver; analog internal circuits</p></li>
+<li><p>GTYP_AVCCAUX_104: Gigabit transceiver; auxiliary analog transceivers</p></li>
+<li><p>GTYP_AVCCAUX_105: Gigabit transceiver; auxiliary analog transceivers</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><img alt="image36" class="confluence-embedded-image" src="_images/1118269121.png"/></p>
+<p><img alt="image37" class="confluence-embedded-image" src="_images/1118269123.png"/></p>
+<p><strong>Temperature</strong></p>
+<p>Enable the over temperature check to help protect the Versal device and PCB.</p>
+<p><img alt="image38" class="confluence-embedded-image" src="_images/1118269124.png"/></p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<p><strong>External Supply Monitor</strong></p>
+<p>None of the external supplies are monitored in AVED.</p>
+<p><img alt="image39" class="confluence-embedded-image" src="_images/1118269122.png"/></p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+<section id="slr1">
+<span id="avedv80cipsconfiguration-slr1-1"></span><h5>SLR1<a class="headerlink" href="#slr1" title="Permalink to this headline">¶</a></h5>
+<p><strong>On Chip Supply</strong></p>
+<p>None of the supplies in SLR1 are monitored in AVED.</p>
+<p><img alt="image40" class="confluence-embedded-image" src="_images/1118269083.png"/></p>
+</section>
+<section id="slr2">
+<span id="avedv80cipsconfiguration-slr2-1"></span><h5>SLR2<a class="headerlink" href="#slr2" title="Permalink to this headline">¶</a></h5>
+<p>On Chip Supply</p>
+<p>None of the supplies in SLR2 are monitored in AVED V80.</p>
+<p><img alt="image41" class="confluence-embedded-image" src="_images/1118269082.png"/></p>
+</section>
+</section>
+<section id="device-security">
+<span id="avedv80cipsconfiguration-devicesecurity"></span><h4>Device Security<a class="headerlink" href="#device-security" title="Permalink to this headline">¶</a></h4>
+<section id="avedv80cipsconfiguration-slr0-2">
+<span id="id1"></span><h5>SLR0<a class="headerlink" href="#avedv80cipsconfiguration-slr0-2" title="Permalink to this headline">¶</a></h5>
+<p><strong>General</strong></p>
+<p>Select ‘Enable/Update Glitch Detector Settings (after BootROM handoff)’. This allows VCC_PMC to be changed to match the voltage setting of the AVED design requirements (0.88V).</p>
+<p>The pulse width will ignore glitches less than the setting of 0.5ns.</p>
+<p>Note: AVED does not enable a specific glitch detection response. If a response were required, it would need to be set up in the Tamper tab. AVED does not set any Tamper settings.</p>
+<p>Unselect “Known Answer Tests (KATs)”. AVED does not use the Cryptographic engines, so there is no need to perform this test.</p>
+<p><a class="reference external" href="https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Known-Answer-Tests">https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Known-Answer-Tests</a></p>
+<p><strong>Clock Monitor</strong></p>
+<p>AVED does not enable clock monitoring. Leave all settings at Default.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+<div class="line"><img alt="image42" class="confluence-embedded-image" src="_images/1118341770.png"/></div>
+</div>
+<p><img alt="image43" class="confluence-embedded-image" src="_images/1118343474.png"/></p>
+</section>
+<section id="avedv80cipsconfiguration-slr1-2">
+<span id="id2"></span><h5>SLR1<a class="headerlink" href="#avedv80cipsconfiguration-slr1-2" title="Permalink to this headline">¶</a></h5>
+<p><strong>General</strong></p>
+<p>Select ‘Enable/Update Glitch Detector Settings (after BootROM handoff)’. This allows VCC_PMC to be changed to match the voltage setting of the AVED design requirements (0.88V).</p>
+<p>The pulse width will ignore glitches less than the setting of 0.5ns.</p>
+<p>Note: AVED does not enable a specific glitch detection response. If a response were required, it would need to be set up in the Tamper tab. AVED does not set any Tamper settings.</p>
+<p>Unselect ‘Known Answer Tests (KATs)’. AVED does not use the Cryptographic engines, so there is no need to perform this test.</p>
+<p><a class="reference external" href="https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Known-Answer-Tests">https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Known-Answer-Tests</a></p>
+<p>Clock Monitor</p>
+<p>AVED does not enable clock monitoring. Leave all settings at default.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+<div class="line"><img alt="image44" class="confluence-embedded-image" src="_images/1118341772.png"/></div>
+</div>
+<p><img alt="image45" class="confluence-embedded-image" src="_images/1118343520.png"/></p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+<section id="avedv80cipsconfiguration-slr2-2">
+<span id="id3"></span><h5>SLR2<a class="headerlink" href="#avedv80cipsconfiguration-slr2-2" title="Permalink to this headline">¶</a></h5>
+<p><strong>General</strong></p>
+<p>Select ‘Enable/Update Glitch Detector Settings (after BootROM handoff)’. This allows VCC_PMC to be changed to match the voltage setting of the AVED design requirements (0.88V).</p>
+<p>The Pulse Width will ignore glitches less than the setting of 0.5ns.</p>
+<p>Note: AVED does not enable a specific glitch detection response. If a response were required, it would need to be set up in the Tamper tab. AVED does not set any Tamper settings.</p>
+<p>Unselect ‘Known Answer Tests (KATs)’. AVED does not use the cryptographic engines, so there is no need to perform this test.</p>
+<p><a class="reference external" href="https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Known-Answer-Tests">https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Known-Answer-Tests</a></p>
+<p><strong>Clock Monitor</strong></p>
+<p>AVED does not enable clock monitoring. Leave all settings at default.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+<div class="line"><img alt="image46" class="confluence-embedded-image" src="_images/1118341785.png"/></div>
+</div>
+<p><img alt="image47" class="confluence-embedded-image" src="_images/1118343361.png"/></p>
+</section>
+</section>
+<section id="tamper">
+<span id="avedv80cipsconfiguration-tamper"></span><h4>Tamper<a class="headerlink" href="#tamper" title="Permalink to this headline">¶</a></h4>
+<p>AVED does not exercise Tamper functionality. It could be used to set a systematic response to a tamper event.</p>
+<p><a class="reference external" href="https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Secure-Lockdown-Support-in-PLM">https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Secure-Lockdown-Support-in-PLM</a></p>
+<section id="avedv80cipsconfiguration-slr0-3">
+<span id="id4"></span><h5>SLR0<a class="headerlink" href="#avedv80cipsconfiguration-slr0-3" title="Permalink to this headline">¶</a></h5>
+<p><strong>General</strong></p>
+<p>Leave all settings at default.</p>
+<p><strong>Voltage</strong></p>
+<p>Leave all settings at default.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+<div class="line"><img alt="image48" class="confluence-embedded-image" src="_images/1118343517.png"/></div>
+</div>
+<p><img alt="image49" class="confluence-embedded-image" src="_images/1118343317.png"/></p>
+</section>
+<section id="avedv80cipsconfiguration-slr1-3">
+<span id="id5"></span><h5>SLR1<a class="headerlink" href="#avedv80cipsconfiguration-slr1-3" title="Permalink to this headline">¶</a></h5>
+<p><strong>General</strong></p>
+<p>Leave all settings at default.</p>
+<p><strong>Voltage</strong></p>
+<p>Leave all settings at default.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+<div class="line"><img alt="image50" class="confluence-embedded-image" src="_images/1118343483.png"/></div>
+</div>
+<p><img alt="image51" class="confluence-embedded-image" src="_images/1118343323.png"/></p>
+</section>
+<section id="avedv80cipsconfiguration-slr2-3">
+<span id="id6"></span><h5>SLR2<a class="headerlink" href="#avedv80cipsconfiguration-slr2-3" title="Permalink to this headline">¶</a></h5>
+<p><strong>General</strong></p>
+<p>Leave all settings at default.</p>
+<p><strong>Voltage</strong></p>
+<p>Leave all settings at default.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+<div class="line"><img alt="image52" class="confluence-embedded-image" src="_images/1118343360.png"/></div>
+</div>
+<p><img alt="image53" class="confluence-embedded-image" src="_images/1118343328.png"/></p>
+</section>
+</section>
+<section id="ps-pl-interfaces">
+<span id="avedv80cipsconfiguration-psplinterfaces"></span><h4>PS PL Interfaces<a class="headerlink" href="#ps-pl-interfaces" title="Permalink to this headline">¶</a></h4>
+<p>AVED only uses one PL reset from CIPS and it is enabled here. This reset is used to create multiple derived resets synchronized to various PL clock domains.</p>
+<p>The PL Master AXI LPD interface connects to the RPU SmartConnect. This allows for RPU communication with the SMBus IP and the PCIe host through the General Command Queue (GCQ).</p>
+<p>‘Number of PL Resets: 1’ creates the CIPS pl0_resetn output.</p>
+<p>Select “M_AXI_LPD” and set “Data Width” to 32. This creates the 32-bit @100MHz AXI4 M_AXI_LPD port on CIPs.</p>
+<p><img alt="image54" class="confluence-embedded-image" src="_images/1118343409.png"/></p>
+</section>
+<section id="noc">
+<span id="avedv80cipsconfiguration-noc"></span><h4>NoC<a class="headerlink" href="#noc" title="Permalink to this headline">¶</a></h4>
+<p>AVED uses two PS NoC connections on SLR0 for PMC and RPU communication to other NoCs. A description of the available options are here: <a class="reference external" href="https://docs.xilinx.com/r/en-US/pg352-cips/PS-NoC-Interfaces">https://docs.xilinx.com/r/en-US/pg352-cips/PS-NoC-Interfaces</a>.</p>
+<section id="avedv80cipsconfiguration-slr0-4">
+<span id="id7"></span><h5>SLR0<a class="headerlink" href="#avedv80cipsconfiguration-slr0-4" title="Permalink to this headline">¶</a></h5>
+<p>RPU:</p>
+<ul class="simple">
+<li><p>Select ‘RPU to NoC’: This creates the 128-bit @ 800MHz LPD_AXI_NOC_0 port on CIPS</p></li>
+</ul>
+<p>PMC:</p>
+<ul class="simple">
+<li><p>Select ‘PMC to NoC’: This creates the 128-bit @ 400MHz PMC_NOC_AXI_0 port on CIPS</p></li>
+</ul>
+<p><img alt="image55" class="confluence-embedded-image" src="_images/1118343381.png"/></p>
+</section>
+<section id="avedv80cipsconfiguration-slr1-4">
+<span id="id8"></span><h5>SLR1<a class="headerlink" href="#avedv80cipsconfiguration-slr1-4" title="Permalink to this headline">¶</a></h5>
+<p>AVED does not have any PMC NoC connections in SLR1.</p>
+<p><a class="confluence-embedded-image confluence-thumbnail reference internal" href="_images/1118343401.png"><img alt="image56" class="confluence-embedded-image confluence-thumbnail" src="_images/1118343401.png" style="height: 134px;"/></a></p>
+</section>
+<section id="avedv80cipsconfiguration-slr2-4">
+<span id="id9"></span><h5>SLR2<a class="headerlink" href="#avedv80cipsconfiguration-slr2-4" title="Permalink to this headline">¶</a></h5>
+<p>AVED does not have any PMC NoC connections in SLR2.</p>
+<p><a class="confluence-embedded-image confluence-thumbnail reference internal" href="_images/1118343400.png"><img alt="image57" class="confluence-embedded-image confluence-thumbnail" src="_images/1118343400.png" style="height: 139px;"/></a></p>
+</section>
+</section>
+<section id="interrupts">
+<span id="avedv80cipsconfiguration-interrupts"></span><h4>Interrupts<a class="headerlink" href="#interrupts" title="Permalink to this headline">¶</a></h4>
+<p>AVED uses two PL to PS LPD interrupts: one for the GCQ between the RPU (IRQ 0) and PCIe Host, and the other for SMBus (IRQ 1).</p>
+<p>Enable LPD interrupts: IRQ 0 &amp; 1. This creates the pl_ps_irq0 &amp; pl_ps_irq1 interrupt ports on CIPS.</p>
+<p>Enable Inter Processor Interrupts. The Inter Processor Interrupts allows one processor to interrupt another processor. The PMC and PSM Interrupts are enabled by default, and use the first three IPI agents. To allow R5 interrupts to the PMC and PSM,
+AVED uses four additional agents; IPI3, IPI4, IPI5, and IPI6. Two agents are used for each R5 processor. These can be changed as deemed necessary.</p>
+<ul class="simple">
+<li><p>IPI 0:2: N/C</p></li>
+<li><p>IPI 3:4: R5 0</p></li>
+<li><p>IPI 5:6: R5 1</p></li>
+</ul>
+<p><img alt="image58" class="confluence-embedded-image" src="_images/1118346327.png"/></p>
+</section>
+<section id="power">
+<span id="avedv80cipsconfiguration-power"></span><h4>Power<a class="headerlink" href="#power" title="Permalink to this headline">¶</a></h4>
+<p>Set the AVED MIO Bank voltages to match the AVED design requirements.</p>
+<ul class="simple">
+<li><p>Bank0 [MIO 0:25]: LVCMOS 1.8V (default)</p></li>
+<li><p>Bank1 [MIO 26:51]: LVCMOS 3.3V</p></li>
+<li><p>Bank2 [MIO 0:25]: LVCMOS 3.3V</p></li>
+<li><p>Bank3 [Dedicated]: LVCMOS 1.8V (default)</p></li>
+</ul>
+<p><a class="confluence-embedded-image reference internal" href="_images/1118343626.png"><img alt="image59" class="confluence-embedded-image" src="_images/1118343626.png" style="height: 133px;"/></a></p>
+<p>PS PMC TCL Settings</p>
+<div class="line-block">
+<div class="line">CONFIG.PS_PMC_CONFIG { \</div>
+<div class="line">BOOT_MODE {Custom} \</div>
+<div class="line">CLOCK_MODE {Custom} \</div>
+<div class="line">DDR_MEMORY_MODE {Custom} \</div>
+<div class="line">DESIGN_MODE {1} \</div>
+<div class="line">DEVICE_INTEGRITY_MODE {Custom} \</div>
+<div class="line">IO_CONFIG_MODE {Custom} \</div>
+<div class="line">PCIE_APERTURES_DUAL_ENABLE {0} \</div>
+<div class="line">PCIE_APERTURES_SINGLE_ENABLE {1} \</div>
+<div class="line">PMC_BANK_1_IO_STANDARD {LVCMOS3.3} \</div>
+<div class="line">PMC_CRP_OSPI_REF_CTRL_FREQMHZ {200} \</div>
+<div class="line">PMC_CRP_PL0_REF_CTRL_FREQMHZ {100} \</div>
+<div class="line">PMC_CRP_PL1_REF_CTRL_FREQMHZ {33.3333333} \</div>
+<div class="line">PMC_CRP_PL2_REF_CTRL_FREQMHZ {250} \</div>
+<div class="line">PMC_GLITCH_CONFIG {{DEPTH_SENSITIVITY 1} {MIN_PULSE_WIDTH 0.5} {TYPE CUSTOM} {VCC_PMC_VALUE 0.88}} \</div>
+<div class="line">PMC_GLITCH_CONFIG_1 {{DEPTH_SENSITIVITY 1} {MIN_PULSE_WIDTH 0.5} {TYPE CUSTOM} {VCC_PMC_VALUE 0.88}} \</div>
+<div class="line">PMC_GLITCH_CONFIG_2 {{DEPTH_SENSITIVITY 1} {MIN_PULSE_WIDTH 0.5} {TYPE CUSTOM} {VCC_PMC_VALUE 0.88}} \</div>
+<div class="line">PMC_GPIO_EMIO_PERIPHERAL_ENABLE {0} \</div>
+<div class="line">PMC_MIO11 {{AUX_IO 0} {DIRECTION in} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO12 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO13 {{AUX_IO 0} {DIRECTION inout} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE Reserved}} \</div>
+<div class="line">PMC_MIO17 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO26 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO27 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO28 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO29 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO30 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO31 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO32 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO33 {{AUX_IO 0} {DIRECTION in} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO34 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO35 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO36 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO37 {{AUX_IO 0} {DIRECTION in} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO38 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO39 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO40 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO41 {{AUX_IO 0} {DIRECTION in} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO42 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO43 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO44 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO48 {{AUX_IO 0} {DIRECTION in} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO49 {{AUX_IO 0} {DIRECTION in} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO50 {{AUX_IO 0} {DIRECTION in} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO51 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PMC_MIO_EN_FOR_PL_PCIE {0} \</div>
+<div class="line">PMC_OSPI_PERIPHERAL {{ENABLE 1} {IO {PMC_MIO 0 .. 11}} {MODE Single}} \</div>
+<div class="line">PMC_REF_CLK_FREQMHZ {33.333333} \</div>
+<div class="line">PMC_SD0_DATA_TRANSFER_MODE {8Bit} \</div>
+<div class="line">PMC_SD0_PERIPHERAL {{CLK_100_SDR_OTAP_DLY 0x00} {CLK_200_SDR_OTAP_DLY 0x2} {CLK_50_DDR_ITAP_DLY 0x1E} {CLK_50_DDR_OTAP_DLY 0x5} {CLK_50_SDR_ITAP_DLY 0x2C} {CLK_50_SDR_OTAP_DLY 0x5} {ENABLE 1} {IO\</div>
+<div class="line">{PMC_MIO 13 .. 25}}} \</div>
+<div class="line">PMC_SD0_SLOT_TYPE {eMMC} \</div>
+<div class="line">PMC_USE_PMC_NOC_AXI0 {0} \</div>
+<div class="line">PS_BANK_2_IO_STANDARD {LVCMOS3.3} \</div>
+<div class="line">PS_BOARD_INTERFACE {Custom} \</div>
+<div class="line">PS_CRL_CPM_TOPSW_REF_CTRL_FREQMHZ {1000} \</div>
+<div class="line">PS_GEN_IPI0_ENABLE {0} \</div>
+<div class="line">PS_GEN_IPI1_ENABLE {0} \</div>
+<div class="line">PS_GEN_IPI2_ENABLE {0} \</div>
+<div class="line">PS_GEN_IPI3_ENABLE {1} \</div>
+<div class="line">PS_GEN_IPI3_MASTER {R5_0} \</div>
+<div class="line">PS_GEN_IPI4_ENABLE {1} \</div>
+<div class="line">PS_GEN_IPI4_MASTER {R5_0} \</div>
+<div class="line">PS_GEN_IPI5_ENABLE {1} \</div>
+<div class="line">PS_GEN_IPI5_MASTER {R5_1} \</div>
+<div class="line">PS_GEN_IPI6_ENABLE {1} \</div>
+<div class="line">PS_GEN_IPI6_MASTER {R5_1} \</div>
+<div class="line">PS_GPIO_EMIO_PERIPHERAL_ENABLE {0} \</div>
+<div class="line">PS_I2C0_PERIPHERAL {{ENABLE 1} {IO {PS_MIO 2 .. 3}}} \</div>
+<div class="line">PS_I2C1_PERIPHERAL {{ENABLE 1} {IO {PS_MIO 0 .. 1}}} \</div>
+<div class="line">PS_IRQ_USAGE {{CH0 1} {CH1 1} {CH10 0} {CH11 0} {CH12 0} {CH13 0} {CH14 0} {CH15 0} {CH2 0} {CH3 0} {CH4 0} {CH5 0} {CH6 0} {CH7 0} {CH8 0} {CH9 0}} \</div>
+<div class="line">PS_KAT_ENABLE {0} \</div>
+<div class="line">PS_KAT_ENABLE_1 {0} \</div>
+<div class="line">PS_KAT_ENABLE_2 {0} \</div>
+<div class="line">PS_MIO10 {{AUX_IO 0} {DIRECTION in} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PS_MIO11 {{AUX_IO 0} {DIRECTION in} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PS_MIO12 {{AUX_IO 0} {DIRECTION inout} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE Reserved}} \</div>
+<div class="line">PS_MIO13 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PS_MIO14 {{AUX_IO 0} {DIRECTION in} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PS_MIO18 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PS_MIO19 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PS_MIO22 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PS_MIO23 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PS_MIO24 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PS_MIO25 {{AUX_IO 0} {DIRECTION in} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PS_MIO4 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PS_MIO5 {{AUX_IO 0} {DIRECTION in} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PS_MIO6 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PS_MIO7 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \</div>
+<div class="line">PS_MIO8 {{AUX_IO 0} {DIRECTION in} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE Reserved}} \</div>
+<div class="line">PS_MIO9 {{AUX_IO 0} {DIRECTION out} {DRIVE_STRENGTH 8mA} {OUTPUT_DATA default} {PULL pullup} {SCHMITT 1} {SLEW slow} {USAGE Reserved}} \</div>
+<div class="line">PS_M_AXI_LPD_DATA_WIDTH {32} \</div>
+<div class="line">PS_NUM_FABRIC_RESETS {1} \</div>
+<div class="line">PS_PCIE1_PERIPHERAL_ENABLE {0} \</div>
+<div class="line">PS_PCIE2_PERIPHERAL_ENABLE {1} \</div>
+<div class="line">PS_PCIE_EP_RESET1_IO {PMC_MIO 24} \</div>
+<div class="line">PS_PCIE_EP_RESET2_IO {PMC_MIO 25} \</div>
+<div class="line">PS_PCIE_RESET {{ENABLE 1}} \</div>
+<div class="line">PS_PL_CONNECTIVITY_MODE {Custom} \</div>
+<div class="line">PS_SPI0 {{GRP_SS0_ENABLE 1} {GRP_SS0_IO {PS_MIO 15}} {GRP_SS1_ENABLE 0} {GRP_SS1_IO {PMC_MIO 14}} {GRP_SS2_ENABLE 0} {GRP_SS2_IO {PMC_MIO 13}} {PERIPHERAL_ENABLE 1} {PERIPHERAL_IO {PS_MIO 12 .. 17}}}\</div>
+<div class="line">\</div>
+<div class="line">PS_SPI1 {{GRP_SS0_ENABLE 0} {GRP_SS0_IO {PS_MIO 9}} {GRP_SS1_ENABLE 0} {GRP_SS1_IO {PS_MIO 8}} {GRP_SS2_ENABLE 0} {GRP_SS2_IO {PS_MIO 7}} {PERIPHERAL_ENABLE 0} {PERIPHERAL_IO {PS_MIO 6 .. 11}}} \</div>
+<div class="line">PS_TTC0_PERIPHERAL_ENABLE {1} \</div>
+<div class="line">PS_TTC1_PERIPHERAL_ENABLE {1} \</div>
+<div class="line">PS_TTC2_PERIPHERAL_ENABLE {1} \</div>
+<div class="line">PS_TTC3_PERIPHERAL_ENABLE {1} \</div>
+<div class="line">PS_UART0_PERIPHERAL {{ENABLE 1} {IO {PS_MIO 8 .. 9}}} \</div>
+<div class="line">PS_UART1_PERIPHERAL {{ENABLE 1} {IO {PS_MIO 20 .. 21}}} \</div>
+<div class="line">PS_USE_FPD_CCI_NOC {0} \</div>
+<div class="line">PS_USE_M_AXI_FPD {0} \</div>
+<div class="line">PS_USE_M_AXI_LPD {1} \</div>
+<div class="line">PS_USE_NOC_LPD_AXI0 {1} \</div>
+<div class="line">PS_USE_PMCPL_CLK0 {1} \</div>
+<div class="line">PS_USE_PMCPL_CLK1 {1} \</div>
+<div class="line">PS_USE_PMCPL_CLK2 {1} \</div>
+<div class="line">PS_USE_S_AXI_LPD {0} \</div>
+<div class="line">SMON_ALARMS {Set_Alarms_On} \</div>
+<div class="line">SMON_ENABLE_TEMP_AVERAGING {0} \</div>
+<div class="line">SMON_MEAS100 {{ALARM_ENABLE 1} {ALARM_LOWER 0.00} {ALARM_UPPER 4.00} {AVERAGE_EN 0} {ENABLE 1} {MODE {4 V unipolar}} {NAME VCCO_500} {SUPPLY_NUM 9}} \</div>
+<div class="line">SMON_MEAS101 {{ALARM_ENABLE 1} {ALARM_LOWER 0.00} {ALARM_UPPER 4.00} {AVERAGE_EN 0} {ENABLE 1} {MODE {4 V unipolar}} {NAME VCCO_501} {SUPPLY_NUM 10}} \</div>
+<div class="line">SMON_MEAS102 {{ALARM_ENABLE 1} {ALARM_LOWER 0.00} {ALARM_UPPER 4.00} {AVERAGE_EN 0} {ENABLE 1} {MODE {4 V unipolar}} {NAME VCCO_502} {SUPPLY_NUM 11}} \</div>
+<div class="line">SMON_MEAS103 {{ALARM_ENABLE 1} {ALARM_LOWER 0.00} {ALARM_UPPER 4.00} {AVERAGE_EN 0} {ENABLE 1} {MODE {4 V unipolar}} {NAME VCCO_503} {SUPPLY_NUM 12}} \</div>
+<div class="line">SMON_MEAS104 {{ALARM_ENABLE 1} {ALARM_LOWER 0.00} {ALARM_UPPER 2.00} {AVERAGE_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME VCCO_700} {SUPPLY_NUM 13}} \</div>
+<div class="line">SMON_MEAS105 {{ALARM_ENABLE 1} {ALARM_LOWER 0.00} {ALARM_UPPER 2.00} {AVERAGE_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME VCCO_701} {SUPPLY_NUM 14}} \</div>
+<div class="line">SMON_MEAS106 {{ALARM_ENABLE 1} {ALARM_LOWER 0.00} {ALARM_UPPER 2.00} {AVERAGE_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME VCCO_702} {SUPPLY_NUM 15}} \</div>
+<div class="line">SMON_MEAS118 {{ALARM_ENABLE 1} {ALARM_LOWER 0.00} {ALARM_UPPER 2.00} {AVERAGE_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME VCC_PMC} {SUPPLY_NUM 0}} \</div>
+<div class="line">SMON_MEAS119 {{ALARM_ENABLE 1} {ALARM_LOWER 0.00} {ALARM_UPPER 2.00} {AVERAGE_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME VCC_PSFP} {SUPPLY_NUM 1}} \</div>
+<div class="line">SMON_MEAS120 {{ALARM_ENABLE 1} {ALARM_LOWER 0.00} {ALARM_UPPER 2.00} {AVERAGE_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME VCC_PSLP} {SUPPLY_NUM 2}} \</div>
+<div class="line">SMON_MEAS121 {{ALARM_ENABLE 1} {ALARM_LOWER 0.00} {ALARM_UPPER 2.00} {AVERAGE_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME VCC_RAM} {SUPPLY_NUM 3}} \</div>
+<div class="line">SMON_MEAS122 {{ALARM_ENABLE 1} {ALARM_LOWER 0.00} {ALARM_UPPER 2.00} {AVERAGE_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME VCC_SOC} {SUPPLY_NUM 4}} \</div>
+<div class="line">SMON_MEAS47 {{ALARM_ENABLE 1} {ALARM_LOWER 0.00} {ALARM_UPPER 2.00} {AVERAGE_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME GTYP_AVCCAUX_104} {SUPPLY_NUM 20}} \</div>
+<div class="line">SMON_MEAS48 {{ALARM_ENABLE 1} {ALARM_LOWER 0.00} {ALARM_UPPER 2.00} {AVERAGE_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME GTYP_AVCCAUX_105} {SUPPLY_NUM 21}} \</div>
+<div class="line">SMON_MEAS64 {{ALARM_ENABLE 1} {ALARM_LOWER 0.00} {ALARM_UPPER 2.00} {AVERAGE_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME GTYP_AVCC_104} {SUPPLY_NUM 18}} \</div>
+<div class="line">SMON_MEAS65 {{ALARM_ENABLE 1} {ALARM_LOWER 0.00} {ALARM_UPPER 2.00} {AVERAGE_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME GTYP_AVCC_105} {SUPPLY_NUM 19}} \</div>
+<div class="line">SMON_MEAS81 {{ALARM_ENABLE 1} {ALARM_LOWER 0.00} {ALARM_UPPER 2.00} {AVERAGE_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME GTYP_AVTT_104} {SUPPLY_NUM 22}} \</div>
+<div class="line">SMON_MEAS82 {{ALARM_ENABLE 1} {ALARM_LOWER 0.00} {ALARM_UPPER 2.00} {AVERAGE_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME GTYP_AVTT_105} {SUPPLY_NUM 23}} \</div>
+<div class="line">SMON_MEAS96 {{ALARM_ENABLE 1} {ALARM_LOWER 0.00} {ALARM_UPPER 2.00} {AVERAGE_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME VCCAUX} {SUPPLY_NUM 6}} \</div>
+<div class="line">SMON_MEAS97 {{ALARM_ENABLE 1} {ALARM_LOWER 0.00} {ALARM_UPPER 2.00} {AVERAGE_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME VCCAUX_PMC} {SUPPLY_NUM 7}} \</div>
+<div class="line">SMON_MEAS98 {{ALARM_ENABLE 1} {ALARM_LOWER 0.00} {ALARM_UPPER 2.00} {AVERAGE_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME VCCAUX_SMON} {SUPPLY_NUM 8}} \</div>
+<div class="line">SMON_MEAS99 {{ALARM_ENABLE 1} {ALARM_LOWER 0.00} {ALARM_UPPER 2.00} {AVERAGE_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME VCCINT} {SUPPLY_NUM 5}} \</div>
+<div class="line">SMON_TEMP_AVERAGING_SAMPLES {0} \</div>
+<div class="line">SMON_VOLTAGE_AVERAGING_SAMPLES {8} \</div>
+<div class="line">} \</div>
+</div>
+<p>Page Revision: v. 132</p>
+</section>
+</section>
+</section>
+</section>
+</div>
+</div>
+<footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+<a accesskey="p" class="btn btn-neutral float-left" href="AVED%2BV80%2B-%2BHierarchy%2BOverview.html" rel="prev" title="AVED V80 - Hierarchy Overview"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+<a accesskey="n" class="btn btn-neutral float-right" href="AVED%2BV80%2B-%2BMemory%2BResources.html" rel="next" title="AVED V80 - Memory Resources">Next <span aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<p>© Copyright 2023, Advanced Micro Devices Inc.</p>
+</div>
+<div class="aem-Grid aem-Grid--16">
+<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+<div class="container-fluid sub-footer">
+<div class="row">
+<div class="col-xs-24">
+<p><a href="https://www.amd.com/en/corporate/copyright" target="_blank">Terms and Conditions</a> | <a href="https://www.amd.com/en/corporate/privacy" target="_blank">Privacy</a> | <a href="https://www.amd.com/en/corporate/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.amd.com/en/corporate/trademarks" target="_blank">Trademarks</a> | <a href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf" target="_blank">Statement on Forced Labor</a> | <a href="https://www.amd.com/en/corporate/competition" target="_blank">Fair and Open Competition</a> | <a href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf" target="_blank">UK Tax Strategy</a> | <a href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA" target="_blank">Inclusive Terminology</a> | <a class="ot-sdk-show-settings" href="#cookiessettings">Cookies Settings</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+</div>
+</div>
+</section>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+</body>
+</html>

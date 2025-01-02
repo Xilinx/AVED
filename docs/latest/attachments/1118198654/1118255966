@@ -1,0 +1,125 @@
+<mxfile host="confluence.xilinx.com" modified="2024-02-05T22:55:19.141Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="QsXu8PSSTYRPXtlSXR1Y" version="21.4.0" type="atlas">
+  <diagram id="bfV44rIyC2PPQyhU2yLp" name="Page-1">
+    <mxGraphModel dx="2758" dy="1248" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="qerGy-et3axBQwncCWnh-1" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontColor=default;strokeColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="-210" y="70" width="800" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="qerGy-et3axBQwncCWnh-2" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=default;strokeColor=#000000;" parent="qerGy-et3axBQwncCWnh-1" vertex="1">
+          <mxGeometry width="800" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="qerGy-et3axBQwncCWnh-3" value="Master" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=#CCCCCC;top=1;left=1;bottom=1;right=1;pointerEvents=1;align=left;fontStyle=1;fontSize=14;fontColor=default;strokeColor=#000000;" parent="qerGy-et3axBQwncCWnh-2" vertex="1">
+          <mxGeometry width="325" height="40" as="geometry">
+            <mxRectangle width="325" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qerGy-et3axBQwncCWnh-4" value="NMU" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=#CCCCCC;top=1;left=1;bottom=1;right=1;pointerEvents=1;align=left;fontStyle=1;fontSize=14;fontColor=default;strokeColor=#000000;" parent="qerGy-et3axBQwncCWnh-2" vertex="1">
+          <mxGeometry x="325" width="90" height="40" as="geometry">
+            <mxRectangle width="90" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qerGy-et3axBQwncCWnh-5" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=#CCCCCC;top=1;left=1;bottom=1;right=1;pointerEvents=1;align=left;fontColor=default;strokeColor=#000000;" parent="qerGy-et3axBQwncCWnh-2" vertex="1">
+          <mxGeometry x="415" width="40" height="40" as="geometry">
+            <mxRectangle width="40" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qerGy-et3axBQwncCWnh-6" value="Slave" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=#CCCCCC;top=1;left=1;bottom=1;right=1;pointerEvents=1;align=left;fontStyle=1;fontSize=14;fontColor=default;strokeColor=#000000;" parent="qerGy-et3axBQwncCWnh-2" vertex="1">
+          <mxGeometry x="455" width="225" height="40" as="geometry">
+            <mxRectangle width="225" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qerGy-et3axBQwncCWnh-7" value="NSU" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=#CCCCCC;top=1;left=1;bottom=1;right=1;pointerEvents=1;align=left;fontStyle=1;fontSize=14;fontColor=default;strokeColor=#000000;" parent="qerGy-et3axBQwncCWnh-2" vertex="1">
+          <mxGeometry x="680" width="120" height="40" as="geometry">
+            <mxRectangle width="120" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qerGy-et3axBQwncCWnh-8" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=default;strokeColor=#000000;" parent="qerGy-et3axBQwncCWnh-1" vertex="1">
+          <mxGeometry y="40" width="800" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="qerGy-et3axBQwncCWnh-9" value="&lt;span style=&quot;font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, Oxygen, Ubuntu, &amp;quot;Fira Sans&amp;quot;, &amp;quot;Droid Sans&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, sans-serif; font-size: 14px;&quot;&gt;CPM_PCIE_NOC_1&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;align=left;fontColor=default;strokeColor=#000000;rowspan=3;colspan=1;" parent="qerGy-et3axBQwncCWnh-8" vertex="1">
+          <mxGeometry width="325" height="120" as="geometry">
+            <mxRectangle width="325" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qerGy-et3axBQwncCWnh-10" value="&lt;span style=&quot;font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, Oxygen, Ubuntu, &amp;quot;Fira Sans&amp;quot;, &amp;quot;Droid Sans&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, sans-serif; font-size: 14px;&quot;&gt;NMU_128&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;align=left;fontColor=default;strokeColor=#000000;rowspan=3;colspan=1;" parent="qerGy-et3axBQwncCWnh-8" vertex="1">
+          <mxGeometry x="325" width="90" height="120" as="geometry">
+            <mxRectangle width="90" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qerGy-et3axBQwncCWnh-11" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;align=left;fontColor=default;strokeColor=#000000;rowspan=3;colspan=1;" parent="qerGy-et3axBQwncCWnh-8" vertex="1">
+          <mxGeometry x="415" width="40" height="120" as="geometry">
+            <mxRectangle width="40" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qerGy-et3axBQwncCWnh-12" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, Oxygen, Ubuntu, &amp;quot;Fira Sans&amp;quot;, &amp;quot;Droid Sans&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;/base_logic/pcie_slr0_mgmt_sc&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;align=left;fontColor=default;strokeColor=#000000;fontSize=12;" parent="qerGy-et3axBQwncCWnh-8" vertex="1">
+          <mxGeometry x="455" width="225" height="40" as="geometry">
+            <mxRectangle width="225" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qerGy-et3axBQwncCWnh-13" value="&lt;span style=&quot;font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, Oxygen, Ubuntu, &amp;quot;Fira Sans&amp;quot;, &amp;quot;Droid Sans&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, sans-serif; font-size: 14px;&quot;&gt;NSU_512&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;align=left;fontColor=default;strokeColor=#000000;" parent="qerGy-et3axBQwncCWnh-8" vertex="1">
+          <mxGeometry x="680" width="120" height="40" as="geometry">
+            <mxRectangle width="120" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qerGy-et3axBQwncCWnh-32" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=default;strokeColor=#000000;" parent="qerGy-et3axBQwncCWnh-1" vertex="1">
+          <mxGeometry y="80" width="800" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="qerGy-et3axBQwncCWnh-33" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;align=left;" parent="qerGy-et3axBQwncCWnh-32" vertex="1" visible="0">
+          <mxGeometry width="325" height="40" as="geometry">
+            <mxRectangle width="325" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qerGy-et3axBQwncCWnh-34" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;align=left;" parent="qerGy-et3axBQwncCWnh-32" vertex="1" visible="0">
+          <mxGeometry x="325" width="90" height="40" as="geometry">
+            <mxRectangle width="90" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qerGy-et3axBQwncCWnh-35" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;align=left;" parent="qerGy-et3axBQwncCWnh-32" vertex="1" visible="0">
+          <mxGeometry x="415" width="40" height="40" as="geometry">
+            <mxRectangle width="40" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qerGy-et3axBQwncCWnh-36" value="&lt;span style=&quot;font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, Oxygen, Ubuntu, &amp;quot;Fira Sans&amp;quot;, &amp;quot;Droid Sans&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, sans-serif; font-size: 14px;&quot;&gt;DDR Port 1&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;align=left;fontColor=default;strokeColor=#000000;" parent="qerGy-et3axBQwncCWnh-32" vertex="1">
+          <mxGeometry x="455" width="225" height="40" as="geometry">
+            <mxRectangle width="225" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qerGy-et3axBQwncCWnh-37" value="&lt;span style=&quot;font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, Oxygen, Ubuntu, &amp;quot;Fira Sans&amp;quot;, &amp;quot;Droid Sans&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, sans-serif; font-size: 14px;&quot;&gt;DDRMC NSU&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;align=left;fontColor=default;strokeColor=#000000;" parent="qerGy-et3axBQwncCWnh-32" vertex="1">
+          <mxGeometry x="680" width="120" height="40" as="geometry">
+            <mxRectangle width="120" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qerGy-et3axBQwncCWnh-38" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=default;strokeColor=#000000;" parent="qerGy-et3axBQwncCWnh-1" vertex="1">
+          <mxGeometry y="120" width="800" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="qerGy-et3axBQwncCWnh-39" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;align=left;" parent="qerGy-et3axBQwncCWnh-38" vertex="1" visible="0">
+          <mxGeometry width="325" height="40" as="geometry">
+            <mxRectangle width="325" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qerGy-et3axBQwncCWnh-40" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;align=left;" parent="qerGy-et3axBQwncCWnh-38" vertex="1" visible="0">
+          <mxGeometry x="325" width="90" height="40" as="geometry">
+            <mxRectangle width="90" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qerGy-et3axBQwncCWnh-41" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;align=left;" parent="qerGy-et3axBQwncCWnh-38" vertex="1" visible="0">
+          <mxGeometry x="415" width="40" height="40" as="geometry">
+            <mxRectangle width="40" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qerGy-et3axBQwncCWnh-42" value="&lt;span style=&quot;font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, Oxygen, Ubuntu, &amp;quot;Fira Sans&amp;quot;, &amp;quot;Droid Sans&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, sans-serif; font-size: 14px;&quot;&gt;DIMM Port 1&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, Oxygen, Ubuntu, &amp;quot;Fira Sans&amp;quot;, &amp;quot;Droid Sans&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, sans-serif; font-size: 14px;&quot;&gt;(V80 only)&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;align=left;fontColor=default;strokeColor=#000000;" parent="qerGy-et3axBQwncCWnh-38" vertex="1">
+          <mxGeometry x="455" width="225" height="40" as="geometry">
+            <mxRectangle width="225" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qerGy-et3axBQwncCWnh-43" value="&lt;span style=&quot;font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, Oxygen, Ubuntu, &amp;quot;Fira Sans&amp;quot;, &amp;quot;Droid Sans&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, sans-serif; font-size: 14px;&quot;&gt;DDRMC NSU&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;align=left;fontColor=default;strokeColor=#000000;" parent="qerGy-et3axBQwncCWnh-38" vertex="1">
+          <mxGeometry x="680" width="120" height="40" as="geometry">
+            <mxRectangle width="120" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
