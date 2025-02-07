@@ -230,26 +230,6 @@ Refer to the pre-canned test provided in the <a class="reference internal" href=
 </pre></div>
 </div>
 </section>
-<section id="dma">
-<h2><code class="docutils literal notranslate"><span class="pre">dma</span></code><a class="headerlink" href="#dma" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">dma</span></code> pre-canned test performs a basic <a class="reference internal" href="../test-cases/dma-test-case-description.html#dma-test-case-description"><span class="std std-ref">DMA</span></a> test case of all memories available on the card (for example: DDR and/or HBM).
-For more information about host &lt;-&gt; memory test capabilities, see <a class="reference internal" href="../test-cases/dma-test-case-description.html#dma-test-case-description"><span class="std std-ref">DMA test case description</span></a>.</p>
-<p>In this test, the DMA bandwidths are only reported as information and are not checked against any thresholds.
-The following are two examples of how a pre-canned <code class="docutils literal notranslate"><span class="pre">test_sequence</span></code> may look like.
-Refer to the pre-canned test provided in the <a class="reference internal" href="../introduction/overview.html#aved-deployment-archives"><span class="std std-ref">AVED deployment archive</span></a> for accurate content.</p>
-<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;test_sequence&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HBM&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DDR&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
-<span class="p">]</span><span class="w"></span>
-</pre></div>
-</div>
-<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;test_sequence&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PL_DDR&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PS_DDR&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
-<span class="p">]</span><span class="w"></span>
-</pre></div>
-</div>
-</section>
 <section id="memory">
 <h2><code class="docutils literal notranslate"><span class="pre">memory</span></code><a class="headerlink" href="#memory" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">memory</span></code> pre-canned test performs a basic <a class="reference internal" href="../test-cases/memory-test-case-description.html#memory-test-case-description"><span class="std std-ref">Memory</span></a> test case of all memories available on the card (for example DDR or HBM).

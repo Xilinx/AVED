@@ -95,7 +95,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="verify-test-case-description.html">Verify</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mmio-test-case-description.html">MMIO</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dma-test-case-description.html">DMA</a></li>
 <li class="toctree-l3"><a class="reference internal" href="memory-test-case-description.html">Memory</a></li>
 <li class="toctree-l3"><a class="reference internal" href="power-test-case-description.html">Power</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gt-test-case-description.html">GT</a></li>
@@ -230,20 +229,16 @@ A failure in a test case does not stop other test cases.</p>
 </figure>
 </td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="dma-test-case-description.html#dma-test-case-description"><span class="std std-ref">DMA</span></a></p></td>
-<td><ul class="simple">
-<li><p>Checks data transfer between host and memories available on the card (for example: DDR/HBM).</p></li>
-<li><p>Tests each memory individually.</p></li>
-<li><p>Uses counter for data integrity check.</p></li>
-<li><p>Measures read and write bandwidths between host and memories available on the card.</p></li>
+<tr class="row-even"><td><p><a class="reference internal" href="multi-gt-prbs-test-case-description.html#multi-gt-prbs-test-case-description"><span class="std std-ref">GTF/GTYP/GTM PRBS</span></a></p></td>
+<td><p>GT lanes are checked by generating and checking PRBS-31 data.  BER is computed</p>
+<ul class="simple">
+<li><p>Checks GTF transceiver at 10 Gigabit Ethernet (10 GbE) lane rates</p></li>
+<li><p>Checks GTYp transceiver at 32Gb/s lane rates</p></li>
+<li><p>Checks GTM transceiver at 56 Gigabit Ethernet (56 GbE) lane rates</p></li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The <a class="reference internal" href="dma-test-case-description.html#dma-test-case-description"><span class="std std-ref">DMA</span></a> test case does not use any <a class="reference internal" href="../introduction/overview.html#hardware-overview"><span class="std std-ref">xbtIP</span></a>.</p>
-</div>
-<figure class="align-center" id="test-case-dma">
-<img alt="../../../../../_images/test-case-dma.svg" src="../../../../../_images/test-case-dma.svg" /><figcaption>
-<p><span class="caption-text">DMA test case</span><a class="headerlink" href="#test-case-dma" title="Permalink to this image">¶</a></p>
+<figure class="align-center" id="test-case-multi-gt-prbs">
+<img alt="../../../../../_images/test-case-multi-gt-prbs.svg" src="../../../../../_images/test-case-multi-gt-prbs.svg" /><figcaption>
+<p><span class="caption-text">GTF, GTYp, GTM PRBS test case</span><a class="headerlink" href="#test-case-multi-gt-prbs" title="Permalink to this image">¶</a></p>
 </figcaption>
 </figure>
 </td>
@@ -302,20 +297,6 @@ With the last method, traffic flows between GT MAC <a class="reference internal"
 <figure class="align-center" id="test-case-gt-mac">
 <img alt="../../../../../_images/test-case-gt-mac.svg" src="../../../../../_images/test-case-gt-mac.svg" /><figcaption>
 <p><span class="caption-text">GT MAC test case</span><a class="headerlink" href="#test-case-gt-mac" title="Permalink to this image">¶</a></p>
-</figcaption>
-</figure>
-</td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="multi-gt-prbs-test-case-description.html#multi-gt-prbs-test-case-description"><span class="std std-ref">GTF/GTYP/GTM PRBS</span></a></p></td>
-<td><p>GT lanes are checked by generating and checking PRBS-31 data.  BER is computed</p>
-<ul class="simple">
-<li><p>Checks GTF transceiver at 10 Gigabit Ethernet (10 GbE) lane rates</p></li>
-<li><p>Checks GTYp transceiver at 32Gb/s lane rates</p></li>
-<li><p>Checks GTM transceiver at 56 Gigabit Ethernet (56 GbE) lane rates</p></li>
-</ul>
-<figure class="align-center" id="test-case-multi-gt-prbs">
-<img alt="../../../../../_images/test-case-multi-gt-prbs.svg" src="../../../../../_images/test-case-multi-gt-prbs.svg" /><figcaption>
-<p><span class="caption-text">GTF, GTYp, GTM PRBS test case</span><a class="headerlink" href="#test-case-multi-gt-prbs" title="Permalink to this image">¶</a></p>
 </figcaption>
 </figure>
 </td>
