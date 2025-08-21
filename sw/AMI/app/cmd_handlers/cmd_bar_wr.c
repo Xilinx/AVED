@@ -2,7 +2,7 @@
 /*
  * cmd_bar_wr.c - This file contains the implementation for the command "bar_wr"
  * 
- * Copyright (c) 2023-present Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  */
 
 /*****************************************************************************/
@@ -189,14 +189,14 @@ static int do_cmd_bar_wr(struct app_option *options, int num_args, char **args)
 		}
 
 		if (ret == AMI_STATUS_OK) {
-			ret = EXIT_SUCCESS;
 			printf("Successfully wrote to %d register(s)\r\n", num);
+			ret = EXIT_SUCCESS;
 		} else {
 			APP_API_ERROR("could not write data");
 		}
 	} else {
-		ret = EXIT_SUCCESS;
 		printf("\r\nAborting...\r\n");
+		ret = EXIT_SUCCESS;
 	}
 
 done:

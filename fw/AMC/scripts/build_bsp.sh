@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+# Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 
 ################################################################################
@@ -12,13 +12,9 @@
 #                                                                              #
 # This will create a bsp (amc_bsp) in the top level directory                  #
 #                                                                              #
-#                                                                              #
-#                                                                              #
 ################################################################################
 
-################################################################################
 ###                                 Variables                                ###
-################################################################################
 
 ARCH_DIR=archive
 ### store xsa path ###
@@ -27,21 +23,15 @@ xsa=0
 os=0
 ### store FREERTOS_DEBUG param ###
 FREERTOS_DEBUG=0
-### FreeRTOS number of ticks per second ###
-TICK_RATE_HZ=10000
 
-### Heap size ###
-HEAP_SIZE=131072
+### SDT ###
+SDT="versal_sdt"
 
-################################################################################
-###                                 Functions                                ###
-################################################################################
+###  Functions  ###
 
-################################################################################
 #
 # This function will display syntax diagram, with description of each option
 #
-################################################################################
 function help() {
     echo
     echo
@@ -57,154 +47,20 @@ function help() {
     echo
     echo
 }
-################################################################################
 
-################################################################################
 #
 # This function will remove all vitis source directories
 #
-################################################################################
 function clean() {
     echo "Removing all vitis source files"
-    rm -r .Xil
-    rm -r .metadata
-    rm -r .analytics
-    rm -r IDE.log
+    rm -rf .Xil
+    rm -rf .metadata
+    rm -rf .analytics
+    rm -rf IDE.log
 }
 
-################################################################################
-#
-# This function sets additinal debug parameters in the FreeRTOSConfig.h file
-#
-################################################################################
-function set_freertos_config() {
 
-    FREERTOS_CONFIG_DIR=$(find ./amc_bsp/psv_cortexr5_0/freertos10_xilinx_domain/bsp/psv_cortexr5_0/libsrc/ -type d -name "freertos10_xilinx_v*")
-
-    if [ ! -d "${FREERTOS_CONFIG_DIR[0]}" ]; then
-        echo "Error: FreeRTOS Config not found!"
-        exit 1
-    fi
-
-    FREERTOS_CONFIG_FILE="$FREERTOS_CONFIG_DIR/src/FreeRTOSConfig.h"
-    # Use awk to process and replace/add configurations
-    awk '
-    BEGIN {
-        configs["configGENERATE_RUN_TIME_STATS"];
-        configs["configUSE_STATS_FORMATTING_FUNCTIONS"];
-        configs["configUSE_TRACE_FACILITY"];
-    }
-    {
-        for (config in configs) {
-            if ($0 ~ config) {
-                sub(config ".*", config " 1");
-                found[config]++;
-            }
-        }
-        # Replacement for the sed commands
-        if ($0 ~ "portCONFIGURE_TIMER_FOR_RUN_TIME_STATS()") {
-            sub("portCONFIGURE_TIMER_FOR_RUN_TIME_STATS().*", "portCONFIGURE_TIMER_FOR_RUN_TIME_STATS() vConfigureTimerForRunTimeStats()");
-        }
-        if ($0 ~ "portGET_RUN_TIME_COUNTER_VALUE()") {
-            sub("portGET_RUN_TIME_COUNTER_VALUE().*", "portGET_RUN_TIME_COUNTER_VALUE() vGetRunTimeCounterValue()");
-        }
-        print $0;
-    }
-    END {
-        for (config in configs) {
-            if (!found[config]) {
-                print "#define " config " 1";
-            }
-        }
-    }' $FREERTOS_CONFIG_FILE > $FREERTOS_CONFIG_FILE.tmp
-    mv $FREERTOS_CONFIG_FILE.tmp $FREERTOS_CONFIG_FILE
-
-    # Re-run the makefile to regenerate libraries with new config
-    make -C ./amc_bsp/psv_cortexr5_0/freertos10_xilinx_domain/bsp/ clean all
-}
-
-################################################################################
-#
-# This function sets configTICK_RATE_HZ in the FreeRTOSConfig.h file
-#
-################################################################################
-function set_config_tick_rate() {
-
-    FREERTOS_CONFIG_DIR=$(find ./amc_bsp/psv_cortexr5_0/freertos10_xilinx_domain/bsp/psv_cortexr5_0/libsrc/ -type d -name "freertos10_xilinx_v*")
-
-    if [ ! -d "${FREERTOS_CONFIG_DIR[0]}" ]; then
-        echo "Error: FreeRTOS Config not found!"
-        exit 1
-    fi
-
-    FREERTOS_CONFIG_FILE="$FREERTOS_CONFIG_DIR/src/FreeRTOSConfig.h"
-
-    stringreplacement="#define configTICK_RATE_HZ ("
-    stringreplacement+=$TICK_RATE_HZ
-    stringreplacement+=")"
-    echo "Replacing configTICK_RATE_HZ value in FreeRTOSConfig.h"
-    sed -i "s/#define configTICK_RATE_HZ (100)/$stringreplacement/g" $FREERTOS_CONFIG_FILE
-
-    # Re-run the makefile to regenerate libraries with new config
-    make -C ./amc_bsp/psv_cortexr5_0/freertos10_xilinx_domain/bsp/ clean all
-}
-
-################################################################################
-#
-# This function sets configSUPPORT_STATIC_ALLOCATION in the FreeRTOSConfig.h file
-#
-################################################################################
-function set_config_static_allocation() {
-
-    FREERTOS_CONFIG_DIR=$(find ./amc_bsp/psv_cortexr5_0/freertos10_xilinx_domain/bsp/psv_cortexr5_0/libsrc/ -type d -name "freertos10_xilinx_v*")
-
-    if [ ! -d "${FREERTOS_CONFIG_DIR[0]}" ]; then
-        echo "Error: FreeRTOS Config not found!"
-        exit 1
-    fi
-
-    FREERTOS_CONFIG_FILE="$FREERTOS_CONFIG_DIR/src/FreeRTOSConfig.h"
-
-    stringreplacement="#define configSUPPORT_STATIC_ALLOCATION 1"
-
-    echo "Replacing configSUPPORT_STATIC_ALLOCATION value in FreeRTOSConfig.h"
-    sed -i "s/#define configSUPPORT_STATIC_ALLOCATION 0/$stringreplacement/g" $FREERTOS_CONFIG_FILE
-
-    # Re-run the makefile to regenerate libraries with new config
-    make -C ./amc_bsp/psv_cortexr5_0/freertos10_xilinx_domain/bsp/ clean all
-}
-
-################################################################################
-#
-# This function sets config configTOTAL_HEAP_SIZE in the FreeRTOSConfig.h file
-#
-################################################################################
-function set_config_heap_size() {
-
-    FREERTOS_CONFIG_DIR=$(find ./amc_bsp/psv_cortexr5_0/freertos10_xilinx_domain/bsp/psv_cortexr5_0/libsrc/ -type d -name "freertos10_xilinx_v*")
-
-    if [ ! -d "${FREERTOS_CONFIG_DIR[0]}" ]; then
-        echo "Error: FreeRTOS Config not found!"
-        exit 1
-    fi
-
-    FREERTOS_CONFIG_FILE="$FREERTOS_CONFIG_DIR/src/FreeRTOSConfig.h"
-
-    stringreplacement="#define configTOTAL_HEAP_SIZE ( ( size_t ) ( "
-    stringreplacement+=$HEAP_SIZE
-    stringreplacement+=" ) )"
-    echo "Replacing configTOTAL_HEAP_SIZE value in FreeRTOSConfig.h"
-    sed -i "s/#define configTOTAL_HEAP_SIZE ( ( size_t ) ( 65536 ) )/$stringreplacement/g" $FREERTOS_CONFIG_FILE
-
-    # Re-run the makefile to regenerate libraries with new config
-    make -C ./amc_bsp/psv_cortexr5_0/freertos10_xilinx_domain/bsp/ clean all
-}
-
-################################################################################
-
-################################################################################
-###                           Script Starting Point                          ###
-################################################################################
+###  Script Starting Point  ###
 
 ### handle options ###
 
@@ -280,12 +136,17 @@ if [ $os == 0 ] ### if os not specified ###
 	exit
 fi
 
-echo "=== Creating BSP in vitis ==="
+echo "===    Creating BSP    ==="
 cd ..
-xsct ./scripts/create_bsp.tcl $xsa $os
-set_config_tick_rate
-set_config_static_allocation
-set_config_heap_size
-if [ "$FREERTOS_DEBUG" == 1 ]; then
-    set_freertos_config
-fi
+mkdir -p amc_bsp
+cd amc_bsp
+sdtgen -eval "sdtgen set_dt_param -xsa $xsa -dir ${SDT}; generate_sdt"
+empyro repo -st ${XILINX_VITIS}/data/embeddedsw
+empyro create_bsp -t empty_application -w amc_bsp -s ${SDT}/system-top.dts -p psv_cortexr5_0 -o freertos
+empyro config_bsp -d amc_bsp -al xilfpga
+empyro config_bsp -d amc_bsp -al xilloader
+empyro config_bsp -d amc_bsp -st freertos freertos_support_static_allocation:true
+empyro config_bsp -d amc_bsp -st freertos freertos_tick_rate:1000
+empyro config_bsp -d amc_bsp -st freertos freertos_total_heap_size:131072
+empyro build_bsp  -d amc_bsp
+cd ..

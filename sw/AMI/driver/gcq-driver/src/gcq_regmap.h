@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  * SPDX-License-Identifier: MIT
  *
  * This header file contains register definitions and macros to
@@ -79,7 +79,9 @@ static inline uint32_t prvulGetTrailingZeros( uint64_t ullValue )
                                                                 ( UINT32_MAX >> ( BITS_PER_U32 - 1 - ( h ) ) ) )
 #define FIELD_SHIFT( mask )                                     ( prvulGetTrailingZeros( mask ) )
 #define FIELD_SET( mask, val )                                  ( ( ( val ) << FIELD_SHIFT( mask ) ) & ( mask ) )
+#ifndef FIELD_GET
 #define FIELD_GET( mask, reg )                                  ( ( ( reg ) & ( mask ) ) >> FIELD_SHIFT( mask ) )
+#endif
 
 #define GCQ_INTERRUPT_CTRL_DISABLE                              ( 0x0 )
 #define GCQ_INTERRUPT_CTRL_ENABLE                               ( 0x1 )

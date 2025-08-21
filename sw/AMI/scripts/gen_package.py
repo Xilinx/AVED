@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # SPDX-License-Identifier: GPL-2.0-only
-# Copyright (c) 2023-present Advanced Micro Devices, Inc. All rights reserved.
+# Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
 
 import re
 import os
@@ -31,14 +31,14 @@ class Options(object):
 
     def printHelp(self):
         log_info('GEN_PACKAGE-6', 'Usage: $ python3 ' + SCRIPT_FILE + ' [options]')
-        log_info('GEN_PACKAGE-6', '\t--help                 / -h: Display this message')
-        log_info('GEN_PACKAGE-6', '\t--output_dir           / -o: Path to the output directory. Default: ./output/<date>_<time>')
-        log_info('GEN_PACKAGE-6', '\t--pkg_release          / -r: Package release. Default <date>')
-        log_info('GEN_PACKAGE-6', '\t--verbose              / -V: Turn on verbosity')
-        log_info('GEN_PACKAGE-6', '\t--force                / -f: Override output directory if already existing')
-        log_info('GEN_PACKAGE-6', '\t--version              / -v: Display version')
-        log_info('GEN_PACKAGE-6', '\t--no_driver            / -n: No driver built during gen_package - docker build option only')
-        log_info('GEN_PACKAGE-6', '\t--no_gen_version       / -g: No genVersion scripts run during gen_package - docker build option only')
+        log_info('GEN_PACKAGE-6', '\t--help              / -h: Display this message')
+        log_info('GEN_PACKAGE-6', '\t--output_dir        / -o: Path to the output directory. Default: ./output/<date>_<time>')
+        log_info('GEN_PACKAGE-6', '\t--pkg_release       / -r: Package release. Default <date>')
+        log_info('GEN_PACKAGE-6', '\t--verbose           / -V: Turn on verbosity')
+        log_info('GEN_PACKAGE-6', '\t--force             / -f: Override output directory if already existing')
+        log_info('GEN_PACKAGE-6', '\t--version           / -v: Display version')
+        log_info('GEN_PACKAGE-6', '\t--no_driver         / -n: No driver built during gen_package - docker build option only')
+        log_info('GEN_PACKAGE-6', '\t--no_gen_version    / -g: No genVersion scripts run during gen_package - docker build option only')
         log_info('GEN_PACKAGE-6', '')
 
     def __init__(self):
@@ -189,54 +189,59 @@ def main(args):
         step = 'get system info'
         start_time = start_step('GEN_PACKAGE-39', step)
 
-        # Get System info
+        # Get distribution ID from /etc/os-release
+        log_file_name = os.path.abspath(os.path.join(output_dir, 'os-release.log'))
+        log_info('GEN_PACKAGE-5', 'Get distribution ID from /etc/os-release')
+
         config['system'] = {}
 
-        # Get config['system']['distribution_id']
-        cmd = [ 'lsb_release', '-is']
-        log_file_name = os.path.abspath(os.path.join(output_dir, 'lsb_release_is.log'))
-        log_info('GEN_PACKAGE-5', 'Get distribution ID')
-        exec_step_cmd('GEN_PACKAGE-15', step, cmd, log_file_name)
+        with open('/etc/os-release', 'r') as f:
+            for line in f:
+                if line.startswith('ID='):
+                    config['system']['distribution_id'] = line.strip().split('=')[1].strip('"')
+                    break
+
+
+        with open(log_file_name, 'w') as log_file:
+            log_file.write(config['system']['distribution_id'] + '\n')
+
         check_output_file_exists('GEN_PACKAGE-5', log_file_name)
 
-        log_file = open(log_file_name, mode='r')
-        for line in log_file:
-            config['system']['distribution_id'] = line.split('\n')[0]
-            break
-        log_file.close()
-
-        if config['system']['distribution_id'] not in SUPPORTED_DIST_ID:
+        if config['system']['distribution_id'].lower() not in [d.lower() for d in SUPPORTED_DIST_ID]:
             exit_error('GEN_PACKAGE-14', 'Invalid Distribution ID: ' + config['system']['distribution_id'] + '. Supported values are ' + str(SUPPORTED_DIST_ID))
 
         log_info('GEN_PACKAGE-16', 'Current distribution ID: ' + config['system']['distribution_id'])
 
-        # Get config['system']['distribution_release']
-        cmd = [ 'lsb_release', '-rs']
-        log_file_name = os.path.abspath(os.path.join(output_dir, 'lsb_release_rs.log'))
-        exec_step_cmd('GEN_PACKAGE-15', step, cmd, log_file_name)
-        log_file = open(log_file_name, mode='r')
-        for line in log_file:
-            config['system']['distribution_release'] = line.split('\n')[0]
-            break
-        log_file.close()
+
+        # Get distribution release version from /etc/os-release
+        log_file_name = os.path.abspath(os.path.join(output_dir, 'os_release.log'))
+        with open('/etc/os-release', 'r') as f:
+            for line in f:
+                if line.startswith('VERSION_ID='):
+                    config['system']['distribution_release'] = line.strip().split('=')[1].strip('"')
+                    break
+
+        with open(log_file_name, 'w') as log_file:
+            log_file.write(config['system']['distribution_release'] + '\n')
+
 
         # Only use the major release number of CentOS and RedHat
-        if config['system']['distribution_id'] in [DIST_ID_CENTOS, DIST_ID_REDHAT, DIST_ID_REDHAT2]:
+        if config['system']['distribution_id'].lower() in [d.lower() for d in  [DIST_ID_CENTOS, DIST_ID_REDHAT, DIST_ID_REDHAT2, DIST_ID_RHEL]]:
             distribution_release_split = config['system']['distribution_release'].split('.')
             config['system']['distribution_release'] = distribution_release_split[0] + '.x'
 
         # architecture
-        if config['system']['distribution_id'] in DIST_DEB:
-            cmd = [ 'dpkg', '--print-architecture']
+        if config['system']['distribution_id'].lower() in [d.lower() for d in DIST_DEB]:
+            cmd = ['dpkg', '--print-architecture']
             log_file_name = os.path.abspath(os.path.join(output_dir, 'dpkg_print_architecture.log'))
             exec_step_cmd('GEN_PACKAGE-15', step, cmd, log_file_name)
-            log_file = open(log_file_name, mode='r')
-            for line in log_file:
-                config['system']['architecture'] = line.split('\n')[0]
-                break
-            log_file.close()
+            with open(log_file_name, mode='r') as log_file:
+                for line in log_file:
+                    config['system']['architecture'] = line.strip()
+                    break
         else:
-            config['system']['architecture'] = platform.machine() # 'x86_64'
+            config['system']['architecture'] = platform.machine()
+
 
         if config['system']['architecture'] not in SUPPORTED_ARCH:
             exit_error('GEN_PACKAGE-17', 'Invalid architecture: ' + config['system']['architecture'] + '. Supported values are ' + str(SUPPORTED_ARCH))
@@ -261,9 +266,9 @@ def main(args):
             # Get package version
             step = 'get AMI version'
             start_time = start_step('GET_VER', step)
-            get_ver = './scripts/getVersion.sh ami'
-            exec_step_cmd('GEN_VERSION', step, get_ver, shell=True, cwd=PROJECT_DIR)
-            check_output_file_exists('GET_VER', join(PROJECT_DIR, 'api', 'include', 'ami_version.h'))
+            get_ver = '../scripts/getVersion.sh ami'
+            exec_step_cmd('GEN_VERSION', step, get_ver, shell=True, cwd=join(PROJECT_DIR, 'api'))
+            check_output_file_exists('GET_VER', join(PROJECT_DIR, 'api', 'build', 'ami_version.h'))
             end_step('GET_VER', start_time)
 
             # Get GCQ driver version
@@ -272,6 +277,14 @@ def main(args):
             get_ver = './getVersion.sh gcq'
             exec_step_cmd('GEN_VERSION', step, get_ver, shell=True, cwd=join(PROJECT_DIR, 'driver', 'gcq-driver'))
             check_output_file_exists('GET_VER', join(PROJECT_DIR, 'driver', 'gcq-driver', 'src', 'gcq_version.h'))
+            end_step('GET_VER', start_time)
+
+            # Get AMI driver version
+            step = 'get AMI Driver version'
+            start_time = start_step('GET_VER', step)
+            get_ver = '../scripts/getVersion.sh driver'
+            exec_step_cmd('GEN_VERSION', step, get_ver, shell=True, cwd=join(PROJECT_DIR, 'driver'))
+            check_output_file_exists('GET_VER', join(PROJECT_DIR, 'driver', 'ami_driver_version.h'))
             end_step('GET_VER', start_time)
 
         # If a directory is present in this dictionary, we will only include the
@@ -306,34 +319,37 @@ def main(args):
 
                 driver.append(join(path, name).split(PROJECT_DIR)[-1].split('/', 1)[-1])
 
+        config['package']                = {}
+        config['package']['name']        = 'ami'
+        config['package']['release']     = opt.pkg_release
+        config['package']['summary']     = config['package']['name']  + ' driver package'
+        config['package']['description'] = [config['package']['name'] + ' driver package', 'Built on ' + build_date_short + '.']
+        config['package']['changelog']   = config['package']['name']  + ' driver package. Built on $build_date_short.'
+
+        # Find version from generated header file
+        ami_ver_file = join(PROJECT_DIR, 'api', 'build', 'ami_version.h')
+        if not os.path.isfile(ami_ver_file):
+            ami_ver_file = join(PROJECT_DIR, 'api', 'include', 'ami_version.h')
+
         # Find API sources
         for path, _, files in walk(join(PROJECT_DIR, 'api', 'include')):
             for name in files:
                 api_headers.append(join(path, name).split(PROJECT_DIR)[-1].split('/', 1)[-1])
 
-        config['package']                       = {}
-        config['package']['name']               = 'ami'
-        config['package']['release']            = opt.pkg_release
-        config['package']['summary']            = config['package']['name'] + ' driver package'
-        config['package']['description']        = [
-            config['package']['name'] + ' driver package',
-            'Built on ' + build_date_short + '.'
-        ]
-        config['package']['changelog']          = config['package']['name'] + ' driver package. Built on $build_date_short.'
+        api_headers.append(ami_ver_file)
 
-        # Find version from generated header file
-        with open(join(PROJECT_DIR, 'api', 'include', 'ami_version.h'), 'r') as fd:
-                data = fd.read()
+        with open(ami_ver_file, 'r') as fd:
+            data = fd.read()
 
-                v = re.findall(r'GIT_TAG.*?\"(\d+\.\d+\.\d+).*\"$', data, re.M)
-                c = re.findall(r'GIT_TAG_VER_DEV_COMMITS.*?\((\d+)\)$', data, re.M)
-                h = re.findall(r'GIT_HASH.*?\"(.*?)\"$', data, re.M)
+            v = re.findall(r'GIT_TAG.*?\"(\d+\.\d+\.\d+).*\"$', data, re.M)
+            c = re.findall(r'GIT_TAG_VER_DEV_COMMITS.*?\((\d+)\)$', data, re.M)
+            h = re.findall(r'GIT_HASH.*?\"(.*?)\"$', data, re.M)
 
-                # Set version
-                config['package']['version'] = v[0] if v else '0.0.0'
+            # Set version
+            config['package']['version'] = v[0] if v else '0.0.0'
 
-                # Set release
-                config['package']['release'] = f'{c[0] if c else 0}.{h[0][:8] if h else ""}.{opt.pkg_release}'
+            # Set release
+            config['package']['release'] = f'{c[0] if c else 0}.{h[0][:8] if h else ""}.{opt.pkg_release}'
 
         with open(os.path.abspath(os.path.join(SCRIPT_DIR, 'package_data', 'postinst.sh')), 'r') as infile:
             fdata = infile.read()
@@ -420,9 +436,9 @@ def main(args):
         config['package']['usr_bin'] = config['package']['usr_bin_dir'] + '/ami_tool'
         config['package']['usr_lib'] = config['package']['usr_lib_dir'] + '/libami.a'
 
-        if config['system']['distribution_id'] in DIST_RPM:
+        if config['system']['distribution_id'].lower() in [d.lower() for d in  DIST_RPM]:
             config['package']['pkg_config_dir'] = 'usr/lib64/pkgconfig'
-        elif config['system']['distribution_id'] in DIST_DEB:
+        elif config['system']['distribution_id'].lower()  in [d.lower() for d in DIST_DEB]:
             config['package']['pkg_config_dir'] = 'usr/lib/pkgconfig'
         else:
             config['package']['pkg_config_dir'] = 'usr/share/pkgconfig'
@@ -436,7 +452,7 @@ def main(args):
         ]
 
         # Create the file necessary to generate the packages
-        if config['system']['distribution_id'] in DIST_RPM:
+        if config['system']['distribution_id'].lower() in [d.lower() for d in DIST_RPM]:
             for dirname in ['BUILDROOT', 'RPMS', 'SOURCES', 'SPECS', 'SRPMS', 'BUILD']:
                 dir = os.path.abspath(os.path.join(output_dir, dirname))
                 os.makedirs(dir)
@@ -688,12 +704,13 @@ def main(args):
         check_output_file_exists('GEN_PACKAGE-5', module_pc_file_name)
 
         # Generate package
-        if config['system']['distribution_id'] in DIST_RPM:
+        if config['system']['distribution_id'].lower() in [d.lower() for d in DIST_RPM]:
             cmd = [
                 'rpmbuild', '--verbose',
                             '--define', '_topdir ' + output_dir,
                             '-bb',      spec_file_name
             ]
+
             log_file_name = os.path.abspath(os.path.join(log_dir, 'rpmbuild.log'))
 
             pkg_name  = config['package']['name'] + '-' + config['package']['version'] + '-' + config['package']['release'] + '.' + config['system']['architecture']

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  * SPDX-License-Identifier: MIT
  *
  * This file contains the EMMC driver debug implementation
@@ -480,7 +480,7 @@ static void vEmmcGetReadTestResults( void )
         PLL_DAL( EMMC_DBG_NAME, "Test complete\r\n" );
         if( 1 == iReadResult )
         {
-            PLL_DAL( EMMC_DBG_NAME, "Test failed at block 0x%u\r\n", ulFailedBlock );
+            PLL_DAL( EMMC_DBG_NAME, "Test failed at block 0x%lx\r\n", ulFailedBlock );
         }
         else
         {

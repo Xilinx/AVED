@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * ami.c - This file contains the implementation of misc. API functions
- * 
- * Copyright (c) 2023-present Advanced Micro Devices, Inc. All rights reserved.
+ *
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  */
 
 /*****************************************************************************/
@@ -21,10 +21,12 @@
 #include <poll.h>
 #include <time.h>
 #include <sys/eventfd.h>
+#include <sys/utsname.h>
 
 /* Private API includes */
 #include "ami_internal.h"
 #include "ami_version.h"
+#include "ami_program.h"
 
 /*****************************************************************************/
 /* Defines                                                                   */
@@ -59,6 +61,31 @@ static char last_error_str[MAX_ERROR_STR] = { 0 };
 /*****************************************************************************/
 
 /**
+ * kernel_version_cmp() - Compare with current kernel version.
+ * @v: char pointer to version (major.minor.pat)
+ *
+ * Return: current kernel version - v.
+ */
+static int kernel_version_cmp(const char *v) {
+	struct utsname uts;
+    int cmaj, cmin, cpat;
+    int vmaj, vmin, vpat;
+
+	uname(&uts);
+
+    sscanf(uts.release, "%d.%d.%d", &cmaj, &cmin, &cpat);
+    sscanf(v,           "%d.%d.%d", &vmaj, &vmin, &vpat);
+
+    if (cmaj != vmaj)
+		return cmaj - vmaj;
+
+	if (cmin != vmin)
+		return cmin - vmin;
+
+    return cpat - vpat;
+}
+
+/**
  * ami_event_thread() - Internal event watcher thread.
  * @data: Pointer to `struct ami_event_data`
  *
@@ -67,14 +94,17 @@ static char last_error_str[MAX_ERROR_STR] = { 0 };
 static void *ami_event_thread(void *data)
 {
 	struct ami_event_data *d = NULL;
+	struct ami_pdi_progress *p = NULL;
 	struct pollfd mypoll = { 0 };
 	uint64_t efd_ctr = 0;
+	uint64_t chunk_size = PDI_CHUNK_SIZE * PDI_CHUNK_MULTIPLIER;
 	enum ami_event_status status = AMI_EVENT_STATUS_TIMEOUT;
 
 	if (!data)
 		return NULL;
 
 	d = (struct ami_event_data*)data;
+	p = d->callback_data;
 
 	/* callback is necessary */
 	if (!(d->callback))
@@ -93,11 +123,19 @@ static void *ami_event_thread(void *data)
 			status = AMI_EVENT_STATUS_TIMEOUT;
 		}
 
-		d->callback(
-			status,
-			efd_ctr,
-			d->callback_data
-		);
+		if (kernel_version_cmp("6.8.0") >= 0) {
+			d->callback(
+				status,
+				p->bytes_to_write > chunk_size ? chunk_size : p->bytes_to_write,
+				d->callback_data
+			);
+		} else {
+			d->callback(
+				status,
+				efd_ctr,
+				d->callback_data
+			);
+		}
 	}
 
 	return NULL;
@@ -187,7 +225,7 @@ int ami_set_last_error(enum ami_error err, const char *ctxt, ...)
 			error_ctxt
 		);
 		break;
-	
+
 	case AMI_ERROR_EBADF:
 		snprintf(
 			last_error_str,
@@ -232,7 +270,7 @@ int ami_set_last_error(enum ami_error err, const char *ctxt, ...)
 			error_ctxt
 		);
 		break;
-	
+
 	case AMI_ERROR_ENODEV:
 		snprintf(
 			last_error_str,
@@ -349,7 +387,7 @@ uint16_t ami_parse_bdf(const char *bdf)
 
 	if (!bdf)
 		return ret;
-	
+
 	/* Find position of first colon. */
 	c = strchr(bdf, ':');
 
@@ -378,7 +416,7 @@ int ami_watch_driver_events(struct ami_event_data *event_data,
 		return AMI_API_ERROR(AMI_ERROR_EINVAL);
 
 	/* Setup eventfd */
-	if ((efd = eventfd(0, 0)) == AMI_INVALID_FD) 
+	if ((efd = eventfd(0, 0)) == AMI_INVALID_FD)
 		return AMI_API_ERROR(EBADF);
 
 	/* Initialise thread data */
@@ -395,7 +433,7 @@ int ami_watch_driver_events(struct ami_event_data *event_data,
 		(void*)event_data
 	);
 
-	if (ret) 
+	if (ret)
 		return AMI_API_ERROR(AMI_ERROR_ERET);
 
 	event_data->thread_created = true;

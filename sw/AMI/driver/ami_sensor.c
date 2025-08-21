@@ -2,7 +2,7 @@
 /*
  * ami_sensor.c - This file contains sensor-related functionality.
  *
- * Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  */
 
 #include <linux/kthread.h>
@@ -81,9 +81,9 @@ const char *sdr_repo_type_to_str(enum gcq_sdr_repo_type sdr)
  *
  * Return: The relevant command flag or 0.
  */
-enum gcq_submit_cmd_req get_flags_for_repo(enum gcq_sdr_repo_type repo_type)
+static enum gcq_submit_cmd_flags get_flags_for_repo(enum gcq_sdr_repo_type repo_type)
 {
-	enum gcq_submit_cmd_req ret = GCQ_CMD_FLAG_NONE;
+	enum gcq_submit_cmd_flags ret = GCQ_CMD_FLAG_NONE;
 
 	switch (repo_type) {
 	case SDR_TYPE_BDINFO:
@@ -129,7 +129,7 @@ enum gcq_submit_cmd_req get_flags_for_repo(enum gcq_sdr_repo_type repo_type)
  *
  * Return: 0 or negative error code.
  */
-int parse_sdr(struct amc_control_ctxt	*amc_ctrl_ctxt,
+static int parse_sdr(struct amc_control_ctxt	*amc_ctrl_ctxt,
 	      uint8_t			*sdr_buf,
 	      struct sdr_repo		*repo) /* TODO: Test with board info SDR */
 {
@@ -477,82 +477,6 @@ int parse_sdr(struct amc_control_ctxt	*amc_ctrl_ctxt,
  * checks the size against a hardcoded value (512).
  */
 #define SDR_RESP_LEN 4096
-
-/**
- * get_sdr_size() - Perform the GET_SDR_SIZE API call.
- * @amc_ctrl_ctxt: The top level AMC struct instance.
- * @repo_type: The repo type.
- * @sdr_size: Pointer to a variable which will hold the returned size.
- *
- * Return: 0 or negative error code.
- */
-int get_sdr_size(struct amc_control_ctxt	*amc_ctrl_ctxt,
-		 enum gcq_sdr_repo_type		repo_type,
-		 uint16_t			*sdr_size)
-{
-	int ret = 0;
-	char *sdr_raw_buf = NULL;
-	int buf_index = 0;
-
-	int rid = 0;
-	enum gcq_sdr_completion_code completion_code = SDR_CODE_NOT_AVAILABLE;
-
-	if (!amc_ctrl_ctxt || !sdr_size)
-		return -EINVAL;
-
-	sdr_raw_buf = vzalloc(sizeof(char) * SDR_RESP_LEN);
-	if (!sdr_raw_buf) {
-		AMI_ERR(amc_ctrl_ctxt, "Failed to allocate memory buffer for sdr_raw_buf");
-		ret = -ENOMEM;
-		goto done;
-	}
-
-	ret = submit_gcq_command(amc_ctrl_ctxt,
-				 GCQ_SUBMIT_CMD_GET_SDR_SIZE,
-				 get_flags_for_repo(repo_type),
-				 sdr_raw_buf,
-				 SDR_RESP_LEN);
-
-	if (ret) {
-		AMI_ERR(amc_ctrl_ctxt, "Submit command failed");
-		ret = -EIO;
-		goto done;
-	}
-
-	completion_code = sdr_raw_buf[buf_index];
-	if (completion_code != SDR_CODE_OP_SUCCESS) {
-		AMI_ERR(amc_ctrl_ctxt, "Completion code : %d", completion_code);
-		ret = -EINVAL;
-		goto done;
-	}
-	buf_index++;
-
-	rid = (uint8_t)sdr_raw_buf[buf_index];
-	if (rid != repo_type) {
-		AMI_ERR(amc_ctrl_ctxt,
-			"Sensor response ID %d does not match sensor request ID %d",
-			rid,
-			AMC_PROXY_CMD_SENSOR_REQUEST_GET_SIZE);
-		ret = -EINVAL;
-		goto done;
-	}
-	buf_index++;
-
-	*sdr_size = (uint16_t)(sdr_raw_buf[buf_index + 1] << 8);
-	*sdr_size |= (uint16_t)(sdr_raw_buf[buf_index]);
-
-done:
-	if (sdr_raw_buf)
-		vfree(sdr_raw_buf);
-
-	if (ret == SUCCESS)
-		AMI_VDBG(amc_ctrl_ctxt, "Successfully fetched SDR size");
-	else
-		AMI_ERR(amc_ctrl_ctxt, "Failed to fetch SDR size");
-
-	return ret;
-}
-
 /**
  * get_sdr() - Perform the GET_SDR API call.
  * @amc_ctrl_ctxt: The top level AMC struct instance.
@@ -561,7 +485,7 @@ done:
  *
  * Return: 0 or negative error code.
  */
-int get_sdr(struct amc_control_ctxt	*amc_ctrl_ctxt,
+static int get_sdr(struct amc_control_ctxt	*amc_ctrl_ctxt,
 	    enum gcq_sdr_repo_type	repo_type,
 	    struct sdr_repo		*repo)
 {

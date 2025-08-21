@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (c) 2024 Advanced Micro Devices, Inc. All rights reserved.
+# Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 
 ################################################################################
@@ -34,9 +34,6 @@ SCRIPT_START_TIME=$SECONDS
 
 chmod +x $SCRIPTS_DIR/*
 
-### Array of required git filenames ###
-GIT_FILES=(".uncrustify_rtos.cfg" "function_header.txt" "pre-commit" "commit-msg")
-
 ################################################################################
 ###                                 Functions                                ###
 ################################################################################
@@ -44,13 +41,13 @@ GIT_FILES=(".uncrustify_rtos.cfg" "function_header.txt" "pre-commit" "commit-msg
 function clean() {
     SECTION_START=$SECONDS
     echo "=== Removing BSP, build, and CMake files ==="
-    rm -r $ROOT_DIR/.Xil/
-    rm -r $ROOT_DIR/.metadata/
-    rm -r $BSP_DIR/
-    rm -r $ROOT_DIR/.analytics
-    rm -r $ROOT_DIR/IDE.log
+    rm -rf $ROOT_DIR/.Xil/
+    rm -rf $ROOT_DIR/.metadata/
+    rm -rf $BSP_DIR/
+    rm -rf $ROOT_DIR/.analytics
+    rm -rf $ROOT_DIR/IDE.log
 
-    rm -r $BUILD_DIR
+    rm -rf $BUILD_DIR
     echo "*** Cleaning took $((SECONDS - $SECTION_START)) S ***"
 }
 
@@ -59,7 +56,7 @@ function clean_static_analysis() {
     echo "=== Static analysis clean ==="
     cd $BUILD_DIR
     make clean
-    rm -r coverity/
+    rm -rf coverity/
 
     echo "*** Cleaning took $((SECONDS - $SECTION_START)) S ***"
 }
@@ -90,29 +87,6 @@ function print_help() {
     echo "========================================================================================="
 }
 
-function check_workspace_setup() {
-    for file in "${GIT_FILES[@]}"
-    do
-        if [ -f ".git/hooks/$file" ]; then
-            echo "Checking ==> $file"
-	    else
-            echo "Checking ==> $file"
-            echo "Error: file does not exist."
-            echo "Please run ./scripts/setupWorkspace.sh"
-            exit 1
-        fi
-    done
-
-    echo "Checking ==> uncrustify is installed"
-    check=$(command -v uncrustify)
-
-    if [ $? -ne 0 ]; then
-        echo "Error: uncrustify is not installed."
-        echo "Please run ./scripts/setupWorkspace.sh"
-        exit 1
-    fi
-}
-
 ################################################################################
 
 ################################################################################
@@ -137,7 +111,7 @@ while [ $# -gt 0 ]; do
         ### clean AMC application files ###
         if [ -d "$BUILD_DIR" ]; then
             echo "=== Removing $BUILD_DIR ==="
-            rm -r $BUILD_DIR
+            rm -rf $BUILD_DIR
         fi
         exit 0;;
     -amc)
@@ -188,12 +162,9 @@ while [ $# -gt 0 ]; do
     shift ### shift to next passed option ###
 done
 
-# Check setupWorkspace.sh script has run, and that uncrustify is installed.
-# check_workspace_setup
-
 # Remake build direcory
 if [ -d "$BUILD_DIR" ]; then
-    rm -r $BUILD_DIR/
+    rm -rf $BUILD_DIR/
 fi
 mkdir $BUILD_DIR
 

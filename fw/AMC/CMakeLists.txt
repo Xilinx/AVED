@@ -1,4 +1,4 @@
-# Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+# Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 
 cmake_minimum_required(VERSION 3.5.0)
@@ -54,6 +54,7 @@ else()
     endif()
 
     if(OS MATCHES "^(FreeRTOS)$")
+        add_definitions(-DSDT)
         set(CMAKE_C_COMPILER armr5-none-eabi-gcc)
         set(CMAKE_SYSTEM_NAME Generic)
         set(CMAKE_SYSTEM_PROCESSOR arm)
@@ -147,14 +148,18 @@ else()
     execute_process(COMMAND ./getVersion.sh smbus WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/src/device_drivers/smbus_driver )
 
     #adding static libraries
-    find_library(FREERTOS_LIB NAMES freertos PATHS amc_bsp/psv_cortexr5_0/freertos10_xilinx_domain/bsp/psv_cortexr5_0/lib)
-    find_library(XIL_LIB NAMES xil PATHS amc_bsp/psv_cortexr5_0/freertos10_xilinx_domain/bsp/psv_cortexr5_0/lib)
-    find_library(XIL_FPGA NAMES xilfpga PATHS amc_bsp/psv_cortexr5_0/freertos10_xilinx_domain/bsp/psv_cortexr5_0/lib)
-    find_library(XIL_MAILBOX NAMES xilmailbox PATHS amc_bsp/psv_cortexr5_0/freertos10_xilinx_domain/bsp/psv_cortexr5_0/lib)
+    set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH};amc_bsp/amc_bsp/lib)
+    find_library(FREERTOS_LIB NAMES freertos PATHS ${CMAKE_LIBRARY_PATH})
+    find_library(XIL_LIB NAMES xil PATHS ${CMAKE_LIBRARY_PATH})
+    find_library(XIL_TIMER NAMES xiltimer PATHS ${CMAKE_LIBRARY_PATH})
+    find_library(XIL_FPGA NAMES xilfpga PATHS ${CMAKE_LIBRARY_PATH})
+    find_library(XIL_MAILBOX NAMES xilmailbox PATHS ${CMAKE_LIBRARY_PATH})
+    find_library(XIL_STANDALONE NAMES xilstandalone PATHS ${CMAKE_LIBRARY_PATH})
 
     #Include directories
-    include_directories(amc_bsp/psv_cortexr5_0/freertos10_xilinx_domain/bsp/psv_cortexr5_0/include)
-    include_directories(amc_bsp/psv_cortexr5_0/freertos10_xilinx_domain/bsp/psv_cortexr5_0/lib)
+    include_directories(amc_bsp/amc_bsp/include)
+    include_directories(${CMAKE_LIBRARY_PATH})
+    include_directories(build)
     include_directories(src/common/include)
     include_directories(src/common/core_libs/pll)
     include_directories(src/common/core_libs/evl)
@@ -309,7 +314,7 @@ else()
 
     #linking libraries with executable
     if(OS MATCHES "^(FreeRTOS)$")
-        target_link_libraries(amc.elf "-Wl,-T -Wl,../src/lscript.ld" -Wl,--start-group,${XIL_LIB},${FREERTOS_LIB},-lgcc,-lc,--end-group -Wl,--start-group,${XIL_FPGA},${XIL_LIB},-lgcc,-lc,--end-group -Wl,--start-group,${XIL_MAILBOX},${XIL_LIB},-lgcc,-lc,--end-group)
+        target_link_libraries(amc.elf "-Wl,-T -Wl,${amc_SOURCE_DIR}/src/lscript.ld" -Wl,--start-group,${XIL_TIMER},${XIL_STANDALONE},${XIL_LIB},${FREERTOS_LIB},-lgcc,-lc,--end-group -Wl,--start-group,${XIL_FPGA},${XIL_LIB},-lgcc,-lc,--end-group -Wl,--start-group,${XIL_TIMER},${XIL_STANDALONE},${XIL_MAILBOX},${XIL_LIB},-lgcc,-lc,--end-group)
         target_compile_definitions(amc.elf PRIVATE $<$<CONFIG:Debug>:DEBUG_PRINT> GCQ_MAX_INSTANCES=1)
     endif()
 

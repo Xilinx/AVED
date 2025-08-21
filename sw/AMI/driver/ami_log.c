@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * ami_log.c - This file contains functions to read AMC shared memory logs.
- * 
- * Copyright (c) 2023-present Advanced Micro Devices, Inc. All rights reserved.
+ *
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  */
 
 #include <linux/types.h>
@@ -26,7 +26,7 @@ void dump_amc_log(struct amc_control_ctxt *amc_ctrl_ctxt)
 
 	if (!amc_ctrl_ctxt)
 		return;
-	
+
 	msg_idx_addr = (uintptr_t)amc_ctrl_ctxt->gcq_payload_base_virt_addr +
 		offsetof(struct amc_shared_mem, log_msg.log_msg_index);
 
@@ -56,7 +56,7 @@ void dump_amc_log(struct amc_control_ctxt *amc_ctrl_ctxt)
 
 		memcpy_fromio(&msg, (void*)log_msg_addr, sizeof(struct amc_msg_payload));
 
-		if(strchr(msg.buff, '\0') && strlen(msg.buff))
+		if(strnchr(msg.buff, sizeof(struct amc_msg_payload), '\0') && strlen(msg.buff))
 			AMI_AMC_LOG(amc_ctrl_ctxt, "%s", msg.buff);
 
 		i = (i + 1) % AMC_LOG_MAX_RECS;

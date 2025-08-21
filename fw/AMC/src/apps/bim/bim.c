@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  * SPDX-License-Identifier: MIT
  *
  * This file contains the implementation of the Built in Monitoring (BIM) Application.
@@ -148,26 +148,26 @@ typedef struct BIM_PRIVATE_DATA
 
 static BIM_PRIVATE_DATA xLocalData =
 {
-    UPPER_FIREWALL,                                                            /* ulUpperFirewall */
+    UPPER_FIREWALL, /* ulUpperFirewall */
 
-    FALSE,                                                                     /* iIsInitialised  */
+    FALSE,          /* iIsInitialised  */
 
-    NULL,                                                                      /* pxModuleData    */
-    0,                                                                         /* xHealthStatus   */
+    NULL,           /* pxModuleData    */
+    0,              /* xHealthStatus   */
     {
         0
-    },                                                                         /* pxModuleStates  */
+    },              /* pxModuleStates  */
 
-    NULL,                                                                      /* pvMtxHdl        */
+    NULL,           /* pvMtxHdl        */
 
     {
         0
-    },                                                                         /* ulStats         */
+    },              /* ulStats         */
     {
         0
-    },                                                                         /* ulErrors        */
+    },              /* ulErrors        */
 
-    LOWER_FIREWALL                                                             /* ulLowerFirewall */
+    LOWER_FIREWALL  /* ulLowerFirewall */
 };
 
 static BIM_PRIVATE_DATA *pxThis = &xLocalData;
@@ -610,25 +610,21 @@ static int iApcCallback( EVL_SIGNAL *pxSignal )
 
             switch( pxSignal->ucEventType )
             {
-            case APC_PROXY_DRIVER_E_DOWNLOAD_STARTED:
-            case APC_PROXY_DRIVER_E_DOWNLOAD_COMPLETE:
-            case APC_PROXY_DRIVER_E_DOWNLOAD_FAILED:
-            case APC_PROXY_DRIVER_E_DOWNLOAD_BUSY:
-            case APC_PROXY_DRIVER_E_COPY_STARTED:
-            case APC_PROXY_DRIVER_E_COPY_COMPLETE:
-            case APC_PROXY_DRIVER_E_COPY_FAILED:
-            case APC_PROXY_DRIVER_E_COPY_BUSY:
-            case APC_PROXY_DRIVER_E_PARTITION_SELECTED:
-            case APC_PROXY_DRIVER_E_PARTITION_SELECTION_FAILED:
-            {
-                break;
-            }
+                case APC_PROXY_DRIVER_E_DOWNLOAD_STARTED:
+                case APC_PROXY_DRIVER_E_DOWNLOAD_COMPLETE:
+                case APC_PROXY_DRIVER_E_DOWNLOAD_FAILED:
+                case APC_PROXY_DRIVER_E_DOWNLOAD_BUSY:
+                case APC_PROXY_DRIVER_E_COPY_STARTED:
+                case APC_PROXY_DRIVER_E_COPY_COMPLETE:
+                case APC_PROXY_DRIVER_E_COPY_FAILED:
+                case APC_PROXY_DRIVER_E_COPY_BUSY:
+                case APC_PROXY_DRIVER_E_PARTITION_SELECTED:
+                case APC_PROXY_DRIVER_E_PARTITION_SELECTION_FAILED:
+                    break;
 
-            default:
-            {
-                INC_ERROR_COUNTER( BIM_ERRORS_APC_UNKNOWN_EVENT );
-                break;
-            }
+                default:
+                    INC_ERROR_COUNTER( BIM_ERRORS_APC_UNKNOWN_EVENT );
+                    break;
             }
 
             iStatus = OK;
@@ -683,22 +679,18 @@ static int iAmiCallback( EVL_SIGNAL *pxSignal )
 
             switch( pxSignal->ucEventType )
             {
-            case AMI_PROXY_DRIVER_E_PDI_DOWNLOAD_START:
-            case AMI_PROXY_DRIVER_E_PDI_COPY_START:
-            case AMI_PROXY_DRIVER_E_SENSOR_READ:
-            case AMI_PROXY_DRIVER_E_GET_IDENTITY:
-            case AMI_PROXY_DRIVER_E_BOOT_SELECT:
-            case AMI_PROXY_DRIVER_E_HEARTBEAT:
-            case AMI_PROXY_DRIVER_E_EEPROM_READ_WRITE:
-            {
-                break;
-            }
+                case AMI_PROXY_DRIVER_E_PDI_DOWNLOAD_START:
+                case AMI_PROXY_DRIVER_E_PDI_COPY_START:
+                case AMI_PROXY_DRIVER_E_SENSOR_READ:
+                case AMI_PROXY_DRIVER_E_GET_IDENTITY:
+                case AMI_PROXY_DRIVER_E_BOOT_SELECT:
+                case AMI_PROXY_DRIVER_E_HEARTBEAT:
+                case AMI_PROXY_DRIVER_E_EEPROM_READ_WRITE:
+                    break;
 
-            default:
-            {
-                INC_ERROR_COUNTER( BIM_ERRORS_AMI_UNKNOWN_EVENT );
-                break;
-            }
+                default:
+                    INC_ERROR_COUNTER( BIM_ERRORS_AMI_UNKNOWN_EVENT );
+                    break;
             }
 
             iStatus = OK;
@@ -732,7 +724,6 @@ static int iAmiCallback( EVL_SIGNAL *pxSignal )
         else
         {
             INC_ERROR_COUNTER( BIM_ERRORS_AMI_UNKNOWN_EVENT );
-
         }
     }
 
@@ -997,6 +988,7 @@ static int iBmcCallback( EVL_SIGNAL *pxSignal )
     return iStatus;
 }
 
+
 /******************************************************************************/
 /* Local function implementations                                             */
 /******************************************************************************/
@@ -1041,9 +1033,7 @@ static int iHandleEvent( EVL_SIGNAL *pxSignal )
                         /* else, update AMC health status to the individual event's context status */
                         else
                         {
-                            if( OK !=
-                                iBIM_SetOverallHealthStatus(
-                                    pxModule->pxEvents[ pxSignal->ucEventType ].xContextStatus ) )
+                            if( OK != iBIM_SetOverallHealthStatus(pxModule->pxEvents[ pxSignal->ucEventType ].xContextStatus ) )
                             {
                                 INC_ERROR_COUNTER( BIM_ERRORS_STATUS_SET_FAILED )
                                 iStatus = ERROR;

@@ -2,7 +2,7 @@
 /*
  * ami_sensor.c - This file contains the implementation of sensor related logic
  * 
- * Copyright (c) 2023-present Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  */
 
 /*****************************************************************************/
@@ -374,7 +374,7 @@ static int read_sensor_attr(struct ami_sensor_attr *attr)
 	char buf[AMI_HWMON_MAX_STR] = { 0 };
 	int ret = AMI_STATUS_ERROR;
 
-	if (!attr || !attr->hwmon)
+	if (!attr)
 		return AMI_API_ERROR(AMI_ERROR_EINVAL);
 
 	if (read_hwmon(attr->hwmon, 0, NULL, buf) == AMI_STATUS_OK) {

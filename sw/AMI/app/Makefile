@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-2.0-only
-# Copyright (c) 2023-present Advanced Micro Devices, Inc. All rights reserved.
+# Copyright (c) 2023-2025 Advanced Micro Devices, Inc. All rights reserved.
 
 TARGET := ami_tool
 BUILD_DIR := ./build
@@ -14,7 +14,7 @@ OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 # Replace .o with .d for dependencies.
 DEPS := $(OBJS:.o=.d)
 
-INC_DIRS := ../api/include ./cmd_handlers .
+INC_DIRS := ../api/build ../api/include ./cmd_handlers .
 INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
 AMI_LIB_DIR := ../api/build
@@ -46,12 +46,13 @@ banner:
 	@echo "  - $(PWD)\n"
 	@echo "  - CC          : $(CC)"
 	@echo "  - CFLAGS      : $(CFLAGS)"
+	@echo "  - LDFLAGS     : $(LDFLAGS)"
 	@echo "  - INC_DIRS    : $(INC_DIRS)"
 	@echo "  - BUILD_DIR   : $(BUILD_DIR)\n"
 	@$(MAKE) -s newline
 
 #
-# amiapp target
+# amiapp ami_tool target
 #
 $(BUILD_DIR)/$(TARGET): $(OBJS)
 	mkdir -p $(dir $@)

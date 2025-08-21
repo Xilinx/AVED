@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  * SPDX-License-Identifier: MIT
  *
  * This file contains the FW IF GCQ abstraction.
@@ -168,7 +168,7 @@ static FW_IF_GCQ_ERRORS_TYPE prvxMapIFDriverReturnCode( GCQ_ERRORS_TYPE xError )
 
     switch( xError )
     {
-        case GCQ_ERRORS_NONE:                       xMappedErr = FW_IF_ERRORS_NONE; break;
+        case GCQ_ERRORS_NONE:                       xMappedErr = FW_IF_GCQ_ERRORS_NONE; break;
         case GCQ_ERRORS_DRIVER_NOT_INITIALISED:     xMappedErr = FW_IF_GCQ_ERRORS_DRIVER_NOT_INITIALISED; break;
         case GCQ_ERRORS_NO_FREE_INSTANCES:          xMappedErr = FW_IF_GCQ_ERRORS_DRIVER_NO_FREE_INSTANCES; break;
         case GCQ_ERRORS_INVALID_INSTANCE:           xMappedErr = FW_IF_GCQ_ERRORS_DRIVER_INVALID_INSTANCE; break;
@@ -248,7 +248,7 @@ static GCQ_MODE_TYPE prvxMapMode( FW_IF_GCQ_MODE_TYPE xMode )
  *
  * @param   ppxGCQProfile is a variable to store the free GCQ profile
  *
- * @return  FW_IF_ERRORS_NONE if profile found, error otherwise
+ * @return  FW_IF_GCQ_ERRORS_NONE if profile found, error otherwise
  *
  */
 static uint32_t prvFindNextFreeProfile( FW_IF_GCQ_PROFILE_TYPE **ppxGCQProfile )
@@ -266,7 +266,7 @@ static uint32_t prvFindNextFreeProfile( FW_IF_GCQ_PROFILE_TYPE **ppxGCQProfile )
             if( FW_IF_GCQ_STATE_CLOSED == xGCQProfile[ iIndex ].xState )
             {
                 *ppxGCQProfile = &xGCQProfile[ iIndex ];
-                xRet = FW_IF_ERRORS_NONE;
+                xRet = FW_IF_GCQ_ERRORS_NONE;
                 break;
             }
         }
@@ -287,14 +287,14 @@ static uint32_t prvGCQOpen( void *pvFWIf )
     if( CHECK_DRIVER ) { return FW_IF_ERRORS_DRIVER_NOT_INITIALISED; }
 
     {
-        FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_ERRORS_NONE;
+        FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_GCQ_ERRORS_NONE;
         GCQ_INTERRUPT_MODE_TYPE xIntMode = MAX_GCQ_INTERRUPT_MODE;
         GCQ_MODE_TYPE xMode = MAX_GCQ_MODE_TYPE;
         GCQ_FLAGS_TYPE xFlags = 0;
         FW_IF_GCQ_CFG *pxCfg = ( FW_IF_GCQ_CFG* )pxThisIf->cfg;
         FW_IF_GCQ_PROFILE_TYPE *pxGCQProfile = NULL;
 
-        if( FW_IF_ERRORS_NONE != prvFindNextFreeProfile( &pxGCQProfile ) ) { return FW_IF_GCQ_ERRORS_NO_FREE_PROFILES; }
+        if( FW_IF_GCQ_ERRORS_NONE != prvFindNextFreeProfile( &pxGCQProfile ) ) { return FW_IF_GCQ_ERRORS_NO_FREE_PROFILES; }
         if( CHECK_NULL( pxGCQProfile ) ) { return FW_IF_GCQ_ERRORS_INVALID_PROFILE; }
 
         pxGCQProfile->ulIOHandle = 0;
@@ -390,7 +390,7 @@ static uint32_t prvGCQClose( void *pvFWIf )
     if( CHECK_DRIVER ) { return FW_IF_ERRORS_DRIVER_NOT_INITIALISED; }
 
     {
-        FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_ERRORS_NONE;
+        FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_GCQ_ERRORS_NONE;
         FW_IF_GCQ_PROFILE_TYPE *pxProfile = NULL;
         FW_IF_GCQ_CFG *pxCfg = NULL;
         GCQ_ERRORS_TYPE xStatus = GCQ_ERRORS_NONE;
@@ -430,7 +430,7 @@ static uint32_t prvGCQWrite( void *pvFWIf, uint64_t ullDstPort, uint8_t *pucData
     if( CHECK_NULL( pucData ) ) { return FW_IF_ERRORS_PARAMS; };
 
     {
-        FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_ERRORS_NONE;
+        FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_GCQ_ERRORS_NONE;
         FW_IF_GCQ_PROFILE_TYPE *pxProfile = NULL;
         FW_IF_GCQ_CFG *pxCfg = NULL;
         GCQ_ERRORS_TYPE xStatus = GCQ_ERRORS_NONE;
@@ -464,7 +464,7 @@ static uint32_t prvGCQRead( void *pvFWIf, uint64_t ullSrcPort, uint8_t *pucData,
     if( CHECK_NULL( pucData ) ) { return FW_IF_ERRORS_PARAMS; };
 
     {
-        FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_ERRORS_NONE;
+        FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_GCQ_ERRORS_NONE;
         FW_IF_GCQ_CFG *pxCfg = NULL;
         FW_IF_GCQ_PROFILE_TYPE *pxProfile = NULL;
         GCQ_ERRORS_TYPE xStatus = GCQ_ERRORS_NONE;
@@ -495,7 +495,7 @@ static uint32_t prvGCQIOCtrl( void *pvFWIf, uint32_t ulOption, void *pvValue )
     if( CHECK_DRIVER ) { return FW_IF_ERRORS_DRIVER_NOT_INITIALISED; }
 
     {
-        FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_ERRORS_NONE;
+        FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_GCQ_ERRORS_NONE;
         FW_IF_GCQ_CFG *pxCfg = NULL;
         FW_IF_GCQ_PROFILE_TYPE *pxProfile = NULL;
 
@@ -544,7 +544,7 @@ static uint32_t prvGCQIOCtrl( void *pvFWIf, uint32_t ulOption, void *pvValue )
                 break;
 
             default:
-                xRet = FW_IF_ERRORS_UNRECOGNISED_OPTION;
+                xRet = (FW_IF_GCQ_ERRORS_TYPE)FW_IF_ERRORS_UNRECOGNISED_OPTION;
                 PLL_DBG( FW_IF_GCQ_NAME, "Error:  GCQ IOCTL unrecognised option\r\n" );
                 break;
         }
@@ -559,7 +559,7 @@ static uint32_t prvGCQIOCtrl( void *pvFWIf, uint32_t ulOption, void *pvValue )
  */
 static uint32_t prvGCQBindCallback( void *pvFWIf, FW_IF_callback *pxNewFunc )
 {
-    FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_ERRORS_NONE;
+    FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_GCQ_ERRORS_NONE;
     FW_IF_CFG *pxThisIf = ( FW_IF_CFG* )pvFWIf;
     if( CHECK_NULL( pxThisIf ) ) { return FW_IF_ERRORS_INVALID_HANDLE; }
     if( CHECK_CFG( pxThisIf ) ) { return FW_IF_ERRORS_INVALID_CFG; }
@@ -586,13 +586,13 @@ static uint32_t prvGCQBindCallback( void *pvFWIf, FW_IF_callback *pxNewFunc )
  */
 uint32_t ulFW_IF_GCQ_Init( FW_IF_GCQ_INIT_CFG *pxCfg )
 {
-    FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_ERRORS_NONE;
+    FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_GCQ_ERRORS_NONE;
     if( CHECK_NULL( pxCfg ) ) { return FW_IF_ERRORS_PARAMS; };
     if( CHECK_NOT_NULL( pxCfg->pvIOAccess ) ) { return FW_IF_ERRORS_PARAMS; };
 
     if( FW_IF_FALSE != iInitialised )
     {
-        xRet = FW_IF_ERRORS_DRIVER_IN_USE;
+        xRet = (FW_IF_GCQ_ERRORS_TYPE)FW_IF_ERRORS_DRIVER_IN_USE;
     }
     else
     {
@@ -619,7 +619,7 @@ uint32_t ulFW_IF_GCQ_Init( FW_IF_GCQ_INIT_CFG *pxCfg )
  */
 uint32_t ulFW_IF_GCQ_Create( FW_IF_CFG *xFWIf, FW_IF_GCQ_CFG *xGCQCfg )
 {
-    FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_ERRORS_NONE;
+    FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_GCQ_ERRORS_NONE;
     if( CHECK_DRIVER ) { return FW_IF_ERRORS_DRIVER_NOT_INITIALISED; }
     if( CHECK_NULL( xFWIf ) ) { return FW_IF_ERRORS_INVALID_CFG; }
     if( CHECK_NULL( xGCQCfg ) ) { return FW_IF_ERRORS_INVALID_CFG; }
@@ -646,7 +646,7 @@ uint32_t ulFW_IF_GCQ_Create( FW_IF_CFG *xFWIf, FW_IF_GCQ_CFG *xGCQCfg )
     }
     else
     {
-        xRet = FW_IF_ERRORS_INVALID_CFG;
+        xRet = (FW_IF_GCQ_ERRORS_TYPE)FW_IF_ERRORS_INVALID_CFG;
     } 
 
     return xRet;
@@ -657,7 +657,7 @@ uint32_t ulFW_IF_GCQ_Create( FW_IF_CFG *xFWIf, FW_IF_GCQ_CFG *xGCQCfg )
  */
 int iFW_IF_GCQ_PrintStatistics( void )
 {
-    FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_ERRORS_DRIVER_NOT_INITIALISED;
+    FW_IF_GCQ_ERRORS_TYPE xRet = (FW_IF_GCQ_ERRORS_TYPE)FW_IF_ERRORS_DRIVER_NOT_INITIALISED;
 
     /* TODO implement print stats */
 
@@ -669,7 +669,7 @@ int iFW_IF_GCQ_PrintStatistics( void )
  */
 int iFW_IF_GCQ_ClearStatistics( void )
 {
-    FW_IF_GCQ_ERRORS_TYPE xRet = FW_IF_ERRORS_DRIVER_NOT_INITIALISED;
+    FW_IF_GCQ_ERRORS_TYPE xRet = (FW_IF_GCQ_ERRORS_TYPE)FW_IF_ERRORS_DRIVER_NOT_INITIALISED;
 
     /* TODO implement clear stats */
 

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  * SPDX-License-Identifier: MIT
  *
  * This file contains the in band telemetry debug implementation
@@ -76,10 +76,10 @@ typedef struct IN_BAND_DEBUG_PRIVATE_DATA
 
 static IN_BAND_DEBUG_PRIVATE_DATA xLocalData =
 {
-    FALSE,                                                                     /* iIsInitialised */
-    0,                                                                         /* ullSharedMemBaseAddr*/
-    FALSE,                                                                     /* iInBandTestMode */
-    FALSE                                                                      /* iAmiTestCallbackBounded*/
+    FALSE,  /* iIsInitialised */
+    0,      /* ullSharedMemBaseAddr*/
+    FALSE,  /* iInBandTestMode */
+    FALSE   /* iAmiTestCallbackBounded*/
 
 };
 static IN_BAND_DEBUG_PRIVATE_DATA *pxThis = &xLocalData;

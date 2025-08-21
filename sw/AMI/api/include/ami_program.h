@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * ami_program.h- This file contains the public interface for device programming logic
- * 
- * Copyright (c) 2023-present Advanced Micro Devices, Inc. All rights reserved.
+ *
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  */
 
 #ifndef AMI_PROGRAM_H
@@ -21,6 +21,12 @@ extern "C" {
 
 /* Public API includes */
 #include "ami_device.h"
+
+/*****************************************************************************/
+/* Defines                                                                   */
+/*****************************************************************************/
+#define PDI_CHUNK_MULTIPLIER	(1024)
+#define PDI_CHUNK_SIZE			(32)  /* Multiple of 1024 */
 
 /*****************************************************************************/
 /* Structs, Enums                                                            */
@@ -155,7 +161,7 @@ int ami_prog_device_boot(struct ami_device **dev, uint32_t partition);
  *
  * Return: AMI_STATUS_OK or AMI_STATUS_ERROR.
  */
-int ami_prog_copy_partition(ami_device *dev, uint32_t src_device, uint32_t src_part, 
+int ami_prog_copy_partition(ami_device *dev, uint32_t src_device, uint32_t src_part,
 	uint32_t dest_device, uint32_t dest_part, ami_event_handler progress_handler);
 
 /**

@@ -1,14 +1,15 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * ami_program.c - This file contains functions to program (flash) devices.
- * 
- * Copyright (c) 2023-present Advanced Micro Devices, Inc. All rights reserved.
+ *
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  */
 
 #include <linux/types.h>
 #include <linux/delay.h>
 #include <linux/pci.h>
 #include <linux/eventfd.h>
+#include <linux/version.h>
 
 #include "ami_top.h"
 #include "ami_program.h"
@@ -46,7 +47,7 @@ static int do_image_download(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *bu
 	/* Round up the total number of chunks */
 	uint16_t num_chunks = (size + ((PDI_CHUNK_SIZE * PDI_CHUNK_MULTIPLIER) - 1)) /
 		(PDI_CHUNK_SIZE * PDI_CHUNK_MULTIPLIER);
-	
+
 	if (!size || !amc_ctrl_ctxt || !buf)
 		return -EINVAL;
 
@@ -71,7 +72,7 @@ static int do_image_download(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *bu
 			bytes_to_write = (size - bytes_written);
 		else
 			bytes_to_write = (PDI_CHUNK_SIZE * PDI_CHUNK_MULTIPLIER);
-		
+
 		/*
 		 * Don't invalidate the boot tag if we're updating the FPT
 		 * or if there is only a single chunk.
@@ -86,11 +87,16 @@ static int do_image_download(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *bu
 				MK_PDI_FLAGS(boot_device, part, chunk, (!rewrite_boot_tag && (chunk == (num_chunks - 1)))),
 				&buf[bytes_written], bytes_to_write);
 
-			if (ret) 
+			if (ret)
 				break;
 
-			if (efd_ctx)
-				eventfd_signal(efd_ctx, bytes_to_write);
+			if (efd_ctx) {
+				#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 8, 0)
+					eventfd_signal(efd_ctx);
+				#else
+					eventfd_signal(efd_ctx, bytes_to_write);
+				#endif
+			}
 		} else {
 			uint32_t boot_tag = INVALID_BOOT_TAG;
 
@@ -106,7 +112,7 @@ static int do_image_download(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *bu
 			ret = submit_gcq_command(amc_ctrl_ctxt, GCQ_SUBMIT_CMD_DOWNLOAD_PDI,
 				MK_PDI_FLAGS(boot_device, part, BOOT_TAG_CHUNK, false),
 				(uint8_t*)&boot_tag, sizeof(uint32_t));
-			
+
 			/*
 			 * Don't signal to the user here but we do increment
 			 * the chunk and number of bytes written so we can continue
@@ -114,7 +120,7 @@ static int do_image_download(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *bu
 			 */
 			if (ret)
 				break;
-			
+
 			rewrite_boot_tag = true;
 		}
 
@@ -144,7 +150,11 @@ static int do_image_download(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *bu
 			buf, (PDI_CHUNK_SIZE * PDI_CHUNK_MULTIPLIER));
 
 		if (!ret && efd_ctx)
+		#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 8, 0)
+			eventfd_signal(efd_ctx);
+		#else
 			eventfd_signal(efd_ctx, (PDI_CHUNK_SIZE * PDI_CHUNK_MULTIPLIER));
+		#endif
 	}
 
 	if (ret)
@@ -226,7 +236,7 @@ int device_boot(struct pf_dev_struct *pf_dev, uint32_t partition)
 
 	ret = submit_gcq_command(pf_dev->amc_ctrl_ctxt, GCQ_SUBMIT_CMD_DEVICE_BOOT,
 		partition, NULL, 0);
-	
+
 	if (ret)
 		AMI_ERR(pf_dev->amc_ctrl_ctxt, "Failed to select boot partition");
 
@@ -258,7 +268,7 @@ int copy_partition(struct pf_dev_struct *pf_dev, uint32_t src_device, uint32_t s
 			AMI_ERR(pf_dev->amc_ctrl_ctxt, "Partition not found");
 			return -EINVAL;
 	}
-	
+
 	/* Sanity check partition size */
 	if (dest_partition.partition_size < src_partition.partition_size) {
 		AMI_ERR(pf_dev->amc_ctrl_ctxt, "Destination partition is too small for copy");
@@ -271,7 +281,7 @@ int copy_partition(struct pf_dev_struct *pf_dev, uint32_t src_device, uint32_t s
 	 */
 	ret = submit_gcq_command(pf_dev->amc_ctrl_ctxt, GCQ_SUBMIT_CMD_COPY_PARTITION,
 		MK_PARTITION_FLAGS(src_device, src_part, dest_device, dest_part), NULL, src_partition.partition_size);
-	
+
 	if (ret)
 		AMI_ERR(pf_dev->amc_ctrl_ctxt, "Failed to copy partition");
 

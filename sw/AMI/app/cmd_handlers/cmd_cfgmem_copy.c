@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * cmd_cfgmem_copy.c - This file contains the implementation for the command "cfgmem_copy"
- * 
- * Copyright (c) 2023-present Advanced Micro Devices, Inc. All rights reserved.
+ *
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  */
 
 /*****************************************************************************/
@@ -27,11 +27,8 @@
 /*****************************************************************************/
 /* Defines                                                                   */
 /*****************************************************************************/
-
-#define PDI_CHUNK_MULTIPLIER		(1024)
-#define PDI_CHUNK_SIZE			(32)	/* Multiple of 1024 */
-#define COPY_CHUNK_DUR_MS		(70)	/* Est duration for partition chunk copy (ms) */
-#define SECOND_IN_MS			(1000) 
+#define COPY_CHUNK_DUR_MS		(800)	/* Est duration for partition chunk copy (ms) */
+#define SECOND_IN_MS			(1000)
 
 /*****************************************************************************/
 /* Function declarations                                                     */
@@ -42,18 +39,18 @@
  * @options:  Ordered list of options passed in at the command line
  * @num_args:  Number of non-option arguments (excluding command)
  * @args:  List of non-option arguments (excluding command)
- * 
+ *
  * `args` may be an invalid pointer. It is the function's responsibility
  * to validate the `num_args` parameter.
- * 
+ *
  * Return: EXIT_SUCCESS or EXIT_FAILURE
  */
 static int do_cmd_cfgmem_copy(struct app_option *options, int num_args, char **args);
 
 /**
- * calc_est_time() - Local function to calc est copy duration. 
+ * calc_est_time() - Local function to calc est copy duration.
  * @part_size: Size of src partition.
- * 
+ *
  * Return: Result of duration calc.
  */
 static uint32_t calc_est_time(uint32_t part_size);
@@ -67,7 +64,7 @@ static uint32_t calc_est_time(uint32_t part_size);
  * The progress handling is currently limited and simply prints out a character
  * regardless of the actual event that gets raised. This may still be useful,
  * however, to indicate that the application itself is not hanging.
- * 
+ *
  * Return: None.
  */
 static void progress_handler(enum ami_event_status status, uint64_t ctr, void *data);
@@ -131,7 +128,7 @@ static uint32_t calc_est_time(uint32_t part_size)
 	uint32_t est_num_chunks = 0;
 	/* calc est copy duration */
 	est_num_chunks = (part_size + ((PDI_CHUNK_SIZE * PDI_CHUNK_MULTIPLIER) - 1)) /
-		                 (PDI_CHUNK_SIZE * PDI_CHUNK_MULTIPLIER);	
+		                 (PDI_CHUNK_SIZE * PDI_CHUNK_MULTIPLIER);
 	est_dur_seconds = ((est_num_chunks*COPY_CHUNK_DUR_MS) / SECOND_IN_MS) + 1;
 	return est_dur_seconds;
 }
@@ -181,6 +178,11 @@ static int do_cmd_cfgmem_copy(struct app_option *options, int num_args, char **a
 
 	/* parse source boot device */
 	char *source_token = strtok((char *)source->arg, ":");
+	if (source_token == NULL) {
+		APP_USER_ERROR("not enough arguments", help_msg);
+		return AMI_STATUS_ERROR;
+	}
+
 	if (strcmp(source_token, "primary") == 0) {
 		source_device = AMI_BOOT_DEVICES_PRIMARY;
 	} else if (strcmp(source_token, "secondary") == 0) {
@@ -192,10 +194,20 @@ static int do_cmd_cfgmem_copy(struct app_option *options, int num_args, char **a
 
 	/* parse source partition */
 	source_token = strtok(NULL, ":");
-	source_partition = (uint32_t)strtoul(source_token, NULL, 0);
+	if (source_token == NULL) {
+		APP_USER_ERROR("arguments are wrong", help_msg);
+		return AMI_STATUS_ERROR;
+	}
+
+	source_partition = (uint32_t)strtoul(source_token, NULL, 10);
 
 	/* parse dest boot device */
 	char *dest_token = strtok((char *)dest->arg, ":");
+	if (dest_token == NULL) {
+		APP_USER_ERROR("not enough arguments", help_msg);
+		return AMI_STATUS_ERROR;
+	}
+
 	if (strcmp(dest_token, "primary") == 0) {
 		dest_device = AMI_BOOT_DEVICES_PRIMARY;
 	} else if (strcmp(dest_token, "secondary") == 0) {
@@ -207,7 +219,11 @@ static int do_cmd_cfgmem_copy(struct app_option *options, int num_args, char **a
 
 	/* parse dest partition */
 	dest_token = strtok(NULL, ":");
-	dest_partition = (uint32_t)strtoul(dest_token, NULL, 0);
+	if (dest_token == NULL) {
+		APP_USER_ERROR("arguments are wrong", help_msg);
+		return AMI_STATUS_ERROR;
+	}
+	dest_partition = (uint32_t)strtoul(dest_token, NULL, 10);
 
 	printf("Copying partition %d to partition %d\r\n", source_partition, dest_partition);
 

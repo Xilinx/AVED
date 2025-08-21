@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  * SPDX-License-Identifier: MIT
  *
  * This header file contains the function implementations for the System Monnitor
@@ -250,10 +250,10 @@ int iSYS_MON_ReadVoltage( SYS_MON_VOLTAGES_ENUM xVoltageType, float *pfVoltageIn
                 iMappedVType = VCCAUX;
                 break;
             case SYS_MON_VOLTAGES_VCCAUXSMON:
-                iMappedVType = VCCAUXSMON;
+                iMappedVType = VCCAUX_SMON;
                 break;
             case SYS_MON_VOLTAGES_VCCAUXPMC:
-                iMappedVType = VCCAUXPMC;
+                iMappedVType = VCCAUX_PMC;
                 break;
             default:
                 iMappedVType = SYS_MON_DEFAULT_V_TYPE;

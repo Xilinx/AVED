@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  * SPDX-License-Identifier: MIT
  *
  * This file contains the public API for the Event Library
@@ -23,10 +23,10 @@
 
 
 #ifndef EVL_LOG_LEN
-#define EVL_LOG_LEN ( 100 )
+#define EVL_LOG_LEN         ( 100 )
 #endif
 
-#define EVL_MAX_BINDINGS ( 10 )
+#define EVL_MAX_BINDINGS    ( 10 )
 
 
 /******************************************************************************/
@@ -39,11 +39,11 @@
  */
 typedef struct EVL_SIGNAL
 {
-    uint8_t ucModule;                                                          /* Unique ID of the module raising the event   */
-    uint8_t ucEventType;                                                       /* Unique ID of the event raised by the module */
-    uint8_t ucInstance;                                                        /* Specific instance of the event raised       */
-    /* - for optional tracking                     */
-    uint8_t ucAdditionalData;                                                  /* Additional data if required.                */
+    uint8_t         ucModule;           /* Unique ID of the module raising the event   */
+    uint8_t         ucEventType;        /* Unique ID of the event raised by the module */
+    uint8_t         ucInstance;         /* Specific instance of the event raised       */
+                                        /* - for optional tracking                     */
+    uint8_t         ucAdditionalData;   /* Additional data if required.                */
 
 } EVL_SIGNAL;
 

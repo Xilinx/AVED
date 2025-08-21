@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  * SPDX-License-Identifier: MIT
  *
  * This file contains the implementation of the Debug Access Library (DAL)
@@ -25,58 +25,58 @@
 /* Defines                                                                    */
 /******************************************************************************/
 
-#define UPPER_FIREWALL ( 0xBABECAFE )
-#define LOWER_FIREWALL ( 0xDEADFACE )
+#define UPPER_FIREWALL      ( 0xBABECAFE )
+#define LOWER_FIREWALL      ( 0xDEADFACE )
 
-#define DAL_NAME "DAL"
+#define DAL_NAME            "DAL"
 
-#define DAL_CMD_LEN_MIN    ( 1 )
-#define DAL_CMD_SINGLE_LEN ( DAL_CMD_LEN_MIN + 1 )
-#define DAL_CMD_FULL_MENU  ( '?' )
-#define DAL_CMD_GO_TOP     ( '*' )
-#define DAL_CMD_GO_BACK    ( '0' )
+#define DAL_CMD_LEN_MIN     ( 1 )
+#define DAL_CMD_SINGLE_LEN  ( DAL_CMD_LEN_MIN + 1 )
+#define DAL_CMD_FULL_MENU   ( '?' )
+#define DAL_CMD_GO_TOP      ( '*' )
+#define DAL_CMD_GO_BACK     ( '0' )
 
-#define DAL_PROMPT        ( "#>" )
-#define DAL_TOP_MENU_NAME ( "*" )
+#define DAL_PROMPT          ( "#>" )
+#define DAL_TOP_MENU_NAME   ( "*" )
 
-#define DAL_START_IDX ( 1 )
-#define DAL_START_LVL ( 1 )
+#define DAL_START_IDX       ( 1 )
+#define DAL_START_LVL       ( 1 )
 
-#define DAL_MAX_INPUT   ( 256 )
-#define DAL_MSG_MAX_LEN ( 256 )
+#define DAL_MAX_INPUT       ( 256 )
+#define DAL_MSG_MAX_LEN     ( 256 )
 
-#define BASE_DEC ( 10 )
-#define BASE_HEX ( 16 )
+#define BASE_DEC            ( 10 )
+#define BASE_HEX            ( 16 )
 
 /* Stat & Error definitions */
-#define DAL_STATS( DO )                        \
-        DO( DAL_STATS_INIT_OVERALL_COMPLETE )  \
-        DO( DAL_STATS_CREATE_MUTEX )           \
-        DO( DAL_STATS_TAKE_MUTEX )             \
-        DO( DAL_STATS_RELEASE_MUTEX )          \
-        DO( DAL_STATS_OPTION_CREATED )         \
-        DO( DAL_STATS_DIRECTORY_CREATED )      \
-        DO( DAL_STATS_SUB_DIRECTORY_CREATED )  \
-        DO( DAL_STATS_DEBUG_FUNCTION_CREATED ) \
-        DO( DAL_STATS_NEW_COMMAND )            \
-        DO( DAL_STATS_MAX )
+#define DAL_STATS( DO )                          \
+    DO( DAL_STATS_INIT_OVERALL_COMPLETE )        \
+    DO( DAL_STATS_CREATE_MUTEX )                 \
+    DO( DAL_STATS_TAKE_MUTEX )                   \
+    DO( DAL_STATS_RELEASE_MUTEX )                \
+    DO( DAL_STATS_OPTION_CREATED )               \
+    DO( DAL_STATS_DIRECTORY_CREATED )            \
+    DO( DAL_STATS_SUB_DIRECTORY_CREATED )        \
+    DO( DAL_STATS_DEBUG_FUNCTION_CREATED )       \
+    DO( DAL_STATS_NEW_COMMAND )                  \
+    DO( DAL_STATS_MAX )
 
-#define DAL_ERRORS( DO )                              \
-        DO( DAL_ERRORS_INIT_TASK_CREATE_FAILED )      \
-        DO( DAL_ERRORS_INIT_MUTEX_CREATE_FAILED )     \
-        DO( DAL_ERRORS_MUTEX_RELEASE_FAILED )         \
-        DO( DAL_ERRORS_MUTEX_TAKE_FAILED )            \
-        DO( DAL_ERRORS_OPTION_NOT_CREATED )           \
-        DO( DAL_ERRORS_DIRECTORY_NOT_CREATED )        \
-        DO( DAL_ERRORS_SUB_DIRECTORY_NOT_CREATED )    \
-        DO( DAL_ERRORS_DEBUG_FUNCTION_NOT_CREATED )   \
-        DO( DAL_ERRORS_VALIDATION_FAILED )            \
-        DO( DAL_ERRORS_COMMAND_LIST_NULL_POINTER )    \
-        DO( DAL_ERRORS_UNKNOWN_CHAR_IN_COMMAND_LINE ) \
-        DO( DAL_ERRORS_UNKNOWN_COMMAND )              \
-        DO( DAL_ERRORS_NULL_INPUT_POINTER )           \
-        DO( DAL_ERRORS_WRONG_INPUT_BUF_SIZE )         \
-        DO( DAL_ERRORS_MAX )
+#define DAL_ERRORS( DO )                         \
+    DO( DAL_ERRORS_INIT_TASK_CREATE_FAILED )     \
+    DO( DAL_ERRORS_INIT_MUTEX_CREATE_FAILED )    \
+    DO( DAL_ERRORS_MUTEX_RELEASE_FAILED )        \
+    DO( DAL_ERRORS_MUTEX_TAKE_FAILED )           \
+    DO( DAL_ERRORS_OPTION_NOT_CREATED )          \
+    DO( DAL_ERRORS_DIRECTORY_NOT_CREATED )       \
+    DO( DAL_ERRORS_SUB_DIRECTORY_NOT_CREATED )   \
+    DO( DAL_ERRORS_DEBUG_FUNCTION_NOT_CREATED )  \
+    DO( DAL_ERRORS_VALIDATION_FAILED )           \
+    DO( DAL_ERRORS_COMMAND_LIST_NULL_POINTER )   \
+    DO( DAL_ERRORS_UNKNOWN_CHAR_IN_COMMAND_LINE )\
+    DO( DAL_ERRORS_UNKNOWN_COMMAND )             \
+    DO( DAL_ERRORS_NULL_INPUT_POINTER )          \
+    DO( DAL_ERRORS_WRONG_INPUT_BUF_SIZE )        \
+    DO( DAL_ERRORS_MAX )
 
 #define PRINT_STAT_COUNTER( x )  PLL_INF( DAL_NAME,              \
                                           "%50s . . . . %d\r\n", \
@@ -131,8 +131,8 @@ UTIL_MAKE_ENUM_AND_STRINGS( DAL_ERRORS, DAL_ERRORS, DAL_ERRORS_STR )
  */
 typedef union DAL_MENU_ACTION
 {
-    DAL_DEBUG_FUNCTION pxDebugFunc;
-    DAL_HDL            pxLevelDown;
+    DAL_DEBUG_FUNCTION  pxDebugFunc;
+    DAL_HDL             pxLevelDown;
 
 } DAL_MENU_ACTION;
 
@@ -142,16 +142,16 @@ typedef union DAL_MENU_ACTION
  */
 typedef struct DAL_MENU_OPTION
 {
-    char                      pcName[ DAL_MAX_NAME_LEN ];
-    DAL_MENU_OPTION_TYPE_ENUM xNodeType;
+    char                        pcName[ DAL_MAX_NAME_LEN ];
+    DAL_MENU_OPTION_TYPE_ENUM   xNodeType;
 
-    DAL_MENU_ACTION           xAction;
-    DAL_HDL                   pxLevelUp;
+    DAL_MENU_ACTION             xAction;
+    DAL_HDL                     pxLevelUp;
 
-    DAL_HDL                   pxNextNode;
-    DAL_HDL                   pxLastNode;
-    int                       iNumNodes;
-    int                       iDepth;
+    DAL_HDL                     pxNextNode;
+    DAL_HDL                     pxLastNode;
+    int                         iNumNodes;
+    int                         iDepth;
 
 } DAL_MENU_OPTION;
 
@@ -272,26 +272,26 @@ static void vDalTask( void *pArg );
 
 static DAL_PRIVATE_DATA xLocalData =
 {
-    UPPER_FIREWALL,                                                            /* ulUpperFirewall */
-    FALSE,                                                                     /* iIsInitialised  */
+    UPPER_FIREWALL, /* ulUpperFirewall */
+    FALSE,          /* iIsInitialised  */
     {
         0
-    },                                                                         /* pcMenuName      */
-    NULL,                                                                      /* pxInitFunc      */
-    0,                                                                         /* iNumNodes       */
-    NULL,                                                                      /* pxTopLevel      */
-    NULL,                                                                      /* pxCurrentLevel  */
+    },              /* pcMenuName      */
+    NULL,           /* pxInitFunc      */
+    0,              /* iNumNodes       */
+    NULL,           /* pxTopLevel      */
+    NULL,           /* pxCurrentLevel  */
     {
         0
-    },                                                                         /* pcLastCmd       */
-    NULL,                                                                      /* pvTaskHdl       */
-    NULL,                                                                      /* pvMtxHdl        */
+    },              /* pcLastCmd       */
+    NULL,           /* pvTaskHdl       */
+    NULL,           /* pvMtxHdl        */
     {
         0
-    },                                                                         /* ulStats         */
+    },              /* ulStats         */
     {
         0
-    },                                                                         /* ulErrors        */
+    },              /* ulErrors        */
     LOWER_FIREWALL
 };
 
@@ -436,7 +436,7 @@ DAL_HDL pxDAL_NewSubDirectory( const char *pcSubDirName, DAL_HDL pxParent )
         ( NULL != pcSubDirName ) &&
         ( NULL != pxParent ) )
     {
-        if( DAL_MENU_OPTION_TYPE_DIR == pxParent->xNodeType )
+        if ( DAL_MENU_OPTION_TYPE_DIR == pxParent->xNodeType )
         {
             if( OSAL_ERRORS_NONE == iOSAL_Mutex_Take( pxThis->pvMtxHdl, OSAL_TIMEOUT_WAIT_FOREVER ) )
             {
@@ -490,7 +490,7 @@ DAL_HDL pxDAL_NewDebugFunction( const char *pcFunctionName, DAL_HDL pxParent, DA
         ( NULL != pxParent ) &&
         ( NULL != pxFunction ) )
     {
-        if( DAL_MENU_OPTION_TYPE_DIR == pxParent->xNodeType )
+        if ( DAL_MENU_OPTION_TYPE_DIR == pxParent->xNodeType )
         {
             if( OSAL_ERRORS_NONE == iOSAL_Mutex_Take( pxThis->pvMtxHdl, OSAL_TIMEOUT_WAIT_FOREVER ) )
             {
@@ -574,7 +574,7 @@ int iDAL_GetInt( const char *pcPrompt, int *piInput )
                     pcDigit++;
                 }
 
-                if( ( 0 < iInputLen ) && ( OK == iStatus ) )
+                if( ( 0 < iInputLen ) && (  OK == iStatus ) )
                 {
                     /* input is a number */
                     *piInput = ( int )strtol( pcGetInput, NULL, BASE_DEC );
@@ -1136,7 +1136,7 @@ static int iSelectOption( int iCmd )
         ( NULL != pxCurrentLevel ) &&
         ( iCmd <= pxCurrentLevel->iNumNodes ) )
     {
-        int i = DAL_START_IDX;
+        int i          = DAL_START_IDX;
         pxCurrentLevel = pxCurrentLevel->xAction.pxLevelDown;
 
         while( ( NULL != pxCurrentLevel ) && ( i++ < iCmd ) )
@@ -1146,7 +1146,7 @@ static int iSelectOption( int iCmd )
 
         if( NULL != pxCurrentLevel )
         {
-            if( DAL_MENU_OPTION_TYPE_DIR == pxCurrentLevel->xNodeType )
+            if ( DAL_MENU_OPTION_TYPE_DIR == pxCurrentLevel->xNodeType )
             {
                 pxThis->pxCurrentLevel = pxCurrentLevel;
                 iStatus                = OK;

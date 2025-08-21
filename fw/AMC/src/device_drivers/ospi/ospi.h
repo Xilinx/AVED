@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  * SPDX-License-Identifier: MIT
  *
  * This header file contains structures, type definitions and function declarations
@@ -23,7 +23,7 @@
  */
 typedef struct OSPI_CFG_TYPE
 {
-    uint8_t ucDeviceId;
+    uint32_t ulBaseAddr;
     uint16_t usPageSize;
 
 } OSPI_CFG_TYPE;

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # SPDX-License-Identifier: GPL-2.0-only
-# Copyright (c) 2023-present Advanced Micro Devices, Inc. All rights reserved.
+# Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
 
 import json
 import os
@@ -93,14 +93,16 @@ DIST_ID_UBUNTU  = 'Ubuntu'
 DIST_ID_REDHAT  = 'RedHatEnterprise'
 DIST_ID_REDHAT2 = 'RedHatEnterpriseWorkstation'
 DIST_ID_SLES    = 'SUSE'
+DIST_ID_RHEL    = 'RHEL'
 SUPPORTED_DIST_ID = [
     DIST_ID_CENTOS,
     DIST_ID_UBUNTU,
     DIST_ID_REDHAT,
     DIST_ID_REDHAT2,
     DIST_ID_SLES,
+    DIST_ID_RHEL,
 ]
-DIST_RPM = [DIST_ID_CENTOS, DIST_ID_REDHAT, DIST_ID_REDHAT2, DIST_ID_SLES]
+DIST_RPM = [DIST_ID_CENTOS, DIST_ID_REDHAT, DIST_ID_REDHAT2, DIST_ID_SLES, DIST_ID_RHEL]
 DIST_DEB = [DIST_ID_UBUNTU]
 
 ARCH_X86_64     = 'x86_64'

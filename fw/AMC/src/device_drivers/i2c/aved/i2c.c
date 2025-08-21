@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  * SPDX-License-Identifier: MIT
  *
  * This file contains the user API definitions for the I2C driver.
@@ -27,54 +27,54 @@
 /******************************************************************************/
 /* Defines                                                                    */
 /******************************************************************************/
-#define UPPER_FIREWALL ( 0xBABECAFE )
-#define LOWER_FIREWALL ( 0xDEADFACE )
+#define UPPER_FIREWALL                  ( 0xBABECAFE )
+#define LOWER_FIREWALL                  ( 0xDEADFACE )
 
-#define I2C_NAME "I2C"
+#define I2C_NAME                        "I2C"
 
 /* Verbose data log - disabled by default */
 //#define I2C_DEBUG_DATA_LOG_ENABLE
-#define I2C_LOG_STRING_LENGTH       ( 105 )
-#define I2C_LOG_DEPTH               ( 100 )
-#define I2C_DEBUG_DATA_LOG_BUFF_MAX ( 60 )
-#define I2C_DEBUG_CHAR_PER_VALUE    ( 5 )
+#define I2C_LOG_STRING_LENGTH           ( 105 )
+#define I2C_LOG_DEPTH                   ( 100 )
+#define I2C_DEBUG_DATA_LOG_BUFF_MAX     ( 60 )
+#define I2C_DEBUG_CHAR_PER_VALUE        ( 5 )
 
-#define I2C_DEBUG_DATA_READ  ( 0 )
-#define I2C_DEBUG_DATA_WRITE ( 1 )
+#define I2C_DEBUG_DATA_READ             ( 0 )
+#define I2C_DEBUG_DATA_WRITE            ( 1 )
 
-#define I2C_WAIT_TIMEOUT_MS  ( 100 )
-#define I2C_RESET_TIMEOUT_MS ( 100 )
+#define I2C_WAIT_TIMEOUT_MS             ( 100 )
+#define I2C_RESET_TIMEOUT_MS            ( 100 )
 
 /* Stat & Error definitions */
-#define I2C_STATS( DO )                   \
-        DO( I2C_STATS_INIT_COMPLETED )    \
-        DO( I2C_STATS_SEND_COMPLETED )    \
-        DO( I2C_STATS_RECEIVE_COMPLETED ) \
-        DO( I2C_STATS_CREATE_TIMER )      \
-        DO( I2C_STATS_CREATE_MUTEX )      \
-        DO( I2C_STATS_TAKE_MUTEX )        \
-        DO( I2C_STATS_RELEASE_MUTEX )     \
-        DO( I2C_STATS_REINIT_SUCCESSFUL ) \
-        DO( I2C_STATS_MAX )
+#define I2C_STATS( DO )                                     \
+    DO( I2C_STATS_INIT_COMPLETED )                          \
+    DO( I2C_STATS_SEND_COMPLETED )                          \
+    DO( I2C_STATS_RECEIVE_COMPLETED )                       \
+    DO( I2C_STATS_CREATE_TIMER )                            \
+    DO( I2C_STATS_CREATE_MUTEX )                            \
+    DO( I2C_STATS_TAKE_MUTEX )                              \
+    DO( I2C_STATS_RELEASE_MUTEX )                           \
+    DO( I2C_STATS_REINIT_SUCCESSFUL )                       \
+    DO( I2C_STATS_MAX )
 
-#define I2C_ERRORS( DO )                                      \
-        DO( I2C_ERRORS_VALIDATION_FAILED )                    \
-        DO( I2C_ERRORS_XIIC_PS_CONFIG_FAILED )                \
-        DO( I2C_ERRORS_XIIC_PS_SET_CLK_FAILED )               \
-        DO( I2C_ERRORS_XIIC_PS_MASTER_SEND_POLLED_FAILED )    \
-        DO( I2C_ERRORS_XIIC_PS_MASTER_RECEIVE_POLLED_FAILED ) \
-        DO( I2C_ERRORS_XIIC_PS_SET_OPTIONS_FAILED )           \
-        DO( I2C_ERRORS_XIIC_PS_CLEAR_OPTIONS_FAILED )         \
-        DO( I2C_ERRORS_TIMER_CREATE_FAILED )                  \
-        DO( I2C_ERRORS_TIMER_START_FAILED )                   \
-        DO( I2C_ERRORS_TIMER_STOP_FAILED )                    \
-        DO( I2C_ERRORS_MUTEX_CREATE_FAILED )                  \
-        DO( I2C_ERRORS_MUTEX_RELEASE_FAILED )                 \
-        DO( I2C_ERRORS_MUTEX_TAKE_FAILED )                    \
-        DO( I2C_ERRORS_WAIT_FOR_BUS_IDLE_FAILED )             \
-        DO( I2C_ERRORS_WAIT_FOR_BUS_IDLE_TIMED_OUT )          \
-        DO( I2C_ERRORS_REINIT_FAILED )                        \
-        DO( I2C_ERRORS_MAX )
+#define I2C_ERRORS( DO )                                    \
+    DO( I2C_ERRORS_VALIDATION_FAILED )                      \
+    DO( I2C_ERRORS_XIIC_PS_CONFIG_FAILED )                  \
+    DO( I2C_ERRORS_XIIC_PS_SET_CLK_FAILED )                 \
+    DO( I2C_ERRORS_XIIC_PS_MASTER_SEND_POLLED_FAILED )      \
+    DO( I2C_ERRORS_XIIC_PS_MASTER_RECEIVE_POLLED_FAILED )   \
+    DO( I2C_ERRORS_XIIC_PS_SET_OPTIONS_FAILED )             \
+    DO( I2C_ERRORS_XIIC_PS_CLEAR_OPTIONS_FAILED )           \
+    DO( I2C_ERRORS_TIMER_CREATE_FAILED )                    \
+    DO( I2C_ERRORS_TIMER_START_FAILED )                     \
+    DO( I2C_ERRORS_TIMER_STOP_FAILED )                      \
+    DO( I2C_ERRORS_MUTEX_CREATE_FAILED )                    \
+    DO( I2C_ERRORS_MUTEX_RELEASE_FAILED )                   \
+    DO( I2C_ERRORS_MUTEX_TAKE_FAILED )                      \
+    DO( I2C_ERRORS_WAIT_FOR_BUS_IDLE_FAILED )               \
+    DO( I2C_ERRORS_WAIT_FOR_BUS_IDLE_TIMED_OUT )            \
+    DO( I2C_ERRORS_REINIT_FAILED )                          \
+    DO( I2C_ERRORS_MAX )
 
 #define PRINT_STAT_COUNTER( x )  PLL_INF( I2C_NAME,              \
                                           "%50s . . . . %d\r\n", \
@@ -167,22 +167,22 @@ typedef struct I2C_PRIVATE_DATA
 
 static I2C_PRIVATE_DATA xLocalData =
 {
-    UPPER_FIREWALL,                                                            /* ulUpperFirewall */
-    FALSE,                                                                     /* iInitialised */
+    UPPER_FIREWALL,     /* ulUpperFirewall */
+    FALSE,              /* iInitialised */
     { { { {
               0
-          } } } },                                                             /* xIicProfile */
-    0,                                                                         /* usBusIdleWaitMs */
+          } } } },      /* xIicProfile */
+    0,                  /* usBusIdleWaitMs */
     { {
           0
-      } },                                                                     /* *pxI2cCfg */
+      } },              /* *pxI2cCfg */
     {
         0
-    },                                                                         /* pulStatCounters */
+    },                  /* pulStatCounters */
     {
         0
-    },                                                                         /* pulErrorCounters */
-    LOWER_FIREWALL                                                             /* ulLowerFirewall */
+    },                  /* pulErrorCounters */
+    LOWER_FIREWALL      /* ulLowerFirewall */
 };
 static I2C_PRIVATE_DATA *pxThis = &xLocalData;
 
@@ -273,7 +273,6 @@ int iI2C_ReInit( uint8_t ucDeviceId )
          */
         XIicPs_Config xEngineCfg =
         {
-            .DeviceId     = pxThis->pxI2cCfg[ ucDeviceId ].ucDeviceId,
             .BaseAddress  = pxThis->pxI2cCfg[ ucDeviceId ].ullBaseAddress,
             .InputClockHz = HAL_I2C_DEFAULT_SCLK_RATE
         };
@@ -378,7 +377,6 @@ int iI2C_Init( I2C_CFG_TYPE *pxI2cCfg, uint16_t usBusIdleWaitMs )
              */
             XIicPs_Config xEngineCfg =
             {
-                .DeviceId     = pxI2cCfg[ i ].ucDeviceId,
                 .BaseAddress  = pxI2cCfg[ i ].ullBaseAddress,
                 .InputClockHz = HAL_I2C_DEFAULT_SCLK_RATE
             };

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-2.0-only
-# Copyright (c) 2023-present Advanced Micro Devices, Inc. All rights reserved.
+# Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
 
 # Makefile based on https://makefiletutorial.com/
 
@@ -18,7 +18,7 @@ OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 # Replace .o with .d for dependencies.
 DEPS := $(OBJS:.o=.d)
 
-INC_DIRS := ./include  # Public headers only
+INC_DIRS := ./include ./build # Public headers only
 INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
 # The -MMD and -MP flags together generate Makefiles for us.
@@ -30,6 +30,7 @@ CFLAGS := $(INC_FLAGS) -MMD -MP -Wall -Werror
 #
 all:
 	@$(MAKE) -s banner
+	../scripts/getVersion.sh ami $(realpath .)
 	@$(MAKE) -s $(BUILD_DIR)/$(TARGET)
 
 #

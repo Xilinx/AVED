@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-2.0-only
-# Copyright (c) 2023-present Advanced Micro Devices, Inc. All rights reserved.
+# Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
 
 TARGET_MODULE:=ami
 
@@ -37,6 +37,7 @@ KERNEL_DIR = /lib/modules/`uname -r`/build
 ccflags-y:=-DDEBUG -DVERBOSE_DEBUG -DGCQ_MAX_INSTANCES=16
 
 all: clean
+	@test -f ../scripts/getVersion.sh && ../scripts/getVersion.sh driver $(realpath .) || echo ""
 	$(MAKE) -C ${KERNEL_DIR} M=${PWD} modules
 
 clean:

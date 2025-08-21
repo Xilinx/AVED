@@ -2,7 +2,7 @@
 /*
  * amc_proxy.c - This file contains AMC proxy layer implementation.
  *
- * Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  */
 
 /*****************************************************************************/
@@ -49,15 +49,15 @@
  * @AMC_PROXY_CMD_OPCODE_IDENTIFY: identity request
  */
 enum amc_proxy_cmd_opcode {
-        AMC_PROXY_CMD_OPCODE_DEVICE_BOOT       = 0x0,
-	AMC_PROXY_CMD_OPCODE_HEARTBEAT         = 0x2,
-	AMC_PROXY_CMD_OPCODE_EEPROM_READ_WRITE = 0x3,
-	AMC_PROXY_CMD_OPCODE_MODULE_READ_WRITE = 0x4,
-        AMC_PROXY_CMD_OPCODE_DEBUG_VERBOSITY   = 0x5,
-	AMC_PROXY_CMD_OPCODE_PDI_DOWNLOAD      = 0xA,
-	AMC_PROXY_CMD_OPCODE_SENSOR            = 0xC,
-        AMC_PROXY_CMD_OPCODE_PARTITION_COPY    = 0xD,
-	AMC_PROXY_CMD_OPCODE_IDENTIFY          = 0x202,
+    AMC_PROXY_CMD_OPCODE_DEVICE_BOOT       = 0x0,
+    AMC_PROXY_CMD_OPCODE_HEARTBEAT         = 0x2,
+    AMC_PROXY_CMD_OPCODE_EEPROM_READ_WRITE = 0x3,
+    AMC_PROXY_CMD_OPCODE_MODULE_READ_WRITE = 0x4,
+    AMC_PROXY_CMD_OPCODE_DEBUG_VERBOSITY   = 0x5,
+    AMC_PROXY_CMD_OPCODE_PDI_DOWNLOAD      = 0xA,
+    AMC_PROXY_CMD_OPCODE_SENSOR            = 0xC,
+    AMC_PROXY_CMD_OPCODE_PARTITION_COPY    = 0xD,
+    AMC_PROXY_CMD_OPCODE_IDENTIFY          = 0x202,
 
 	/* Other commands to be added here */
 	MAX_AMC_PROXY_CMD_OPCODE

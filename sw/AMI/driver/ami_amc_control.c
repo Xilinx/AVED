@@ -2,7 +2,7 @@
 /*
  * ami_amc_control.c - This file contains AMC control implementation.
  *
- * Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  */
 
 #include <linux/kthread.h>
@@ -31,30 +31,30 @@ static DEFINE_XARRAY_ALLOC(cid_xarray);
 /* Defines                                                                   */
 /*****************************************************************************/
 
-#define MAX_COMMAND_IDS                         (255)
+#define MAX_COMMAND_IDS             (255)
 
-#define DEVICE_READY_SLEEP_INTERVAL             (100)
-#define DEVICE_READY_RETRY_COUNT                (5)
-#define REQUEST_MSQ_TIMEOUT                     (msecs_to_jiffies(30000))       /* 30 seconds */
+#define DEVICE_READY_SLEEP_INTERVAL (100)
+#define DEVICE_READY_RETRY_COUNT    (5)
+#define REQUEST_MSQ_TIMEOUT         (msecs_to_jiffies(30000))       /* 30 seconds */
 /*
  * Timeout for the PDI download can be small as we are packetising the
  * image and sending across one chunk at a time.
  */
-#define REQUEST_DOWNLOAD_TIMEOUT                (msecs_to_jiffies(30000))       /* 30 seconds */
-#define REQUEST_COPY_TIMEOUT                    (msecs_to_jiffies(3600000))     /* 60 minutes - based on example max parition size of 128MB */
-#define REQUEST_HEARTBEAT_TIMEOUT               (msecs_to_jiffies(500))         /* 0.5 seconds */
-#define HEARTBEAT_REQUEST_INTERVAL              (500)
-#define LOGGING_SLEEP_INTERVAL                  (500)
+#define REQUEST_DOWNLOAD_TIMEOUT    (msecs_to_jiffies(30000))       /* 30 seconds */
+#define REQUEST_COPY_TIMEOUT        (msecs_to_jiffies(3600000))     /* 60 minutes - based on example max parition size of 128MB */
+#define REQUEST_HEARTBEAT_TIMEOUT   (msecs_to_jiffies(500))         /* 0.5 seconds */
+#define HEARTBEAT_REQUEST_INTERVAL  (500)
+#define LOGGING_SLEEP_INTERVAL      (500)
 
 
 /* AMC Identify Command Version Major and Minor Numbers */
-#define AMC_GCQ_IDENTIFY_CMD_MAJOR              (1)
-#define AMC_GCQ_IDENTIFY_CMD_MINOR              (0)
-#define AMC_GCQ_MAGIC_NO                        (0x564D5230)
-#define VERSION_BUF_SIZE                        (8)
+#define AMC_GCQ_IDENTIFY_CMD_MAJOR  (1)
+#define AMC_GCQ_IDENTIFY_CMD_MINOR  (0)
+#define AMC_GCQ_MAGIC_NO            (0x564D5230)
+#define VERSION_BUF_SIZE            (8)
 
 /* Number of permitted failures before raising a fatal event */
-#define HEARTBEAT_FAIL_THRESHOLD                (3)
+#define HEARTBEAT_FAIL_THRESHOLD    (3)
 
 
 /*****************************************************************************/
@@ -153,7 +153,7 @@ static int get_sensor_id(int cmd_req, int flags)
  *
  * Return: the AID.
  */
-int get_aid(int cmd_req, int flags)
+static int get_aid(int cmd_req, int flags)
 {
 	enum amc_proxy_cmd_sensor_request id = AMC_PROXY_CMD_SENSOR_REQUEST_UNKNOWN;
 
@@ -203,7 +203,7 @@ int get_aid(int cmd_req, int flags)
  *
  * Return: None.
  */
-bool gcq_device_is_ready(struct amc_control_ctxt *amc_ctrl_ctxt)
+static bool gcq_device_is_ready(struct amc_control_ctxt *amc_ctrl_ctxt)
 {
 	int i = 0, retry = DEVICE_READY_RETRY_COUNT, interval = DEVICE_READY_SLEEP_INTERVAL;
 
@@ -496,7 +496,7 @@ static void release_amc_log_page_sema(struct amc_control_ctxt *amc_ctrl_ctxt)
  *
  * Return: Shared memory size or 0.
  */
-static size_t inline amc_shared_mem_size(struct amc_control_ctxt *amc_ctrl_ctxt)
+static inline size_t amc_shared_mem_size(struct amc_control_ctxt *amc_ctrl_ctxt)
 {
 	if (amc_ctrl_ctxt)
 		return amc_ctrl_ctxt->amc_shared_mem.data.amc_data_end -
@@ -510,7 +510,7 @@ static size_t inline amc_shared_mem_size(struct amc_control_ctxt *amc_ctrl_ctxt)
  *
  * Return: Total size (page size * pages).
  */
-static size_t inline shm_size_log_page(void)
+static inline size_t shm_size_log_page(void)
 {
 	return AMC_LOG_PAGE_SIZE * AMC_LOG_PAGE_NUM;
 }
@@ -521,7 +521,7 @@ static size_t inline shm_size_log_page(void)
  *
  * Return: Data size or 0.
  */
-static size_t inline shm_size_data(struct amc_control_ctxt *amc_ctrl_ctxt)
+static inline size_t shm_size_data(struct amc_control_ctxt *amc_ctrl_ctxt)
 {
 	if (amc_ctrl_ctxt)
 		return amc_shared_mem_size(amc_ctrl_ctxt) - shm_size_log_page();
@@ -535,7 +535,7 @@ static size_t inline shm_size_data(struct amc_control_ctxt *amc_ctrl_ctxt)
  *
  * Return: Offset or 0.
  */
-static u32 inline shm_addr_data(struct amc_control_ctxt *amc_ctrl_ctxt)
+static inline u32 shm_addr_data(struct amc_control_ctxt *amc_ctrl_ctxt)
 {
 	if (amc_ctrl_ctxt)
 		return amc_ctrl_ctxt->amc_shared_mem.data.amc_data_start + AMC_DATA_ADDR_OFF;
@@ -712,7 +712,7 @@ static int check_amc_supported_version(struct amc_control_ctxt	*amc_ctrl_ctxt,
 	if (!amc_ctrl_ctxt)
 		return -EINVAL;
 
-	if ((GIT_TAG_VER_MAJOR == major) && (GIT_TAG_VER_MINOR == minor)) {
+	if ((GIT_TAG_VER_MAJOR == major) && (GIT_TAG_VER_MINOR >= minor)) {
 		AMI_INFO(amc_ctrl_ctxt, "AMC Supported Version : %d.%d", major, minor);
 		return SUCCESS;
 	}
@@ -929,7 +929,7 @@ static void unmap_pci_io(struct pci_dev *dev, void __iomem **virt_addr)
  *
  * Return: None.
  */
-void release_amc(struct amc_control_ctxt **amc_ctrl_ctxt)
+static void release_amc(struct amc_control_ctxt **amc_ctrl_ctxt)
 {
 	if (amc_ctrl_ctxt && *amc_ctrl_ctxt) {
 		kfree(*amc_ctrl_ctxt);
@@ -1872,8 +1872,6 @@ int setup_amc(struct pci_dev		*dev,
 		}
 	}
 
-	vfree(version_buf);
-
 	/*
 	 * COMPAT MODE: heartbeat disabled, logging disabled.
 	 * When the AMC version does not match the current AMI version, we run
@@ -1904,6 +1902,7 @@ int setup_amc(struct pci_dev		*dev,
 	if (ret)
 		goto fail;
 
+	vfree(version_buf);
 	return SUCCESS;
 
 fail:

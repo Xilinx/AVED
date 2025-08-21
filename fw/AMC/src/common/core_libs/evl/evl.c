@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  * SPDX-License-Identifier: MIT
  *
  * This file contains the implemenation for the Event Library
@@ -22,42 +22,42 @@
 /* Defines                                                                    */
 /******************************************************************************/
 
-#define UPPER_FIREWALL ( 0xBABECAFE )
-#define LOWER_FIREWALL ( 0xDEADFACE )
+#define UPPER_FIREWALL              ( 0xBABECAFE )
+#define LOWER_FIREWALL              ( 0xDEADFACE )
 
-#define EVL_NAME "EVL"
+#define EVL_NAME                    "EVL"
 
-#define EVL_STATS( DO )                       \
-        DO( EVL_STATS_INITIALISED )           \
-        DO( EVL_STATS_RECORDS )               \
-        DO( EVL_STATS_BINDINGS )              \
-        DO( EVL_STATS_SIGNALS )               \
-        DO ( EVL_STATS_LOG_RETRIEVED )        \
-        DO( EVL_STATS_LOG_MUTEX_CREATED )     \
-        DO( EVL_STATS_LOG_MUTEX_GRABBED )     \
-        DO( EVL_STATS_LOG_MUTEX_RELEASED )    \
-        DO( EVL_STATS_RECORD_MUTEX_CREATED )  \
-        DO( EVL_STATS_RECORD_MUTEX_GRABBED )  \
-        DO( EVL_STATS_RECORD_MUTEX_RELEASED ) \
-        DO( EVL_STATS_VERBOSITY_SET )         \
-        DO( EVL_STATS_MAX )
+#define EVL_STATS( DO )                    \
+    DO( EVL_STATS_INITIALISED )            \
+    DO( EVL_STATS_RECORDS )                \
+    DO( EVL_STATS_BINDINGS )               \
+    DO( EVL_STATS_SIGNALS )                \
+    DO (EVL_STATS_LOG_RETRIEVED )          \
+    DO( EVL_STATS_LOG_MUTEX_CREATED )      \
+    DO( EVL_STATS_LOG_MUTEX_GRABBED )      \
+    DO( EVL_STATS_LOG_MUTEX_RELEASED )     \
+    DO( EVL_STATS_RECORD_MUTEX_CREATED )   \
+    DO( EVL_STATS_RECORD_MUTEX_GRABBED )   \
+    DO( EVL_STATS_RECORD_MUTEX_RELEASED )  \
+        DO( EVL_STATS_VERBOSITY_SET )      \
+    DO( EVL_STATS_MAX )
 
 
-#define EVL_ERRORS( DO )                       \
-        DO( EVL_ERRORS_BINDINGS )              \
-        DO( EVL_ERRORS_CALLBACKS )             \
-        DO( EVL_ERRORS_VALIDATION )            \
-        DO( EVL_ERRORS_LOG_MUTEX_CREATED )     \
-        DO( EVL_ERRORS_LOG_MUTEX_GRABBED )     \
-        DO( EVL_ERRORS_LOG_MUTEX_RELEASED )    \
-        DO( EVL_ERRORS_RECORD_MUTEX_CREATED )  \
-        DO( EVL_ERRORS_RECORD_MUTEX_GRABBED )  \
-        DO( EVL_ERRORS_RECORD_MUTEX_RELEASED ) \
-        DO( EVL_ERRORS_RECORD_MALLOC )         \
-        DO( EVL_ERRORS_BINDINGS_MALLOC )       \
-        DO( EVL_ERRORS_NO_BINDINGS )           \
-        DO( EVL_ERRORS_VERBOSITY_NOT_SET )     \
-        DO( EVL_ERRORS_MAX )
+#define EVL_ERRORS( DO )                    \
+    DO( EVL_ERRORS_BINDINGS )               \
+    DO( EVL_ERRORS_CALLBACKS )              \
+    DO( EVL_ERRORS_VALIDATION )             \
+    DO( EVL_ERRORS_LOG_MUTEX_CREATED )      \
+    DO( EVL_ERRORS_LOG_MUTEX_GRABBED )      \
+    DO( EVL_ERRORS_LOG_MUTEX_RELEASED )     \
+    DO( EVL_ERRORS_RECORD_MUTEX_CREATED )   \
+    DO( EVL_ERRORS_RECORD_MUTEX_GRABBED )   \
+    DO( EVL_ERRORS_RECORD_MUTEX_RELEASED )  \
+    DO( EVL_ERRORS_RECORD_MALLOC )          \
+    DO( EVL_ERRORS_BINDINGS_MALLOC )        \
+    DO( EVL_ERRORS_NO_BINDINGS )            \
+        DO( EVL_ERRORS_VERBOSITY_NOT_SET )  \
+    DO( EVL_ERRORS_MAX )
 
 #define PRINT_STAT_COUNTER( x )  PLL_INF( EVL_NAME,              \
                                           "%50s . . . . %d\r\n", \
@@ -99,19 +99,19 @@ UTIL_MAKE_ENUM_AND_STRINGS( EVL_ERRORS, EVL_ERRORS, EVL_ERRORS_STR )
  */
 typedef struct EVL_PRIVATE_DATA
 {
-    uint32_t   ulUpperFirewall;
+    uint32_t    ulUpperFirewall;
 
-    int        iIsInitialised;
+    int         iIsInitialised;
 
-    void       *pxLogMtx;
-    int        iLogIdx;
-    EVL_SIGNAL pxEvlLog[ EVL_LOG_LEN ];
-    uint32_t   pulLogTimes[ EVL_LOG_LEN ];
+    void        *pxLogMtx;
+    int         iLogIdx;
+    EVL_SIGNAL  pxEvlLog[ EVL_LOG_LEN ];
+    uint32_t    pulLogTimes[ EVL_LOG_LEN ];
 
-    uint32_t   ulStats[ EVL_STATS_MAX ];
-    uint32_t   ulErrors[ EVL_ERRORS_MAX ];
+    uint32_t    ulStats[ EVL_STATS_MAX ];
+    uint32_t    ulErrors[ EVL_ERRORS_MAX ];
 
-    uint32_t   ulLowerFirewall;
+    uint32_t    ulLowerFirewall;
 
 } EVL_PRIVATE_DATA;
 
@@ -145,23 +145,23 @@ typedef struct EVL_RECORD
 
 static EVL_PRIVATE_DATA xLocalData =
 {
-    UPPER_FIREWALL,                                                            /* ulUpperFirewall */
-    FALSE,                                                                     /* iIsInitialised */
-    NULL,                                                                      /* pxLogMtx */
-    0,                                                                         /* iLogIdx */
+    UPPER_FIREWALL,     /* ulUpperFirewall */
+    FALSE,              /* iIsInitialised */
+    NULL,               /* pxLogMtx */
+    0,                  /* iLogIdx */
     { {
           0
-      } },                                                                     /* pxEvlLog */
+      } },              /* pxEvlLog */
     {
         0
-    },                                                                         /* pulLogTimes */
+    },                  /* pulLogTimes */
     {
         0
-    },                                                                         /* ulStats */
+    },                  /* ulStats */
     {
         0
-    },                                                                         /* ulErrors */
-    LOWER_FIREWALL                                                             /* LOWER_FIREWALL */
+    },                  /* ulErrors */
+    LOWER_FIREWALL      /* LOWER_FIREWALL */
 };
 
 static EVL_PRIVATE_DATA *pxThis = &xLocalData;

@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+* Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
 * SPDX-License-Identifier: MIT
 *
 * This header file contains the FW IF EMMC abstraction definitions.
@@ -44,9 +44,9 @@ typedef enum FW_IF_EMMC_IOCTRL
 {
     FW_IF_EMMC_IOCTRL_PRINT_INSTANCE_DETAILS = MAX_FW_IF_COMMON_IOCTRL_OPTION,
     FW_IF_EMMC_IOCTRL_ERASE_ALL,
-                            
+
     MAX_FW_IF_EMMC_IOCTRL_OPTION
-                                    
+
 } FW_IF_EMMC_IOCTRL;
 
 /**
@@ -78,7 +78,7 @@ typedef enum FW_IF_EMMC_STATE
 typedef struct FW_IF_EMMC_INIT_CFG
 {
     char            *pcDriverName;
-    uint16_t        usDeviceId;             /* The EMMC device ID */
+    uint32_t        ulBaseAddr;             /* The EMMC device base address */
 
 } FW_IF_EMMC_INIT_CFG;
 

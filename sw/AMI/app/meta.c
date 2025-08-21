@@ -2,7 +2,7 @@
 /*
  * meta.c - This file contains utilities for printing AMI info/metadata
  * 
- * Copyright (c) 2023-present Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  */
 
 /*****************************************************************************/
@@ -1883,8 +1883,8 @@ int print_fpt_info(ami_device *dev, uint8_t boot_device, struct app_option *opti
 	if (parse_output_options(options, &format, NULL, &stream,
 			NULL, NULL) == EXIT_FAILURE)
 		return EXIT_FAILURE;
-		
-	
+
+
 	/* Must fetch FPT header */
 	if (ami_prog_get_fpt_header(dev, boot_device, &hdr) != EXIT_SUCCESS) {
 		APP_API_ERROR("could not fetch FPT header");

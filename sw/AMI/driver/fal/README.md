@@ -1,6 +1,6 @@
 # Firmware Abstraction Layer
 
-Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
 SPDX-License-Identifier: MIT
 
 ## Overview
@@ -87,9 +87,9 @@ Use for write/read operations if the requested timeout is a non-standard wait.
 Function return values and errors are common to all protocols, so that a user application may be ported to another driver without requiring any change to return checks or logic.
 ```
 /*
-* @enum    FW_IF_ERRORS
-* @brief   Return values from an fw_if function
-*/
+ * @enum    FW_IF_ERRORS
+ * @brief   Return values from an fw_if function
+ */
 typedef enum _FW_IF_ERRORS
 {
     FW_IF_ERRORS_NONE = 0,				 /* no errors, call was successful */
@@ -125,13 +125,13 @@ The driver initialisation is specific to the protocol - therefore, the initialis
 Within each common protocol header is an "INIT_CONFIG" - a structure used during initialisation of the driver but not needed for individual instances of that interface.
 ```
 /*
-* @struct  FW_IF_SMBUS_INIT_CFG
-* @brief   config options for smbus initialisation (generic across all smbus interfaces)
-*/
+ * @struct  FW_IF_SMBUS_INIT_CFG
+ * @brief   config options for smbus initialisation (generic across all smbus interfaces)
+ */
 typedef struct _FW_IF_SMBUS_INIT_CFG
 {
-    uint32_t        ulBaseAddr;
-    uint32_t        ulBaudRate;
+    uint32_t ulBaseAddr;
+    uint32_t ulBaudRate;
 
 } FW_IF_SMBUS_INIT_CFG;
 ```
@@ -141,12 +141,12 @@ If any configuration values aren't required for a specific implementation, they 
 
 ```
 /*
-* @brief   initialisation function for smbus interfaces (generic across all smbus interfaces)
-*
-* @param   cfg        pointer to the config to initialise the driver with
-*
-* @return  See FW_IF_ERRORS
-*/
+ * @brief   initialisation function for smbus interfaces (generic across all smbus interfaces)
+ *
+ * @param   cfg        pointer to the config to initialise the driver with
+ *
+ * @return  See FW_IF_ERRORS
+ */
 extern uint32_t FW_IF_smbus_init( FW_IF_SMBUS_INIT_CFG * cfg );
 ```
 The initialisation function should only pass in a pointer to the initialisation structure, so that porting a user application from one driver to another takes minimal effort (only the structure contents and the name of the function need changed).
@@ -170,25 +170,25 @@ Each interface has public methods and private data, held in a config.
 
 ```
 /*
-* @struct  FW_IF_CFG
-* @brief   Structure to hold a fw_if instance
-*/
+ * @struct  FW_IF_CFG
+ * @brief   Structure to hold a fw_if instance
+ */
 typedef struct _FW_IF_CFG
 {
-    uint32_t                upperFirewall;
+    uint32_t            upperFirewall;
 
-    FW_IF_open          *   open;
-    FW_IF_close         *   close;
-    FW_IF_write         *   write;
-    FW_IF_read          *   read;
-    FW_IF_ioctrl        *   ioctrl;
-    FW_IF_bindCallback  *   bindCallback;
+    FW_IF_open          *open;
+    FW_IF_close         *close;
+    FW_IF_write         *write;
+    FW_IF_read          *read;
+    FW_IF_ioctrl        *ioctrl;
+    FW_IF_bindCallback  *bindCallback;
 
-    FW_IF_callback      *   raiseEvent;
+    FW_IF_callback      *raiseEvent;
 
-    void                *   cfg;
+    void                *cfg;
 
-    uint32_t                lowerFirewall;
+    uint32_t            lowerFirewall;
 
 } FW_IF_CFG;
 ```
@@ -203,9 +203,9 @@ Within each common protocol header is an "CONFIG" - a structure used during inte
 #define FW_IF_SMBUS_UDID_LEN    ( 16 )
 
 /*
-* @enum    FW_IF_SMBUS_ROLE
-* @brief   Controller or Target
-*/
+ * @enum    FW_IF_SMBUS_ROLE
+ * @brief   Controller or Target
+ */
 typedef enum _FW_IF_SMBUS_ROLE
 {
     FW_IF_SMBUS_ROLE_CONTROLLER = 0,
@@ -218,9 +218,9 @@ typedef enum _FW_IF_SMBUS_ROLE
 ...
 
 /*
-* @struct  FW_IF_SMBUS_CFG
-* @brief   config options for smbus interfaces (generic across all smbus interfaces)
-*/
+ * @struct  FW_IF_SMBUS_CFG
+ * @brief   config options for smbus interfaces (generic across all smbus interfaces)
+ */
 typedef struct _FW_IF_SMBUS_CFG
 {
     uint32_t            ulPort;
@@ -237,13 +237,13 @@ As before, if any values aren't required for a specific implementation, they can
 
 ```
 /*
-* @brief   creates an instance of the smbus interface
-*
-* @param   fwIf        fw_if handle to the interface instance
-* @param   smbusCfg    unique data of this instance (port, address, etc)
-*
-* @return  See FW_IF_ERRORS
-*/
+ * @brief   creates an instance of the smbus interface
+ *
+ * @param   fwIf        fw_if handle to the interface instance
+ * @param   smbusCfg    unique data of this instance (port, address, etc)
+ *
+ * @return  See FW_IF_ERRORS
+ */
 extern uint32_t FW_IF_smbus_create( FW_IF_CFG *fwIf, FW_IF_SMBUS_CFG *smbusCfg );
 ```
 * The parameter ***fw_if** is the handle to the interface that will be used for all subsequent calls (e.g. **open**, **write**, etc). It must initialised in the user application as an empty structure.
@@ -262,12 +262,12 @@ Each implementation source file must provide a local (static) implementation of 
 
 ```
 /*
-* @brief   Open the specific fw_if
-*
-* @param   fwIf        Pointer to this fw_if
-*
-* @return  See FW_IF_ERRORS
-*/
+ * @brief   Open the specific fw_if
+ *
+ * @param   fwIf        Pointer to this fw_if
+ *
+ * @return  See FW_IF_ERRORS
+ */
 typedef uint32_t ( FW_IF_open )( void *fwIf );
 ```
 
@@ -277,12 +277,12 @@ In another protocol, it may be as simple as setting a flag, or it may be more in
 
 ```
 /*
-* @brief   Close the specific fw_if
-*
-* @param   fwIf        Pointer to this fw_if
-*
-* @return  See FW_IF_ERRORS
-*/
+ * @brief   Close the specific fw_if
+ *
+ * @param   fwIf        Pointer to this fw_if
+ *
+ * @return  See FW_IF_ERRORS
+ */
 typedef uint32_t ( FW_IF_close )( void *fwIf );
 ```
 
@@ -299,16 +299,16 @@ Once an interface has been opened, outgoing data (Tx) can be written from it.
 
 ```
 /*
-* @brief   Writes data from an instance of the specific fw_if
-*
-* @param   fwIf        Pointer to this fw_if
-* @param   dstPort     Remote port to write to
-* @param   data        Data buffer to write
-* @param   size        Number of bytes in data buffer
-* @param   timeoutMs   Time (in ms) to wait for write to complete
-*
-* @return  See FW_IF_ERRORS
-*/
+ * @brief   Writes data from an instance of the specific fw_if
+ *
+ * @param   fwIf        Pointer to this fw_if
+ * @param   dstPort     Remote port to write to
+ * @param   data        Data buffer to write
+ * @param   size        Number of bytes in data buffer
+ * @param   timeoutMs   Time (in ms) to wait for write to complete
+ *
+ * @return  See FW_IF_ERRORS
+ */
 typedef uint32_t ( FW_IF_write )( void *fwIf, uint32_t dstPort, uint8_t * data, uint32_t size, uint32_t timeoutMs );
 ```
 For the **timeoutMs** parameter, the additional **#defines** may also be used:
@@ -327,16 +327,16 @@ Once an interface has been opened, incoming data (Rx) can be read from it.
 
 ```
 /*
-* @brief   Reads data from an instance of the specific fw_if
-*
-* @param   fwIf        Pointer to this fw_if
-* @param   srcPort     Remote port to read from
-* @param   data        Data buffer to read
-* @param   size        Pointer to maximum number of bytes allowed in data buffer
-*                          This value is updated to the actual number of bytes read
-* @param   timeoutMs   Time (in ms) to wait for read to complete
-*
-* @return  See FW_IF_ERRORS */typedef uint32_t ( FW_IF_read )( void *fwIf, uint32_t srcPort, uint8_t * data, uint32_t * size, uint32_t timeoutMs );
+ * @brief   Reads data from an instance of the specific fw_if
+ *
+ * @param   fwIf        Pointer to this fw_if
+ * @param   srcPort     Remote port to read from
+ * @param   data        Data buffer to read
+ * @param   size        Pointer to maximum number of bytes allowed in data buffer
+ *                          This value is updated to the actual number of bytes read
+ * @param   timeoutMs   Time (in ms) to wait for read to complete
+ *
+ * @return  See FW_IF_ERRORS */typedef uint32_t ( FW_IF_read )( void *fwIf, uint32_t srcPort, uint8_t * data, uint32_t * size, uint32_t timeoutMs );
 ```
 For the **timeoutMs** parameter, the additional **#defines** may also be used:
 
@@ -359,9 +359,9 @@ The **common header** provides some generic events that are usable by all proto
 
 ```
 /*
-* @enum    FW_IF_COMMON_EVENTS
-* @brief   common events raised in the callback (generic across all interfaces)
-*/
+ * @enum    FW_IF_COMMON_EVENTS
+ * @brief   common events raised in the callback (generic across all interfaces)
+ */
 typedef enum _FW_IF_COMMON_EVENTS
 {
     FW_IF_COMMON_EVENT_NEW_RX_DATA,
@@ -378,9 +378,9 @@ Each protocol provides specific **events** - these are specific to the protocol 
 
 ```
 /*
-* @enum    FW_IF_SMBUS_EVENTS
-* @brief   smbus events raised in the callback (generic across all smbus interface)
-*/
+ * @enum    FW_IF_SMBUS_EVENTS
+ * @brief   smbus events raised in the callback (generic across all smbus interface)
+ */
 typedef enum _FW_IF_SMBUS_EVENTS
 {
     FW_IF_SMBUS_EVENT_ADDRESS_CHANGE = MAX_FW_IF_COMMON_EVENT,
@@ -395,14 +395,14 @@ Events are raised through a pre-defined callback.
 
 ```
 /*
-* @brief   Callback to raise to calling layer
-*
-* @param   eventId     Unique ID to identify the event
-* @param   data        Pointer to data buffer
-* @param   size        Number of bytes in data
-*
-* @return  See FW_IF_ERRORS
-*/
+ * @brief   Callback to raise to calling layer
+ *
+ * @param   eventId     Unique ID to identify the event
+ * @param   data        Pointer to data buffer
+ * @param   size        Number of bytes in data
+ *
+ * @return  See FW_IF_ERRORS
+ */
 typedef uint32_t ( FW_IF_callback )( uint16_t eventId, uint8_t * data, uint32_t size );
 ```
 
@@ -421,13 +421,13 @@ The above callback must be bound to interface instance before it can be triggere
 
 ```
 /*
-* @brief   Binds a user-defined callback into the fw_if
-*
-* @parmam  fwIf        Pointer too this fw_if
-* @param   newFunc     Function pointer to call
-*
-* @return  See FW_IF_ERRORS
-*/
+ * @brief   Binds a user-defined callback into the fw_if
+ *
+ * @parmam  fwIf        Pointer too this fw_if
+ * @param   newFunc     Function pointer to call
+ *
+ * @return  See FW_IF_ERRORS
+ */
 typedef uint32_t ( FW_IF_bindCallback )( void *fwIf, FW_IF_callback * newFunc );
 ```
 
@@ -444,9 +444,9 @@ There is some IO ctrl that is common to all protocols, and so is defined the **c
 
 ```
 /*
-*  @enum   FW_IF_RX_MODE
-*  @brief  Mode of Rx operation
-*/
+ *  @enum   FW_IF_RX_MODE
+ *  @brief  Mode of Rx operation
+ */
 typedef enum _FW_IF_RX_MODE
 {
     FW_IF_RX_MODE_POLLING   = 0x01,         /* driver must be polled for new data */
@@ -455,9 +455,9 @@ typedef enum _FW_IF_RX_MODE
 } FW_IF_RX_MODE;
 
 /*
-* @enum    FW_IF_COMMON_IOCTRL_OPTIONS
-* @brief   IO ctrl options common to all fw_ifs
-*/
+ * @enum    FW_IF_COMMON_IOCTRL_OPTIONS
+ * @brief   IO ctrl options common to all fw_ifs
+ */
 typedef enum _FW_IF_COMMON_IOCTRL_OPTIONS
 {
     FW_IF_COMMON_IOCTRL_FLUSH_TX = 0,
@@ -476,9 +476,9 @@ Additional IO Ctrl options for a specific protocol can then be provided in the 
 
 ```
 /*
-* @enum    FW_IF_SMBUS_IOCTRL_OPTION
-* @brief   ioctrl options for smbus interfaces (generic across all smbus interfaces)
-*/
+ * @enum    FW_IF_SMBUS_IOCTRL_OPTION
+ * @brief   ioctrl options for smbus interfaces (generic across all smbus interfaces)
+ */
 typedef enum _FW_IF_SMBUS_IOCTRL_OPTIONS
 {
     FW_IF_SMBUS_IOCTRL_SET_CONTROLLER = MAX_FW_IF_COMMON_IOCTRL_OPTION,
@@ -495,14 +495,14 @@ The user application can then set an option (and pass an associated value, if ne
 
 ```
 /*
-* @brief   Set/get specific IO options to/from the specific fw_if
-*
-* @param   fwIf        Pointer to this fw_if
-* @param   option      Unique IO Ctrl option to set/get
-* @param   value       Pointer to value to set/get
-*
-* @return  See FW_IF_ERRORS
-*
+ * @brief   Set/get specific IO options to/from the specific fw_if
+ *
+ * @param   fwIf        Pointer to this fw_if
+ * @param   option      Unique IO Ctrl option to set/get
+ * @param   value       Pointer to value to set/get
+ *
+ * @return  See FW_IF_ERRORS
+ *
 /typedef uint32_t ( FW_IF_ioctrl )( void *fwIf, uint32_t option, void * value );
 ```
 * The parameter **option** must be an enum value from either the common list or the protocol specific list.
@@ -527,7 +527,7 @@ This function should only be called once. Drivers should be developed to cater f
 ```
     FW_IF_SMBUS_INIT_CFG mySmbusIf =
     {
-        0x12345678,    /* ulBaseAddr */
+        0x12345678,   /* ulBaseAddr */
         100000        /* ulBaudRate */
     };
 
@@ -704,11 +704,11 @@ Within the **FW_IF_read** implementation, the function:
 
 1. Checks if the driver is initialised.
 2. If operating as a Controller:
-1. Uses the ***size** parameter to determine which SMBus protocol command to use.
-2. Initiates an SMBus Controller read command.
-3. Waits **timeoutMs** (in this example, 50ms) and then (if data has been received in that timeframe) loads the received data into the **data** parameter and the number of bytes read into the ***size** parameter.
+   1. Uses the ***size** parameter to determine which SMBus protocol command to use.
+   2. Initiates an SMBus Controller read command.
+   3. Waits **timeoutMs** (in this example, 50ms) and then (if data has been received in that timeframe) loads the received data into the **data** parameter and the number of bytes read into the ***size** parameter.
 3. If operating as a Target:
-1. Waits **timeoutMs** (in this example, 50ms) for **writeCallback** to be triggered (if a remote Controller sends a write command to the interface) and loads the data and size in it into the **data** and ***size** parameters.
+   1. Waits **timeoutMs** (in this example, 50ms) for **writeCallback** to be triggered (if a remote Controller sends a write command to the interface) and loads the data and size in it into the **data** and ***size** parameters.
 
 
 

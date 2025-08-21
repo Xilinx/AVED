@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2024 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  * SPDX-License-Identifier: MIT
  *
  * This file contains the main entry point for the Alveo Managment Controller
@@ -74,13 +74,13 @@
 #define AMC_OUTPUT_LEVEL  ( PLL_OUTPUT_LEVEL_WARNING )
 #define AMC_LOGGING_LEVEL ( PLL_OUTPUT_LEVEL_LOGGING )
 
-#define AMC_NAME "AMC"
+#define AMC_NAME                      "AMC"
 
-#define AMC_HASH_LEN ( 7 )
-#define AMC_DATE_LEN ( 8 )
+#define AMC_HASH_LEN                  ( 7 )
+#define AMC_DATE_LEN                  ( 8 )
 
-#define AMC_TASK_DEFAULT_STACK ( 0x1000 )
-#define AMC_PROXY_NAME_LEN     ( 15 )
+#define AMC_TASK_DEFAULT_STACK        ( 0x1000 )
+#define AMC_PROXY_NAME_LEN            ( 15 )
 
 #define AMC_TASK_SLEEP_MS             ( 100 )
 #define AMC_GET_PROJECT_INFO_SLEEP_MS ( 1000 )
@@ -96,7 +96,7 @@
  */
 typedef enum AMC_TASK_PRIOS
 {
-    AMC_TASK_PRIO_RSVD = 5,                                                    /* TODO: get actual value from osal.h */
+    AMC_TASK_PRIO_RSVD = 5, /* TODO: get actual value from osal.h */
 
     AMC_TASK_PRIO_DEFAULT,
     MAX_AMC_TASK_PRIO
@@ -201,27 +201,28 @@ static void vConfigurePartitionTable( void );
 /* Note: the default I2C clock frequency isn't used */
 static I2C_CFG_TYPE xI2cCfg[ I2C_NUM_INSTANCES ] =
 { {
-      HAL_I2C_BUS_0_DEVICE_ID,
-      ( uint64_t )HAL_I2C_BUS_0_BASEADDR,
-      HAL_I2C_BUS_0_I2C_CLK_FREQ_HZ,
-      HAL_I2C_RETRY_COUNT,
-      HAL_I2C_BUS_0_SW_RESET_OFFSET,
-      HAL_I2C_BUS_0_RESET_ON_INIT,
-      HAL_I2C_BUS_0_HW_RESET_ADDR,
-      HAL_I2C_BUS_0_HW_RESET_MASK,
-      HAL_I2C_BUS_0_HW_DEVICE_RESET
+    HAL_I2C_BUS_0_DEVICE_ID,
+    ( uint64_t )HAL_I2C_BUS_0_BASEADDR,
+    HAL_I2C_BUS_0_I2C_CLK_FREQ_HZ,
+    HAL_I2C_RETRY_COUNT,
+    HAL_I2C_BUS_0_SW_RESET_OFFSET,
+    HAL_I2C_BUS_0_RESET_ON_INIT,
+    HAL_I2C_BUS_0_HW_RESET_ADDR,
+    HAL_I2C_BUS_0_HW_RESET_MASK,
+    HAL_I2C_BUS_0_HW_DEVICE_RESET
   },
   {
-      HAL_I2C_BUS_1_DEVICE_ID,
-      ( uint64_t )HAL_I2C_BUS_1_BASEADDR,
-      HAL_I2C_BUS_1_I2C_CLK_FREQ_HZ,
-      HAL_I2C_RETRY_COUNT,
-      HAL_I2C_BUS_1_SW_RESET_OFFSET,
-      HAL_I2C_BUS_1_RESET_ON_INIT,
-      HAL_I2C_BUS_1_HW_RESET_ADDR,
-      HAL_I2C_BUS_1_HW_RESET_MASK,
-      HAL_I2C_BUS_1_HW_DEVICE_RESET
+    HAL_I2C_BUS_1_DEVICE_ID,
+    ( uint64_t )HAL_I2C_BUS_1_BASEADDR,
+    HAL_I2C_BUS_1_I2C_CLK_FREQ_HZ,
+    HAL_I2C_RETRY_COUNT,
+    HAL_I2C_BUS_1_SW_RESET_OFFSET,
+    HAL_I2C_BUS_1_RESET_ON_INIT,
+    HAL_I2C_BUS_1_HW_RESET_ADDR,
+    HAL_I2C_BUS_1_HW_RESET_MASK,
+    HAL_I2C_BUS_1_HW_DEVICE_RESET
   } };
+
 static EEPROM_CFG xEepromCfg =
 {
     HAL_EEPROM_I2C_BUS,
@@ -451,22 +452,16 @@ static int iAxcCallback( EVL_SIGNAL *pxSignal )
     {
         switch( pxSignal->ucEventType )
         {
-        case AXC_PROXY_DRIVER_E_QSFP_PRESENT:
-        {
-            iStatus = OK;
-            break;
-        }
+            case AXC_PROXY_DRIVER_E_QSFP_PRESENT:
+                iStatus = OK;
+                break;
 
-        case AXC_PROXY_DRIVER_E_QSFP_NOT_PRESENT:
-        {
-            iStatus = OK;
-            break;
-        }
+            case AXC_PROXY_DRIVER_E_QSFP_NOT_PRESENT:
+                iStatus = OK;
+                break;
 
-        default:
-        {
-            break;
-        }
+            default:
+                break;
         }
     }
 
@@ -613,10 +608,8 @@ static int iAmiCallback( EVL_SIGNAL *pxSignal )
         }
 
         default:
-        {
             iStatus = OK;
             break;
-        }
         }
     }
 
@@ -634,10 +627,8 @@ static int iBmcCallback( EVL_SIGNAL *pxSignal )
     {
         switch( pxSignal->ucEventType )
         {
-        default:
-        {
-            break;
-        }
+            default:
+                break;
         }
     }
 
@@ -662,7 +653,7 @@ static void vGetProjectInfo( void )
     vPLL_Printf( "#                                                             #\r\n" );
     vPLL_Printf( "#                             AMC                             #\r\n" );
     vPLL_Printf( "#                                                             #\r\n" );
-    vPLL_Printf( "# Copyright (c) 2024 Advanced Micro Devices, Inc.             #\r\n" );
+    vPLL_Printf( "# Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc.      #\r\n" );
     vPLL_Printf( "# All rights reserved.                                        #\r\n" );
     vPLL_Printf( "#                                                             #\r\n" );
     vPLL_Printf( "# SPDX-License-Identifier: MIT                                #\r\n" );

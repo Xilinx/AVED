@@ -2,7 +2,7 @@
 /*
  * ami_top.c - This file contains the main entry point for the AMI driver.
  *
- * Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  */
 
 #include <linux/module.h>
@@ -417,7 +417,7 @@ void shutdown_pf_dev_services(struct pf_dev_struct *pf_dev)
  *
  * Return: None.
  */
-void delete_pf_dev_data(struct pf_dev_struct *pf_dev, bool delete_managed)
+static void delete_pf_dev_data(struct pf_dev_struct *pf_dev, bool delete_managed)
 {
 	struct pf_dev_application *pos = NULL, *next = NULL;
 
@@ -486,7 +486,8 @@ void pcie_device_remove(struct pci_dev *dev)
 
 	pci_disable_device(dev);                        /* Disable bus mastering regardless of the refcount */
 	kill_pf_dev_apps(pf_dev, SIGBUS);               /* Kill any applications that may still be running */
-	down_interruptible(&pf_dev->remove_sema);       /* Wait until the refcount reaches 0 */
+	if (down_interruptible(&pf_dev->remove_sema))   /* Wait until the refcount reaches 0 */
+		PR_ERR("Failed to wait for device removal semaphore");
 	delete_pf_dev_data(pf_dev, false);              /* Safe to delete data */
 	DEV_INFO(dev, "Successfully removed PCIe device");
 }
@@ -717,7 +718,7 @@ int kill_pf_dev_apps(struct pf_dev_struct *pf_dev, int sig)
  *
  * Return: 0 or negative error code
  */
-int create_map_str(char **map_str, int *map_str_sz)
+static int create_map_str(char **map_str, int *map_str_sz)
 {
 	int ret = 0;
 	int num_entries = 0;
@@ -854,7 +855,7 @@ static ssize_t ami_debug_enabled_store(struct device_driver *drv, const char *bu
 	if (count > AMI_DEBUG_INPUT_LIMIT)
 		return -EINVAL;
 
-	sscanf(buf, "%hhd", &set_output_status);
+	sscanf(buf, "%hhd", (char*)&set_output_status);
 	ami_debug_enabled = set_output_status;
 
 	return count;
@@ -876,7 +877,7 @@ static ssize_t ami_debug_enabled_show(struct device_driver *drv, char *buf)
 }
 static DRIVER_ATTR_RW(ami_debug_enabled);
 
-int __init vmc_entry(void)
+static int __init vmc_entry(void)
 {
 	int ret = 0;
 
@@ -938,7 +939,7 @@ fail:
  * to enable this code only at module removal time.
  * Note - Do not call this function from anywhere in the code
  */
-void __exit vmc_exit(void)
+static void __exit vmc_exit(void)
 {
 	PR_DBG("Removing driver from the kernel");
 	PR_DBG("Unregister driver from PCIE Stack");

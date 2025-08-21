@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2023 - 2025 Advanced Micro Devices, Inc. All rights reserved.
  * SPDX-License-Identifier: MIT
  *
  * This file contains the user API definitions for the OSPI device driver.
@@ -31,21 +31,46 @@
 #define OSPI_NAME "OSPI"
 
 /* Stat & Error definitions */
-#define OSPI_STATS( DO ) DO( OSPI_STATS_INIT_COMPLETED ) DO( OSPI_STATS_ERASE_SUCCESS ) DO(            \
-            OSPI_STATS_READ_SUCCESS ) DO( OSPI_STATS_WRITE_SUCCESS ) DO( OSPI_STATS_CREATE_TIMER ) DO( \
-            OSPI_STATS_CREATE_MUTEX ) DO( OSPI_STATS_TAKE_MUTEX ) DO( OSPI_STATS_RELEASE_MUTEX ) DO( OSPI_STATS_MAX )
+#define OSPI_STATS( DO )                        \
+    DO( OSPI_STATS_INIT_COMPLETED )             \
+    DO( OSPI_STATS_ERASE_SUCCESS )              \
+    DO( OSPI_STATS_READ_SUCCESS )               \
+    DO( OSPI_STATS_WRITE_SUCCESS )              \
+    DO( OSPI_STATS_CREATE_TIMER )               \
+    DO( OSPI_STATS_CREATE_MUTEX )               \
+    DO( OSPI_STATS_TAKE_MUTEX )                 \
+    DO( OSPI_STATS_RELEASE_MUTEX )              \
+    DO( OSPI_STATS_MAX )
 
-#define OSPI_ERRORS( DO ) DO( OSPI_ERRORS_VALIDAION_FAILED ) DO( OSPI_ERRORS_DEVICE_RESET ) DO(                       \
-            OSPI_ERRORS_LOOKUP_CONFIG ) DO( OSPI_ERRORS_CONFIG_INIT ) DO( OSPI_ERRORS_SET_OPTIONS ) DO(               \
-            OSPI_ERRORS_SET_CLK_PRESCALER ) DO( OSPI_ERRORS_SELECT_FLASH ) DO( OSPI_ERRORS_FLASH_READ_ID ) DO(        \
-            OSPI_ERRORS_SET_DDR_MODE_INDEX ) DO( OSPI_ERRORS_4B_ADDRESS_MODE ) DO( OSPI_ERRORS_SET_SDR_DDR_MODE ) DO( \
-            OSPI_ERRORS_PAGE_SIZE ) DO( OSPI_ERRORS_FLASH_ERASE_FAILED ) DO( OSPI_ERRORS_FLASH_READ_FAILED ) DO(      \
-            OSPI_ERRORS_FLASH_LINEAR_WRITE_FAILED ) DO( OSPI_ERRORS_FLASH_WRITE_FAILED ) DO(                          \
-            OSPI_ERRORS_FLASH_READ_MISMATCH ) DO( OSPI_ERRORS_FLASH_POLL_RETRY_FAILED ) DO(                           \
-            OSPI_ERRORS_SET_EDGE_MODE ) DO( OSPI_ERRORS_SET_4B_ADDR_MODE ) DO( OSPI_ERRORS_TIMER_CREATE_FAILED ) DO(  \
-            OSPI_ERRORS_TIMER_START_FAILED ) DO( OSPI_ERRORS_TIMER_STOP_FAILED ) DO(                                  \
-            OSPI_ERRORS_MUTEX_CREATE_FAILED ) DO( OSPI_ERRORS_MUTEX_RELEASE_FAILED ) DO(                              \
-            OSPI_ERRORS_MUTEX_TAKE_FAILED ) DO( OSPI_ERRORS_FLASH_ID_READ ) DO( OSPI_ERRORS_MAX )
+#define OSPI_ERRORS( DO )                       \
+    DO( OSPI_ERRORS_VALIDAION_FAILED )          \
+    DO( OSPI_ERRORS_DEVICE_RESET )              \
+    DO( OSPI_ERRORS_LOOKUP_CONFIG )             \
+    DO( OSPI_ERRORS_CONFIG_INIT )               \
+    DO( OSPI_ERRORS_SET_OPTIONS )               \
+    DO( OSPI_ERRORS_SET_CLK_PRESCALER )         \
+    DO( OSPI_ERRORS_SELECT_FLASH )              \
+    DO( OSPI_ERRORS_FLASH_READ_ID )             \
+    DO( OSPI_ERRORS_SET_DDR_MODE_INDEX )        \
+    DO( OSPI_ERRORS_4B_ADDRESS_MODE )           \
+    DO( OSPI_ERRORS_SET_SDR_DDR_MODE )          \
+    DO( OSPI_ERRORS_PAGE_SIZE )                 \
+    DO( OSPI_ERRORS_FLASH_ERASE_FAILED )        \
+    DO( OSPI_ERRORS_FLASH_READ_FAILED )         \
+    DO( OSPI_ERRORS_FLASH_LINEAR_WRITE_FAILED ) \
+    DO( OSPI_ERRORS_FLASH_WRITE_FAILED )        \
+    DO(  OSPI_ERRORS_FLASH_READ_MISMATCH )      \
+    DO( OSPI_ERRORS_FLASH_POLL_RETRY_FAILED )   \
+    DO( OSPI_ERRORS_SET_EDGE_MODE )             \
+    DO( OSPI_ERRORS_SET_4B_ADDR_MODE )          \
+    DO( OSPI_ERRORS_TIMER_CREATE_FAILED )       \
+    DO( OSPI_ERRORS_TIMER_START_FAILED )        \
+    DO( OSPI_ERRORS_TIMER_STOP_FAILED )         \
+    DO( OSPI_ERRORS_MUTEX_CREATE_FAILED )       \
+    DO( OSPI_ERRORS_MUTEX_RELEASE_FAILED )      \
+    DO( OSPI_ERRORS_MUTEX_TAKE_FAILED )         \
+    DO( OSPI_ERRORS_FLASH_ID_READ )             \
+    DO( OSPI_ERRORS_MAX )
 
 #define PRINT_STAT_COUNTER( x )  PLL_INF( OSPI_NAME,             \
                                           "%50s . . . . %d\r\n", \
@@ -81,47 +106,47 @@
 #define WRITE_CONFIG_REG         ( 0x81 )
 #define READ_CONFIG_REG          ( 0x85 )
 
-#define SIXTEENMB ( 0x1000000 )
+#define SIXTEENMB                ( 0x1000000 )
 
-#define FLASH_PAGE_SIZE_DEFAULT ( 256 )
-#define FLASH_SECTOR_SIZE_32KB  ( 0x8000 )
-#define FLASH_SECTOR_SIZE_64KB  ( 0x10000 )
-#define FLASH_SECTOR_SIZE_128KB ( 0x20000 )
-#define FLASH_DEVICE_SIZE_256M  ( 0x2000000 )
-#define FLASH_DEVICE_SIZE_512M  ( 0x4000000 )
-#define FLASH_DEVICE_SIZE_1G    ( 0x8000000 )
-#define FLASH_DEVICE_SIZE_2G    ( 0x10000000 )
+#define FLASH_PAGE_SIZE_DEFAULT  ( 256 )
+#define FLASH_SECTOR_SIZE_32KB   ( 0x8000 )
+#define FLASH_SECTOR_SIZE_64KB   ( 0x10000 )
+#define FLASH_SECTOR_SIZE_128KB  ( 0x20000 )
+#define FLASH_DEVICE_SIZE_256M   ( 0x2000000 )
+#define FLASH_DEVICE_SIZE_512M   ( 0x4000000 )
+#define FLASH_DEVICE_SIZE_1G     ( 0x8000000 )
+#define FLASH_DEVICE_SIZE_2G     ( 0x10000000 )
 
-#define MICRON_OCTAL_ID_BYTE0     ( 0x2c )
-#define GIGADEVICE_OCTAL_ID_BYTE0 ( 0xc8 )
-#define ISSI_OCTAL_ID_BYTE0       ( 0x9d )
+#define MICRON_OCTAL_ID_BYTE0           ( 0x2c )
+#define GIGADEVICE_OCTAL_ID_BYTE0       ( 0xc8 )
+#define ISSI_OCTAL_ID_BYTE0             ( 0x9d )
 
-#define OSPI_READ_BUFFER_SIZE       ( 8 )
-#define OSPI_READ_BUFFER_ALIGNMENT  ( 8 )
-#define OSPI_WRITE_BUFFER_ALIGNMENT ( 4 )
-#define OSPI_DATA_ALIGNMENT         ( 8 )
-#define OSPI_CMD_BUFFER_SIZE        ( 8 )
-#define OSPI_STATUS_BUFFER_SIZE     ( 2 )
+#define OSPI_READ_BUFFER_SIZE           ( 8 )
+#define OSPI_READ_BUFFER_ALIGNMENT      ( 8 )
+#define OSPI_WRITE_BUFFER_ALIGNMENT     ( 4 )
+#define OSPI_DATA_ALIGNMENT             ( 8 )
+#define OSPI_CMD_BUFFER_SIZE            ( 8 )
+#define OSPI_STATUS_BUFFER_SIZE         ( 2 )
 
-#define OSPI_POLL_OVERALL_TIMEOUT_MS  ( 1000 )
-#define OSPI_POLL_INTERVAL_TIMEOUT_MS ( 100 )
+#define OSPI_POLL_OVERALL_TIMEOUT_MS    ( 1000 )
+#define OSPI_POLL_INTERVAL_TIMEOUT_MS   ( 100 )
 
-#define BITSHIFT_1B ( 8 )
-#define BITSHIFT_2B ( 16 )
-#define BITSHIFT_3B ( 24 )
+#define BITSHIFT_1B                     ( 8 )
+#define BITSHIFT_2B                     ( 16 )
+#define BITSHIFT_3B                     ( 24 )
 
-#define MISMATCH_CHECK_COUNT    ( 16 )
-#define FLASH_ID_STR_BUFFER     ( 100 )
-#define FLASH_ID_SPECIFIER_SIZE ( 6 )
-#define FLASH_ID_READ_SIZE      ( 8 )
-#define FLASH_WRITE_BYTE_SIZE   ( 8 )
+#define MISMATCH_CHECK_COUNT            ( 16 )
+#define FLASH_ID_STR_BUFFER             ( 100 )
+#define FLASH_ID_SPECIFIER_SIZE         ( 6 )
+#define FLASH_ID_READ_SIZE              ( 8 )
+#define FLASH_WRITE_BYTE_SIZE           ( 8 )
 
-#define XFLASH_CMD_ADDRSIZE_3      ( 3 )
-#define XFLASH_CMD_ADDRSIZE_4      ( 4 )
-#define XFLASH_BYTE_COUNT_1        ( 1 )
-#define XFLASH_BYTE_COUNT_2        ( 2 )
-#define XFLASH_OPCODE_DUMMY_CYCLES ( 8 )
-#define XFLASH_STATUS_BYTE         ( 0x80 )
+#define XFLASH_CMD_ADDRSIZE_3           ( 3 )
+#define XFLASH_CMD_ADDRSIZE_4           ( 4 )
+#define XFLASH_BYTE_COUNT_1             ( 1 )
+#define XFLASH_BYTE_COUNT_2             ( 2 )
+#define XFLASH_OPCODE_DUMMY_CYCLES      ( 8 )
+#define XFLASH_STATUS_BYTE              ( 0x80 )
 
 
 /******************************************************************************/
@@ -151,20 +176,20 @@ UTIL_MAKE_ENUM_AND_STRINGS( OSPI_ERRORS, OSPI_ERRORS, OSPI_ERRORS_STR )
  */
 typedef struct OSPI_FLASH_INFO
 {
-    uint32_t ulJedecId;                                                        /* JEDEC ID */
-    uint32_t ulSectSize;                                                       /* Individual sector size or
-                                                                                * combined sector size in case of parallel config*/
-    uint32_t ululNumSect;                                                      /* Total no. of sectors in one/two flash devices */
-    uint32_t ulPageSize;                                                       /* Individual page size or
-                                                                                * combined page size in case of parallel config*/
-    uint32_t ulNumPage;                                                        /* Total no. of pages in one/two flash devices */
-    uint32_t ulFlashDeviceSize;                                                /* This is the size of one flash device */
-    uint8_t  ucNumDie;                                                         /* No. of die forming a single flash */
-    uint32_t ulReadCmd;                                                        /* Read command used to read data from flash */
-    uint32_t ulWriteCmd;                                                       /* Write command used to write data to flash */
-    uint32_t ulEraseCmd;                                                       /* Erase Command */
-    uint8_t  ucStatusCmd;                                                      /* Status Command */
-    uint8_t  ucDummyCycles;                                                    /* Number of Dummy cycles for Read operation */
+    uint32_t ulJedecId;         /* JEDEC ID */
+    uint32_t ulSectSize;        /* Individual sector size or
+                                 * combined sector size in case of parallel config*/
+    uint32_t ululNumSect;       /* Total no. of sectors in one/two flash devices */
+    uint32_t ulPageSize;        /* Individual page size or
+                                 * combined page size in case of parallel config*/
+    uint32_t ulNumPage;         /* Total no. of pages in one/two flash devices */
+    uint32_t ulFlashDeviceSize; /* This is the size of one flash device */
+    uint8_t  ucNumDie;          /* No. of die forming a single flash */
+    uint32_t ulReadCmd;         /* Read command used to read data from flash */
+    uint32_t ulWriteCmd;        /* Write command used to write data to flash */
+    uint32_t ulEraseCmd;        /* Erase Command */
+    uint8_t  ucStatusCmd;       /* Status Command */
+    uint8_t  ucDummyCycles;     /* Number of Dummy cycles for Read operation */
 
 } OSPI_FLASH_INFO;
 
@@ -246,29 +271,29 @@ static OSPI_FLASH_INFO pxFlashConfigTable[] =
 
 static OSPI_PRIVATE_DATA xLocalData =
 {
-    UPPER_FIREWALL,                                                            /* ulUpperFirewall */
-    FALSE,                                                                     /* iInitialised */
+    UPPER_FIREWALL, /* ulUpperFirewall */
+    FALSE,          /* iInitialised */
     { {
           0
-      } },                                                                     /* xOspiPsvInstance */
-    0,                                                                         /* ulFlashMake */
-    0,                                                                         /* ulOspiSectorSize */
-    0,                                                                         /* ucFctIndex */
-    0,                                                                         /* ulPageSize */
-    0,                                                                         /* ucOspiFlashPercentage */
-    NULL,                                                                      /* pvOsalMutexHdl */
-    NULL,                                                                      /* pvTimerHandle */
-    FALSE,                                                                     /* iAbortPollWait */
+    } },            /* xOspiPsvInstance */
+    0,              /* ulFlashMake */
+    0,              /* ulOspiSectorSize */
+    0,              /* ucFctIndex */
+    0,              /* ulPageSize */
+    0,              /* ucOspiFlashPercentage */
+    NULL,           /* pvOsalMutexHdl */
+    NULL,           /* pvTimerHandle */
+    FALSE,          /* iAbortPollWait */
     {
         0
-    },                                                                         /* ucReadBfrPtr */
+    },              /* ucReadBfrPtr */
     {
         0
-    },                                                                         /* pulStatCounters */
+    },              /* pulStatCounters */
     {
         0
-    },                                                                         /* pulErrorCounters */
-    LOWER_FIREWALL                                                             /* ulLowerFirewall */
+    },              /* pulErrorCounters */
+    LOWER_FIREWALL  /* ulLowerFirewall */
 };
 static OSPI_PRIVATE_DATA *pxThis = &xLocalData;
 
@@ -499,7 +524,7 @@ int iOSPI_FlashInit( OSPI_CFG_TYPE *pxOspiCfg )
         /* Initialize the OSPIPSV driver so that it's ready to use */
         if( OK == iStatus )
         {
-            pxOspiPsvConfig = XOspiPsv_LookupConfig( pxOspiCfg->ucDeviceId );
+            pxOspiPsvConfig = XOspiPsv_LookupConfig( pxOspiCfg->ulBaseAddr );
             if( NULL == pxOspiPsvConfig )
             {
                 PLL_ERR( OSPI_NAME, "Error: XOspiPsv_LookupConfig failed\r\n" );
@@ -912,9 +937,9 @@ int iOSPI_FlashWrite( uint32_t ulAddr, uint8_t *pucWriteBuffer, uint32_t ulLengt
             if( OK == iStatus )
             {
                 uint8_t ucReadBuffer[ ucPageSize ] __attribute__ ( ( aligned( OSPI_DATA_ALIGNMENT ) ) );
-                int     iCount = 0;
-                int     i      = 0;
-                int     j      = 0;
+                int iCount = 0;
+                int i = 0;
+                int j = 0;
 
                 /* read back: check some pages numbers */
                 PLL_DBG( OSPI_NAME, "Write complete, read back flash to verify\r\n" );
