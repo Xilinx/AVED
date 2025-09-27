@@ -1,0 +1,41 @@
+<mxfile host="confluence.amd.com" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36" version="24.7.10">
+  <diagram id="lsSjGnxVs_fWoM6lbFz8" name="Page-1">
+    <mxGraphModel dx="1050" dy="641" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="nCK2chzQX1p0WjIYSjwb-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="40" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="nCK2chzQX1p0WjIYSjwb-2" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="160" y="160" width="10" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="nCK2chzQX1p0WjIYSjwb-3" value="callback" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;entryX=1;entryY=0;entryDx=0;entryDy=5;" edge="1" target="nCK2chzQX1p0WjIYSjwb-2" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="240" y="165" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nCK2chzQX1p0WjIYSjwb-4" value="return" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;exitX=1;exitY=1;exitDx=0;exitDy=-5;" edge="1" source="nCK2chzQX1p0WjIYSjwb-2" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="240" y="235" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nCK2chzQX1p0WjIYSjwb-5" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="200" y="160" width="10" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="nCK2chzQX1p0WjIYSjwb-6" value="dispatch" style="html=1;verticalAlign=bottom;startArrow=oval;startFill=1;endArrow=block;startSize=8;curved=0;rounded=0;" edge="1" parent="1" target="nCK2chzQX1p0WjIYSjwb-7">
+          <mxGeometry width="60" relative="1" as="geometry">
+            <mxPoint x="170" y="200" as="sourcePoint" />
+            <mxPoint x="230" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nCK2chzQX1p0WjIYSjwb-7" value="Module" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="175" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="nCK2chzQX1p0WjIYSjwb-8" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;Object:Type&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;field1 = value1&lt;br/&gt;field2 = value2&lt;br&gt;field3 = value3&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="120" y="150" width="160" height="90" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

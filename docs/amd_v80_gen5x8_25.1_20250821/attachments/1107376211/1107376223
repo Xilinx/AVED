@@ -1,0 +1,76 @@
+<mxfile host="confluence.xilinx.com" modified="2024-02-15T10:00:13.027Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="zmSyuNy6kIoCj_4E5u8M" version="21.4.0" type="atlas">
+  <diagram id="1ZhY-su90kfpZS9YtNBN" name="Page-1">
+    <mxGraphModel dx="2474" dy="1563" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="dxHJR88ZFng2MrCnBtps-14" value="OK or ERROR" style="verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;shadow=0;strokeWidth=1;startArrow=none;exitX=0.3;exitY=0.625;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1" source="dxHJR88ZFng2MrCnBtps-12">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="115" y="170" as="targetPoint" />
+            <mxPoint x="459.5" y="169.99999999999977" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dxHJR88ZFng2MrCnBtps-15" value="OK or ERROR" style="verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;shadow=0;strokeWidth=1;startArrow=none;entryX=0.8;entryY=0.859;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-155" y="189.1099999999999" as="targetPoint" />
+            <mxPoint x="107" y="189.99999999999977" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dxHJR88ZFng2MrCnBtps-2" value="AMC Main Task" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+          <mxGeometry x="-210" y="-130" width="100" height="390" as="geometry" />
+        </mxCell>
+        <mxCell id="dxHJR88ZFng2MrCnBtps-3" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;strokeWidth=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="dxHJR88ZFng2MrCnBtps-2" vertex="1">
+          <mxGeometry x="45" y="70" width="10" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="dxHJR88ZFng2MrCnBtps-4" value="iInitApp( )" style="verticalAlign=bottom;startArrow=oval;endArrow=block;startSize=8;shadow=0;strokeWidth=1;" parent="dxHJR88ZFng2MrCnBtps-2" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-60" y="77" as="sourcePoint" />
+            <mxPoint x="45" y="77" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dxHJR88ZFng2MrCnBtps-5" value="OOB App" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="60" y="-130" width="100" height="370" as="geometry" />
+        </mxCell>
+        <mxCell id="dxHJR88ZFng2MrCnBtps-6" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;strokeWidth=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="dxHJR88ZFng2MrCnBtps-5" vertex="1">
+          <mxGeometry x="45" y="80" width="10" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="dxHJR88ZFng2MrCnBtps-7" value="iOSAL_Mutex_Create( )" style="verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;shadow=0;strokeWidth=1;" parent="dxHJR88ZFng2MrCnBtps-5" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="55" y="162.0000000000009" as="sourcePoint" />
+            <mxPoint x="225" y="162.0000000000009" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dxHJR88ZFng2MrCnBtps-8" value="iOUT_OF_BAND_TELEMETRY_Initialise( )" style="verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;shadow=0;strokeWidth=1;exitX=0.9;exitY=0.169;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-155" y="-10.990000000000009" as="sourcePoint" />
+            <mxPoint x="104" y="-11.99999999999909" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dxHJR88ZFng2MrCnBtps-9" value="OSAL" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="240" y="-130" width="100" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="dxHJR88ZFng2MrCnBtps-10" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;strokeWidth=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="dxHJR88ZFng2MrCnBtps-9" vertex="1">
+          <mxGeometry x="45" y="130" width="10" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="dxHJR88ZFng2MrCnBtps-11" value="BMC Proxy" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="420" y="-130" width="100" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="dxHJR88ZFng2MrCnBtps-12" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;strokeWidth=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="dxHJR88ZFng2MrCnBtps-11" vertex="1">
+          <mxGeometry x="45" y="250" width="10" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="dxHJR88ZFng2MrCnBtps-13" value="iBMC_BindCallback( )" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;entryX=0.5;entryY=0.25;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="116" y="140" as="sourcePoint" />
+            <mxPoint x="466" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dxHJR88ZFng2MrCnBtps-16" value="OK or ERROR" style="verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;shadow=0;strokeWidth=1;startArrow=none;" parent="1" edge="1" source="dxHJR88ZFng2MrCnBtps-10">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="115" y="70" as="targetPoint" />
+            <mxPoint x="279.5" y="69.99999999999977" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
