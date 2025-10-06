@@ -11,8 +11,7 @@
 
 # AMD Alveo™ Versal™ Example Design (AVED)
 
-View the [full documentation](./docs/index.html) for the Alveo Versal Example Design.
-
+View the [full documentation](https://xilinx.github.io/AVED/) for the Alveo Versal Example Design.
 
 <hr class="sphinxhide">
 
