@@ -195,6 +195,7 @@ OneTrust Cookies Consent Notice end -->
 <p>This table shows the recommended functions that can access the DDR Memories. The light grey rows and columns related to the APU, PCIe User, and PCIe DMA are not currently used, but they are captured for future growth. The <strong>Yes</strong><strong>/</strong><strong>No</strong>
 entries indicate the recommended memory access. There is not an active control that prohibits unintended access to the DDR. For example, if caution is not exercised, the APU or PL could access DDR locations intended for the RPU (RPU execution).</p>
 <p>Address remapping must be used for the PCIe to access the 128MB of memory starting at 0x000_3800_0000. The address remap is configured in the AXI NoC CIPS (axi_noc_cips).</p>
+<p><img alt="image1" src="_images/1107374801.png" /></p>
 <p>N/A* The RPU is only 32-bit addressing, so it cannot access more than 4GB of DDR.</p>
 </section>
 <section id="aved-memory-map">
@@ -207,16 +208,20 @@ entries indicate the recommended memory access. There is not an active control t
 </ul>
 <section id="aved-4g-memory-space-ddr-lower-2g-ps-pmc">
 <span id="avedv80-memorymap-aved4gmemoryspace-ddrlower2g-ps-pmc"></span><h3>AVED 4G Memory Space - DDR Lower 2G &amp; PS/PMC<a class="headerlink" href="#aved-4g-memory-space-ddr-lower-2g-ps-pmc" title="Link to this heading">¶</a></h3>
+<p><img alt="image2" src="_images/1107374801.png" /></p>
 </section>
 <section id="aved-hbm-memory-space">
 <span id="avedv80-memorymap-avedhbmmemoryspace"></span><h3>AVED HBM Memory Space<a class="headerlink" href="#aved-hbm-memory-space" title="Link to this heading">¶</a></h3>
+<p><img alt="image3" src="_images/1107374822.png" /></p>
 </section>
 <section id="aved-pl-memory-space">
 <span id="avedv80-memorymap-pf0baraddressing"></span><h3>AVED PL Memory Space<a class="headerlink" href="#aved-pl-memory-space" title="Link to this heading">¶</a></h3>
+<p><img alt="image4" src="_images/1107374813.png" /></p>
 <p>PCIe® Management functions are in blue.</p>
 </section>
 <section id="aved-ddr-upper-2g-and-dimm-32g-memory-space">
 <span id="avedv80-memorymap-avedddrupper2ganddimm32gmemoryspace"></span><h3>AVED DDR Upper 2G and DIMM 32G Memory Space<a class="headerlink" href="#aved-ddr-upper-2g-and-dimm-32g-memory-space" title="Link to this heading">¶</a></h3>
+<p><img alt="image5" src="_images/1107374792.png" /></p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -237,7 +242,7 @@ entries indicate the recommended memory access. There is not an active control t
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2025, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on September 11, 2025.
+      <span class="lastupdated">Last updated on October 31, 2025.
       </span></p>
   </div>
 

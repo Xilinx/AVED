@@ -130,9 +130,46 @@ OneTrust Cookies Consent Notice end -->
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#muxed-device-fal">Muxed Device FAL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#api">API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#sequence-diagrams">Sequence Diagrams</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api">API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#enums">Enums</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initialize-the-axc-proxy-driver">Initialize the AXC proxy driver.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-external-device">Add External Device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bind-callbacks">Bind Callbacks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-byte-in-desired-external-device">Set byte in desired External Device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-byte-from-desired-qsfp">Get byte from desired QSFP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-page-from-desired-qsfp">Get page from desired QSFP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-io-status-from-desired-qsfp">Get IO Status from desired QSFP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-all-io-statuses-from-desired-qsfp">Get All IO Statuses from desired QSFP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-temperature-from-desired-external-device">Get Temperature from desired External Device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-state">Get State</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#print-statistics">Print Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#validate-request">Validate request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clear-statistics">Clear Statistics</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sequence-diagrams">Sequence Diagrams</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#axc-proxy-initialisation">AXC Proxy Initialisation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#axc-proxy-task">AXC Proxy Task</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#initialize-driver">Initialize Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#register-for-callback">Register For Callback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-new-external-device">Add new External device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sets">Sets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#set-byte">Set byte</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gets">Gets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#get-byte">Get byte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-page">Get Page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-single-io-status">Get single IO status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-all-io-statuses">Get all IO statuses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-temperature-value">Get temperature value</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Board%2BManagement%2BController%2B%28BMC%29%2BProxy%2BDriver.html">Board Management Controller (BMC) Proxy Driver</a></li>
@@ -191,7 +228,7 @@ the calling task. The AXC proxy task will only call into the FAL to update the t
 </section>
 <section id="key-acronyms">
 <span id="avedexternaldevicecontrol-axc-proxydriver-keyacronyms"></span><h3>Key Acronyms<a class="headerlink" href="#key-acronyms" title="Link to this heading">¶</a></h3>
-<table class="relative-table wrapped confluenceTable" style="width: 24.6106%;"><colgroup><col style="width: 14.5622%;"/><col style="width: 85.464%;"/></colgroup><tbody><tr><th class="confluenceTh">Acronym</th><th class="confluenceTh">Definition</th></tr><tr><td class="confluenceTd">QSFP</td><td class="confluenceTd">Quad Small Form-Factor Pluggable</td></tr><tr><td class="confluenceTd">SFF</td><td class="confluenceTd">Small Form Factor</td></tr><tr><td class="confluenceTd">QSFP56</td><td class="confluenceTd">QSFP - 200G Transceivers</td></tr><tr><td class="confluenceTd" colspan="1">MIO</td><td class="confluenceTd" colspan="1">Multiplexed I/O</td></tr></tbody></table>
+<table class="relative-table wrapped confluenceTable" style="width: 24.6106%;"><colgroup><col style="width: 14.5622%;"/></colgroup><colgroup><col style="width: 85.464%;"/></colgroup><tbody><tr><th class="confluenceTh">Acronym</th><th class="confluenceTh">Definition</th></tr><tr><td class="confluenceTd">QSFP</td><td class="confluenceTd">Quad Small Form-Factor Pluggable</td></tr><tr><td class="confluenceTd">SFF</td><td class="confluenceTd">Small Form Factor</td></tr><tr><td class="confluenceTd">QSFP56</td><td class="confluenceTd">QSFP - 200G Transceivers</td></tr><tr><td class="confluenceTd" colspan="1">MIO</td><td class="confluenceTd" colspan="1">Multiplexed I/O</td></tr></tbody></table>
 </section>
 <section id="qsfp-overview">
 <span id="avedexternaldevicecontrol-axc-proxydriver-qsfpoverview"></span><h3>QSFP overview<a class="headerlink" href="#qsfp-overview" title="Link to this heading">¶</a></h3>
@@ -205,10 +242,14 @@ the calling task. The AXC proxy task will only call into the FAL to update the t
 <span id="avedexternaldevicecontrol-axc-proxydriver-muxeddevicefal"></span><h2>Muxed Device FAL<a class="headerlink" href="#muxed-device-fal" title="Link to this heading">¶</a></h2>
 <p>The AXC Proxy Driver will call into the muxed device FAL. This layer will be responsible for abstracting the stages required in accessing the external, muxed devices, into simple read and write calls.</p>
 <p>There are a number of stages in the control path to access a QSFP or other muxed device on V80. The following flow-chart diagrams outline each stage, and the proposed FW_IF API responsible for implementing the stages.</p>
+<p><img alt="image1" src="_images/1107376594.png"/></p>
+<p><img alt="image2" src="_images/1107376588.png"/></p>
 </section>
 <section id="api">
 <span id="avedexternaldevicecontrol-axc-proxydriver-api"></span><h2>API<a class="headerlink" href="#api" title="Link to this heading">¶</a></h2>
-<p id="avedexternaldevicecontrol-axc-proxydriver-enums">QSFP present or not present.</p>
+<section id="enums">
+<span id="avedexternaldevicecontrol-axc-proxydriver-enums"></span><h3>Enums<a class="headerlink" href="#enums" title="Link to this heading">¶</a></h3>
+<p>QSFP present or not present.</p>
 <p><strong>AXC_PROXY_DRIVER_EVENTS</strong></p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @enum    AXC_PROXY_DRIVER_EVENTS</span>
@@ -243,7 +284,10 @@ the calling task. The AXC proxy task will only call into the FAL to update the t
 <span class="p">}</span><span class="w"> </span><span class="n">AXC_PROXY_DRIVER_QSFP_IO</span><span class="p">;</span>
 </pre></div>
 </div>
-<p id="avedexternaldevicecontrol-axc-proxydriver-initializetheaxcproxydriver">This will make use of the OSAL layer to create the proxy mutex and task.</p>
+</section>
+<section id="initialize-the-axc-proxy-driver">
+<span id="avedexternaldevicecontrol-axc-proxydriver-initializetheaxcproxydriver"></span><h3>Initialize the AXC proxy driver.<a class="headerlink" href="#initialize-the-axc-proxy-driver" title="Link to this heading">¶</a></h3>
+<p>This will make use of the OSAL layer to create the proxy mutex and task.</p>
 <p><strong>iAXC_Initialise</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Main initialisation point for the AXC Proxy Driver
@@ -260,7 +304,10 @@ the calling task. The AXC proxy task will only call into the FAL to update the t
 int iAXC_Initialise( uint8_t ucProxyId, uint32_t ulTaskPrio, uint32_t ulTaskStack );
 </pre></div>
 </div>
-<p id="avedexternaldevicecontrol-axc-proxydriver-addexternaldevice">This will initialize a new external device within the AXC proxy driver, adding the device to its internally held linked list. AXC proxy will continually check the status and temperature of the newly added device, raising an event if the status of the
+</section>
+<section id="add-external-device">
+<span id="avedexternaldevicecontrol-axc-proxydriver-addexternaldevice"></span><h3>Add External Device<a class="headerlink" href="#add-external-device" title="Link to this heading">¶</a></h3>
+<p>This will initialize a new external device within the AXC proxy driver, adding the device to its internally held linked list. AXC proxy will continually check the status and temperature of the newly added device, raising an event if the status of the
 device changes.</p>
 <p><strong>iAXC_AddExternalDevice</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
@@ -276,7 +323,10 @@ device changes.</p>
 int iAXC_AddExternalDevice( AXC_PROXY_DRIVER_EXTERNAL_DEVICE_CONFIG *pxExDeviceCfg );
 </pre></div>
 </div>
-<p id="avedexternaldevicecontrol-axc-proxydriver-bindcallbacks">This API can be used to bind into a callback to be notified of events generated by the AXC proxy using the EVL library. The current supported events are:</p>
+</section>
+<section id="bind-callbacks">
+<span id="avedexternaldevicecontrol-axc-proxydriver-bindcallbacks"></span><h3>Bind Callbacks<a class="headerlink" href="#bind-callbacks" title="Link to this heading">¶</a></h3>
+<p>This API can be used to bind into a callback to be notified of events generated by the AXC proxy using the EVL library. The current supported events are:</p>
 <ul class="simple">
 <li><p><strong>AXC_PROXY_DRIVER_E_QSFP_PRESENT</strong></p></li>
 <li><p><strong>AXC_PROXY_DRIVER_E_QSFP_NOT_PRESENT</strong></p></li>
@@ -298,7 +348,10 @@ int iAXC_AddExternalDevice( AXC_PROXY_DRIVER_EXTERNAL_DEVICE_CONFIG *pxExDeviceC
 int iAXC_BindCallback( EVL_CALLBACK *pxCallback );
 </pre></div>
 </div>
-<p id="avedexternaldevicecontrol-axc-proxydriver-setbyteindesiredexternaldevice">This will write a byte value to desired device memory map. This API will not trigger functionality within the internal task (as with other proxy drivers), instead, the data will be written directly to the device from the calling task.</p>
+</section>
+<section id="set-byte-in-desired-external-device">
+<span id="avedexternaldevicecontrol-axc-proxydriver-setbyteindesiredexternaldevice"></span><h3>Set byte in desired External Device<a class="headerlink" href="#set-byte-in-desired-external-device" title="Link to this heading">¶</a></h3>
+<p>This will write a byte value to desired device memory map. This API will not trigger functionality within the internal task (as with other proxy drivers), instead, the data will be written directly to the device from the calling task.</p>
 <p><strong>iAXC_SetByte</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Write byte value to desired External Device memory map
@@ -321,7 +374,10 @@ int iAXC_BindCallback( EVL_CALLBACK *pxCallback );
 int iAXC_SetByte( uint8_t ucExDeviceId, uint32_t ulPage, uint32_t ulByteOffset, uint8_t ucValue );
 </pre></div>
 </div>
-<p id="avedexternaldevicecontrol-axc-proxydriver-getbytefromdesiredqsfp">This will read a byte value from the desired device memory map. This API will not trigger functionality within the internal task (as with other proxy drivers), instead, the data will be read directly from the device from the calling task.</p>
+</section>
+<section id="get-byte-from-desired-qsfp">
+<span id="avedexternaldevicecontrol-axc-proxydriver-getbytefromdesiredqsfp"></span><h3>Get byte from desired QSFP<a class="headerlink" href="#get-byte-from-desired-qsfp" title="Link to this heading">¶</a></h3>
+<p>This will read a byte value from the desired device memory map. This API will not trigger functionality within the internal task (as with other proxy drivers), instead, the data will be read directly from the device from the calling task.</p>
 <p><strong>iAXC_GetByte</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Read real-time byte value from desired External Device memory map
@@ -343,7 +399,10 @@ int iAXC_SetByte( uint8_t ucExDeviceId, uint32_t ulPage, uint32_t ulByteOffset, 
 int iAXC_GetByte( uint8_t ucExDeviceId, uint32_t ulPage, uint32_t ulByteOffset, uint8_t *pucValue );
 </pre></div>
 </div>
-<p id="avedexternaldevicecontrol-axc-proxydriver-getpagefromdesiredqsfp">This will read an entire memory map page from the desired QSFP. This API will not trigger functionality within the internal task (as with other proxy drivers), instead, the data will be read directly from the QSFP from the calling task.</p>
+</section>
+<section id="get-page-from-desired-qsfp">
+<span id="avedexternaldevicecontrol-axc-proxydriver-getpagefromdesiredqsfp"></span><h3>Get page from desired QSFP<a class="headerlink" href="#get-page-from-desired-qsfp" title="Link to this heading">¶</a></h3>
+<p>This will read an entire memory map page from the desired QSFP. This API will not trigger functionality within the internal task (as with other proxy drivers), instead, the data will be read directly from the QSFP from the calling task.</p>
 <p><strong>iAXC_GetPage</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Read real-time memory map from desired QSFP
@@ -360,7 +419,10 @@ int iAXC_GetByte( uint8_t ucExDeviceId, uint32_t ulPage, uint32_t ulByteOffset, 
 int iAXC_GetPage( uint8_t ucExDeviceId, uint32_t ulPage, AXC_PROXY_DRIVER_PAGE_DATA *pxData );
 </pre></div>
 </div>
-<p id="avedexternaldevicecontrol-axc-proxydriver-getiostatusfromdesiredqsfp">This will read a desired IO control line from the desired QSFP. This API will not trigger functionality within the internal task (as with other proxy drivers), instead, the data will be read directly from the QSFP from the calling task.</p>
+</section>
+<section id="get-io-status-from-desired-qsfp">
+<span id="avedexternaldevicecontrol-axc-proxydriver-getiostatusfromdesiredqsfp"></span><h3>Get IO Status from desired QSFP<a class="headerlink" href="#get-io-status-from-desired-qsfp" title="Link to this heading">¶</a></h3>
+<p>This will read a desired IO control line from the desired QSFP. This API will not trigger functionality within the internal task (as with other proxy drivers), instead, the data will be read directly from the QSFP from the calling task.</p>
 <p><strong>iAXC_GetSingleIoStatus</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Read single status from QSFP IO Expander
@@ -376,7 +438,10 @@ int iAXC_GetPage( uint8_t ucExDeviceId, uint32_t ulPage, AXC_PROXY_DRIVER_PAGE_D
 int iAXC_GetSingleIoStatus( uint8_t ucExDeviceId, AXC_PROXY_DRIVER_QSFP_IO xIoControlLine, uint8_t *pucIoStatus );
 </pre></div>
 </div>
-<p id="avedexternaldevicecontrol-axc-proxydriver-getalliostatusesfromdesiredqsfp">This will read all IO control lines from the desired QSFP. This API will not trigger functionality within the internal task (as with other proxy drivers), instead, the data will be read directly from the QSFP from the calling task.</p>
+</section>
+<section id="get-all-io-statuses-from-desired-qsfp">
+<span id="avedexternaldevicecontrol-axc-proxydriver-getalliostatusesfromdesiredqsfp"></span><h3>Get All IO Statuses from desired QSFP<a class="headerlink" href="#get-all-io-statuses-from-desired-qsfp" title="Link to this heading">¶</a></h3>
+<p>This will read all IO control lines from the desired QSFP. This API will not trigger functionality within the internal task (as with other proxy drivers), instead, the data will be read directly from the QSFP from the calling task.</p>
 <p><strong>iAXC_GetAllIoStatuses</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Read all statuses from QSFP IO Expander
@@ -391,7 +456,10 @@ int iAXC_GetSingleIoStatus( uint8_t ucExDeviceId, AXC_PROXY_DRIVER_QSFP_IO xIoCo
 int iAXC_GetAllIoStatuses( uint8_t ucExDeviceId, AXC_PROXY_DRIVER_QSFP_IO_STATUSES *pxIoStatuses );
 </pre></div>
 </div>
-<p id="avedexternaldevicecontrol-axc-proxydriver-gettemperaturefromdesiredexternaldevice">This will return temperature value from the desired external device. The reading of temperature values is implemented within the AXC proxy task, for each device that has been added. Calling this function will simply return the most up-to-date
+</section>
+<section id="get-temperature-from-desired-external-device">
+<span id="avedexternaldevicecontrol-axc-proxydriver-gettemperaturefromdesiredexternaldevice"></span><h3>Get Temperature from desired External Device<a class="headerlink" href="#get-temperature-from-desired-external-device" title="Link to this heading">¶</a></h3>
+<p>This will return temperature value from the desired external device. The reading of temperature values is implemented within the AXC proxy task, for each device that has been added. Calling this function will simply return the most up-to-date
 temperature value for the desired device.</p>
 <p><strong>iAXC_GetTemperature</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
@@ -408,7 +476,10 @@ temperature value for the desired device.</p>
 int iAXC_GetTemperature( uint8_t ucExDeviceId, float *pfTemperature );
 </pre></div>
 </div>
-<p id="avedexternaldevicecontrol-axc-proxydriver-getstate">This will get the current state of the proxy driver.</p>
+</section>
+<section id="get-state">
+<span id="avedexternaldevicecontrol-axc-proxydriver-getstate"></span><h3>Get State<a class="headerlink" href="#get-state" title="Link to this heading">¶</a></h3>
+<p>This will get the current state of the proxy driver.</p>
 <p><strong>iAXC_GetState</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Gets the current state of the proxy driver
@@ -421,7 +492,10 @@ int iAXC_GetTemperature( uint8_t ucExDeviceId, float *pfTemperature );
 int iAXC_GetState( MODULE_STATE *pxState );
 </pre></div>
 </div>
-<p id="avedexternaldevicecontrol-axc-proxydriver-printstatistics">This will print AXC proxy statistic counters and errors, useful for Debug.</p>
+</section>
+<section id="print-statistics">
+<span id="avedexternaldevicecontrol-axc-proxydriver-printstatistics"></span><h3>Print Statistics<a class="headerlink" href="#print-statistics" title="Link to this heading">¶</a></h3>
+<p>This will print AXC proxy statistic counters and errors, useful for Debug.</p>
 <p><strong>iAXC_PrintStatistics</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Print all the stats gathered by the application
@@ -433,7 +507,10 @@ int iAXC_GetState( MODULE_STATE *pxState );
 int iAXC_PrintStatistics( void );
 </pre></div>
 </div>
-<p id="avedexternaldevicecontrol-axc-proxydriver-validaterequest">This will check if the device exists and the page/byte offset of valid.</p>
+</section>
+<section id="validate-request">
+<span id="avedexternaldevicecontrol-axc-proxydriver-validaterequest"></span><h3>Validate request<a class="headerlink" href="#validate-request" title="Link to this heading">¶</a></h3>
+<p>This will check if the device exists and the page/byte offset of valid.</p>
 <p><strong>iAXC_ValidateRequest</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Check if a device exists and the page/byte offset are valid
@@ -446,8 +523,11 @@ int iAXC_ValidateRequest( uint8_t ucExDeviceId, uint32_t ulPage, uint32_t ulByte
 </pre></div>
 </div>
 <p>Example output from iAXC_PrintStatistics():</p>
-<p><a class="confluence-embedded-image reference internal" href="_images/1107376642.png"><img alt="image1" class="confluence-embedded-image" src="_images/1107376642.png" style="height: 400px;"/></a></p>
-<p id="avedexternaldevicecontrol-axc-proxydriver-clearstatistics">This will clear all AXC statistic counters back to zero, useful for Debug.</p>
+<p><a class="confluence-embedded-image reference internal" href="_images/1107376642.png"><img alt="image3" class="confluence-embedded-image" src="_images/1107376642.png" style="height: 400px;"/></a></p>
+</section>
+<section id="clear-statistics">
+<span id="avedexternaldevicecontrol-axc-proxydriver-clearstatistics"></span><h3>Clear Statistics<a class="headerlink" href="#clear-statistics" title="Link to this heading">¶</a></h3>
+<p>This will clear all AXC statistic counters back to zero, useful for Debug.</p>
 <p><strong>iAXC_ClearStatistics</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Clear all the stats in the application
@@ -460,13 +540,20 @@ int iAXC_ClearStatistics( void );
 </pre></div>
 </div>
 </section>
+</section>
 <section id="sequence-diagrams">
 <span id="avedexternaldevicecontrol-axc-proxydriver-sequencediagrams"></span><h2>Sequence Diagrams<a class="headerlink" href="#sequence-diagrams" title="Link to this heading">¶</a></h2>
-<p id="avedexternaldevicecontrol-axc-proxydriver-axcproxyinitialisation">Three AXC API functions are called from the AMC main task (iAXC_Initialise, iAXC_BindCallback and iAXC_AddExternalDevice), when all the other proxies are being initialized.</p>
+<section id="axc-proxy-initialisation">
+<span id="avedexternaldevicecontrol-axc-proxydriver-axcproxyinitialisation"></span><h3>AXC Proxy Initialisation<a class="headerlink" href="#axc-proxy-initialisation" title="Link to this heading">¶</a></h3>
+<p>Three AXC API functions are called from the AMC main task (iAXC_Initialise, iAXC_BindCallback and iAXC_AddExternalDevice), when all the other proxies are being initialized.</p>
 <p>iAXC_Initialise will create a shared proxy mutex, and the proxy task. iAXC_BindCallback will bind the appropriate top-level callback function.</p>
 <p>iAXC_AddExternalDevice is called five times, each with a unique FAL handle for each external device. Each FAL object will be opened, and memory allocated to hold the handle, unique ID, temperature and status of each device.</p>
 <p>Note: It is the (top-level) applications responsibility to add the required number of External Devices, with unique FAL handles for each device.</p>
-<p id="avedexternaldevicecontrol-axc-proxydriver-axcproxytask">The task within AXC proxy has 3 main responsibilities:</p>
+<p><img alt="image4" src="_images/1107376573.png"/></p>
+</section>
+<section id="axc-proxy-task">
+<span id="avedexternaldevicecontrol-axc-proxydriver-axcproxytask"></span><h3>AXC Proxy Task<a class="headerlink" href="#axc-proxy-task" title="Link to this heading">¶</a></h3>
+<p>The task within AXC proxy has 3 main responsibilities:</p>
 <ul class="simple">
 <li><p>Update the temperature value of each device.</p></li>
 <li><p>Update the status (Present or not present) of each QSFP.</p></li>
@@ -475,10 +562,14 @@ int iAXC_ClearStatistics( void );
 <div class="line-block">
 <div class="line"><br/></div>
 </div>
+<p><img alt="image5" src="_images/1107376579.png"/></p>
+</section>
 </section>
 <section id="examples">
 <span id="avedexternaldevicecontrol-axc-proxydriver-examples"></span><h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h2>
-<p id="avedexternaldevicecontrol-axc-proxydriver-initializedriver">This function should only be called once. It requires a unique ID for the proxy, used for signaling new events from the proxy, along with proxy driver task priority and stack size.</p>
+<section id="initialize-driver">
+<span id="avedexternaldevicecontrol-axc-proxydriver-initializedriver"></span><h3>Initialize Driver<a class="headerlink" href="#initialize-driver" title="Link to this heading">¶</a></h3>
+<p>This function should only be called once. It requires a unique ID for the proxy, used for signaling new events from the proxy, along with proxy driver task priority and stack size.</p>
 <p><strong>iAQC_Initialise Example</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if( OK == iAXC_Initialise( AMC_EVENT_UNIQUE_ID_AXC, AMC_TASK_PRIO_DEFAULT, AMC_TASK_DEFAULT_STACK ) )
 {
@@ -490,7 +581,10 @@ else
 }
 </pre></div>
 </div>
-<p id="avedexternaldevicecontrol-axc-proxydriver-registerforcallback">Define a function based on the function pointer prototype and bind in using the API.</p>
+</section>
+<section id="register-for-callback">
+<span id="avedexternaldevicecontrol-axc-proxydriver-registerforcallback"></span><h3>Register For Callback<a class="headerlink" href="#register-for-callback" title="Link to this heading">¶</a></h3>
+<p>Define a function based on the function pointer prototype and bind in using the API.</p>
 <p><strong>iAQC_BindCallback Example</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/* Define a callback to handle the events */
 static int iAxcCallback( EVL_SIGNAL *pxSignal )
@@ -532,7 +626,10 @@ else
 }
 </pre></div>
 </div>
-<p id="avedexternaldevicecontrol-axc-proxydriver-addnewexternaldevice">To add a new external device, pass in a pointer to a device config structure. This should include a handle to a FW_IF (already created and initialized), and a unique ID for the device.</p>
+</section>
+<section id="add-new-external-device">
+<span id="avedexternaldevicecontrol-axc-proxydriver-addnewexternaldevice"></span><h3>Add new External device<a class="headerlink" href="#add-new-external-device" title="Link to this heading">¶</a></h3>
+<p>To add a new external device, pass in a pointer to a device config structure. This should include a handle to a FW_IF (already created and initialized), and a unique ID for the device.</p>
 <p><strong>iAQC_AddQsfpDevice Example</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/* AXC Device configs */
 AXC_PROXY_DRIVER_EXTERNAL_DEVICE_CONFIG xQsfpDevice1 = { &amp;xQsfpIf1, 1 };
@@ -555,7 +652,12 @@ else
 }
 </pre></div>
 </div>
-<p id="avedexternaldevicecontrol-axc-proxydriver-setbyte"><span id="avedexternaldevicecontrol-axc-proxydriver-sets"></span>Example of setting byte 127, within page 00h of QSFP 1, to a value of 1. The parameters can be adjusted to set a different byte value, as required.</p>
+</section>
+<section id="sets">
+<span id="avedexternaldevicecontrol-axc-proxydriver-sets"></span><h3>Sets<a class="headerlink" href="#sets" title="Link to this heading">¶</a></h3>
+<section id="set-byte">
+<span id="avedexternaldevicecontrol-axc-proxydriver-setbyte"></span><h4>Set byte<a class="headerlink" href="#set-byte" title="Link to this heading">¶</a></h4>
+<p>Example of setting byte 127, within page 00h of QSFP 1, to a value of 1. The parameters can be adjusted to set a different byte value, as required.</p>
 <p><strong>iAQC_SetByte Example</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>uint8_t iQsfpId = 1;
 uint32_t iPageNum = 0;
@@ -572,7 +674,13 @@ else
 }
 </pre></div>
 </div>
-<p id="avedexternaldevicecontrol-axc-proxydriver-getbyte"><span id="avedexternaldevicecontrol-axc-proxydriver-gets"></span>Example of reading byte 127, from page 00h of QSFP 1. The parameters can be adjusted to read a different byte value, as required.</p>
+</section>
+</section>
+<section id="gets">
+<span id="avedexternaldevicecontrol-axc-proxydriver-gets"></span><h3>Gets<a class="headerlink" href="#gets" title="Link to this heading">¶</a></h3>
+<section id="get-byte">
+<span id="avedexternaldevicecontrol-axc-proxydriver-getbyte"></span><h4>Get byte<a class="headerlink" href="#get-byte" title="Link to this heading">¶</a></h4>
+<p>Example of reading byte 127, from page 00h of QSFP 1. The parameters can be adjusted to read a different byte value, as required.</p>
 <p><strong>iAQC_GetByte Example</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>uint8_t iQsfpId = 1;
 uint32_t iPageNum = 0;
@@ -589,7 +697,10 @@ else
 }
 </pre></div>
 </div>
-<p id="avedexternaldevicecontrol-axc-proxydriver-getpage">Example of reading entire upper page 00h of QSFP 1. The parameters can be adjusted to read a different page, as required.</p>
+</section>
+<section id="get-page">
+<span id="avedexternaldevicecontrol-axc-proxydriver-getpage"></span><h4>Get Page<a class="headerlink" href="#get-page" title="Link to this heading">¶</a></h4>
+<p>Example of reading entire upper page 00h of QSFP 1. The parameters can be adjusted to read a different page, as required.</p>
 <p><strong>iAQC_GetPage Example</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>uint8_t iQsfpId = 1;
 uint32_t iPageNum = 0;
@@ -613,7 +724,10 @@ else
 }
 </pre></div>
 </div>
-<p id="avedexternaldevicecontrol-axc-proxydriver-getsingleiostatus">Example of reading MODSEL status of QSFP 1. The parameters can be adjusted to read a different IO status line, as required.</p>
+</section>
+<section id="get-single-io-status">
+<span id="avedexternaldevicecontrol-axc-proxydriver-getsingleiostatus"></span><h4>Get single IO status<a class="headerlink" href="#get-single-io-status" title="Link to this heading">¶</a></h4>
+<p>Example of reading MODSEL status of QSFP 1. The parameters can be adjusted to read a different IO status line, as required.</p>
 <p><strong>iAQC_GetSingleIoStatus Example</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>uint8_t iQsfpId = 1;
 AXC_PROXY_DRIVER_QSFP_IO iIoCtrlId = 0; /* MODSEL */
@@ -629,7 +743,10 @@ else
 }
 </pre></div>
 </div>
-<p id="avedexternaldevicecontrol-axc-proxydriver-getalliostatuses">Example of reading all IO statuses from QSFP 1. The parameters can be adjusted to read from a different QSFP, as required.</p>
+</section>
+<section id="get-all-io-statuses">
+<span id="avedexternaldevicecontrol-axc-proxydriver-getalliostatuses"></span><h4>Get all IO statuses<a class="headerlink" href="#get-all-io-statuses" title="Link to this heading">¶</a></h4>
+<p>Example of reading all IO statuses from QSFP 1. The parameters can be adjusted to read from a different QSFP, as required.</p>
 <p><strong>iAQC_GetAllIoStatuses Example</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>uint8_t iQsfpId = 1;
 AXC_PROXY_DRIVER_QSFP_IO_STATUSES xTestStatuses = { 0 };
@@ -649,7 +766,10 @@ else
 }
 </pre></div>
 </div>
-<p id="avedexternaldevicecontrol-axc-proxydriver-gettemperaturevalue">Example of reading temperature value from QSFP 1. The parameters can be adjusted to read from a different device, as required.</p>
+</section>
+<section id="get-temperature-value">
+<span id="avedexternaldevicecontrol-axc-proxydriver-gettemperaturevalue"></span><h4>Get temperature value<a class="headerlink" href="#get-temperature-value" title="Link to this heading">¶</a></h4>
+<p>Example of reading temperature value from QSFP 1. The parameters can be adjusted to read from a different device, as required.</p>
 <p><strong>iAQC_GetTemperature Example</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>uint8_t iQsfpId = 1;
 float fTemperatureByte = 0;
@@ -694,6 +814,8 @@ else
 </div>
 </section>
 </section>
+</section>
+</section>
 </div>
 </div>
 <footer><div aria-label="Footer" class="rst-footer-buttons" role="navigation">
@@ -703,7 +825,7 @@ else
 <hr/>
 <div role="contentinfo">
 <p>© Copyright 2023-2025, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on September 11, 2025.
+      <span class="lastupdated">Last updated on October 31, 2025.
       </span></p>
 </div>
 <div class="aem-Grid aem-Grid--16">

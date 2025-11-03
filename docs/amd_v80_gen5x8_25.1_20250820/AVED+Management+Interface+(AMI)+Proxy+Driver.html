@@ -605,6 +605,7 @@ int iAMI_ClearStatistics( void );
 <span id="avedmanagementinterface-ami-proxydriver-amiproxyinitialization"></span><h3>AMI Proxy Initialization<a class="headerlink" href="#ami-proxy-initialization" title="Link to this heading">¶</a></h3>
 <p>The initialization function (iAMI_Initialise) is called from the main task when all the other proxies are being initialized.</p>
 <p>It obtains a handle to the FAL and creates the resources needed by the driver including spawning the AMI proxy task.</p>
+<p><img alt="image2" src="_images/1107376250.png" /></p>
 </section>
 <section id="ami-proxy-task">
 <span id="avedmanagementinterface-ami-proxydriver-amiproxytask"></span><h3>AMI Proxy Task<a class="headerlink" href="#ami-proxy-task" title="Link to this heading">¶</a></h3>
@@ -613,6 +614,7 @@ int iAMI_ClearStatistics( void );
 <li><p>To check for requests incoming via the FAL.</p></li>
 <li><p>To service the internal mailbox and form up responses to go back out to the FAL.</p></li>
 </ul>
+<p><img alt="image3" src="_images/1107376271.png" /></p>
 </section>
 <section id="ami-handling-requests">
 <span id="avedmanagementinterface-ami-proxydriver-amihandlingrequests"></span><h3>AMI Handling Requests<a class="headerlink" href="#ami-handling-requests" title="Link to this heading">¶</a></h3>
@@ -623,6 +625,7 @@ int iAMI_ClearStatistics( void );
 </ul>
 <p>The requests data is stored within the AMI proxy when the event is generated and the callback has been invoked to notify any registered users.</p>
 <p>When the request from the application is made a protected copy of the data is made and returned that will allow the user to perform the relevant action.</p>
+<p><img alt="image4" src="_images/1107376259.png" /></p>
 </section>
 <section id="ami-handling-responses">
 <span id="avedmanagementinterface-ami-proxydriver-amihandlingresponses"></span><h3>AMI Handling Responses<a class="headerlink" href="#ami-handling-responses" title="Link to this heading">¶</a></h3>
@@ -633,6 +636,7 @@ int iAMI_ClearStatistics( void );
 <li><p>iAMI_SetIdentityResponse( )</p></li>
 </ul>
 <p>Within each response a mailbox message is formed with the unique instance id, the type, and the result and posted to be handled by the internal task.</p>
+<p><img alt="image5" src="_images/1107376268.png" /></p>
 </section>
 </section>
 <section id="examples">
@@ -807,7 +811,7 @@ int iAmiCallback( EVL_SIGNAL *pxSignal )
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2025, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on September 11, 2025.
+      <span class="lastupdated">Last updated on October 31, 2025.
       </span></p>
   </div>
 

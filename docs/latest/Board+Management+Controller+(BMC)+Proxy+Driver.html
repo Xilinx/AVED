@@ -128,12 +128,36 @@ OneTrust Cookies Consent Notice end -->
 <li class="toctree-l3"><a class="reference internal" href="#note">Note:</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#supported-commands">Supported commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#supported-commands">Supported commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mctp">MCTP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pldm-type-0">PLDM Type 0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pldm-type-2">PLDM Type 2</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#supported-pdrs">Supported PDRs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#internal-apis">Internal APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#internal-apis">Internal APIs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#enums">Enums</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initialize-the-proxy">Initialize the proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bind-callback">Bind callback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-sensor-info-response">Set sensor info response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-response">Set response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-uuid">Get UUID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-sensor-id-request">Get sensor ID request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-write">Data write</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#print-statistics">Print statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clear-statistics">Clear statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-proxy-state">Get proxy state</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#bmc-proxy-handling-requests">BMC Proxy Handling Requests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#bmc-proxy-handling-responses">BMC Proxy Handling Responses</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#initialize-proxy">Initialize Proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#register-for-callback">Register for Callback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generating-responses">Generating Responses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#handling-requests">Handling Requests</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#common-pdr-header">Common PDR header</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#numeric-sensor-pdr">Numeric sensor PDR</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sensor-name-pdr">Sensor name PDR</a></li>
@@ -186,6 +210,7 @@ response to the initial request, which gets sent back to the BMC via a firmware 
 <section id="note">
 <span id="boardmanagementcontroller-bmc-proxydriver-note"></span><h3>Note:<a class="headerlink" href="#note" title="Link to this heading">¶</a></h3>
 <p>The MCTP/PLDM code provided is intended to be used and an example to prove the basic functionality of a BMC stack. AMC only supports Type 0 and Type 2 DMTF messages (limited to sensor reading - i.e. no effecters).</p>
+<p><img alt="image1" src="_images/1107376765.png"/></p>
 </section>
 </section>
 <section id="supported-commands">
@@ -193,17 +218,28 @@ response to the initial request, which gets sent back to the BMC via a firmware 
 <p>M - Mandatory</p>
 <p>O - Optional</p>
 <p>C - Conditional</p>
+<section id="mctp">
+<span id="boardmanagementcontroller-bmc-proxydriver-mctp"></span><h3>MCTP<a class="headerlink" href="#mctp" title="Link to this heading">¶</a></h3>
 <table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh" scope="col">Command Name</th><th class="confluenceTh" scope="col">Command Code</th><th class="confluenceTh" scope="col">DMTF Spec<br/><br/>M/O/C</th></tr><tr><td class="confluenceTd">Set Endpoint ID    </td><td class="confluenceTd">0x01</td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd">Get Endpoint ID    </td><td class="confluenceTd">0x02</td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd">Get Endpoint UUID    </td><td class="confluenceTd">0x03</td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd">Get MCTP Version Support    </td><td class="confluenceTd"><p>0x04</p></td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd">Get Message Type support    </td><td class="confluenceTd">0x05</td><td class="confluenceTd">M</td></tr></tbody></table>
+</section>
+<section id="pldm-type-0">
+<span id="boardmanagementcontroller-bmc-proxydriver-pldmtype0"></span><h3>PLDM Type 0<a class="headerlink" href="#pldm-type-0" title="Link to this heading">¶</a></h3>
 <table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Command Name</th><th class="confluenceTh">Command Code</th><th class="confluenceTh">DMTF Spec<br/><br/>M/O/C</th></tr><tr><td class="confluenceTd">SetTID </td><td class="confluenceTd">0x01</td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd">GetTID</td><td class="confluenceTd">0x02</td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd">GetPLDMVersion</td><td class="confluenceTd">0x03</td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd">GetPLDMTypes</td><td class="confluenceTd"><p>0x04</p></td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd">GetPLDMCommands    </td><td class="confluenceTd">0x05</td><td class="confluenceTd">M</td></tr></tbody></table>
+</section>
+<section id="pldm-type-2">
+<span id="boardmanagementcontroller-bmc-proxydriver-pldmtype2"></span><h3>PLDM Type 2<a class="headerlink" href="#pldm-type-2" title="Link to this heading">¶</a></h3>
 <table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Command Name</th><th class="confluenceTh">Command Code</th><th class="confluenceTh">DMTF Spec<br/><br/>M/O/C</th></tr><tr><td class="confluenceTd">SetTID </td><td class="confluenceTd">0x01</td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd">GetTID</td><td class="confluenceTd">0x02</td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd"><span class="legacy-color-text-blue3">SetNumericSensorEnable</span></td><td class="confluenceTd"><span class="legacy-color-text-blue3">0x10</span></td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd"><span class="legacy-color-text-blue3">GetSensorReading</span></td><td class="confluenceTd"><p><span class="legacy-color-text-blue3">0x11</span></p></td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd"><span class="legacy-color-text-blue3">GetPDRRepositoryInfo</span></td><td class="confluenceTd"><span class="legacy-color-text-blue3">0x50</span></td><td class="confluenceTd">M</td></tr><tr><td class="confluenceTd"><span class="legacy-color-text-blue3">GetPDR</span></td><td class="confluenceTd"><span class="legacy-color-text-blue3">0x51</span></td><td class="confluenceTd">M</td></tr></tbody></table>
+</section>
 </section>
 <section id="supported-pdrs">
 <span id="boardmanagementcontroller-bmc-proxydriver-supportedpdrs"></span><h2>Supported PDRs<a class="headerlink" href="#supported-pdrs" title="Link to this heading">¶</a></h2>
-<table class="relative-table wrapped confluenceTable" style="width: 14.7787%;"><colgroup><col style="width: 20.668%;"/><col style="width: 79.332%;"/></colgroup><tbody><tr><th class="confluenceTh" scope="col">PDR Type Number</th><th class="confluenceTh" scope="col">PDR Type Name</th></tr><tr><td class="confluenceTd">1</td><td class="confluenceTd">Terminus Locator PDR</td></tr><tr><td class="confluenceTd">2</td><td class="confluenceTd">Numeric Sensor PDR</td></tr><tr><td class="confluenceTd">6</td><td class="confluenceTd">Sensor Auxiliary Names PDR </td></tr></tbody></table>
+<table class="relative-table wrapped confluenceTable" style="width: 14.7787%;"><colgroup><col style="width: 20.668%;"/></colgroup><colgroup><col style="width: 79.332%;"/></colgroup><tbody><tr><th class="confluenceTh" scope="col">PDR Type Number</th><th class="confluenceTh" scope="col">PDR Type Name</th></tr><tr><td class="confluenceTd">1</td><td class="confluenceTd">Terminus Locator PDR</td></tr><tr><td class="confluenceTd">2</td><td class="confluenceTd">Numeric Sensor PDR</td></tr><tr><td class="confluenceTd">6</td><td class="confluenceTd">Sensor Auxiliary Names PDR </td></tr></tbody></table>
 </section>
 <section id="internal-apis">
 <span id="boardmanagementcontroller-bmc-proxydriver-internalapis"></span><h2>Internal APIs<a class="headerlink" href="#internal-apis" title="Link to this heading">¶</a></h2>
-<p id="boardmanagementcontroller-bmc-proxydriver-enums">BMC accepted events.</p>
+<section id="enums">
+<span id="boardmanagementcontroller-bmc-proxydriver-enums"></span><h3>Enums<a class="headerlink" href="#enums" title="Link to this heading">¶</a></h3>
+<p>BMC accepted events.</p>
 <p><strong>BMC_PROXY_DRIVER_EVENTS</strong></p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * @enum    BMC_PROXY_DRIVER_EVENTS</span>
@@ -288,7 +324,10 @@ response to the initial request, which gets sent back to the BMC via a firmware 
 <span class="p">}</span><span class="w"> </span><span class="n">BMC_GET_SENSOR_RESPONSE</span><span class="p">;</span>
 </pre></div>
 </div>
-<p id="boardmanagementcontroller-bmc-proxydriver-initializetheproxy">The initialize function takes in 15 parameters:</p>
+</section>
+<section id="initialize-the-proxy">
+<span id="boardmanagementcontroller-bmc-proxydriver-initializetheproxy"></span><h3>Initialize the proxy<a class="headerlink" href="#initialize-the-proxy" title="Link to this heading">¶</a></h3>
+<p>The initialize function takes in 15 parameters:</p>
 <ul class="simple">
 <li><p>The unique ID of the proxy driver</p></li>
 <li><p>Pointer to the firmware interface the proxy uses</p></li>
@@ -348,7 +387,10 @@ int iBMC_Initialise( uint8_t ucProxyId,
                      uint8_t *pucUuid );
 </pre></div>
 </div>
-<p id="boardmanagementcontroller-bmc-proxydriver-bindcallback">Applications can bind into the callback to listen to incoming events and handle them accordingly.</p>
+</section>
+<section id="bind-callback">
+<span id="boardmanagementcontroller-bmc-proxydriver-bindcallback"></span><h3>Bind callback<a class="headerlink" href="#bind-callback" title="Link to this heading">¶</a></h3>
+<p>Applications can bind into the callback to listen to incoming events and handle them accordingly.</p>
 <p>Current list of supported events:</p>
 <ul class="simple">
 <li><p>BMC_PROXY_DRIVER_E_SMBUS_MSG_ARRIVAL</p></li>
@@ -370,7 +412,10 @@ int iBMC_Initialise( uint8_t ucProxyId,
 int iBMC_BindCallback( EVL_CALLBACK *pxCallback );
 </pre></div>
 </div>
-<p id="boardmanagementcontroller-bmc-proxydriver-setsensorinforesponse">Function used to respond to the BMC_PROXY_DRIVER_E_GET_SENSOR_INFO event.</p>
+</section>
+<section id="set-sensor-info-response">
+<span id="boardmanagementcontroller-bmc-proxydriver-setsensorinforesponse"></span><h3>Set sensor info response<a class="headerlink" href="#set-sensor-info-response" title="Link to this heading">¶</a></h3>
+<p>Function used to respond to the BMC_PROXY_DRIVER_E_GET_SENSOR_INFO event.</p>
 <p><strong>iBMC_SendResponseForGetSensor</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Response to a Sensor Info request
@@ -391,7 +436,10 @@ int iBMC_SendResponseForGetSensor( EVL_SIGNAL *pxSignal,
                                    BMC_GET_SENSOR_RESPONSE xSensorResponse );
 </pre></div>
 </div>
-<p id="boardmanagementcontroller-bmc-proxydriver-setresponse">Responds back to a request from the proxy to enable a sensor.</p>
+</section>
+<section id="set-response">
+<span id="boardmanagementcontroller-bmc-proxydriver-setresponse"></span><h3>Set response<a class="headerlink" href="#set-response" title="Link to this heading">¶</a></h3>
+<p>Responds back to a request from the proxy to enable a sensor.</p>
 <p><strong>iBMC_SetResponse</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
 * @brief Response to an enable sensor request
@@ -405,7 +453,10 @@ int iBMC_SendResponseForGetSensor( EVL_SIGNAL *pxSignal,
 int iBMC_SetResponse( EVL_SIGNAL *pxSignal, uint16_t usSensorId, BMC_SENSOR_RESPONSE xBmcResponse );
 </pre></div>
 </div>
-<p id="boardmanagementcontroller-bmc-proxydriver-getuuid">Returns the board UUID</p>
+</section>
+<section id="get-uuid">
+<span id="boardmanagementcontroller-bmc-proxydriver-getuuid"></span><h3>Get UUID<a class="headerlink" href="#get-uuid" title="Link to this heading">¶</a></h3>
+<p>Returns the board UUID</p>
 <p><strong>iBMC_GetUuid</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Get the UUID
@@ -417,7 +468,10 @@ int iBMC_SetResponse( EVL_SIGNAL *pxSignal, uint16_t usSensorId, BMC_SENSOR_RESP
 int iBMC_GetUuid( uint8_t * pucUuid );
 </pre></div>
 </div>
-<p id="boardmanagementcontroller-bmc-proxydriver-getsensoridrequest">If a BMC_PROXY_DRIVER_E_GET_SENSOR_INFO event is received, the application can call iBMC_GetSensorIdRequest to get more information about the request like the sensor ID and operational state.</p>
+</section>
+<section id="get-sensor-id-request">
+<span id="boardmanagementcontroller-bmc-proxydriver-getsensoridrequest"></span><h3>Get sensor ID request<a class="headerlink" href="#get-sensor-id-request" title="Link to this heading">¶</a></h3>
+<p>If a BMC_PROXY_DRIVER_E_GET_SENSOR_INFO event is received, the application can call iBMC_GetSensorIdRequest to get more information about the request like the sensor ID and operational state.</p>
 <p><strong>iBMC_GetSensorIdRequest</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Function called after certain events are raised to get the sensor id
@@ -431,7 +485,10 @@ int iBMC_GetUuid( uint8_t * pucUuid );
 int iBMC_GetSensorIdRequest( EVL_SIGNAL *pxSignal, int16_t *pssSensorId, uint8_t *pucOperationalState );
 </pre></div>
 </div>
-<p id="boardmanagementcontroller-bmc-proxydriver-datawrite">Performs a FAL write with the supplied buffer and size.</p>
+</section>
+<section id="data-write">
+<span id="boardmanagementcontroller-bmc-proxydriver-datawrite"></span><h3>Data write<a class="headerlink" href="#data-write" title="Link to this heading">¶</a></h3>
+<p>Performs a FAL write with the supplied buffer and size.</p>
 <p><strong>iBMC_ResponseDataWrite</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Start a Data Write
@@ -444,7 +501,10 @@ int iBMC_GetSensorIdRequest( EVL_SIGNAL *pxSignal, int16_t *pssSensorId, uint8_t
 int iBMC_ResponseDataWrite( uint8_t *pucData, uint16_t usDataSize );
 </pre></div>
 </div>
-<p id="boardmanagementcontroller-bmc-proxydriver-printstatistics">Prints the statistics associated with the proxy.</p>
+</section>
+<section id="print-statistics">
+<span id="boardmanagementcontroller-bmc-proxydriver-printstatistics"></span><h3>Print statistics<a class="headerlink" href="#print-statistics" title="Link to this heading">¶</a></h3>
+<p>Prints the statistics associated with the proxy.</p>
 <p><strong>iBMC_PrintStatistics</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Print all the stats gathered by the application
@@ -456,7 +516,10 @@ int iBMC_ResponseDataWrite( uint8_t *pucData, uint16_t usDataSize );
 int iBMC_PrintStatistics( void );
 </pre></div>
 </div>
-<p id="boardmanagementcontroller-bmc-proxydriver-clearstatistics">Clears the statistics associated with the proxy.</p>
+</section>
+<section id="clear-statistics">
+<span id="boardmanagementcontroller-bmc-proxydriver-clearstatistics"></span><h3>Clear statistics<a class="headerlink" href="#clear-statistics" title="Link to this heading">¶</a></h3>
+<p>Clears the statistics associated with the proxy.</p>
 <p><strong>iBMC_ClearStatistics</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Clear all the stats in the application
@@ -468,7 +531,10 @@ int iBMC_PrintStatistics( void );
 int iBMC_ClearStatistics( void );
 </pre></div>
 </div>
-<p id="boardmanagementcontroller-bmc-proxydriver-getproxystate">Gets the current health state of the proxy.</p>
+</section>
+<section id="get-proxy-state">
+<span id="boardmanagementcontroller-bmc-proxydriver-getproxystate"></span><h3>Get proxy state<a class="headerlink" href="#get-proxy-state" title="Link to this heading">¶</a></h3>
+<p>Gets the current health state of the proxy.</p>
 <p><strong>iBMC_GetState</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
 * @brief Gets the current state of the proxy driver
@@ -482,6 +548,7 @@ int iBMC_GetState( MODULE_STATE *pxState );
 </pre></div>
 </div>
 </section>
+</section>
 <section id="bmc-proxy-handling-requests">
 <span id="boardmanagementcontroller-bmc-proxydriver-bmcproxyhandlingrequests"></span><h2>BMC Proxy Handling Requests<a class="headerlink" href="#bmc-proxy-handling-requests" title="Link to this heading">¶</a></h2>
 <p>The request API’s allows an application to get a copy of the internal proxy request data received via the FAL.</p>
@@ -491,6 +558,7 @@ int iBMC_GetState( MODULE_STATE *pxState );
 <p>The requests data is stored within the BMC proxy when the event is generated and the callback has been invoked to notify any registered users.</p>
 <p>When the request from the application is made a protected copy of the data is made and returned that will allow the user to perform the relevant action.</p>
 <p>A global mutex is held until a MCTP message is processed and response created. Any BMC request calls that change private data are within the flow of that message making them protected.</p>
+<p><img alt="image2" src="_images/1107376756.png"/></p>
 </section>
 <section id="bmc-proxy-handling-responses">
 <span id="boardmanagementcontroller-bmc-proxydriver-bmcproxyhandlingresponses"></span><h2>BMC Proxy Handling Responses<a class="headerlink" href="#bmc-proxy-handling-responses" title="Link to this heading">¶</a></h2>
@@ -501,10 +569,13 @@ int iBMC_GetState( MODULE_STATE *pxState );
 </ul>
 <p>Within each response a the relevant flag is set, signaling to the proxy that the event has been handled and the requested data is available.</p>
 <p>A global mutex is held until a MCTP message is processed and response created. Any BMC response calls that change private data are within the flow of that message making them protected.</p>
+<p><img alt="image3" src="_images/1107376753.png"/></p>
 </section>
 <section id="examples">
 <span id="boardmanagementcontroller-bmc-proxydriver-examples"></span><h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h2>
-<p id="boardmanagementcontroller-bmc-proxydriver-initializeproxy">The initialize function needs a unique id for the proxy, a handle to a FW_IF (already created and initialized), and a task priority/size passed in, as well as the PDR sensor lists and total values.</p>
+<section id="initialize-proxy">
+<span id="boardmanagementcontroller-bmc-proxydriver-initializeproxy"></span><h3>Initialize Proxy<a class="headerlink" href="#initialize-proxy" title="Link to this heading">¶</a></h3>
+<p>The initialize function needs a unique id for the proxy, a handle to a FW_IF (already created and initialized), and a task priority/size passed in, as well as the PDR sensor lists and total values.</p>
 <p><strong>iBMC_Initialise Example</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if( OK == iBMC_Initialise( AMC_EVENT_UNIQUE_ID_BMC, &amp;xSMBusIf, 0, AMC_TASK_PRIO_DEFAULT, AMC_TASK_DEFAULT_STACK,
                                pxPdrTemperatureSensors, TOTAL_PDR_TEMPERATURE,
@@ -514,7 +585,10 @@ int iBMC_GetState( MODULE_STATE *pxState );
                                pxPdrSensorNames,        TOTAL_PDR_NUMERIC_ASCI_SENSORS ) )
 </pre></div>
 </div>
-<p id="boardmanagementcontroller-bmc-proxydriver-registerforcallback">Define a function based on the function pointer prototype and bind in using the API.</p>
+</section>
+<section id="register-for-callback">
+<span id="boardmanagementcontroller-bmc-proxydriver-registerforcallback"></span><h3>Register for Callback<a class="headerlink" href="#register-for-callback" title="Link to this heading">¶</a></h3>
+<p>Define a function based on the function pointer prototype and bind in using the API.</p>
 <p><strong>iBMC_Initialise Example</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   BMC Proxy Driver EVL callback
@@ -538,7 +612,10 @@ static int iBmcCallback( EVL_SIGNAL *pxSignal )
 }
 </pre></div>
 </div>
-<p id="boardmanagementcontroller-bmc-proxydriver-generatingresponses">Example of calling the response (iBMC_GetSensorInfoResponse) from within the callback to send the result back to the proxy.</p>
+</section>
+<section id="generating-responses">
+<span id="boardmanagementcontroller-bmc-proxydriver-generatingresponses"></span><h3>Generating Responses<a class="headerlink" href="#generating-responses" title="Link to this heading">¶</a></h3>
+<p>Example of calling the response (iBMC_GetSensorInfoResponse) from within the callback to send the result back to the proxy.</p>
 <p><strong>BMC_PRIVATE_DATA</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   RMI Handler EVL callback
@@ -597,7 +674,10 @@ static int iBmcProxyCallback( EVL_SIGNAL *pxSignal )
 }
 </pre></div>
 </div>
-<p id="boardmanagementcontroller-bmc-proxydriver-handlingrequests">Example of requesting the data associated with an event (iBMC_GetSensorIdRequest) from within the callback and to send the result back to the proxy.</p>
+</section>
+<section id="handling-requests">
+<span id="boardmanagementcontroller-bmc-proxydriver-handlingrequests"></span><h3>Handling Requests<a class="headerlink" href="#handling-requests" title="Link to this heading">¶</a></h3>
+<p>Example of requesting the data associated with an event (iBMC_GetSensorIdRequest) from within the callback and to send the result back to the proxy.</p>
 <p><strong>BMC_PRIVATE_DATA</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   RMI Handler EVL callback
@@ -650,20 +730,21 @@ static int iBmcProxyCallback( EVL_SIGNAL *pxSignal )
 </pre></div>
 </div>
 </section>
+</section>
 <section id="common-pdr-header">
 <span id="boardmanagementcontroller-bmc-proxydriver-commonpdrheader"></span><h2>Common PDR header<a class="headerlink" href="#common-pdr-header" title="Link to this heading">¶</a></h2>
 <p>Structure to store the MCTP/PLDM common header, used in the response buffer.</p>
-<table class="relative-table wrapped confluenceTable" style="width: 45.1076%;"><colgroup><col style="width: 5.40527%;"/><col style="width: 14.324%;"/><col style="width: 80.2708%;"/></colgroup><tbody><tr><th class="confluenceTh" scope="col">Type</th><th class="confluenceTh" scope="col">Name</th><th class="confluenceTh" scope="col">Description</th></tr><tr><td class="confluenceTd">uint32</td><td class="confluenceTd">recordHandle</td><td class="confluenceTd">An opaque number that is used for accessing individual PDRs within a PDR Repository.</td></tr><tr><td class="confluenceTd">uint8</td><td class="confluenceTd">PDRHeaderVersion</td><td class="confluenceTd">This field is provided in case a future version of this specification requires a modification to the format of the PDR Header.</td></tr><tr><td class="confluenceTd">uint8</td><td class="confluenceTd">PDRType</td><td class="confluenceTd">The type of the PDR.</td></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">recordChangeNumber</td><td class="confluenceTd">Mechanism for preventing the use of invalid PDR data if a record's data gets updated while the record was in the process of being read out.</td></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">dataLength</td><td class="confluenceTd">The total number of PDR data bytes following this field. </td></tr></tbody></table>
+<table class="relative-table wrapped confluenceTable" style="width: 45.1076%;"><colgroup><col style="width: 5.40527%;"/></colgroup><colgroup><col style="width: 14.324%;"/></colgroup><colgroup><col style="width: 80.2708%;"/></colgroup><tbody><tr><th class="confluenceTh" scope="col">Type</th><th class="confluenceTh" scope="col">Name</th><th class="confluenceTh" scope="col">Description</th></tr><tr><td class="confluenceTd">uint32</td><td class="confluenceTd">recordHandle</td><td class="confluenceTd">An opaque number that is used for accessing individual PDRs within a PDR Repository.</td></tr><tr><td class="confluenceTd">uint8</td><td class="confluenceTd">PDRHeaderVersion</td><td class="confluenceTd">This field is provided in case a future version of this specification requires a modification to the format of the PDR Header.</td></tr><tr><td class="confluenceTd">uint8</td><td class="confluenceTd">PDRType</td><td class="confluenceTd">The type of the PDR.</td></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">recordChangeNumber</td><td class="confluenceTd">Mechanism for preventing the use of invalid PDR data if a record's data gets updated while the record was in the process of being read out.</td></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">dataLength</td><td class="confluenceTd">The total number of PDR data bytes following this field. </td></tr></tbody></table>
 </section>
 <section id="numeric-sensor-pdr">
 <span id="boardmanagementcontroller-bmc-proxydriver-numericsensorpdr"></span><h2>Numeric sensor PDR<a class="headerlink" href="#numeric-sensor-pdr" title="Link to this heading">¶</a></h2>
 <p>Structure that represents a single numeric sensor PDR.</p>
-<table class="relative-table wrapped confluenceTable" style="width: 54.7706%;"><colgroup><col style="width: 3.85769%;"/><col style="width: 16.321%;"/><col style="width: 79.8213%;"/></colgroup><tbody><tr><th class="confluenceTh" scope="col">Type</th><th class="confluenceTh" scope="col">Name</th><th class="confluenceTh" scope="col">Description</th></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">PLDMTerminusHandle</td><td class="confluenceTd">A handle that identifies PDRs that belong to a particular PLDM terminus. </td></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">sensorID</td><td class="confluenceTd">ID of the sensor relative to the given PLDM Terminus ID. </td></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">entityType</td><td class="confluenceTd">The Type value for the entity that is associated with this sensor.</td></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">entityInstanceNumber</td><td class="confluenceTd">The Instance Number for the entity that is associated with this sensor. See 9.1 for more information. </td></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">containerID</td><td class="confluenceTd">The containerID for the containing entity that instantiates the entity that is measured by this sensor.</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">sensorInit</td><td class="confluenceTd">Indicates whether the sensor requires initialization by the initializationAgent.</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">sensorAuxiliaryNamesPDR</td><td class="confluenceTd"><p>true =  sensor has a Sensor Auxiliary Names PDR</p><p>false = sensor does not have an associated Sensor Auxiliary Names PDR </p></td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">baseUnit</td><td class="confluenceTd">The base unit of the reading returned by this sensor.</td></tr><tr><td class="confluenceTd">int8_t</td><td class="confluenceTd">unitModifier</td><td class="confluenceTd">A power-of-10 multiplier for the baseUnit.</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">rateUnit</td><td class="confluenceTd">value: { None, Per MicroSecond, Per MilliSecond, Per Second, Per Minute, Per Hour, Per Day, Per Week, Per Month, Per Year } </td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">baseOEMUnitHandle</td><td class="confluenceTd">This value is used to locate the corresponding PLDM OEM Unit PDR that defines the OEMUnit when the OEMUnit value is used for the baseUnit. </td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">auxUnit</td><td class="confluenceTd">The base unit of the reading returned by this sensor.</td></tr><tr><td class="confluenceTd">int8_t</td><td class="confluenceTd">auxUnitModifier</td><td class="confluenceTd">A power-of-10 multiplier for the auxUnit.</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">auxrateUnit</td><td class="confluenceTd">value: { None, Per MicroSecond, Per MilliSecond, Per Second, Per Minute, Per Hour, Per Day, Per Week, Per Month, Per Year }</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">rel</td><td class="confluenceTd">The relationship between the base unit and the auxiliary unit.</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">auxOEMUnitHandle</td><td class="confluenceTd">This value is used to locate the PLDM OEM Unit PDR that defines the OEMUnit if the OEMUnit value is used for the auxUnit. </td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">isLinear</td><td class="confluenceTd">Indicates whether a sensor is linear or dynamic in its range. For example, this value can be used by a MAP to populate the IsLinear attribute of CIM_NumericSensor. </td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">sensorDataSize</td><td class="confluenceTd">The bit width and format of reading and threshold values that the sensor returns value: { uint8, sint8, uint16, sint16, uint32, sint32 } </td></tr><tr><td class="confluenceTd">float</td><td class="confluenceTd">resolution</td><td class="confluenceTd">The resolution of the sensor in Units</td></tr><tr><td class="confluenceTd">float</td><td class="confluenceTd">offset</td><td class="confluenceTd">A constant value that is added in as part of the conversion process of converting a raw sensor reading to Units</td></tr><tr><td class="confluenceTd">uint16_t</td><td class="confluenceTd">accuracy</td><td class="confluenceTd">Given as a +/- percentage in 1/100ths of a % from 0.00 to 100.00. For example, the integer value 510 corresponds to ± 5.10%</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">plusTolerance</td><td class="confluenceTd">Tolerance is given in +/- counts of the reading value.</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">minusTolerance</td><td class="confluenceTd">Tolerance is given in +/- counts of the reading value.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">hysteresis</td><td class="confluenceTd">The amount of hysteresis associated with the sensor thresholds, given in raw sensor counts.</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">supportedThresholds</td><td class="confluenceTd">For PLDM: bit field where bit position represents whether a given threshold is supported</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">thresholdAndHysteresisVolatility</td><td class="confluenceTd">Identifies under which conditions any threshold or hysteresis settings that were set through the SetSensorThresholds or SetSensorHysteresis command may be lost.</td></tr><tr><td class="confluenceTd">float</td><td class="confluenceTd">stateTransitionInterval </td><td class="confluenceTd">How long the sensor device takes to do an enabledState change (worst case)</td></tr><tr><td class="confluenceTd">float</td><td class="confluenceTd">updateInterval</td><td class="confluenceTd">Polling or update interval in seconds expressed using a floating point number (generally corresponds to the CIM PollingInterval property) </td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">maxReadable</td><td class="confluenceTd">The maximum value that the sensor may return. The size of this field is given by the sensorDataSize field in this PDR.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">minReadable</td><td class="confluenceTd">The minimum value that the sensor may return. The size of this field is given by the sensorDataSize field in this PDR. </td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">rangeFieldFormat</td><td class="confluenceTd">Indicates the format used for the following nominalValue, normalMax, normalMin, criticalHigh, criticalLow, fatalHigh, and fatalLow fields.</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">rangeFieldSupport</td><td class="confluenceTd">Indicates which of the fields that identify the operating ranges of the parameter monitored by the sensor are supported. (This bitfield indicates whether the following nominalValue, normalMax, and so on, fields contain valid range values.)  </td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">nominalValue</td><td class="confluenceTd">This value presents the nominal value for the parameter that is monitored by the sensor. The size of this field is given by the rangeFieldFormat field in this PDR. This value is given directly in the specified units without the use of any conversion formula. </td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">normalMax</td><td class="confluenceTd">The upper limit of the normal operating range for the parameter that is monitored by the numeric sensor.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">normalMin</td><td class="confluenceTd">The lower limit of the normal operating range for the parameter that is monitored by the numeric sensor.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">warningHigh</td><td class="confluenceTd">A warning condition that occurs when the monitored value is greater than the value reported by warningHigh.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">warningLow</td><td class="confluenceTd">A warning condition that occurs when the monitored value is less than or equal to the value reported by warningLow.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">criticalHigh</td><td class="confluenceTd">A critical condition that occurs when the monitored value is greater than or equal to the value reported by criticalHigh.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">criticalLow</td><td class="confluenceTd">A critical condition that occurs when the monitored value is less than the value reported by criticalLow.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">fatalHigh</td><td class="confluenceTd">A fatal condition that occurs when the monitored value is greater than the value reported by fatalHigh.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">fatalLow</td><td class="confluenceTd">A fatal condition that occurs when the monitored value is less than the value reported by fatalLow.</td></tr></tbody></table>
+<table class="relative-table wrapped confluenceTable" style="width: 54.7706%;"><colgroup><col style="width: 3.85769%;"/></colgroup><colgroup><col style="width: 16.321%;"/></colgroup><colgroup><col style="width: 79.8213%;"/></colgroup><tbody><tr><th class="confluenceTh" scope="col">Type</th><th class="confluenceTh" scope="col">Name</th><th class="confluenceTh" scope="col">Description</th></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">PLDMTerminusHandle</td><td class="confluenceTd">A handle that identifies PDRs that belong to a particular PLDM terminus. </td></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">sensorID</td><td class="confluenceTd">ID of the sensor relative to the given PLDM Terminus ID. </td></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">entityType</td><td class="confluenceTd">The Type value for the entity that is associated with this sensor.</td></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">entityInstanceNumber</td><td class="confluenceTd">The Instance Number for the entity that is associated with this sensor. See 9.1 for more information. </td></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">containerID</td><td class="confluenceTd">The containerID for the containing entity that instantiates the entity that is measured by this sensor.</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">sensorInit</td><td class="confluenceTd">Indicates whether the sensor requires initialization by the initializationAgent.</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">sensorAuxiliaryNamesPDR</td><td class="confluenceTd"><p>true =  sensor has a Sensor Auxiliary Names PDR</p><p>false = sensor does not have an associated Sensor Auxiliary Names PDR </p></td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">baseUnit</td><td class="confluenceTd">The base unit of the reading returned by this sensor.</td></tr><tr><td class="confluenceTd">int8_t</td><td class="confluenceTd">unitModifier</td><td class="confluenceTd">A power-of-10 multiplier for the baseUnit.</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">rateUnit</td><td class="confluenceTd">value: { None, Per MicroSecond, Per MilliSecond, Per Second, Per Minute, Per Hour, Per Day, Per Week, Per Month, Per Year } </td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">baseOEMUnitHandle</td><td class="confluenceTd">This value is used to locate the corresponding PLDM OEM Unit PDR that defines the OEMUnit when the OEMUnit value is used for the baseUnit. </td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">auxUnit</td><td class="confluenceTd">The base unit of the reading returned by this sensor.</td></tr><tr><td class="confluenceTd">int8_t</td><td class="confluenceTd">auxUnitModifier</td><td class="confluenceTd">A power-of-10 multiplier for the auxUnit.</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">auxrateUnit</td><td class="confluenceTd">value: { None, Per MicroSecond, Per MilliSecond, Per Second, Per Minute, Per Hour, Per Day, Per Week, Per Month, Per Year }</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">rel</td><td class="confluenceTd">The relationship between the base unit and the auxiliary unit.</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">auxOEMUnitHandle</td><td class="confluenceTd">This value is used to locate the PLDM OEM Unit PDR that defines the OEMUnit if the OEMUnit value is used for the auxUnit. </td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">isLinear</td><td class="confluenceTd">Indicates whether a sensor is linear or dynamic in its range. For example, this value can be used by a MAP to populate the IsLinear attribute of CIM_NumericSensor. </td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">sensorDataSize</td><td class="confluenceTd">The bit width and format of reading and threshold values that the sensor returns value: { uint8, sint8, uint16, sint16, uint32, sint32 } </td></tr><tr><td class="confluenceTd">float</td><td class="confluenceTd">resolution</td><td class="confluenceTd">The resolution of the sensor in Units</td></tr><tr><td class="confluenceTd">float</td><td class="confluenceTd">offset</td><td class="confluenceTd">A constant value that is added in as part of the conversion process of converting a raw sensor reading to Units</td></tr><tr><td class="confluenceTd">uint16_t</td><td class="confluenceTd">accuracy</td><td class="confluenceTd">Given as a +/- percentage in 1/100ths of a % from 0.00 to 100.00. For example, the integer value 510 corresponds to ± 5.10%</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">plusTolerance</td><td class="confluenceTd">Tolerance is given in +/- counts of the reading value.</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">minusTolerance</td><td class="confluenceTd">Tolerance is given in +/- counts of the reading value.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">hysteresis</td><td class="confluenceTd">The amount of hysteresis associated with the sensor thresholds, given in raw sensor counts.</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">supportedThresholds</td><td class="confluenceTd">For PLDM: bit field where bit position represents whether a given threshold is supported</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">thresholdAndHysteresisVolatility</td><td class="confluenceTd">Identifies under which conditions any threshold or hysteresis settings that were set through the SetSensorThresholds or SetSensorHysteresis command may be lost.</td></tr><tr><td class="confluenceTd">float</td><td class="confluenceTd">stateTransitionInterval </td><td class="confluenceTd">How long the sensor device takes to do an enabledState change (worst case)</td></tr><tr><td class="confluenceTd">float</td><td class="confluenceTd">updateInterval</td><td class="confluenceTd">Polling or update interval in seconds expressed using a floating point number (generally corresponds to the CIM PollingInterval property) </td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">maxReadable</td><td class="confluenceTd">The maximum value that the sensor may return. The size of this field is given by the sensorDataSize field in this PDR.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">minReadable</td><td class="confluenceTd">The minimum value that the sensor may return. The size of this field is given by the sensorDataSize field in this PDR. </td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">rangeFieldFormat</td><td class="confluenceTd">Indicates the format used for the following nominalValue, normalMax, normalMin, criticalHigh, criticalLow, fatalHigh, and fatalLow fields.</td></tr><tr><td class="confluenceTd">uint8_t</td><td class="confluenceTd">rangeFieldSupport</td><td class="confluenceTd">Indicates which of the fields that identify the operating ranges of the parameter monitored by the sensor are supported. (This bitfield indicates whether the following nominalValue, normalMax, and so on, fields contain valid range values.)  </td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">nominalValue</td><td class="confluenceTd">This value presents the nominal value for the parameter that is monitored by the sensor. The size of this field is given by the rangeFieldFormat field in this PDR. This value is given directly in the specified units without the use of any conversion formula. </td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">normalMax</td><td class="confluenceTd">The upper limit of the normal operating range for the parameter that is monitored by the numeric sensor.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">normalMin</td><td class="confluenceTd">The lower limit of the normal operating range for the parameter that is monitored by the numeric sensor.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">warningHigh</td><td class="confluenceTd">A warning condition that occurs when the monitored value is greater than the value reported by warningHigh.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">warningLow</td><td class="confluenceTd">A warning condition that occurs when the monitored value is less than or equal to the value reported by warningLow.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">criticalHigh</td><td class="confluenceTd">A critical condition that occurs when the monitored value is greater than or equal to the value reported by criticalHigh.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">criticalLow</td><td class="confluenceTd">A critical condition that occurs when the monitored value is less than the value reported by criticalLow.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">fatalHigh</td><td class="confluenceTd">A fatal condition that occurs when the monitored value is greater than the value reported by fatalHigh.</td></tr><tr><td class="confluenceTd">int16_t</td><td class="confluenceTd">fatalLow</td><td class="confluenceTd">A fatal condition that occurs when the monitored value is less than the value reported by fatalLow.</td></tr></tbody></table>
 </section>
 <section id="sensor-name-pdr">
 <span id="boardmanagementcontroller-bmc-proxydriver-sensornamepdr"></span><h2>Sensor name PDR<a class="headerlink" href="#sensor-name-pdr" title="Link to this heading">¶</a></h2>
 <p>Structure that stores the sensor names PDR.</p>
-<table class="relative-table wrapped confluenceTable" style="width: 41.2505%;"><colgroup><col style="width: 5.91091%;"/><col style="width: 15.4669%;"/><col style="width: 78.6222%;"/></colgroup><tbody><tr><th class="confluenceTh" scope="col">Type</th><th class="confluenceTh" scope="col">Name</th><th class="confluenceTh" scope="col">Description</th></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">PLDMTerminusHandle</td><td class="confluenceTd">ID of the sensor relative to the given PLDM terminus </td></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">sensorID</td><td class="confluenceTd">ID of the sensor relative to the given PLDM terminus </td></tr><tr><td class="confluenceTd">uint8</td><td class="confluenceTd">sensorCount </td><td class="confluenceTd">For each sensor x in sensorCount, there can be 1..nameStringCount[x] strings, where each set of strings corresponds to a sensor in a composite sensor.</td></tr><tr><td class="confluenceTd">uint8</td><td class="confluenceTd">nameStringCount</td><td class="confluenceTd">Number of following pairs [0..N] of nameLanguageTag + sensorName fields for sensor[1]</td></tr><tr><td class="confluenceTd">uint8</td><td class="confluenceTd">nameLanguageTag</td><td class="confluenceTd">A null-terminated ISO646 ASCII string that holds a language tag.</td></tr><tr><td class="confluenceTd">uint8</td><td class="confluenceTd">sensorName</td><td class="confluenceTd">A null-terminated unicode string for the auxiliary name of the sensor</td></tr></tbody></table>
+<table class="relative-table wrapped confluenceTable" style="width: 41.2505%;"><colgroup><col style="width: 5.91091%;"/></colgroup><colgroup><col style="width: 15.4669%;"/></colgroup><colgroup><col style="width: 78.6222%;"/></colgroup><tbody><tr><th class="confluenceTh" scope="col">Type</th><th class="confluenceTh" scope="col">Name</th><th class="confluenceTh" scope="col">Description</th></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">PLDMTerminusHandle</td><td class="confluenceTd">ID of the sensor relative to the given PLDM terminus </td></tr><tr><td class="confluenceTd">uint16</td><td class="confluenceTd">sensorID</td><td class="confluenceTd">ID of the sensor relative to the given PLDM terminus </td></tr><tr><td class="confluenceTd">uint8</td><td class="confluenceTd">sensorCount </td><td class="confluenceTd">For each sensor x in sensorCount, there can be 1..nameStringCount[x] strings, where each set of strings corresponds to a sensor in a composite sensor.</td></tr><tr><td class="confluenceTd">uint8</td><td class="confluenceTd">nameStringCount</td><td class="confluenceTd">Number of following pairs [0..N] of nameLanguageTag + sensorName fields for sensor[1]</td></tr><tr><td class="confluenceTd">uint8</td><td class="confluenceTd">nameLanguageTag</td><td class="confluenceTd">A null-terminated ISO646 ASCII string that holds a language tag.</td></tr><tr><td class="confluenceTd">uint8</td><td class="confluenceTd">sensorName</td><td class="confluenceTd">A null-terminated unicode string for the auxiliary name of the sensor</td></tr></tbody></table>
 <div class="line-block">
 <div class="line"><br/></div>
 </div>
@@ -684,7 +765,7 @@ static int iBmcProxyCallback( EVL_SIGNAL *pxSignal )
 <hr/>
 <div role="contentinfo">
 <p>© Copyright 2023-2025, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on September 11, 2025.
+      <span class="lastupdated">Last updated on October 31, 2025.
       </span></p>
 </div>
 <div class="aem-Grid aem-Grid--16">

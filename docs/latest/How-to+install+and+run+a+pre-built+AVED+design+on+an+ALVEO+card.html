@@ -40,7 +40,7 @@ OneTrust Cookies Consent Notice end -->
 <link href="search.html" rel="search" title="Search"/>
 <link href="How-to%2BRebuild%2Ban%2BAVED%2BDesign%2Bfor%2BYourself.html" rel="next" title="How-to Rebuild an AVED Design for Yourself"/>
 <link href="AVED%2BOverview.html" rel="prev" title="AVED Overview"/>
-<link href="_static/conf.css" rel="stylesheet" type="text/css"/></head>
+</head>
 <body class="wy-body-for-nav">
 <!-- Google Tag Manager (noscript) -->
 <noscript>
@@ -189,9 +189,7 @@ only the AVED base design is included - the xbtest IP is not included and instea
 <span id="how-toinstallandrunapre-builtaveddesignonanalveocard-beforeyoubegin"></span><h2>Before You Begin<a class="headerlink" href="#before-you-begin" title="Link to this heading">¶</a></h2>
 <section id="dependencies">
 <span id="how-toinstallandrunapre-builtaveddesignonanalveocard-dependencies"></span><h3>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">¶</a></h3>
-<p>The Example Design has been tested with the operating systems in the table below. AVED may work with other versions of these operating systems, but they have not been tested. All supported operating systems are tested with general access versions
-(GA). <a class="reference external" href="https://wiki.ubuntu.com/Kernel/LTSEnablementStack">Ubuntu Hardware Enablement</a> (HWE) is not supported. By default, HWE is disabled by Ubuntu Server versions and enabled by Desktop versions.</p>
-<table class="confluenceTable" data-layout="default" data-local-id="0decc8e5-dae0-4ad2-a8c4-e6ebc5b472ae" data-table-width="1800"><tbody><tr><th class="confluenceTh"><p>Operating System</p></th><th class="confluenceTh"><p>Architecture</p></th><th class="confluenceTh"><p>Supported Versions</p></th><th class="confluenceTh"><p>Kernel Version</p></th></tr><tr><td class="confluenceTd"><p>Ubuntu</p></td><td class="confluenceTd"><p>x86_64</p></td><td class="confluenceTd"><p>22.04</p><p>24.04</p></td><td class="confluenceTd"><p>5.4.0</p><p>5.15.0</p><p>6.8</p></td></tr><tr><td class="confluenceTd"><p>RHEL</p></td><td class="confluenceTd"><p>x86_64</p></td><td class="confluenceTd"><p>8.3</p><p>9.4</p></td><td class="confluenceTd"><p>4.18.0</p><p>5.14</p></td></tr></tbody></table>
+<p>Supported OS and kernel. See <a class="reference external" href="AVED+Overview.html#AVEDOverview-SupportedKernelsandDistributions">Supported Kernels and Distributions</a></p>
 <p><em>Note</em>: root/sudo permissions are required.</p>
 <p>Tools</p>
 <ul class="simple">
@@ -201,13 +199,19 @@ only the AVED base design is included - the xbtest IP is not included and instea
 <section id="preparing-for-aved-installation">
 <span id="how-toinstallandrunapre-builtaveddesignonanalveocard-preparingforavedinstallation"></span><h3>Preparing for AVED Installation<a class="headerlink" href="#preparing-for-aved-installation" title="Link to this heading">¶</a></h3>
 <ol class="arabic simple">
-<li><p>Confirm the server is running a supported OS. Follow the instructions provided in the <em>Alveo V80 Data Center Accelerator Cards Installation Guide</em> (UG1617) to physically install the card in your server.</p></li>
+<li><p>Confirm the server is running a supported OS. Follow the instructions provided in the <em>Alveo V80 Data Center Accelerator Cards Installation Guide</em> (<a class="reference external" href="https://docs.amd.com/go/en-US/ug1617-alveo-v80">UG1617</a>) to physically install the card in your
+server.</p></li>
 <li><p>Get the latest AVED installation package for your Alveo card.</p>
 <ol class="arabic simple">
-<li><p>Refer to the <a class="reference external" href="AVED+Release+Information.html">AVED release table</a> to find the latest example design version. The <em>AVED Git Release Tag</em> will direct you to the tagged source code in GitHub. The <em>AVED
-Deployment Archive</em> is a zipped AVED installation package; it is pre-built from the tagged source code using the Vivado™ tools version noted in the table.</p></li>
-<li><p>Download the latest AVED Deployment archive to the server that contains your Alveo card.</p></li>
-<li><p>Unzip the archive, and find the aved_install.sh script, which will be used in the AVED installation. Review the <a class="reference external" href="AVED+Deployment+Archive.html">AVED Deployment Archive</a> for details on the extracted files and directory structure.</p></li>
+<li><p>For the most recent version of the example design, refer to the table in <a class="reference external" href="AVED+Release+Information.html">AVED Release Information</a>.</p>
+<ol class="arabic simple">
+<li><p><em>AVED Git Release Tag</em> directs you to the latest release of source code on GitHub, which can be downloaded as a <code class="docutils literal notranslate"><span class="pre">.zip</span></code> or <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> file.</p></li>
+<li><p><em>AVED Deployment Archive</em> is a <code class="docutils literal notranslate"><span class="pre">.zip</span></code> of the AVED installation package. It is pre-built from the same source code in the <em>AVED Git Release Tag</em>, using the Vivado™ tools version noted in the <a class="reference external" href="AVED+Release+Information.html">AVED Release
+Information</a> table.</p></li>
+</ol>
+</li>
+<li><p>Download the latest <em>AVED Deployment Archive</em> to the server that contains your Alveo card.</p></li>
+<li><p>Unzip the archive, and find the <code class="docutils literal notranslate"><span class="pre">aved_install.sh</span></code> script (which will be used in the AVED installation). Review the <a class="reference external" href="AVED+Deployment+Archive.html">AVED Deployment Archive</a> for details on the extracted files and directory structure.</p></li>
 </ol>
 </li>
 <li><p>Unlike prior Alveo platforms, AVED does not use the Xilinx RunTime Library (XRT). Instead, AVED includes the AVED Management Interface (AMI) as part of the example design. Before AVED installation, ensure that XRT has been removed. It’s not
@@ -535,7 +539,7 @@ power, stress, and verify.</p></li>
 <hr/>
 <div role="contentinfo">
 <p>© Copyright 2023-2025, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on September 11, 2025.
+      <span class="lastupdated">Last updated on October 31, 2025.
       </span></p>
 </div>
 <div class="aem-Grid aem-Grid--16">

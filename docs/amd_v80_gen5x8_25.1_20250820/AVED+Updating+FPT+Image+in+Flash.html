@@ -169,28 +169,28 @@ OneTrust Cookies Consent Notice end -->
 </pre></div>
 </div>
 <p>Only after stopping AMI is it safe to change the device image over JTAG.</p>
-<p><strong>2)</strong> Load Vivado</p>
+<p><strong>2)</strong> If not done so, connect V80 card to the host running Vivado using micro-USB cable and start the application.</p>
 <p>Select Open Hardware Manager</p>
 <p><a class="confluence-embedded-image image-left reference internal" href="_images/1107373915.png"><img alt="image-20250818-150233.png" class="confluence-embedded-image image-left" src="_images/1107373915.png" style="width: 866px;"/></a></p>
 <p><strong>3)</strong> Select Open Target to connect to the AMD Alveo™ card you want to target.</p>
-<p><a class="confluence-embedded-image image-left reference internal" href="_images/1107373873.png"><img alt="image1" class="confluence-embedded-image image-left" src="_images/1107373873.png" style="width: 394px;"/></a></p>
+<p><a class="confluence-embedded-image image-left reference internal" href="_images/1107373873.png"><img alt="image1" class="confluence-embedded-image image-left" src="_images/1107373873.png" style="width: 387px;"/></a></p>
 <div class="line-block">
 <div class="line"><br/></div>
 </div>
 <p><strong>4)</strong> A list of available devices will be displayed in the hardware window. Right click on the device you wish to target (e.g. xcv80_1 when using the V80 card).</p>
 <p>Select Add Configuration Memory Device</p>
-<p><a class="confluence-embedded-image image-left reference internal" href="_images/1107373891.png"><img alt="image2" class="confluence-embedded-image image-left" src="_images/1107373891.png" style="width: 598px;"/></a></p>
+<p><a class="confluence-embedded-image image-left reference internal" href="_images/1107373891.png"><img alt="image2" class="confluence-embedded-image image-left" src="_images/1107373891.png" style="width: 591px;"/></a></p>
 <div class="line-block">
 <div class="line"><br/></div>
 </div>
 <p><strong>5)</strong> Select the appropriate Configuration Memory Part. Reference the following table to determine the applicable Memory part for the target Alveo card.</p>
-<table class="confluenceTable" data-layout="default" data-local-id="cd907086-5877-4fcf-b271-049a526f26e9"><colgroup><col style="width: 203.0px;"/><col style="width: 265.0px;"/><col style="width: 135.0px;"/><col style="width: 200.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Alveo Card</p></th><th class="confluenceTh"><p>Configuration Memory Part</p></th><th class="confluenceTh"><p>Type</p></th><th class="confluenceTh"><p>Density (Mb)</p></th></tr><tr><td class="confluenceTd"><p>V80</p></td><td class="confluenceTd"><p>cfgmem-2048-ospi-x8-single</p></td><td class="confluenceTd"><p>ospi</p></td><td class="confluenceTd"><p>2048</p></td></tr></tbody></table>
+<table class="confluenceTable" data-layout="default" data-local-id="cd907086-5877-4fcf-b271-049a526f26e9"><colgroup><col style="width: 456.0px;"/><col style="width: 593.0px;"/><col style="width: 302.0px;"/><col style="width: 447.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Alveo Card</p></th><th class="confluenceTh"><p>Configuration Memory Part</p></th><th class="confluenceTh"><p>Type</p></th><th class="confluenceTh"><p>Density (Mb)</p></th></tr><tr><td class="confluenceTd"><p>V80</p></td><td class="confluenceTd"><p>cfgmem-2048-ospi-x8-single</p></td><td class="confluenceTd"><p>ospi</p></td><td class="confluenceTd"><p>2048</p></td></tr></tbody></table>
 <div class="line-block">
 <div class="line"><br/></div>
 </div>
 <p><a class="confluence-embedded-image image-left reference internal" href="_images/1107373912.png"><img alt="image-20250818-151846.png" class="confluence-embedded-image image-left" src="_images/1107373912.png" style="width: 721px;"/></a></p>
 <p>Select OK when asked if you want to program the configuration memory device now.</p>
-<p><a class="confluence-embedded-image image-left reference internal" href="_images/1107373876.png"><img alt="image3" class="confluence-embedded-image image-left" src="_images/1107373876.png" style="width: 448px;"/></a></p>
+<p><a class="confluence-embedded-image image-left reference internal" href="_images/1107373876.png"><img alt="image3" class="confluence-embedded-image image-left" src="_images/1107373876.png" style="width: 442px;"/></a></p>
 <p><strong>6)</strong> Select the the fpt_setup pdi from the /opt/amd/aved/&lt;VBNV&gt;*/flash_setup/ directory as the configuration PDI and select the the initialization pdi from the same /opt/amd/aved/&lt;VBNV&gt;*/flash_setup/ directory as the Initialization PDI.</p>
 <p>It is recommended that the Entire Configuration Memory Device option is selected from the Program Operations → Address Range Drop down menu, so that the flash memory is in a known state after FPT setup PDI update.</p>
 <p><a class="confluence-embedded-image image-left reference internal" href="_images/1107373918.png"><img alt="image-20250818-152246.png" class="confluence-embedded-image image-left" src="_images/1107373918.png" style="width: 733px;"/></a></p>
@@ -198,7 +198,7 @@ OneTrust Cookies Consent Notice end -->
 <p><strong>Tip:</strong> If the flash partition table is modified from the AVED example (e.g. if <strong>fw/AMC/scripts/fpt.json</strong> is modified), a new FPT Setup PDI is generated by the AVED build flow to be programmed to OSPI. However, no change is required to the
 Initialization PDI; the v80_initialization.pdi from the pre-built deployment package may be used.</p>
 <p><strong>7)</strong> When Finished, Hardware Manager will report that Flash Programming has completed successfully.</p>
-<p><a class="confluence-embedded-image image-left reference internal" href="_images/1107373867.png"><img alt="image4" class="confluence-embedded-image image-left" src="_images/1107373867.png" style="width: 360px;"/></a></p>
+<p><a class="confluence-embedded-image image-left reference internal" href="_images/1107373867.png"><img alt="image4" class="confluence-embedded-image image-left" src="_images/1107373867.png" style="width: 353px;"/></a></p>
 <p><strong>8)</strong> It is now necessary to perform a <strong>cold reboot</strong> of the Host server in order to boot the new design from flash.</p>
 <p><strong>9)</strong> When the restart has completed, verification that the update has completed correctly can be done by running the <strong>ami_tool overview</strong> command.</p>
 <p>The updated card should display a UUID which matches the logic_uuid value in the <strong>/opt/amd/aved/&lt;VBNV&gt;*/version.json</strong> file.</p>
@@ -241,7 +241,7 @@ d8:00.0   | Alveo V80 ES3   | 9f50fc8fe7bc4d6e1ae0044cdf5f8f61   | 2.4.0  (0)   
 <hr/>
 <div role="contentinfo">
 <p>© Copyright 2023-2025, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on September 11, 2025.
+      <span class="lastupdated">Last updated on October 31, 2025.
       </span></p>
 </div>
 <div class="aem-Grid aem-Grid--16">

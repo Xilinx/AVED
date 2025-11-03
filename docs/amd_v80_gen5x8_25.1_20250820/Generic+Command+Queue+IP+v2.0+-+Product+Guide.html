@@ -209,6 +209,7 @@ OneTrust Cookies Consent Notice end -->
 <li><p>Used to receive command from peer.</p></li>
 <li><p>Generates completion queue interrupt (irq_cq) based on the CQ register settings.</p></li>
 </ul>
+<p><img alt="image1" src="_images/1107375591.png"/></p>
 <p>The sequence to execute commands:</p>
 <ol class="arabic simple">
 <li><p>Producer puts commands into submission queue entries with unique command ID for each command.</p></li>
@@ -234,6 +235,7 @@ OneTrust Cookies Consent Notice end -->
 <p>The diagram below outlines a typical use case for the Generic Command Queue IP as deployed within AMD Versal™ devices. The Generic Command Queue IP communicates with other IPs by implementing an AXI4-Subordinate. The register space of the GCQ IP v2.0
 allows IPs connected to it through the AXI interface produce CQ and SQ interrupts out of GCQ IP itself. Command queue process is from 1 to 2 shown in the diagram below. This flow is explained in the Architecture Overview section.</p>
 <p>Below is an example usage of a GCQ IP v2.0 in Versal device.</p>
+<p><img alt="image2" src="_images/1107375585.png"/></p>
 </section>
 <section id="standards">
 <span id="genericcommandqueueipv2-0-productguide-standards"></span><h2>Standards<a class="headerlink" href="#standards" title="Link to this heading">¶</a></h2>
@@ -247,6 +249,7 @@ consumer, this triggers an interrupt (<strong>irq_sq</strong>). The consumer rea
 The head pointer is stored within software local memory, so this information is not directly related to the IP, but the software. Reading the command and processing that command, the consumer writes to the tail pointer register in the <strong>Completion
 Queue</strong> along with the commands it consumed to the completion queue tail, which also triggers an interrupt (<strong>irq_cq</strong>). The producer reads the completion queue tail pointer to read the queue from head till the tail, which clears the completion queue
 interrupt (irq_cq).</p>
+<p><img alt="image3" src="_images/1107375603.png"/></p>
 </section>
 <section id="resource-use">
 <span id="genericcommandqueueipv2-0-productguide-resourceuse"></span><h2>Resource Use<a class="headerlink" href="#resource-use" title="Link to this heading">¶</a></h2>
@@ -347,7 +350,7 @@ and “_”. The default is cmd_queue_0.</p>
 <hr/>
 <div role="contentinfo">
 <p>© Copyright 2023-2025, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on September 11, 2025.
+      <span class="lastupdated">Last updated on October 31, 2025.
       </span></p>
 </div>
 <div class="aem-Grid aem-Grid--16">

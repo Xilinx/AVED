@@ -228,6 +228,7 @@ OneTrust Cookies Consent Notice end -->
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-getosversion-1">Get OS Version</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#operatingsystemabstractionlayer-osal-schedulerapis-1">Scheduler APIs</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#start-rtos-scheduler-example">Start RTOS scheduler example</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#get-tick-count-since-scheduler-started-example">Get Tick count since scheduler started example</a></li>
@@ -1337,7 +1338,9 @@ void vOSAL_ClearAllStats( void );
 </section>
 <section id="examples">
 <span id="operatingsystemabstractionlayer-osal-examples"></span><h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h2>
-<p id="operatingsystemabstractionlayer-osal-getosversion-1"><strong>iOSAL_GetOsVersion</strong></p>
+<section id="operatingsystemabstractionlayer-osal-getosversion-1">
+<span id="id1"></span><h3>Get OS Version<a class="headerlink" href="#operatingsystemabstractionlayer-osal-getosversion-1" title="Link to this heading">¶</a></h3>
+<p><strong>iOSAL_GetOsVersion</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>char pcOs[ OSAL_OS_NAME_LEN ] = { 0 };
 uint8_t ucVersionMajor = 0;
 uint8_t ucVersionMinor = 0;
@@ -1356,8 +1359,9 @@ else
 }
 </pre></div>
 </div>
+</section>
 <section id="operatingsystemabstractionlayer-osal-schedulerapis-1">
-<span id="id1"></span><h3>Scheduler APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-schedulerapis-1" title="Link to this heading">¶</a></h3>
+<span id="id2"></span><h3>Scheduler APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-schedulerapis-1" title="Link to this heading">¶</a></h3>
 <section id="start-rtos-scheduler-example">
 <span id="operatingsystemabstractionlayer-osal-startrtosschedulerexample"></span><h4>Start RTOS scheduler example<a class="headerlink" href="#start-rtos-scheduler-example" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_StartOS</strong></p>
@@ -1410,7 +1414,7 @@ UpTimeMsAfterSleep = ulOSAL_GetUptimeMs();
 </section>
 </section>
 <section id="operatingsystemabstractionlayer-osal-taskapis-1">
-<span id="id2"></span><h3>Task APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-taskapis-1" title="Link to this heading">¶</a></h3>
+<span id="id3"></span><h3>Task APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-taskapis-1" title="Link to this heading">¶</a></h3>
 <section id="create-osal-task-example">
 <span id="operatingsystemabstractionlayer-osal-createosaltaskexample"></span><h4>Create OSAL Task Example<a class="headerlink" href="#create-osal-task-example" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_Task_Create</strong></p>
@@ -1488,24 +1492,24 @@ else
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-osaltasksleep-ticks-1">
-<span id="id3"></span><h4>OSAL Task Sleep (Ticks)<a class="headerlink" href="#operatingsystemabstractionlayer-osal-osaltasksleep-ticks-1" title="Link to this heading">¶</a></h4>
+<span id="id4"></span><h4>OSAL Task Sleep (Ticks)<a class="headerlink" href="#operatingsystemabstractionlayer-osal-osaltasksleep-ticks-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_Task_SleepTicks</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>iOSAL_Task_SleepTicks( 500 ); /* delay main task - 500 Ticks */
 </pre></div>
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-osaltasksleep-ms-1">
-<span id="id4"></span><h4>OSAL Task Sleep (ms)<a class="headerlink" href="#operatingsystemabstractionlayer-osal-osaltasksleep-ms-1" title="Link to this heading">¶</a></h4>
+<span id="id5"></span><h4>OSAL Task Sleep (ms)<a class="headerlink" href="#operatingsystemabstractionlayer-osal-osaltasksleep-ms-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_Task_SleepMs</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>iOSAL_Task_SleepMs( 2000 ); /* delay main task - 2s */
 </pre></div>
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-semaphoreapis-1">
-<span id="id5"></span><h4>Semaphore APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-semaphoreapis-1" title="Link to this heading">¶</a></h4>
+<span id="id6"></span><h4>Semaphore APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-semaphoreapis-1" title="Link to this heading">¶</a></h4>
 </section>
 <section id="operatingsystemabstractionlayer-osal-createosalsemaphore-1">
-<span id="id6"></span><h4>Create OSAL Semaphore<a class="headerlink" href="#operatingsystemabstractionlayer-osal-createosalsemaphore-1" title="Link to this heading">¶</a></h4>
+<span id="id7"></span><h4>Create OSAL Semaphore<a class="headerlink" href="#operatingsystemabstractionlayer-osal-createosalsemaphore-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_Semaphore_Create</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>static void* pvSemBinaryHandle      = NULL;
 static void* pvSemCountingHandle    = NULL;
@@ -1545,7 +1549,7 @@ else
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-deleteosalsemaphore-1">
-<span id="id7"></span><h4>Delete OSAL Semaphore<a class="headerlink" href="#operatingsystemabstractionlayer-osal-deleteosalsemaphore-1" title="Link to this heading">¶</a></h4>
+<span id="id8"></span><h4>Delete OSAL Semaphore<a class="headerlink" href="#operatingsystemabstractionlayer-osal-deleteosalsemaphore-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_Semaphore_Destroy</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if( OSAL_ERRORS_NONE != iOSAL_Semaphore_Destroy( &amp;pvSemBinaryHandle ) )
 {
@@ -1576,7 +1580,7 @@ else
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-pendtoosalsemaphore-1">
-<span id="id8"></span><h4>Pend to OSAL Semaphore<a class="headerlink" href="#operatingsystemabstractionlayer-osal-pendtoosalsemaphore-1" title="Link to this heading">¶</a></h4>
+<span id="id9"></span><h4>Pend to OSAL Semaphore<a class="headerlink" href="#operatingsystemabstractionlayer-osal-pendtoosalsemaphore-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_Semaphore_Pend</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if( OSAL_ERRORS_NONE != iOSAL_Semaphore_Pend( pvSemBinaryHandle, OSAL_TIMEOUT_WAIT_FOREVER ) )
 {
@@ -1599,7 +1603,7 @@ else
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-posttoosalsemaphore-1">
-<span id="id9"></span><h4>Post to OSAL Semaphore<a class="headerlink" href="#operatingsystemabstractionlayer-osal-posttoosalsemaphore-1" title="Link to this heading">¶</a></h4>
+<span id="id10"></span><h4>Post to OSAL Semaphore<a class="headerlink" href="#operatingsystemabstractionlayer-osal-posttoosalsemaphore-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_Semaphore_Post</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if( OSAL_ERRORS_NONE != iOSAL_Semaphore_Post( pvSemBinaryHandle ) )
 {
@@ -1623,9 +1627,9 @@ else
 </section>
 </section>
 <section id="operatingsystemabstractionlayer-osal-mutexapis-1">
-<span id="id10"></span><h3>Mutex APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-mutexapis-1" title="Link to this heading">¶</a></h3>
+<span id="id11"></span><h3>Mutex APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-mutexapis-1" title="Link to this heading">¶</a></h3>
 <section id="operatingsystemabstractionlayer-osal-createosalmutex-1">
-<span id="id11"></span><h4>Create OSAL Mutex<a class="headerlink" href="#operatingsystemabstractionlayer-osal-createosalmutex-1" title="Link to this heading">¶</a></h4>
+<span id="id12"></span><h4>Create OSAL Mutex<a class="headerlink" href="#operatingsystemabstractionlayer-osal-createosalmutex-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_Mutex_Create</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>static void* pvMutexHandle = NULL;
 
@@ -1645,7 +1649,7 @@ else
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-deleteosalmutex-1">
-<span id="id12"></span><h4>Delete OSAL Mutex<a class="headerlink" href="#operatingsystemabstractionlayer-osal-deleteosalmutex-1" title="Link to this heading">¶</a></h4>
+<span id="id13"></span><h4>Delete OSAL Mutex<a class="headerlink" href="#operatingsystemabstractionlayer-osal-deleteosalmutex-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_Mutex_Destroy</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if( OSAL_ERRORS_NONE != iOSAL_Mutex_Destroy( &amp;pvMutexHandle ) )
 {
@@ -1663,7 +1667,7 @@ else
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-takeosalmutex-1">
-<span id="id13"></span><h4>Take OSAL Mutex<a class="headerlink" href="#operatingsystemabstractionlayer-osal-takeosalmutex-1" title="Link to this heading">¶</a></h4>
+<span id="id14"></span><h4>Take OSAL Mutex<a class="headerlink" href="#operatingsystemabstractionlayer-osal-takeosalmutex-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_Mutex_Take</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if( OSAL_ERRORS_NONE != iOSAL_Mutex_Take( pvMutexHandle, OSAL_TIMEOUT_WAIT_FOREVER ) )
 {
@@ -1677,7 +1681,7 @@ else
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-releaseosalmutex-1">
-<span id="id14"></span><h4>Release OSAL Mutex<a class="headerlink" href="#operatingsystemabstractionlayer-osal-releaseosalmutex-1" title="Link to this heading">¶</a></h4>
+<span id="id15"></span><h4>Release OSAL Mutex<a class="headerlink" href="#operatingsystemabstractionlayer-osal-releaseosalmutex-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_Mutex_Release</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if( OSAL_ERRORS_NONE != iOSAL_Mutex_Release( pvMutexHandle ) )
 {
@@ -1692,9 +1696,9 @@ else
 </section>
 </section>
 <section id="operatingsystemabstractionlayer-osal-mailboxapis-1">
-<span id="id15"></span><h3>Mailbox APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-mailboxapis-1" title="Link to this heading">¶</a></h3>
+<span id="id16"></span><h3>Mailbox APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-mailboxapis-1" title="Link to this heading">¶</a></h3>
 <section id="operatingsystemabstractionlayer-osal-createosalmailbox-1">
-<span id="id16"></span><h4>Create OSAL Mailbox<a class="headerlink" href="#operatingsystemabstractionlayer-osal-createosalmailbox-1" title="Link to this heading">¶</a></h4>
+<span id="id17"></span><h4>Create OSAL Mailbox<a class="headerlink" href="#operatingsystemabstractionlayer-osal-createosalmailbox-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_MBox_Create</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>static void* pvMBoxHandle = NULL;
 uint32_t ulMBoxLength = 10; /* set to mailbox length */
@@ -1716,7 +1720,7 @@ else
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-deleteosalmailbox-1">
-<span id="id17"></span><h4>Delete OSAL Mailbox<a class="headerlink" href="#operatingsystemabstractionlayer-osal-deleteosalmailbox-1" title="Link to this heading">¶</a></h4>
+<span id="id18"></span><h4>Delete OSAL Mailbox<a class="headerlink" href="#operatingsystemabstractionlayer-osal-deleteosalmailbox-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_MBox_Destroy</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if( OSAL_ERRORS_NONE != iOSAL_MBox_Destroy( &amp;pvMBoxHandle ) )
 {
@@ -1734,7 +1738,7 @@ else
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-pendtoosalmailbox-1">
-<span id="id18"></span><h4>Pend to OSAL Mailbox<a class="headerlink" href="#operatingsystemabstractionlayer-osal-pendtoosalmailbox-1" title="Link to this heading">¶</a></h4>
+<span id="id19"></span><h4>Pend to OSAL Mailbox<a class="headerlink" href="#operatingsystemabstractionlayer-osal-pendtoosalmailbox-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_MBox_Pend</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ulRxData = 0;
 uint32_t ulTimeoutMs =  2000; /* set to desired timeout (ms) */
@@ -1751,7 +1755,7 @@ else
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-posttoosalmailbox-1">
-<span id="id19"></span><h4>Post to OSAL Mailbox<a class="headerlink" href="#operatingsystemabstractionlayer-osal-posttoosalmailbox-1" title="Link to this heading">¶</a></h4>
+<span id="id20"></span><h4>Post to OSAL Mailbox<a class="headerlink" href="#operatingsystemabstractionlayer-osal-posttoosalmailbox-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_MBox_Post</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>static uint32_t ulTxData = 0x12345678; /* set to desired data */
 
@@ -1768,9 +1772,9 @@ else
 </section>
 </section>
 <section id="operatingsystemabstractionlayer-osal-eventapis-1">
-<span id="id20"></span><h3>Event APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-eventapis-1" title="Link to this heading">¶</a></h3>
+<span id="id21"></span><h3>Event APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-eventapis-1" title="Link to this heading">¶</a></h3>
 <section id="operatingsystemabstractionlayer-osal-createosaleventgroup-1">
-<span id="id21"></span><h4>Create OSAL Event Group<a class="headerlink" href="#operatingsystemabstractionlayer-osal-createosaleventgroup-1" title="Link to this heading">¶</a></h4>
+<span id="id22"></span><h4>Create OSAL Event Group<a class="headerlink" href="#operatingsystemabstractionlayer-osal-createosaleventgroup-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_EventFlag_Create</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>static void* pvEventFlagHandle = NULL;
 
@@ -1791,7 +1795,7 @@ else
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-deleteosaleventgroup-1">
-<span id="id22"></span><h4>Delete OSAL Event Group<a class="headerlink" href="#operatingsystemabstractionlayer-osal-deleteosaleventgroup-1" title="Link to this heading">¶</a></h4>
+<span id="id23"></span><h4>Delete OSAL Event Group<a class="headerlink" href="#operatingsystemabstractionlayer-osal-deleteosaleventgroup-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_EventFlag_Destroy</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if( OSAL_ERRORS_NONE != iOSAL_EventFlag_Destroy( &amp;pvEventFlagHandle ) )
 {
@@ -1809,7 +1813,7 @@ else
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-pendtoosaleventgroup-1">
-<span id="id23"></span><h4>Pend to OSAL Event Group<a class="headerlink" href="#operatingsystemabstractionlayer-osal-pendtoosaleventgroup-1" title="Link to this heading">¶</a></h4>
+<span id="id24"></span><h4>Pend to OSAL Event Group<a class="headerlink" href="#operatingsystemabstractionlayer-osal-pendtoosaleventgroup-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_EventFlag_Pend</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define EVENT_BIT_0 ( 1 &lt;&lt; 0 )
 #define EVENT_BIT_1 ( 1 &lt;&lt; 1 )
@@ -1829,7 +1833,7 @@ else
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-posttoosaleventgroup-1">
-<span id="id24"></span><h4>Post to OSAL Event Group<a class="headerlink" href="#operatingsystemabstractionlayer-osal-posttoosaleventgroup-1" title="Link to this heading">¶</a></h4>
+<span id="id25"></span><h4>Post to OSAL Event Group<a class="headerlink" href="#operatingsystemabstractionlayer-osal-posttoosaleventgroup-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_EventFlag_Post</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define EVENT_BIT_0 ( 1 &lt;&lt; 0 )
 #define EVENT_BIT_1 ( 1 &lt;&lt; 1 )
@@ -1849,9 +1853,9 @@ else
 </section>
 </section>
 <section id="operatingsystemabstractionlayer-osal-timerapis-1">
-<span id="id25"></span><h3>Timer APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-timerapis-1" title="Link to this heading">¶</a></h3>
+<span id="id26"></span><h3>Timer APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-timerapis-1" title="Link to this heading">¶</a></h3>
 <section id="operatingsystemabstractionlayer-osal-createosaltimer-1">
-<span id="id26"></span><h4>Create OSAL Timer<a class="headerlink" href="#operatingsystemabstractionlayer-osal-createosaltimer-1" title="Link to this heading">¶</a></h4>
+<span id="id27"></span><h4>Create OSAL Timer<a class="headerlink" href="#operatingsystemabstractionlayer-osal-createosaltimer-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_Timer_Create</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void* pvTimerHandle = NULL;
 
@@ -1881,7 +1885,7 @@ else
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-deleteosaltimer-1">
-<span id="id27"></span><h4>Delete OSAL Timer<a class="headerlink" href="#operatingsystemabstractionlayer-osal-deleteosaltimer-1" title="Link to this heading">¶</a></h4>
+<span id="id28"></span><h4>Delete OSAL Timer<a class="headerlink" href="#operatingsystemabstractionlayer-osal-deleteosaltimer-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_Timer_Destroy</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if( OSAL_ERRORS_NONE != iOSAL_Timer_Destroy( &amp;pvTimerHandle ) )
 {
@@ -1899,7 +1903,7 @@ else
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-startosaltimer-1">
-<span id="id28"></span><h4>Start OSAL Timer<a class="headerlink" href="#operatingsystemabstractionlayer-osal-startosaltimer-1" title="Link to this heading">¶</a></h4>
+<span id="id29"></span><h4>Start OSAL Timer<a class="headerlink" href="#operatingsystemabstractionlayer-osal-startosaltimer-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_Timer_Start</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if( OSAL_ERRORS_NONE != iOSAL_Timer_Start( pvTimerHandle,
                                            1000 ) )
@@ -1914,7 +1918,7 @@ else
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-stoposaltimer-1">
-<span id="id29"></span><h4>Stop OSAL Timer<a class="headerlink" href="#operatingsystemabstractionlayer-osal-stoposaltimer-1" title="Link to this heading">¶</a></h4>
+<span id="id30"></span><h4>Stop OSAL Timer<a class="headerlink" href="#operatingsystemabstractionlayer-osal-stoposaltimer-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_Timer_Stop</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if( OSAL_ERRORS_NONE != iOSAL_Timer_Stop( pvTimerHandle ) )
 {
@@ -1928,7 +1932,7 @@ else
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-resetosaltimer-1">
-<span id="id30"></span><h4>Reset OSAL Timer<a class="headerlink" href="#operatingsystemabstractionlayer-osal-resetosaltimer-1" title="Link to this heading">¶</a></h4>
+<span id="id31"></span><h4>Reset OSAL Timer<a class="headerlink" href="#operatingsystemabstractionlayer-osal-resetosaltimer-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_Timer_Reset</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if( OSAL_ERRORS_NONE != iOSAL_Timer_Reset( pvTimerHandle,
                                            2000 ) )
@@ -1944,9 +1948,9 @@ else
 </section>
 </section>
 <section id="operatingsystemabstractionlayer-osal-interruptapis-1">
-<span id="id31"></span><h3>Interrupt APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-interruptapis-1" title="Link to this heading">¶</a></h3>
+<span id="id32"></span><h3>Interrupt APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-interruptapis-1" title="Link to this heading">¶</a></h3>
 <section id="operatingsystemabstractionlayer-osal-setuposalinterrupt-1">
-<span id="id32"></span><h4>Setup OSAL Interrupt<a class="headerlink" href="#operatingsystemabstractionlayer-osal-setuposalinterrupt-1" title="Link to this heading">¶</a></h4>
+<span id="id33"></span><h4>Setup OSAL Interrupt<a class="headerlink" href="#operatingsystemabstractionlayer-osal-setuposalinterrupt-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_Interrupt_Setup</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define FABRIC_INTERRUPT_HANDLE ( XPAR_FABRIC_UARTLITE_1_VEC_ID )
 
@@ -1972,7 +1976,7 @@ else
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-enableosalinterrupt-1">
-<span id="id33"></span><h4>Enable OSAL Interrupt<a class="headerlink" href="#operatingsystemabstractionlayer-osal-enableosalinterrupt-1" title="Link to this heading">¶</a></h4>
+<span id="id34"></span><h4>Enable OSAL Interrupt<a class="headerlink" href="#operatingsystemabstractionlayer-osal-enableosalinterrupt-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_Interrupt_Enable</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define FABRIC_INTERRUPT_HANDLE ( XPAR_FABRIC_UARTLITE_1_VEC_ID )
 
@@ -1988,7 +1992,7 @@ else
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-disableosalinterrupt-1">
-<span id="id34"></span><h4>Disable OSAL Interrupt<a class="headerlink" href="#operatingsystemabstractionlayer-osal-disableosalinterrupt-1" title="Link to this heading">¶</a></h4>
+<span id="id35"></span><h4>Disable OSAL Interrupt<a class="headerlink" href="#operatingsystemabstractionlayer-osal-disableosalinterrupt-1" title="Link to this heading">¶</a></h4>
 <p><strong>iOSAL_Interrupt_Disable</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define FABRIC_INTERRUPT_HANDLE ( XPAR_FABRIC_UARTLITE_1_VEC_ID )
 
@@ -2005,9 +2009,9 @@ else
 </section>
 </section>
 <section id="operatingsystemabstractionlayer-osal-threadsafeapis-1">
-<span id="id35"></span><h3>Thread safe APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-threadsafeapis-1" title="Link to this heading">¶</a></h3>
+<span id="id36"></span><h3>Thread safe APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-threadsafeapis-1" title="Link to this heading">¶</a></h3>
 <section id="operatingsystemabstractionlayer-osal-markthestartofcriticalcoderegion-1">
-<span id="id36"></span><h4>Mark the start of critical code region<a class="headerlink" href="#operatingsystemabstractionlayer-osal-markthestartofcriticalcoderegion-1" title="Link to this heading">¶</a></h4>
+<span id="id37"></span><h4>Mark the start of critical code region<a class="headerlink" href="#operatingsystemabstractionlayer-osal-markthestartofcriticalcoderegion-1" title="Link to this heading">¶</a></h4>
 <p><strong>vOSAL_EnterCritical</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/* simply call API where needed. No parameters required */
 vOSAL_EnterCritical();
@@ -2015,7 +2019,7 @@ vOSAL_EnterCritical();
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-marktheendofcriticalcoderegion-1">
-<span id="id37"></span><h4>Mark the end of critical code region<a class="headerlink" href="#operatingsystemabstractionlayer-osal-marktheendofcriticalcoderegion-1" title="Link to this heading">¶</a></h4>
+<span id="id38"></span><h4>Mark the end of critical code region<a class="headerlink" href="#operatingsystemabstractionlayer-osal-marktheendofcriticalcoderegion-1" title="Link to this heading">¶</a></h4>
 <p><strong>vOSAL_ExitCritical</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/* simply call API where needed. No parameters required */
 vOSAL_ExitCritical();
@@ -2056,7 +2060,7 @@ void vMemoryTaskFunc( void* pvArg )
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-osalprintf-1">
-<span id="id38"></span><h4>OSAL printf<a class="headerlink" href="#operatingsystemabstractionlayer-osal-osalprintf-1" title="Link to this heading">¶</a></h4>
+<span id="id39"></span><h4>OSAL printf<a class="headerlink" href="#operatingsystemabstractionlayer-osal-osalprintf-1" title="Link to this heading">¶</a></h4>
 <p><strong>vOSAL_Printf</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/* OSAL printf can be safely called from within tasks */
 void vPrintTaskFunc( void* pvArg )
@@ -2077,7 +2081,7 @@ void vPrintTaskFunc( void* pvArg )
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-osalgetchar-1">
-<span id="id39"></span><h4>OSAL getchar<a class="headerlink" href="#operatingsystemabstractionlayer-osal-osalgetchar-1" title="Link to this heading">¶</a></h4>
+<span id="id40"></span><h4>OSAL getchar<a class="headerlink" href="#operatingsystemabstractionlayer-osal-osalgetchar-1" title="Link to this heading">¶</a></h4>
 <p><strong>cOSAL_GetChar</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define DAL_MAX_INPUT ( 256 )
 
@@ -2097,9 +2101,9 @@ while( ( &#39;\r&#39; != cLastChar ) &amp;&amp; ( &#39;\n&#39; != cLastChar ) &a
 </section>
 </section>
 <section id="operatingsystemabstractionlayer-osal-debugstatsapis-1">
-<span id="id40"></span><h3>Debug stats APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-debugstatsapis-1" title="Link to this heading">¶</a></h3>
+<span id="id41"></span><h3>Debug stats APIs<a class="headerlink" href="#operatingsystemabstractionlayer-osal-debugstatsapis-1" title="Link to this heading">¶</a></h3>
 <section id="operatingsystemabstractionlayer-osal-printallstats-1">
-<span id="id41"></span><h4>Print all stats<a class="headerlink" href="#operatingsystemabstractionlayer-osal-printallstats-1" title="Link to this heading">¶</a></h4>
+<span id="id42"></span><h4>Print all stats<a class="headerlink" href="#operatingsystemabstractionlayer-osal-printallstats-1" title="Link to this heading">¶</a></h4>
 <p><strong>vOSAL_PrintAllStats</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/* specify verbosity level and stats type */
 vOSAL_PrintAllStats( OSAL_STATS_VERBOSITY_FULL, OSAL_STATS_TYPE_ALL );
@@ -2107,7 +2111,7 @@ vOSAL_PrintAllStats( OSAL_STATS_VERBOSITY_FULL, OSAL_STATS_TYPE_ALL );
 </div>
 </section>
 <section id="operatingsystemabstractionlayer-osal-clearallstats-1">
-<span id="id42"></span><h4>Clear all stats<a class="headerlink" href="#operatingsystemabstractionlayer-osal-clearallstats-1" title="Link to this heading">¶</a></h4>
+<span id="id43"></span><h4>Clear all stats<a class="headerlink" href="#operatingsystemabstractionlayer-osal-clearallstats-1" title="Link to this heading">¶</a></h4>
 <p><strong>vOSAL_ClearAllStats</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/* simply call API, no params needed */
 vOSAL_ClearAllStats();
@@ -2131,7 +2135,7 @@ vOSAL_ClearAllStats();
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2025, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on September 11, 2025.
+      <span class="lastupdated">Last updated on October 31, 2025.
       </span></p>
   </div>
 

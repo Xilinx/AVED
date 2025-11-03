@@ -204,6 +204,7 @@ OneTrust Cookies Consent Notice end -->
 <section id="initialization-flow">
 <span id="carddetection-selection-andgeneraloverview-initializationflow"></span><h2>Initialization flow<a class="headerlink" href="#initialization-flow" title="Link to this heading">¶</a></h2>
 <p>The diagram below shows a simplified example of the AMI driver initialization flow and what happens when two user applications attempt to access a shared resource (sensor data in this case).</p>
+<p><img alt="image1" src="_images/1107377045.png" /></p>
 <section id="device-enablement">
 <span id="carddetection-selection-andgeneraloverview-deviceenablement"></span><h3><strong>Device enablement</strong><a class="headerlink" href="#device-enablement" title="Link to this heading">¶</a></h3>
 <p>The first steps of the main PCI device detection flow are to “check if the device is supported” and to “enable the PCI device”. As per the standard Linux practice, the AMI driver maintains a table of supported PCI devices; the driver probe function
@@ -225,6 +226,7 @@ the device ID is supported, the driver enables the device with the Linux PCI cor
 <li><p>There is a global character device file /dev/ami0 which does not belong to any device (this is currently unused).</p></li>
 <li><p>The user can view all devices present by looking at /dev.</p></li>
 </ul>
+<p><img alt="image2" src="_images/1107377039.png" /></p>
 <p>The user can view all BDF → device number mappings by reading <em>/sys/bus/pci/drivers/ami/devices</em> file. For example, with two V80 devices in the system, the map may look like:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>2
 c1:00.0 1 2
@@ -236,6 +238,7 @@ c1:00.0 1 2
 <p>where &lt;BDF&gt; is the device BDF, &lt;cdev&gt; is the character device number (/dev/amiX) and &lt;hwmon&gt; is the number of the hwmon directory belonging to the device (/sys/class/hwmon/hwmonX). For a more detailed explanation of how each of these components are
 used, see <a class="reference external" href="User+Interface.html">User Interface</a>.</p>
 <p>The following diagram shows a simplified initialization flow and shows how the user can interact with the underlying driver to access their desired device (in this example, the devices have two supported PF’s).</p>
+<p><img alt="image3" src="_images/1107377036.png" /></p>
 <section id="using-hwmon-for-sensor-readings">
 <span id="carddetection-selection-andgeneraloverview-usinghwmonforsensorreadings"></span><h3>Using HWMON for sensor readings<a class="headerlink" href="#using-hwmon-for-sensor-readings" title="Link to this heading">¶</a></h3>
 <p>Sensors are exposed via <strong>sysfs</strong> (or more specifically, <strong>hwmon</strong>). This exposes all sensor information in plaintext format as sysfs nodes that can be viewed either from the command line or from code with simple system calls. This approach has
@@ -250,9 +253,10 @@ several advantages:</p>
 fixed point values only where possible.</p>
 <p>See <a class="reference external" href="https://docs.kernel.org/hwmon/hwmon-kernel-api.html">The Linux Hardware Monitoring kernel API — The Linux Kernel documentation</a> for more detailed information.</p>
 <p>See the following diagram.</p>
+<p><img alt="image4" src="_images/1107377021.png" /></p>
 <p>The following image shows how hwmon works in practice on the command line.</p>
 <p>Note that using the hwmon interface to read sensor information bypasses the shared resource lock that is imposed upon IOCTL calls.</p>
-<p><img alt="image1" class="confluence-embedded-image" src="_images/1107377027.png" /></p>
+<p><img alt="image5" class="confluence-embedded-image" src="_images/1107377027.png" /></p>
 </section>
 <section id="a-note-on-sysfs-and-ioctl">
 <span id="carddetection-selection-andgeneraloverview-anoteonsysfsandioctl"></span><h3>A note on sysfs and ioctl<a class="headerlink" href="#a-note-on-sysfs-and-ioctl" title="Link to this heading">¶</a></h3>
@@ -277,7 +281,7 @@ human-readable attributes, and configuration options to the user. These can be r
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2025, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on September 11, 2025.
+      <span class="lastupdated">Last updated on October 31, 2025.
       </span></p>
   </div>
 
