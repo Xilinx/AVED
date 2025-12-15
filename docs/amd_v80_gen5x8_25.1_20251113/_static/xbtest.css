@@ -1,0 +1,13 @@
+/*
+ * xbtest.css
+ * ~~~~~~~~~
+ *
+ * Custom stylesheet.
+ *
+ * :copyright: Copyright 2022 by Xilinx, Inc.
+ *
+ */
+
+.wy-nav-content{
+    max-width:none;
+}
