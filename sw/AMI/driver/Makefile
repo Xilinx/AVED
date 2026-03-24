@@ -25,20 +25,16 @@ $(TARGET_MODULE)-objs += gcq-driver/src/gcq_driver.o
 $(TARGET_MODULE)-objs += gcq-driver/src/gcq_hw.o
 $(TARGET_MODULE)-objs += gcq-driver/src/gcq_features.o
 
-EXTRA_CFLAGS:=-I$(PWD) -I$(PWD)/fal -I$(PWD)/fal/gcq -I$(PWD)/gcq-driver/src
+# To apply the macro to all the source files compiled with this makefile
+ccflags-y := -I$(src) -I$(src)/fal -I$(src)/fal/gcq -I$(src)/gcq-driver/src
+ccflags-y += -DDEBUG -DVERBOSE_DEBUG -DGCQ_MAX_INSTANCES=16
 
-KERNEL_DIR = /lib/modules/`uname -r`/build
-
-#CFLAGS_file_name will apply the macros to those files
-# CFLAGS_versal_vmc.o:=-DDEBUG
-
-#To apply the macro to all the source files compiled with this makefile
-# ccflags-y:=-DDEBUG
-ccflags-y:=-DDEBUG -DVERBOSE_DEBUG -DGCQ_MAX_INSTANCES=16
+KERNEL_DIR ?= /lib/modules/$(shell uname -r)/build
+PWD := $(shell pwd)
 
 all: clean
 	@test -f ../scripts/getVersion.sh && ../scripts/getVersion.sh driver $(realpath .) || echo ""
-	$(MAKE) -C ${KERNEL_DIR} M=${PWD} modules
+	$(MAKE) -C $(KERNEL_DIR) M=$(PWD) modules
 
 clean:
-	$(MAKE) -C ${KERNEL_DIR} M=${PWD} clean
+	$(MAKE) -C $(KERNEL_DIR) M=$(PWD) clean
