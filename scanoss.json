@@ -1,0 +1,7 @@
+{
+  "bom": {
+    "include": [
+      {"purl":"pkg:github/Xilinx/AVED","comment":"Known GPL upstream - AMD AVED"}
+    ]
+  }
+}
