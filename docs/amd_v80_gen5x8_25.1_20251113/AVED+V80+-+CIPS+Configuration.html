@@ -234,7 +234,7 @@ described below. All settings differing from the default settings are indicated 
 In addition to this, AVED is only using 8 lanes, and to be in PCI SIG compliance, the bottom 8 lanes must be used. As a result, PCIe® controller 1 must be used.</div>
 <div class="line">AVED V80 is a Gen 5x8 design supporting 32GT/s raw bandwidth.</div>
 </div>
-<p><img alt="image1" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image1" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><img alt="image2" class="confluence-embedded-image" src="_images/1107374422.png" /></p>
 </section>
 <section id="cpm5-pcie-controller-1-configuration">
@@ -247,7 +247,7 @@ tabs. Then, in the advanced options tab, the configuration space must be changed
 ‘Extended Config Interface’. This interface connects to the HW discovery IP, which provides vendor specific extended configuration information.</p>
 <p><strong>Functional Mode: QDMA</strong></p>
 <p>Used for high bandwidth DDR accesses.</p>
-<p><img alt="image3" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image3" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><img alt="image4" class="confluence-embedded-image" src="_images/1107374413.png" /></p>
 </section>
 <section id="capabilities">
@@ -255,7 +255,7 @@ tabs. Then, in the advanced options tab, the configuration space must be changed
 <p><strong>Total Physical Functions: 2</strong></p>
 <p>Two Physical Functions (PF) are used in the AVED design. PF0 allows the card to be managed by the PCIe host. PF1 allows DMA transfers with the PCIe Host. Additional PFs can be enabled as required by user applications.</p>
 <p>AVED PCIe uses the synchronous clock from the PCIe edge connector.</p>
-<p><img alt="image5" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image5" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><img alt="image6" class="confluence-embedded-image" src="_images/1107374419.png" /></p>
 </section>
 <section id="pf-ids">
@@ -276,7 +276,7 @@ tabs. Then, in the advanced options tab, the configuration space must be changed
 <li><p>Base Class Value PF 0: 12 : Processing Accelerator – vendor-specific interface</p></li>
 <li><p>Subclass Value PF 0: 00 : Processing Accelerator – vendor-specific interface</p></li>
 </ul>
-<p><img alt="image7" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image7" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><img alt="image8" class="confluence-embedded-image" src="_images/1107374425.png" /></p>
 </section>
 <section id="pcie-bars">
@@ -287,7 +287,7 @@ devices.</p>
 space: 0x201_0000_0000 - 0x201_0FFF_FFFF (256MB). For additional information on address mapping in AMD Versal™ devices, refer to the following link: <a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map</a>. Since the address space
 for PCIe and AXI is different, address translation is required.</p>
 <p>PF1 is configured to use the DMA.</p>
-<p><img alt="image9" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image9" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p>PF0</p>
 <p><img alt="image10" class="confluence-embedded-image" src="_images/1107374407.png" /></p>
 <p>PF1</p>
@@ -302,14 +302,14 @@ for PCIe and AXI is different, address translation is required.</p>
 <section id="pcie-dma">
 <span id="avedv80-cipsconfiguration-pcie-dma"></span><h5>PCIe: DMA<a class="headerlink" href="#pcie-dma" title="Link to this heading">¶</a></h5>
 <p>This functionality is not used by AVED.</p>
-<p><img alt="image12" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image12" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <div class="line-block">
 <div class="line"><br /></div>
 <div class="line"><a class="confluence-embedded-image reference internal" href="_images/1107374401.png"><img alt="image13" class="confluence-embedded-image" src="_images/1107374401.png" style="width: 931px;" /></a></div>
 </div>
 <p>MSI-X Cap</p>
 <p>MSI-X capabilities for PF1 were enabled to be used in conjunction with the DMA.</p>
-<p><img alt="image14" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image14" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><a class="confluence-embedded-image reference internal" href="_images/1107374416.png"><img alt="image15" class="confluence-embedded-image" src="_images/1107374416.png" style="height: 163px;" /></a></p>
 </section>
 <section id="advanced-options">
@@ -320,7 +320,7 @@ Logic</a>). To minimize design complexity, AVED does not enable virtualization c
 <p><strong>Disable Access Control Services (ACS) Capability: De-Selected</strong></p>
 <p><strong>Verify Advanced Error Reporting (AER) Capability: Selected</strong></p>
 <p><strong>PCI Express Extended Configuration Space Enabled: Extended Large</strong></p>
-<p><img alt="image16" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image16" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <div class="line-block">
 <div class="line"><br /></div>
 <div class="line"><img alt="image17" class="confluence-embedded-image" src="_images/1107374395.png" /></div>
@@ -330,7 +330,7 @@ Logic</a>). To minimize design complexity, AVED does not enable virtualization c
 <span id="avedv80-cipsconfiguration-enableinterfaceoptions"></span><h5>Enable Interface Options<a class="headerlink" href="#enable-interface-options" title="Link to this heading">¶</a></h5>
 <p>The Extend Config Interface option enables the interface to allow PCIe to transfer configuration information with the user application. In AVED, this port, pcie1_cfg_ext, is connected to the Hardware Discovery IP.</p>
 <p><strong>Extended Config Interface: Select</strong></p>
-<p><img alt="image18" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image18" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><img alt="image19" class="confluence-embedded-image" src="_images/1107374404.png" /></p>
 </section>
 </section>
@@ -338,7 +338,7 @@ Logic</a>). To minimize design complexity, AVED does not enable virtualization c
 <section id="cpm5-tcl-configuration">
 <span id="avedv80-cipsconfiguration-cpm5tclconfiguration"></span><h3>CPM5 TCL Configuration<a class="headerlink" href="#cpm5-tcl-configuration" title="Link to this heading">¶</a></h3>
 <p>The above configuration can be enabled using the TCL configuration settings below.</p>
-<p><img alt="image20" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image20" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p>CONFIG.CPM_CONFIG { \</p>
 <div class="line-block">
 <div class="line">CPM_PCIE0_MODES {None} \</div>
@@ -438,7 +438,7 @@ Logic</a>). To minimize design complexity, AVED does not enable virtualization c
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Secondary-Boot-Process-and-Device-Choices">https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Secondary-Boot-Process-and-Device-Choices</a></p>
 <p><strong>Slot Type:</strong> eMMC</p>
 <p><strong>Data Transfer Width:</strong> 8Bit</p>
-<p><img alt="image21" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image21" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><img alt="image22" class="confluence-embedded-image" src="_images/1107374386.png" /></p>
 <p><img alt="image23" class="confluence-embedded-image" src="_images/1107374392.png" /></p>
 <div class="line-block">
@@ -457,7 +457,7 @@ Logic</a>). To minimize design complexity, AVED does not enable virtualization c
 <li><p>IO → PS-Domain → PCIe Reset → CPM PCIE Controller 1 (End Point) → PMC_MIO_25</p></li>
 </ul>
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/PCIe-Resets-on-MIO-Pins">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/PCIe-Resets-on-MIO-Pins</a></p>
-<p><img alt="image24" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image24" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <div class="line-block">
 <div class="line"><br /></div>
 <div class="line"><img alt="image25" class="confluence-embedded-image" src="_images/1107374446.png" /></div>
@@ -474,7 +474,7 @@ Logic</a>). To minimize design complexity, AVED does not enable virtualization c
 <li><p>IO → PS-Domain → UART1 → PS_MIO_20 and PS_MIO_21</p></li>
 </ul>
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/UART-I/O-Signals">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/UART-I/O-Signals</a></p>
-<p><img alt="image26" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image26" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><strong>UART0</strong></p>
 <p><img alt="image27" class="confluence-embedded-image" src="_images/1107374428.png" /></p>
 <p><strong>UART1</strong></p>
@@ -491,7 +491,7 @@ Logic</a>). To minimize design complexity, AVED does not enable virtualization c
 <li><p>IO → PS-Domain → SPI0 → SS0 → PS_MIO_15</p></li>
 </ul>
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/SPI-Controller-I/O-Signals">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/SPI-Controller-I/O-Signals</a></p>
-<p><img alt="image29" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image29" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><strong>SPI0</strong></p>
 <p><img alt="image30" class="confluence-embedded-image" src="_images/1107374566.png" /></p>
 </section>
@@ -503,7 +503,7 @@ Logic</a>). To minimize design complexity, AVED does not enable virtualization c
 <li><p>IO → PS-Domain → I2C1 → PS_MIO_0 and PS_MIO_1</p></li>
 </ul>
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/LPD-I2C-Interface-Signals">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/LPD-I2C-Interface-Signals</a></p>
-<p><img alt="image31" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image31" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><strong>LPD_I2C0</strong></p>
 <p><img alt="image32" class="confluence-embedded-image" src="_images/1107374572.png" /></p>
 <p><strong>LPD_I2C1</strong></p>
@@ -514,7 +514,7 @@ Logic</a>). To minimize design complexity, AVED does not enable virtualization c
 <p>The triple timer counters (TTCs) can generate periodic interrupts or can be used to count the widths of signal pulses from an MIO pin or from the PL. In AVED, the TTCs are used by SW to generate periodic interrupts for runtime purposes. The TTCs
 cannot be used to monitor any HW functionality through the PMC MIO or PS MIO pins because there are not any spare MIO pins.</p>
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Triple-Timer-Counters">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Triple-Timer-Counters</a></p>
-<p><img alt="image34" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image34" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><strong>TTC0</strong></p>
 <p><img alt="image35" class="confluence-embedded-image" src="_images/1107374563.png" /></p>
 <p><strong>TTC1</strong></p>
@@ -539,7 +539,7 @@ All the GPIO 1* signals are outputs except MIO_33, MIO_37, MIO_41, MIO_48, MIO_4
 <li><p>PS Bank 2:
 All the GPIO 2* signals are outputs except MIO_5, MIO_10, MIO_11, MIO_14, and MIO_25, which are inputs.</p></li>
 </ul>
-<p><img alt="image39" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image39" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><img alt="image40" class="confluence-embedded-image" src="_images/1107374548.png" /></p>
 </section>
 <section id="debug">
@@ -547,22 +547,22 @@ All the GPIO 2* signals are outputs except MIO_5, MIO_10, MIO_11, MIO_14, and MI
 <p>None of the debug settings are used. Leave all settings at Default.</p>
 <section id="pl-bscan">
 <span id="avedv80-cipsconfiguration-plbscan"></span><h5>PL BSCAN<a class="headerlink" href="#pl-bscan" title="Link to this heading">¶</a></h5>
-<p><img alt="image41" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image41" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><img alt="image42" class="confluence-embedded-image" src="_images/1107374539.png" /></p>
 </section>
 <section id="cross-trigger">
 <span id="avedv80-cipsconfiguration-crosstrigger"></span><h5>Cross Trigger<a class="headerlink" href="#cross-trigger" title="Link to this heading">¶</a></h5>
-<p><img alt="image43" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image43" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><img alt="image44" class="confluence-embedded-image" src="_images/1107374545.png" /></p>
 </section>
 <section id="ps-parallel-trace">
 <span id="avedv80-cipsconfiguration-psparalleltrace"></span><h5>PS Parallel Trace<a class="headerlink" href="#ps-parallel-trace" title="Link to this heading">¶</a></h5>
-<p><img alt="image45" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image45" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><img alt="image46" class="confluence-embedded-image" src="_images/1107374554.png" /></p>
 </section>
 <section id="hsdp">
 <span id="avedv80-cipsconfiguration-hsdp"></span><h5>HSDP<a class="headerlink" href="#hsdp" title="Link to this heading">¶</a></h5>
-<p><img alt="image47" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image47" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><img alt="image48" class="confluence-embedded-image" src="_images/1107374536.png" /></p>
 </section>
 </section>
@@ -572,7 +572,7 @@ All the GPIO 2* signals are outputs except MIO_5, MIO_10, MIO_11, MIO_14, and MI
 <span id="avedv80-cipsconfiguration-inputclocks"></span><h5>Input Clocks<a class="headerlink" href="#input-clocks" title="Link to this heading">¶</a></h5>
 <p>Change the input REF_CLK to match the board oscillator clock frequency (from 33.333MHz to 33.333333MHz).</p>
 <p>REF_CLK: 33.333333</p>
-<p><img alt="image49" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image49" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><img alt="image50" class="confluence-embedded-image" src="_images/1107374533.png" /></p>
 </section>
 <section id="output-clocks">
@@ -582,7 +582,7 @@ All the GPIO 2* signals are outputs except MIO_5, MIO_10, MIO_11, MIO_14, and MI
 <p>Enable the PL CLK 0, PL CLK 1, and PL CLK 2 and set the frequencies to 100MHz, 33.3333333MHz, and 250MHz (respectively). This creates the CIPs pl0_ref_clk, pl1_ref_clk, and pl2_ref_clk outputs from CIPS in the BD. PL CLK 0 (100MHz) is used for
 numerous AXI interfaces. PL CLK 1 is a free running clock used to generate other system clocks. PL CLK 2 is set to run at 250MHz. This is the frequency of the PCIe extended configuration interface.</p>
 <p>Change the CPM_TOPSW clock to 1000MHz so the CPM runs at maximum frequency.</p>
-<p><img alt="image51" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image51" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <div class="line-block">
 <div class="line"><br /></div>
 <div class="line"><img alt="image52" class="confluence-embedded-image" src="_images/1107374542.png" /></div>
@@ -596,7 +596,7 @@ numerous AXI interfaces. PL CLK 1 is a free running clock used to generate other
 <p>There are not any options for SLR1 - this tab does not exist.</p>
 <p id="avedv80-cipsconfiguration-slr2">SLR2</p>
 <p>Leave at the default setting. The Processor memory clocks (HSM0 and HSM1) are not used in AVED because it is a design requirement to use external 200MHz LVDS clocks for HBM and DDR MCs.</p>
-<p><img alt="image55" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image55" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <div class="line-block">
 <div class="line"><br /></div>
 <div class="line"><img alt="image56" class="confluence-embedded-image" src="_images/1107374524.png" /></div>
@@ -609,7 +609,7 @@ numerous AXI interfaces. PL CLK 1 is a free running clock used to generate other
 </div>
 <p>XilSEM Library</p>
 <p>Leave all settings at Default. XilSEM is not used in AVED.</p>
-<p><img alt="image57" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image57" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><img alt="image58" class="confluence-embedded-image" src="_images/1107374521.png" /></p>
 </section>
 </section>
@@ -619,7 +619,7 @@ numerous AXI interfaces. PL CLK 1 is a free running clock used to generate other
 <span id="avedv80-cipsconfiguration-slr0-1"></span><h5>SLR0<a class="headerlink" href="#slr0" title="Link to this heading">¶</a></h5>
 <p><strong>Basic Configuration</strong></p>
 <p>Change the voltage averaging samples to 8.</p>
-<p><img alt="image59" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image59" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><a class="confluence-embedded-image reference internal" href="_images/1107374503.png"><img alt="image60" class="confluence-embedded-image" src="_images/1107374503.png" style="height: 250px;" /></a></p>
 <p><strong>On Chip Supply</strong></p>
 <p>These are optional voltages that can be monitored by AMC for future use. The ADC and thresholds would need to be adjusted appropriately.</p>
@@ -660,19 +660,19 @@ numerous AXI interfaces. PL CLK 1 is a free running clock used to generate other
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p><img alt="image61" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image61" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><img alt="image62" class="confluence-embedded-image" src="_images/1107374455.png" /></p>
 <p><img alt="image63" class="confluence-embedded-image" src="_images/1107374464.png" /></p>
 <p><strong>Temperature</strong></p>
 <p>Enable the over temperature check to help protect the Versal device and PCB.</p>
-<p><img alt="image64" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image64" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><img alt="image65" class="confluence-embedded-image" src="_images/1107374515.png" /></p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <p><strong>External Supply Monitor</strong></p>
 <p>None of the external supplies are monitored in AVED.</p>
-<p><img alt="image66" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image66" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><img alt="image67" class="confluence-embedded-image" src="_images/1107374506.png" /></p>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -682,14 +682,14 @@ numerous AXI interfaces. PL CLK 1 is a free running clock used to generate other
 <span id="avedv80-cipsconfiguration-slr1-1"></span><h5>SLR1<a class="headerlink" href="#slr1" title="Link to this heading">¶</a></h5>
 <p><strong>On Chip Supply</strong></p>
 <p>None of the supplies in SLR1 are monitored in AVED.</p>
-<p><img alt="image68" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image68" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><img alt="image69" class="confluence-embedded-image" src="_images/1107374518.png" /></p>
 </section>
 <section id="slr2">
 <span id="avedv80-cipsconfiguration-slr2-1"></span><h5>SLR2<a class="headerlink" href="#slr2" title="Link to this heading">¶</a></h5>
 <p>On Chip Supply</p>
 <p>None of the supplies in SLR2 are monitored in AVED V80.</p>
-<p><img alt="image70" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image70" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><img alt="image71" class="confluence-embedded-image" src="_images/1107374494.png" /></p>
 </section>
 </section>
@@ -705,7 +705,7 @@ numerous AXI interfaces. PL CLK 1 is a free running clock used to generate other
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Known-Answer-Tests">https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Known-Answer-Tests</a></p>
 <p><strong>Clock Monitor</strong></p>
 <p>AVED does not enable clock monitoring. Leave all settings at Default.</p>
-<p><img alt="image72" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image72" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <div class="line-block">
 <div class="line"><br /></div>
 <div class="line"><img alt="image73" class="confluence-embedded-image" src="_images/1107374440.png" /></div>
@@ -722,7 +722,7 @@ numerous AXI interfaces. PL CLK 1 is a free running clock used to generate other
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Known-Answer-Tests">https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Known-Answer-Tests</a></p>
 <p><strong>Clock Monitor</strong></p>
 <p>AVED does not enable clock monitoring. Leave all settings at default.</p>
-<p><img alt="image75" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image75" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <div class="line-block">
 <div class="line"><br /></div>
 <div class="line"><img alt="image76" class="confluence-embedded-image" src="_images/1107374452.png" /></div>
@@ -742,7 +742,7 @@ numerous AXI interfaces. PL CLK 1 is a free running clock used to generate other
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Known-Answer-Tests">https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Known-Answer-Tests</a></p>
 <p><strong>Clock Monitor</strong></p>
 <p>AVED does not enable clock monitoring. Leave all settings at default.</p>
-<p><img alt="image78" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image78" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <div class="line-block">
 <div class="line"><br /></div>
 <div class="line"><img alt="image79" class="confluence-embedded-image" src="_images/1107374443.png" /></div>
@@ -760,7 +760,7 @@ numerous AXI interfaces. PL CLK 1 is a free running clock used to generate other
 <p>Leave all settings at default.</p>
 <p><strong>Voltage</strong></p>
 <p>Leave all settings at default.</p>
-<p><img alt="image81" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image81" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <div class="line-block">
 <div class="line"><br /></div>
 <div class="line"><img alt="image82" class="confluence-embedded-image" src="_images/1107374500.png" /></div>
@@ -773,7 +773,7 @@ numerous AXI interfaces. PL CLK 1 is a free running clock used to generate other
 <p>Leave all settings at default.</p>
 <p><strong>Voltage</strong></p>
 <p>Leave all settings at default.</p>
-<p><img alt="image84" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image84" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <div class="line-block">
 <div class="line"><br /></div>
 <div class="line"><img alt="image85" class="confluence-embedded-image" src="_images/1107374485.png" /></div>
@@ -786,7 +786,7 @@ numerous AXI interfaces. PL CLK 1 is a free running clock used to generate other
 <p>Leave all settings at default.</p>
 <p><strong>Voltage</strong></p>
 <p>Leave all settings at default.</p>
-<p><img alt="image87" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image87" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <div class="line-block">
 <div class="line"><br /></div>
 <div class="line"><img alt="image88" class="confluence-embedded-image" src="_images/1107374497.png" /></div>
@@ -800,7 +800,7 @@ numerous AXI interfaces. PL CLK 1 is a free running clock used to generate other
 <p>The PL Master AXI LPD interface connects to the RPU SmartConnect. This allows for RPU communication with the SMBus IP and the PCIe host through the General Command Queue (GCQ).</p>
 <p>‘Number of PL Resets: 1’ creates the CIPS pl0_resetn output.</p>
 <p>Select “M_AXI_LPD” and set “Data Width” to 32. This creates the 32-bit &#64;100MHz AXI4 M_AXI_LPD port on CIPs.</p>
-<p><img alt="image90" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image90" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><img alt="image91" class="confluence-embedded-image" src="_images/1107374488.png" /></p>
 </section>
 <section id="noc">
@@ -816,19 +816,19 @@ numerous AXI interfaces. PL CLK 1 is a free running clock used to generate other
 <ul class="simple">
 <li><p>Select ‘PMC to NoC’: This creates the 128-bit &#64; 400MHz PMC_NOC_AXI_0 port on CIPS</p></li>
 </ul>
-<p><img alt="image92" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image92" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><img alt="image93" class="confluence-embedded-image" src="_images/1107374476.png" /></p>
 </section>
 <section id="avedv80-cipsconfiguration-slr1-4">
 <span id="id8"></span><h5>SLR1<a class="headerlink" href="#avedv80-cipsconfiguration-slr1-4" title="Link to this heading">¶</a></h5>
 <p>AVED does not have any PMC NoC connections in SLR1.</p>
-<p><img alt="image94" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image94" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><a class="confluence-embedded-image confluence-thumbnail reference internal" href="_images/1107374470.png"><img alt="image95" class="confluence-embedded-image confluence-thumbnail" src="_images/1107374470.png" style="height: 134px;" /></a></p>
 </section>
 <section id="avedv80-cipsconfiguration-slr2-4">
 <span id="id9"></span><h5>SLR2<a class="headerlink" href="#avedv80-cipsconfiguration-slr2-4" title="Link to this heading">¶</a></h5>
 <p>AVED does not have any PMC NoC connections in SLR2.</p>
-<p><img alt="image96" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image96" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><a class="confluence-embedded-image confluence-thumbnail reference internal" href="_images/1107374467.png"><img alt="image97" class="confluence-embedded-image confluence-thumbnail" src="_images/1107374467.png" style="height: 139px;" /></a></p>
 </section>
 </section>
@@ -843,7 +843,7 @@ AVED uses four additional agents; IPI3, IPI4, IPI5, and IPI6. Two agents are use
 <li><p>IPI 3:4: R5 0</p></li>
 <li><p>IPI 5:6: R5 1</p></li>
 </ul>
-<p><img alt="image98" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image98" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><img alt="image99" class="confluence-embedded-image" src="_images/1107374434.png" /></p>
 </section>
 <section id="power">
@@ -855,10 +855,10 @@ AVED uses four additional agents; IPI3, IPI4, IPI5, and IPI6. Two agents are use
 <li><p>Bank2 [MIO 0:25]: LVCMOS 3.3V</p></li>
 <li><p>Bank3 [Dedicated]: LVCMOS 1.8V (default)</p></li>
 </ul>
-<p><img alt="image100" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image100" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <p><a class="confluence-embedded-image reference internal" href="_images/1107374458.png"><img alt="image101" class="confluence-embedded-image" src="_images/1107374458.png" style="height: 133px;" /></a></p>
 <p>PS PMC TCL Settings</p>
-<p><img alt="image102" class="expand-control-image" src="_images/grey_arrow_down2.png" /></p>
+<p><img alt="image102" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b622.png" /></p>
 <div class="line-block">
 <div class="line">CONFIG.PS_PMC_CONFIG { \</div>
 <div class="line">BOOT_MODE {Custom} \</div>
@@ -1021,8 +1021,8 @@ AVED uses four additional agents; IPI3, IPI4, IPI5, and IPI6. Two agents are use
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023-2025, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on December 03, 2025.
+    <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
+      <span class="lastupdated">Last updated on May 14, 2026.
       </span></p>
   </div>
 

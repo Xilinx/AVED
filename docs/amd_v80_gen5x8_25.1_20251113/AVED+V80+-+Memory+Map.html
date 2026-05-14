@@ -192,8 +192,8 @@ OneTrust Cookies Consent Notice end -->
 <p>AVED uses the address mapping illustrated below.</p>
 <section id="memory-mapping">
 <span id="avedv80-memorymap-memorymapping"></span><h2>Memory Mapping<a class="headerlink" href="#memory-mapping" title="Link to this heading">¶</a></h2>
-<p>This table shows the recommended functions that can access the DDR Memories. The light grey rows and columns related to the APU, PCIe User, and PCIe DMA are not currently used, but they are captured for future growth. The <strong>Yes</strong><strong>/</strong><strong>No</strong>
-entries indicate the recommended memory access. There is not an active control that prohibits unintended access to the DDR. For example, if caution is not exercised, the APU or PL could access DDR locations intended for the RPU (RPU execution).</p>
+<p>This table shows the recommended functions that can access the DDR Memories. The light grey rows and columns related to the APU, PCIe User, and PCIe DMA are not currently used, but they are captured for future growth. The <strong>Yes/No</strong> entries indicate
+the recommended memory access. There is not an active control that prohibits unintended access to the DDR. For example, if caution is not exercised, the APU or PL could access DDR locations intended for the RPU (RPU execution).</p>
 <p>Address remapping must be used for the PCIe to access the 128MB of memory starting at 0x000_3800_0000. The address remap is configured in the AXI NoC CIPS (axi_noc_cips).</p>
 <img alt="_images/1107374801.png" src="_images/1107374801.png" />
 <p>N/A* The RPU is only 32-bit addressing, so it cannot access more than 4GB of DDR.</p>
@@ -216,7 +216,7 @@ entries indicate the recommended memory access. There is not an active control t
 </section>
 <section id="aved-pl-memory-space">
 <span id="avedv80-memorymap-pf0baraddressing"></span><h3>AVED PL Memory Space<a class="headerlink" href="#aved-pl-memory-space" title="Link to this heading">¶</a></h3>
-<img alt="_images/1107374813.png" src="_images/1107374813.png" />
+<img alt="_images/1687179602.png" src="_images/1687179602.png" />
 <p>PCIe® Management functions are in blue.</p>
 </section>
 <section id="aved-ddr-upper-2g-and-dimm-32g-memory-space">
@@ -241,8 +241,8 @@ entries indicate the recommended memory access. There is not an active control t
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023-2025, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on December 03, 2025.
+    <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
+      <span class="lastupdated">Last updated on May 14, 2026.
       </span></p>
   </div>
 

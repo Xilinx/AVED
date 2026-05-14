@@ -261,7 +261,7 @@ address entries of this tab.</p>
 <div class="line-block">
 <div class="line"><br/></div>
 </div>
-<p><img alt="image2" class="expand-control-image" src="_images/grey_arrow_down1.png"/></p>
+<p><img alt="image2" class="expand-control-image" src="_images/e271e1a7f763ac1190ff021cb2f33f4f55b04b621.png"/></p>
 </section>
 </section>
 <section id="hardware-discovery-ip-gui-configuration">
@@ -275,8 +275,8 @@ address entries of this tab.</p>
 <p>The AVED gcq_m2r instantiates the <a class="reference external" href="Generic+Command+Queue+IP+v2.0+-+Product+Guide.html">Generic Command Queue IP</a> to allow the PCIe management and RPU to communicate with each other using 128 MB of DDR4 shared
 memory. The communication is performed through the the use of two AXI4-Lite interfaces that provide access to the queue status/control registers contained within the GCQ IP. In the GCQ IP, the Producer is connected to the Submission Queue (SQ)
 interface (S00_AXI). It generates the submission queue interrupt (irq_sq). The Consumer is connected to the Completion Queue (CQ) interface (S01_AXI). It generates the completion queue interrupt (irq_cq). In gcq_m2r, the producer is the PCIe
-Management, and the consumer is the RPU. The SQ and CQ ring buffers are contained in DDR memory shared between the PCIe management PF &amp; RPU - <a class="reference external" href="AVED+V80+-+Memory+Map.html#AVEDV80-MemoryMap-gcq_m2rDDRlocation">gcq_m2r DDR location</a>. The AVED design
-connects the submission queue interrupt to the CIPS LPD PL-PS interrupt (IRQ 0) so it can be serviced by the RPU. The consumer queue interrupt is not used.</p>
+Management, and the consumer is the RPU. The SQ and CQ ring buffers are contained in DDR memory shared between the PCIe management PF &amp; RPU - <a class="reference external" href="AVED+V80+-+Memory+Map.html#gcq_m2r%20DDR%20location">gcq_m2r DDR location</a>. The AVED design connects the
+submission queue interrupt to the CIPS LPD PL-PS interrupt (IRQ 0) so it can be serviced by the RPU. The consumer queue interrupt is not used.</p>
 <div class="line-block">
 <div class="line"><br/></div>
 </div>
@@ -311,8 +311,8 @@ interrupt is connected to the CIPS LPD PL-PS interrupt (IRQ 1) so it can be serv
 </div>
 <hr/>
 <div role="contentinfo">
-<p>© Copyright 2023-2025, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on December 03, 2025.
+<p>© Copyright 2023-2026, Advanced Micro Devices, Inc.
+      <span class="lastupdated">Last updated on May 14, 2026.
       </span></p>
 </div>
 <div class="aem-Grid aem-Grid--16">

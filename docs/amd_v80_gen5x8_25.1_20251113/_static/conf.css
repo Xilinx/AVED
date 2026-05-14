@@ -18,7 +18,6 @@ p:first-child, ul:first-child, ol:first-child, dl:first-child, h1:first-child, h
     border-collapse: collapse
     }
 .confluenceTh, .confluenceTd {
-    border: 1px solid var(--ds-border, #ddd);
     padding: 7px 10px;
     /* CONFDEV-13618: line-height will add up 3 pixels, so we have a 10px top padding for text. Images will remain with 7px top margin though (see thread in Stash) */
     vertical-align: top;
@@ -33,26 +32,8 @@ p:first-child, ul:first-child, ol:first-child, dl:first-child, h1:first-child, h
 .confluenceTable:first-child, .table-wrap:first-child {
     margin-top: 0
     }
-table.confluenceTable th.confluenceTh, table.confluenceTable th.confluenceTh > p, table.confluenceTable th.confluenceTh.highlight-grey, table.confluenceTable th.confluenceTh.highlight-grey > p, table.confluenceTable td.confluenceTd.highlight-grey, table.confluenceTable td.confluenceTd.highlight-grey > p {
-    background-color: var(--ds-background-accent-gray-subtlest, #f0f0f0)
-    }
-table.confluenceTable th.confluenceTh.highlight-blue, table.confluenceTable th.confluenceTh.highlight-blue > p, table.confluenceTable td.confluenceTd.highlight-blue, table.confluenceTable td.confluenceTd.highlight-blue > p {
-    background-color: var(--ds-background-accent-blue-subtlest, #e0f0ff)
-    }
-table.confluenceTable th.confluenceTh.highlight-green, table.confluenceTable th.confluenceTh.highlight-green > p, table.confluenceTable td.confluenceTd.highlight-green, table.confluenceTable td.confluenceTd.highlight-green > p {
-    background-color: var(--ds-background-accent-green-subtlest, #ddfade)
-    }
-table.confluenceTable th.confluenceTh.highlight-red, table.confluenceTable th.confluenceTh.highlight-red > p, table.confluenceTable td.confluenceTd.highlight-red, table.confluenceTable td.confluenceTd.highlight-red > p {
-    background-color: var(--ds-background-accent-red-subtlest, #ffe7e7)
-    }
-table.confluenceTable th.confluenceTh.highlight-yellow, table.confluenceTable th.confluenceTh.highlight-yellow > p, table.confluenceTable td.confluenceTd.highlight-yellow, table.confluenceTable td.confluenceTd.highlight-yellow > p {
-    background-color: var(--ds-background-accent-yellow-subtlest, #ffd)
-    }
 html[data-color-mode=dark] table.confluenceTable [data-highlight-colour="\#344563"] {
     background-color: #9EAED1
-    }
-table.confluenceTable th.confluenceTh, table.confluenceTable th.confluenceTh > p {
-    font-weight: var(--ds-font-weight-bold, bold)
     }
 table.confluenceTable th.confluenceTh.nohighlight, /* deprecated */table.confluenceTable th.confluenceTh.nohighlight > p {
     /* deprecated */
@@ -77,30 +58,22 @@ table.confluenceTable td.numberingColumn {
     border-collapse: collapse
     }
 .rssMacro table th, .rssMacro table td {
-    border: 1px solid var(--ds-border, #ccc);
     padding: 4px
-    }
-.rssMacro table th {
-    background: var(--ds-surface, #f0f0f0)
     }
 .recentlyUpdatedItem td {
     padding: 10px;
-    border-bottom: var(--ds-border, #f0f0f0) 1px solid;
     vertical-align: top
     }
 .recentlyUpdatedItem .authorAndDate {
-    background-color: var(--ds-surface, #f0f0f0);
     width: 25%
     }
 .recentlyUpdatedItem td.icon {
     padding: 8px 0 0 1px
     }
 .recentlyUpdatedItem .summary, .recentlyUpdatedItem .thumbnail {
-    margin-top: 3px;
-    color: var(--ds-text-subtle, #666)
+    margin-top: 3px
     }
 body.popup-window, body.content-preview, .content-preview.aui-theme-default {
-    background-color: var(--ds-surface, #fff);
     /* override aui-theme-default background */
     }
 .content-preview.aui-theme-default #main.aui-page-panel {
