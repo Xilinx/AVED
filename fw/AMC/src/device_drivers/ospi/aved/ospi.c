@@ -2093,6 +2093,7 @@ static int iFlashRead( XOspiPsv *pxOspiPsvPtr,
         };
         uint32_t ulRealAddr       = 0;
         uint32_t ulBytesToRead    = 0;
+        uint32_t ulEffectiveBytes = 0;                                         /* Post-clamp length, preserved for final trim */
         uint8_t  ucNumLines       = 0;
         int      iUnalignedRead   = FALSE;                                     /* Read buffer required to be on 8 byte boundary */
         uint32_t ucReadIterations = 1;                                         /* At least one read required when aligned */
@@ -2108,6 +2109,12 @@ static int iFlashRead( XOspiPsv *pxOspiPsvPtr,
         {
             ulBytesToRead = ulByteCount;
         }
+
+        /*
+         * Snapshot the post-clamp length before the unaligned branch rewrites
+         * ulBytesToRead to OSPI_READ_BUFFER_SIZE. Needed for the final trim.
+         */
+        ulEffectiveBytes = ulBytesToRead;
 
         if( 0 != ( ulBytesToRead % OSPI_READ_BUFFER_ALIGNMENT ) )
         {
@@ -2179,16 +2186,21 @@ static int iFlashRead( XOspiPsv *pxOspiPsvPtr,
             {
                 if( TRUE == iUnalignedRead )
                 {
+                    /*
+                     * Trim the copy length on the final iteration BEFORE the
+                     * memcpy so we do not overrun the caller's buffer, use
+                     * ulEffectiveBytes to honour the stacked-flash-tail clamp
+                     */
+                    if( ( ucReadIterations - 1 ) == i )
+                    {
+                        ulBytesToRead = ulEffectiveBytes - ( i * OSPI_READ_BUFFER_SIZE );
+                    }
+
                     /* Copy the data into the return buffer */
                     pvOSAL_MemCpy( &pucReadBfrPtr[ i * OSPI_READ_BUFFER_SIZE ], pxThis->ucReadBfrPtr, ulBytesToRead );
 
                     /* Move the next base address forward */
                     ulAddress += OSPI_READ_BUFFER_SIZE;
-                    if( ( ucReadIterations - 1 ) == i )
-                    {
-                        /* Final iteration will be less than OSPI_READ_BUFFER_SIZE */
-                        ulBytesToRead = ( ulByteCount % OSPI_READ_BUFFER_SIZE );
-                    }
                 }
             }
         }
