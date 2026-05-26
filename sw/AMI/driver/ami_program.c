@@ -91,11 +91,18 @@ static int do_image_download(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *bu
 				break;
 
 			if (efd_ctx) {
-				#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 8, 0) || \
-					(defined(RHEL_RELEASE_CODE) && RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(9, 5))
+				#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 8, 0)
 					eventfd_signal(efd_ctx);
 				#else
+				# ifdef RHEL_RELEASE_CODE
+				#  if RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(9, 5)
+					eventfd_signal(efd_ctx);
+				#  else
 					eventfd_signal(efd_ctx, bytes_to_write);
+				#  endif
+				# else
+					eventfd_signal(efd_ctx, bytes_to_write);
+				# endif
 				#endif
 			}
 		} else {
@@ -151,11 +158,18 @@ static int do_image_download(struct amc_control_ctxt *amc_ctrl_ctxt, uint8_t *bu
 			buf, (PDI_CHUNK_SIZE * PDI_CHUNK_MULTIPLIER));
 
 		if (!ret && efd_ctx)
-		#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 8, 0) || \
-			(defined(RHEL_RELEASE_CODE) && RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(9, 5))
+		#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 8, 0)
 			eventfd_signal(efd_ctx);
 		#else
+		# ifdef RHEL_RELEASE_CODE
+		#  if RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(9, 5)
+			eventfd_signal(efd_ctx);
+		#  else
 			eventfd_signal(efd_ctx, (PDI_CHUNK_SIZE * PDI_CHUNK_MULTIPLIER));
+		#  endif
+		# else
+			eventfd_signal(efd_ctx, (PDI_CHUNK_SIZE * PDI_CHUNK_MULTIPLIER));
+		# endif
 		#endif
 	}
 
