@@ -15,6 +15,7 @@
 #include <linux/hwmon.h>
 #include <linux/eventfd.h>
 #include <linux/version.h>
+#include <linux/vmalloc.h>
 
 #include "ami.h"
 #include "ami_hwmon.h"

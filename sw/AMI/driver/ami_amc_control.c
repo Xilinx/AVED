@@ -9,6 +9,7 @@
 #include <linux/delay.h>
 #include <linux/device.h>
 #include <linux/types.h>
+#include <linux/vmalloc.h>
 
 #include "gcq.h"
 #include "ami_top.h"
