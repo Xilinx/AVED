@@ -7,6 +7,7 @@
 
 #include <linux/device.h>
 #include <linux/kernel.h>
+#include <linux/vmalloc.h>
 
 #include "ami.h"
 #include "ami_top.h"
