@@ -894,8 +894,8 @@ void find_pci_ext_capability(struct pci_dev *dev, char *cap_name, int cap)
 
 	if (!dev || !cap_name)
 		return;
-	
-	ret = pci_find_ext_capability(dev, PCI_CAP_ID_PM);
+
+	ret = pci_find_ext_capability(dev, cap);
 	if (ret == CAP_NOT_FOUND)
 		DEV_VDBG(dev, "PCIe extended capability not found: %s", cap_name);
 	else
