@@ -383,7 +383,7 @@ uint16_t ami_parse_bdf(const char *bdf)
 	int ret = 0;
 
 	/* Need to determine if the user passed in a PCI domain. */
-	char *c = NULL;
+	const char *c = NULL;
 
 	if (!bdf)
 		return ret;
